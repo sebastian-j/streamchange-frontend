@@ -18,8 +18,8 @@ module.exports = require('./webpack.base.babel')({
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: 'giveaway/[name].[chunkhash].js',
+    chunkFilename: 'giveaway/[name].[chunkhash].chunk.js',
   },
 
   optimization: {
@@ -69,6 +69,7 @@ module.exports = require('./webpack.base.babel')({
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
       template: 'app/index.html',
+      filename: 'giveaway.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -116,9 +117,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
-      description: 'My React Boilerplate-based project!',
+      name: 'StreamChange Giveaway',
+      short_name: 'SC Giveaway',
+      description: 'Giveaway app for Youtube live streams.',
       background_color: '#fafafa',
       theme_color: '#b1624d',
       inject: true,
