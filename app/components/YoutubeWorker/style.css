@@ -1,0 +1,6 @@
+.three-sections {
+    background-color: #eeeeee;
+    display: flex;
+    flex-direction: row;
+    height: 95vh;
+}
