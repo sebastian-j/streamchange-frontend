@@ -42,7 +42,7 @@ export default class WelcomeDialog extends React.Component {
           onClose={this.closeDialog}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Dodaj do kolejki</DialogTitle>
+          <DialogTitle id="form-dialog-title">Wybierz, na którym streamie organizujesz giveaway</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -63,7 +63,7 @@ export default class WelcomeDialog extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.sendVideoLink} color="primary">
-              Zapisz
+              Dalej
             </Button>
           </DialogActions>
         </Dialog>
