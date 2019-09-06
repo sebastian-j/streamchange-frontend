@@ -16,7 +16,9 @@ export default class GiveawayRules extends React.Component {
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({ keyword: localStorage.getItem('keyword')})
+  }
 
   handleToggleButton(event) {
     const { target } = event;
@@ -45,6 +47,7 @@ export default class GiveawayRules extends React.Component {
       this.setState({
         [name]: value,
       });
+      localStorage.setItem(name, value);
     }
   }
 

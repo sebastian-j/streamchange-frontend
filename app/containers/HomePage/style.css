@@ -1,0 +1,11 @@
+.stream-info {
+    height: 5vh;
+}
+
+.stream-info img {
+    height: 100%;
+}
+
+.stream-info span {
+    margin-left: 10px;
+}
