@@ -17,7 +17,11 @@ export default class GiveawayRules extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ keyword: localStorage.getItem('keyword')})
+    let keyword = localStorage.getItem('keyword');
+    if (keyword === null) {
+      keyword = '';
+    }
+    this.setState({ keyword });
   }
 
   handleToggleButton(event) {

@@ -1,34 +1,32 @@
 import React from 'react';
-import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
+import db from '../YoutubeWorker/db';
+import UserItem from './userItem';
 import './style.css';
 
 export default class UserList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { keyword: '' };
-    this.handleToggleButton = this.handleToggleButton.bind(this);
+    this.state = { keyword: '', interval: null, items: [] };
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
+    this.toggleEligible = this.toggleEligible.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.state.interval = setInterval(
+      function() {
+        db.table('users')
+          .toArray()
+          .then(items => {
+            this.setState({ items });
+          });
+      }.bind(this),
+      3000,
+    );
+  }
 
-  handleToggleButton(event) {
-    const { target } = event;
-    const { name } = target;
-    if (name === 'forMods') {
-      this.setState(prevState => ({
-        forMods: !prevState.forMods,
-      }));
-    } else if (name === 'forSponsors') {
-      this.setState(prevState => ({
-        forSponsors: !prevState.forSponsors,
-      }));
-    } else if (name === 'forRegulars') {
-      this.setState(prevState => ({
-        forRegulars: !prevState.forRegulars,
-      }));
-    }
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
   }
 
   handleInputValueChange(event) {
@@ -41,6 +39,21 @@ export default class UserList extends React.Component {
         [name]: value,
       });
     }
+  }
+
+  toggleEligible(id) {
+    db.users
+      .where('id')
+      .equals(id)
+      .first()
+      .then(user => {
+        db.table('users')
+          .where('id')
+          .equals(id)
+          .modify({
+            isEligible: !user.isEligible,
+          });
+      });
   }
 
   render() {
@@ -58,6 +71,17 @@ export default class UserList extends React.Component {
           value={this.state.keyword}
           fullWidth
         />
+        <ul className="user-list">
+          {this.state.items.map(item => (
+            <UserItem
+              key={item.id}
+              channelId={item.id}
+              title={item.title}
+              isEligible={item.isEligible}
+              handleToggleUser={this.toggleEligible}
+            />
+          ))}
+        </ul>
       </div>
     );
   }
