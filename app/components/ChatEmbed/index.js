@@ -5,7 +5,7 @@ import './style.css';
 function ChatEmbed(props) {
   return (
     <div className="flex-column">
-      <h2>Chat</h2>
+      <h2 className="column-title">Chat</h2>
       <iframe
         className="chat-frame"
         title="Youtube Chat"

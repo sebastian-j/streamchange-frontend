@@ -6,17 +6,32 @@
     padding: 15px;
 }
 
+.column-title {
+    margin: 5px 10px;
+}
+
 .user-list {
     list-style: none;
     padding: 0;
 }
 
 .user-item {
-    color: grey;
+    color: rgb(156, 156, 156);
     cursor: pointer;
-    margin: 15px;
+    line-height: 1.43;
+    margin: 10px 5px;
 }
 
 .user-item.isEligible {
-    color: dodgerblue;
+    color: rgb(10, 133, 255);
+}
+
+.user-item svg {
+    margin-right: 10px;
+    height: 1em;
+    width: 1em;
+}
+
+.user-item span {
+    vertical-align: middle;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import db from '../YoutubeWorker/db';
 import UserItem from './userItem';
@@ -8,21 +9,22 @@ export default class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { keyword: '', interval: null, items: [] };
+    this.getUsers = this.getUsers.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
     this.toggleEligible = this.toggleEligible.bind(this);
   }
 
   componentDidMount() {
-    this.state.interval = setInterval(
-      function() {
-        db.table('users')
-          .toArray()
-          .then(items => {
-            this.setState({ items });
-          });
-      }.bind(this),
-      3000,
-    );
+    this.getUsers();
+    this.state.interval = setInterval(this.getUsers.bind(this), 3000);
+  }
+
+  getUsers() {
+    db.table('users')
+      .toArray()
+      .then(items => {
+        this.setState({ items });
+      });
   }
 
   componentWillUnmount() {
@@ -52,6 +54,9 @@ export default class UserList extends React.Component {
           .equals(id)
           .modify({
             isEligible: !user.isEligible,
+          })
+          .then(() => {
+            this.getUsers();
           });
       });
   }
@@ -59,7 +64,7 @@ export default class UserList extends React.Component {
   render() {
     return (
       <div className="flex-column">
-        <h2>Uczestnicy</h2>
+        <h2 className="column-title">Uczestnicy</h2>
         <TextField
           autoFocus
           margin="dense"
@@ -82,6 +87,9 @@ export default class UserList extends React.Component {
             />
           ))}
         </ul>
+        <Button color="primary">
+          Wyczyść listę
+        </Button>
       </div>
     );
   }

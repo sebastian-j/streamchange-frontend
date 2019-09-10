@@ -58,7 +58,7 @@ export default class GiveawayRules extends React.Component {
   render() {
     return (
       <div className="flex-column">
-        <h2>Zasady losowania</h2>
+        <h2 className="column-title">Zasady losowania</h2>
         <button
           name="forMods"
           type="button"
