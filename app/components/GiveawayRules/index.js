@@ -18,27 +18,45 @@ export default class GiveawayRules extends React.Component {
 
   componentDidMount() {
     let keyword = localStorage.getItem('keyword');
+    const forMods = localStorage.getItem('gv-forMods') === 'true';
+    const forSponsors = localStorage.getItem('gv-forSponsors') === 'true';
+    const forRegulars = localStorage.getItem('gv-forRegulars') === 'true';
     if (keyword === null) {
       keyword = '';
     }
-    this.setState({ keyword });
+    this.setState({ keyword, forMods, forSponsors, forRegulars });
   }
 
   handleToggleButton(event) {
     const { target } = event;
     const { name } = target;
     if (name === 'forMods') {
-      this.setState(prevState => ({
-        forMods: !prevState.forMods,
-      }));
+      this.setState(
+        prevState => ({
+          forMods: !prevState.forMods,
+        }),
+        () => {
+          localStorage.setItem('gv-forMods', this.state.forMods);
+        },
+      );
     } else if (name === 'forSponsors') {
-      this.setState(prevState => ({
-        forSponsors: !prevState.forSponsors,
-      }));
+      this.setState(
+        prevState => ({
+          forSponsors: !prevState.forSponsors,
+        }),
+        () => {
+          localStorage.setItem('gv-forSponsors', this.state.forSponsors);
+        },
+      );
     } else if (name === 'forRegulars') {
-      this.setState(prevState => ({
-        forRegulars: !prevState.forRegulars,
-      }));
+      this.setState(
+        prevState => ({
+          forRegulars: !prevState.forRegulars,
+        }),
+        () => {
+          localStorage.setItem('gv-forRegulars', this.state.forRegulars);
+        },
+      );
     }
   }
 
@@ -57,7 +75,7 @@ export default class GiveawayRules extends React.Component {
 
   render() {
     return (
-      <div className="flex-column">
+      <div className="gv-column">
         <h2 className="column-title">Zasady losowania</h2>
         <button
           name="forMods"
