@@ -4,7 +4,7 @@ import './style.css';
 
 function ChatEmbed(props) {
   return (
-    <div className="flex-column">
+    <div className="gv-column">
       <h2 className="column-title">Chat</h2>
       <iframe
         className="chat-frame"

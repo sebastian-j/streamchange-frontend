@@ -63,7 +63,7 @@ export default class UserList extends React.Component {
 
   render() {
     return (
-      <div className="flex-column">
+      <div className="gv-column flex-column">
         <h2 className="column-title">Uczestnicy</h2>
         <TextField
           autoFocus
@@ -82,6 +82,8 @@ export default class UserList extends React.Component {
               key={item.id}
               channelId={item.id}
               title={item.title}
+              isModerator={item.isModerator}
+              isSponsor={item.isSponsor}
               isEligible={item.isEligible}
               handleToggleUser={this.toggleEligible}
             />

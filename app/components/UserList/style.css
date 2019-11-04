@@ -1,4 +1,4 @@
-.flex-column {
+.gv-column {
     background-color: white;
     flex-basis: 0;
     flex-grow: 1;
@@ -6,11 +6,17 @@
     padding: 15px;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .column-title {
     margin: 5px 10px;
 }
 
 .user-list {
+    overflow-y: scroll;
     list-style: none;
     padding: 0;
 }

@@ -32,6 +32,8 @@ export default class YoutubeWorker extends React.Component {
             imageUrl: res.data.items[i].authorDetails.profileImageUrl,
             title: res.data.items[i].authorDetails.displayName,
             message: res.data.items[i].snippet.displayMessage,
+            isModerator: res.data.items[i].authorDetails.isChatModerator,
+            isSponsor: res.data.items[i].authorDetails.isChatSponsor,
             isEligible: res.data.items[i].snippet.displayMessage.includes(
               localStorage.getItem('keyword'),
             ),
