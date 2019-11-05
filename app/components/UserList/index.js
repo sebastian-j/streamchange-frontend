@@ -43,6 +43,10 @@ export default class UserList extends React.Component {
     }
   }
 
+  clearList() {
+    db.users.clear().then(this.getUsers());
+  }
+
   toggleEligible(id) {
     db.users
       .where('id')
@@ -89,7 +93,7 @@ export default class UserList extends React.Component {
             />
           ))}
         </ul>
-        <Button color="primary">
+        <Button color="primary" onClick={this.clearList}>
           Wyczyść listę
         </Button>
       </div>
