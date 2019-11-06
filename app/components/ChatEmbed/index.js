@@ -11,7 +11,7 @@ function ChatEmbed(props) {
         title="Youtube Chat"
         src={`https://www.youtube.com/live_chat?v=${
           props.videoId
-        }&embed_domain=streamchange.pl`}
+        }&embed_domain=${window.location.hostname}`}
       />
     </div>
   );
