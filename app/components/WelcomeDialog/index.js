@@ -15,6 +15,7 @@ export default class WelcomeDialog extends React.Component {
     this.state = { isOpen: true, videoLink: '', isChrome: true };
     this.sendVideoLink = this.sendVideoLink.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   sendVideoLink() {
@@ -41,6 +42,12 @@ export default class WelcomeDialog extends React.Component {
     }
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.sendVideoLink();
+    }
+  }
+
   render() {
     if (this.state.isChrome) {
       return (
@@ -59,6 +66,7 @@ export default class WelcomeDialog extends React.Component {
                 margin="dense"
                 name="videoLink"
                 onChange={this.handleInputValueChange}
+                onKeyPress={this.handleKeyPress}
                 id="videoLink"
                 label="Wklej link do streama"
                 type="text"
