@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
+import RaffleWrapper from '../RaffleWrapper';
 import './style.css';
 
 export default class GiveawayRules extends React.Component {
@@ -118,9 +119,7 @@ export default class GiveawayRules extends React.Component {
           value={this.state.keyword}
           fullWidth
         />
-        <button className="start-lottery-btn" type="button">
-          Losuj
-        </button>
+        <RaffleWrapper />
       </div>
     );
   }
