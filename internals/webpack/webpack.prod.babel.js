@@ -104,6 +104,10 @@ module.exports = require('./webpack.base.babel')({
         // do not want them to be preloaded at all (cached only when first loaded)
         additional: ['*.chunk.js'],
       },
+      ServiceWorker: {
+        output: 'giveaway/sw.js',
+        publicPath: 'giveaway/sw.js',
+      },
 
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
