@@ -38,6 +38,11 @@ export default class YoutubeWorker extends React.Component {
               localStorage.getItem('keyword'),
             ),
           };
+          const message = {
+            authorId: res.data.items[i].authorDetails.channelId,
+            displayText: res.data.items[i].snippet.displayMessage,
+            publishedAt: res.data.items[i].snippet.publishedAt,
+          };
           db.users
             .where('id')
             .equals(author.id)
@@ -56,6 +61,7 @@ export default class YoutubeWorker extends React.Component {
                   });
               }
             });
+          db.table('messages').add(message);
         }
         setTimeout(this.messageProcessor, res.data.pollingIntervalMillis);
       });
