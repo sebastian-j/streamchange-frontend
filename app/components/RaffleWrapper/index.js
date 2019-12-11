@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CSGORaffle from '../CSGORaffle';
 
 export default class RaffleWrapper extends React.Component {
@@ -27,8 +28,14 @@ export default class RaffleWrapper extends React.Component {
         >
           Losuj
         </button>
-        {this.state.isOpen && <CSGORaffle onClose={this.closeDialog} />}
+        {this.state.isOpen && (
+          <CSGORaffle onClose={this.closeDialog} onWin={this.props.onWin} />
+        )}
       </div>
     );
   }
 }
+
+RaffleWrapper.propTypes = {
+  onWin: PropTypes.func.isRequired,
+};

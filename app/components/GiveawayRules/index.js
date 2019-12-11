@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
 import RaffleWrapper from '../RaffleWrapper';
 import './style.css';
+import WinnerView from '../WinnerView';
 
 export default class GiveawayRules extends React.Component {
   constructor(props) {
@@ -12,9 +13,11 @@ export default class GiveawayRules extends React.Component {
       forMods: true,
       forSponsors: true,
       forRegulars: true,
+      winnerId: null,
     };
     this.handleToggleButton = this.handleToggleButton.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
+    this.winHandler = this.winHandler.bind(this);
   }
 
   componentDidMount() {
@@ -74,7 +77,21 @@ export default class GiveawayRules extends React.Component {
     }
   }
 
+  winHandler(id) {
+    this.setState({
+      winnerId: id,
+    });
+  }
+
   render() {
+    if (this.state.winnerId) {
+      return (
+        <WinnerView
+          id={this.state.winnerId}
+          onClose={() => this.setState({ winnerId: null })}
+        />
+      );
+    }
     return (
       <div className="gv-column">
         <h2 className="column-title">Zasady losowania</h2>
@@ -119,7 +136,7 @@ export default class GiveawayRules extends React.Component {
           value={this.state.keyword}
           fullWidth
         />
-        <RaffleWrapper />
+        <RaffleWrapper onWin={this.winHandler} />
       </div>
     );
   }

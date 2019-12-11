@@ -35,6 +35,9 @@ export default class CSGORaffle extends React.Component {
           scrollSize,
           winner: shuffled[winnerIndex],
         });
+        setTimeout(() => {
+          this.props.onWin(shuffled[winnerIndex].id);
+        }, 8000);
       });
   }
 
@@ -74,4 +77,5 @@ export default class CSGORaffle extends React.Component {
 
 CSGORaffle.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onWin: PropTypes.func.isRequired,
 };
