@@ -75,7 +75,10 @@ export default class YoutubeWorker extends React.Component {
     return (
       <div className="three-sections">
         <UserList />
-        <GiveawayRules />
+        <GiveawayRules
+          apiKey={this.props.apiKey}
+          channelId={this.props.channelId}
+        />
         <ChatEmbed videoId={this.props.videoId} />
       </div>
     );
@@ -84,6 +87,7 @@ export default class YoutubeWorker extends React.Component {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  channelId: PropTypes.string.isRequired,
   videoId: PropTypes.string,
   liveChatId: PropTypes.string.isRequired,
 };

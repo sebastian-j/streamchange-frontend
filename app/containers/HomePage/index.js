@@ -16,6 +16,7 @@ export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      channelId: '',
       videoId: '',
       title: '',
       thumbnailUrl: '',
@@ -47,8 +48,9 @@ export default class HomePage extends React.Component {
       .then(res => {
         this.setState({
           videoId,
+          channelId: res.data.items[0].snippet.channelId,
           title: res.data.items[0].snippet.title,
-          thumbnailUrl: res.data.items[0].snippet.thumbnails.maxres.url,
+          thumbnailUrl: res.data.items[0].snippet.thumbnails.medium.url,
           liveChatId: res.data.items[0].liveStreamingDetails.activeLiveChatId,
         });
       });
@@ -68,6 +70,7 @@ export default class HomePage extends React.Component {
           </Button>
         </div>
         <YoutubeWorker
+          channelId={this.state.channelId}
           liveChatId={this.state.liveChatId}
           videoId={this.state.videoId}
           apiKey="API_KEY"

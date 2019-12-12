@@ -5,16 +5,24 @@
 }
 
 .winner-logo {
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     margin-right: 10px;
 }
 
 .winner-title {
     font-size: 20px;
-    padding: 4px 0;
 }
 
+.winner-sub-status {
+    font-size: 0.9rem;
+    padding-bottom: 3px;
+}
+
+.winner-sub-status.sub-true {
+    font-weight: bold;
+    color: #007703;
+}
 .winner-btn {
     background: none;
     border: 1px solid #0059a3;

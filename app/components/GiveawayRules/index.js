@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField';
 import RaffleWrapper from '../RaffleWrapper';
-import './style.css';
 import WinnerView from '../WinnerView';
+import './style.css';
 
 export default class GiveawayRules extends React.Component {
   constructor(props) {
@@ -87,6 +88,8 @@ export default class GiveawayRules extends React.Component {
     if (this.state.winnerId) {
       return (
         <WinnerView
+          apiKey={this.props.apiKey}
+          ownerId={this.props.channelId}
           id={this.state.winnerId}
           onClose={() => this.setState({ winnerId: null })}
         />
@@ -141,3 +144,8 @@ export default class GiveawayRules extends React.Component {
     );
   }
 }
+
+GiveawayRules.propTypes = {
+  apiKey: PropTypes.string.isRequired,
+  channelId: PropTypes.string.isRequired,
+};
