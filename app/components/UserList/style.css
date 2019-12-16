@@ -33,6 +33,8 @@
 }
 
 .user-item svg {
+    display: inline-block;
+    margin-left: 5px;
     margin-right: 10px;
     height: 1em;
     width: 1em;

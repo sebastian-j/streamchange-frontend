@@ -8,7 +8,7 @@ import './style.css';
 export default class UserList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { keyword: '', interval: null, items: [] };
+    this.state = { search: '', interval: null, items: [] };
     this.getUsers = this.getUsers.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
     this.toggleEligible = this.toggleEligible.bind(this);
@@ -21,6 +21,9 @@ export default class UserList extends React.Component {
 
   getUsers() {
     db.table('users')
+      .filter(user =>
+        user.title.toLowerCase().includes(this.state.search.toLowerCase()),
+      )
       .toArray()
       .then(items => {
         this.setState({ items });
@@ -37,13 +40,17 @@ export default class UserList extends React.Component {
     const { name } = target;
 
     if (value.length < 140) {
-      this.setState({
-        [name]: value,
-      });
+      this.setState(
+        {
+          [name]: value,
+        },
+        () => this.getUsers(),
+      );
     }
   }
 
   clearList() {
+    db.messages.clear();
     db.users.clear().then(this.getUsers());
   }
 
@@ -72,12 +79,11 @@ export default class UserList extends React.Component {
         <TextField
           autoFocus
           margin="dense"
-          name="searchTerm"
+          name="search"
           onChange={this.handleInputValueChange}
-          id="searchTerm"
           label="Wyszukaj"
           type="text"
-          value={this.state.keyword}
+          value={this.state.search}
           fullWidth
         />
         <ul className="user-list">
