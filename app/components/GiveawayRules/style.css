@@ -5,17 +5,34 @@
     margin: 15px;
     padding: 15px;
 }
+
 .viewer-type-button {
     background-color: transparent;
     border: 1px solid #e5e6e7;
     cursor: pointer;
     padding: 6px 12px;
 }
+
 .viewer-type-button.active {
     background-color: #d6f3ff;
     border: 1px solid #0094ff;
     color: #0094ff;
 }
+
+.toggle-visibility-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.toggle-visibility-btn:hover {
+    color: #0094ff;
+}
+
+.toggle-visibility-btn > * {
+    pointer-events: none;
+}
+
 .start-lottery-btn {
     background-color: transparent;
     border: 1px solid #0094ff;

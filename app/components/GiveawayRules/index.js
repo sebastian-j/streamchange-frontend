@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import TextField from '@material-ui/core/TextField';
+import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
 import './style.css';
@@ -10,7 +10,6 @@ export default class GiveawayRules extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: '',
       forMods: true,
       forSponsors: true,
       forRegulars: true,
@@ -22,14 +21,10 @@ export default class GiveawayRules extends React.Component {
   }
 
   componentDidMount() {
-    let keyword = localStorage.getItem('keyword');
     const forMods = localStorage.getItem('gv-forMods') === 'true';
     const forSponsors = localStorage.getItem('gv-forSponsors') === 'true';
     const forRegulars = localStorage.getItem('gv-forRegulars') === 'true';
-    if (keyword === null) {
-      keyword = '';
-    }
-    this.setState({ keyword, forMods, forSponsors, forRegulars });
+    this.setState({ forMods, forSponsors, forRegulars });
   }
 
   handleToggleButton(event) {
@@ -128,17 +123,7 @@ export default class GiveawayRules extends React.Component {
         >
           Zwykli użytkownicy
         </button>
-        <TextField
-          autoFocus
-          margin="dense"
-          name="keyword"
-          onChange={this.handleInputValueChange}
-          id="keyword"
-          label="Słowo kluczowe"
-          type="text"
-          value={this.state.keyword}
-          fullWidth
-        />
+        <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
       </div>
     );
