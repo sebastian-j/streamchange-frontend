@@ -37,7 +37,9 @@ export default class HomePage extends React.Component {
   }
 
   leaveStream() {
-    this.setState({ videoId: '', title: '', liveChatId: '' });
+    this.setState({ videoId: '', title: '', liveChatId: '', thumbnailUrl: '' });
+    sessionStorage.removeItem('gv-videoId');
+    window.location.reload();
   }
 
   launchWorker(videoId) {
@@ -53,7 +55,15 @@ export default class HomePage extends React.Component {
           thumbnailUrl: res.data.items[0].snippet.thumbnails.medium.url,
           liveChatId: res.data.items[0].liveStreamingDetails.activeLiveChatId,
         });
+        sessionStorage.setItem('gv-videoId', videoId);
       });
+  }
+
+  componentDidMount() {
+    const id = sessionStorage.getItem('gv-videoId');
+    if (id !== null) {
+      this.launchWorker(id);
+    }
   }
 
   render() {

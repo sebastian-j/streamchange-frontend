@@ -51,7 +51,7 @@ export default class UserList extends React.Component {
 
   clearList() {
     db.messages.clear();
-    db.users.clear().then(this.getUsers());
+    db.users.clear().then(() => this.getUsers());
   }
 
   toggleEligible(id) {
