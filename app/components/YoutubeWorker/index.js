@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import ChatEmbed from '../ChatEmbed';
@@ -7,13 +7,10 @@ import UserList from '../UserList';
 import db from './db';
 import './style.css';
 
-export default class YoutubeWorker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.messageProcessor = this.messageProcessor.bind(this);
-  }
+const YoutubeWorker = props => {
+  const [timer, setTimer] = useState(null);
 
-  messageProcessor() {
+  const messageProcessor = () => {
     let nextPageToken = localStorage.getItem('nextPageToken');
     if (nextPageToken === null) {
       nextPageToken = ' ';
@@ -21,8 +18,8 @@ export default class YoutubeWorker extends React.Component {
     axios
       .get(
         `https://www.googleapis.com/youtube/v3/liveChat/messages?part=snippet,authorDetails&maxResults=200&liveChatId=${
-          this.props.liveChatId
-        }&pageToken=${nextPageToken}&key=${this.props.apiKey}`,
+          props.liveChatId
+        }&pageToken=${nextPageToken}&key=${props.apiKey}`,
       )
       .then(res => {
         localStorage.setItem('nextPageToken', res.data.nextPageToken);
@@ -63,27 +60,27 @@ export default class YoutubeWorker extends React.Component {
             });
           db.table('messages').add(message);
         }
-        setTimeout(this.messageProcessor, res.data.pollingIntervalMillis);
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
       });
-  }
+  };
 
-  componentDidMount() {
-    this.messageProcessor();
-  }
+  useEffect(() => {
+    messageProcessor();
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
-  render() {
-    return (
-      <div className="three-sections">
-        <UserList />
-        <GiveawayRules
-          apiKey={this.props.apiKey}
-          channelId={this.props.channelId}
-        />
-        <ChatEmbed videoId={this.props.videoId} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="three-sections">
+      <UserList />
+      <GiveawayRules apiKey={props.apiKey} channelId={props.channelId} />
+      <ChatEmbed videoId={props.videoId} />
+    </div>
+  );
+};
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
@@ -91,3 +88,5 @@ YoutubeWorker.propTypes = {
   videoId: PropTypes.string,
   liveChatId: PropTypes.string.isRequired,
 };
+
+export default YoutubeWorker;
