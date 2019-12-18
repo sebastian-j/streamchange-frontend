@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import TextField from '@material-ui/core/TextField';
 import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
@@ -13,6 +14,7 @@ export default class GiveawayRules extends React.Component {
       forMods: true,
       forSponsors: true,
       forRegulars: true,
+      prize: '',
       winnerId: null,
     };
     this.handleToggleButton = this.handleToggleButton.bind(this);
@@ -86,6 +88,7 @@ export default class GiveawayRules extends React.Component {
           apiKey={this.props.apiKey}
           ownerId={this.props.channelId}
           id={this.state.winnerId}
+          prize={this.state.prize}
           onClose={() => this.setState({ winnerId: null })}
         />
       );
@@ -123,6 +126,16 @@ export default class GiveawayRules extends React.Component {
         >
           Zwykli użytkownicy
         </button>
+        <TextField
+          autoFocus
+          margin="dense"
+          name="prize"
+          onChange={this.handleInputValueChange}
+          label="Nagroda (opcjonalne)"
+          type="text"
+          value={this.state.prize}
+          fullWidth
+        />
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
       </div>

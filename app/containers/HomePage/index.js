@@ -7,6 +7,7 @@
 
 import React from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
@@ -72,12 +73,17 @@ export default class HomePage extends React.Component {
     }
     return (
       <div>
-        <div className="stream-info">
-          <img alt="Miniatura" src={this.state.thumbnailUrl} />
-          <span>{this.state.title}</span>
-          <Button onClick={this.leaveStream} color="primary">
-            Opuść stream
-          </Button>
+        <div className="flex-row-space">
+          <div className="stream-info">
+            <img alt="Miniatura" src={this.state.thumbnailUrl} />
+            <span>{this.state.title}</span>
+            <Button onClick={this.leaveStream} color="primary">
+              Opuść stream
+            </Button>
+          </div>
+          <NavLink to="/giveaway-history" className="history-navLink">
+            Historia wygranych
+          </NavLink>
         </div>
         <YoutubeWorker
           channelId={this.state.channelId}

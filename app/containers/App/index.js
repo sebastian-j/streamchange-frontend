@@ -11,6 +11,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
+import History from 'containers/History/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -20,6 +21,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/giveaway" component={HomePage} />
+        <Route exact path="/giveaway-history" component={History} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

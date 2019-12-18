@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
 import db from '../YoutubeWorker/db';
 import MessageItem from './MessageItem';
 import RelativeDate from '../RelativeDate';
@@ -10,23 +11,22 @@ export default class WinnerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUrl: null,
-      title: null,
+      user: null,
       messages: [],
       interval: null,
+      prize: this.props.prize,
       subscriberFrom: null,
       subscriberStatus: null,
     };
     this.getMessages = this.getMessages.bind(this);
     this.checkSubStatus = this.checkSubStatus.bind(this);
+    this.saveAndExit = this.saveAndExit.bind(this);
+    this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
 
   getMessages() {
-    const authorId = this.props.id;
     db.table('messages')
-      .filter(function(message) {
-        return message.authorId === authorId;
-      })
+      .filter(message => message.authorId === this.props.id)
       .toArray()
       .then(items => {
         this.setState({ messages: items });
@@ -63,15 +63,39 @@ export default class WinnerView extends React.Component {
       });
   }
 
+  saveAndExit() {
+    const d = new Date();
+    const winner = {
+      channelId: this.state.user.id,
+      displayName: this.state.user.title,
+      imageUrl: this.state.user.imageUrl,
+      message: this.state.user.message,
+      prize: this.state.prize,
+      createdAt: d.toISOString(),
+    };
+    db.table('history')
+      .add(winner)
+      .finally(() => {
+        this.props.onClose();
+      });
+  }
+
+  handleInputValueChange(event) {
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   componentDidMount() {
     const userId = this.props.id;
     db.table('users')
-      .filter(function(user) {
-        return user.id === userId;
-      })
+      .filter(user => user.id === userId)
       .toArray()
       .then(items => {
-        this.setState({ imageUrl: items[0].imageUrl, title: items[0].title });
+        this.setState({ user: items[0] });
       });
     this.checkSubStatus();
     this.getMessages();
@@ -83,7 +107,7 @@ export default class WinnerView extends React.Component {
   }
 
   render() {
-    if (!this.state.title || !this.state.subscriberStatus) {
+    if (!this.state.user || !this.state.subscriberStatus) {
       return (
         <div className="gv-column flex-column">
           <h2 className="column-title">Zwycięzca</h2>
@@ -102,9 +126,13 @@ export default class WinnerView extends React.Component {
       <div className="gv-column flex-column">
         <h2 className="column-title">Zwycięzca</h2>
         <div className="winner-outer">
-          <img className="winner-logo" alt="logo" src={this.state.imageUrl} />
+          <img
+            className="winner-logo"
+            alt="logo"
+            src={this.state.user.imageUrl}
+          />
           <div className="flex-column">
-            <span className="winner-title">{this.state.title}</span>
+            <span className="winner-title">{this.state.user.title}</span>
             {this.state.subscriberStatus === 'true' && (
               <span className="winner-sub-status sub-true">
                 Subskrybuje od&nbsp;
@@ -131,12 +159,18 @@ export default class WinnerView extends React.Component {
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
         </ul>
-        <button
-          className="winner-btn"
-          onClick={this.props.onClose}
-          type="button"
-        >
-          Powrót
+        <TextField
+          autoFocus
+          margin="dense"
+          name="prize"
+          onChange={this.handleInputValueChange}
+          label="Nagroda"
+          type="text"
+          value={this.state.prize}
+          fullWidth
+        />
+        <button className="winner-btn" onClick={this.saveAndExit} type="button">
+          Zapisz i wróć
         </button>
       </div>
     );
@@ -147,5 +181,6 @@ WinnerView.propTypes = {
   apiKey: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   ownerId: PropTypes.string.isRequired,
+  prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 };
