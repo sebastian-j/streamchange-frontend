@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,95 +9,79 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import './style.css';
 
-export default class WelcomeDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOpen: true, videoLink: '', isChrome: true };
-    this.sendVideoLink = this.sendVideoLink.bind(this);
-    this.handleInputValueChange = this.handleInputValueChange.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
+const WelcomeDialog = props => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [videoLink, setVideoLink] = useState('');
+  const [isChrome, setIsChrome] = useState('');
 
-  sendVideoLink() {
-    if (typeof this.props.passVideo === 'function') {
-      this.props.passVideo(this.state.videoLink);
+  const sendVideoLink = () => {
+    if (typeof props.passVideo === 'function') {
+      props.passVideo(videoLink);
     }
-  }
+  };
 
-  componentDidMount() {
-    this.setState({
-      isChrome: !!window.chrome,
-    });
-  }
+  useEffect(() => {
+    setIsChrome(!!window.chrome);
+  }, []);
 
-  handleInputValueChange(event) {
+  const handleInputValueChange = event => {
     const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
+    const { value } = target;
+    setVideoLink(value);
+  };
 
-    if (value.length < 140) {
-      this.setState({
-        [name]: value,
-      });
-    }
-  }
-
-  handleKeyPress(e) {
+  const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      this.sendVideoLink();
+      sendVideoLink();
     }
-  }
+  };
 
-  render() {
-    if (this.state.isChrome) {
-      return (
-        <div className="blur">
-          <Dialog
-            open={this.state.isOpen}
-            onClose={this.closeDialog}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">
-              Wybierz, na którym streamie organizujesz giveaway
-            </DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="videoLink"
-                onChange={this.handleInputValueChange}
-                onKeyPress={this.handleKeyPress}
-                id="videoLink"
-                label="Wklej link do streama"
-                type="text"
-                value={this.state.videoLink}
-                fullWidth
-              />
-              <DialogContentText>
-                <span style={{ fontSize: '0.8rem' }}>
-                  Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
-                </span>
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.sendVideoLink} color="primary">
-                Dalej
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      );
-    }
+  if (isChrome) {
     return (
-      <div className="vertical">
-        <div className="compatibility-info">
-          Aplikacja działa wyłącznie w Google Chrome
-        </div>
+      <div className="blur">
+        <Dialog open={isOpen} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">
+            Wybierz, na którym streamie organizujesz giveaway
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              name="videoLink"
+              onChange={handleInputValueChange}
+              onKeyPress={handleKeyPress}
+              id="videoLink"
+              label="Wklej link do streama"
+              type="text"
+              value={videoLink}
+              fullWidth
+            />
+            <DialogContentText>
+              <span style={{ fontSize: '0.8rem' }}>
+                Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
+              </span>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={sendVideoLink} color="primary">
+              Dalej
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
-}
+  return (
+    <div className="vertical">
+      <div className="compatibility-info">
+        Aplikacja działa wyłącznie w Google Chrome
+      </div>
+    </div>
+  );
+};
 
 WelcomeDialog.propTypes = {
   passVideo: PropTypes.func,
 };
+
+export default WelcomeDialog;

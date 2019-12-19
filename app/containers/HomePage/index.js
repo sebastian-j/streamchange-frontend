@@ -1,11 +1,4 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- */
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
@@ -13,85 +6,78 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import './style.css';
 
-export default class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      channelId: '',
-      videoId: '',
-      title: '',
-      thumbnailUrl: '',
-      liveChatId: '',
-    };
-    this.receiveVideo = this.receiveVideo.bind(this);
-    this.leaveStream = this.leaveStream.bind(this);
-    this.launchWorker = this.launchWorker.bind(this);
-  }
+const HomePage = () => {
+  const [channelId, setChannelId] = useState('');
+  const [videoId, setVideoId] = useState('');
+  const [title, setTitle] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
+  const [liveChatId, setLiveChatId] = useState('');
 
-  receiveVideo(videoLink) {
+  const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
-      let videoId = videoLink.split('v=')[1];
-      videoId = videoId.split('&')[0];
-      videoId = videoId.split('/')[0];
-      this.launchWorker(videoId);
+      let vidId = videoLink.split('v=')[1];
+      vidId = vidId.split('&')[0];
+      vidId = vidId.split('/')[0];
+      launchWorker(vidId);
     }
-  }
+  };
 
-  leaveStream() {
-    this.setState({ videoId: '', title: '', liveChatId: '', thumbnailUrl: '' });
+  const leaveStream = () => {
+    setVideoId('');
+    setTitle('');
+    setLiveChatId('');
+    setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
-  }
+  };
 
-  launchWorker(videoId) {
+  const launchWorker = vidId => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${videoId}&key=API_KEY`,
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=API_KEY`,
       )
       .then(res => {
-        this.setState({
-          videoId,
-          channelId: res.data.items[0].snippet.channelId,
-          title: res.data.items[0].snippet.title,
-          thumbnailUrl: res.data.items[0].snippet.thumbnails.medium.url,
-          liveChatId: res.data.items[0].liveStreamingDetails.activeLiveChatId,
-        });
-        sessionStorage.setItem('gv-videoId', videoId);
+        setVideoId(vidId);
+        setChannelId(res.data.items[0].snippet.channelId);
+        setTitle(res.data.items[0].snippet.title);
+        setThumbnailUrl(res.data.items[0].snippet.thumbnails.medium.url);
+        setLiveChatId(res.data.items[0].liveStreamingDetails.activeLiveChatId);
+        sessionStorage.setItem('gv-videoId', vidId);
       });
-  }
+  };
 
-  componentDidMount() {
+  useEffect(() => {
     const id = sessionStorage.getItem('gv-videoId');
     if (id !== null) {
-      this.launchWorker(id);
+      launchWorker(id);
     }
-  }
+  }, []);
 
-  render() {
-    if (this.state.videoId === '') {
-      return <WelcomeDialog passVideo={this.receiveVideo} />;
-    }
-    return (
-      <div>
-        <div className="flex-row-space">
-          <div className="stream-info">
-            <img alt="Miniatura" src={this.state.thumbnailUrl} />
-            <span>{this.state.title}</span>
-            <Button onClick={this.leaveStream} color="primary">
-              Opuść stream
-            </Button>
-          </div>
-          <NavLink to="/giveaway-history" className="history-navLink">
-            Historia wygranych
-          </NavLink>
-        </div>
-        <YoutubeWorker
-          channelId={this.state.channelId}
-          liveChatId={this.state.liveChatId}
-          videoId={this.state.videoId}
-          apiKey="API_KEY"
-        />
-      </div>
-    );
+  if (videoId === '') {
+    return <WelcomeDialog passVideo={receiveVideo} />;
   }
-}
+  return (
+    <div>
+      <div className="flex-row-space">
+        <div className="stream-info">
+          <img alt="Miniatura" src={thumbnailUrl} />
+          <span>{title}</span>
+          <Button onClick={leaveStream} color="primary">
+            Opuść stream
+          </Button>
+        </div>
+        <NavLink to="/giveaway-history" className="history-navLink">
+          Historia wygranych
+        </NavLink>
+      </div>
+      <YoutubeWorker
+        channelId={channelId}
+        liveChatId={liveChatId}
+        videoId={videoId}
+        apiKey="API_KEY"
+      />
+    </div>
+  );
+};
+
+export default HomePage;
