@@ -12,6 +12,7 @@ const HomePage = () => {
   const [title, setTitle] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [liveChatId, setLiveChatId] = useState('');
+  const [error, setError] = useState(null);
 
   const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
@@ -19,6 +20,8 @@ const HomePage = () => {
       vidId = vidId.split('&')[0];
       vidId = vidId.split('/')[0];
       launchWorker(vidId);
+    } else {
+      setError('To nie jest link do live streama ani filmu na Youtube.');
     }
   };
 
@@ -37,12 +40,26 @@ const HomePage = () => {
         `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=API_KEY`,
       )
       .then(res => {
-        setVideoId(vidId);
-        setChannelId(res.data.items[0].snippet.channelId);
-        setTitle(res.data.items[0].snippet.title);
-        setThumbnailUrl(res.data.items[0].snippet.thumbnails.medium.url);
-        setLiveChatId(res.data.items[0].liveStreamingDetails.activeLiveChatId);
-        sessionStorage.setItem('gv-videoId', vidId);
+        if (res.data.items.length === 0) {
+          setError('Nie ma takiego streama. Link jest błędny.');
+        } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
+          setError('To jest link do zwykłego filmu. Wklej link do streama');
+        } else {
+          const stream = res.data.items[0];
+          setVideoId(vidId);
+          setChannelId(stream.snippet.channelId);
+          setTitle(stream.snippet.title);
+          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
+          setLiveChatId(stream.liveStreamingDetails.activeLiveChatId);
+          sessionStorage.setItem('gv-videoId', vidId);
+        }
+      })
+      .catch(err => {
+        if (err.response.data.error) {
+          if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
+            setError('Limit quota został wyczerpany.');
+          }
+        }
       });
   };
 
@@ -54,7 +71,7 @@ const HomePage = () => {
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} />;
+    return <WelcomeDialog passVideo={receiveVideo} error={error} />;
   }
   return (
     <div>

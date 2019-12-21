@@ -60,6 +60,11 @@ const WelcomeDialog = props => {
               <span style={{ fontSize: '0.8rem' }}>
                 Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
               </span>
+              {props.error && (
+                <span style={{ display: 'block', color: '#bd0013' }}>
+                  {props.error}
+                </span>
+              )}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -81,6 +86,7 @@ const WelcomeDialog = props => {
 };
 
 WelcomeDialog.propTypes = {
+  error: PropTypes.string,
   passVideo: PropTypes.func,
 };
 

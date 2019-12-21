@@ -71,7 +71,7 @@ const YoutubeWorker = props => {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [props.liveChatId]);
 
   return (
     <div className="three-sections">
