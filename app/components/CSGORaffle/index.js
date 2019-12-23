@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import db from '../YoutubeWorker/db';
 import './style.css';
 
-export default class CSGORaffle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { users: [], scrollSize: 0, winner: null };
-  }
+const CSGORaffle = props => {
+  const [users, setUsers] = useState([]);
+  const [scrollSize, setScrollSize] = useState(0);
+  const [winner, setWinner] = useState(null);
+  const [timer, setTimer] = useState(null);
 
-  static getDerivedStateFromError() {
-    return { error: true };
-  }
+  const closeImmediately = () => {
+    props.onClose();
+    clearTimeout(timer);
+  };
 
-  componentDidMount() {
+  useEffect(() => {
     db.table('users')
-      .filter(function(user) {
-        return user.isEligible === true;
-      })
+      .filter(user => user.isEligible === true)
       .toArray()
       .then(items => {
         const shuffled = [];
@@ -25,57 +24,52 @@ export default class CSGORaffle extends React.Component {
           shuffled.push(items[Math.floor(Math.random() * items.length)]);
         }
         const winnerIndex = Math.floor(Math.random() * 10) + 35;
-        const scrollSize = -(
+        const scroll = -(
           winnerIndex * 150 +
           Math.floor(Math.random() * 65) -
           290
         );
-        this.setState({
-          users: shuffled,
-          scrollSize,
-          winner: shuffled[winnerIndex],
-        });
-        setTimeout(() => {
-          this.props.onWin(shuffled[winnerIndex].id);
-        }, 8000);
+        setUsers(shuffled);
+        setScrollSize(scroll);
+        setWinner(shuffled[winnerIndex]);
+        setTimer(
+          setTimeout(() => {
+            props.onWin(shuffled[winnerIndex].id);
+          }, 8000),
+        );
       });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="dialog-root">
-        <div className="dialog-backdrop" onClick={this.props.onClose} />
-        <div className="raffle-dialog">
-          <div className="roller-box">
-            <div className="roller-needle" />
-            <table>
-              <tbody>
-                <tr
-                  className="roller-movable"
-                  style={{ left: this.state.scrollSize }}
-                >
-                  {this.state.users.map(item => (
-                    <td>
-                      <div className="roller-cell">
-                        <img src={item.imageUrl} alt="logo" />
-                        <span className="roller-label">{item.title}</span>
-                      </div>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <span className="raffle-winner">
-            {this.state.winner !== null && this.state.winner.title}
-          </span>
+  return (
+    <div className="dialog-root">
+      <div className="dialog-backdrop" onClick={closeImmediately} />
+      <div className="raffle-dialog">
+        <div className="roller-box">
+          <div className="roller-needle" />
+          <table>
+            <tbody>
+              <tr className="roller-movable" style={{ left: scrollSize }}>
+                {users.map(item => (
+                  <td>
+                    <div className="roller-cell">
+                      <img src={item.imageUrl} alt="logo" />
+                      <span className="roller-label">{item.title}</span>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <span className="raffle-winner">{winner !== null && winner.title}</span>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 CSGORaffle.propTypes = {
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
 };
+
+export default CSGORaffle;
