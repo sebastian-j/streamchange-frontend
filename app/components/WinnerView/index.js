@@ -73,6 +73,14 @@ export default class WinnerView extends React.Component {
       prize: this.state.prize,
       createdAt: d.toISOString(),
     };
+    if (localStorage.getItem('gv-deleteWinner') === 'true') {
+      db.table('users')
+        .where('id')
+        .equals(winner.channelId)
+        .modify({
+          isEligible: false,
+        });
+    }
     db.table('history')
       .add(winner)
       .finally(() => {

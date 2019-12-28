@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .stream-info {
     height: 5vh;
 }
@@ -28,4 +29,10 @@
 .history-navLink:hover {
     background-color: #0059a3;
     color: white;
+}
+
+.hint-paragraph {
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+    display: block;
 }

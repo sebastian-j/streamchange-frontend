@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
+import SettingsDialog from '../../components/SettingsDialog';
 import './style.css';
 
 const HomePage = () => {
@@ -55,7 +56,7 @@ const HomePage = () => {
         }
       })
       .catch(err => {
-        if (err.response.data.error) {
+        if (err.response.data && err.response.data.error) {
           if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
             setError('Limit quota został wyczerpany.');
           }
@@ -83,9 +84,12 @@ const HomePage = () => {
             Opuść stream
           </Button>
         </div>
-        <NavLink to="/giveaway-history" className="history-navLink">
-          Historia wygranych
-        </NavLink>
+        <div style={{ display: 'block' }}>
+          <NavLink to="/giveaway-history" className="history-navLink">
+            Historia wygranych
+          </NavLink>
+          <SettingsDialog />
+        </div>
       </div>
       <YoutubeWorker
         channelId={channelId}

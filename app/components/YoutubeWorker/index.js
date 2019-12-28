@@ -35,11 +35,6 @@ const YoutubeWorker = props => {
               localStorage.getItem('keyword'),
             ),
           };
-          const message = {
-            authorId: res.data.items[i].authorDetails.channelId,
-            displayText: res.data.items[i].snippet.displayMessage,
-            publishedAt: res.data.items[i].snippet.publishedAt,
-          };
           db.users
             .where('id')
             .equals(author.id)
@@ -55,15 +50,41 @@ const YoutubeWorker = props => {
                     message: author.isEligible ? author.message : user.message,
                     isEligible:
                       user.isEligible === true ? true : author.isEligible,
+                  })
+                  .then(() => {
+                    checkResignation(author);
                   });
               }
             });
-          db.table('messages').add(message);
+          saveMessage(res.data.items[i]);
         }
         clearTimeout(timer);
         setTimer(null);
         setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
       });
+  };
+
+  const saveMessage = msg => {
+    const message = {
+      authorId: msg.authorDetails.channelId,
+      displayText: msg.snippet.displayMessage,
+      publishedAt: msg.snippet.publishedAt,
+    };
+    db.table('messages').add(message);
+  };
+
+  const checkResignation = author => {
+    if (
+      localStorage.getItem('gv-abortCommand') !== null &&
+      author.message === localStorage.getItem('gv-abortCommand')
+    ) {
+      db.table('users')
+        .where('id')
+        .equals(author.id)
+        .modify({
+          isEligible: false,
+        });
+    }
   };
 
   useEffect(() => {

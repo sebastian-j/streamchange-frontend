@@ -26,7 +26,8 @@ export default class GiveawayRules extends React.Component {
     const forMods = localStorage.getItem('gv-forMods') === 'true';
     const forSponsors = localStorage.getItem('gv-forSponsors') === 'true';
     const forRegulars = localStorage.getItem('gv-forRegulars') === 'true';
-    this.setState({ forMods, forSponsors, forRegulars });
+    const prize = localStorage.getItem('gv-prize');
+    this.setState({ forMods, forSponsors, forRegulars, prize });
   }
 
   handleToggleButton(event) {
@@ -71,7 +72,7 @@ export default class GiveawayRules extends React.Component {
       this.setState({
         [name]: value,
       });
-      localStorage.setItem(name, value);
+      localStorage.setItem(`gv-${name}`, value);
     }
   }
 
