@@ -7,6 +7,7 @@ import './style.css';
 const KeywordInput = () => {
   const [keyword, setKeyword] = useState('');
   const [visible, setVisible] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let storedKeyword = localStorage.getItem('keyword');
@@ -17,6 +18,11 @@ const KeywordInput = () => {
   }, []);
 
   const handleInputChange = event => {
+    if (event.target.value.includes(localStorage.getItem('gv-abortCommand'))) {
+      setError('Komenda na dołączenie nie może zawierać komendy rezygnacji.');
+      return;
+    }
+    setError(null);
     setKeyword(event.target.value);
     localStorage.setItem('keyword', event.target.value);
   };
@@ -25,6 +31,7 @@ const KeywordInput = () => {
   return (
     <TextField
       autoFocus
+      error={!!error}
       margin="dense"
       name="keyword"
       onChange={handleInputChange}
@@ -32,6 +39,7 @@ const KeywordInput = () => {
       label="Słowo kluczowe"
       type={visible ? 'text' : 'password'}
       value={keyword}
+      helperText={error}
       fullWidth
       InputProps={{
         endAdornment: (

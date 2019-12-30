@@ -13,6 +13,7 @@ const SettingsDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteWinner, setDeleteWinner] = useState(false);
   const [abortCommand, setAbortCommand] = useState('');
+  const [error, setError] = useState(null);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -29,6 +30,10 @@ const SettingsDialog = () => {
   };
 
   const saveSettings = () => {
+    if (localStorage.getItem('keyword') === abortCommand) {
+      setError('Komendy na rezygnację i dołączenie muszą być różne.');
+      return;
+    }
     localStorage.setItem('gv-deleteWinner', String(deleteWinner));
     localStorage.setItem('gv-abortCommand', String(abortCommand));
     closeDialog();
@@ -79,13 +84,18 @@ const SettingsDialog = () => {
             />
           </Tooltip>
           <TextField
+            error={!!error}
             id="abortCommand"
             name="abortCommand"
             label="Komenda na rezygnację z losowania"
             value={abortCommand}
-            onChange={event => setAbortCommand(event.target.value)}
+            onChange={event => {
+              setAbortCommand(event.target.value);
+              setError(null);
+            }}
             fullWidth
             margin="normal"
+            helperText={error}
           />
         </DialogContent>
         <DialogActions>
