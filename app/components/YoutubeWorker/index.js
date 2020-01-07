@@ -70,6 +70,12 @@ const YoutubeWorker = props => {
       displayText: msg.snippet.displayMessage,
       publishedAt: msg.snippet.publishedAt,
     };
+    if (
+      message.displayText === localStorage.getItem('keyword') &&
+      localStorage.getItem('gv-saveCommands') !== 'true'
+    ) {
+      return;
+    }
     db.table('messages').add(message);
   };
 

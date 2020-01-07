@@ -11,6 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const SettingsDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [saveCommands, setSaveCommands] = useState(false);
   const [deleteWinner, setDeleteWinner] = useState(false);
   const [abortCommand, setAbortCommand] = useState('');
   const [error, setError] = useState(null);
@@ -23,23 +24,19 @@ const SettingsDialog = () => {
     setIsOpen(false);
   };
 
-  const handleChange = event => {
-    const { target } = event;
-    const value = target.checked;
-    setDeleteWinner(value);
-  };
-
   const saveSettings = () => {
     if (localStorage.getItem('keyword') === abortCommand) {
       setError('Komendy na rezygnację i dołączenie muszą być różne.');
       return;
     }
+    localStorage.setItem('gv-saveCommands', String(saveCommands));
     localStorage.setItem('gv-deleteWinner', String(deleteWinner));
     localStorage.setItem('gv-abortCommand', String(abortCommand));
     closeDialog();
   };
 
   useEffect(() => {
+    setSaveCommands(localStorage.getItem('gv-saveCommands') === 'true');
     setDeleteWinner(localStorage.getItem('gv-deleteWinner') === 'true');
     setAbortCommand(localStorage.getItem('gv-abortCommand'));
   }, []);
@@ -66,6 +63,29 @@ const SettingsDialog = () => {
           <Tooltip
             title={
               <span className="hint-paragraph">
+                Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane
+                wszystkie wysłane przez niego komendy na dołączenie. Może to być
+                spam setek identycznych wiadomości, dlatego zazwyczaj lepiej
+                zostawić pole niezaznaczone.
+              </span>
+            }
+          >
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={saveCommands}
+                  onChange={event => setSaveCommands(event.target.checked)}
+                  color="primary"
+                  name="saveCommands"
+                  type="checkbox"
+                />
+              }
+              label="Zapisuj wysłane komendy na dołączenie"
+            />
+          </Tooltip>
+          <Tooltip
+            title={
+              <span className="hint-paragraph">
                 Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
               </span>
             }
@@ -74,9 +94,9 @@ const SettingsDialog = () => {
               control={
                 <Checkbox
                   checked={deleteWinner}
-                  onChange={handleChange}
+                  onChange={event => setDeleteWinner(event.target.checked)}
                   color="primary"
-                  name="forComment"
+                  name="deleteWinner"
                   type="checkbox"
                 />
               }
