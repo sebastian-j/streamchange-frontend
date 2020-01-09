@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import db from '../YoutubeWorker/db';
 import MessageItem from './MessageItem';
 import RelativeDate from '../RelativeDate';
+import Timer from './Timer';
 import './style.css';
 
 export default class WinnerView extends React.Component {
@@ -161,6 +162,7 @@ export default class WinnerView extends React.Component {
               Przejdź na kanał
             </a>
           </div>
+          <Timer />
         </div>
         <ul className="winner-message-list">
           {this.state.messages.map(item => (
