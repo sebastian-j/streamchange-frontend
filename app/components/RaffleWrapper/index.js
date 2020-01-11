@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CSGORaffle from '../CSGORaffle';
+import NumericInput from '../NumericInput';
 import db from '../YoutubeWorker/db';
 
 export default class RaffleWrapper extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false, noUsers: false };
+    this.state = { isOpen: false, noUsers: false, duration: 7 };
     this.openDialog = this.openDialog.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
   }
@@ -32,6 +33,12 @@ export default class RaffleWrapper extends React.Component {
   render() {
     return (
       <div>
+        <NumericInput
+          label="Czas trwania animacji (sekundy)"
+          minValue={1}
+          value={this.state.duration}
+          onChange={ret => this.setState({ duration: ret })}
+        />
         <button
           className="start-lottery-btn"
           disabled={this.state.noUsers}
@@ -41,7 +48,11 @@ export default class RaffleWrapper extends React.Component {
           {this.state.noUsers ? 'Nie zaznaczono żadnego użytkownika' : 'Losuj'}
         </button>
         {this.state.isOpen && (
-          <CSGORaffle onClose={this.closeDialog} onWin={this.props.onWin} />
+          <CSGORaffle
+            duration={this.state.duration}
+            onClose={this.closeDialog}
+            onWin={this.props.onWin}
+          />
         )}
       </div>
     );

@@ -35,7 +35,7 @@ const CSGORaffle = props => {
         setTimer(
           setTimeout(() => {
             props.onWin(shuffled[winnerIndex].id);
-          }, 8000),
+          }, (props.duration + 1) * 1000),
         );
       });
   }, []);
@@ -48,7 +48,13 @@ const CSGORaffle = props => {
           <div className="roller-needle" />
           <table>
             <tbody>
-              <tr className="roller-movable" style={{ left: scrollSize }}>
+              <tr
+                className="roller-movable"
+                style={{
+                  left: scrollSize,
+                  transitionDuration: `${props.duration}s`,
+                }}
+              >
                 {users.map(item => (
                   <td>
                     <div className="roller-cell">
@@ -61,15 +67,24 @@ const CSGORaffle = props => {
             </tbody>
           </table>
         </div>
-        <span className="raffle-winner">{winner !== null && winner.title}</span>
+        <span
+          className="raffle-winner"
+          style={{ animationDelay: `${props.duration + 0.1}s` }}
+        >
+          {winner !== null && winner.title}
+        </span>
       </div>
     </div>
   );
 };
 
 CSGORaffle.propTypes = {
+  duration: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+};
+CSGORaffle.defaultProps = {
+  duration: 7,
 };
 
 export default CSGORaffle;
