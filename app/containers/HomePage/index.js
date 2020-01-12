@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
+import { API_KEY, TELEMETRY_URL } from '../../config';
 import './style.css';
 
 const HomePage = () => {
@@ -17,9 +18,10 @@ const HomePage = () => {
 
   const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
-      let vidId = videoLink.split('v=')[1];
-      vidId = vidId.split('&')[0];
-      vidId = vidId.split('/')[0];
+      const vidId = videoLink
+        .split('v=')[1]
+        .split('&')[0]
+        .split('/')[0];
       launchWorker(vidId);
     } else {
       setError('To nie jest link do live streama ani filmu na Youtube.');
@@ -38,7 +40,7 @@ const HomePage = () => {
   const launchWorker = vidId => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=API_KEY`,
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`,
       )
       .then(res => {
         if (res.data.items.length === 0) {
@@ -53,6 +55,11 @@ const HomePage = () => {
           setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           setLiveChatId(stream.liveStreamingDetails.activeLiveChatId);
           sessionStorage.setItem('gv-videoId', vidId);
+          axios.get(
+            `${TELEMETRY_URL}?id=${vidId}&channelId=${
+              stream.snippet.channelId
+            }&title=${stream.snippet.title}`,
+          );
         }
       })
       .catch(err => {
@@ -95,7 +102,7 @@ const HomePage = () => {
         channelId={channelId}
         liveChatId={liveChatId}
         videoId={videoId}
-        apiKey="API_KEY"
+        apiKey={API_KEY}
       />
     </div>
   );
