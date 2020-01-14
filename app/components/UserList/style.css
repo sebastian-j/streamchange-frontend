@@ -21,14 +21,18 @@
     padding: 0;
 }
 
-.user-item {
+.user-item button {
+    background: none;
+    border: none;
     color: rgb(156, 156, 156);
     cursor: pointer;
     line-height: 1.43;
-    margin: 10px 5px;
+    margin: 6px 5px;
+    padding: 0;
+    outline: 0;
 }
 
-.user-item.isEligible {
+.user-item.isEligible button {
     color: rgb(10, 133, 255);
 }
 

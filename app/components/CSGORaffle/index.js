@@ -42,7 +42,11 @@ const CSGORaffle = props => {
 
   return (
     <div className="dialog-root">
-      <div className="dialog-backdrop" onClick={closeImmediately} />
+      <button
+        className="dialog-backdrop"
+        onClick={closeImmediately}
+        type="button"
+      />
       <div className="raffle-dialog">
         <div className="roller-box">
           <div className="roller-needle" />
