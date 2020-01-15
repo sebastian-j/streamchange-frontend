@@ -1,0 +1,38 @@
+.flex-row-space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stream-info {
+    height: 5vh;
+}
+
+.stream-info img {
+    height: 100%;
+}
+
+.stream-info span {
+    margin-left: 10px;
+}
+
+.history-navLink {
+    background: none;
+    border: 1px solid #0059a3;
+    color: #0059a3;
+    border-radius: 4px;
+    height: 80%;
+    padding: 3px 5px;
+    margin: 10px 15px 0 0;
+    text-decoration: none;
+}
+
+.history-navLink:hover {
+    background-color: #0059a3;
+    color: white;
+}
+
+.hint-paragraph {
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+    display: block;
+}

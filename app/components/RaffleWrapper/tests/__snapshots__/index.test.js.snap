@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
+<div>
+  <NumericInput
+    label="Czas trwania animacji (sekundy)"
+    maxValue={null}
+    minValue={1}
+    onChange={[Function]}
+    step={1}
+    value={7}
+  />
+  <button
+    className="start-lottery-btn"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Losuj
+  </button>
+</div>
+`;

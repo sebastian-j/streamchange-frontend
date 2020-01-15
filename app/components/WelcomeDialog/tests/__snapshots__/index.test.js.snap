@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
+<div
+  className="blur"
+>
+  <div
+    className="welcome-wrapper"
+  >
+    <div
+      className="welcomeDialog"
+    >
+      <div
+        className="welcomeDialog-title"
+      >
+        Wybierz, na którym streamie organizujesz giveaway
+      </div>
+      <div
+        className="welcomeDialog-content"
+      >
+        <ForwardRef(WithStyles)
+          autoFocus={true}
+          fullWidth={true}
+          id="videoLink"
+          label="Wklej link do streama"
+          margin="dense"
+          name="videoLink"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          type="text"
+          value=""
+        />
+        <div
+          className="welcomeDialog-textSecondary"
+        >
+          <span
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
+          </span>
+        </div>
+      </div>
+      <div
+        className="welcomeDialog-actions"
+      >
+        <ForwardRef(WithStyles)
+          color="primary"
+          onClick={[Function]}
+        >
+          Dalej
+        </ForwardRef(WithStyles)>
+      </div>
+    </div>
+    <div
+      className="welcomeHint"
+    >
+      <img
+        alt="light bulb"
+        height="140px"
+        src="https://streamchange.pl/static/light-bulb.png"
+      />
+      <div>
+        <span
+          className="welcomeHint-title"
+        >
+          Czy wiesz, że...
+        </span>
+        <span
+          className="welcomeHint-content"
+        >
+          
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

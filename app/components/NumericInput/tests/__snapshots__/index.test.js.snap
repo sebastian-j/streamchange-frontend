@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NumericInput /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef />
+  <ForwardRef
+    left="true"
+    onClick={[Function]}
+    type="button"
+  >
+    -
+  </ForwardRef>
+  <ForwardRef>
+    0
+  </ForwardRef>
+  <ForwardRef
+    onClick={[Function]}
+    type="button"
+  >
+    +
+  </ForwardRef>
+</ForwardRef>
+`;

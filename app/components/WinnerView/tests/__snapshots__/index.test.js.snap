@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WinnerView /> should render and match the snapshot 1`] = `
+<div
+  className="gv-column flex-column"
+>
+  <h2
+    className="column-title"
+  >
+    Zwycięzca
+  </h2>
+  <span>
+    Ładowanie...
+  </span>
+  <button
+    className="winner-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    Powrót
+  </button>
+</div>
+`;

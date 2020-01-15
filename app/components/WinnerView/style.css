@@ -1,0 +1,52 @@
+.winner-outer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.winner-logo {
+    height: 70px;
+    width: 70px;
+    margin-right: 10px;
+}
+
+.winner-title {
+    font-size: 20px;
+}
+
+.winner-sub-status {
+    font-size: 0.9rem;
+    padding-bottom: 3px;
+}
+
+.winner-sub-status.sub-true {
+    font-weight: bold;
+    color: #007703;
+}
+.winner-btn {
+    background: none;
+    border: 1px solid #0059a3;
+    color: #0059a3;
+    border-radius: 4px;
+    padding: 3px 5px;
+    text-decoration: none;
+}
+
+.winner-btn:hover {
+    background-color: #0059a3;
+    color: white;
+}
+
+.winner-message-list {
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+}
+
+.winner-message {
+    margin-bottom: 5px;
+}
+.winner-message span:nth-child(1) {
+    color: grey;
+    margin-right: 10px;
+}

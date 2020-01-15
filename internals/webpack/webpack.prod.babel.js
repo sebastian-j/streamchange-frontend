@@ -104,6 +104,10 @@ module.exports = require('./webpack.base.babel')({
         // do not want them to be preloaded at all (cached only when first loaded)
         additional: ['*.chunk.js'],
       },
+      ServiceWorker: {
+        output: 'giveaway/sw.js',
+        publicPath: 'giveaway/sw.js',
+      },
 
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
@@ -120,8 +124,10 @@ module.exports = require('./webpack.base.babel')({
       name: 'StreamChange Giveaway',
       short_name: 'SC Giveaway',
       description: 'Giveaway app for Youtube live streams.',
+      filename: 'giveaway/manifest.json',
+      includeDirectory: true,
       background_color: '#fafafa',
-      theme_color: '#b1624d',
+      theme_color: '#20c0ee',
       inject: true,
       ios: true,
       icons: [
