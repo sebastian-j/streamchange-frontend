@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
+<div
+  className="gv-column"
+>
+  <h2
+    className="column-title"
+  >
+    Zasady losowania
+  </h2>
+  <button
+    className="viewer-type-button active"
+    name="forMods"
+    onClick={[Function]}
+    type="button"
+  >
+    Moderatorzy
+  </button>
+  <button
+    className="viewer-type-button active"
+    name="forSponsors"
+    onClick={[Function]}
+    type="button"
+  >
+    Sponsorzy
+  </button>
+  <button
+    className="viewer-type-button active"
+    name="forRegulars"
+    onClick={[Function]}
+    type="button"
+  >
+    Zwykli użytkownicy
+  </button>
+  <ForwardRef(WithStyles)
+    autoFocus={true}
+    fullWidth={true}
+    label="Nagroda (opcjonalne)"
+    margin="dense"
+    name="prize"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+  <KeywordInput />
+  <RaffleWrapper
+    onWin={[Function]}
+  />
+</div>
+`;

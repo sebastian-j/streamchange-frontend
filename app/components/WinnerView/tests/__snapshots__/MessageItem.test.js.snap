@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MessageItem /> should render and match the snapshot 1`] = `
+<li
+  className="winner-message"
+>
+  <span>
+    7:27:56
+  </span>
+  <span>
+    text
+  </span>
+</li>
+`;

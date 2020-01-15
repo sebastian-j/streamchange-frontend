@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CSGORaffle /> should render and match the snapshot 1`] = `
+<div
+  className="dialog-root"
+>
+  <button
+    className="dialog-backdrop"
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="raffle-dialog"
+  >
+    <div
+      className="roller-box"
+    >
+      <div
+        className="roller-needle"
+      />
+      <table>
+        <tbody>
+          <tr
+            className="roller-movable"
+            style={
+              Object {
+                "left": 0,
+                "transitionDuration": "7s",
+              }
+            }
+          />
+        </tbody>
+      </table>
+    </div>
+    <span
+      className="raffle-winner"
+      style={
+        Object {
+          "animationDelay": "7.1s",
+        }
+      }
+    />
+  </div>
+</div>
+`;

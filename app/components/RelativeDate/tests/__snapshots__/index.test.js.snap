@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RelativeDate /> should render and match the snapshot 1`] = `
+<span>
+  24 gru 2019 7:27
+</span>
+`;
