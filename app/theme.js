@@ -1,23 +1,25 @@
 export const lightTheme = {
-  body: '#E2E2E2',
+  welcomeBackground: '#00000080',
+  bodyBackground: '#E2E2E2',
   panelBackground: '#FFF',
   buttonBackground: '#FFF',
   buttonBackgroundHover: '#0059a3',
   buttonTextColor: '#0059a3',
   buttonTextColorHover: '#FFF',
   staticTextColor: '#000',
-  activeUser: '#0a85ff',
+  secondaryTextColor: 'grey',
   inactiveUser: '#9c9c9c',
 };
 
 export const darkTheme = {
-  body: '#363537',
-  panelBackground: '#474747',
-  buttonBackground: '#474747',
-  buttonBackgroundHover: '#585858',
+  welcomeBackground: '#000000CB',
+  bodyBackground: '#282828',
+  panelBackground: '#1f1f1f',
+  buttonBackground: '#232323',
+  buttonBackgroundHover: '#3e3e3e',
   buttonTextColor: '#FAFAFA',
-  buttonTextColorHover: '#FABAFC',
+  buttonTextColorHover: '#bdf3ff',
   staticTextColor: '#FFF',
-  activeUser: '#0a85ff',
+  secondaryTextColor: 'grey',
   inactiveUser: '#9c9c9c',
 };

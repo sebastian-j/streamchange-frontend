@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ChatEmbed from '../ChatEmbed';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
 import db from './db';
-import './style.css';
+
+const ThreeSections = styled.div`
+  background-color: ${props => props.theme.bodyBackground};
+  display: flex;
+  flex-direction: row;
+  height: 95vh;
+`;
 
 const YoutubeWorker = props => {
   const [timer, setTimer] = useState(null);
@@ -101,11 +108,11 @@ const YoutubeWorker = props => {
   }, [props.liveChatId]);
 
   return (
-    <div className="three-sections">
+    <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} channelId={props.channelId} />
       <ChatEmbed videoId={props.videoId} />
-    </div>
+    </ThreeSections>
   );
 };
 

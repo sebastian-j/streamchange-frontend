@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<YoutubeWorker /> should render and match the snapshot 1`] = `
-<div
-  className="three-sections"
->
+<ForwardRef>
   <UserList />
   <GiveawayRules
     apiKey="key"
@@ -12,5 +10,5 @@ exports[`<YoutubeWorker /> should render and match the snapshot 1`] = `
   <ChatEmbed
     videoId="vidId"
   />
-</div>
+</ForwardRef>
 `;

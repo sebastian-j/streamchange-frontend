@@ -1,38 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
-<div
-  className="gv-column"
->
-  <h2
-    className="column-title"
-  >
+<ForwardRef>
+  <ForwardRef>
     Zasady losowania
-  </h2>
-  <button
-    className="viewer-type-button active"
+  </ForwardRef>
+  <ForwardRef
+    active={true}
     name="forMods"
     onClick={[Function]}
     type="button"
   >
     Moderatorzy
-  </button>
-  <button
-    className="viewer-type-button active"
+  </ForwardRef>
+  <ForwardRef
+    active={true}
     name="forSponsors"
     onClick={[Function]}
     type="button"
   >
     Sponsorzy
-  </button>
-  <button
-    className="viewer-type-button active"
+  </ForwardRef>
+  <ForwardRef
+    active={true}
     name="forRegulars"
     onClick={[Function]}
     type="button"
   >
     Zwykli użytkownicy
-  </button>
+  </ForwardRef>
   <ForwardRef(WithStyles)
     autoFocus={true}
     fullWidth={true}
@@ -47,5 +43,5 @@ exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
   <RaffleWrapper
     onWin={[Function]}
   />
-</div>
+</ForwardRef>
 `;
