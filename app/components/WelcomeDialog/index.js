@@ -135,11 +135,7 @@ const WelcomeDialog = props => {
             </DialogActions>
           </Dialog>
           <div className="welcomeHint">
-            <img
-              src="/static/light-bulb.png"
-              height="140px"
-              alt="light bulb"
-            />
+            <img src="/static/light-bulb.png" height="140px" alt="light bulb" />
             <div>
               <span className="welcomeHint-title">Czy wiesz, że...</span>
               <span className="welcomeHint-content">{hint}</span>

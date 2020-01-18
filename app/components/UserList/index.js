@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import StyledTextField from '../StyledTextField';
 import db from '../YoutubeWorker/db';
 import UserItem from './userItem';
 import PanelTitle from '../Panel/PanelTitle';
@@ -20,6 +20,12 @@ const Ul = styled.ul`
   overflow-y: scroll;
   list-style: none;
   padding: 0;
+`;
+
+const StyledButton = styled(Button)`
+  span {
+    color: ${props => props.theme.materialButtonColor};
+  }
 `;
 
 export default class UserList extends React.Component {
@@ -93,7 +99,7 @@ export default class UserList extends React.Component {
     return (
       <UserListPanel>
         <PanelTitle>Uczestnicy</PanelTitle>
-        <TextField
+        <StyledTextField
           autoFocus
           margin="dense"
           name="search"
@@ -116,9 +122,7 @@ export default class UserList extends React.Component {
             />
           ))}
         </Ul>
-        <Button color="primary" onClick={this.clearList}>
-          Wyczyść listę
-        </Button>
+        <StyledButton onClick={this.clearList}>Wyczyść listę</StyledButton>
       </UserListPanel>
     );
   }

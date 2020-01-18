@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+import StyledTextField from '../StyledTextField';
 
 const ToggleVisibilityBtn = styled.button`
   background-color: transparent;
@@ -41,7 +41,7 @@ const KeywordInput = () => {
   const handleToggleButton = () => setVisible(prevState => !prevState);
 
   return (
-    <TextField
+    <StyledTextField
       autoFocus
       error={!!error}
       margin="dense"

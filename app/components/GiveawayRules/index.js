@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TextField from '@material-ui/core/TextField';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
+import StyledTextField from '../StyledTextField';
 import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
@@ -137,7 +137,7 @@ export default class GiveawayRules extends React.Component {
         >
           Zwykli użytkownicy
         </UserTypeButton>
-        <TextField
+        <StyledTextField
           autoFocus
           margin="dense"
           name="prize"

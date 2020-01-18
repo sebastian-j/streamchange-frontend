@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
-import TextField from '@material-ui/core/TextField';
 import db from '../YoutubeWorker/db';
 import PanelTitle from '../Panel/PanelTitle';
+import StyledTextField from '../StyledTextField';
 import MessageItem from './MessageItem';
 import RelativeDate from '../RelativeDate';
 import Timer from './Timer';
@@ -236,7 +236,7 @@ export default class WinnerView extends React.Component {
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
         </MessageList>
-        <TextField
+        <StyledTextField
           autoFocus
           margin="dense"
           name="prize"

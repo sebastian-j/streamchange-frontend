@@ -42,6 +42,12 @@ const LinkToHistory = styled.span`
   }
 `;
 
+const StyledButton = styled(Button)`
+  span {
+    color: ${props => props.theme.materialButtonColor};
+  }
+`;
+
 const HomePage = () => {
   const [channelId, setChannelId] = useState('');
   const [videoId, setVideoId] = useState('');
@@ -121,9 +127,9 @@ const HomePage = () => {
         <StreamInfo>
           <StreamImg alt="Miniatura" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
-          <Button onClick={leaveStream} color="primary">
+          <StyledButton onClick={leaveStream}>
             Opuść stream
-          </Button>
+          </StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
           <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
