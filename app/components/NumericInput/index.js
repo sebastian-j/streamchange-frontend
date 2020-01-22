@@ -8,14 +8,15 @@ const Container = styled.div`
 `;
 
 const Label = styled.div`
+  color: ${props => props.theme.staticTextColor};
   line-height: 30px;
   margin-right: 5px;
 `;
 const Button = styled.button`
-  background: none;
-  border: 1px solid #0059a3;
+  background: ${props => props.theme.buttonBackground};
+  border: 1px solid #0094ff;
   border-radius: 0 4px 4px 0;
-  color: #0059a3;
+  color: ${props => props.theme.buttonTextColor};
   font-size: 1.5rem;
   line-height: 23px;
   height: 30px;
@@ -28,13 +29,14 @@ const Button = styled.button`
     border-radius: 4px 0 0 4px;
   `}
   &:hover {
-    background-color: #0059a3;
-    color: white;
+    background-color: ${props => props.theme.buttonBackgroundHover};
+    color: ${props => props.theme.buttonTextColorHover};
   }
 `;
 
 const NumberDisplay = styled.div`
   border: 1px solid gray;
+  color: ${props => props.theme.staticTextColor};
   font-size: 1.5rem;
   padding: 0 10px;
 `;

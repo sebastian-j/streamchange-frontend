@@ -1,18 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChatEmbed /> should render and match the snapshot 1`] = `
-<div
-  className="gv-column"
->
-  <h2
-    className="column-title"
-  >
-    Chat
-  </h2>
-  <iframe
+<ForwardRef>
+  <ForwardRef>
+    Czat
+  </ForwardRef>
+  <ForwardRef
     className="chat-frame"
     src="https://www.youtube.com/live_chat?v=id&embed_domain=localhost"
     title="Youtube Chat"
   />
-</div>
+</ForwardRef>
 `;

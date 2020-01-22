@@ -1,11 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components';
+import Panel from '../Panel';
+import PanelTitle from '../Panel/PanelTitle';
+import StyledTextField from '../StyledTextField';
 import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
-import './style.css';
+
+const UserTypeButton = styled.button`
+  background-color: transparent;
+  border: 1px solid gray;
+  color: ${props => props.theme.buttonTextColor};
+  cursor: pointer;
+  padding: 6px 12px;
+  outline: none;
+  ${({ active }) =>
+    active &&
+    `
+    border: 1px solid #0094ff;
+    text-shadow: 0px 0px 4px #0cd2ef;
+  `}
+`;
 
 export default class GiveawayRules extends React.Component {
   constructor(props) {
@@ -95,39 +111,33 @@ export default class GiveawayRules extends React.Component {
       );
     }
     return (
-      <div className="gv-column">
-        <h2 className="column-title">Zasady losowania</h2>
-        <button
+      <Panel>
+        <PanelTitle>Zasady losowania</PanelTitle>
+        <UserTypeButton
           name="forMods"
           type="button"
-          className={clsx('viewer-type-button', this.state.forMods && 'active')}
+          active={this.state.forMods}
           onClick={this.handleToggleButton}
         >
           Moderatorzy
-        </button>
-        <button
+        </UserTypeButton>
+        <UserTypeButton
           name="forSponsors"
           type="button"
-          className={clsx(
-            'viewer-type-button',
-            this.state.forSponsors && 'active',
-          )}
+          active={this.state.forSponsors}
           onClick={this.handleToggleButton}
         >
           Sponsorzy
-        </button>
-        <button
+        </UserTypeButton>
+        <UserTypeButton
           name="forRegulars"
           type="button"
-          className={clsx(
-            'viewer-type-button',
-            this.state.forRegulars && 'active',
-          )}
+          active={this.state.forRegulars}
           onClick={this.handleToggleButton}
         >
           Zwykli użytkownicy
-        </button>
-        <TextField
+        </UserTypeButton>
+        <StyledTextField
           autoFocus
           margin="dense"
           name="prize"
@@ -139,7 +149,7 @@ export default class GiveawayRules extends React.Component {
         />
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
-      </div>
+      </Panel>
     );
   }
 }

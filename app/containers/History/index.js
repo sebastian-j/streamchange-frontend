@@ -1,17 +1,54 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import styled from 'styled-components';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
 import db from '../../components/YoutubeWorker/db';
+import StyledTextField from '../../components/StyledTextField';
 import HistoryItem from './HistoryItem';
 import ArrowUpIcon from './arrowUpIcon';
 import './style.css';
+
+const PageWrapper = styled.div`
+  background-color: ${props => props.theme.bodyBackground};
+  padding: 10px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+`;
+
+const HeaderButton = styled.button`
+  background: none;
+  border: none;
+  color: ${props => props.theme.staticTextColor};
+  padding: 14px 10px 14px 16px;
+  outline: none;
+  width: 100%;
+`;
+
+const StyledFormControl = styled(FormControl)`
+  width: 128px;
+  div.MuiInput-input {
+    color: ${props => props.theme.staticTextColor};
+  }
+  label {
+    color: ${props => props.theme.inputLabel};
+  }
+  label.Mui-focused {
+    color: ${props => props.theme.inputLabelFocused};
+  }
+  svg.MuiSelect-icon {
+    color: ${props => props.theme.secondaryTextColor};
+  }
+  .MuiInput-underline:before {
+    border-bottom-color: ${props => props.theme.secondaryTextColor};
+  }
+`;
 
 export default class History extends React.Component {
   constructor(props) {
@@ -115,7 +152,7 @@ export default class History extends React.Component {
     }
     if (!this.state.isLoaded) {
       return (
-        <div>
+        <PageWrapper>
           <LinearProgress />
           <div
             style={{
@@ -129,16 +166,19 @@ export default class History extends React.Component {
           >
             Ładowanie listy
           </div>
-        </div>
+        </PageWrapper>
       );
     }
-    if (this.state.search.length > 2 && this.state.items.length === 0) {
+    if (this.state.search.length > 0 && this.state.items.length === 0) {
       return (
-        <div className="page-wrapper">
-          <TextField
+        <PageWrapper>
+          <NavLink to="/giveaway" activeClassName="active">
+            <span>Powrót</span>
+          </NavLink>
+          <StyledTextField
             id="search"
             name="search"
-            label="Wyszukaj (min. 3 znaki)"
+            label="Wyszukaj"
             value={this.state.search}
             onChange={this.handleChange}
             type="text"
@@ -156,18 +196,18 @@ export default class History extends React.Component {
               Żaden kanał nie pasuje do wyszukiwanego słowa.
             </div>
           </div>
-        </div>
+        </PageWrapper>
       );
     }
     return (
-      <div className="page-wrapper">
+      <PageWrapper>
         <NavLink to="/giveaway" activeClassName="active">
           <span>Powrót</span>
         </NavLink>
-        <TextField
+        <StyledTextField
           id="search"
           name="search"
-          label="Wyszukaj (min. 3 znaki)"
+          label="Wyszukaj"
           value={this.state.search}
           onChange={this.handleChange}
           type="text"
@@ -179,8 +219,7 @@ export default class History extends React.Component {
             <tr>
               <td />
               <td>
-                <button
-                  className="header-btn"
+                <HeaderButton
                   id="displayName"
                   onClick={this.handleSortChange}
                   type="button"
@@ -196,11 +235,10 @@ export default class History extends React.Component {
                       ],
                     )}
                   />
-                </button>
+                </HeaderButton>
               </td>
               <td>
-                <button
-                  className="header-btn"
+                <HeaderButton
                   id="prize"
                   onClick={this.handleSortChange}
                   type="button"
@@ -216,11 +254,10 @@ export default class History extends React.Component {
                       ],
                     )}
                   />
-                </button>
+                </HeaderButton>
               </td>
               <td>
-                <button
-                  className="header-btn"
+                <HeaderButton
                   id="message"
                   onClick={this.handleSortChange}
                   type="button"
@@ -236,11 +273,10 @@ export default class History extends React.Component {
                       ],
                     )}
                   />
-                </button>
+                </HeaderButton>
               </td>
               <td>
-                <button
-                  className="header-btn"
+                <HeaderButton
                   id="createdAt"
                   onClick={this.handleSortChange}
                   type="button"
@@ -256,7 +292,7 @@ export default class History extends React.Component {
                       ],
                     )}
                   />
-                </button>
+                </HeaderButton>
               </td>
             </tr>
           </thead>
@@ -310,7 +346,7 @@ export default class History extends React.Component {
               </svg>
             </IconButton>
           )}
-          <FormControl style={{ marginRight: '2vw', width: '128px' }}>
+          <StyledFormControl>
             <InputLabel htmlFor="age-simple">Ilość na stronę</InputLabel>
             <Select
               value={this.state.maxResults}
@@ -325,9 +361,9 @@ export default class History extends React.Component {
               <MenuItem value={50}>50</MenuItem>
               <MenuItem value={100}>100</MenuItem>
             </Select>
-          </FormControl>
+          </StyledFormControl>
         </div>
-      </div>
+      </PageWrapper>
     );
   }
 }

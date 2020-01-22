@@ -1,9 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import StyledTextField from '../StyledTextField';
 import db from '../YoutubeWorker/db';
 import UserItem from './userItem';
-import './style.css';
+import PanelTitle from '../Panel/PanelTitle';
+
+const UserListPanel = styled.div`
+  background-color: ${props => props.theme.panelBackground};
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 15px;
+  padding: 15px;
+`;
+
+const Ul = styled.ul`
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+`;
+
+const StyledButton = styled(Button)`
+  span {
+    color: ${props => props.theme.materialButtonColor};
+  }
+`;
 
 export default class UserList extends React.Component {
   constructor(props) {
@@ -74,9 +97,9 @@ export default class UserList extends React.Component {
 
   render() {
     return (
-      <div className="gv-column flex-column">
-        <h2 className="column-title">Uczestnicy</h2>
-        <TextField
+      <UserListPanel>
+        <PanelTitle>Uczestnicy</PanelTitle>
+        <StyledTextField
           autoFocus
           margin="dense"
           name="search"
@@ -86,7 +109,7 @@ export default class UserList extends React.Component {
           value={this.state.search}
           fullWidth
         />
-        <ul className="user-list">
+        <Ul>
           {this.state.items.map(item => (
             <UserItem
               key={item.id}
@@ -98,11 +121,9 @@ export default class UserList extends React.Component {
               handleToggleUser={this.toggleEligible}
             />
           ))}
-        </ul>
-        <Button color="primary" onClick={this.clearList}>
-          Wyczyść listę
-        </Button>
-      </div>
+        </Ul>
+        <StyledButton onClick={this.clearList}>Wyczyść listę</StyledButton>
+      </UserListPanel>
     );
   }
 }

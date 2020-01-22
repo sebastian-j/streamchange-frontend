@@ -10,13 +10,12 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     step={1}
     value={7}
   />
-  <button
-    className="start-lottery-btn"
+  <ForwardRef
     disabled={false}
     onClick={[Function]}
     type="button"
   >
     Losuj
-  </button>
+  </ForwardRef>
 </div>
 `;
