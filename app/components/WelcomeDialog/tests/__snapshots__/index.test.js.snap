@@ -47,7 +47,7 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
       <img
         alt="light bulb"
         height="140px"
-        src="https://streamchange.pl/static/light-bulb.png"
+        src="/static/light-bulb.png"
       />
       <div>
         <span

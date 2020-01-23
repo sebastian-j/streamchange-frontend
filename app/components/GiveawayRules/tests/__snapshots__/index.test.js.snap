@@ -29,7 +29,7 @@ exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
   >
     Zwykli użytkownicy
   </ForwardRef>
-  <ForwardRef(WithStyles)
+  <ForwardRef
     autoFocus={true}
     fullWidth={true}
     label="Nagroda (opcjonalne)"

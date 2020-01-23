@@ -34,6 +34,7 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
       Ustawienia
     </ForwardRef(WithStyles)>
     <ForwardRef(WithStyles)>
+      <DarkModeSwitch />
       <ForwardRef(WithStyles)
         title={
           <ForwardRef>
