@@ -127,9 +127,7 @@ const HomePage = () => {
         <StreamInfo>
           <StreamImg alt="Miniatura" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
-          <StyledButton onClick={leaveStream}>
-            Opuść stream
-          </StyledButton>
+          <StyledButton onClick={leaveStream}>Opuść stream</StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
           <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>

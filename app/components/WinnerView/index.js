@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import styled from 'styled-components';
 import db from '../YoutubeWorker/db';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import MessageItem from './MessageItem';
-import RelativeDate from '../RelativeDate';
+import SubStatus from './SubStatus';
 import Timer from './Timer';
 
 const WinnerPanel = styled.div`
@@ -41,17 +40,6 @@ const WinnerTitle = styled.span`
   font-size: 20px;
 `;
 
-const SubStatus = styled.span`
-  color: ${props => props.theme.staticTextColor};
-  font-size: 0.9rem;
-  padding-bottom: 3px;
-  ${({ subscribed }) =>
-    subscribed &&
-    `
-      font-weight: bold;
-      color: #007703;
-  `}
-`;
 const ChannelLink = styled.a`
   background: ${props => props.theme.buttonBackground};
   border: 1px solid #0059a3;
@@ -92,11 +80,8 @@ export default class WinnerView extends React.Component {
       messages: [],
       interval: null,
       prize: this.props.prize,
-      subscriberFrom: null,
-      subscriberStatus: null,
     };
     this.getMessages = this.getMessages.bind(this);
-    this.checkSubStatus = this.checkSubStatus.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
@@ -107,36 +92,6 @@ export default class WinnerView extends React.Component {
       .toArray()
       .then(items => {
         this.setState({ messages: items });
-      });
-  }
-
-  checkSubStatus() {
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${
-          this.props.id
-        }&forChannelId=${this.props.ownerId}&key=${this.props.apiKey}`,
-      )
-      .then(res => {
-        if (res.data.items.length > 0) {
-          this.setState({
-            subscriberFrom: res.data.items[0].snippet.publishedAt,
-            subscriberStatus: 'true',
-          });
-        } else {
-          this.setState({ subscriberStatus: 'false' });
-        }
-      })
-      .catch(err => {
-        if (
-          err.response &&
-          err.response.data &&
-          err.response.data.error.errors[0].reason === 'subscriptionForbidden'
-        ) {
-          this.setState({ subscriberStatus: 'private' });
-        } else {
-          this.setState({ subscriberStatus: 'error' });
-        }
       });
   }
 
@@ -182,7 +137,6 @@ export default class WinnerView extends React.Component {
       .then(items => {
         this.setState({ user: items[0] });
       });
-    this.checkSubStatus();
     this.getMessages();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
@@ -192,7 +146,7 @@ export default class WinnerView extends React.Component {
   }
 
   render() {
-    if (!this.state.user || !this.state.subscriberStatus) {
+    if (!this.state.user) {
       return (
         <WinnerPanel>
           <PanelTitle>Zwycięzca</PanelTitle>
@@ -210,18 +164,11 @@ export default class WinnerView extends React.Component {
           <Logo alt="logo" src={this.state.user.imageUrl} />
           <WinnerInfo>
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
-            {this.state.subscriberStatus === 'true' && (
-              <SubStatus subscribed>
-                Subskrybuje od&nbsp;
-                <RelativeDate ISO8601Date={this.state.subscriberFrom} />
-              </SubStatus>
-            )}
-            {this.state.subscriberStatus === 'false' && (
-              <SubStatus>Nie subskrybuje</SubStatus>
-            )}
-            {this.state.subscriberStatus === 'private' && (
-              <SubStatus>Subskrypcje prywatne</SubStatus>
-            )}
+            <SubStatus
+              apiKey={this.props.apiKey}
+              id={this.props.id}
+              ownerId={this.props.ownerId}
+            />
             <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
