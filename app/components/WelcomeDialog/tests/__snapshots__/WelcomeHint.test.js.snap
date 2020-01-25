@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef
+    onClick={[Function]}
+  >
+    <img
+      alt="light bulb"
+      height="140px"
+      src="/static/light-bulb.png"
+    />
+  </ForwardRef>
+  <div>
+    <ForwardRef>
+      Czy wiesz, że...
+    </ForwardRef>
+    <ForwardRef>
+      
+    </ForwardRef>
+  </div>
+</ForwardRef>
+`;

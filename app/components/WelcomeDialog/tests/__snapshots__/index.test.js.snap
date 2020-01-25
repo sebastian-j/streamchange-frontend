@@ -41,27 +41,7 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
         </ForwardRef(WithStyles)>
       </ForwardRef>
     </ForwardRef>
-    <div
-      className="welcomeHint"
-    >
-      <img
-        alt="light bulb"
-        height="140px"
-        src="/static/light-bulb.png"
-      />
-      <div>
-        <span
-          className="welcomeHint-title"
-        >
-          Czy wiesz, że...
-        </span>
-        <span
-          className="welcomeHint-content"
-        >
-          
-        </span>
-      </div>
-    </div>
+    <WelcomeHint />
   </ForwardRef>
 </ForwardRef>
 `;

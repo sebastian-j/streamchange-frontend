@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { HINTS } from '../../config';
-import './style.css';
+import WelcomeHint from './WelcomeHint';
 
 const WelcomePage = styled.div`
   background-color: ${props => props.theme.welcomeBackground};
@@ -71,7 +70,6 @@ const CompatibilityInfo = styled.div`
 const WelcomeDialog = props => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
-  const [hint, setHint] = useState('');
 
   const sendVideoLink = () => {
     if (typeof props.passVideo === 'function') {
@@ -81,7 +79,6 @@ const WelcomeDialog = props => {
 
   useEffect(() => {
     setIsChrome(!!window.chrome);
-    setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);
   }, []);
 
   const handleInputValueChange = event => {
@@ -134,13 +131,7 @@ const WelcomeDialog = props => {
               </Button>
             </DialogActions>
           </Dialog>
-          <div className="welcomeHint">
-            <img src="/static/light-bulb.png" height="140px" alt="light bulb" />
-            <div>
-              <span className="welcomeHint-title">Czy wiesz, że...</span>
-              <span className="welcomeHint-content">{hint}</span>
-            </div>
-          </div>
+          <WelcomeHint />
         </DialogWrapper>
       </WelcomePage>
     );
