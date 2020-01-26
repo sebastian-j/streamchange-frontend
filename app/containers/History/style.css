@@ -9,22 +9,3 @@
 .sort-icon:not(.active) {
     opacity: 0;
 }
-
-.md-table {
-    display: table;
-    overflow-y: auto;
-    min-width: 1052px;
-    width: 100%;
-}
-
-.md-thead {
-    border-bottom: 1px solid rgba(224, 224, 224, 1);
-    cursor: pointer;
-    user-select: none;
-}
-
-.md-footer {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-top: 10px;
-}
