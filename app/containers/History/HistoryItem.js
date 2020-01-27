@@ -64,7 +64,7 @@ HistoryItem.propTypes = {
   imageUrl: PropTypes.string,
   displayName: PropTypes.string,
   prize: PropTypes.string,
-  message: PropTypes.number,
+  message: PropTypes.string,
   createdAt: PropTypes.string,
 };
 export default HistoryItem;
