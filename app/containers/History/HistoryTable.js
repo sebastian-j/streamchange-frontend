@@ -108,6 +108,7 @@ const HistoryTable = props => {
       <tbody>
         {props.items.map(item => (
           <HistoryItem
+            key={item.createdAt}
             channelId={item.channelId}
             imageUrl={item.imageUrl}
             displayName={item.displayName}

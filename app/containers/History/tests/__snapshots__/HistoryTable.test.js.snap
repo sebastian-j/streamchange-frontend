@@ -57,6 +57,8 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
   </ForwardRef>
   <tbody>
     <HistoryItem
+      channelId="id"
+      createdAt="2019-12-24T07:27:56.273Z"
       displayName="name"
     />
   </tbody>

@@ -19,6 +19,19 @@ const PageWrapper = styled.div`
   width: 100%;
 `;
 
+const ReturnButton = styled.div`
+  color: ${props => props.theme.staticTextColor};
+  line-height: 48px;
+  min-height: 48px;
+  & span {
+    margin-left: 24px;
+    text-decoration: none;
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const StyledFormControl = styled(FormControl)`
   width: 128px;
   div.MuiInput-input {
@@ -38,6 +51,12 @@ const StyledFormControl = styled(FormControl)`
   }
 `;
 
+const Information = styled.div`
+  color: ${props => props.theme.staticTextColor};
+  font-size: 2vw;
+  margin-top: 5vh;
+  text-align: center;
+`;
 const Footer = styled.div`
   display: flex;
   flex-direction: row-reverse;
@@ -145,40 +164,21 @@ export default class History extends React.Component {
         </PageWrapper>
       );
     }
-    if (this.state.search.length > 0 && this.state.items.length === 0) {
-      return (
-        <PageWrapper>
-          <NavLink to="/giveaway" activeClassName="active">
-            <span>Powrót</span>
-          </NavLink>
-          <StyledTextField
-            id="search"
-            name="search"
-            label="Wyszukaj"
-            value={this.state.search}
-            onChange={this.handleChange}
-            type="text"
-            margin="normal"
-            fullWidth
-          />
-          <div>
-            <div
-              style={{
-                fontSize: '2vw',
-                marginTop: '10px',
-                textAlign: 'center',
-              }}
-            >
-              Żaden kanał nie pasuje do wyszukiwanego słowa.
-            </div>
-          </div>
-        </PageWrapper>
-      );
-    }
     return (
       <PageWrapper>
         <NavLink to="/giveaway" activeClassName="active">
-          <span>Powrót</span>
+          <ReturnButton>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+            <span>Powrót do losowania</span>
+          </ReturnButton>
         </NavLink>
         <StyledTextField
           id="search"
@@ -190,7 +190,14 @@ export default class History extends React.Component {
           margin="normal"
           fullWidth
         />
-        <HistoryTable items={this.state.items} />
+        {this.state.search.length > 0 && this.state.items.length === 0 && (
+          <Information>
+            Żaden kanał nie pasuje do wyszukiwanego słowa.
+          </Information>
+        )}
+        {this.state.items.length > 0 && (
+          <HistoryTable items={this.state.items} />
+        )}
         <Footer>
           {!this.state.isLastPage && (
             <IconButton
