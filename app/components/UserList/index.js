@@ -28,6 +28,11 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const Counts = styled.span`
+  color: ${props => props.theme.secondaryTextColor};
+  font-size: 0.9rem;
+`;
+
 export default class UserList extends React.Component {
   constructor(props) {
     super(props);
@@ -123,6 +128,11 @@ export default class UserList extends React.Component {
           ))}
         </Ul>
         <StyledButton onClick={this.clearList}>Wyczyść listę</StyledButton>
+        <Counts>
+          Bierze udział{' '}
+          {this.state.items.filter(item => item.isEligible === true).length} z{' '}
+          {this.state.items.length}
+        </Counts>
       </UserListPanel>
     );
   }

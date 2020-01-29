@@ -21,5 +21,13 @@ exports[`<UserList /> should render and match the snapshot 1`] = `
   >
     Wyczyść listę
   </ForwardRef>
+  <ForwardRef>
+    Bierze udział
+     
+    0
+     z
+     
+    0
+  </ForwardRef>
 </ForwardRef>
 `;
