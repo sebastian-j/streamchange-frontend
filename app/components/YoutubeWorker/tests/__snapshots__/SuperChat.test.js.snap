@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SuperChat /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef>
+    <ForwardRef
+      alt="logo"
+      src="url"
+    />
+     
+    title
+  </ForwardRef>
+  <ForwardRef>
+    message
+  </ForwardRef>
+</ForwardRef>
+`;
