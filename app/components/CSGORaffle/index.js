@@ -20,10 +20,11 @@ const CSGORaffle = props => {
       .toArray()
       .then(items => {
         const shuffled = [];
-        for (let i = 0; i < 50; i += 1) {
+        for (let i = 0; i < 30 + props.duration * 3; i += 1) {
           shuffled.push(items[Math.floor(Math.random() * items.length)]);
         }
-        const winnerIndex = Math.floor(Math.random() * 10) + 35;
+        const winnerIndex =
+          Math.floor(Math.random() * 10) + 10 + props.duration * 3;
         const scroll = -(
           winnerIndex * 150 +
           Math.floor(Math.random() * 65) -
