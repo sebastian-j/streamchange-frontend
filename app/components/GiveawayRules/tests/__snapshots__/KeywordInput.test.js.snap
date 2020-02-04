@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<KeywordInput /> should render and match the snapshot 1`] = `
-<ForwardRef(WithStyles)
+<ForwardRef
   InputProps={
     Object {
       "endAdornment": <ForwardRef(WithStyles)
@@ -11,9 +11,8 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
           aria-label="add"
           title="Ukryj lub odsłoń słowo kluczowe"
         >
-          <button
+          <ForwardRef
             aria-label="toggle keyword visibility"
-            className="toggle-visibility-btn"
             name="showKeyword"
             onClick={[Function]}
             type="button"
@@ -31,7 +30,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
                 d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
               />
             </svg>
-          </button>
+          </ForwardRef>
         </ForwardRef(WithStyles)>
       </ForwardRef(WithStyles)>,
     }

@@ -1,5 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const MessageLi = styled.li`
+  margin-bottom: 5px;
+`;
+
+const MessageDate = styled.span`
+  color: ${props => props.theme.secondaryTextColor};
+  margin-right: 10px;
+`;
+const MessageText = styled.span`
+  color: ${props => props.theme.staticTextColor};
+`;
 
 function MessageItem(props) {
   const dt = new Date(props.date);
@@ -7,10 +20,10 @@ function MessageItem(props) {
     dt.getMinutes() < 10 ? '0' : ''
   }${dt.getMinutes()}:${dt.getSeconds() < 10 ? '0' : ''}${dt.getSeconds()}`;
   return (
-    <li className="winner-message">
-      <span>{convertedDate}</span>
-      <span>{props.text}</span>
-    </li>
+    <MessageLi>
+      <MessageDate>{convertedDate}</MessageDate>
+      <MessageText>{props.text}</MessageText>
+    </MessageLi>
   );
 }
 

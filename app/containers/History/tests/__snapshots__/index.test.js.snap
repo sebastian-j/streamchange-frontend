@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<History /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef(WithStyles) />
+  <div
+    style={
+      Object {
+        "fontSize": "2vw",
+        "left": "55%",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "50%",
+        "transform": "translate(-50%, -50%)",
+      }
+    }
+  >
+    Ładowanie listy
+  </div>
+</ForwardRef>
+`;

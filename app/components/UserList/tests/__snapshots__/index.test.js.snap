@@ -1,15 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserList /> should render and match the snapshot 1`] = `
-<div
-  className="gv-column flex-column"
->
-  <h2
-    className="column-title"
-  >
+<ForwardRef>
+  <ForwardRef>
     Uczestnicy
-  </h2>
-  <ForwardRef(WithStyles)
+  </ForwardRef>
+  <ForwardRef
     autoFocus={true}
     fullWidth={true}
     label="Wyszukaj"
@@ -19,14 +15,19 @@ exports[`<UserList /> should render and match the snapshot 1`] = `
     type="text"
     value=""
   />
-  <ul
-    className="user-list"
-  />
-  <ForwardRef(WithStyles)
-    color="primary"
+  <ForwardRef />
+  <ForwardRef
     onClick={[Function]}
   >
     Wyczyść listę
-  </ForwardRef(WithStyles)>
-</div>
+  </ForwardRef>
+  <ForwardRef>
+    Bierze udział
+     
+    0
+     z
+     
+    0
+  </ForwardRef>
+</ForwardRef>
 `;

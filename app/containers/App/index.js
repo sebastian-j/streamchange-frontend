@@ -7,7 +7,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
@@ -17,6 +17,11 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  useEffect(() => {
+    if (!localStorage.getItem('gv-abortCommand')) {
+      localStorage.setItem('gv-abortCommand', '!rezygnuje');
+    }
+  }, []);
   return (
     <div>
       <Switch>

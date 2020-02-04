@@ -1,12 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import { API_KEY, TELEMETRY_URL } from '../../config';
-import './style.css';
+
+const TopBar = styled.div`
+  background-color: ${props => props.theme.panelBackground};
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StreamInfo = styled.div`
+  height: 5vh;
+`;
+
+const StreamImg = styled.img`
+  height: 100%;
+`;
+
+const StreamTitle = styled.span`
+  color: ${props => props.theme.staticTextColor};
+  margin-left: 10px;
+`;
+
+const LinkToHistory = styled.span`
+  background: ${props => props.theme.buttonBackground};
+  border: 1px solid #0059a3;
+  color: ${props => props.theme.buttonTextColor};
+  border-radius: 4px;
+  height: 80%;
+  padding: 3px 5px;
+  margin: 10px 15px 0 0;
+  text-decoration: none;
+  &:hover {
+    background-color: ${props => props.theme.buttonBackgroundHover};
+    color: ${props => props.theme.buttonTextColorHover};
+  }
+`;
+
+const StyledButton = styled(Button)`
+  span {
+    color: ${props => props.theme.materialButtonColor};
+  }
+`;
 
 const HomePage = () => {
   const [channelId, setChannelId] = useState('');
@@ -83,21 +123,19 @@ const HomePage = () => {
   }
   return (
     <div>
-      <div className="flex-row-space">
-        <div className="stream-info">
-          <img alt="Miniatura" src={thumbnailUrl} />
-          <span>{title}</span>
-          <Button onClick={leaveStream} color="primary">
-            Opuść stream
-          </Button>
-        </div>
+      <TopBar>
+        <StreamInfo>
+          <StreamImg alt="Miniatura" src={thumbnailUrl} />
+          <StreamTitle>{title}</StreamTitle>
+          <StyledButton onClick={leaveStream}>Opuść stream</StyledButton>
+        </StreamInfo>
         <div style={{ display: 'block' }}>
-          <NavLink to="/giveaway-history" className="history-navLink">
-            Historia wygranych
+          <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
+            <LinkToHistory>Historia wygranych</LinkToHistory>
           </NavLink>
           <SettingsDialog />
         </div>
-      </div>
+      </TopBar>
       <YoutubeWorker
         channelId={channelId}
         liveChatId={liveChatId}

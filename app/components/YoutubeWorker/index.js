@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { PRIVILEGED_CHANNELS } from '../../config';
 import ChatEmbed from '../ChatEmbed';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
+import SuperChat from './SuperChat';
 import db from './db';
-import './style.css';
+
+const ThreeSections = styled.div`
+  background-color: ${props => props.theme.bodyBackground};
+  display: flex;
+  flex-direction: row;
+  height: 95vh;
+`;
 
 const YoutubeWorker = props => {
   const [timer, setTimer] = useState(null);
+  const [superChat, setSuperChat] = useState(null);
 
   const messageProcessor = () => {
     let nextPageToken = localStorage.getItem('nextPageToken');
@@ -57,6 +67,20 @@ const YoutubeWorker = props => {
               }
             });
           saveMessage(res.data.items[i]);
+          if (
+            PRIVILEGED_CHANNELS.includes(author.id) &&
+            author.message.startsWith('!s ')
+          ) {
+            setSuperChat({
+              title: author.title,
+              imageUrl: author.imageUrl,
+              message: author.message.replace('!s ', ''),
+            });
+            setTimeout(
+              () => setSuperChat(null),
+              6000 + author.message.length * 30,
+            );
+          }
         }
         clearTimeout(timer);
         setTimer(null);
@@ -101,11 +125,18 @@ const YoutubeWorker = props => {
   }, [props.liveChatId]);
 
   return (
-    <div className="three-sections">
+    <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} channelId={props.channelId} />
       <ChatEmbed videoId={props.videoId} />
-    </div>
+      {superChat && (
+        <SuperChat
+          imageUrl={superChat.imageUrl}
+          message={superChat.message}
+          title={superChat.title}
+        />
+      )}
+    </ThreeSections>
   );
 };
 

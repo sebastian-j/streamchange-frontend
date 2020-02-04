@@ -1,17 +1,67 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+import styled from 'styled-components';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
 import db from '../../components/YoutubeWorker/db';
-import HistoryItem from './HistoryItem';
-import ArrowUpIcon from './arrowUpIcon';
-import './style.css';
+import StyledTextField from '../../components/StyledTextField';
+import HistoryTable from './HistoryTable';
+
+const PageWrapper = styled.div`
+  background-color: ${props => props.theme.bodyBackground};
+  padding: 10px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+`;
+
+const ReturnButton = styled.div`
+  color: ${props => props.theme.staticTextColor};
+  line-height: 48px;
+  min-height: 48px;
+  & span {
+    margin-left: 24px;
+    text-decoration: none;
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const StyledFormControl = styled(FormControl)`
+  width: 128px;
+  div.MuiInput-input {
+    color: ${props => props.theme.staticTextColor};
+  }
+  label {
+    color: ${props => props.theme.inputLabel};
+  }
+  label.Mui-focused {
+    color: ${props => props.theme.inputLabelFocused};
+  }
+  svg.MuiSelect-icon {
+    color: ${props => props.theme.secondaryTextColor};
+  }
+  .MuiInput-underline:before {
+    border-bottom-color: ${props => props.theme.secondaryTextColor};
+  }
+`;
+
+const Information = styled.div`
+  color: ${props => props.theme.staticTextColor};
+  font-size: 2vw;
+  margin-top: 5vh;
+  text-align: center;
+`;
+const Footer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+`;
 
 export default class History extends React.Component {
   constructor(props) {
@@ -20,33 +70,15 @@ export default class History extends React.Component {
       error: false,
       isLoaded: false,
       items: [],
-      sort: 'createdAtDESC',
       search: '',
       maxResults: 20,
       page: 0,
       isLastPage: false,
     };
-    this.handleSortChange = this.handleSortChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.getHistory = this.getHistory.bind(this);
-  }
-
-  handleSortChange(event) {
-    const { target } = event;
-    let value = target.id;
-    if (value === this.state.sort) {
-      value += 'DESC';
-    }
-    this.setState(
-      {
-        sort: value,
-      },
-      () => {
-        this.getHistory();
-      },
-    );
   }
 
   handleChange(event) {
@@ -115,7 +147,7 @@ export default class History extends React.Component {
     }
     if (!this.state.isLoaded) {
       return (
-        <div>
+        <PageWrapper>
           <LinearProgress />
           <div
             style={{
@@ -129,151 +161,44 @@ export default class History extends React.Component {
           >
             Ładowanie listy
           </div>
-        </div>
-      );
-    }
-    if (this.state.search.length > 2 && this.state.items.length === 0) {
-      return (
-        <div className="page-wrapper">
-          <TextField
-            id="search"
-            name="search"
-            label="Wyszukaj (min. 3 znaki)"
-            value={this.state.search}
-            onChange={this.handleChange}
-            type="text"
-            margin="normal"
-            fullWidth
-          />
-          <div>
-            <div
-              style={{
-                fontSize: '2vw',
-                marginTop: '10px',
-                textAlign: 'center',
-              }}
-            >
-              Żaden kanał nie pasuje do wyszukiwanego słowa.
-            </div>
-          </div>
-        </div>
+        </PageWrapper>
       );
     }
     return (
-      <div className="page-wrapper">
+      <PageWrapper>
         <NavLink to="/giveaway" activeClassName="active">
-          <span>Powrót</span>
+          <ReturnButton>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+            <span>Powrót do losowania</span>
+          </ReturnButton>
         </NavLink>
-        <TextField
+        <StyledTextField
           id="search"
           name="search"
-          label="Wyszukaj (min. 3 znaki)"
+          label="Wyszukaj"
           value={this.state.search}
           onChange={this.handleChange}
           type="text"
           margin="normal"
           fullWidth
         />
-        <table className="md-table">
-          <thead className="md-thead">
-            <tr>
-              <td />
-              <td>
-                <button
-                  className="header-btn"
-                  id="displayName"
-                  onClick={this.handleSortChange}
-                  type="button"
-                >
-                  Nazwa
-                  <ArrowUpIcon
-                    className={clsx(
-                      'sort-icon',
-                      this.state.sort === 'displayName' && 'active',
-                      this.state.sort === 'displayNameDESC' && [
-                        'active',
-                        'icon-direction-desc',
-                      ],
-                    )}
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  className="header-btn"
-                  id="prize"
-                  onClick={this.handleSortChange}
-                  type="button"
-                >
-                  Nagroda
-                  <ArrowUpIcon
-                    className={clsx(
-                      'sort-icon',
-                      this.state.sort === 'prize' && 'active',
-                      this.state.sort === 'prizeDESC' && [
-                        'active',
-                        'icon-direction-desc',
-                      ],
-                    )}
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  className="header-btn"
-                  id="message"
-                  onClick={this.handleSortChange}
-                  type="button"
-                >
-                  Wiadomość
-                  <ArrowUpIcon
-                    className={clsx(
-                      'sort-icon',
-                      this.state.sort === 'message' && 'active',
-                      this.state.sort === 'messageDESC' && [
-                        'active',
-                        'icon-direction-desc',
-                      ],
-                    )}
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  className="header-btn"
-                  id="createdAt"
-                  onClick={this.handleSortChange}
-                  type="button"
-                >
-                  Data i godzina
-                  <ArrowUpIcon
-                    className={clsx(
-                      'sort-icon',
-                      this.state.sort === 'createdAt' && 'active',
-                      this.state.sort === 'createdAtDESC' && [
-                        'active',
-                        'icon-direction-desc',
-                      ],
-                    )}
-                  />
-                </button>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.items.map(item => (
-              <HistoryItem
-                channelId={item.channelId}
-                imageUrl={item.imageUrl}
-                displayName={item.displayName}
-                prize={item.prize}
-                message={item.message}
-                createdAt={item.createdAt}
-              />
-            ))}
-          </tbody>
-        </table>
-        <div className="md-footer">
+        {this.state.search.length > 0 && this.state.items.length === 0 && (
+          <Information>
+            Żaden kanał nie pasuje do wyszukiwanego słowa.
+          </Information>
+        )}
+        {this.state.items.length > 0 && (
+          <HistoryTable items={this.state.items} />
+        )}
+        <Footer>
           {!this.state.isLastPage && (
             <IconButton
               edge="end"
@@ -310,7 +235,7 @@ export default class History extends React.Component {
               </svg>
             </IconButton>
           )}
-          <FormControl style={{ marginRight: '2vw', width: '128px' }}>
+          <StyledFormControl>
             <InputLabel htmlFor="age-simple">Ilość na stronę</InputLabel>
             <Select
               value={this.state.maxResults}
@@ -325,9 +250,9 @@ export default class History extends React.Component {
               <MenuItem value={50}>50</MenuItem>
               <MenuItem value={100}>100</MenuItem>
             </Select>
-          </FormControl>
-        </div>
-      </div>
+          </StyledFormControl>
+        </Footer>
+      </PageWrapper>
     );
   }
 }

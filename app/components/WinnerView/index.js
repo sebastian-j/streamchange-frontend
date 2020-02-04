@@ -1,12 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components';
 import db from '../YoutubeWorker/db';
+import PanelTitle from '../Panel/PanelTitle';
+import StyledTextField from '../StyledTextField';
 import MessageItem from './MessageItem';
-import RelativeDate from '../RelativeDate';
+import SubStatus from './SubStatus';
 import Timer from './Timer';
-import './style.css';
+
+const WinnerPanel = styled.div`
+  background-color: ${props => props.theme.panelBackground};
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 15px;
+  padding: 15px;
+`;
+
+const WinnerHeading = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+`;
+
+const Logo = styled.img`
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+`;
+
+const WinnerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WinnerTitle = styled.span`
+  color: ${props => props.theme.staticTextColor};
+  font-size: 20px;
+`;
+
+const ChannelLink = styled.a`
+  background: ${props => props.theme.buttonBackground};
+  border: 1px solid #0059a3;
+  color: ${props => props.theme.buttonTextColor};
+  border-radius: 4px;
+  padding: 3px 5px;
+  text-decoration: none;
+  &:hover {
+    background-color: ${props => props.theme.buttonBackgroundHover};
+    color: ${props => props.theme.buttonTextColorHover};
+  }
+`;
+
+const Button = styled.button`
+  background: ${props => props.theme.buttonBackground};
+  border: 1px solid #0059a3;
+  color: ${props => props.theme.buttonTextColor};
+  border-radius: 4px;
+  padding: 3px 5px;
+  text-decoration: none;
+  &:hover {
+    background-color: ${props => props.theme.buttonBackgroundHover};
+    color: ${props => props.theme.buttonTextColorHover};
+  }
+`;
+
+const MessageList = styled.ul`
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+`;
 
 export default class WinnerView extends React.Component {
   constructor(props) {
@@ -16,11 +80,8 @@ export default class WinnerView extends React.Component {
       messages: [],
       interval: null,
       prize: this.props.prize,
-      subscriberFrom: null,
-      subscriberStatus: null,
     };
     this.getMessages = this.getMessages.bind(this);
-    this.checkSubStatus = this.checkSubStatus.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
@@ -31,36 +92,6 @@ export default class WinnerView extends React.Component {
       .toArray()
       .then(items => {
         this.setState({ messages: items });
-      });
-  }
-
-  checkSubStatus() {
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${
-          this.props.id
-        }&forChannelId=${this.props.ownerId}&key=${this.props.apiKey}`,
-      )
-      .then(res => {
-        if (res.data.items.length > 0) {
-          this.setState({
-            subscriberFrom: res.data.items[0].snippet.publishedAt,
-            subscriberStatus: 'true',
-          });
-        } else {
-          this.setState({ subscriberStatus: 'false' });
-        }
-      })
-      .catch(err => {
-        if (
-          err.response &&
-          err.response.data &&
-          err.response.data.error.errors[0].reason === 'subscriptionForbidden'
-        ) {
-          this.setState({ subscriberStatus: 'private' });
-        } else {
-          this.setState({ subscriberStatus: 'error' });
-        }
       });
   }
 
@@ -106,7 +137,6 @@ export default class WinnerView extends React.Component {
       .then(items => {
         this.setState({ user: items[0] });
       });
-    this.checkSubStatus();
     this.getMessages();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
@@ -116,60 +146,44 @@ export default class WinnerView extends React.Component {
   }
 
   render() {
-    if (!this.state.user || !this.state.subscriberStatus) {
+    if (!this.state.user) {
       return (
-        <div className="gv-column flex-column">
-          <h2 className="column-title">Zwycięzca</h2>
+        <WinnerPanel>
+          <PanelTitle>Zwycięzca</PanelTitle>
           <span>Ładowanie...</span>
-          <button
-            className="winner-btn"
-            onClick={this.props.onClose}
-            type="button"
-          >
+          <Button onClick={this.props.onClose} type="button">
             Powrót
-          </button>
-        </div>
+          </Button>
+        </WinnerPanel>
       );
     }
     return (
-      <div className="gv-column flex-column">
-        <h2 className="column-title">Zwycięzca</h2>
-        <div className="winner-outer">
-          <img
-            className="winner-logo"
-            alt="logo"
-            src={this.state.user.imageUrl}
-          />
-          <div className="flex-column">
-            <span className="winner-title">{this.state.user.title}</span>
-            {this.state.subscriberStatus === 'true' && (
-              <span className="winner-sub-status sub-true">
-                Subskrybuje od&nbsp;
-                <RelativeDate ISO8601Date={this.state.subscriberFrom} />
-              </span>
-            )}
-            {this.state.subscriberStatus === 'false' && (
-              <span className="winner-sub-status">Nie subskrybuje</span>
-            )}
-            {this.state.subscriberStatus === 'private' && (
-              <span className="winner-sub-status">Subskrypcje prywatne</span>
-            )}
-            <a
+      <WinnerPanel>
+        <PanelTitle>Zwycięzca</PanelTitle>
+        <WinnerHeading>
+          <Logo alt="logo" src={this.state.user.imageUrl} />
+          <WinnerInfo>
+            <WinnerTitle>{this.state.user.title}</WinnerTitle>
+            <SubStatus
+              apiKey={this.props.apiKey}
+              id={this.props.id}
+              ownerId={this.props.ownerId}
+            />
+            <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
-              className="winner-btn"
             >
               Przejdź na kanał
-            </a>
-          </div>
+            </ChannelLink>
+          </WinnerInfo>
           <Timer />
-        </div>
-        <ul className="winner-message-list">
+        </WinnerHeading>
+        <MessageList>
           {this.state.messages.map(item => (
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
-        </ul>
-        <TextField
+        </MessageList>
+        <StyledTextField
           autoFocus
           margin="dense"
           name="prize"
@@ -179,10 +193,10 @@ export default class WinnerView extends React.Component {
           value={this.state.prize}
           fullWidth
         />
-        <button className="winner-btn" onClick={this.saveAndExit} type="button">
+        <Button onClick={this.saveAndExit} type="button">
           Zapisz i wróć
-        </button>
-      </div>
+        </Button>
+      </WinnerPanel>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -8,6 +9,28 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+import DarkModeSwitch from './DarkModeSwitch';
+
+const SettingsButton = styled.button`
+  background: ${props => props.theme.buttonBackground};
+  border: 1px solid #0059a3;
+  color: ${props => props.theme.buttonTextColor};
+  border-radius: 4px;
+  height: 80%;
+  padding: 3px 5px;
+  margin: 10px 15px 0 0;
+  text-decoration: none;
+  &:hover {
+    background-color: ${props => props.theme.buttonBackgroundHover};
+    color: ${props => props.theme.buttonTextColorHover};
+  }
+`;
+
+const HintParagraph = styled.span`
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  display: block;
+`;
 
 const SettingsDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +66,7 @@ const SettingsDialog = () => {
 
   return (
     <div style={{ display: 'inline-block' }}>
-      <button className="history-navLink" onClick={openDialog} type="button">
+      <SettingsButton onClick={openDialog} type="button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -52,7 +75,7 @@ const SettingsDialog = () => {
         >
           <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
         </svg>
-      </button>
+      </SettingsButton>
       <Dialog
         open={isOpen}
         onClose={closeDialog}
@@ -60,14 +83,15 @@ const SettingsDialog = () => {
       >
         <DialogTitle id="form-dialog-title">Ustawienia</DialogTitle>
         <DialogContent>
+          <DarkModeSwitch />
           <Tooltip
             title={
-              <span className="hint-paragraph">
+              <HintParagraph>
                 Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane
                 wszystkie wysłane przez niego komendy na dołączenie. Może to być
                 spam setek identycznych wiadomości, dlatego zazwyczaj lepiej
                 zostawić pole niezaznaczone.
-              </span>
+              </HintParagraph>
             }
           >
             <FormControlLabel
@@ -85,9 +109,9 @@ const SettingsDialog = () => {
           </Tooltip>
           <Tooltip
             title={
-              <span className="hint-paragraph">
+              <HintParagraph>
                 Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
-              </span>
+              </HintParagraph>
             }
           >
             <FormControlLabel

@@ -1,23 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WinnerView /> should render and match the snapshot 1`] = `
-<div
-  className="gv-column flex-column"
->
-  <h2
-    className="column-title"
-  >
+<ForwardRef>
+  <ForwardRef>
     Zwycięzca
-  </h2>
+  </ForwardRef>
   <span>
     Ładowanie...
   </span>
-  <button
-    className="winner-btn"
+  <ForwardRef
     onClick={[Function]}
     type="button"
   >
     Powrót
-  </button>
-</div>
+  </ForwardRef>
+</ForwardRef>
 `;

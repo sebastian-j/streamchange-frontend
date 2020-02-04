@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HistoryTable /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef>
+    <tr>
+      <td />
+      <td>
+        <ForwardRef
+          id="displayName"
+          onClick={[Function]}
+          type="button"
+        >
+          Nazwa
+          <ArrowUpIcon
+            className="sort-icon"
+          />
+        </ForwardRef>
+      </td>
+      <td>
+        <ForwardRef
+          id="prize"
+          onClick={[Function]}
+          type="button"
+        >
+          Nagroda
+          <ArrowUpIcon
+            className="sort-icon"
+          />
+        </ForwardRef>
+      </td>
+      <td>
+        <ForwardRef
+          id="message"
+          onClick={[Function]}
+          type="button"
+        >
+          Wiadomość
+          <ArrowUpIcon
+            className="sort-icon"
+          />
+        </ForwardRef>
+      </td>
+      <td>
+        <ForwardRef
+          id="createdAt"
+          onClick={[Function]}
+          type="button"
+        >
+          Data i godzina
+          <ArrowUpIcon
+            className="sort-icon active icon-direction-desc"
+          />
+        </ForwardRef>
+      </td>
+    </tr>
+  </ForwardRef>
+  <tbody>
+    <HistoryItem
+      channelId="id"
+      createdAt="2019-12-24T07:27:56.273Z"
+      displayName="name"
+    />
+  </tbody>
+</ForwardRef>
+`;
