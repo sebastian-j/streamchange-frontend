@@ -13,6 +13,74 @@
 
   <link rel="icon" href="/favicon.ico" />
   <title>StreamChange Giveaway</title>
+  <style>
+    #app:not(:empty) + .loader {
+      display: none;
+    }
+
+    .loader {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .loader-title {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      color: #32cce4;
+    }
+
+    .loader svg {
+      overflow: visible;
+      width: 100px;
+      height: 150px;
+    }
+    .loader svg g {
+      animation: slide 2s linear infinite;
+    }
+    .loader svg g:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .loader svg g:nth-child(2) path {
+      animation-delay: 0.5s;
+      stroke-dasharray: 0 158px;
+      stroke-dashoffset: 1px;
+    }
+    .loader svg path {
+      stroke: url(#gradient);
+      stroke-width: 20px;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 0 157px;
+      stroke-dashoffset: 0;
+      animation: draw 2s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateY(-50px);
+      }
+      100% {
+        transform: translateY(50px);
+      }
+    }
+    @keyframes draw {
+      0% {
+        stroke-dasharray: 0 157px;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 156px 157px;
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dasharray: 156px 157px;
+        stroke-dashoffset: -156px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -23,6 +91,23 @@
 
   <!-- The app hooks into this div -->
   <div id="app"></div>
+  <div class="loader">
+    <svg>
+      <g>
+        <path d="M 50,100 A 1,1 0 0 1 50,0"/>
+      </g>
+      <g>
+        <path d="M 50,75 A 1,1 0 0 0 50,-25"/>
+      </g>
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#FF56A1;stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:#32cce4;stop-opacity:1"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="loader-title">StreamChange</div>
+  </div>
   <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically injects all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this file. Don't add any assets here! (Check out webpack.dev.babel.js and webpack.prod.babel.js if you want to know more) -->
 </body>
 
