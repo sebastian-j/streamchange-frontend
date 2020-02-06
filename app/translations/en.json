@@ -1,1 +1,5 @@
-[]
+{
+  "streamchange.components.SettingsDialog.LocaleToggle.en": "English",
+  "streamchange.components.SettingsDialog.LocaleToggle.pl": "Polish",
+  "streamchange.components.SettingsDialog.LocaleToggle.title": "Language"
+}

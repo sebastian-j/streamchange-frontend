@@ -9,7 +9,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+
 import DarkModeSwitch from './DarkModeSwitch';
+import LocaleToggle from './LocaleToggle';
 
 const SettingsButton = styled.button`
   background: ${props => props.theme.buttonBackground};
@@ -84,6 +86,7 @@ const SettingsDialog = () => {
         <DialogTitle id="form-dialog-title">Ustawienia</DialogTitle>
         <DialogContent>
           <DarkModeSwitch />
+          <LocaleToggle />
           <Tooltip
             title={
               <HintParagraph>
