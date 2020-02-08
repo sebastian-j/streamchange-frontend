@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const DarkModeSwitch = () => {
   const [state, setState] = useState(false);
@@ -16,12 +18,16 @@ const DarkModeSwitch = () => {
 
   return (
     <div>
-      <FormControlLabel
-        control={
-          <Switch checked={state} onChange={handleChange} color="primary" />
-        }
-        label="Tryb ciemny (widoczny po odświeżeniu strony)"
-      />
+      <FormattedMessage {...messages.darkModeLabel}>
+        {label => (
+          <FormControlLabel
+            control={
+              <Switch checked={state} onChange={handleChange} color="primary" />
+            }
+            label={label}
+          />
+        )}
+      </FormattedMessage>
     </div>
   );
 };

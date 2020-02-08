@@ -1,5 +1,14 @@
 {
+  "streamchange.components.SettingsDialog.DarkModeSwitch.label": "Dark mode (visible after page refresh)",
   "streamchange.components.SettingsDialog.LocaleToggle.en": "English",
   "streamchange.components.SettingsDialog.LocaleToggle.pl": "Polish",
-  "streamchange.components.SettingsDialog.LocaleToggle.title": "Language"
+  "streamchange.components.SettingsDialog.LocaleToggle.title": "Language",
+  "streamchange.components.SettingsDialog.DialogTitle": "Settings",
+  "streamchange.components.SettingsDialog.DeleteWinner.hint": "The winner does not take part in the next draw.",
+  "streamchange.components.SettingsDialog.DeleteWinner.label": "Uncheck winner on list",
+  "streamchange.components.SettingsDialog.ResignationCommand.label": "Resignation command",
+  "streamchange.components.SettingsDialog.SaveCommands.label": "Save commands in the chat log",
+  "streamchange.components.SettingsDialog.SaveCommands.hint": "If checked, winner chat log will show all sent commands. They can be hundreds of identical messages, so usually it's better to uncheck this setting.",
+  "streamchange.components.SettingsDialog.CancelButton": "Cancel",
+  "streamchange.components.SettingsDialog.SaveButton": "Save"
 }
