@@ -1,4 +1,15 @@
 {
+  "streamchange.components.ChatEmbed.title": "Chat",
+  "streamchange.components.GiveawayRules.KeywordInput.label": "Keyword",
+  "streamchange.components.GiveawayRules.KeywordInput.visibility": "Toggle keyword visibility",
+  "streamchange.components.GiveawayRules.prize": "Prize (optional)",
+  "streamchange.components.GiveawayRules.title": "Giveaway rules",
+  "streamchange.components.GiveawayRules.moderators": "Moderators",
+  "streamchange.components.GiveawayRules.sponsors": "Sponsors",
+  "streamchange.components.GiveawayRules.regulars": "Regulars",
+  "streamchange.components.RaffleWrapper.animationDuration": "Animation duration (seconds)",
+  "streamchange.components.RaffleWrapper.noUserSelected": "No user selected",
+  "streamchange.components.RaffleWrapper.startBtn": "Roll it!",
   "streamchange.components.SettingsDialog.DarkModeSwitch.label": "Dark mode (visible after page refresh)",
   "streamchange.components.SettingsDialog.LocaleToggle.en": "English",
   "streamchange.components.SettingsDialog.LocaleToggle.pl": "Polish",
@@ -10,5 +21,15 @@
   "streamchange.components.SettingsDialog.SaveCommands.label": "Save commands in the chat log",
   "streamchange.components.SettingsDialog.SaveCommands.hint": "If checked, winner chat log will show all sent commands. They can be hundreds of identical messages, so usually it's better to uncheck this setting.",
   "streamchange.components.SettingsDialog.CancelButton": "Cancel",
-  "streamchange.components.SettingsDialog.SaveButton": "Save"
+  "streamchange.components.SettingsDialog.SaveButton": "Save",
+  "streamchange.components.UserList.search.placeholder": "Search",
+  "streamchange.components.UserList.clearBtn": "Clear all",
+  "streamchange.components.UserList.counter": "{selected} out of {all} are participating",
+  "streamchange.components.UserList.title": "Users",
+  "streamchange.components.WinnerView.openChannel": "Open channel page",
+  "streamchange,components.WinnerView.prize": "Prize",
+  "streamchange.components.WinnerView.saveBtn": "Save and return",
+  "streamchange.components.WinnerView.title": "Winner",
+  "streamchange.containers.HomePage.historyLink": "Win history",
+  "streamchange.containers.HomePage.leaveStreamBtn": "Leave stream"
 }

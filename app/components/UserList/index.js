@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import Button from '@material-ui/core/Button';
 import StyledTextField from '../StyledTextField';
 import db from '../YoutubeWorker/db';
 import UserItem from './userItem';
 import PanelTitle from '../Panel/PanelTitle';
+import messages from './messages';
 
 const UserListPanel = styled.div`
   background-color: ${props => props.theme.panelBackground};
@@ -103,17 +105,23 @@ export default class UserList extends React.Component {
   render() {
     return (
       <UserListPanel>
-        <PanelTitle>Uczestnicy</PanelTitle>
-        <StyledTextField
-          autoFocus
-          margin="dense"
-          name="search"
-          onChange={this.handleInputValueChange}
-          label="Wyszukaj"
-          type="text"
-          value={this.state.search}
-          fullWidth
-        />
+        <PanelTitle>
+          <FormattedMessage {...messages.panelTitle} />
+        </PanelTitle>
+        <FormattedMessage {...messages.searchPlaceholder}>
+          {placeholder => (
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="search"
+              onChange={this.handleInputValueChange}
+              label={placeholder}
+              type="text"
+              value={this.state.search}
+              fullWidth
+            />
+          )}
+        </FormattedMessage>
         <Ul>
           {this.state.items.map(item => (
             <UserItem
@@ -127,11 +135,19 @@ export default class UserList extends React.Component {
             />
           ))}
         </Ul>
-        <StyledButton onClick={this.clearList}>Wyczyść listę</StyledButton>
+        <StyledButton onClick={this.clearList}>
+          <FormattedMessage {...messages.clearBtn} />
+        </StyledButton>
         <Counts>
-          Bierze udział{' '}
-          {this.state.items.filter(item => item.isEligible === true).length} z{' '}
-          {this.state.items.length}
+          <FormattedMessage
+            {...messages.counter}
+            values={{
+              selected: this.state.items.filter(
+                item => item.isEligible === true,
+              ).length,
+              all: this.state.items.length,
+            }}
+          />
         </Counts>
       </UserListPanel>
     );

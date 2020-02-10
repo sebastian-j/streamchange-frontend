@@ -1,6 +1,5 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { mount } from 'enzyme';
 
 import SettingsDialog from '../index';
 
@@ -11,12 +10,5 @@ describe('<SettingsDialog />', () => {
     renderer.render(<SettingsDialog />);
     const renderedOutput = renderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();
-  });
-
-  it('should open dialog', () => {
-    const wrapper = mount(<SettingsDialog />);
-    expect(wrapper.find('div [role="presentation"]')).toHaveLength(0);
-    wrapper.find('button').simulate('click');
-    expect(wrapper.find('div [role="presentation"]')).toHaveLength(3);
   });
 });

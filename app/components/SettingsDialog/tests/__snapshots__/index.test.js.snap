@@ -31,74 +31,59 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
     <ForwardRef(WithStyles)
       id="form-dialog-title"
     >
-      Ustawienia
+      <FormattedMessage
+        defaultMessage="Settings"
+        id="streamchange.components.SettingsDialog.DialogTitle"
+        values={Object {}}
+      />
     </ForwardRef(WithStyles)>
     <ForwardRef(WithStyles)>
       <DarkModeSwitch />
-      <ForwardRef(WithStyles)
-        title={
-          <ForwardRef>
-            Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane wszystkie wysłane przez niego komendy na dołączenie. Może to być spam setek identycznych wiadomości, dlatego zazwyczaj lepiej zostawić pole niezaznaczone.
-          </ForwardRef>
-        }
+      <Memo(ConnectFunction) />
+      <div>
+        <FormattedMessage
+          defaultMessage="Save commands in the chat log"
+          id="streamchange.components.SettingsDialog.SaveCommands.label"
+          values={Object {}}
+        >
+          [Function]
+        </FormattedMessage>
+      </div>
+      <FormattedMessage
+        defaultMessage="The winner does not take part in the next draw."
+        id="streamchange.components.SettingsDialog.DeleteWinner.label"
+        values={Object {}}
       >
-        <ForwardRef(WithStyles)
-          control={
-            <ForwardRef(WithStyles)
-              checked={false}
-              color="primary"
-              name="saveCommands"
-              onChange={[Function]}
-              type="checkbox"
-            />
-          }
-          label="Zapisuj wysłane komendy na dołączenie"
-        />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        title={
-          <ForwardRef>
-            Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
-          </ForwardRef>
-        }
+        [Function]
+      </FormattedMessage>
+      <FormattedMessage
+        defaultMessage="Resignation command"
+        id="streamchange.components.SettingsDialog.ResignationCommand.label"
+        values={Object {}}
       >
-        <ForwardRef(WithStyles)
-          control={
-            <ForwardRef(WithStyles)
-              checked={false}
-              color="primary"
-              name="deleteWinner"
-              onChange={[Function]}
-              type="checkbox"
-            />
-          }
-          label="Usuń z listy zwycięzcę losowania"
-        />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        error={false}
-        fullWidth={true}
-        helperText={null}
-        id="abortCommand"
-        label="Komenda na rezygnację z losowania"
-        margin="normal"
-        name="abortCommand"
-        onChange={[Function]}
-        value=""
-      />
+        [Function]
+      </FormattedMessage>
     </ForwardRef(WithStyles)>
     <ForwardRef(WithStyles)>
       <ForwardRef(WithStyles)
         color="secondary"
         onClick={[Function]}
       >
-        Anuluj
+        <FormattedMessage
+          defaultMessage="Cancel"
+          id="streamchange.components.SettingsDialog.CancelButton"
+          values={Object {}}
+        />
       </ForwardRef(WithStyles)>
       <ForwardRef(WithStyles)
         color="primary"
         onClick={[Function]}
       >
-        Zapisz
+        <FormattedMessage
+          defaultMessage="Save"
+          id="streamchange.components.SettingsDialog.SaveButton"
+          values={Object {}}
+        />
       </ForwardRef(WithStyles)>
     </ForwardRef(WithStyles)>
   </ForwardRef(WithStyles)>

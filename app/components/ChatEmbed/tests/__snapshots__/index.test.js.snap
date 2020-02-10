@@ -3,7 +3,11 @@
 exports[`<ChatEmbed /> should render and match the snapshot 1`] = `
 <ForwardRef>
   <ForwardRef>
-    Czat
+    <FormattedMessage
+      defaultMessage="Chat"
+      id="streamchange.components.ChatEmbed.title"
+      values={Object {}}
+    />
   </ForwardRef>
   <ForwardRef
     className="chat-frame"

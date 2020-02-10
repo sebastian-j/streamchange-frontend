@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import CSGORaffle from '../CSGORaffle';
 import NumericInput from '../NumericInput';
 import db from '../YoutubeWorker/db';
@@ -48,18 +51,26 @@ export default class RaffleWrapper extends React.Component {
   render() {
     return (
       <div>
-        <NumericInput
-          label="Czas trwania animacji (sekundy)"
-          minValue={1}
-          value={this.state.duration}
-          onChange={ret => this.setState({ duration: ret })}
-        />
+        <FormattedMessage {...messages.animationDuration}>
+          {label => (
+            <NumericInput
+              label={label}
+              minValue={1}
+              value={this.state.duration}
+              onChange={ret => this.setState({ duration: ret })}
+            />
+          )}
+        </FormattedMessage>
         <StartButton
           disabled={this.state.noUsers}
           type="button"
           onClick={this.openDialog}
         >
-          {this.state.noUsers ? 'Nie zaznaczono żadnego użytkownika' : 'Losuj'}
+          {this.state.noUsers ? (
+            <FormattedMessage {...messages.noUserSelected} />
+          ) : (
+            <FormattedMessage {...messages.startBtn} />
+          )}
         </StartButton>
         {this.state.isOpen && (
           <CSGORaffle

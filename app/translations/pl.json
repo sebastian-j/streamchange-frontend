@@ -1,4 +1,15 @@
 {
+  "streamchange.components.ChatEmbed.title": "Czat",
+  "streamchange.components.GiveawayRules.KeywordInput.label": "Słowo kluczowe",
+  "streamchange.components.GiveawayRules.KeywordInput.visibility": "Ukryj lub odsłoń słowo kluczowe",
+  "streamchange.components.GiveawayRules.prize": "Nagroda (opcjonalnie)",
+  "streamchange.components.GiveawayRules.title": "Zasady losowania",
+  "streamchange.components.GiveawayRules.moderators": "Moderatorzy",
+  "streamchange.components.GiveawayRules.sponsors": "Sponsorzy",
+  "streamchange.components.GiveawayRules.regulars": "Zwykli użytkownicy",
+  "streamchange.components.RaffleWrapper.animationDuration": "Czas trwania animacji (sekundy)",
+  "streamchange.components.RaffleWrapper.noUserSelected": "Nie zaznaczono żadnego użytkownika",
+  "streamchange.components.RaffleWrapper.startBtn": "Losuj",
   "streamchange.components.SettingsDialog.DarkModeSwitch.label": "Tryb ciemny (widoczny po odświeżeniu strony)",
   "streamchange.components.SettingsDialog.LocaleToggle.en": "Angielski",
   "streamchange.components.SettingsDialog.LocaleToggle.pl": "Polski",
@@ -10,5 +21,15 @@
   "streamchange.components.SettingsDialog.SaveCommands.label": "Zapisuj wysłane komendy na dołączenie",
   "streamchange.components.SettingsDialog.SaveCommands.hint": "Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane wszystkie wysłane przez niego komendy na dołączenie. Może to być spam setek identycznych wiadomości, dlatego zazwyczaj lepiej zostawić pole niezaznaczone.",
   "streamchange.components.SettingsDialog.CancelButton": "Anuluj",
-  "streamchange.components.SettingsDialog.SaveButton": "Zapisz"
+  "streamchange.components.SettingsDialog.SaveButton": "Zapisz",
+  "streamchange.components.UserList.search.placeholder": "Wyszukaj",
+  "streamchange.components.UserList.clearBtn": "Wyczyść listę",
+  "streamchange.components.UserList.counter": "Bierze udział {selected} z {all}",
+  "streamchange.components.UserList.title": "Użytkownicy",
+  "streamchange.components.WinnerView.openChannel": "Przejdź na kanał",
+  "streamchange.components.WinnerView.prize": "Nagroda",
+  "streamchange.components.WinnerView.saveBtn": "Zapisz i wróć",
+  "streamchange.components.WinnerView.title": "Zwycięzca",
+  "streamchange.containers.HomePage.historyLink": "Historia wygranych",
+  "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream"
 }

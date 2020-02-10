@@ -3,6 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -127,11 +130,15 @@ const HomePage = () => {
         <StreamInfo>
           <StreamImg alt="Miniatura" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
-          <StyledButton onClick={leaveStream}>Opuść stream</StyledButton>
+          <StyledButton onClick={leaveStream}>
+            <FormattedMessage {...messages.leaveStreamBtn} />
+          </StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
           <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
-            <LinkToHistory>Historia wygranych</LinkToHistory>
+            <LinkToHistory>
+              <FormattedMessage {...messages.historyLink} />
+            </LinkToHistory>
           </NavLink>
           <SettingsDialog />
         </div>
