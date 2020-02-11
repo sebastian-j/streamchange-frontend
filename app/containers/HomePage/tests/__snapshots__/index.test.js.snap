@@ -5,7 +5,9 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   class="WelcomeDialog__CompatibilityInfo-eofhf2-7 dzqwnO"
 >
   <div>
-    Aplikacja działa wyłącznie w Google Chrome
+    <span>
+      App works only in Google Chrome
+    </span>
   </div>
 </div>
 `;

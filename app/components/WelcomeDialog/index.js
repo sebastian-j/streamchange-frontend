@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomePage = styled.div`
@@ -99,24 +102,28 @@ const WelcomeDialog = props => {
         <DialogWrapper>
           <Dialog>
             <DialogTitle>
-              Wybierz, na którym streamie organizujesz giveaway
+              <FormattedMessage {...messages.dialogTitle} />
             </DialogTitle>
             <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="videoLink"
-                onChange={handleInputValueChange}
-                onKeyPress={handleKeyPress}
-                id="videoLink"
-                label="Wklej link do streama"
-                type="text"
-                value={videoLink}
-                fullWidth
-              />
+              <FormattedMessage {...messages.videoInputLabel}>
+                {label => (
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="videoLink"
+                    onChange={handleInputValueChange}
+                    onKeyPress={handleKeyPress}
+                    id="videoLink"
+                    label={label}
+                    type="text"
+                    value={videoLink}
+                    fullWidth
+                  />
+                )}
+              </FormattedMessage>
               <TextSecondary>
                 <span style={{ fontSize: '0.8rem' }}>
-                  Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
+                  <FormattedMessage {...messages.example} />
                 </span>
                 {props.error && (
                   <span style={{ display: 'block', color: '#bd0013' }}>
@@ -127,7 +134,7 @@ const WelcomeDialog = props => {
             </DialogContent>
             <DialogActions>
               <Button onClick={sendVideoLink} color="primary">
-                Dalej
+                <FormattedMessage {...messages.saveBtn} />
               </Button>
             </DialogActions>
           </Dialog>
@@ -138,7 +145,9 @@ const WelcomeDialog = props => {
   }
   return (
     <CompatibilityInfo>
-      <div>Aplikacja działa wyłącznie w Google Chrome</div>
+      <div>
+        <FormattedMessage {...messages.compatibilityInfo} />
+      </div>
     </CompatibilityInfo>
   );
 };

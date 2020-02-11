@@ -13,7 +13,11 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
   </ForwardRef>
   <div>
     <ForwardRef>
-      Czy wiesz, że...
+      <FormattedMessage
+        defaultMessage="Did you know..."
+        id="streamchange.components.WelcomeDialog.WelcomeHint.title"
+        values={Object {}}
+      />
     </ForwardRef>
     <ForwardRef>
       
