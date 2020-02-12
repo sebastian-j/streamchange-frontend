@@ -36,6 +36,16 @@
   "streamchange,components.WinnerView.prize": "Prize",
   "streamchange.components.WinnerView.saveBtn": "Save and return",
   "streamchange.components.WinnerView.title": "Winner",
+  "streamchange.containers.History.header.date": "Date and time",
+  "streamchange.containers.History.header.message": "Message",
+  "streamchange.containers.History.header.name": "Channel name",
+  "streamchange.containers.History.header.prize": "Prize",
+  "streamchange.containers.History.info.error": "Cannot load list.",
+  "streamchange.containers.History.info.loading": "Loading history",
+  "streamchange.containers.History.info.noResults": "No channel match the search term.",
+  "streamchange.containers.History.resultsPerPage": "Results per page",
+  "streamchange.containers.History.ReturnButton": "Back to giveaway",
+  "streamchange.containers.History.search.label": "Search",
   "streamchange.containers.HomePage.historyLink": "Win history",
   "streamchange.containers.HomePage.leaveStreamBtn": "Leave stream"
 }

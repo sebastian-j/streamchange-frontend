@@ -11,7 +11,11 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          Nazwa
+          <FormattedMessage
+            defaultMessage="Channel name"
+            id="streamchange.containers.History.header.name"
+            values={Object {}}
+          />
           <ArrowUpIcon
             className="sort-icon"
           />
@@ -23,7 +27,11 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          Nagroda
+          <FormattedMessage
+            defaultMessage="Prize"
+            id="streamchange.containers.History.header.prize"
+            values={Object {}}
+          />
           <ArrowUpIcon
             className="sort-icon"
           />
@@ -35,7 +43,11 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          Wiadomość
+          <FormattedMessage
+            defaultMessage="Message"
+            id="streamchange.containers.History.header.message"
+            values={Object {}}
+          />
           <ArrowUpIcon
             className="sort-icon"
           />
@@ -47,7 +59,11 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          Data i godzina
+          <FormattedMessage
+            defaultMessage="Date and time"
+            id="streamchange.containers.History.header.date"
+            values={Object {}}
+          />
           <ArrowUpIcon
             className="sort-icon active icon-direction-desc"
           />

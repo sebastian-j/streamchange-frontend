@@ -36,6 +36,16 @@
   "streamchange.components.WinnerView.prize": "Nagroda",
   "streamchange.components.WinnerView.saveBtn": "Zapisz i wróć",
   "streamchange.components.WinnerView.title": "Zwycięzca",
+  "streamchange.containers.History.header.date": "Data i godzina",
+  "streamchange.containers.History.header.message": "Wiadomość",
+  "streamchange.containers.History.header.name": "Nazwa",
+  "streamchange.containers.History.header.prize": "Nagroda",
+  "streamchange.containers.History.info.error": "Nie udało się załadować listy.",
+  "streamchange.containers.History.info.loading": "Ładowanie listy",
+  "streamchange.containers.History.info.noResults": "Żaden kanał nie pasuje do wyszukiwanego słowa.",
+  "streamchange.containers.History.resultsPerPage": "Ilość na stronę",
+  "streamchange.containers.History.ReturnButton": "Powrót do losowania",
+  "streamchange.containers.History.search.label": "Wyszukaj",
   "streamchange.containers.HomePage.historyLink": "Historia wygranych",
   "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream"
 }
