@@ -32,4 +32,20 @@ export default defineMessages({
     id: `${scope}.WelcomeHint.title`,
     defaultMessage: 'Did you know...',
   },
+  invalidUrlError: {
+    id: `${scope}.error.invalidUrl`,
+    defaultMessage: 'This is not a URL to live stream or a YouTube video.',
+  },
+  notVideoError: {
+    id: `${scope}.error.notVideo`,
+    defaultMessage: 'There is no such live stream. Invalid url.',
+  },
+  notStreamError: {
+    id: `${scope}.error.notStream`,
+    defaultMessage: 'This is url for video. Paste live stream url.',
+  },
+  quotaExceededError: {
+    id: `${scope}.error.quotaExceeded`,
+    defaultMessage: 'The quota limit has been exceeded.',
+  },
 });

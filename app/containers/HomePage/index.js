@@ -67,7 +67,7 @@ const HomePage = () => {
         .split('/')[0];
       launchWorker(vidId);
     } else {
-      setError('To nie jest link do live streama ani filmu na Youtube.');
+      setError('invalidUrl');
     }
   };
 
@@ -87,9 +87,9 @@ const HomePage = () => {
       )
       .then(res => {
         if (res.data.items.length === 0) {
-          setError('Nie ma takiego streama. Link jest błędny.');
+          setError('notVideo');
         } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
-          setError('To jest link do zwykłego filmu. Wklej link do streama');
+          setError('notStream');
         } else {
           const stream = res.data.items[0];
           setVideoId(vidId);
@@ -108,7 +108,7 @@ const HomePage = () => {
       .catch(err => {
         if (err.response.data && err.response.data.error) {
           if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
-            setError('Limit quota został wyczerpany.');
+            setError('quotaExceeded');
           }
         }
       });

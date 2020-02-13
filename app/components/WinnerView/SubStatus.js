@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
@@ -65,18 +68,30 @@ const SubStatus = props => {
   if (status === 'true') {
     return (
       <Subscribed>
-        Subskrybuje od&nbsp;
+        <FormattedMessage {...messages.subscriberFrom} />
         <RelativeDate ISO8601Date={subscriberFrom} />
       </Subscribed>
     );
   }
   if (status === 'false') {
-    return <NotSubscribed>Nie subskrybuje</NotSubscribed>;
+    return (
+      <NotSubscribed>
+        <FormattedMessage {...messages.notSubscribed} />
+      </NotSubscribed>
+    );
   }
   if (status === 'private') {
-    return <PrivateSubs>Subskrypcje prywatne</PrivateSubs>;
+    return (
+      <PrivateSubs>
+        <FormattedMessage {...messages.subscriberPrivate} />
+      </PrivateSubs>
+    );
   }
-  return <PrivateSubs>Nie wiadomo czy subskrybuje</PrivateSubs>;
+  return (
+    <PrivateSubs>
+      <FormattedMessage {...messages.subscriberUnknown} />
+    </PrivateSubs>
+  );
 };
 
 SubStatus.propTypes = {

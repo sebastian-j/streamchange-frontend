@@ -12,6 +12,14 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Winner',
   },
+  exitBtn: {
+    id: `${scope}.exitBtn`,
+    defaultMessage: 'Return',
+  },
+  loading: {
+    id: `${scope}.loading`,
+    defaultMessage: 'Loading...',
+  },
   openChannel: {
     id: `${scope}.openChannel`,
     defaultMessage: 'Open channel page',
@@ -23,5 +31,21 @@ export default defineMessages({
   saveBtn: {
     id: `${scope}.saveBtn`,
     defaultMessage: 'Save and return',
+  },
+  notSubscribed: {
+    id: `${scope}.SubStatus.notSubscribed`,
+    defaultMessage: 'Not subscribed',
+  },
+  subscriberPrivate: {
+    id: `${scope}.SubStatus.privateSub`,
+    defaultMessage: 'Subscription list private',
+  },
+  subscriberFrom: {
+    id: `${scope}.SubStatus.subscriberFrom`,
+    defaultMessage: 'Subscriber from',
+  },
+  subscriberUnknown: {
+    id: `${scope}.SubStatus.unknownSubscriber`,
+    defaultMessage: 'Subscription status unknown',
   },
 });

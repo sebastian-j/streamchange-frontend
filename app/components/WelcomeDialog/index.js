@@ -127,7 +127,18 @@ const WelcomeDialog = props => {
                 </span>
                 {props.error && (
                   <span style={{ display: 'block', color: '#bd0013' }}>
-                    {props.error}
+                    {props.error === 'invalidUrl' && (
+                      <FormattedMessage {...messages.invalidUrlError} />
+                    )}
+                    {props.error === 'notStream' && (
+                      <FormattedMessage {...messages.notStreamError} />
+                    )}
+                    {props.error === 'notVideo' && (
+                      <FormattedMessage {...messages.notVideoError} />
+                    )}
+                    {props.error === 'quotaExceeded' && (
+                      <FormattedMessage {...messages.quotaExceededError} />
+                    )}
                   </span>
                 )}
               </TextSecondary>

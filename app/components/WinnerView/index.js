@@ -152,10 +152,14 @@ export default class WinnerView extends React.Component {
     if (!this.state.user) {
       return (
         <WinnerPanel>
-          <PanelTitle>Zwycięzca</PanelTitle>
-          <span>Ładowanie...</span>
+          <PanelTitle>
+            <FormattedMessage {...messages.panelTitle} />
+          </PanelTitle>
+          <span>
+            <FormattedMessage {...messages.loading} />
+          </span>
           <Button onClick={this.props.onClose} type="button">
-            Powrót
+            <FormattedMessage {...messages.exitBtn} />
           </Button>
         </WinnerPanel>
       );
