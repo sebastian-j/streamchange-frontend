@@ -13,12 +13,17 @@ import { changeLocale } from '../../containers/LanguageProvider/actions';
 import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
 
 export function LocaleToggle(props) {
+  const toggle = event => {
+    localStorage.setItem('locale', event.target.value);
+    props.onLocaleToggle(event);
+  };
+
   return (
     <div>
       <Typography display="inline" style={{ marginRight: '10px' }}>
         <FormattedMessage {...messages.localeTitle} />
       </Typography>
-      <Select onChange={props.onLocaleToggle} value={props.locale}>
+      <Select onChange={toggle} value={props.locale}>
         {appLocales.map(item => (
           <MenuItem value={item}>
             <FormattedMessage {...messages[item]} />
