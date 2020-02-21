@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomePage = styled.div`
@@ -73,6 +74,7 @@ const CompatibilityInfo = styled.div`
 const WelcomeDialog = props => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
+  const [isFirstUse, setIsFirstUse] = useState(false);
 
   const sendVideoLink = () => {
     if (typeof props.passVideo === 'function') {
@@ -82,6 +84,7 @@ const WelcomeDialog = props => {
 
   useEffect(() => {
     setIsChrome(!!window.chrome);
+    setIsFirstUse(!localStorage.getItem('locale'));
   }, []);
 
   const handleInputValueChange = event => {
@@ -96,6 +99,9 @@ const WelcomeDialog = props => {
     }
   };
 
+  if (isFirstUse) {
+    return <FirstUseScreen />;
+  }
   if (isChrome) {
     return (
       <WelcomePage>

@@ -48,4 +48,36 @@ export default defineMessages({
     id: `${scope}.error.quotaExceeded`,
     defaultMessage: 'The quota limit has been exceeded.',
   },
+  firstUseSaveBtn: {
+    id: `${scope}.FirstUseScreen.saveBtn`,
+    defaultMessage: 'Save',
+  },
+  firstUseSelectLang: {
+    id: `${scope}.FirstUseScreen.selectLanguage`,
+    defaultMessage: 'Select language',
+  },
+  firstUseSelectTheme: {
+    id: `${scope}.FirstUseScreen.selectTheme`,
+    defaultMessage: 'Select theme',
+  },
+  darkTheme: {
+    id: `${scope}.FirstUseScreen.theme.dark`,
+    defaultMessage: 'Dark',
+  },
+  lightTheme: {
+    id: `${scope}.FirstUseScreen.theme.light`,
+    defaultMessage: 'Light',
+  },
+  firstUseTitle: {
+    id: `${scope}.FirstUseScreen.title`,
+    defaultMessage: 'Welcome to StreamChange',
+  },
+  en: {
+    id: `streamchange.components.SettingsDialog.LocaleToggle.en`,
+    defaultMessage: 'en',
+  },
+  pl: {
+    id: `streamchange.components.SettingsDialog.LocaleToggle.pl`,
+    defaultMessage: 'pl',
+  },
 });
