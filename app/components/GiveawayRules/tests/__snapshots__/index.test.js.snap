@@ -3,7 +3,11 @@
 exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
 <ForwardRef>
   <ForwardRef>
-    Zasady losowania
+    <FormattedMessage
+      defaultMessage="Giveaway rules"
+      id="streamchange.components.GiveawayRules.title"
+      values={Object {}}
+    />
   </ForwardRef>
   <ForwardRef
     active={true}
@@ -11,7 +15,11 @@ exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
     onClick={[Function]}
     type="button"
   >
-    Moderatorzy
+    <FormattedMessage
+      defaultMessage="Moderators"
+      id="streamchange.components.GiveawayRules.moderators"
+      values={Object {}}
+    />
   </ForwardRef>
   <ForwardRef
     active={true}
@@ -19,7 +27,11 @@ exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
     onClick={[Function]}
     type="button"
   >
-    Sponsorzy
+    <FormattedMessage
+      defaultMessage="Sponsors"
+      id="streamchange.components.GiveawayRules.sponsors"
+      values={Object {}}
+    />
   </ForwardRef>
   <ForwardRef
     active={true}
@@ -27,18 +39,19 @@ exports[`<GiveawayRules /> should render and match the snapshot 1`] = `
     onClick={[Function]}
     type="button"
   >
-    Zwykli użytkownicy
+    <FormattedMessage
+      defaultMessage="Regulars"
+      id="streamchange.components.GiveawayRules.regulars"
+      values={Object {}}
+    />
   </ForwardRef>
-  <ForwardRef
-    autoFocus={true}
-    fullWidth={true}
-    label="Nagroda (opcjonalne)"
-    margin="dense"
-    name="prize"
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
+  <FormattedMessage
+    defaultMessage="Prize (optional)"
+    id="streamchange.components.GiveawayRules.prize"
+    values={Object {}}
+  >
+    [Function]
+  </FormattedMessage>
   <KeywordInput />
   <RaffleWrapper
     onWin={[Function]}

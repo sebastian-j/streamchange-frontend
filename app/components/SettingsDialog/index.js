@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,7 +10,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import messages from './messages';
 import DarkModeSwitch from './DarkModeSwitch';
+import LocaleToggle from './LocaleToggle';
 
 const SettingsButton = styled.button`
   background: ${props => props.theme.buttonBackground};
@@ -81,73 +85,89 @@ const SettingsDialog = () => {
         onClose={closeDialog}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Ustawienia</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          <FormattedMessage {...messages.dialogTitle} />
+        </DialogTitle>
         <DialogContent>
           <DarkModeSwitch />
-          <Tooltip
-            title={
-              <HintParagraph>
-                Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane
-                wszystkie wysłane przez niego komendy na dołączenie. Może to być
-                spam setek identycznych wiadomości, dlatego zazwyczaj lepiej
-                zostawić pole niezaznaczone.
-              </HintParagraph>
-            }
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={saveCommands}
-                  onChange={event => setSaveCommands(event.target.checked)}
-                  color="primary"
-                  name="saveCommands"
-                  type="checkbox"
+          <LocaleToggle />
+          <div>
+            <FormattedMessage {...messages.saveCommandsLabel}>
+              {label => (
+                <Tooltip
+                  title={
+                    <HintParagraph>
+                      <FormattedMessage {...messages.saveCommandsHint} />
+                    </HintParagraph>
+                  }
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={saveCommands}
+                        onChange={event =>
+                          setSaveCommands(event.target.checked)
+                        }
+                        color="primary"
+                        name="saveCommands"
+                        type="checkbox"
+                      />
+                    }
+                    label={label}
+                  />
+                </Tooltip>
+              )}
+            </FormattedMessage>
+          </div>
+          <FormattedMessage {...messages.deleteWinnerLabel}>
+            {label => (
+              <Tooltip
+                title={
+                  <HintParagraph>
+                    <FormattedMessage {...messages.deleteWinnerHint} />
+                  </HintParagraph>
+                }
+              >
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={deleteWinner}
+                      onChange={event => setDeleteWinner(event.target.checked)}
+                      color="primary"
+                      name="deleteWinner"
+                      type="checkbox"
+                    />
+                  }
+                  label={label}
                 />
-              }
-              label="Zapisuj wysłane komendy na dołączenie"
-            />
-          </Tooltip>
-          <Tooltip
-            title={
-              <HintParagraph>
-                Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
-              </HintParagraph>
-            }
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={deleteWinner}
-                  onChange={event => setDeleteWinner(event.target.checked)}
-                  color="primary"
-                  name="deleteWinner"
-                  type="checkbox"
-                />
-              }
-              label="Usuń z listy zwycięzcę losowania"
-            />
-          </Tooltip>
-          <TextField
-            error={!!error}
-            id="abortCommand"
-            name="abortCommand"
-            label="Komenda na rezygnację z losowania"
-            value={abortCommand}
-            onChange={event => {
-              setAbortCommand(event.target.value);
-              setError(null);
-            }}
-            fullWidth
-            margin="normal"
-            helperText={error}
-          />
+              </Tooltip>
+            )}
+          </FormattedMessage>
+          <FormattedMessage {...messages.resignationCommand}>
+            {label => (
+              <TextField
+                error={!!error}
+                id="abortCommand"
+                name="abortCommand"
+                label={label}
+                value={abortCommand}
+                onChange={event => {
+                  setAbortCommand(event.target.value);
+                  setError(null);
+                }}
+                fullWidth
+                margin="normal"
+                helperText={error}
+              />
+            )}
+          </FormattedMessage>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDialog} color="secondary">
-            Anuluj
+            <FormattedMessage {...messages.cancelBtn} />
           </Button>
           <Button onClick={saveSettings} color="primary">
-            Zapisz
+            <FormattedMessage {...messages.saveBtn} />
           </Button>
         </DialogActions>
       </Dialog>

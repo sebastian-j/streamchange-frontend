@@ -3,31 +3,40 @@
 exports[`<UserList /> should render and match the snapshot 1`] = `
 <ForwardRef>
   <ForwardRef>
-    Uczestnicy
+    <FormattedMessage
+      defaultMessage="Users"
+      id="streamchange.components.UserList.title"
+      values={Object {}}
+    />
   </ForwardRef>
-  <ForwardRef
-    autoFocus={true}
-    fullWidth={true}
-    label="Wyszukaj"
-    margin="dense"
-    name="search"
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
+  <FormattedMessage
+    defaultMessage="Search"
+    id="streamchange.components.UserList.search.placeholder"
+    values={Object {}}
+  >
+    [Function]
+  </FormattedMessage>
   <ForwardRef />
   <ForwardRef
     onClick={[Function]}
   >
-    Wyczyść listę
+    <FormattedMessage
+      defaultMessage="Clear all"
+      id="streamchange.components.UserList.clearBtn"
+      values={Object {}}
+    />
   </ForwardRef>
   <ForwardRef>
-    Bierze udział
-     
-    0
-     z
-     
-    0
+    <FormattedMessage
+      defaultMessage="{selected} out of {all} are participating"
+      id="streamchange.components.UserList.counter"
+      values={
+        Object {
+          "all": 0,
+          "selected": 0,
+        }
+      }
+    />
   </ForwardRef>
 </ForwardRef>
 `;

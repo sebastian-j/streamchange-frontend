@@ -10,7 +10,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Uczestnicy
+      <span>
+        Users
+      </span>
     </h2>
     <div
       className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
@@ -19,7 +21,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
       >
-        Wyszukaj
+        Search
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
@@ -64,7 +66,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       <span
         className="MuiButton-label"
       >
-        Wyczyść listę
+        <span>
+          Clear all
+        </span>
       </span>
       <span
         className="MuiTouchRipple-root"
@@ -73,12 +77,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <span
       className="UserList__Counts-sc-7bgn44-3 hhpEOQ"
     >
-      Bierze udział
-       
-      0
-       z
-       
-      0
+      <span>
+        0 out of 0 are participating
+      </span>
     </span>
   </div>
   <div
@@ -87,7 +88,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Zasady losowania
+      <span>
+        Giveaway rules
+      </span>
     </h2>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -95,7 +98,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Moderatorzy
+      <span>
+        Moderators
+      </span>
     </button>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -103,7 +108,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Sponsorzy
+      <span>
+        Sponsors
+      </span>
     </button>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -111,7 +118,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Zwykli użytkownicy
+      <span>
+        Regulars
+      </span>
     </button>
     <div
       className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
@@ -120,7 +129,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
       >
-        Nagroda (opcjonalne)
+        Prize (optional)
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
@@ -149,7 +158,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         data-shrink={false}
         htmlFor="keyword"
       >
-        Słowo kluczowe
+        Keyword
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense"
@@ -184,7 +193,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
             onMouseOver={[Function]}
             onTouchEnd={[Function]}
             onTouchStart={[Function]}
-            title="Ukryj lub odsłoń słowo kluczowe"
+            title="Toggle keyword visibility"
             type="button"
           >
             <svg
@@ -211,7 +220,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         <div
           className="NumericInput__Label-sc-2ueyqw-1 fqrMbr"
         >
-          Czas trwania animacji (sekundy)
+          Animation duration (seconds)
         </div>
         <button
           className="NumericInput__Button-sc-2ueyqw-2 jSXsrE"
@@ -239,7 +248,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         onClick={[Function]}
         type="button"
       >
-        Losuj
+        <span>
+          Roll it!
+        </span>
       </button>
     </div>
   </div>
@@ -249,7 +260,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Czat
+      <span>
+        Chat
+      </span>
     </h2>
     <iframe
       className="chat-frame ChatEmbed__ChatFrame-g1101a-0 bRtIsU"

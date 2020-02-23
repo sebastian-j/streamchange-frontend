@@ -1,50 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<KeywordInput /> should render and match the snapshot 1`] = `
-<ForwardRef
-  InputProps={
-    Object {
-      "endAdornment": <ForwardRef(WithStyles)
-        position="end"
-      >
-        <ForwardRef(WithStyles)
-          aria-label="add"
-          title="Ukryj lub odsłoń słowo kluczowe"
-        >
-          <ForwardRef
-            aria-label="toggle keyword visibility"
-            name="showKeyword"
-            onClick={[Function]}
-            type="button"
-          >
-            <svg
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-            >
-              <path
-                d="M0 0h24v24H0z"
-                fill="none"
-              />
-              <path
-                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-              />
-            </svg>
-          </ForwardRef>
-        </ForwardRef(WithStyles)>
-      </ForwardRef(WithStyles)>,
-    }
-  }
-  autoFocus={true}
-  error={false}
-  fullWidth={true}
-  helperText={null}
-  id="keyword"
-  label="Słowo kluczowe"
-  margin="dense"
-  name="keyword"
-  onChange={[Function]}
-  type="text"
-  value=""
-/>
+<FormattedMessage
+  defaultMessage="Keyword"
+  id="streamchange.components.GiveawayRules.KeywordInput.label"
+  values={Object {}}
+>
+  [Function]
+</FormattedMessage>
 `;

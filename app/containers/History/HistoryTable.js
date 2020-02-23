@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import ArrowUpIcon from './arrowUpIcon';
 import HistoryItem from './HistoryItem';
 import './style.css';
@@ -50,7 +53,7 @@ const HistoryTable = props => {
               onClick={handleSortChange}
               type="button"
             >
-              Nazwa
+              <FormattedMessage {...messages.nameHeader} />
               <ArrowUpIcon
                 className={clsx(
                   'sort-icon',
@@ -65,7 +68,7 @@ const HistoryTable = props => {
           </td>
           <td>
             <HeaderButton id="prize" onClick={handleSortChange} type="button">
-              Nagroda
+              <FormattedMessage {...messages.prizeHeader} />
               <ArrowUpIcon
                 className={clsx(
                   'sort-icon',
@@ -77,7 +80,7 @@ const HistoryTable = props => {
           </td>
           <td>
             <HeaderButton id="message" onClick={handleSortChange} type="button">
-              Wiadomość
+              <FormattedMessage {...messages.messageHeader} />
               <ArrowUpIcon
                 className={clsx(
                   'sort-icon',
@@ -93,7 +96,7 @@ const HistoryTable = props => {
               onClick={handleSortChange}
               type="button"
             >
-              Data i godzina
+              <FormattedMessage {...messages.dateHeader} />
               <ArrowUpIcon
                 className={clsx(
                   'sort-icon',

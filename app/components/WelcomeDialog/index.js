@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomePage = styled.div`
@@ -70,6 +74,7 @@ const CompatibilityInfo = styled.div`
 const WelcomeDialog = props => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
+  const [isFirstUse, setIsFirstUse] = useState(false);
 
   const sendVideoLink = () => {
     if (typeof props.passVideo === 'function') {
@@ -79,6 +84,7 @@ const WelcomeDialog = props => {
 
   useEffect(() => {
     setIsChrome(!!window.chrome);
+    setIsFirstUse(!localStorage.getItem('locale'));
   }, []);
 
   const handleInputValueChange = event => {
@@ -93,41 +99,59 @@ const WelcomeDialog = props => {
     }
   };
 
+  if (isFirstUse) {
+    return <FirstUseScreen />;
+  }
   if (isChrome) {
     return (
       <WelcomePage>
         <DialogWrapper>
           <Dialog>
             <DialogTitle>
-              Wybierz, na którym streamie organizujesz giveaway
+              <FormattedMessage {...messages.dialogTitle} />
             </DialogTitle>
             <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="videoLink"
-                onChange={handleInputValueChange}
-                onKeyPress={handleKeyPress}
-                id="videoLink"
-                label="Wklej link do streama"
-                type="text"
-                value={videoLink}
-                fullWidth
-              />
+              <FormattedMessage {...messages.videoInputLabel}>
+                {label => (
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="videoLink"
+                    onChange={handleInputValueChange}
+                    onKeyPress={handleKeyPress}
+                    id="videoLink"
+                    label={label}
+                    type="text"
+                    value={videoLink}
+                    fullWidth
+                  />
+                )}
+              </FormattedMessage>
               <TextSecondary>
                 <span style={{ fontSize: '0.8rem' }}>
-                  Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
+                  <FormattedMessage {...messages.example} />
                 </span>
                 {props.error && (
                   <span style={{ display: 'block', color: '#bd0013' }}>
-                    {props.error}
+                    {props.error === 'invalidUrl' && (
+                      <FormattedMessage {...messages.invalidUrlError} />
+                    )}
+                    {props.error === 'notStream' && (
+                      <FormattedMessage {...messages.notStreamError} />
+                    )}
+                    {props.error === 'notVideo' && (
+                      <FormattedMessage {...messages.notVideoError} />
+                    )}
+                    {props.error === 'quotaExceeded' && (
+                      <FormattedMessage {...messages.quotaExceededError} />
+                    )}
                   </span>
                 )}
               </TextSecondary>
             </DialogContent>
             <DialogActions>
               <Button onClick={sendVideoLink} color="primary">
-                Dalej
+                <FormattedMessage {...messages.saveBtn} />
               </Button>
             </DialogActions>
           </Dialog>
@@ -138,7 +162,9 @@ const WelcomeDialog = props => {
   }
   return (
     <CompatibilityInfo>
-      <div>Aplikacja działa wyłącznie w Google Chrome</div>
+      <div>
+        <FormattedMessage {...messages.compatibilityInfo} />
+      </div>
     </CompatibilityInfo>
   );
 };

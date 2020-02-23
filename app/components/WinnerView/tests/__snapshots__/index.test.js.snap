@@ -3,16 +3,28 @@
 exports[`<WinnerView /> should render and match the snapshot 1`] = `
 <ForwardRef>
   <ForwardRef>
-    Zwycięzca
+    <FormattedMessage
+      defaultMessage="Winner"
+      id="streamchange.components.WinnerView.title"
+      values={Object {}}
+    />
   </ForwardRef>
   <span>
-    Ładowanie...
+    <FormattedMessage
+      defaultMessage="Loading..."
+      id="streamchange.components.WinnerView.loading"
+      values={Object {}}
+    />
   </span>
   <ForwardRef
     onClick={[Function]}
     type="button"
   >
-    Powrót
+    <FormattedMessage
+      defaultMessage="Return"
+      id="streamchange.components.WinnerView.exitBtn"
+      values={Object {}}
+    />
   </ForwardRef>
 </ForwardRef>
 `;

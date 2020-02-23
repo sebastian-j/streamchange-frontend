@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import db from '../YoutubeWorker/db';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -149,17 +152,23 @@ export default class WinnerView extends React.Component {
     if (!this.state.user) {
       return (
         <WinnerPanel>
-          <PanelTitle>Zwycięzca</PanelTitle>
-          <span>Ładowanie...</span>
+          <PanelTitle>
+            <FormattedMessage {...messages.panelTitle} />
+          </PanelTitle>
+          <span>
+            <FormattedMessage {...messages.loading} />
+          </span>
           <Button onClick={this.props.onClose} type="button">
-            Powrót
+            <FormattedMessage {...messages.exitBtn} />
           </Button>
         </WinnerPanel>
       );
     }
     return (
       <WinnerPanel>
-        <PanelTitle>Zwycięzca</PanelTitle>
+        <PanelTitle>
+          <FormattedMessage {...messages.panelTitle} />
+        </PanelTitle>
         <WinnerHeading>
           <Logo alt="logo" src={this.state.user.imageUrl} />
           <WinnerInfo>
@@ -173,7 +182,7 @@ export default class WinnerView extends React.Component {
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
             >
-              Przejdź na kanał
+              <FormattedMessage {...messages.openChannel} />
             </ChannelLink>
           </WinnerInfo>
           <Timer />
@@ -183,18 +192,22 @@ export default class WinnerView extends React.Component {
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
         </MessageList>
-        <StyledTextField
-          autoFocus
-          margin="dense"
-          name="prize"
-          onChange={this.handleInputValueChange}
-          label="Nagroda"
-          type="text"
-          value={this.state.prize}
-          fullWidth
-        />
+        <FormattedMessage {...messages.prize}>
+          {label => (
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="prize"
+              onChange={this.handleInputValueChange}
+              label={label}
+              type="text"
+              value={this.state.prize}
+              fullWidth
+            />
+          )}
+        </FormattedMessage>
         <Button onClick={this.saveAndExit} type="button">
-          Zapisz i wróć
+          <FormattedMessage {...messages.saveBtn} />
         </Button>
       </WinnerPanel>
     );

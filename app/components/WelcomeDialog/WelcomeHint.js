@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import { HINTS } from '../../config';
 
 const Wrapper = styled.div`
@@ -49,7 +52,9 @@ const WelcomeHint = () => {
         <img src="/static/light-bulb.png" height="140px" alt="light bulb" />
       </Button>
       <div>
-        <DialogTitle>Czy wiesz, że...</DialogTitle>
+        <DialogTitle>
+          <FormattedMessage {...messages.hintTitle} />
+        </DialogTitle>
         <DialogContent>{hint}</DialogContent>
       </div>
     </Wrapper>

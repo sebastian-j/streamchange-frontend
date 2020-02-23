@@ -3,6 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -64,7 +67,7 @@ const HomePage = () => {
         .split('/')[0];
       launchWorker(vidId);
     } else {
-      setError('To nie jest link do live streama ani filmu na Youtube.');
+      setError('invalidUrl');
     }
   };
 
@@ -84,9 +87,9 @@ const HomePage = () => {
       )
       .then(res => {
         if (res.data.items.length === 0) {
-          setError('Nie ma takiego streama. Link jest błędny.');
+          setError('notVideo');
         } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
-          setError('To jest link do zwykłego filmu. Wklej link do streama');
+          setError('notStream');
         } else {
           const stream = res.data.items[0];
           setVideoId(vidId);
@@ -105,7 +108,7 @@ const HomePage = () => {
       .catch(err => {
         if (err.response.data && err.response.data.error) {
           if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
-            setError('Limit quota został wyczerpany.');
+            setError('quotaExceeded');
           }
         }
       });
@@ -127,11 +130,15 @@ const HomePage = () => {
         <StreamInfo>
           <StreamImg alt="Miniatura" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
-          <StyledButton onClick={leaveStream}>Opuść stream</StyledButton>
+          <StyledButton onClick={leaveStream}>
+            <FormattedMessage {...messages.leaveStreamBtn} />
+          </StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
           <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
-            <LinkToHistory>Historia wygranych</LinkToHistory>
+            <LinkToHistory>
+              <FormattedMessage {...messages.historyLink} />
+            </LinkToHistory>
           </NavLink>
           <SettingsDialog />
         </div>
