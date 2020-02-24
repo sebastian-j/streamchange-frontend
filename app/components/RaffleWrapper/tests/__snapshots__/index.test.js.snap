@@ -2,6 +2,43 @@
 
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
+  <ForwardRef
+    margin="normal"
+  >
+    <ForwardRef(WithStyles)
+      id="animation-select"
+    >
+      <FormattedMessage
+        defaultMessage="Animation"
+        id="streamchange.components.RaffleWrapper.raffleType"
+        values={Object {}}
+      />
+    </ForwardRef(WithStyles)>
+    <ForwardRef(WithStyles)
+      labelId="animation-label"
+      onChange={[Function]}
+      value={0}
+    >
+      <ForwardRef(WithStyles)
+        value={0}
+      >
+        <FormattedMessage
+          defaultMessage="CS:GO case opening"
+          id="streamchange.components.RaffleWrapper.raffleType.CS"
+          values={Object {}}
+        />
+      </ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)
+        value={1}
+      >
+        <FormattedMessage
+          defaultMessage="Fortune wheel"
+          id="streamchange.components.RaffleWrapper.raffleType.fortuneWheel"
+          values={Object {}}
+        />
+      </ForwardRef(WithStyles)>
+    </ForwardRef(WithStyles)>
+  </ForwardRef>
   <FormattedMessage
     defaultMessage="Animation duration (seconds)"
     id="streamchange.components.RaffleWrapper.animationDuration"

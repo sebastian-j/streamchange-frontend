@@ -20,4 +20,16 @@ export default defineMessages({
     id: `${scope}.startBtn`,
     defaultMessage: 'Roll it!',
   },
+  raffleType: {
+    id: `${scope}.raffleType`,
+    defaultMessage: 'Animation',
+  },
+  raffleTypeCS: {
+    id: `${scope}.raffleType.CS`,
+    defaultMessage: 'CS:GO case opening',
+  },
+  raffleTypeWheel: {
+    id: `${scope}.raffleType.fortuneWheel`,
+    defaultMessage: 'Fortune wheel',
+  },
 });

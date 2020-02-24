@@ -10,6 +10,7 @@ import StyledTextField from '../StyledTextField';
 const ToggleVisibilityBtn = styled.button`
   background-color: transparent;
   border: none;
+  color: ${props => props.theme.staticTextColor};
   outline: none;
   &:hover {
     color: #0094ff;

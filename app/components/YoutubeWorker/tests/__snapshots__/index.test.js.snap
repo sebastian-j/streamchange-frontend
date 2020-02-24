@@ -184,7 +184,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           <button
             aria-describedby={null}
             aria-label="toggle keyword visibility"
-            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 jmnecv"
+            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ldEhFZ"
             name="showKeyword"
             onBlur={[Function]}
             onClick={[Function]}
@@ -214,6 +214,54 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </div>
     </div>
     <div>
+      <div
+        className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 jqDDzA MuiFormControl-marginNormal"
+      >
+        <label
+          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+          data-shrink={true}
+          id="animation-select"
+        >
+          <span>
+            Animation
+          </span>
+        </label>
+        <div
+          className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          labelId="animation-label"
+          onClick={[Function]}
+        >
+          <div
+            aria-haspopup="listbox"
+            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span>
+              CS:GO case opening
+            </span>
+          </div>
+          <input
+            type="hidden"
+            value={0}
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root MuiSelect-icon"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
       <div
         className="NumericInput__Container-sc-2ueyqw-0 iGHMIM"
       >
