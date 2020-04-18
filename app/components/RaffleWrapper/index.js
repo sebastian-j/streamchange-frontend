@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -43,94 +43,93 @@ const StyledFormControl = styled(FormControl)`
     color: ${props => props.theme.staticTextColor};
   }
 `;
-export default class RaffleWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOpen: false, noUsers: false, duration: 7, raffleType: 0 };
-    this.openDialog = this.openDialog.bind(this);
-    this.closeDialog = this.closeDialog.bind(this);
-  }
+const RaffleWrapper = props => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [noUsers, setNoUsers] = useState(false);
+  const [duration, setDuration] = useState(
+    Number(localStorage.getItem('gv-animationDuration')) || 7,
+  );
+  const [raffleType, setRaffleType] = useState(0);
 
-  openDialog() {
+  const openDialog = () => {
     db.table('users')
       .filter(user => user.isEligible === true)
       .toArray()
       .then(items => {
         if (items.length > 0) {
-          this.setState({ isOpen: true });
+          setIsOpen(true);
         } else {
-          this.setState({ noUsers: true });
-          setTimeout(() => this.setState({ noUsers: false }), 3000);
+          setNoUsers(true);
+          setTimeout(() => setNoUsers(false), 3000);
         }
       });
-  }
+  };
 
-  closeDialog() {
-    this.setState({ isOpen: false });
-  }
+  const closeDialog = () => {
+    setIsOpen(false);
+  };
 
-  render() {
-    return (
-      <div>
-        <StyledFormControl margin="normal">
-          <InputLabel id="animation-select">
-            <FormattedMessage {...messages.raffleType} />
-          </InputLabel>
-          <Select
-            labelId="animation-label"
-            onChange={event =>
-              this.setState({ raffleType: event.target.value })
-            }
-            value={this.state.raffleType}
-          >
-            <MenuItem value={0}>
-              <FormattedMessage {...messages.raffleTypeCS} />
-            </MenuItem>
-            <MenuItem value={1}>
-              <FormattedMessage {...messages.raffleTypeWheel} />
-            </MenuItem>
-          </Select>
-        </StyledFormControl>
-        <FormattedMessage {...messages.animationDuration}>
-          {label => (
-            <NumericInput
-              label={label}
-              minValue={1}
-              value={this.state.duration}
-              onChange={ret => this.setState({ duration: ret })}
-            />
-          )}
-        </FormattedMessage>
-        <StartButton
-          disabled={this.state.noUsers}
-          type="button"
-          onClick={this.openDialog}
+  const changeDuration = value => {
+    setDuration(value);
+    localStorage.setItem('gv-animationDuration', String(value));
+  };
+
+  return (
+    <div>
+      <StyledFormControl margin="normal">
+        <InputLabel id="animation-select">
+          <FormattedMessage {...messages.raffleType} />
+        </InputLabel>
+        <Select
+          labelId="animation-label"
+          onChange={event => setRaffleType(event.target.value)}
+          value={raffleType}
         >
-          {this.state.noUsers ? (
-            <FormattedMessage {...messages.noUserSelected} />
-          ) : (
-            <FormattedMessage {...messages.startBtn} />
-          )}
-        </StartButton>
-        {this.state.isOpen && this.state.raffleType === 0 && (
-          <CSGORaffle
-            duration={this.state.duration}
-            onClose={this.closeDialog}
-            onWin={this.props.onWin}
+          <MenuItem value={0}>
+            <FormattedMessage {...messages.raffleTypeCS} />
+          </MenuItem>
+          <MenuItem value={1}>
+            <FormattedMessage {...messages.raffleTypeWheel} />
+          </MenuItem>
+        </Select>
+      </StyledFormControl>
+      <FormattedMessage {...messages.animationDuration}>
+        {label => (
+          <NumericInput
+            label={label}
+            minValue={1}
+            value={duration}
+            onChange={ret => changeDuration(ret)}
           />
         )}
-        {this.state.isOpen && this.state.raffleType === 1 && (
-          <FortuneWheelRaffle
-            duration={this.state.duration}
-            onClose={this.closeDialog}
-            onWin={this.props.onWin}
-          />
+      </FormattedMessage>
+      <StartButton disabled={noUsers} type="button" onClick={openDialog}>
+        {noUsers ? (
+          <FormattedMessage {...messages.noUserSelected} />
+        ) : (
+          <FormattedMessage {...messages.startBtn} />
         )}
-      </div>
-    );
-  }
-}
+      </StartButton>
+      {isOpen && raffleType === 0 && (
+        <CSGORaffle
+          duration={duration}
+          onClose={closeDialog}
+          onWin={props.onWin}
+        />
+      )}
+      {isOpen && raffleType === 1 && (
+        <FortuneWheelRaffle
+          duration={duration}
+          onClose={closeDialog}
+          onWin={props.onWin}
+        />
+      )}
+    </div>
+  );
+};
 
 RaffleWrapper.propTypes = {
   onWin: PropTypes.func.isRequired,
 };
+
+export default RaffleWrapper;
