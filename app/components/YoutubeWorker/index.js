@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { PRIVILEGED_CHANNELS } from '../../config';
+import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import ChatEmbed from '../ChatEmbed';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
@@ -27,9 +27,9 @@ const YoutubeWorker = props => {
     }
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/liveChat/messages?part=snippet,authorDetails&maxResults=200&liveChatId=${
-          props.liveChatId
-        }&pageToken=${nextPageToken}&key=${props.apiKey}`,
+        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${
+          props.videoId
+        }&pageToken=${nextPageToken}`,
       )
       .then(res => {
         localStorage.setItem('nextPageToken', res.data.nextPageToken);
@@ -68,7 +68,8 @@ const YoutubeWorker = props => {
             });
           saveMessage(res.data.items[i]);
           if (
-            PRIVILEGED_CHANNELS.includes(author.id) &&
+            (PRIVILEGED_CHANNELS.includes(author.id) ||
+              res.data.items[i].authorDetails.isChatOwner) &&
             author.message.startsWith('!s ')
           ) {
             setSuperChat({
@@ -85,6 +86,11 @@ const YoutubeWorker = props => {
         clearTimeout(timer);
         setTimer(null);
         setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, 6000));
       });
   };
 
@@ -122,7 +128,7 @@ const YoutubeWorker = props => {
     return () => {
       clearTimeout(timer);
     };
-  }, [props.liveChatId]);
+  }, []);
 
   return (
     <ThreeSections>
@@ -144,7 +150,6 @@ YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   channelId: PropTypes.string.isRequired,
   videoId: PropTypes.string,
-  liveChatId: PropTypes.string.isRequired,
 };
 
 export default YoutubeWorker;

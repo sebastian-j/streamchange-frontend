@@ -56,7 +56,6 @@ const HomePage = () => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
-  const [liveChatId, setLiveChatId] = useState('');
   const [error, setError] = useState(null);
 
   const receiveVideo = videoLink => {
@@ -74,7 +73,6 @@ const HomePage = () => {
   const leaveStream = () => {
     setVideoId('');
     setTitle('');
-    setLiveChatId('');
     setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
@@ -96,7 +94,6 @@ const HomePage = () => {
           setChannelId(stream.snippet.channelId);
           setTitle(stream.snippet.title);
           setThumbnailUrl(stream.snippet.thumbnails.medium.url);
-          setLiveChatId(stream.liveStreamingDetails.activeLiveChatId);
           sessionStorage.setItem('gv-videoId', vidId);
           axios.get(
             `${TELEMETRY_URL}?id=${vidId}&channelId=${
@@ -143,12 +140,7 @@ const HomePage = () => {
           <SettingsDialog />
         </div>
       </TopBar>
-      <YoutubeWorker
-        channelId={channelId}
-        liveChatId={liveChatId}
-        videoId={videoId}
-        apiKey={API_KEY}
-      />
+      <YoutubeWorker channelId={channelId} videoId={videoId} apiKey={API_KEY} />
     </div>
   );
 };
