@@ -34,10 +34,13 @@ const Button = styled.button`
   }
 `;
 
-const NumberDisplay = styled.div`
+const NumberDisplay = styled.input`
+  background: transparent;
   border: 1px solid gray;
   color: ${props => props.theme.staticTextColor};
   font-size: 1.5rem;
+  height: 100%;
+  max-width: 70px;
   padding: 0 10px;
 `;
 
@@ -64,14 +67,25 @@ const NumericInput = props => {
     if (val !== props.value) props.onChange(Number(val));
     setValue(val);
   };
-
+  const checkValue = () => {
+    let val = value;
+    if (val < props.minValue) val = props.minValue;
+    if (val > props.maxValue) val = props.maxValue;
+    if (Number.isNaN(Number(val))) val = props.value;
+    setValue(val);
+    props.onChange(Number(val));
+  };
   return (
     <Container>
       <Label>{props.label}</Label>
       <Button left="true" onClick={dec} type="button">
         -
       </Button>
-      <NumberDisplay>{value}</NumberDisplay>
+      <NumberDisplay
+        value={value}
+        onChange={event => setValue(event.target.value)}
+        onBlur={checkValue}
+      />
       <Button onClick={inc} type="button">
         +
       </Button>

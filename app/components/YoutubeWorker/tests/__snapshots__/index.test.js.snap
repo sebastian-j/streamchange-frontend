@@ -277,11 +277,12 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         >
           -
         </button>
-        <div
-          className="NumericInput__NumberDisplay-sc-2ueyqw-3 cTjqhA"
-        >
-          7
-        </div>
+        <input
+          className="NumericInput__NumberDisplay-sc-2ueyqw-3 iputsX"
+          onBlur={[Function]}
+          onChange={[Function]}
+          value={7}
+        />
         <button
           className="NumericInput__Button-sc-2ueyqw-2 bqvYTn"
           onClick={[Function]}

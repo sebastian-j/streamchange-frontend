@@ -98,6 +98,7 @@ const RaffleWrapper = props => {
           <NumericInput
             label={label}
             minValue={1}
+            maxValue={600}
             value={duration}
             onChange={ret => changeDuration(ret)}
           />
