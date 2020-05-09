@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.LocaleToggle.pl`,
     defaultMessage: 'pl',
   },
+  themeColor: {
+    id: `${scope}.ColorPicker.label`,
+    defaultMessage: 'Theme color',
+  },
   localeTitle: {
     id: `${scope}.LocaleToggle.title`,
     defaultMessage: 'Language',

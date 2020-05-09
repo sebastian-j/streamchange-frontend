@@ -2,7 +2,7 @@
 
 exports[`<KeywordInput /> should render and match the snapshot 1`] = `
 <div
-  className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
+  className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
 >
   <label
     className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
@@ -35,7 +35,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
       <button
         aria-describedby={null}
         aria-label="toggle keyword visibility"
-        className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ldEhFZ"
+        className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ejSEdz"
         name="showKeyword"
         onBlur={[Function]}
         onClick={[Function]}

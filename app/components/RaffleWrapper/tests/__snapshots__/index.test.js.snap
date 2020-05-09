@@ -15,7 +15,6 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
       />
     </ForwardRef(WithStyles)>
     <ForwardRef(WithStyles)
-      labelId="animation-label"
       onChange={[Function]}
       value={0}
     >

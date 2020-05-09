@@ -9,7 +9,13 @@ const StyledTextField = styled(TextField)`
     color: ${props => props.theme.inputLabel};
   }
   label.Mui-focused {
-    color: ${props => props.theme.inputLabelFocused};
+    color: ${props => props.theme.color};
+  }
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid ${props => props.theme.color};
+  }
+  .MuiInput-underline:after {
+    border-bottom: 2px solid ${props => props.theme.color};
   }
 `;
 

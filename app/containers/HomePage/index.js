@@ -32,7 +32,7 @@ const StreamTitle = styled.span`
 
 const LinkToHistory = styled.span`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
   height: 80%;
@@ -47,7 +47,7 @@ const LinkToHistory = styled.span`
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.materialButtonColor};
+    color: ${props => props.theme.color};
   }
 `;
 

@@ -24,20 +24,11 @@ const UserButton = styled.button`
   margin: 6px 5px;
   padding: 0;
   outline: 0;
-  ${({ isEligible }) =>
-    isEligible &&
+  ${props =>
+    props.isEligible &&
     `
-    color: #0a85ff;
-  `}
-`;
-
-const Logo = styled(YoutubeLogo)`
-  color: ${props => props.theme.inactiveUser};
-  ${({ isEligible }) =>
-    isEligible &&
-    `
-    color: #0a85ff;
-  `}
+    color: ${props.theme.color};
+`}
 `;
 
 const UserItem = props => {
@@ -52,7 +43,7 @@ const UserItem = props => {
         onClick={toggleEligible}
         type="button"
       >
-        <Logo channelId={props.channelId} />
+        <YoutubeLogo channelId={props.channelId} />
         <Span>{props.title}</Span>
         {props.isModerator && (
           <Svg viewBox="0 0 16 16">

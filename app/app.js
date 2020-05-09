@@ -21,7 +21,7 @@ import App from 'containers/App';
 
 // Import Language and Theme Providers
 import LanguageProvider from 'containers/LanguageProvider';
-import { ThemeProvider } from 'styled-components';
+import StyleProvider from './containers/StyleProvider';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -33,7 +33,6 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
-import { lightTheme, darkTheme } from './theme';
 
 // Create redux store with history
 const initialState = {};
@@ -44,15 +43,11 @@ const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ThemeProvider
-          theme={
-            localStorage.getItem('darkMode') === 'true' ? darkTheme : lightTheme
-          }
-        >
+        <StyleProvider>
           <ConnectedRouter history={history}>
             <App />
           </ConnectedRouter>
-        </ThemeProvider>
+        </StyleProvider>
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE,

@@ -13,7 +13,7 @@ const ToggleVisibilityBtn = styled.button`
   color: ${props => props.theme.staticTextColor};
   outline: none;
   &:hover {
-    color: #0094ff;
+    color: ${props => props.theme.color};
   }
   & * {
     pointer-events: none;

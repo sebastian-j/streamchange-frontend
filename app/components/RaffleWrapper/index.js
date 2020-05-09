@@ -15,7 +15,7 @@ import db from '../YoutubeWorker/db';
 
 const StartButton = styled.button`
   background-color: ${props => props.theme.buttonBackground};
-  border: 1px solid #0094ff;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   cursor: pointer;
   margin-top: 10px;
@@ -81,7 +81,6 @@ const RaffleWrapper = props => {
           <FormattedMessage {...messages.raffleType} />
         </InputLabel>
         <Select
-          labelId="animation-label"
           onChange={event => setRaffleType(event.target.value)}
           value={raffleType}
         >

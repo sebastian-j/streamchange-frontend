@@ -14,7 +14,7 @@ const Label = styled.div`
 `;
 const Button = styled.button`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0094ff;
+  border: 1px solid ${props => props.theme.color};
   border-radius: 0 4px 4px 0;
   color: ${props => props.theme.buttonTextColor};
   font-size: 1.5rem;

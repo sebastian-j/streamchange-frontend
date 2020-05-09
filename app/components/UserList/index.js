@@ -26,7 +26,7 @@ const Ul = styled.ul`
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.materialButtonColor};
+    color: ${props => props.theme.color};
   }
 `;
 

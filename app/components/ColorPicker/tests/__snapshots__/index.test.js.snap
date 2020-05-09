@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColorPicker /> should render and match the snapshot 1`] = `
+<div
+  className="color-picker-wrapper"
+>
+  <div
+    className="color-picker-label"
+  />
+  <button
+    className="color-picker-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "backgroundColor": undefined,
+      }
+    }
+    type="button"
+  />
+</div>
+`;

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -12,13 +15,16 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import messages from './messages';
+import ColorPicker from '../ColorPicker';
 import DarkModeSwitch from './DarkModeSwitch';
 import LocaleToggle from './LocaleToggle';
+import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { changeColor } from '../../containers/StyleProvider/actions';
 
 const SettingsButton = styled.button`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
-  color: ${props => props.theme.buttonTextColor};
+  border: 1px solid ${props => props.theme.color};
+  color: ${props => props.theme.color};
   border-radius: 4px;
   height: 80%;
   padding: 3px 5px;
@@ -36,8 +42,9 @@ const HintParagraph = styled.span`
   display: block;
 `;
 
-const SettingsDialog = () => {
+const SettingsDialog = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const [themeColor, setThemeColor] = useState(props.themeColor);
   const [saveCommands, setSaveCommands] = useState(false);
   const [deleteWinner, setDeleteWinner] = useState(false);
   const [abortCommand, setAbortCommand] = useState('');
@@ -51,11 +58,17 @@ const SettingsDialog = () => {
     setIsOpen(false);
   };
 
+  const changeThemeColor = value => {
+    setThemeColor(value);
+  };
+
   const saveSettings = () => {
+    props.onColorChange(themeColor);
     if (localStorage.getItem('keyword') === abortCommand) {
       setError('Komendy na rezygnację i dołączenie muszą być różne.');
       return;
     }
+    localStorage.setItem('themeColor', themeColor);
     localStorage.setItem('gv-saveCommands', String(saveCommands));
     localStorage.setItem('gv-deleteWinner', String(deleteWinner));
     localStorage.setItem('gv-abortCommand', String(abortCommand));
@@ -66,6 +79,7 @@ const SettingsDialog = () => {
     setSaveCommands(localStorage.getItem('gv-saveCommands') === 'true');
     setDeleteWinner(localStorage.getItem('gv-deleteWinner') === 'true');
     setAbortCommand(localStorage.getItem('gv-abortCommand'));
+    setThemeColor(localStorage.getItem('themeColor') || '#0094ff');
   }, []);
 
   return (
@@ -90,6 +104,16 @@ const SettingsDialog = () => {
         </DialogTitle>
         <DialogContent>
           <DarkModeSwitch />
+          <FormattedMessage {...messages.themeColor}>
+            {label => (
+              <ColorPicker
+                color={themeColor}
+                handleChange={(name, value) => changeThemeColor(value)}
+                label={label}
+                name="themeColor"
+              />
+            )}
+          </FormattedMessage>
           <LocaleToggle />
           <div>
             <FormattedMessage {...messages.saveCommandsLabel}>
@@ -175,4 +199,26 @@ const SettingsDialog = () => {
   );
 };
 
-export default SettingsDialog;
+SettingsDialog.propTypes = {
+  onColorChange: PropTypes.func,
+  themeColor: PropTypes.string,
+};
+
+const mapStateToProps = createSelector(
+  makeSelectColor(),
+  themeColor => ({
+    themeColor,
+  }),
+);
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onColorChange: col => dispatch(changeColor(col)),
+    dispatch,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsDialog);
