@@ -27,13 +27,5 @@ const mapStateToProps = createStructuredSelector({
   color: makeSelectColor(),
   isDarkMode: makeSelectDarkMode(),
 });
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(StyleProvider);
+export default connect(mapStateToProps)(StyleProvider);
