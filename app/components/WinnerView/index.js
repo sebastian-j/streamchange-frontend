@@ -45,7 +45,7 @@ const WinnerTitle = styled.span`
 
 const ChannelLink = styled.a`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
   padding: 3px 5px;
@@ -58,7 +58,7 @@ const ChannelLink = styled.a`
 
 const Button = styled.button`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
   padding: 3px 5px;
