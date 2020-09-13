@@ -12,6 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 import StyledTextField from '../../components/StyledTextField';
+import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
 
 const PageWrapper = styled.div`
@@ -22,13 +23,20 @@ const PageWrapper = styled.div`
   width: 100%;
 `;
 
-const ReturnButton = styled.div`
+const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ReturnButton = styled(NavLink)`
+  display: block;
   color: ${props => props.theme.staticTextColor};
+  flex-grow: 1;
   line-height: 48px;
   min-height: 48px;
+  text-decoration: none;
   & span {
     margin-left: 24px;
-    text-decoration: none;
   }
   &:hover {
     background: rgba(0, 0, 0, 0.2);
@@ -173,22 +181,25 @@ export default class History extends React.Component {
     }
     return (
       <PageWrapper>
-        <NavLink to="/giveaway" activeClassName="active">
-          <ReturnButton>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-            <span>
-              <FormattedMessage {...messages.returnButton} />
-            </span>
+        <Header>
+          <ReturnButton to="/giveaway" activeClassName="active">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              <span>
+                <FormattedMessage {...messages.returnButton} />
+              </span>
+            </div>
           </ReturnButton>
-        </NavLink>
+          <HistoryMenu onClear={this.getHistory} />
+        </Header>
         <FormattedMessage {...messages.searchLabel}>
           {label => (
             <StyledTextField

@@ -48,4 +48,20 @@ export default defineMessages({
     id: `${scope}.search.label`,
     defaultMessage: 'Search',
   },
+  clearHistoryMenuItem: {
+    id: `${scope}.HistoryMenu.clearHistory`,
+    defineMessage: 'Clear history',
+  },
+  clearHistoryCancelButton: {
+    id: `${scope}.HistoryMenu.clearHistory.cancelButton`,
+    defineMessage: 'Cancel',
+  },
+  clearHistoryConfirmButton: {
+    id: `${scope}.HistoryMenu.clearHistory.confirmButton`,
+    defineMessage: 'OK',
+  },
+  clearHistoryDialogContent: {
+    id: `${scope}.HistoryMenu.clearHistory.dialogContentText`,
+    defineMessage: 'Are you sure you want to clear all winner history?',
+  },
 });
