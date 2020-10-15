@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Howl } from 'howler';
 
 import db from '../YoutubeWorker/db';
 import DialogRoot from './DialogRoot';
 import FortuneWheelImg from './fortune-wheel-inner.png';
 import FortuneWheelBorder from './fortune-wheel-outer.png';
+import WheelSound from './FortuneWheelSound.mp3';
 import RaffleDialog from './RaffleDialog';
 import RaffleWinner from './RaffleWinner';
 import WheelItem from './WheelItem';
@@ -26,10 +28,21 @@ const FortuneWheelRaffle = props => {
   const [scrollSize, setScrollSize] = useState(0);
   const [winner, setWinner] = useState(null);
   const [timer, setTimer] = useState(null);
+  const [tickSound] = useState(
+    new Howl({
+      src: [WheelSound],
+      sprite: {
+        start: [0, 5750],
+        tick: [5750, 500],
+      },
+    }),
+  );
 
   const closeImmediately = () => {
     props.onClose();
     clearTimeout(timer);
+    tickSound.stop();
+    tickSound.unload();
   };
 
   useEffect(() => {
@@ -50,6 +63,19 @@ const FortuneWheelRaffle = props => {
         setUsers(shuffled);
         setScrollSize(scroll);
         setWinner(shuffled[winnerIndex]);
+        const sId1 = tickSound.play('start');
+        tickSound.on(
+          'end',
+          () => {
+            tickSound.play('tick');
+            tickSound.loop(true);
+          },
+          sId1,
+        );
+        setTimeout(() => {
+          tickSound.stop();
+          tickSound.unload();
+        }, props.duration * 1000);
         setTimer(
           setTimeout(() => {
             props.onWin(shuffled[winnerIndex].id);
