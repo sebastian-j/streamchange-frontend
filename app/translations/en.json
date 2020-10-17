@@ -59,6 +59,8 @@
   "streamchange.components.WinnerView.loading": "Loading...",
   "streamchange.components.WinnerView.openChannel": "Open channel page",
   "streamchange,components.WinnerView.prize": "Prize",
+  "streamchange.components.WinnerView.replayBtn" : "Repeat the draw",
+  "streamchange.components.WinnerView.replayBtnTooltip" : "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
   "streamchange.components.WinnerView.saveBtn": "Save and return",
   "streamchange.components.WinnerView.title": "Winner",
   "streamchange.components.WinnerView.SubStatus.notSubscribed": "Not subscribed",

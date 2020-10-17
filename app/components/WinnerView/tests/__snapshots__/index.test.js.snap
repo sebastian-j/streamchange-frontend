@@ -1,30 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WinnerView /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
-    <FormattedMessage
-      defaultMessage="Winner"
-      id="streamchange.components.WinnerView.title"
-      values={Object {}}
-    />
-  </ForwardRef>
-  <span>
-    <FormattedMessage
-      defaultMessage="Loading..."
-      id="streamchange.components.WinnerView.loading"
-      values={Object {}}
-    />
-  </span>
-  <ForwardRef
-    onClick={[Function]}
-    type="button"
-  >
-    <FormattedMessage
-      defaultMessage="Return"
-      id="streamchange.components.WinnerView.exitBtn"
-      values={Object {}}
-    />
-  </ForwardRef>
-</ForwardRef>
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <Memo(Connect(WinnerView))
+    apiKey="key"
+    id="id"
+    onClose={[Function]}
+    ownerId="owner"
+  />
+</Context.Provider>
 `;

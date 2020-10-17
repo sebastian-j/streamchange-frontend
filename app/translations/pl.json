@@ -59,6 +59,8 @@
   "streamchange.components.WinnerView.loading": "Ładowanie...",
   "streamchange.components.WinnerView.openChannel": "Przejdź na kanał",
   "streamchange.components.WinnerView.prize": "Nagroda",
+  "streamchange.components.WinnerView.replayBtn" : "Powtórz losowanie",
+  "streamchange.components.WinnerView.replayBtnTooltip" : "Natychmiast powtarza losowanie według tych samych zasad. Zwycięzca nie zostanie zapisany w historii wygranych.",
   "streamchange.components.WinnerView.saveBtn": "Zapisz i wróć",
   "streamchange.components.WinnerView.title": "Zwycięzca",
   "streamchange.components.WinnerView.SubStatus.notSubscribed": "Nie subskrybuje",

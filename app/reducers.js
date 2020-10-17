@@ -8,6 +8,7 @@ import { connectRouter } from 'connected-react-router';
 import history from './utils/history';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
 import styleProviderReducer from './containers/StyleProvider/reducer';
+import raffleWrapperReducer from './components/RaffleWrapper/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -16,6 +17,7 @@ export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     language: languageProviderReducer,
     theme: styleProviderReducer,
+    raffleWrapper: raffleWrapperReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });

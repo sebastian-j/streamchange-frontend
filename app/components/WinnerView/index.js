@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import messages from './messages';
+import { changeVisibility } from '../RaffleWrapper/actions';
 import db from '../YoutubeWorker/db';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -61,7 +64,8 @@ const Button = styled.button`
   border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
-  padding: 3px 5px;
+  margin-top: 20px;
+  padding: 8px 5px;
   text-decoration: none;
   &:hover {
     background-color: ${props => props.theme.buttonBackgroundHover};
@@ -75,7 +79,13 @@ const MessageList = styled.ul`
   padding: 0;
 `;
 
-export default class WinnerView extends React.Component {
+const HintParagraph = styled.span`
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  display: block;
+`;
+
+export class WinnerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,6 +96,7 @@ export default class WinnerView extends React.Component {
     };
     this.getMessages = this.getMessages.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
+    this.instantReplay = this.instantReplay.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
 
@@ -121,6 +132,11 @@ export default class WinnerView extends React.Component {
       .finally(() => {
         this.props.onClose();
       });
+  }
+
+  instantReplay() {
+    this.props.onRepeat();
+    this.props.onClose();
   }
 
   handleInputValueChange(event) {
@@ -206,6 +222,17 @@ export default class WinnerView extends React.Component {
             />
           )}
         </FormattedMessage>
+        <Tooltip
+          title={
+            <HintParagraph>
+              <FormattedMessage {...messages.replayBtnTooltip} />
+            </HintParagraph>
+          }
+        >
+          <Button onClick={this.instantReplay} type="button">
+            <FormattedMessage {...messages.replayBtn} />
+          </Button>
+        </Tooltip>
         <Button onClick={this.saveAndExit} type="button">
           <FormattedMessage {...messages.saveBtn} />
         </Button>
@@ -220,4 +247,17 @@ WinnerView.propTypes = {
   ownerId: PropTypes.string.isRequired,
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  onRepeat: PropTypes.func.isRequired,
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onRepeat: () => dispatch(changeVisibility(true)),
+    dispatch,
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(WinnerView);

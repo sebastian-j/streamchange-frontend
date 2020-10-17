@@ -32,6 +32,15 @@ export default defineMessages({
     id: `${scope}.saveBtn`,
     defaultMessage: 'Save and return',
   },
+  replayBtn: {
+    id: `${scope}.replayBtn`,
+    defaultMessage: 'Repeat the draw',
+  },
+  replayBtnTooltip: {
+    id: `${scope}.replayBtnTooltip`,
+    defaultMessage:
+      "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
+  },
   notSubscribed: {
     id: `${scope}.SubStatus.notSubscribed`,
     defaultMessage: 'Not subscribed',
