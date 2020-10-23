@@ -63,6 +63,7 @@
   "streamchange.components.WinnerView.replayBtnTooltip" : "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
   "streamchange.components.WinnerView.saveBtn": "Save and return",
   "streamchange.components.WinnerView.title": "Winner",
+  "streamchange.components.WinnerView.SubStatus.disclaimer": "Status may be inaccurate. Manual check recommended.",
   "streamchange.components.WinnerView.SubStatus.notSubscribed": "Not subscribed",
   "streamchange.components.WinnerView.SubStatus.privateSub": "Subscription list private",
   "streamchange.components.WinnerView.SubStatus.subscriberFrom": "Subscribed ",
@@ -82,6 +83,7 @@
   "streamchange.containers.History.ReturnButton": "Back to giveaway",
   "streamchange.containers.History.search.label": "Search",
   "streamchange.containers.HomePage.HistoryWidget.ButtonText": "Win history",
+  "streamchange.containers.HomePage.HistoryWidget.EmptyTooltip": "Winner history is stored here. History is currently empty.",
   "streamchange.containers.HomePage.HistoryWidget.TableTitle": "Last winners",
   "streamchange.containers.HomePage.HistoryWidget.WarningText": "Storing too long history can affect app performance. Clear winner history when you no longer need it.",
   "streamchange.containers.HomePage.leaveStreamBtn": "Leave stream"

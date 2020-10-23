@@ -63,6 +63,7 @@
   "streamchange.components.WinnerView.replayBtnTooltip" : "Natychmiast powtarza losowanie według tych samych zasad. Zwycięzca nie zostanie zapisany w historii wygranych.",
   "streamchange.components.WinnerView.saveBtn": "Zapisz i wróć",
   "streamchange.components.WinnerView.title": "Zwycięzca",
+  "streamchange.components.WinnerView.SubStatus.disclaimer": "Odczyt subskrypcji może być niedokładny. Zalecane ręczne sprawdzenie.",
   "streamchange.components.WinnerView.SubStatus.notSubscribed": "Nie subskrybuje",
   "streamchange.components.WinnerView.SubStatus.privateSub": "Subskrypcje prywatne",
   "streamchange.components.WinnerView.SubStatus.subscriberFrom": "Subskrybuje od ",
@@ -82,6 +83,7 @@
   "streamchange.containers.History.ReturnButton": "Powrót do losowania",
   "streamchange.containers.History.search.label": "Wyszukaj",
   "streamchange.containers.HomePage.HistoryWidget.ButtonText": "Historia wygranych",
+  "streamchange.containers.HomePage.HistoryWidget.EmptyTooltip": "Historia wygranych jest przechowywana tutaj. Aktualnie jest pusta.",
   "streamchange.containers.HomePage.HistoryWidget.TableTitle": "Ostatni zwycięzcy",
   "streamchange.containers.HomePage.HistoryWidget.WarningText": "Przechowywanie zbyt długiej historii wygranych może spowolnić działanie strony. Rozważ wyczyszczenie historii, gdy nie będziesz jej już potrzebować.",
   "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream"

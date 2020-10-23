@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
@@ -27,6 +29,16 @@ const PrivateSubs = styled.span`
   padding-bottom: 3px;
 `;
 
+const ExtendedTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: 'rgba(225,246,246,0.95)',
+    color: 'rgb(0, 0, 0)',
+    maxWidth: '250px',
+    fontSize: theme.typography.pxToRem(15),
+    border: '1px solid #949499',
+  },
+}))(Tooltip);
+
 const SubStatus = props => {
   const [status, setStatus] = useState(null);
   const [subscriberFrom, setSubscriberFrom] = useState(null);
@@ -36,7 +48,9 @@ const SubStatus = props => {
       .get(
         `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${
           props.id
-        }&forChannelId=${props.ownerId}&key=${props.apiKey}`,
+        }&forChannelId=${props.ownerId}&fields=items/snippet/publishedAt&key=${
+          props.apiKey
+        }`,
       )
       .then(res => {
         if (res.data.items.length > 0) {
@@ -76,7 +90,18 @@ const SubStatus = props => {
   if (status === 'false') {
     return (
       <NotSubscribed>
-        <FormattedMessage {...messages.notSubscribed} />
+        <FormattedMessage {...messages.notSubscribed} />{' '}
+        <ExtendedTooltip
+          title={
+            <React.Fragment>
+              <FormattedMessage {...messages.subscriberDisclaimer} />
+            </React.Fragment>
+          }
+        >
+          <span role="img" aria-label="speech balloon">
+            💬
+          </span>
+        </ExtendedTooltip>
       </NotSubscribed>
     );
   }

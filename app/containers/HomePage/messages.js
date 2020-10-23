@@ -12,6 +12,11 @@ export default defineMessages({
     id: `${scope}.HistoryWidget.ButtonText`,
     defaultMessage: 'Win history',
   },
+  historyEmptyTooltip: {
+    id: `${scope}.HistoryWidget.EmptyTooltip`,
+    defaultMessage:
+      'Winner history is stored here. History is currently empty.',
+  },
   historyWidgetTableTitle: {
     id: `${scope}.HistoryWidget.TableTitle`,
     defaultMessage: 'Last winners',

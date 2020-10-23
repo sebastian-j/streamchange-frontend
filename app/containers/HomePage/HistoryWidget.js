@@ -73,6 +73,11 @@ const HistoryWidget = () => {
     <ExtendedTooltip
       title={
         <React.Fragment>
+          {!warning && winners.length === 0 && (
+            <WarningContent>
+              <FormattedMessage {...messages.historyEmptyTooltip} />
+            </WarningContent>
+          )}
           {warning && (
             <WarningContent>
               <FormattedMessage {...messages.historyWidgetWarningText} />
