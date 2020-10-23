@@ -42,6 +42,7 @@ export default class UserList extends React.Component {
     this.getUsers = this.getUsers.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
     this.toggleEligible = this.toggleEligible.bind(this);
+    this.clearList = this.clearList.bind(this);
   }
 
   componentDidMount() {
