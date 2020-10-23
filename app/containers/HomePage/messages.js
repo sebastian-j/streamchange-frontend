@@ -9,8 +9,17 @@ export const scope = 'streamchange.containers.HomePage';
 
 export default defineMessages({
   historyLink: {
-    id: `${scope}.historyLink`,
+    id: `${scope}.HistoryWidget.ButtonText`,
     defaultMessage: 'Win history',
+  },
+  historyWidgetTableTitle: {
+    id: `${scope}.HistoryWidget.TableTitle`,
+    defaultMessage: 'Last winners',
+  },
+  historyWidgetWarningText: {
+    id: `${scope}.HistoryWidget.WarningText`,
+    defaultMessage:
+      'Storing too long history can affect app performance. Clear winner history when you no longer need it.',
   },
   leaveStreamBtn: {
     id: `${scope}.leaveStreamBtn`,

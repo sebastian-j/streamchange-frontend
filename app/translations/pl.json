@@ -81,6 +81,8 @@
   "streamchange.containers.History.resultsPerPage": "Ilość na stronę",
   "streamchange.containers.History.ReturnButton": "Powrót do losowania",
   "streamchange.containers.History.search.label": "Wyszukaj",
-  "streamchange.containers.HomePage.historyLink": "Historia wygranych",
+  "streamchange.containers.HomePage.HistoryWidget.ButtonText": "Historia wygranych",
+  "streamchange.containers.HomePage.HistoryWidget.TableTitle": "Ostatni zwycięzcy",
+  "streamchange.containers.HomePage.HistoryWidget.WarningText": "Przechowywanie zbyt długiej historii wygranych może spowolnić działanie strony. Rozważ wyczyszczenie historii, gdy nie będziesz jej już potrzebować.",
   "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream"
 }

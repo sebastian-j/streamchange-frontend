@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -28,21 +28,6 @@ const StreamImg = styled.img`
 const StreamTitle = styled.span`
   color: ${props => props.theme.staticTextColor};
   margin-left: 10px;
-`;
-
-const LinkToHistory = styled.span`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.buttonTextColor};
-  border-radius: 4px;
-  height: 80%;
-  padding: 3px 5px;
-  margin: 10px 15px 0 0;
-  text-decoration: none;
-  &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
-  }
 `;
 
 const StyledButton = styled(Button)`
@@ -132,11 +117,7 @@ const HomePage = () => {
           </StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
-          <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
-            <LinkToHistory>
-              <FormattedMessage {...messages.historyLink} />
-            </LinkToHistory>
-          </NavLink>
+          <HistoryWidget />
           <SettingsDialog />
         </div>
       </TopBar>

@@ -81,6 +81,8 @@
   "streamchange.containers.History.resultsPerPage": "Results per page",
   "streamchange.containers.History.ReturnButton": "Back to giveaway",
   "streamchange.containers.History.search.label": "Search",
-  "streamchange.containers.HomePage.historyLink": "Win history",
+  "streamchange.containers.HomePage.HistoryWidget.ButtonText": "Win history",
+  "streamchange.containers.HomePage.HistoryWidget.TableTitle": "Last winners",
+  "streamchange.containers.HomePage.HistoryWidget.WarningText": "Storing too long history can affect app performance. Clear winner history when you no longer need it.",
   "streamchange.containers.HomePage.leaveStreamBtn": "Leave stream"
 }
