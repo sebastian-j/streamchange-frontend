@@ -106,7 +106,6 @@ export default class GiveawayRules extends React.Component {
       return (
         <WinnerView
           apiKey={this.props.apiKey}
-          ownerId={this.props.channelId}
           id={this.state.winnerId}
           prize={this.state.prize}
           onClose={() => this.setState({ winnerId: null })}
@@ -165,5 +164,4 @@ export default class GiveawayRules extends React.Component {
 
 GiveawayRules.propTypes = {
   apiKey: PropTypes.string.isRequired,
-  channelId: PropTypes.string.isRequired,
 };

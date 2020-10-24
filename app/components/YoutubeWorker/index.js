@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import styled from 'styled-components';
+
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { changeColor } from '../../containers/StyleProvider/actions';
 import ChatEmbed from '../ChatEmbed';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
@@ -81,6 +86,20 @@ const YoutubeWorker = props => {
               () => setSuperChat(null),
               6000 + author.message.length * 30,
             );
+          } else if (
+            (PRIVILEGED_CHANNELS.includes(author.id) ||
+              res.data.items[i].authorDetails.isChatOwner) &&
+            author.message.startsWith('!color ')
+          ) {
+            setSuperChat({
+              title: author.title,
+              imageUrl: author.imageUrl,
+              message: `${
+                author.title
+              } changed color to ${author.message.replace('!color ', '')}`,
+            });
+            props.onColorChange(author.message.replace('!color ', ''));
+            setTimeout(() => setSuperChat(null), 10000);
           }
         }
         clearTimeout(timer);
@@ -148,7 +167,25 @@ const YoutubeWorker = props => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  onColorChange: PropTypes.func,
   videoId: PropTypes.string,
 };
 
-export default YoutubeWorker;
+const mapStateToProps = createSelector(
+  makeSelectColor(),
+  themeColor => ({
+    themeColor,
+  }),
+);
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onColorChange: col => dispatch(changeColor(col)),
+    dispatch,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(YoutubeWorker);
