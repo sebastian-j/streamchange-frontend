@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
@@ -21,6 +27,7 @@ const NotSubscribed = styled.span`
 const PrivateSubs = styled.span`
   color: ${props => props.theme.staticTextColor};
   font-size: 0.9rem;
+  max-width: 60%;
   padding-bottom: 3px;
 `;
 
@@ -33,7 +40,9 @@ const SubStatus = props => {
       .get(
         `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${
           props.id
-        }&forChannelId=${props.ownerId}&key=${props.apiKey}`,
+        }&forChannelId=${props.ownerId}&fields=items/snippet/publishedAt&key=${
+          props.apiKey
+        }`,
       )
       .then(res => {
         if (res.data.items.length > 0) {
@@ -65,18 +74,30 @@ const SubStatus = props => {
   if (status === 'true') {
     return (
       <Subscribed>
-        Subskrybuje od&nbsp;
+        <FormattedMessage {...messages.subscriberFrom} />
         <RelativeDate ISO8601Date={subscriberFrom} />
       </Subscribed>
     );
   }
   if (status === 'false') {
-    return <NotSubscribed>Nie subskrybuje</NotSubscribed>;
+    return (
+      <NotSubscribed>
+        <FormattedMessage {...messages.notSubscribed} />
+      </NotSubscribed>
+    );
   }
   if (status === 'private') {
-    return <PrivateSubs>Subskrypcje prywatne</PrivateSubs>;
+    return (
+      <PrivateSubs>
+        <FormattedMessage {...messages.subscriberPrivate} />
+      </PrivateSubs>
+    );
   }
-  return <PrivateSubs>Nie wiadomo czy subskrybuje</PrivateSubs>;
+  return (
+    <PrivateSubs>
+      <FormattedMessage {...messages.subscriberUnknown} />
+    </PrivateSubs>
+  );
 };
 
 SubStatus.propTypes = {
@@ -85,4 +106,11 @@ SubStatus.propTypes = {
   ownerId: PropTypes.string.isRequired,
 };
 
-export default SubStatus;
+const mapStateToProps = createStructuredSelector({
+  ownerId: makeSelectOwnerId(),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(SubStatus);

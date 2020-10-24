@@ -1,106 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
-<div
-  style={
+<Context.Provider
+  value={
     Object {
-      "display": "inline-block",
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "injectedReducers": Object {},
+        "injectedSagas": Object {},
+        "replaceReducer": [Function],
+        "runSaga": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "dispatch": [Function],
+          "getState": [Function],
+          "injectedReducers": Object {},
+          "injectedSagas": Object {},
+          "replaceReducer": [Function],
+          "runSaga": [Function],
+          "subscribe": [Function],
+          Symbol(observable): [Function],
+        },
+        "unsubscribe": null,
+      },
     }
   }
 >
-  <ForwardRef
-    onClick={[Function]}
-    type="button"
-  >
-    <svg
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
-      />
-    </svg>
-  </ForwardRef>
-  <ForwardRef(WithStyles)
-    aria-labelledby="form-dialog-title"
-    onClose={[Function]}
-    open={false}
-  >
-    <ForwardRef(WithStyles)
-      id="form-dialog-title"
-    >
-      Ustawienia
-    </ForwardRef(WithStyles)>
-    <ForwardRef(WithStyles)>
-      <DarkModeSwitch />
-      <ForwardRef(WithStyles)
-        title={
-          <ForwardRef>
-            Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane wszystkie wysłane przez niego komendy na dołączenie. Może to być spam setek identycznych wiadomości, dlatego zazwyczaj lepiej zostawić pole niezaznaczone.
-          </ForwardRef>
-        }
-      >
-        <ForwardRef(WithStyles)
-          control={
-            <ForwardRef(WithStyles)
-              checked={false}
-              color="primary"
-              name="saveCommands"
-              onChange={[Function]}
-              type="checkbox"
-            />
-          }
-          label="Zapisuj wysłane komendy na dołączenie"
-        />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        title={
-          <ForwardRef>
-            Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
-          </ForwardRef>
-        }
-      >
-        <ForwardRef(WithStyles)
-          control={
-            <ForwardRef(WithStyles)
-              checked={false}
-              color="primary"
-              name="deleteWinner"
-              onChange={[Function]}
-              type="checkbox"
-            />
-          }
-          label="Usuń z listy zwycięzcę losowania"
-        />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        error={false}
-        fullWidth={true}
-        helperText={null}
-        id="abortCommand"
-        label="Komenda na rezygnację z losowania"
-        margin="normal"
-        name="abortCommand"
-        onChange={[Function]}
-        value=""
-      />
-    </ForwardRef(WithStyles)>
-    <ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        color="secondary"
-        onClick={[Function]}
-      >
-        Anuluj
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
-        color="primary"
-        onClick={[Function]}
-      >
-        Zapisz
-      </ForwardRef(WithStyles)>
-    </ForwardRef(WithStyles)>
-  </ForwardRef(WithStyles)>
-</div>
+  <Memo(Connect(SettingsDialog)) />
+</Context.Provider>
 `;

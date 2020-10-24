@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -103,7 +106,6 @@ export default class GiveawayRules extends React.Component {
       return (
         <WinnerView
           apiKey={this.props.apiKey}
-          ownerId={this.props.channelId}
           id={this.state.winnerId}
           prize={this.state.prize}
           onClose={() => this.setState({ winnerId: null })}
@@ -112,14 +114,16 @@ export default class GiveawayRules extends React.Component {
     }
     return (
       <Panel>
-        <PanelTitle>Zasady losowania</PanelTitle>
+        <PanelTitle>
+          <FormattedMessage {...messages.panelTitle} />
+        </PanelTitle>
         <UserTypeButton
           name="forMods"
           type="button"
           active={this.state.forMods}
           onClick={this.handleToggleButton}
         >
-          Moderatorzy
+          <FormattedMessage {...messages.moderators} />
         </UserTypeButton>
         <UserTypeButton
           name="forSponsors"
@@ -127,7 +131,7 @@ export default class GiveawayRules extends React.Component {
           active={this.state.forSponsors}
           onClick={this.handleToggleButton}
         >
-          Sponsorzy
+          <FormattedMessage {...messages.sponsors} />
         </UserTypeButton>
         <UserTypeButton
           name="forRegulars"
@@ -135,18 +139,22 @@ export default class GiveawayRules extends React.Component {
           active={this.state.forRegulars}
           onClick={this.handleToggleButton}
         >
-          Zwykli użytkownicy
+          <FormattedMessage {...messages.regulars} />
         </UserTypeButton>
-        <StyledTextField
-          autoFocus
-          margin="dense"
-          name="prize"
-          onChange={this.handleInputValueChange}
-          label="Nagroda (opcjonalne)"
-          type="text"
-          value={this.state.prize}
-          fullWidth
-        />
+        <FormattedMessage {...messages.prize}>
+          {label => (
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="prize"
+              onChange={this.handleInputValueChange}
+              label={label}
+              type="text"
+              value={this.state.prize}
+              fullWidth
+            />
+          )}
+        </FormattedMessage>
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
       </Panel>
@@ -156,5 +164,4 @@ export default class GiveawayRules extends React.Component {
 
 GiveawayRules.propTypes = {
   apiKey: PropTypes.string.isRequired,
-  channelId: PropTypes.string.isRequired,
 };

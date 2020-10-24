@@ -2,10 +2,164 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="WelcomeDialog__CompatibilityInfo-eofhf2-7 dzqwnO"
+  class="FirstUseScreen__Backdrop-sc-18wtu21-0 fBIFTj"
 >
+  <span
+    class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+  >
+    <span>
+      Welcome to StreamChange
+    </span>
+  </span>
+  <div
+    class="tiles-grid"
+  >
+    <span
+      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+    >
+      <span>
+        Select theme
+      </span>
+    </span>
+    <label
+      for="themeLight"
+    >
+      <input
+        checked=""
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        id="themeLight"
+        name="theme"
+        type="radio"
+        value="0"
+      />
+      <div
+        class="box FirstUseScreen__Box-sc-18wtu21-3 bPAypJ"
+      >
+        <img
+          alt="light"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          src="IMAGE_MOCK"
+        />
+        <span
+          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+        >
+          <span>
+            Light
+          </span>
+        </span>
+      </div>
+    </label>
+    <label
+      for="themeDark"
+    >
+      <input
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        id="themeDark"
+        name="theme"
+        type="radio"
+        value="1"
+      />
+      <div
+        class="box FirstUseScreen__Box-sc-18wtu21-3 kcBKzb"
+      >
+        <img
+          alt="dark"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          src="IMAGE_MOCK"
+        />
+        <span
+          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+        >
+          <span>
+            Dark
+          </span>
+        </span>
+      </div>
+    </label>
+  </div>
+  <div
+    class="tiles-grid"
+  >
+    <span
+      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+    >
+      <span>
+        Select language
+      </span>
+    </span>
+    <label
+      for="pl"
+    >
+      <input
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        id="pl"
+        name="language"
+        type="radio"
+        value="pl"
+      />
+      <div
+        class="box FirstUseScreen__LangBox-sc-18wtu21-4 iFLZEI"
+      >
+        <span
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+        >
+          <img
+            alt="pl"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            src="IMAGE_MOCK"
+          />
+          <span>
+            pl
+          </span>
+        </span>
+      </div>
+    </label>
+    <label
+      for="en"
+    >
+      <input
+        checked=""
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        id="en"
+        name="language"
+        type="radio"
+        value="en"
+      />
+      <div
+        class="box FirstUseScreen__LangBox-sc-18wtu21-4 hsnTTl"
+      >
+        <span
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+        >
+          <img
+            alt="en"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            src="IMAGE_MOCK"
+          />
+          <span>
+            en
+          </span>
+        </span>
+      </div>
+    </label>
+  </div>
   <div>
-    Aplikacja działa wyłącznie w Google Chrome
+    <button
+      class="MuiButtonBase-root MuiButton-root FirstUseScreen__StyledButton-sc-18wtu21-9 eyFmjv MuiButton-text"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span>
+          Save
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
 </div>
 `;

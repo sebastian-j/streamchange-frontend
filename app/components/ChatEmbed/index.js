@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
+import messages from './messages';
 
 const ChatFrame = styled.iframe`
   border: none;
@@ -13,7 +16,9 @@ const ChatFrame = styled.iframe`
 function ChatEmbed(props) {
   return (
     <Panel>
-      <PanelTitle>Czat</PanelTitle>
+      <PanelTitle>
+        <FormattedMessage {...messages.panelTitle} />
+      </PanelTitle>
       <ChatFrame
         className="chat-frame"
         title="Youtube Chat"

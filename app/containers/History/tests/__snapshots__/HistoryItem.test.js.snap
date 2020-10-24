@@ -42,6 +42,7 @@ exports[`<HistoryItem /> should render and match the snapshot 1`] = `
   >
     <RelativeDate
       ISO8601Date="2019-12-24T07:27:56.273Z"
+      className="relativeDate"
     />
   </ForwardRef>
 </ForwardRef>

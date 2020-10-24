@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,12 +13,18 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import messages from './messages';
+import ColorPicker from '../ColorPicker';
 import DarkModeSwitch from './DarkModeSwitch';
+import LocaleToggle from './LocaleToggle';
+import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { changeColor } from '../../containers/StyleProvider/actions';
 
 const SettingsButton = styled.button`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
-  color: ${props => props.theme.buttonTextColor};
+  border: 1px solid ${props => props.theme.color};
+  color: ${props => props.theme.color};
   border-radius: 4px;
   height: 80%;
   padding: 3px 5px;
@@ -32,8 +42,9 @@ const HintParagraph = styled.span`
   display: block;
 `;
 
-const SettingsDialog = () => {
+const SettingsDialog = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const [themeColor, setThemeColor] = useState(props.themeColor);
   const [saveCommands, setSaveCommands] = useState(false);
   const [deleteWinner, setDeleteWinner] = useState(false);
   const [abortCommand, setAbortCommand] = useState('');
@@ -47,11 +58,17 @@ const SettingsDialog = () => {
     setIsOpen(false);
   };
 
+  const changeThemeColor = value => {
+    setThemeColor(value);
+  };
+
   const saveSettings = () => {
+    props.onColorChange(themeColor);
     if (localStorage.getItem('keyword') === abortCommand) {
       setError('Komendy na rezygnację i dołączenie muszą być różne.');
       return;
     }
+    localStorage.setItem('themeColor', themeColor);
     localStorage.setItem('gv-saveCommands', String(saveCommands));
     localStorage.setItem('gv-deleteWinner', String(deleteWinner));
     localStorage.setItem('gv-abortCommand', String(abortCommand));
@@ -62,6 +79,7 @@ const SettingsDialog = () => {
     setSaveCommands(localStorage.getItem('gv-saveCommands') === 'true');
     setDeleteWinner(localStorage.getItem('gv-deleteWinner') === 'true');
     setAbortCommand(localStorage.getItem('gv-abortCommand'));
+    setThemeColor(localStorage.getItem('themeColor') || '#0094ff');
   }, []);
 
   return (
@@ -81,73 +99,99 @@ const SettingsDialog = () => {
         onClose={closeDialog}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Ustawienia</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          <FormattedMessage {...messages.dialogTitle} />
+        </DialogTitle>
         <DialogContent>
           <DarkModeSwitch />
-          <Tooltip
-            title={
-              <HintParagraph>
-                Gdy zaznaczone, w widoku czatu zwycięzcy będą wyświetlane
-                wszystkie wysłane przez niego komendy na dołączenie. Może to być
-                spam setek identycznych wiadomości, dlatego zazwyczaj lepiej
-                zostawić pole niezaznaczone.
-              </HintParagraph>
-            }
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={saveCommands}
-                  onChange={event => setSaveCommands(event.target.checked)}
-                  color="primary"
-                  name="saveCommands"
-                  type="checkbox"
+          <FormattedMessage {...messages.themeColor}>
+            {label => (
+              <ColorPicker
+                color={themeColor}
+                handleChange={(name, value) => changeThemeColor(value)}
+                label={label}
+                name="themeColor"
+              />
+            )}
+          </FormattedMessage>
+          <LocaleToggle />
+          <div>
+            <FormattedMessage {...messages.saveCommandsLabel}>
+              {label => (
+                <Tooltip
+                  title={
+                    <HintParagraph>
+                      <FormattedMessage {...messages.saveCommandsHint} />
+                    </HintParagraph>
+                  }
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={saveCommands}
+                        onChange={event =>
+                          setSaveCommands(event.target.checked)
+                        }
+                        color="primary"
+                        name="saveCommands"
+                        type="checkbox"
+                      />
+                    }
+                    label={label}
+                  />
+                </Tooltip>
+              )}
+            </FormattedMessage>
+          </div>
+          <FormattedMessage {...messages.deleteWinnerLabel}>
+            {label => (
+              <Tooltip
+                title={
+                  <HintParagraph>
+                    <FormattedMessage {...messages.deleteWinnerHint} />
+                  </HintParagraph>
+                }
+              >
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={deleteWinner}
+                      onChange={event => setDeleteWinner(event.target.checked)}
+                      color="primary"
+                      name="deleteWinner"
+                      type="checkbox"
+                    />
+                  }
+                  label={label}
                 />
-              }
-              label="Zapisuj wysłane komendy na dołączenie"
-            />
-          </Tooltip>
-          <Tooltip
-            title={
-              <HintParagraph>
-                Osoba, która wygrała losowanie, nie bierze udziału w kolejnym.
-              </HintParagraph>
-            }
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={deleteWinner}
-                  onChange={event => setDeleteWinner(event.target.checked)}
-                  color="primary"
-                  name="deleteWinner"
-                  type="checkbox"
-                />
-              }
-              label="Usuń z listy zwycięzcę losowania"
-            />
-          </Tooltip>
-          <TextField
-            error={!!error}
-            id="abortCommand"
-            name="abortCommand"
-            label="Komenda na rezygnację z losowania"
-            value={abortCommand}
-            onChange={event => {
-              setAbortCommand(event.target.value);
-              setError(null);
-            }}
-            fullWidth
-            margin="normal"
-            helperText={error}
-          />
+              </Tooltip>
+            )}
+          </FormattedMessage>
+          <FormattedMessage {...messages.resignationCommand}>
+            {label => (
+              <TextField
+                error={!!error}
+                id="abortCommand"
+                name="abortCommand"
+                label={label}
+                value={abortCommand}
+                onChange={event => {
+                  setAbortCommand(event.target.value);
+                  setError(null);
+                }}
+                fullWidth
+                margin="normal"
+                helperText={error}
+              />
+            )}
+          </FormattedMessage>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDialog} color="secondary">
-            Anuluj
+            <FormattedMessage {...messages.cancelBtn} />
           </Button>
           <Button onClick={saveSettings} color="primary">
-            Zapisz
+            <FormattedMessage {...messages.saveBtn} />
           </Button>
         </DialogActions>
       </Dialog>
@@ -155,4 +199,26 @@ const SettingsDialog = () => {
   );
 };
 
-export default SettingsDialog;
+SettingsDialog.propTypes = {
+  onColorChange: PropTypes.func,
+  themeColor: PropTypes.string,
+};
+
+const mapStateToProps = createSelector(
+  makeSelectColor(),
+  themeColor => ({
+    themeColor,
+  }),
+);
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onColorChange: col => dispatch(changeColor(col)),
+    dispatch,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsDialog);

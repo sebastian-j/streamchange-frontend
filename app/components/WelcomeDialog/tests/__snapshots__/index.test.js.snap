@@ -5,21 +5,20 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
   <ForwardRef>
     <ForwardRef>
       <ForwardRef>
-        Wybierz, na którym streamie organizujesz giveaway
+        <FormattedMessage
+          defaultMessage="Choose stream"
+          id="streamchange.components.WelcomeDialog.title"
+          values={Object {}}
+        />
       </ForwardRef>
       <ForwardRef>
-        <ForwardRef(WithStyles)
-          autoFocus={true}
-          fullWidth={true}
-          id="videoLink"
-          label="Wklej link do streama"
-          margin="dense"
-          name="videoLink"
-          onChange={[Function]}
-          onKeyPress={[Function]}
-          type="text"
-          value=""
-        />
+        <FormattedMessage
+          defaultMessage="Paste stream url"
+          id="streamchange.components.WelcomeDialog.videoInput.label"
+          values={Object {}}
+        >
+          [Function]
+        </FormattedMessage>
         <ForwardRef>
           <span
             style={
@@ -28,7 +27,11 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
               }
             }
           >
-            Przykład: https://www.youtube.com/watch?v=CBUBY45me_A
+            <FormattedMessage
+              defaultMessage="Example: https://www.youtube.com/watch?v=CBUBY45me_A"
+              id="streamchange.components.WelcomeDialog.example"
+              values={Object {}}
+            />
           </span>
         </ForwardRef>
       </ForwardRef>
@@ -37,7 +40,11 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
           color="primary"
           onClick={[Function]}
         >
-          Dalej
+          <FormattedMessage
+            defaultMessage="OK"
+            id="streamchange.components.WelcomeDialog.saveBtn"
+            values={Object {}}
+          />
         </ForwardRef(WithStyles)>
       </ForwardRef>
     </ForwardRef>

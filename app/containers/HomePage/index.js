@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
+import {
+  makeSelectOwnerId,
+  makeSelectThumbnailUrl,
+  makeSelectTitle,
+  makeSelectVideoId,
+} from './selectors';
+import {
+  changeOwnerId,
+  changeThumbnailUrl,
+  changeTitle,
+  changeVideoId,
+} from './actions';
+import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -27,33 +45,15 @@ const StreamTitle = styled.span`
   margin-left: 10px;
 `;
 
-const LinkToHistory = styled.span`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
-  color: ${props => props.theme.buttonTextColor};
-  border-radius: 4px;
-  height: 80%;
-  padding: 3px 5px;
-  margin: 10px 15px 0 0;
-  text-decoration: none;
-  &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
-  }
-`;
-
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.materialButtonColor};
+    color: ${props => props.theme.color};
   }
 `;
 
-const HomePage = () => {
-  const [channelId, setChannelId] = useState('');
+const HomePage = props => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
-  const [thumbnailUrl, setThumbnailUrl] = useState('');
-  const [liveChatId, setLiveChatId] = useState('');
   const [error, setError] = useState(null);
 
   const receiveVideo = videoLink => {
@@ -64,15 +64,15 @@ const HomePage = () => {
         .split('/')[0];
       launchWorker(vidId);
     } else {
-      setError('To nie jest link do live streama ani filmu na Youtube.');
+      setError('invalidUrl');
     }
   };
 
   const leaveStream = () => {
+    props.changeOwnerId('');
     setVideoId('');
     setTitle('');
-    setLiveChatId('');
-    setThumbnailUrl('');
+    props.changeThumbnail('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
   };
@@ -84,16 +84,15 @@ const HomePage = () => {
       )
       .then(res => {
         if (res.data.items.length === 0) {
-          setError('Nie ma takiego streama. Link jest błędny.');
+          setError('notVideo');
         } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
-          setError('To jest link do zwykłego filmu. Wklej link do streama');
+          setError('notStream');
         } else {
           const stream = res.data.items[0];
           setVideoId(vidId);
-          setChannelId(stream.snippet.channelId);
+          props.changeOwnerId(stream.snippet.channelId);
           setTitle(stream.snippet.title);
-          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
-          setLiveChatId(stream.liveStreamingDetails.activeLiveChatId);
+          props.changeThumbnail(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
           axios.get(
             `${TELEMETRY_URL}?id=${vidId}&channelId=${
@@ -103,10 +102,18 @@ const HomePage = () => {
         }
       })
       .catch(err => {
-        if (err.response.data && err.response.data.error) {
+        if (err.response && err.response.data && err.response.data.error) {
           if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
-            setError('Limit quota został wyczerpany.');
+            setError('quotaExceeded');
           }
+        } else {
+          setVideoId(vidId);
+          props.changeOwnerId('');
+          setTitle('Tytuł nieznany');
+          props.changeThumbnail(
+            'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+          );
+          sessionStorage.setItem('gv-videoId', vidId);
         }
       });
   };
@@ -125,25 +132,51 @@ const HomePage = () => {
     <div>
       <TopBar>
         <StreamInfo>
-          <StreamImg alt="Miniatura" src={thumbnailUrl} />
+          <StreamImg alt="Miniatura" src={props.thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
-          <StyledButton onClick={leaveStream}>Opuść stream</StyledButton>
+          <StyledButton onClick={leaveStream}>
+            <FormattedMessage {...messages.leaveStreamBtn} />
+          </StyledButton>
         </StreamInfo>
         <div style={{ display: 'block' }}>
-          <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
-            <LinkToHistory>Historia wygranych</LinkToHistory>
-          </NavLink>
+          <HistoryWidget />
           <SettingsDialog />
         </div>
       </TopBar>
-      <YoutubeWorker
-        channelId={channelId}
-        liveChatId={liveChatId}
-        videoId={videoId}
-        apiKey={API_KEY}
-      />
+      <YoutubeWorker videoId={videoId} apiKey={API_KEY} />
     </div>
   );
 };
 
-export default HomePage;
+HomePage.propTypes = {
+  changeOwnerId: PropTypes.func.isRequired,
+  changeThumbnail: PropTypes.func.isRequired,
+  changeTitle: PropTypes.func.isRequired,
+  changeVideoId: PropTypes.func.isRequired,
+  ownerId: PropTypes.string.isRequired,
+  thumbnailUrl: PropTypes.string,
+  title: PropTypes.string,
+  videoId: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  ownerId: makeSelectOwnerId(),
+  thumbnailUrl: makeSelectThumbnailUrl(),
+  title: makeSelectTitle(),
+  videoId: makeSelectVideoId(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    changeOwnerId: id => dispatch(changeOwnerId(id)),
+    changeThumbnail: url => dispatch(changeThumbnailUrl(url)),
+    changeTitle: t => dispatch(changeTitle(t)),
+    changeVideoId: id => dispatch(changeVideoId(id)),
+    dispatch,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomePage);

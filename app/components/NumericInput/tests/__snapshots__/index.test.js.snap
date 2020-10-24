@@ -10,9 +10,11 @@ exports[`<NumericInput /> should render and match the snapshot 1`] = `
   >
     -
   </ForwardRef>
-  <ForwardRef>
-    0
-  </ForwardRef>
+  <ForwardRef
+    onBlur={[Function]}
+    onChange={[Function]}
+    value={0}
+  />
   <ForwardRef
     onClick={[Function]}
     type="button"

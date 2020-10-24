@@ -15,7 +15,11 @@ exports[`<History /> should render and match the snapshot 1`] = `
       }
     }
   >
-    Ładowanie listy
+    <FormattedMessage
+      defaultMessage="Loading history"
+      id="streamchange.containers.History.info.loading"
+      values={Object {}}
+    />
   </div>
 </ForwardRef>
 `;

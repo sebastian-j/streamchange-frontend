@@ -1,14 +1,27 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux';
+import renderer from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
 
 import RaffleWrapper from '../index';
 
-const renderer = new ShallowRenderer();
+const mockStore = configureStore([]);
 
 describe('<RaffleWrapper />', () => {
+  let store;
+  beforeEach(() => {
+    store = mockStore({
+      isOpen: false,
+    });
+  });
   it('should render and match the snapshot', () => {
-    renderer.render(<RaffleWrapper onWin={() => 0} />);
-    const renderedOutput = renderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const renderedComponent = renderer
+      .create(
+        <Provider store={store}>
+          <RaffleWrapper onWin={() => 0} />
+        </Provider>,
+      )
+      .toJSON();
+    expect(renderedComponent).toMatchSnapshot();
   });
 });

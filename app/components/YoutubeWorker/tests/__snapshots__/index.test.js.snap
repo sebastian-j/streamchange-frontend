@@ -10,16 +10,18 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Uczestnicy
+      <span>
+        Users
+      </span>
     </h2>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
       >
-        Wyszukaj
+        Search
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
@@ -64,7 +66,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       <span
         className="MuiButton-label"
       >
-        Wyczyść listę
+        <span>
+          Clear all
+        </span>
       </span>
       <span
         className="MuiTouchRipple-root"
@@ -73,12 +77,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <span
       className="UserList__Counts-sc-7bgn44-3 hhpEOQ"
     >
-      Bierze udział
-       
-      0
-       z
-       
-      0
+      <span>
+        0 out of 0 are participating
+      </span>
     </span>
   </div>
   <div
@@ -87,7 +88,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Zasady losowania
+      <span>
+        Giveaway rules
+      </span>
     </h2>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -95,7 +98,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Moderatorzy
+      <span>
+        Moderators
+      </span>
     </button>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -103,7 +108,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Sponsorzy
+      <span>
+        Sponsors
+      </span>
     </button>
     <button
       className="GiveawayRules__UserTypeButton-sc-142hb20-0 bmMAMZ"
@@ -111,16 +118,18 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Zwykli użytkownicy
+      <span>
+        Regulars
+      </span>
     </button>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
       >
-        Nagroda (opcjonalne)
+        Prize (optional)
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
@@ -142,14 +151,14 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dczFRm MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
         htmlFor="keyword"
       >
-        Słowo kluczowe
+        Keyword
       </label>
       <div
         className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense"
@@ -175,7 +184,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           <button
             aria-describedby={null}
             aria-label="toggle keyword visibility"
-            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 jmnecv"
+            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ejSEdz"
             name="showKeyword"
             onBlur={[Function]}
             onClick={[Function]}
@@ -184,7 +193,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
             onMouseOver={[Function]}
             onTouchEnd={[Function]}
             onTouchStart={[Function]}
-            title="Ukryj lub odsłoń słowo kluczowe"
+            title="Toggle keyword visibility"
             type="button"
           >
             <svg
@@ -206,27 +215,75 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     </div>
     <div>
       <div
+        className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 jqDDzA MuiFormControl-marginNormal"
+      >
+        <label
+          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+          data-shrink={true}
+          id="animation-select"
+        >
+          <span>
+            Animation
+          </span>
+        </label>
+        <div
+          className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          onClick={[Function]}
+        >
+          <div
+            aria-haspopup="listbox"
+            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <span>
+              CS:GO case opening
+            </span>
+          </div>
+          <input
+            type="hidden"
+            value={0}
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root MuiSelect-icon"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
         className="NumericInput__Container-sc-2ueyqw-0 iGHMIM"
       >
         <div
           className="NumericInput__Label-sc-2ueyqw-1 fqrMbr"
         >
-          Czas trwania animacji (sekundy)
+          Animation duration (seconds)
         </div>
         <button
-          className="NumericInput__Button-sc-2ueyqw-2 jSXsrE"
+          className="NumericInput__Button-sc-2ueyqw-2 iASXYJ"
           onClick={[Function]}
           type="button"
         >
           -
         </button>
-        <div
-          className="NumericInput__NumberDisplay-sc-2ueyqw-3 cTjqhA"
-        >
-          7
-        </div>
+        <input
+          className="NumericInput__NumberDisplay-sc-2ueyqw-3 iputsX"
+          onBlur={[Function]}
+          onChange={[Function]}
+          value={7}
+        />
         <button
-          className="NumericInput__Button-sc-2ueyqw-2 bqvYTn"
+          className="NumericInput__Button-sc-2ueyqw-2 hSxBBT"
           onClick={[Function]}
           type="button"
         >
@@ -234,12 +291,14 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         </button>
       </div>
       <button
-        className="RaffleWrapper__StartButton-emso03-0 hsCXbs"
+        className="RaffleWrapper__StartButton-emso03-0 elFpup"
         disabled={false}
         onClick={[Function]}
         type="button"
       >
-        Losuj
+        <span>
+          Roll it!
+        </span>
       </button>
     </div>
   </div>
@@ -249,7 +308,9 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     <h2
       className="PanelTitle-sc-100fqnu-0 dfyaea"
     >
-      Czat
+      <span>
+        Chat
+      </span>
     </h2>
     <iframe
       className="chat-frame ChatEmbed__ChatFrame-g1101a-0 bRtIsU"

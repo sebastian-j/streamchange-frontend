@@ -1,22 +1,27 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router-dom';
 
 import SettingsDialog from '../index';
+import configureStore from '../../../configureStore';
 
 const renderer = new ShallowRenderer();
 
 describe('<SettingsDialog />', () => {
-  it('should render and match the snapshot', () => {
-    renderer.render(<SettingsDialog />);
-    const renderedOutput = renderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+  let store;
+
+  beforeAll(() => {
+    store = configureStore({}, browserHistory);
   });
 
-  it('should open dialog', () => {
-    const wrapper = mount(<SettingsDialog />);
-    expect(wrapper.find('div [role="presentation"]')).toHaveLength(0);
-    wrapper.find('button').simulate('click');
-    expect(wrapper.find('div [role="presentation"]')).toHaveLength(3);
+  it('should render and match the snapshot', () => {
+    renderer.render(
+      <Provider store={store}>
+        <SettingsDialog />
+      </Provider>,
+    );
+    const renderedOutput = renderer.getRenderOutput();
+    expect(renderedOutput).toMatchSnapshot();
   });
 });

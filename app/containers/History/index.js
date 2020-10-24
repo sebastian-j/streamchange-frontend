@@ -7,8 +7,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 import StyledTextField from '../../components/StyledTextField';
+import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
 
 const PageWrapper = styled.div`
@@ -19,13 +23,20 @@ const PageWrapper = styled.div`
   width: 100%;
 `;
 
-const ReturnButton = styled.div`
+const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ReturnButton = styled(NavLink)`
+  display: block;
   color: ${props => props.theme.staticTextColor};
+  flex-grow: 1;
   line-height: 48px;
   min-height: 48px;
+  text-decoration: none;
   & span {
     margin-left: 24px;
-    text-decoration: none;
   }
   &:hover {
     background: rgba(0, 0, 0, 0.2);
@@ -143,7 +154,11 @@ export default class History extends React.Component {
 
   render() {
     if (this.state.error) {
-      return <div>Nie udało się załadować listy.</div>;
+      return (
+        <div>
+          <FormattedMessage {...messages.infoError} />
+        </div>
+      );
     }
     if (!this.state.isLoaded) {
       return (
@@ -159,40 +174,49 @@ export default class History extends React.Component {
               textAlign: 'center',
             }}
           >
-            Ładowanie listy
+            <FormattedMessage {...messages.infoLoading} />
           </div>
         </PageWrapper>
       );
     }
     return (
       <PageWrapper>
-        <NavLink to="/giveaway" activeClassName="active">
-          <ReturnButton>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-            <span>Powrót do losowania</span>
+        <Header>
+          <ReturnButton to="/giveaway" activeClassName="active">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              <span>
+                <FormattedMessage {...messages.returnButton} />
+              </span>
+            </div>
           </ReturnButton>
-        </NavLink>
-        <StyledTextField
-          id="search"
-          name="search"
-          label="Wyszukaj"
-          value={this.state.search}
-          onChange={this.handleChange}
-          type="text"
-          margin="normal"
-          fullWidth
-        />
+          <HistoryMenu onClear={this.getHistory} />
+        </Header>
+        <FormattedMessage {...messages.searchLabel}>
+          {label => (
+            <StyledTextField
+              id="search"
+              name="search"
+              label={label}
+              value={this.state.search}
+              onChange={this.handleChange}
+              type="text"
+              margin="normal"
+              fullWidth
+            />
+          )}
+        </FormattedMessage>
         {this.state.search.length > 0 && this.state.items.length === 0 && (
           <Information>
-            Żaden kanał nie pasuje do wyszukiwanego słowa.
+            <FormattedMessage {...messages.infoNoResults} />
           </Information>
         )}
         {this.state.items.length > 0 && (
@@ -236,7 +260,9 @@ export default class History extends React.Component {
             </IconButton>
           )}
           <StyledFormControl>
-            <InputLabel htmlFor="age-simple">Ilość na stronę</InputLabel>
+            <InputLabel htmlFor="maxResults">
+              <FormattedMessage {...messages.resultsPerPage} />
+            </InputLabel>
             <Select
               value={this.state.maxResults}
               onChange={this.handleChange}

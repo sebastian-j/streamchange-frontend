@@ -2,20 +2,91 @@
 
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
-  <NumericInput
-    label="Czas trwania animacji (sekundy)"
-    maxValue={null}
-    minValue={1}
-    onChange={[Function]}
-    step={1}
-    value={7}
-  />
-  <ForwardRef
+  <div
+    className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 jqDDzA MuiFormControl-marginNormal"
+  >
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+      data-shrink={true}
+      id="animation-select"
+    >
+      <span>
+        Animation
+      </span>
+    </label>
+    <div
+      className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      onClick={[Function]}
+    >
+      <div
+        aria-haspopup="listbox"
+        className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <span>
+          CS:GO case opening
+        </span>
+      </div>
+      <input
+        type="hidden"
+        value={0}
+      />
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root MuiSelect-icon"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    className="NumericInput__Container-sc-2ueyqw-0 iGHMIM"
+  >
+    <div
+      className="NumericInput__Label-sc-2ueyqw-1 fqrMbr"
+    >
+      Animation duration (seconds)
+    </div>
+    <button
+      className="NumericInput__Button-sc-2ueyqw-2 iASXYJ"
+      onClick={[Function]}
+      type="button"
+    >
+      -
+    </button>
+    <input
+      className="NumericInput__NumberDisplay-sc-2ueyqw-3 iputsX"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value={7}
+    />
+    <button
+      className="NumericInput__Button-sc-2ueyqw-2 hSxBBT"
+      onClick={[Function]}
+      type="button"
+    >
+      +
+    </button>
+  </div>
+  <button
+    className="RaffleWrapper__StartButton-emso03-0 elFpup"
     disabled={false}
     onClick={[Function]}
     type="button"
   >
-    Losuj
-  </ForwardRef>
+    <span>
+      Roll it!
+    </span>
+  </button>
 </div>
 `;

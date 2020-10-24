@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import messages from './messages';
+import { changeVisibility } from '../RaffleWrapper/actions';
 import db from '../YoutubeWorker/db';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -42,7 +48,7 @@ const WinnerTitle = styled.span`
 
 const ChannelLink = styled.a`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
   padding: 3px 5px;
@@ -55,10 +61,11 @@ const ChannelLink = styled.a`
 
 const Button = styled.button`
   background: ${props => props.theme.buttonBackground};
-  border: 1px solid #0059a3;
+  border: 1px solid ${props => props.theme.color};
   color: ${props => props.theme.buttonTextColor};
   border-radius: 4px;
-  padding: 3px 5px;
+  margin-top: 20px;
+  padding: 8px 5px;
   text-decoration: none;
   &:hover {
     background-color: ${props => props.theme.buttonBackgroundHover};
@@ -72,7 +79,13 @@ const MessageList = styled.ul`
   padding: 0;
 `;
 
-export default class WinnerView extends React.Component {
+const HintParagraph = styled.span`
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  display: block;
+`;
+
+export class WinnerView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,6 +96,7 @@ export default class WinnerView extends React.Component {
     };
     this.getMessages = this.getMessages.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
+    this.instantReplay = this.instantReplay.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
   }
 
@@ -120,6 +134,11 @@ export default class WinnerView extends React.Component {
       });
   }
 
+  instantReplay() {
+    this.props.onRepeat();
+    this.props.onClose();
+  }
+
   handleInputValueChange(event) {
     const { target } = event;
     const { value } = target;
@@ -149,31 +168,33 @@ export default class WinnerView extends React.Component {
     if (!this.state.user) {
       return (
         <WinnerPanel>
-          <PanelTitle>Zwycięzca</PanelTitle>
-          <span>Ładowanie...</span>
+          <PanelTitle>
+            <FormattedMessage {...messages.panelTitle} />
+          </PanelTitle>
+          <span>
+            <FormattedMessage {...messages.loading} />
+          </span>
           <Button onClick={this.props.onClose} type="button">
-            Powrót
+            <FormattedMessage {...messages.exitBtn} />
           </Button>
         </WinnerPanel>
       );
     }
     return (
       <WinnerPanel>
-        <PanelTitle>Zwycięzca</PanelTitle>
+        <PanelTitle>
+          <FormattedMessage {...messages.panelTitle} />
+        </PanelTitle>
         <WinnerHeading>
           <Logo alt="logo" src={this.state.user.imageUrl} />
           <WinnerInfo>
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
-            <SubStatus
-              apiKey={this.props.apiKey}
-              id={this.props.id}
-              ownerId={this.props.ownerId}
-            />
+            <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
             <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
             >
-              Przejdź na kanał
+              <FormattedMessage {...messages.openChannel} />
             </ChannelLink>
           </WinnerInfo>
           <Timer />
@@ -183,18 +204,33 @@ export default class WinnerView extends React.Component {
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
         </MessageList>
-        <StyledTextField
-          autoFocus
-          margin="dense"
-          name="prize"
-          onChange={this.handleInputValueChange}
-          label="Nagroda"
-          type="text"
-          value={this.state.prize}
-          fullWidth
-        />
+        <FormattedMessage {...messages.prize}>
+          {label => (
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="prize"
+              onChange={this.handleInputValueChange}
+              label={label}
+              type="text"
+              value={this.state.prize}
+              fullWidth
+            />
+          )}
+        </FormattedMessage>
+        <Tooltip
+          title={
+            <HintParagraph>
+              <FormattedMessage {...messages.replayBtnTooltip} />
+            </HintParagraph>
+          }
+        >
+          <Button onClick={this.instantReplay} type="button">
+            <FormattedMessage {...messages.replayBtn} />
+          </Button>
+        </Tooltip>
         <Button onClick={this.saveAndExit} type="button">
-          Zapisz i wróć
+          <FormattedMessage {...messages.saveBtn} />
         </Button>
       </WinnerPanel>
     );
@@ -204,7 +240,19 @@ export default class WinnerView extends React.Component {
 WinnerView.propTypes = {
   apiKey: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  onRepeat: PropTypes.func.isRequired,
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onRepeat: () => dispatch(changeVisibility(true)),
+    dispatch,
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(WinnerView);

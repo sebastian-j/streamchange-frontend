@@ -5,15 +5,18 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
   <ForwardRef
     onClick={[Function]}
   >
-    <img
+    <ForwardRef
       alt="light bulb"
-      height="140px"
-      src="/static/light-bulb.png"
+      src="IMAGE_MOCK"
     />
   </ForwardRef>
   <div>
     <ForwardRef>
-      Czy wiesz, że...
+      <FormattedMessage
+        defaultMessage="Did you know..."
+        id="streamchange.components.WelcomeDialog.WelcomeHint.title"
+        values={Object {}}
+      />
     </ForwardRef>
     <ForwardRef>
       

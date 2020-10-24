@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
+import LightBulbImg from './light-bulb.png';
+import messages from './messages';
 import { HINTS } from '../../config';
 
 const Wrapper = styled.div`
@@ -32,6 +36,10 @@ const Button = styled.button`
   outline: none;
 `;
 
+const Image = styled.img`
+  height: 140px;
+`;
+
 const WelcomeHint = () => {
   const [hint, setHint] = useState('');
 
@@ -46,10 +54,12 @@ const WelcomeHint = () => {
   return (
     <Wrapper>
       <Button onClick={changeHint}>
-        <img src="/static/light-bulb.png" height="140px" alt="light bulb" />
+        <Image src={LightBulbImg} alt="light bulb" />
       </Button>
       <div>
-        <DialogTitle>Czy wiesz, że...</DialogTitle>
+        <DialogTitle>
+          <FormattedMessage {...messages.hintTitle} />
+        </DialogTitle>
         <DialogContent>{hint}</DialogContent>
       </div>
     </Wrapper>
