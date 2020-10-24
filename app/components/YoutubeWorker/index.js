@@ -133,7 +133,7 @@ const YoutubeWorker = props => {
   return (
     <ThreeSections>
       <UserList />
-      <GiveawayRules apiKey={props.apiKey} channelId={props.channelId} />
+      <GiveawayRules apiKey={props.apiKey} />
       <ChatEmbed videoId={props.videoId} />
       {superChat && (
         <SuperChat
@@ -148,7 +148,6 @@ const YoutubeWorker = props => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
-  channelId: PropTypes.string.isRequired,
   videoId: PropTypes.string,
 };
 

@@ -45,10 +45,6 @@ export default defineMessages({
     id: `${scope}.SubStatus.notSubscribed`,
     defaultMessage: 'Not subscribed',
   },
-  subscriberDisclaimer: {
-    id: `${scope}.SubStatus.disclaimer`,
-    defaultMessage: 'Status may be inaccurate. Manual check recommended.',
-  },
   subscriberPrivate: {
     id: `${scope}.SubStatus.privateSub`,
     defaultMessage: 'Subscription list private',

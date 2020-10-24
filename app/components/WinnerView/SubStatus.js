@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
@@ -26,18 +27,9 @@ const NotSubscribed = styled.span`
 const PrivateSubs = styled.span`
   color: ${props => props.theme.staticTextColor};
   font-size: 0.9rem;
+  max-width: 60%;
   padding-bottom: 3px;
 `;
-
-const ExtendedTooltip = withStyles(theme => ({
-  tooltip: {
-    backgroundColor: 'rgba(225,246,246,0.95)',
-    color: 'rgb(0, 0, 0)',
-    maxWidth: '250px',
-    fontSize: theme.typography.pxToRem(15),
-    border: '1px solid #949499',
-  },
-}))(Tooltip);
 
 const SubStatus = props => {
   const [status, setStatus] = useState(null);
@@ -90,18 +82,7 @@ const SubStatus = props => {
   if (status === 'false') {
     return (
       <NotSubscribed>
-        <FormattedMessage {...messages.notSubscribed} />{' '}
-        <ExtendedTooltip
-          title={
-            <React.Fragment>
-              <FormattedMessage {...messages.subscriberDisclaimer} />
-            </React.Fragment>
-          }
-        >
-          <span role="img" aria-label="speech balloon">
-            💬
-          </span>
-        </ExtendedTooltip>
+        <FormattedMessage {...messages.notSubscribed} />
       </NotSubscribed>
     );
   }
@@ -125,4 +106,11 @@ SubStatus.propTypes = {
   ownerId: PropTypes.string.isRequired,
 };
 
-export default SubStatus;
+const mapStateToProps = createStructuredSelector({
+  ownerId: makeSelectOwnerId(),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(SubStatus);

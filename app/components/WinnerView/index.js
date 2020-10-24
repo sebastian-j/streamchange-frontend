@@ -189,11 +189,7 @@ export class WinnerView extends React.Component {
           <Logo alt="logo" src={this.state.user.imageUrl} />
           <WinnerInfo>
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
-            <SubStatus
-              apiKey={this.props.apiKey}
-              id={this.props.id}
-              ownerId={this.props.ownerId}
-            />
+            <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
             <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
@@ -244,7 +240,6 @@ export class WinnerView extends React.Component {
 WinnerView.propTypes = {
   apiKey: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
