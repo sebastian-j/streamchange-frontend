@@ -46,9 +46,9 @@ const YoutubeWorker = props => {
             message: res.data.items[i].snippet.displayMessage,
             isModerator: res.data.items[i].authorDetails.isChatModerator,
             isSponsor: res.data.items[i].authorDetails.isChatSponsor,
-            isEligible: res.data.items[i].snippet.displayMessage.includes(
-              localStorage.getItem('keyword'),
-            ),
+            isEligible: res.data.items[i].snippet.displayMessage
+              .toLowerCase()
+              .includes(localStorage.getItem('keyword').toLowerCase()),
           };
           db.users
             .where('id')

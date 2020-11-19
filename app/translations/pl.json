@@ -85,5 +85,13 @@
   "streamchange.containers.HomePage.HistoryWidget.EmptyTooltip": "Historia wygranych jest przechowywana tutaj. Aktualnie jest pusta.",
   "streamchange.containers.HomePage.HistoryWidget.TableTitle": "Ostatni zwycięzcy",
   "streamchange.containers.HomePage.HistoryWidget.WarningText": "Przechowywanie zbyt długiej historii wygranych może spowolnić działanie strony. Rozważ wyczyszczenie historii, gdy nie będziesz jej już potrzebować.",
-  "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream"
+  "streamchange.containers.HomePage.leaveStreamBtn": "Opuść stream",
+  "streamchange.containers.QueuePage.QueueColumn.title": "Kolejka",
+  "streamchange.containers.QueuePage.QueueItem.addedAt": "Dołączył(a)",
+  "streamchange.containers.QueuePage.QueueItem.activeAt": "Aktywny(a)",
+  "streamchange.containers.QueuePage.QueueRules.capacity": "Pojemność kolejki",
+  "streamchange.containers.QueuePage.QueueRules.command": "Komenda na dołączenie do kolejki",
+  "streamchange.containers.QueuePage.QueueRules.timeToIdle": "Oznacz jako nieaktywny po: (sekundy)",
+  "streamchange.containers.QueuePage.QueueRules.timeToKick": "Wyrzuć z kolejki po tylu sekundach bez wiadomości",
+  "streamchange.containers.QueuePage.QueueRules.panelTitle": "Zasady kolejki"
 }
