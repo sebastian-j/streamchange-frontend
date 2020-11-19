@@ -74,6 +74,7 @@ const QueueWorker = props => {
                     }
                   });
               } else if (typeof user !== 'undefined') {
+                if (!isEligible) delete author.message;
                 props.updateItem(author);
               }
             });

@@ -52,4 +52,16 @@ export default defineMessages({
     id: `${scope}.QueueItem.activeAt`,
     defaultMessage: 'Last message at',
   },
+  saveBtn: {
+    id: `${scope}.QueueItem.save`,
+    defaultMessage: 'Save',
+  },
+  cancelBtn: {
+    id: `${scope}.QueueItem.quitEditMode`,
+    defaultMessage: 'Cancel',
+  },
+  markActiveBtn: {
+    id: `${scope}.QueueItem.markAsActive`,
+    defaultMessage: 'Mark as active',
+  },
 });
