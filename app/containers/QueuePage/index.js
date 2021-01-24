@@ -55,6 +55,12 @@ const QueuePage = props => {
         .split('&')[0]
         .split('/')[0];
       launchWorker(vidId);
+    } else if (videoLink.includes('video/')) {
+      const vidId = videoLink.split('video/')[1].split('/')[0];
+      launchWorker(vidId);
+    } else if (videoLink.includes('u.be/')) {
+      const vidId = videoLink.split('be/')[1].split('?')[0];
+      launchWorker(vidId);
     } else {
       setError('invalidUrl');
     }
