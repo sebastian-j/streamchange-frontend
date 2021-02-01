@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import LightBulbImg from './light-bulb.png';
 import messages from './messages';
 import { HINTS } from '../../config';
 
+const SlideUp = keyframes`
+  0% {
+    transform: translateY(550px) translateX(100px);
+  }
+  20% {
+    transform: translateY(550px) translateX(100px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+`;
+
 const Wrapper = styled.div`
+  animation: ${SlideUp} 0.7s ease-out;
   background-color: white;
   display: flex;
   flex-direction: row;
