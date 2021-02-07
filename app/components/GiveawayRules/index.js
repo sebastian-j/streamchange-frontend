@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import { makeSelectGiveawayPrize } from './selectors';
+import { changePrize } from './actions';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -26,14 +30,13 @@ const UserTypeButton = styled.button`
   `}
 `;
 
-export default class GiveawayRules extends React.Component {
+export class GiveawayRules extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       forMods: true,
       forSponsors: true,
       forRegulars: true,
-      prize: '',
       winnerId: null,
     };
     this.handleToggleButton = this.handleToggleButton.bind(this);
@@ -45,8 +48,7 @@ export default class GiveawayRules extends React.Component {
     const forMods = localStorage.getItem('gv-forMods') === 'true';
     const forSponsors = localStorage.getItem('gv-forSponsors') === 'true';
     const forRegulars = localStorage.getItem('gv-forRegulars') === 'true';
-    const prize = localStorage.getItem('gv-prize');
-    this.setState({ forMods, forSponsors, forRegulars, prize });
+    this.setState({ forMods, forSponsors, forRegulars });
   }
 
   handleToggleButton(event) {
@@ -107,7 +109,7 @@ export default class GiveawayRules extends React.Component {
         <WinnerView
           apiKey={this.props.apiKey}
           id={this.state.winnerId}
-          prize={this.state.prize}
+          prize={this.props.prize}
           onClose={() => this.setState({ winnerId: null })}
         />
       );
@@ -147,10 +149,12 @@ export default class GiveawayRules extends React.Component {
               autoFocus
               margin="dense"
               name="prize"
-              onChange={this.handleInputValueChange}
+              onChange={event => {
+                this.props.changePrize(event.target.value);
+              }}
               label={label}
               type="text"
-              value={this.state.prize}
+              value={this.props.prize}
               fullWidth
             />
           )}
@@ -164,4 +168,22 @@ export default class GiveawayRules extends React.Component {
 
 GiveawayRules.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  changePrize: PropTypes.func.isRequired,
+  prize: PropTypes.string,
 };
+
+const mapStateToProps = createStructuredSelector({
+  prize: makeSelectGiveawayPrize(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    changePrize: a => dispatch(changePrize(a)),
+    dispatch,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GiveawayRules);

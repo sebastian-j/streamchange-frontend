@@ -9,6 +9,7 @@ import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import ChatEmbed from '../ChatEmbed';
+import { changePrize } from '../GiveawayRules/actions';
 import { changeAnimationDuration } from '../RaffleWrapper/actions';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
@@ -139,6 +140,17 @@ const YoutubeWorker = props => {
           Number(author.message.replace('!time ', '')),
         );
         setTimeout(() => setSuperChat(null), 10000);
+      } else if (author.message.startsWith('!prize ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed prize to ${author.message.replace(
+            '!prize ',
+            '',
+          )}`,
+        });
+        props.changePrize(author.message.replace('!prize ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
       }
     }
   };
@@ -183,6 +195,7 @@ const YoutubeWorker = props => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   changeAnimationDuration: PropTypes.func,
+  changePrize: PropTypes.func,
   onColorChange: PropTypes.func,
   videoId: PropTypes.string,
 };
@@ -197,6 +210,7 @@ const mapStateToProps = createSelector(
 export function mapDispatchToProps(dispatch) {
   return {
     changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
+    changePrize: str => dispatch(changePrize(str)),
     onColorChange: col => dispatch(changeColor(col)),
     dispatch,
   };

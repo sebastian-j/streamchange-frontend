@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
 import history from './utils/history';
+import giveawayRulesReducer from './components/GiveawayRules/reducer';
 import homePageReducer from './containers/HomePage/reducer';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
 import styleProviderReducer from './containers/StyleProvider/reducer';
@@ -22,6 +23,7 @@ export default function createReducer(injectedReducers = {}) {
     raffleWrapper: raffleWrapperReducer,
     streamInfo: homePageReducer,
     queue: queueReducer,
+    giveawayRules: giveawayRulesReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });

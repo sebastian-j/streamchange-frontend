@@ -146,7 +146,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           onFocus={[Function]}
           required={false}
           type="text"
-          value={null}
+          value=""
         />
       </div>
     </div>
