@@ -10,8 +10,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 import messages from './messages';
-import { makeSelectAnimation, makeSelectVisibility } from './selectors';
-import { changeAnimation, changeVisibility } from './actions';
+import {
+  makeSelectAnimation,
+  makeSelectDuration,
+  makeSelectVisibility,
+} from './selectors';
+import {
+  changeAnimation,
+  changeAnimationDuration,
+  changeVisibility,
+} from './actions';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import NumericInput from '../NumericInput';
@@ -49,9 +57,6 @@ const StyledFormControl = styled(FormControl)`
 `;
 export const RaffleWrapper = props => {
   const [noUsers, setNoUsers] = useState(false);
-  const [duration, setDuration] = useState(
-    Number(localStorage.getItem('gv-animationDuration')) || 7,
-  );
 
   const openDialog = () => {
     db.table('users')
@@ -65,11 +70,6 @@ export const RaffleWrapper = props => {
           setTimeout(() => setNoUsers(false), 3000);
         }
       });
-  };
-
-  const changeDuration = value => {
-    setDuration(value);
-    localStorage.setItem('gv-animationDuration', String(value));
   };
 
   const winnerHandler = event => {
@@ -101,8 +101,8 @@ export const RaffleWrapper = props => {
             label={label}
             minValue={1}
             maxValue={600}
-            value={duration}
-            onChange={ret => changeDuration(ret)}
+            value={props.animationDuration}
+            onChange={ret => props.changeAnimationDuration(ret)}
           />
         )}
       </FormattedMessage>
@@ -115,14 +115,14 @@ export const RaffleWrapper = props => {
       </StartButton>
       {props.isOpen && props.animationType === 0 && (
         <CSGORaffle
-          duration={duration}
+          duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}
         />
       )}
       {props.isOpen && props.animationType === 1 && (
         <FortuneWheelRaffle
-          duration={duration}
+          duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}
         />
@@ -132,7 +132,9 @@ export const RaffleWrapper = props => {
 };
 
 RaffleWrapper.propTypes = {
+  animationDuration: PropTypes.number.isRequired,
   animationType: PropTypes.number.isRequired,
+  changeAnimationDuration: PropTypes.func.isRequired,
   changeAnimationType: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeRaffle: PropTypes.func.isRequired,
@@ -141,12 +143,14 @@ RaffleWrapper.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  animationDuration: makeSelectDuration(),
   animationType: makeSelectAnimation(),
   isOpen: makeSelectVisibility(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
+    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
     changeAnimationType: a => dispatch(changeAnimation(a)),
     closeRaffle: () => dispatch(changeVisibility(false)),
     openRaffle: () => dispatch(changeVisibility(true)),

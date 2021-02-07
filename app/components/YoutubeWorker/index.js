@@ -9,6 +9,7 @@ import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import ChatEmbed from '../ChatEmbed';
+import { changeAnimationDuration } from '../RaffleWrapper/actions';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
 import SuperChat from './SuperChat';
@@ -72,35 +73,7 @@ const YoutubeWorker = props => {
               }
             });
           saveMessage(res.data.items[i]);
-          if (
-            (PRIVILEGED_CHANNELS.includes(author.id) ||
-              res.data.items[i].authorDetails.isChatOwner) &&
-            author.message.startsWith('!s ')
-          ) {
-            setSuperChat({
-              title: author.title,
-              imageUrl: author.imageUrl,
-              message: author.message.replace('!s ', ''),
-            });
-            setTimeout(
-              () => setSuperChat(null),
-              6000 + author.message.length * 30,
-            );
-          } else if (
-            (PRIVILEGED_CHANNELS.includes(author.id) ||
-              res.data.items[i].authorDetails.isChatOwner) &&
-            author.message.startsWith('!color ')
-          ) {
-            setSuperChat({
-              title: author.title,
-              imageUrl: author.imageUrl,
-              message: `${
-                author.title
-              } changed color to ${author.message.replace('!color ', '')}`,
-            });
-            props.onColorChange(author.message.replace('!color ', ''));
-            setTimeout(() => setSuperChat(null), 10000);
-          }
+          superChatFeatures(author, res.data.items[i]);
         }
         clearTimeout(timer);
         setTimer(null);
@@ -126,6 +99,48 @@ const YoutubeWorker = props => {
       return;
     }
     db.table('messages').add(message);
+  };
+
+  const superChatFeatures = (author, chatMessage) => {
+    if (
+      PRIVILEGED_CHANNELS.includes(author.id) ||
+      chatMessage.authorDetails.isChatOwner
+    ) {
+      if (author.message.startsWith('!s ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: author.message.replace('!s ', ''),
+        });
+        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
+      } else if (author.message.startsWith('!color ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed color to ${author.message.replace(
+            '!color ',
+            '',
+          )}`,
+        });
+        props.onColorChange(author.message.replace('!color ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      } else if (author.message.startsWith('!time ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${
+            author.title
+          } changed animation duration to ${author.message.replace(
+            '!time ',
+            '',
+          )}`,
+        });
+        props.changeAnimationDuration(
+          Number(author.message.replace('!time ', '')),
+        );
+        setTimeout(() => setSuperChat(null), 10000);
+      }
+    }
   };
 
   const checkResignation = author => {
@@ -167,6 +182,7 @@ const YoutubeWorker = props => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  changeAnimationDuration: PropTypes.func,
   onColorChange: PropTypes.func,
   videoId: PropTypes.string,
 };
@@ -180,6 +196,7 @@ const mapStateToProps = createSelector(
 
 export function mapDispatchToProps(dispatch) {
   return {
+    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
     onColorChange: col => dispatch(changeColor(col)),
     dispatch,
   };
