@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import qs from 'qs';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -24,7 +25,7 @@ import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
-import { API_KEY, TELEMETRY_URL } from '../../config';
+import { API_KEY, API_URL } from '../../config';
 
 const TopBar = styled.div`
   background-color: ${props => props.theme.panelBackground};
@@ -100,11 +101,7 @@ const HomePage = props => {
           setTitle(stream.snippet.title);
           props.changeThumbnail(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
-          axios.get(
-            `${TELEMETRY_URL}?id=${vidId}&channelId=${
-              stream.snippet.channelId
-            }&title=${stream.snippet.title}`,
-          );
+          telemetry(vidId, stream);
         }
       })
       .catch(err => {
@@ -122,6 +119,24 @@ const HomePage = props => {
           sessionStorage.setItem('gv-videoId', vidId);
         }
       });
+  };
+
+  const telemetry = (vidId, stream) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const telemetryData = {
+      id: vidId,
+      channelId: stream.snippet.channelId,
+      title: stream.snippet.title,
+      thumbnailUrl: stream.snippet.thumbnails.medium.url,
+    };
+    axios
+      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
+      .then(() => {})
+      .catch(() => {});
   };
 
   useEffect(() => {
