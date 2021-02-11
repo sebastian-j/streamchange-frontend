@@ -10,12 +10,14 @@ import {
   makeSelectQueueCommand,
   makeSelectTTI,
   makeSelectTTK,
+  makeSelectWidgetCode,
 } from './selectors';
 import {
   changeCapacity,
   changeQueueCommand,
   changeTTI,
   changeTTK,
+  changeWidgetCode,
 } from './actions';
 import Panel from '../../components/Panel';
 import PanelTitle from '../../components/Panel/PanelTitle';
@@ -32,6 +34,10 @@ export const QueueRules = props => {
     if (name === 'capacity') props.changeCapacity(value);
     if (name === 'timeToIdle') props.changeTTI(value);
     if (name === 'timeToKick') props.changeTTK(value);
+    if (name === 'widgetCode') {
+      props.changeWidgetCode(value);
+      return;
+    }
     localStorage.setItem(`queue-${name}`, value);
   };
 
@@ -96,6 +102,20 @@ export const QueueRules = props => {
           />
         )}
       </FormattedMessage>
+      <FormattedMessage {...messages.widgetCodeTextField}>
+        {label => (
+          <StyledTextField
+            autoFocus
+            margin="dense"
+            name="widgetCode"
+            onChange={handleInputValueChange}
+            label={label}
+            type="password"
+            value={props.widgetCode}
+            fullWidth
+          />
+        )}
+      </FormattedMessage>
     </Panel>
   );
 };
@@ -105,10 +125,12 @@ QueueRules.propTypes = {
   changeQueueCommand: PropTypes.func.isRequired,
   changeTTI: PropTypes.func.isRequired,
   changeTTK: PropTypes.func.isRequired,
+  changeWidgetCode: PropTypes.func.isRequired,
   capacity: PropTypes.number.isRequired,
   command: PropTypes.string,
   timeToIdle: PropTypes.number,
   timeToKick: PropTypes.number.isRequired,
+  widgetCode: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -116,6 +138,7 @@ const mapStateToProps = createStructuredSelector({
   command: makeSelectQueueCommand(),
   timeToIdle: makeSelectTTI(),
   timeToKick: makeSelectTTK(),
+  widgetCode: makeSelectWidgetCode(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -124,6 +147,7 @@ export function mapDispatchToProps(dispatch) {
     changeQueueCommand: command => dispatch(changeQueueCommand(command)),
     changeTTI: s => dispatch(changeTTI(s)),
     changeTTK: s => dispatch(changeTTK(s)),
+    changeWidgetCode: code => dispatch(changeWidgetCode(code)),
     dispatch,
   };
 }

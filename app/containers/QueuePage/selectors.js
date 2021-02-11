@@ -30,6 +30,12 @@ const makeSelectTTK = () =>
     state => state.timeToKick,
   );
 
+const makeSelectWidgetCode = () =>
+  createSelector(
+    selectQueue,
+    state => state.widgetCode,
+  );
+
 const makeSelectQueueArray = () =>
   createSelector(
     selectQueue,
@@ -42,5 +48,6 @@ export {
   makeSelectQueueCommand,
   makeSelectTTI,
   makeSelectTTK,
+  makeSelectWidgetCode,
   makeSelectQueueArray,
 };

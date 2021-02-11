@@ -96,5 +96,6 @@
   "streamchange.containers.QueuePage.QueueRules.command": "Komenda na dołączenie do kolejki",
   "streamchange.containers.QueuePage.QueueRules.timeToIdle": "Oznacz jako nieaktywny po: (sekundy)",
   "streamchange.containers.QueuePage.QueueRules.timeToKick": "Wyrzuć z kolejki po tylu sekundach bez wiadomości",
-  "streamchange.containers.QueuePage.QueueRules.panelTitle": "Zasady kolejki"
+  "streamchange.containers.QueuePage.QueueRules.panelTitle": "Zasady kolejki",
+  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Kod widgetu do OBS z kolejką"
 }

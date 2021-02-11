@@ -9,6 +9,7 @@ import {
   CHANGE_QUEUE_COMMAND,
   CHANGE_QUEUE_TTI,
   CHANGE_QUEUE_TTK,
+  CHANGE_QUEUE_WIDGET_CODE,
   DELETE_QUEUE_ITEM,
   GET_QUEUE_FROM_IDB,
   PURGE_QUEUE,
@@ -41,6 +42,13 @@ export function changeTTK(time) {
   return {
     type: CHANGE_QUEUE_TTK,
     timeToKick: time,
+  };
+}
+
+export function changeWidgetCode(code) {
+  return {
+    type: CHANGE_QUEUE_WIDGET_CODE,
+    widgetCode: code,
   };
 }
 

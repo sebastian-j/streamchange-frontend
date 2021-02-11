@@ -96,5 +96,6 @@
   "streamchange.containers.QueuePage.QueueRules.command": "Command for joining the queue",
   "streamchange.containers.QueuePage.QueueRules.timeToIdle": "Time without any message to mark as inactive (sec)",
   "streamchange.containers.QueuePage.QueueRules.timeToKick": "Time without any message to kick (sec)",
-  "streamchange.containers.QueuePage.QueueRules.panelTitle": "Queue rules"
+  "streamchange.containers.QueuePage.QueueRules.panelTitle": "Queue rules",
+  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Code for OBS widget with queue"
 }

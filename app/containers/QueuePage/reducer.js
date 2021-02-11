@@ -10,6 +10,7 @@ import {
   CHANGE_QUEUE_COMMAND,
   CHANGE_QUEUE_TTI,
   CHANGE_QUEUE_TTK,
+  CHANGE_QUEUE_WIDGET_CODE,
   DELETE_QUEUE_ITEM,
   GET_QUEUE_FROM_IDB,
   PURGE_QUEUE,
@@ -17,6 +18,11 @@ import {
   UPDATE_QUEUE_ITEM,
 } from './constants';
 import { deleteItem, insertOrUpdateItem, purgeQueueTable } from './model';
+import {
+  deleteQueueItem,
+  postQueueItem,
+  updateQueueItem,
+} from './remoteDatabase';
 
 export const initialState = {
   capacity: parseInt(localStorage.getItem('queue-capacity'), 10) || 10,
@@ -24,6 +30,7 @@ export const initialState = {
   queueArray: [],
   timeToIdle: parseInt(localStorage.getItem('queue-timeToIdle'), 10) || 600,
   timeToKick: parseInt(localStorage.getItem('queue-timeToKick'), 10) || 900,
+  widgetCode: localStorage.getItem('queue-widget-code') || '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -42,6 +49,10 @@ const queueReducer = (state = initialState, action) =>
       case CHANGE_QUEUE_TTK:
         draft.timeToKick = action.timeToKick;
         break;
+      case CHANGE_QUEUE_WIDGET_CODE:
+        draft.widgetCode = action.widgetCode;
+        localStorage.setItem('queue-widget-code', action.widgetCode);
+        break;
       case DELETE_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
           if (draft.queueArray[i].id === action.id) {
@@ -49,6 +60,7 @@ const queueReducer = (state = initialState, action) =>
           }
         }
         deleteItem(action.id);
+        deleteQueueItem(action.id);
         break;
       case GET_QUEUE_FROM_IDB:
         draft.queueArray = action.queueArray;
@@ -56,6 +68,7 @@ const queueReducer = (state = initialState, action) =>
       case PURGE_QUEUE:
         draft.queueArray = [];
         purgeQueueTable();
+        deleteQueueItem(null);
         break;
       case PUSH_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
@@ -65,6 +78,7 @@ const queueReducer = (state = initialState, action) =>
         }
         draft.queueArray.push(action.item);
         insertOrUpdateItem(action.item);
+        postQueueItem(action.item);
         break;
       case UPDATE_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
@@ -73,6 +87,7 @@ const queueReducer = (state = initialState, action) =>
           }
         }
         insertOrUpdateItem(action.item);
+        updateQueueItem(action.item);
         break;
     }
   });

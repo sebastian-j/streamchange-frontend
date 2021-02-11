@@ -64,4 +64,8 @@ export default defineMessages({
     id: `${scope}.QueueItem.markAsActive`,
     defaultMessage: 'Mark as active',
   },
+  widgetCodeTextField: {
+    id: `${scope}.QueueRules.widgetCodeTextField`,
+    defaultMessage: 'Code for OBS widget with queue',
+  },
 });
