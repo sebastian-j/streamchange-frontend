@@ -8,6 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { makeSelectGiveawayPrize } from './selectors';
 import { changePrize } from './actions';
+import AdFrame from '../AdFrame';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -161,6 +162,7 @@ export class GiveawayRules extends React.Component {
         </FormattedMessage>
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
+        <AdFrame />
       </Panel>
     );
   }

@@ -301,6 +301,46 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         </span>
       </button>
     </div>
+    <div>
+      <div
+        className="AdFrame__AdPlaceholder-wocikk-0 eQlpDm"
+      >
+        <span>
+          <span>
+            This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
+          </span>
+        </span>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span>
+              Show the details
+            </span>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
   </div>
   <div
     className="Panel-sc-15d2ub8-0 hhnpCF"
