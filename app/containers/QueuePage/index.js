@@ -48,6 +48,7 @@ const QueuePage = props => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [error, setError] = useState(null);
+  const [ban, setBan] = useState(null);
 
   const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
@@ -93,6 +94,7 @@ const QueuePage = props => {
           setTitle(stream.snippet.title);
           props.changeThumbnail(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
+          checkBan(stream.snippet.channelId);
           telemetry(vidId, stream);
         }
       })
@@ -111,6 +113,23 @@ const QueuePage = props => {
           sessionStorage.setItem('gv-videoId', vidId);
         }
       });
+  };
+
+  const checkBan = channelId => {
+    axios.get('../static/bans.json').then(res => {
+      if (res.data) {
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          if (
+            res.data.items[i].channelId.includes(channelId) &&
+            new Date(res.data.items[i].endsAt) > new Date()
+          ) {
+            setVideoId('');
+            setBan(res.data.items[i]);
+            return;
+          }
+        }
+      }
+    });
   };
 
   const telemetry = (vidId, stream) => {
@@ -139,7 +158,7 @@ const QueuePage = props => {
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} error={error} />;
+    return <WelcomeDialog passVideo={receiveVideo} ban={ban} error={error} />;
   }
   return (
     <div>

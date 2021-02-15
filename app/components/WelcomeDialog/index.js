@@ -163,6 +163,14 @@ const WelcomeDialog = props => {
                     )}
                   </span>
                 )}
+                {props.ban && (
+                  <span style={{ display: 'block', color: '#bd0013' }}>
+                    <FormattedMessage {...messages.banDate} />
+                    {` ${props.ban.endsAt} `}
+                    <FormattedMessage {...messages.banReason} />
+                    {props.ban.description}
+                  </span>
+                )}
               </TextSecondary>
             </DialogContent>
             <DialogActions>
@@ -186,6 +194,7 @@ const WelcomeDialog = props => {
 };
 
 WelcomeDialog.propTypes = {
+  ban: PropTypes.object,
   error: PropTypes.string,
   passVideo: PropTypes.func,
 };

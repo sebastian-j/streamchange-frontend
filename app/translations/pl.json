@@ -49,6 +49,8 @@
   "streamchange.components.UserList.clearBtn": "Wyczyść listę",
   "streamchange.components.UserList.counter": "Bierze udział {selected} z {all}",
   "streamchange.components.UserList.title": "Użytkownicy",
+  "streamchange.components.WelcomeDialog.banDate": "Ban do",
+  "streamchange.components.WelcomeDialog.banReason": "Powód:",
   "streamchange.components.WelcomeDialog.FirstUseScreen.saveBtn": "Dalej",
   "streamchange.components.WelcomeDialog.FirstUseScreen.selectLanguage": "Wybierz język",
   "streamchange.components.WelcomeDialog.FirstUseScreen.selectTheme": "Wybierz motyw",
