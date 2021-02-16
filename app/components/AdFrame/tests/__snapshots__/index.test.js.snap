@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdFrame /> should render and match the snapshot 1`] = `
+<div>
+  <ForwardRef>
+    <span>
+      <FormattedMessage
+        defaultMessage="This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers."
+        id="streamchange.components.AdFrame.emptyAdPlaceholder"
+        values={Object {}}
+      />
+    </span>
+    <ForwardRef(WithStyles)
+      color="primary"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        defaultMessage="Show the details"
+        id="streamchange.components.AdFrame.showMoreButton"
+        values={Object {}}
+      />
+    </ForwardRef(WithStyles)>
+  </ForwardRef>
+  <ForwardRef(WithStyles)
+    aria-labelledby="form-dialog-title"
+    onClose={[Function]}
+    open={false}
+  >
+    <ForwardRef(WithStyles)
+      id="form-dialog-title"
+    >
+      <FormattedMessage
+        defaultMessage="Information for advertisers"
+        id="streamchange.components.AdFrame.dialogTitle"
+        values={Object {}}
+      />
+    </ForwardRef(WithStyles)>
+    <ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)>
+        <FormattedMessage
+          defaultMessage="There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner."
+          id="streamchange.components.AdFrame.dialogFirstLine"
+          values={Object {}}
+        />
+      </ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)>
+        <FormattedMessage
+          defaultMessage="If you chose full version, your ad will be displayed on every stream that will show streamchange app that day. Bank transfer is a preferred payment method."
+          id="streamchange.components.AdFrame.dialogSecondLine"
+          values={Object {}}
+        />
+      </ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)>
+        <FormattedMessage
+          defaultMessage="Contact:"
+          id="streamchange.components.AdFrame.dialogThirdLine"
+          values={Object {}}
+        />
+        <ForwardRef(WithStyles)>
+          Discord: Baf#5501
+        </ForwardRef(WithStyles)>
+        <ForwardRef
+          href="https://www.facebook.com/BafYT/"
+        >
+          https://www.facebook.com/BafYT/
+        </ForwardRef>
+        <ForwardRef
+          href="https://www.instagram.com/grafika3d/"
+        >
+          Instagram grafika3d
+        </ForwardRef>
+      </ForwardRef(WithStyles)>
+    </ForwardRef(WithStyles)>
+    <ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)
+        color="secondary"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          defaultMessage="Close"
+          id="streamchange.components.AdFrame.dialogCloseButton"
+          values={Object {}}
+        />
+      </ForwardRef(WithStyles)>
+    </ForwardRef(WithStyles)>
+  </ForwardRef(WithStyles)>
+</div>
+`;
