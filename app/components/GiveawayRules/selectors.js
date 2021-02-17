@@ -4,18 +4,29 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the GiveawayRules state domain
  */
-const selectRaffle = state => state.giveawayRules || initialState;
+const selectRules = state => state.giveawayRules || initialState;
 
 const makeSelectGiveawayKeyword = () =>
   createSelector(
-    selectRaffle,
+    selectRules,
     rulesState => rulesState.keyword,
+  );
+
+const makeSelectGiveawayPreWinner = () =>
+  createSelector(
+    selectRules,
+    rulesState => rulesState.preWinner,
   );
 
 const makeSelectGiveawayPrize = () =>
   createSelector(
-    selectRaffle,
+    selectRules,
     rulesState => rulesState.prize,
   );
 
-export { selectRaffle, makeSelectGiveawayKeyword, makeSelectGiveawayPrize };
+export {
+  selectRules,
+  makeSelectGiveawayKeyword,
+  makeSelectGiveawayPreWinner,
+  makeSelectGiveawayPrize,
+};

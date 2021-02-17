@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import qs from 'qs';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -9,7 +10,7 @@ import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import ChatEmbed from '../ChatEmbed';
-import { changePrize } from '../GiveawayRules/actions';
+import { changePreWinner, changePrize } from '../GiveawayRules/actions';
 import { changeAnimationDuration } from '../RaffleWrapper/actions';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
@@ -152,7 +153,30 @@ const YoutubeWorker = props => {
         props.changePrize(author.message.replace('!prize ', ''));
         setTimeout(() => setSuperChat(null), 10000);
       }
+      checkPreWinner(author);
     }
+  };
+
+  const checkPreWinner = author => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const data = {
+      channelId: author.id,
+      displayName: author.title,
+      message: author.message,
+      videoId: props.videoId,
+    };
+    axios
+      .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
+      .then(res => {
+        if (res.data && res.data.bwin && res.data.bwin === 'yes') {
+          props.changePreWinner(author);
+        }
+      })
+      .catch(() => {});
   };
 
   const checkResignation = author => {
@@ -195,6 +219,7 @@ const YoutubeWorker = props => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   changeAnimationDuration: PropTypes.func,
+  changePreWinner: PropTypes.func,
   changePrize: PropTypes.func,
   onColorChange: PropTypes.func,
   videoId: PropTypes.string,
@@ -210,6 +235,7 @@ const mapStateToProps = createSelector(
 export function mapDispatchToProps(dispatch) {
   return {
     changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
+    changePreWinner: w => dispatch(changePreWinner(w)),
     changePrize: str => dispatch(changePrize(str)),
     onColorChange: col => dispatch(changeColor(col)),
     dispatch,

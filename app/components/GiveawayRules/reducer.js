@@ -5,10 +5,11 @@
  */
 import produce from 'immer';
 
-import { CHANGE_KEYWORD, CHANGE_PRIZE } from './constants';
+import { CHANGE_KEYWORD, CHANGE_PREWINNER, CHANGE_PRIZE } from './constants';
 
 export const initialState = {
   keyword: localStorage.getItem('keyword') || '',
+  preWinner: null,
   prize: localStorage.getItem('gv-prize') || '',
 };
 
@@ -19,6 +20,9 @@ const giveawayRulesReducer = (state = initialState, action) =>
       case CHANGE_KEYWORD:
         draft.keyword = action.keyword;
         localStorage.setItem('keyword', action.keyword);
+        break;
+      case CHANGE_PREWINNER:
+        draft.preWinner = action.preWinner;
         break;
       case CHANGE_PRIZE:
         draft.prize = action.prize;

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
 import db from '../YoutubeWorker/db';
+import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 import './style.css';
 
 const CSGORaffle = props => {
@@ -25,6 +29,7 @@ const CSGORaffle = props => {
         }
         const winnerIndex =
           Math.floor(Math.random() * 10) + 10 + props.duration * 3;
+        if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
         const scroll = -(
           winnerIndex * 150 +
           Math.floor(Math.random() * 65) -
@@ -87,9 +92,17 @@ CSGORaffle.propTypes = {
   duration: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+  preWinner: PropTypes.object,
 };
 CSGORaffle.defaultProps = {
   duration: 7,
 };
 
-export default CSGORaffle;
+const mapStateToProps = createStructuredSelector({
+  preWinner: makeSelectGiveawayPreWinner(),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(CSGORaffle);

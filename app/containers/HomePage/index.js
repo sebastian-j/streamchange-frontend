@@ -57,7 +57,6 @@ const HomePage = props => {
   const [title, setTitle] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
-
   const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
       const vidId = videoLink
@@ -149,6 +148,7 @@ const HomePage = props => {
     const telemetryData = {
       id: vidId,
       channelId: stream.snippet.channelId,
+      part: 'stream',
       title: stream.snippet.title,
       thumbnailUrl: stream.snippet.thumbnails.medium.url,
     };
