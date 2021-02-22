@@ -109,5 +109,9 @@
   "streamchange.containers.QueuePage.QueueRules.timeToIdle": "Oznacz jako nieaktywny po: (sekundy)",
   "streamchange.containers.QueuePage.QueueRules.timeToKick": "Wyrzuć z kolejki po tylu sekundach bez wiadomości",
   "streamchange.containers.QueuePage.QueueRules.panelTitle": "Zasady kolejki",
-  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Kod widgetu do OBS z kolejką"
+  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Kod widgetu do OBS z kolejką",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.copyButton": "Kopiuj",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.firstLine": "URL widgetu jest obliczany z prywatnego kodu widgetu, który wpiszesz w polu tekstowym. Nie udostępniaj nikomu swojego kodu. Każdy, kto używa aplikacji z twoim kodem może dodawać, edytować i usuwać kanały przechowywane w twojej kolejce. URL do kolejki powstaje z prywatnego kodu przy użyciu funkcji kryptograficznej, dzięki czemu nie jest możliwe odzyskanie kodu z URL. URL możesz bezpiecznie udostępnić swoim widzom - służy on tylko do odczytu kolejki.",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.secondLine": "Ten url możesz wkleić do przeglądarki wbudowanej w OBS.",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Widget kolejki do OBS"
 }

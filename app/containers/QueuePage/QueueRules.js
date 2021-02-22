@@ -23,6 +23,7 @@ import Panel from '../../components/Panel';
 import PanelTitle from '../../components/Panel/PanelTitle';
 import StyledTextField from '../../components/StyledTextField';
 import AdFrame from '../../components/AdFrame';
+import QueueWidgetDialog from './QueueWidgetDialog';
 
 export const QueueRules = props => {
   const handleInputValueChange = event => {
@@ -117,6 +118,7 @@ export const QueueRules = props => {
           />
         )}
       </FormattedMessage>
+      <QueueWidgetDialog />
       <AdFrame />
     </Panel>
   );

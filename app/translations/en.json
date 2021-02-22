@@ -109,5 +109,9 @@
   "streamchange.containers.QueuePage.QueueRules.timeToIdle": "Time without any message to mark as inactive (sec)",
   "streamchange.containers.QueuePage.QueueRules.timeToKick": "Time without any message to kick (sec)",
   "streamchange.containers.QueuePage.QueueRules.panelTitle": "Queue rules",
-  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Code for OBS widget with queue"
+  "streamchange.containers.QueuePage.QueueRules.widgetCodeTextField": "Code for OBS widget with queue",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.copyButton": "Copy",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.firstLine": "Your widget url is created from your private widget code. Do not share your code with anyone. Everyone with your private code can add, edit and delete channels stored in your queue. As code cannot be restored from widget url, you can securely share the url with your audience.",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.secondLine": "Paste this url to embedded browser in OBS",
+  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Queue widget for OBS"
 }
