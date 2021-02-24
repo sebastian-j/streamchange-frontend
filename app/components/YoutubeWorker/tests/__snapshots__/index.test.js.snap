@@ -24,7 +24,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         Search
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -33,6 +33,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           className="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
           disabled={false}
           name="search"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -46,7 +47,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       className="UserList__Ul-sc-7bgn44-1 dFcjyK"
     />
     <button
-      className="MuiButtonBase-root MuiButton-root UserList__StyledButton-sc-7bgn44-2 hMUTnL MuiButton-text"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text UserList__StyledButton-sc-7bgn44-2 hMUTnL"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -132,7 +133,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         Prize (optional)
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -141,6 +142,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           className="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
           disabled={false}
           name="prize"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -157,11 +159,12 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
         htmlFor="keyword"
+        id="keyword-label"
       >
         Keyword
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -171,6 +174,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           disabled={false}
           id="keyword"
           name="keyword"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -232,11 +236,11 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         >
           <div
             aria-haspopup="listbox"
-            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
             onBlur={[Function]}
-            onClick={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
+            onMouseDown={[Function]}
             role="button"
             tabIndex={0}
           >
@@ -245,14 +249,18 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
             </span>
           </div>
           <input
-            type="hidden"
+            aria-hidden={true}
+            className="MuiSelect-nativeInput"
+            onAnimationStart={[Function]}
+            onChange={[Function]}
+            required={false}
+            tabIndex={-1}
             value={0}
           />
           <svg
-            aria-hidden="true"
+            aria-hidden={true}
             className="MuiSvgIcon-root MuiSelect-icon"
             focusable="false"
-            role="presentation"
             viewBox="0 0 24 24"
           >
             <path

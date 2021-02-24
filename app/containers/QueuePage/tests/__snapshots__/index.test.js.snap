@@ -145,7 +145,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root FirstUseScreen__StyledButton-sc-18wtu21-9 eyFmjv MuiButton-text"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 eyFmjv"
       tabindex="0"
       type="button"
     >
