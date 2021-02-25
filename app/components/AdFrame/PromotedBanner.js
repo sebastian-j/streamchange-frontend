@@ -34,9 +34,14 @@ const Image = styled.img`
 
 const PromotedBanner = props => {
   const [imgHeight, setImgHeight] = useState(0);
+  const isVideo = props.imageUrl.substr(props.imageUrl.length - 3) === 'mp4';
 
   const onImgLoad = ({ target: img }) => {
     setImgHeight(img.offsetHeight);
+  };
+
+  const onVideoLoad = ({ target: video }) => {
+    setImgHeight(Math.round(video.videoHeight * 0.6));
   };
 
   return (
@@ -45,7 +50,20 @@ const PromotedBanner = props => {
         <FormattedMessage {...messages.title} />
       </AdTitle>
       <a href={props.channelUrl} target="_blank">
-        <Image alt={props.title} onLoad={onImgLoad} src={props.imageUrl} />
+        {!isVideo && (
+          <Image alt={props.title} onLoad={onImgLoad} src={props.imageUrl} />
+        )}
+        {isVideo && (
+          <video
+            width="100%"
+            autoPlay
+            loop
+            muted
+            onLoadedMetadata={onVideoLoad}
+          >
+            <source src={props.imageUrl} type="video/mp4" />
+          </video>
+        )}
       </a>
     </PromotedContentWrapper>
   );
