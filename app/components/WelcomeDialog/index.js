@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
@@ -91,9 +92,11 @@ const WelcomeDialog = props => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendVideoLink = () => {
     if (typeof props.passVideo === 'function') {
+      setIsLoading(true);
       props.passVideo(videoLink);
     }
   };
@@ -103,6 +106,10 @@ const WelcomeDialog = props => {
     setIsFirstUse(!localStorage.getItem('locale'));
   }, []);
 
+  useEffect(() => {
+    if (props.error) setIsLoading(false);
+  }, [props.error]);
+
   const handleInputValueChange = event => {
     const { target } = event;
     const { value } = target;
@@ -110,7 +117,7 @@ const WelcomeDialog = props => {
   };
 
   const handleKeyPress = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isLoading) {
       sendVideoLink();
     }
   };
@@ -174,9 +181,12 @@ const WelcomeDialog = props => {
               </TextSecondary>
             </DialogContent>
             <DialogActions>
-              <Button onClick={sendVideoLink} color="primary">
-                <FormattedMessage {...messages.saveBtn} />
-              </Button>
+              {!isLoading && (
+                <Button onClick={sendVideoLink} color="primary">
+                  <FormattedMessage {...messages.saveBtn} />
+                </Button>
+              )}
+              {isLoading && <CircularProgress />}
             </DialogActions>
           </Dialog>
           <WelcomeHint />
