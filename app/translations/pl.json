@@ -1,5 +1,4 @@
 {
-  "streamchange.components.ChatEmbed.title": "Czat",
   "streamchange.components.AdFrame.emptyAdPlaceholder": "Tu może być reklama twojego kanału od 10zł na dzień. Zobaczą ją tysiące widzów. Zebrane pieniądze zostaną przeznaczone na utrzymanie serwera do StreamChange na kolejny miesiąc.",
   "streamchange.components.AdFrame.dialogCloseButton": "Zamknij",
   "streamchange.components.AdFrame.dialogFirstLine": "Możesz wybrać jedną z trzech dostępnych form reklamy: kanał Youtube (klikalne logo, nazwa i kilka zdań), wideo Youtube (mały odtwarzacz wideo oraz tekst obok), klikalny baner.",
@@ -10,6 +9,7 @@
   "streamchange.components.AdFrame.title": "Reklama",
   "streamchange.components.ChatView.embedMode": "Okno czatu z Youtube",
   "streamchange.components.ChatView.internalMode": "Wewnętrzny czat Streamchange",
+  "streamchange.components.ChatView.title": "Czat",
   "streamchange.components.GiveawayRules.KeywordInput.label": "Słowo kluczowe",
   "streamchange.components.GiveawayRules.KeywordInput.visibility": "Ukryj lub odsłoń słowo kluczowe",
   "streamchange.components.GiveawayRules.prize": "Nagroda (opcjonalnie)",

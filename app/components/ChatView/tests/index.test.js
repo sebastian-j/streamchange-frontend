@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import ChatEmbed from '../index';
+import ChatEmbed from '../ChatEmbed';
 
 const renderer = new ShallowRenderer();
 

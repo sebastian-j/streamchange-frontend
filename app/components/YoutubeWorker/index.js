@@ -8,10 +8,11 @@ import styled from 'styled-components';
 
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
-import ChatEmbed from '../ChatEmbed';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
 import { changeAnimationDuration } from '../RaffleWrapper/actions';
+import ChatView from '../ChatView';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
 import SuperChat from './SuperChat';
@@ -89,18 +90,27 @@ const YoutubeWorker = props => {
   };
 
   const saveMessage = msg => {
-    const message = {
+    const dbMessage = {
       authorId: msg.authorDetails.channelId,
       displayText: msg.snippet.displayMessage,
       publishedAt: msg.snippet.publishedAt,
     };
+    const chatViewMessage = {
+      imageUrl: msg.authorDetails.profileImageUrl,
+      isModerator: msg.authorDetails.isChatModerator,
+      isOwner: msg.authorDetails.isChatOwner,
+      isVerified: msg.authorDetails.isVerified,
+      title: msg.authorDetails.displayName,
+      ...dbMessage,
+    };
+    props.addMessage(chatViewMessage);
     if (
-      message.displayText === localStorage.getItem('keyword') &&
+      dbMessage.displayText === localStorage.getItem('keyword') &&
       localStorage.getItem('gv-saveCommands') !== 'true'
     ) {
       return;
     }
-    db.table('messages').add(message);
+    db.table('messages').add(dbMessage);
   };
 
   const superChatFeatures = (author, chatMessage) => {
@@ -204,7 +214,7 @@ const YoutubeWorker = props => {
     <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} />
-      <ChatEmbed videoId={props.videoId} />
+      <ChatView videoId={props.videoId} />
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}
@@ -218,6 +228,7 @@ const YoutubeWorker = props => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  addMessage: PropTypes.func.isRequired,
   changeAnimationDuration: PropTypes.func,
   changePreWinner: PropTypes.func,
   changePrize: PropTypes.func,
@@ -234,6 +245,7 @@ const mapStateToProps = createSelector(
 
 export function mapDispatchToProps(dispatch) {
   return {
+    addMessage: m => dispatch(addMessage(m)),
     changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
     changePreWinner: w => dispatch(changePreWinner(w)),
     changePrize: str => dispatch(changePrize(str)),

@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import {
   deleteQueueItem,
   pushQueueItem,
   updateQueueItem,
 } from '../../containers/QueuePage/actions';
-import ChatEmbed from '../ChatEmbed';
+import ChatView from '../ChatView';
 import QueueColumn from '../../containers/QueuePage/QueueColumn';
 import QueueRules from '../../containers/QueuePage/QueueRules';
 import SuperChat from './SuperChat';
@@ -75,10 +76,12 @@ const QueueWorker = props => {
                   });
               } else if (typeof user !== 'undefined') {
                 if (!isEligible) delete author.message;
+                delete author.addedAt;
                 props.updateItem(author);
               }
             });
           checkResignation(author);
+          saveMessage(res.data.items[i]);
           superChatFeatures(author, res.data.items[i]);
         }
         clearTimeout(timer);
@@ -90,6 +93,20 @@ const QueueWorker = props => {
         setTimer(null);
         setTimer(setTimeout(messageProcessor, 6000));
       });
+  };
+
+  const saveMessage = msg => {
+    const chatViewMessage = {
+      authorId: msg.authorDetails.channelId,
+      displayText: msg.snippet.displayMessage,
+      imageUrl: msg.authorDetails.profileImageUrl,
+      isModerator: msg.authorDetails.isChatModerator,
+      isOwner: msg.authorDetails.isChatOwner,
+      isVerified: msg.authorDetails.isVerified,
+      publishedAt: msg.snippet.publishedAt,
+      title: msg.authorDetails.displayName,
+    };
+    props.addMessage(chatViewMessage);
   };
 
   const superChatFeatures = (author, chatMessage) => {
@@ -137,7 +154,7 @@ const QueueWorker = props => {
     <ThreeSections>
       <QueueColumn />
       <QueueRules />
-      <ChatEmbed videoId={props.videoId} />
+      <ChatView videoId={props.videoId} />
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}
@@ -150,6 +167,7 @@ const QueueWorker = props => {
 };
 
 QueueWorker.propTypes = {
+  addMessage: PropTypes.func.isRequired,
   deleteItem: PropTypes.func,
   onColorChange: PropTypes.func,
   pushItem: PropTypes.func,
@@ -159,6 +177,7 @@ QueueWorker.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
+    addMessage: m => dispatch(addMessage(m)),
     deleteItem: id => dispatch(deleteQueueItem(id)),
     onColorChange: col => dispatch(changeColor(col)),
     pushItem: item => dispatch(pushQueueItem(item)),

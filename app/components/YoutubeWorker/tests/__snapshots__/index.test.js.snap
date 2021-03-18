@@ -353,15 +353,61 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
   <div
     className="Panel-sc-15d2ub8-0 hhnpCF"
   >
-    <h2
-      className="PanelTitle-sc-100fqnu-0 dfyaea"
+    <div
+      className="ChatView__Header-zon57q-1 kTQsRs"
     >
-      <span>
-        Chat
-      </span>
-    </h2>
+      <h2
+        className="PanelTitle-sc-100fqnu-0 dfyaea"
+      >
+        <span>
+          Chat
+        </span>
+      </h2>
+      <button
+        aria-label="Options"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            className="ChatView__ThemedSvg-zon57q-0 cQurPG"
+            height="18px"
+            viewBox="0 0 24 24"
+            width="18px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
     <iframe
-      className="chat-frame ChatEmbed__ChatFrame-g1101a-0 bRtIsU"
+      className="chat-frame ChatEmbed__ChatFrame-sc-1ho4a0z-0 iCspyk"
       src="https://www.youtube.com/live_chat?v=vidId&embed_domain=localhost"
       title="Youtube Chat"
     />

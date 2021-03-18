@@ -1,5 +1,4 @@
 {
-  "streamchange.components.ChatEmbed.title": "Chat",
   "streamchange.components.AdFrame.emptyAdPlaceholder": "This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.",
   "streamchange.components.AdFrame.dialogCloseButton": "Close",
   "streamchange.components.AdFrame.dialogFirstLine": "There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner.",
@@ -10,6 +9,7 @@
   "streamchange.components.AdFrame.title": "Advertisement",
   "streamchange.components.ChatView.embedMode": "Embedded chat from Youtube",
   "streamchange.components.ChatView.internalMode": "Internal StreamChange chat",
+  "streamchange.components.ChatView.title": "Chat",
   "streamchange.components.GiveawayRules.KeywordInput.label": "Keyword",
   "streamchange.components.GiveawayRules.KeywordInput.visibility": "Toggle keyword visibility",
   "streamchange.components.GiveawayRules.prize": "Prize (optional)",
