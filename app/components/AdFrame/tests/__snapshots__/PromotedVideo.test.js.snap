@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PromotedVideo /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <ForwardRef>
+    <FormattedMessage
+      defaultMessage="Advertisement"
+      id="streamchange.components.AdFrame.title"
+      values={Object {}}
+    />
+  </ForwardRef>
+  <ForwardRef>
+    <iframe
+      frameBorder="0"
+      height="170"
+      id="ytplayer"
+      src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0origin=https://www.streamchange.pl"
+      title="video"
+      width="500"
+    />
+    <div />
+  </ForwardRef>
+</ForwardRef>
+`;

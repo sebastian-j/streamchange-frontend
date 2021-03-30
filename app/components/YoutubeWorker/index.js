@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import qs from 'qs';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -7,8 +8,11 @@ import styled from 'styled-components';
 
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
-import ChatEmbed from '../ChatEmbed';
+import { changePreWinner, changePrize } from '../GiveawayRules/actions';
+import { changeAnimationDuration } from '../RaffleWrapper/actions';
+import ChatView from '../ChatView';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
 import SuperChat from './SuperChat';
@@ -46,9 +50,9 @@ const YoutubeWorker = props => {
             message: res.data.items[i].snippet.displayMessage,
             isModerator: res.data.items[i].authorDetails.isChatModerator,
             isSponsor: res.data.items[i].authorDetails.isChatSponsor,
-            isEligible: res.data.items[i].snippet.displayMessage.includes(
-              localStorage.getItem('keyword'),
-            ),
+            isEligible: res.data.items[i].snippet.displayMessage
+              .toLowerCase()
+              .includes(localStorage.getItem('keyword').toLowerCase()),
           };
           db.users
             .where('id')
@@ -72,35 +76,7 @@ const YoutubeWorker = props => {
               }
             });
           saveMessage(res.data.items[i]);
-          if (
-            (PRIVILEGED_CHANNELS.includes(author.id) ||
-              res.data.items[i].authorDetails.isChatOwner) &&
-            author.message.startsWith('!s ')
-          ) {
-            setSuperChat({
-              title: author.title,
-              imageUrl: author.imageUrl,
-              message: author.message.replace('!s ', ''),
-            });
-            setTimeout(
-              () => setSuperChat(null),
-              6000 + author.message.length * 30,
-            );
-          } else if (
-            (PRIVILEGED_CHANNELS.includes(author.id) ||
-              res.data.items[i].authorDetails.isChatOwner) &&
-            author.message.startsWith('!color ')
-          ) {
-            setSuperChat({
-              title: author.title,
-              imageUrl: author.imageUrl,
-              message: `${
-                author.title
-              } changed color to ${author.message.replace('!color ', '')}`,
-            });
-            props.onColorChange(author.message.replace('!color ', ''));
-            setTimeout(() => setSuperChat(null), 10000);
-          }
+          superChatFeatures(author, res.data.items[i]);
         }
         clearTimeout(timer);
         setTimer(null);
@@ -114,18 +90,103 @@ const YoutubeWorker = props => {
   };
 
   const saveMessage = msg => {
-    const message = {
+    const dbMessage = {
       authorId: msg.authorDetails.channelId,
       displayText: msg.snippet.displayMessage,
       publishedAt: msg.snippet.publishedAt,
     };
+    const chatViewMessage = {
+      imageUrl: msg.authorDetails.profileImageUrl,
+      isModerator: msg.authorDetails.isChatModerator,
+      isOwner: msg.authorDetails.isChatOwner,
+      isVerified: msg.authorDetails.isVerified,
+      title: msg.authorDetails.displayName,
+      ...dbMessage,
+    };
+    props.addMessage(chatViewMessage);
     if (
-      message.displayText === localStorage.getItem('keyword') &&
+      dbMessage.displayText === localStorage.getItem('keyword') &&
       localStorage.getItem('gv-saveCommands') !== 'true'
     ) {
       return;
     }
-    db.table('messages').add(message);
+    db.table('messages').add(dbMessage);
+  };
+
+  const superChatFeatures = (author, chatMessage) => {
+    if (
+      PRIVILEGED_CHANNELS.includes(author.id) ||
+      chatMessage.authorDetails.isChatOwner
+    ) {
+      if (author.message.startsWith('!s ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: author.message.replace('!s ', ''),
+        });
+        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
+      } else if (author.message.startsWith('!color ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed color to ${author.message.replace(
+            '!color ',
+            '',
+          )}`,
+        });
+        props.onColorChange(author.message.replace('!color ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      } else if (author.message.startsWith('!time ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${
+            author.title
+          } changed animation duration to ${author.message.replace(
+            '!time ',
+            '',
+          )}`,
+        });
+        props.changeAnimationDuration(
+          Number(author.message.replace('!time ', '')),
+        );
+        setTimeout(() => setSuperChat(null), 10000);
+      } else if (author.message.startsWith('!prize ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed prize to ${author.message.replace(
+            '!prize ',
+            '',
+          )}`,
+        });
+        props.changePrize(author.message.replace('!prize ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      }
+      checkPreWinner(author);
+    }
+  };
+
+  const checkPreWinner = author => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const data = {
+      channelId: author.id,
+      displayName: author.title,
+      message: author.message,
+      videoId: props.videoId,
+    };
+    axios
+      .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
+      .then(res => {
+        if (res.data && res.data.bwin && res.data.bwin === 'yes') {
+          props.changePreWinner(author);
+        }
+      })
+      .catch(() => {});
   };
 
   const checkResignation = author => {
@@ -153,7 +214,7 @@ const YoutubeWorker = props => {
     <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} />
-      <ChatEmbed videoId={props.videoId} />
+      <ChatView videoId={props.videoId} />
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}
@@ -167,6 +228,10 @@ const YoutubeWorker = props => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  addMessage: PropTypes.func.isRequired,
+  changeAnimationDuration: PropTypes.func,
+  changePreWinner: PropTypes.func,
+  changePrize: PropTypes.func,
   onColorChange: PropTypes.func,
   videoId: PropTypes.string,
 };
@@ -180,6 +245,10 @@ const mapStateToProps = createSelector(
 
 export function mapDispatchToProps(dispatch) {
   return {
+    addMessage: m => dispatch(addMessage(m)),
+    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
+    changePreWinner: w => dispatch(changePreWinner(w)),
+    changePrize: str => dispatch(changePrize(str)),
     onColorChange: col => dispatch(changeColor(col)),
     dispatch,
   };

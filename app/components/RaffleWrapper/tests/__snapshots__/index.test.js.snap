@@ -20,11 +20,11 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     >
       <div
         aria-haspopup="listbox"
-        className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+        className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
+        onMouseDown={[Function]}
         role="button"
         tabIndex={0}
       >
@@ -33,14 +33,18 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
         </span>
       </div>
       <input
-        type="hidden"
+        aria-hidden={true}
+        className="MuiSelect-nativeInput"
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        required={false}
+        tabIndex={-1}
         value={0}
       />
       <svg
-        aria-hidden="true"
+        aria-hidden={true}
         className="MuiSvgIcon-root MuiSelect-icon"
         focusable="false"
-        role="presentation"
         viewBox="0 0 24 24"
       >
         <path

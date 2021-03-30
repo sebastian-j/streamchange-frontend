@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from '../HomePage/Loadable';
 import History from '../History/Loadable';
+import QueuePage from '../QueuePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -27,6 +28,7 @@ export default function App() {
       <Switch>
         <Route exact path="/giveaway" component={HomePage} />
         <Route exact path="/giveaway-history" component={History} />
+        <Route exact path="/queue" component={QueuePage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

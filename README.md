@@ -3,6 +3,10 @@
 Web application for organizing lotteries and contests on Youtube live streams.
 
 Built application consists only of static .js and .html files. No backend needed.
+
+[![CircleCI](https://circleci.com/gh/sebastian-j/streamchange-giveaway.svg?style=shield)](https://circleci.com/gh/sebastian-j/streamchange-giveaway)
+[![Test Coverage](https://coveralls.io/repos/github/sebastian-j/streamchange-giveaway/badge.svg?branch=master)](https://coveralls.io/github/sebastian-j/streamchange-giveaway?branch=master)
+
 ## Features
 
 * Downloading all necessary data only from Youtube Data API v3

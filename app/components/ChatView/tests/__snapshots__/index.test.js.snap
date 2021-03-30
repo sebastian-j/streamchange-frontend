@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatEmbed /> should render and match the snapshot 1`] = `
+<ForwardRef
+  className="chat-frame"
+  src="https://www.youtube.com/live_chat?v=id&embed_domain=localhost"
+  title="Youtube Chat"
+/>
+`;

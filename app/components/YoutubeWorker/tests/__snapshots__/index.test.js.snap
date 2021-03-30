@@ -24,7 +24,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         Search
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -33,6 +33,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           className="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
           disabled={false}
           name="search"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -46,7 +47,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       className="UserList__Ul-sc-7bgn44-1 dFcjyK"
     />
     <button
-      className="MuiButtonBase-root MuiButton-root UserList__StyledButton-sc-7bgn44-2 hMUTnL MuiButton-text"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text UserList__StyledButton-sc-7bgn44-2 hMUTnL"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -132,7 +133,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         Prize (optional)
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -141,12 +142,13 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           className="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
           disabled={false}
           name="prize"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           required={false}
           type="text"
-          value={null}
+          value=""
         />
       </div>
     </div>
@@ -157,11 +159,12 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
         data-shrink={false}
         htmlFor="keyword"
+        id="keyword-label"
       >
         Keyword
       </label>
       <div
-        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense"
+        className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
         onClick={[Function]}
       >
         <input
@@ -171,6 +174,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           disabled={false}
           id="keyword"
           name="keyword"
+          onAnimationStart={[Function]}
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
@@ -232,11 +236,11 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         >
           <div
             aria-haspopup="listbox"
-            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input MuiInputBase-inputSelect"
+            className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
             onBlur={[Function]}
-            onClick={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
+            onMouseDown={[Function]}
             role="button"
             tabIndex={0}
           >
@@ -245,14 +249,18 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
             </span>
           </div>
           <input
-            type="hidden"
+            aria-hidden={true}
+            className="MuiSelect-nativeInput"
+            onAnimationStart={[Function]}
+            onChange={[Function]}
+            required={false}
+            tabIndex={-1}
             value={0}
           />
           <svg
-            aria-hidden="true"
+            aria-hidden={true}
             className="MuiSvgIcon-root MuiSelect-icon"
             focusable="false"
-            role="presentation"
             viewBox="0 0 24 24"
           >
             <path
@@ -301,19 +309,105 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         </span>
       </button>
     </div>
+    <div>
+      <div
+        className="AdFrame__AdPlaceholder-wocikk-0 eQlpDm"
+      >
+        <span>
+          <span>
+            This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
+          </span>
+        </span>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            <span>
+              Show the details
+            </span>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
   </div>
   <div
     className="Panel-sc-15d2ub8-0 hhnpCF"
   >
-    <h2
-      className="PanelTitle-sc-100fqnu-0 dfyaea"
+    <div
+      className="ChatView__Header-zon57q-1 kTQsRs"
     >
-      <span>
-        Chat
-      </span>
-    </h2>
+      <h2
+        className="PanelTitle-sc-100fqnu-0 dfyaea"
+      >
+        <span>
+          Chat
+        </span>
+      </h2>
+      <button
+        aria-label="Options"
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            className="ChatView__ThemedSvg-zon57q-0 cQurPG"
+            height="18px"
+            viewBox="0 0 24 24"
+            width="18px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+            />
+          </svg>
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
     <iframe
-      className="chat-frame ChatEmbed__ChatFrame-g1101a-0 bRtIsU"
+      className="chat-frame ChatEmbed__ChatFrame-sc-1ho4a0z-0 iCspyk"
       src="https://www.youtube.com/live_chat?v=vidId&embed_domain=localhost"
       title="Youtube Chat"
     />

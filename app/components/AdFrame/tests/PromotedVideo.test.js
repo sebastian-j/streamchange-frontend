@@ -1,13 +1,13 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import ChatEmbed from '../index';
+import PromotedVideo from '../PromotedVideo';
 
 const renderer = new ShallowRenderer();
 
-describe('<ChatEmbed />', () => {
+describe('<PromotedVideo />', () => {
   it('should render and match the snapshot', () => {
-    renderer.render(<ChatEmbed videoId="id" />);
+    renderer.render(<PromotedVideo videoId="jNQXAC9IVRw" />);
     const renderedOutput = renderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();
   });

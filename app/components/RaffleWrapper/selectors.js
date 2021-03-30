@@ -12,10 +12,21 @@ const makeSelectAnimation = () =>
     raffleState => raffleState.animationType,
   );
 
+const makeSelectDuration = () =>
+  createSelector(
+    selectRaffle,
+    raffleState => raffleState.animationDuration,
+  );
+
 const makeSelectVisibility = () =>
   createSelector(
     selectRaffle,
     raffleState => raffleState.isOpen,
   );
 
-export { selectRaffle, makeSelectAnimation, makeSelectVisibility };
+export {
+  selectRaffle,
+  makeSelectAnimation,
+  makeSelectDuration,
+  makeSelectVisibility,
+};

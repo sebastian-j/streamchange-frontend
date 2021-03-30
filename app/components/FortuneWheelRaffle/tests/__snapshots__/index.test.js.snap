@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FortuneWheelRaffle /> should render and match the snapshot 1`] = `
+<ForwardRef>
+  <button
+    className="dialog-backdrop"
+    onClick={[Function]}
+    type="button"
+  />
+  <ForwardRef>
+    <ForwardRef
+      style={
+        Object {
+          "position": "absolute",
+          "transform": "rotate(0deg)",
+          "transitionDuration": "7s",
+        }
+      }
+    >
+      <ForwardRef
+        src="IMAGE_MOCK"
+      />
+    </ForwardRef>
+    <ForwardRef
+      src="IMAGE_MOCK"
+    />
+    <ForwardRef
+      style={
+        Object {
+          "animationDelay": "7.1s",
+        }
+      }
+    />
+  </ForwardRef>
+</ForwardRef>
+`;
