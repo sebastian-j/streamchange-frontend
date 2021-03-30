@@ -8,11 +8,12 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
     className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
     data-shrink={false}
     htmlFor="keyword"
+    id="keyword-label"
   >
     Keyword
   </label>
   <div
-    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense"
+    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
     onClick={[Function]}
   >
     <input
@@ -22,6 +23,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
       disabled={false}
       id="keyword"
       name="keyword"
+      onAnimationStart={[Function]}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}

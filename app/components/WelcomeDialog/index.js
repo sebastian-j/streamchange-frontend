@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
@@ -10,7 +11,9 @@ import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomePage = styled.div`
-  background-color: ${props => props.theme.welcomeBackground};
+  background: url(../static/streamchange-cover.webp) no-repeat center center
+    fixed;
+  background-size: cover;
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -21,16 +24,30 @@ const DialogWrapper = styled.div`
   flex-direction: column;
   position: absolute;
   top: 55%;
-  left: 50%;
+  left: 30%;
   transform: translate(-50%, -50%);
 `;
 
+const SlideDown = keyframes`
+  0% {
+    transform: translateY(-650px) translateX(-100px);
+  }
+  20% {
+    transform: translateY(-650px) translateX(-100px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+`;
+
 const Dialog = styled.div`
+  animation: ${SlideDown} 0.7s ease-out;
   background-color: white;
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-    0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.52);
   border-radius: 4px;
   max-width: 600px;
+  z-index: -1;
 `;
 
 const DialogTitle = styled.div`
@@ -75,9 +92,11 @@ const WelcomeDialog = props => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendVideoLink = () => {
     if (typeof props.passVideo === 'function') {
+      setIsLoading(true);
       props.passVideo(videoLink);
     }
   };
@@ -87,6 +106,10 @@ const WelcomeDialog = props => {
     setIsFirstUse(!localStorage.getItem('locale'));
   }, []);
 
+  useEffect(() => {
+    if (props.error) setIsLoading(false);
+  }, [props.error]);
+
   const handleInputValueChange = event => {
     const { target } = event;
     const { value } = target;
@@ -94,7 +117,7 @@ const WelcomeDialog = props => {
   };
 
   const handleKeyPress = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isLoading) {
       sendVideoLink();
     }
   };
@@ -147,12 +170,23 @@ const WelcomeDialog = props => {
                     )}
                   </span>
                 )}
+                {props.ban && (
+                  <span style={{ display: 'block', color: '#bd0013' }}>
+                    <FormattedMessage {...messages.banDate} />
+                    {` ${props.ban.endsAt} `}
+                    <FormattedMessage {...messages.banReason} />
+                    {props.ban.description}
+                  </span>
+                )}
               </TextSecondary>
             </DialogContent>
             <DialogActions>
-              <Button onClick={sendVideoLink} color="primary">
-                <FormattedMessage {...messages.saveBtn} />
-              </Button>
+              {!isLoading && (
+                <Button onClick={sendVideoLink} color="primary">
+                  <FormattedMessage {...messages.saveBtn} />
+                </Button>
+              )}
+              {isLoading && <CircularProgress />}
             </DialogActions>
           </Dialog>
           <WelcomeHint />
@@ -170,6 +204,7 @@ const WelcomeDialog = props => {
 };
 
 WelcomeDialog.propTypes = {
+  ban: PropTypes.object,
   error: PropTypes.string,
   passVideo: PropTypes.func,
 };

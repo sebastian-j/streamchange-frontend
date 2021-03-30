@@ -1,18 +1,24 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import qs from 'qs';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import messages from './messages';
+import { changePreWinner } from '../GiveawayRules/actions';
 import { changeVisibility } from '../RaffleWrapper/actions';
 import db from '../YoutubeWorker/db';
+import { API_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
+import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${props => props.theme.panelBackground};
@@ -148,6 +154,27 @@ export class WinnerView extends React.Component {
     });
   }
 
+  telemetry() {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const telemetryData = {
+      id: sessionStorage.getItem('gv-videoId'),
+      prize: this.state.prize,
+      winnerId: this.props.id,
+      part: 'winner',
+      message: this.props.preWinner ? this.props.preWinner.message : null,
+    };
+    axios
+      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
+      .then(() => {
+        this.props.changePreWinner(null);
+      })
+      .catch(() => {});
+  }
+
   componentDidMount() {
     const userId = this.props.id;
     db.table('users')
@@ -157,10 +184,12 @@ export class WinnerView extends React.Component {
         this.setState({ user: items[0] });
       });
     this.getMessages();
+    this.telemetry();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
 
   componentWillUnmount() {
+    this.props.changePreWinner(null);
     clearInterval(this.state.interval);
   }
 
@@ -239,20 +268,27 @@ export class WinnerView extends React.Component {
 
 WinnerView.propTypes = {
   apiKey: PropTypes.string.isRequired,
+  changePreWinner: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  preWinner: PropTypes.object,
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = createStructuredSelector({
+  preWinner: makeSelectGiveawayPreWinner(),
+});
+
 export function mapDispatchToProps(dispatch) {
   return {
+    changePreWinner: w => dispatch(changePreWinner(w)),
     onRepeat: () => dispatch(changeVisibility(true)),
     dispatch,
   };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(WinnerView);

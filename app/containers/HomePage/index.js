@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import qs from 'qs';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -24,7 +25,7 @@ import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
-import { API_KEY, TELEMETRY_URL } from '../../config';
+import { API_KEY, API_URL } from '../../config';
 
 const TopBar = styled.div`
   background-color: ${props => props.theme.panelBackground};
@@ -54,14 +55,21 @@ const StyledButton = styled(Button)`
 const HomePage = props => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
-
+  const [ban, setBan] = useState(null);
   const receiveVideo = videoLink => {
     if (videoLink.includes('v=')) {
       const vidId = videoLink
         .split('v=')[1]
         .split('&')[0]
         .split('/')[0];
+      launchWorker(vidId);
+    } else if (videoLink.includes('video/')) {
+      const vidId = videoLink.split('video/')[1].split('/')[0];
+      launchWorker(vidId);
+    } else if (videoLink.includes('u.be/')) {
+      const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
     } else {
       setError('invalidUrl');
@@ -74,6 +82,8 @@ const HomePage = props => {
     setTitle('');
     props.changeThumbnail('');
     sessionStorage.removeItem('gv-videoId');
+    sessionStorage.removeItem('gv-title');
+    sessionStorage.removeItem('gv-thumbnailUrl');
     window.location.reload();
   };
 
@@ -92,13 +102,15 @@ const HomePage = props => {
           setVideoId(vidId);
           props.changeOwnerId(stream.snippet.channelId);
           setTitle(stream.snippet.title);
-          props.changeThumbnail(stream.snippet.thumbnails.medium.url);
+          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
-          axios.get(
-            `${TELEMETRY_URL}?id=${vidId}&channelId=${
-              stream.snippet.channelId
-            }&title=${stream.snippet.title}`,
+          sessionStorage.setItem('gv-title', stream.snippet.title);
+          sessionStorage.setItem(
+            'gv-thumbnailUrl',
+            stream.snippet.thumbnails.medium.url,
           );
+          checkBan(stream.snippet.channelId);
+          telemetry(vidId, stream);
         }
       })
       .catch(err => {
@@ -118,21 +130,61 @@ const HomePage = props => {
       });
   };
 
+  const checkBan = channelId => {
+    axios.get('../static/bans.json').then(res => {
+      if (res.data) {
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          if (
+            res.data.items[i].channelId.includes(channelId) &&
+            new Date(res.data.items[i].endsAt) > new Date()
+          ) {
+            setVideoId('');
+            setBan(res.data.items[i]);
+            return;
+          }
+        }
+      }
+    });
+  };
+
+  const telemetry = (vidId, stream) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const telemetryData = {
+      id: vidId,
+      channelId: stream.snippet.channelId,
+      part: 'stream',
+      title: stream.snippet.title,
+      thumbnailUrl: stream.snippet.thumbnails.medium.url,
+    };
+    axios
+      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
+      .then(() => {})
+      .catch(() => {});
+  };
+
   useEffect(() => {
     const id = sessionStorage.getItem('gv-videoId');
-    if (id !== null) {
-      launchWorker(id);
+    const storedTitle = sessionStorage.getItem('gv-title');
+    const storedThumbnail = sessionStorage.getItem('gv-thumbnailUrl');
+    if (id !== null && storedTitle !== null && storedThumbnail !== null) {
+      setVideoId(id);
+      setTitle(storedTitle);
+      setThumbnailUrl(storedThumbnail);
     }
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} error={error} />;
+    return <WelcomeDialog passVideo={receiveVideo} ban={ban} error={error} />;
   }
   return (
     <div>
       <TopBar>
         <StreamInfo>
-          <StreamImg alt="Miniatura" src={props.thumbnailUrl} />
+          <StreamImg alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <FormattedMessage {...messages.leaveStreamBtn} />

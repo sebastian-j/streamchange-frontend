@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -45,34 +45,29 @@ const NumberDisplay = styled.input`
 `;
 
 const NumericInput = props => {
-  const [value, setValue] = useState(props.value);
-
   const inc = () => {
     let val = props.value;
     if (props.maxValue === null || val + props.step < props.maxValue) {
-      val = value + props.step;
+      val = props.value + props.step;
     } else {
       val = props.maxValue;
     }
     if (val !== props.value) props.onChange(Number(val));
-    setValue(val);
   };
   const dec = () => {
     let val = props.value;
     if (props.minValue === null || val - props.step > props.minValue) {
-      val = value - props.step;
+      val = props.value - props.step;
     } else {
       val = props.minValue;
     }
     if (val !== props.value) props.onChange(Number(val));
-    setValue(val);
   };
   const checkValue = () => {
-    let val = value;
+    let val = props.value;
     if (val < props.minValue) val = props.minValue;
     if (val > props.maxValue) val = props.maxValue;
     if (Number.isNaN(Number(val))) val = props.value;
-    setValue(val);
     props.onChange(Number(val));
   };
   return (
@@ -82,8 +77,8 @@ const NumericInput = props => {
         -
       </Button>
       <NumberDisplay
-        value={value}
-        onChange={event => setValue(event.target.value)}
+        value={props.value}
+        onChange={event => props.onChange(event.target.value)}
         onBlur={checkValue}
       />
       <Button onClick={inc} type="button">

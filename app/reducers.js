@@ -6,10 +6,12 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
 import history from './utils/history';
+import giveawayRulesReducer from './components/GiveawayRules/reducer';
 import homePageReducer from './containers/HomePage/reducer';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
 import styleProviderReducer from './containers/StyleProvider/reducer';
 import raffleWrapperReducer from './components/RaffleWrapper/reducer';
+import queueReducer from './containers/QueuePage/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -20,6 +22,8 @@ export default function createReducer(injectedReducers = {}) {
     theme: styleProviderReducer,
     raffleWrapper: raffleWrapperReducer,
     streamInfo: homePageReducer,
+    queue: queueReducer,
+    giveawayRules: giveawayRulesReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });
