@@ -55,6 +55,7 @@ const StyledButton = styled(Button)`
 const HomePage = props => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
   const receiveVideo = videoLink => {
@@ -81,6 +82,8 @@ const HomePage = props => {
     setTitle('');
     props.changeThumbnail('');
     sessionStorage.removeItem('gv-videoId');
+    sessionStorage.removeItem('gv-title');
+    sessionStorage.removeItem('gv-thumbnailUrl');
     window.location.reload();
   };
 
@@ -99,8 +102,13 @@ const HomePage = props => {
           setVideoId(vidId);
           props.changeOwnerId(stream.snippet.channelId);
           setTitle(stream.snippet.title);
-          props.changeThumbnail(stream.snippet.thumbnails.medium.url);
+          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
+          sessionStorage.setItem('gv-title', stream.snippet.title);
+          sessionStorage.setItem(
+            'gv-thumbnailUrl',
+            stream.snippet.thumbnails.medium.url,
+          );
           checkBan(stream.snippet.channelId);
           telemetry(vidId, stream);
         }
@@ -160,8 +168,12 @@ const HomePage = props => {
 
   useEffect(() => {
     const id = sessionStorage.getItem('gv-videoId');
-    if (id !== null) {
-      launchWorker(id);
+    const storedTitle = sessionStorage.getItem('gv-title');
+    const storedThumbnail = sessionStorage.getItem('gv-thumbnailUrl');
+    if (id !== null && storedTitle !== null && storedThumbnail !== null) {
+      setVideoId(id);
+      setTitle(storedTitle);
+      setThumbnailUrl(storedThumbnail);
     }
   }, []);
 
@@ -172,7 +184,7 @@ const HomePage = props => {
     <div>
       <TopBar>
         <StreamInfo>
-          <StreamImg alt="Miniatura" src={props.thumbnailUrl} />
+          <StreamImg alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <FormattedMessage {...messages.leaveStreamBtn} />
