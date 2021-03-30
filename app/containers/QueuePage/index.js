@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import qs from 'qs';
 import styled from 'styled-components';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import {
-  makeSelectOwnerId,
-  makeSelectThumbnailUrl,
-} from '../HomePage/selectors';
-import { changeOwnerId, changeThumbnailUrl } from '../HomePage/actions';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import QueueWorker from '../../components/YoutubeWorker/QueueWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -44,9 +36,10 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const QueuePage = props => {
+const QueuePage = () => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
 
@@ -69,10 +62,9 @@ const QueuePage = props => {
   };
 
   const leaveStream = () => {
-    props.changeOwnerId('');
     setVideoId('');
     setTitle('');
-    props.changeThumbnail('');
+    setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
   };
@@ -90,9 +82,8 @@ const QueuePage = props => {
         } else {
           const stream = res.data.items[0];
           setVideoId(vidId);
-          props.changeOwnerId(stream.snippet.channelId);
           setTitle(stream.snippet.title);
-          props.changeThumbnail(stream.snippet.thumbnails.medium.url);
+          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
           checkBan(stream.snippet.channelId);
           telemetry(vidId, stream);
@@ -105,9 +96,8 @@ const QueuePage = props => {
           }
         } else {
           setVideoId(vidId);
-          props.changeOwnerId('');
           setTitle('Tytuł nieznany');
-          props.changeThumbnail(
+          setThumbnailUrl(
             'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
           );
           sessionStorage.setItem('gv-videoId', vidId);
@@ -164,7 +154,7 @@ const QueuePage = props => {
     <div>
       <TopBar>
         <StreamInfo>
-          <StreamImg alt="Miniatura" src={props.thumbnailUrl} />
+          <StreamImg alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <FormattedMessage {...messages.leaveStreamBtn} />
@@ -179,27 +169,4 @@ const QueuePage = props => {
   );
 };
 
-QueuePage.propTypes = {
-  changeOwnerId: PropTypes.func.isRequired,
-  changeThumbnail: PropTypes.func.isRequired,
-  ownerId: PropTypes.string.isRequired,
-  thumbnailUrl: PropTypes.string,
-};
-
-const mapStateToProps = createStructuredSelector({
-  ownerId: makeSelectOwnerId(),
-  thumbnailUrl: makeSelectThumbnailUrl(),
-});
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    changeOwnerId: id => dispatch(changeOwnerId(id)),
-    changeThumbnail: url => dispatch(changeThumbnailUrl(url)),
-    dispatch,
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QueuePage);
+export default QueuePage;
