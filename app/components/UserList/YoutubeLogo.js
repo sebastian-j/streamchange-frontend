@@ -19,11 +19,11 @@ const A = styled.a`
   margin-right: 3px;
 `;
 
-const YoutubeLogo = props => (
+const YoutubeLogo = (props) => (
   <A
     href={`https://www.youtube.com/channel/${props.channelId}`}
     target="_blank"
-    onClick={event => event.stopPropagation()}
+    onClick={(event) => event.stopPropagation()}
   >
     <Svg
       xmlns="http://www.w3.org/2000/svg"

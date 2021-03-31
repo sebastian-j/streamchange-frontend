@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PromotedChannel /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
+<PromotedChannel__PromotedContentWrapper>
+  <PromotedChannel__AdTitle>
     <FormattedMessage
       defaultMessage="Advertisement"
       id="streamchange.components.AdFrame.title"
       values={Object {}}
     />
-  </ForwardRef>
-  <ForwardRef>
+  </PromotedChannel__AdTitle>
+  <PromotedChannel__PromotedContent>
     <a
       href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
       target="_blank"
     >
-      <ForwardRef
+      <PromotedChannel__PromotedChannelLogo
         src="https://yt3.ggpht.com/ytc/AAUvwnjMKD2nkjne8W3-jn2yCf-lOdD2P1wTJ0Q_G9X72w=s88-c-k-c0x00ffffff-no-rj"
       />
     </a>
     <div>
-      <ForwardRef
+      <PromotedChannel__PromotedChannelTitle
         href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
         target="_blank"
       />
       <div />
     </div>
-  </ForwardRef>
-</ForwardRef>
+  </PromotedChannel__PromotedContent>
+</PromotedChannel__PromotedContentWrapper>
 `;

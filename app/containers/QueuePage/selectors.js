@@ -4,43 +4,25 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the QueuePage state domain
  */
-const selectQueue = state => state.queue || initialState;
+const selectQueue = (state) => state.queue || initialState;
 
 const makeSelectCapacity = () =>
-  createSelector(
-    selectQueue,
-    state => state.capacity,
-  );
+  createSelector(selectQueue, (state) => state.capacity);
 
 const makeSelectQueueCommand = () =>
-  createSelector(
-    selectQueue,
-    state => state.command,
-  );
+  createSelector(selectQueue, (state) => state.command);
 
 const makeSelectTTI = () =>
-  createSelector(
-    selectQueue,
-    state => state.timeToIdle,
-  );
+  createSelector(selectQueue, (state) => state.timeToIdle);
 
 const makeSelectTTK = () =>
-  createSelector(
-    selectQueue,
-    state => state.timeToKick,
-  );
+  createSelector(selectQueue, (state) => state.timeToKick);
 
 const makeSelectWidgetCode = () =>
-  createSelector(
-    selectQueue,
-    state => state.widgetCode,
-  );
+  createSelector(selectQueue, (state) => state.widgetCode);
 
 const makeSelectQueueArray = () =>
-  createSelector(
-    selectQueue,
-    state => state.queueArray,
-  );
+  createSelector(selectQueue, (state) => state.queueArray);
 
 export {
   selectQueue,

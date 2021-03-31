@@ -156,9 +156,6 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
           Save
         </span>
       </span>
-      <span
-        class="MuiTouchRipple-root"
-      />
     </button>
   </div>
 </div>

@@ -26,43 +26,43 @@ import NumericInput from '../NumericInput';
 import db from '../YoutubeWorker/db';
 
 const StartButton = styled.button`
-  background-color: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.buttonTextColor};
+  background-color: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
+  color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
   margin-top: 10px;
   padding: 8px 12px;
   width: 100%;
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
 const StyledFormControl = styled(FormControl)`
   width: 100%;
   input {
-    color: ${props => props.theme.staticTextColor};
+    color: ${(props) => props.theme.staticTextColor};
   }
   label {
-    color: ${props => props.theme.inputLabel};
+    color: ${(props) => props.theme.inputLabel};
   }
   label.Mui-focused {
-    color: ${props => props.theme.inputLabelFocused};
+    color: ${(props) => props.theme.inputLabelFocused};
   }
   span,
   svg {
-    color: ${props => props.theme.staticTextColor};
+    color: ${(props) => props.theme.staticTextColor};
   }
 `;
-export const RaffleWrapper = props => {
+export const RaffleWrapper = (props) => {
   const [noUsers, setNoUsers] = useState(false);
 
   const openDialog = () => {
     db.table('users')
-      .filter(user => user.isEligible === true)
+      .filter((user) => user.isEligible === true)
       .toArray()
-      .then(items => {
+      .then((items) => {
         if (items.length > 0) {
           props.openRaffle();
         } else {
@@ -72,7 +72,7 @@ export const RaffleWrapper = props => {
       });
   };
 
-  const winnerHandler = event => {
+  const winnerHandler = (event) => {
     props.closeRaffle();
     props.onWin(event);
   };
@@ -84,7 +84,7 @@ export const RaffleWrapper = props => {
           <FormattedMessage {...messages.raffleType} />
         </InputLabel>
         <Select
-          onChange={event => props.changeAnimationType(event.target.value)}
+          onChange={(event) => props.changeAnimationType(event.target.value)}
           value={props.animationType}
         >
           <MenuItem value={0}>
@@ -96,13 +96,13 @@ export const RaffleWrapper = props => {
         </Select>
       </StyledFormControl>
       <FormattedMessage {...messages.animationDuration}>
-        {label => (
+        {(label) => (
           <NumericInput
             label={label}
             minValue={1}
             maxValue={600}
             value={props.animationDuration}
-            onChange={ret => props.changeAnimationDuration(ret)}
+            onChange={(ret) => props.changeAnimationDuration(ret)}
           />
         )}
       </FormattedMessage>
@@ -150,15 +150,12 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
-    changeAnimationType: a => dispatch(changeAnimation(a)),
+    changeAnimationDuration: (t) => dispatch(changeAnimationDuration(t)),
+    changeAnimationType: (a) => dispatch(changeAnimation(a)),
     closeRaffle: () => dispatch(changeVisibility(false)),
     openRaffle: () => dispatch(changeVisibility(true)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RaffleWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(RaffleWrapper);

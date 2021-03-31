@@ -14,7 +14,7 @@ const AuthorImage = styled.img`
 `;
 
 const AuthorTitle = styled.span`
-  color: ${props =>
+  color: ${(props) =>
     props.userColor ? props.userColor : props.theme.secondaryTextColor};
   font-family: Roboto, sans-serif;
   font-weight: 500;
@@ -24,10 +24,10 @@ const AuthorTitle = styled.span`
   }
 `;
 const MessageText = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
 `;
 
-const InternalChatMessage = props => {
+const InternalChatMessage = (props) => {
   let userColor = props.message.isSponsor ? 'rgb(43,166,64)' : null;
   userColor = props.message.isModerator ? 'rgb(94, 132, 241)' : userColor;
   userColor = props.message.isOwner ? 'rgb(255, 214, 0)' : userColor;

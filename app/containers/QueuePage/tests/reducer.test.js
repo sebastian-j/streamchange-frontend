@@ -21,7 +21,10 @@ describe('queueReducer', () => {
     state = {
       capacity: 10,
       command: 'join',
-      queueArray: [{ id: 'id', title: 'item1' }, { id: 'id2', title: 'item2' }],
+      queueArray: [
+        { id: 'id', title: 'item1' },
+        { id: 'id2', title: 'item2' },
+      ],
       timeToIdle: 300,
       timeToKick: 600,
       widgetCode: 'code',
@@ -34,7 +37,7 @@ describe('queueReducer', () => {
 
   it('should handle the changeCapacity action correctly', () => {
     const fixture = 15;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.capacity = fixture;
     });
 
@@ -45,7 +48,7 @@ describe('queueReducer', () => {
 
   it('should handle the changeQueueCommand action correctly', () => {
     const fixture = 'giveaway';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.command = fixture;
     });
 
@@ -56,7 +59,7 @@ describe('queueReducer', () => {
 
   it('should handle the changeTTI action correctly', () => {
     const fixture = 400;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.timeToIdle = fixture;
     });
 
@@ -65,7 +68,7 @@ describe('queueReducer', () => {
 
   it('should handle the changeTTK action correctly', () => {
     const fixture = 800;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.timeToKick = fixture;
     });
 
@@ -74,7 +77,7 @@ describe('queueReducer', () => {
 
   it('should handle the changeWidgetCode action correctly', () => {
     const fixture = 400;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.widgetCode = fixture;
     });
 
@@ -85,7 +88,7 @@ describe('queueReducer', () => {
 
   it('should handle the deleteQueueItem action correctly and delete queue item with the given id', () => {
     const fixture = 'id';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = [{ id: 'id2', title: 'item2' }];
     });
 
@@ -96,7 +99,7 @@ describe('queueReducer', () => {
 
   it('should handle the deleteQueueItem action correctly and do not delete any item, when incorrect id was given', () => {
     const fixture = 'not-id';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = [
         { id: 'id', title: 'item1' },
         { id: 'id2', title: 'item2' },
@@ -114,7 +117,7 @@ describe('queueReducer', () => {
       { id: 'id2', title: 'item2' },
       { id: 'id3', title: 'item3' },
     ];
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 
@@ -125,7 +128,7 @@ describe('queueReducer', () => {
 
   it('should handle the purgeQueue action correctly', () => {
     const fixture = [];
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 
@@ -139,7 +142,7 @@ describe('queueReducer', () => {
       { id: 'id3', title: 'item3' },
     ];
     const newItem = { id: 'id3', title: 'item3' };
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 
@@ -152,7 +155,7 @@ describe('queueReducer', () => {
       { id: 'id2', title: 'item2' },
     ];
     const newItem = { id: 'id2', title: 'item3' };
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 
@@ -172,7 +175,7 @@ describe('queueReducer', () => {
       id: 'id2',
       message: 'abc',
     };
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 
@@ -194,7 +197,7 @@ describe('queueReducer', () => {
       id: 'id2',
       lastActiveAt: '2021-02-13T21:37:00.000Z',
     };
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
 

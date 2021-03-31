@@ -23,7 +23,7 @@ const WheelBorder = styled.img`
   width: 75vh;
 `;
 
-const FortuneWheelRaffle = props => {
+const FortuneWheelRaffle = (props) => {
   const [users, setUsers] = useState([]);
   const [scrollSize, setScrollSize] = useState(0);
   const [winner, setWinner] = useState(null);
@@ -47,9 +47,9 @@ const FortuneWheelRaffle = props => {
 
   useEffect(() => {
     db.table('users')
-      .filter(user => user.isEligible === true)
+      .filter((user) => user.isEligible === true)
       .toArray()
-      .then(items => {
+      .then((items) => {
         const shuffled = [];
         for (let i = 0; i < 10; i += 1) {
           shuffled.push(items[Math.floor(Math.random() * items.length)]);
@@ -117,6 +117,7 @@ const FortuneWheelRaffle = props => {
   return (
     <DialogRoot>
       <button
+        aria-label="stop the wheel immediately"
         className="dialog-backdrop"
         onClick={closeImmediately}
         type="button"

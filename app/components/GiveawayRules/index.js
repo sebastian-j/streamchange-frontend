@@ -19,7 +19,7 @@ import WinnerView from '../WinnerView';
 const UserTypeButton = styled.button`
   background-color: transparent;
   border: 1px solid gray;
-  color: ${props => props.theme.buttonTextColor};
+  color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
   padding: 6px 12px;
   outline: none;
@@ -57,7 +57,7 @@ export class GiveawayRules extends React.Component {
     const { name } = target;
     if (name === 'forMods') {
       this.setState(
-        prevState => ({
+        (prevState) => ({
           forMods: !prevState.forMods,
         }),
         () => {
@@ -66,7 +66,7 @@ export class GiveawayRules extends React.Component {
       );
     } else if (name === 'forSponsors') {
       this.setState(
-        prevState => ({
+        (prevState) => ({
           forSponsors: !prevState.forSponsors,
         }),
         () => {
@@ -75,7 +75,7 @@ export class GiveawayRules extends React.Component {
       );
     } else if (name === 'forRegulars') {
       this.setState(
-        prevState => ({
+        (prevState) => ({
           forRegulars: !prevState.forRegulars,
         }),
         () => {
@@ -145,12 +145,12 @@ export class GiveawayRules extends React.Component {
           <FormattedMessage {...messages.regulars} />
         </UserTypeButton>
         <FormattedMessage {...messages.prize}>
-          {label => (
+          {(label) => (
             <StyledTextField
               autoFocus
               margin="dense"
               name="prize"
-              onChange={event => {
+              onChange={(event) => {
                 this.props.changePrize(event.target.value);
               }}
               label={label}
@@ -180,12 +180,9 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changePrize: a => dispatch(changePrize(a)),
+    changePrize: (a) => dispatch(changePrize(a)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GiveawayRules);
+export default connect(mapStateToProps, mapDispatchToProps)(GiveawayRules);

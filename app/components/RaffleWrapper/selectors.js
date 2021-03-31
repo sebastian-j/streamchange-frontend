@@ -4,25 +4,16 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the RaffleWrapper state domain
  */
-const selectRaffle = state => state.raffleWrapper || initialState;
+const selectRaffle = (state) => state.raffleWrapper || initialState;
 
 const makeSelectAnimation = () =>
-  createSelector(
-    selectRaffle,
-    raffleState => raffleState.animationType,
-  );
+  createSelector(selectRaffle, (raffleState) => raffleState.animationType);
 
 const makeSelectDuration = () =>
-  createSelector(
-    selectRaffle,
-    raffleState => raffleState.animationDuration,
-  );
+  createSelector(selectRaffle, (raffleState) => raffleState.animationDuration);
 
 const makeSelectVisibility = () =>
-  createSelector(
-    selectRaffle,
-    raffleState => raffleState.isOpen,
-  );
+  createSelector(selectRaffle, (raffleState) => raffleState.isOpen);
 
 export {
   selectRaffle,

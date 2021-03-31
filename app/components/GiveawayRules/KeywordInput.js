@@ -10,10 +10,10 @@ import StyledTextField from '../StyledTextField';
 const ToggleVisibilityBtn = styled.button`
   background-color: transparent;
   border: none;
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   outline: none;
   &:hover {
-    color: ${props => props.theme.color};
+    color: ${(props) => props.theme.color};
   }
   & * {
     pointer-events: none;
@@ -33,7 +33,7 @@ const KeywordInput = () => {
     setKeyword(storedKeyword);
   }, []);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     if (event.target.value.includes(localStorage.getItem('gv-abortCommand'))) {
       setError('Komenda na dołączenie nie może zawierać komendy rezygnacji.');
       return;
@@ -42,11 +42,11 @@ const KeywordInput = () => {
     setKeyword(event.target.value);
     localStorage.setItem('keyword', event.target.value);
   };
-  const handleToggleButton = () => setVisible(prevState => !prevState);
+  const handleToggleButton = () => setVisible((prevState) => !prevState);
 
   return (
     <FormattedMessage {...messages.keyword}>
-      {label => (
+      {(label) => (
         <StyledTextField
           autoFocus
           error={!!error}
@@ -63,7 +63,7 @@ const KeywordInput = () => {
             endAdornment: (
               <InputAdornment position="end">
                 <FormattedMessage {...messages.keywordVisibility}>
-                  {title => (
+                  {(title) => (
                     <Tooltip title={title} aria-label="add">
                       <ToggleVisibilityBtn
                         aria-label="toggle keyword visibility"

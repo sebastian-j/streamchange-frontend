@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserList /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
+<UserList__UserListPanel>
+  <PanelTitle>
     <FormattedMessage
       defaultMessage="Users"
       id="streamchange.components.UserList.title"
       values={Object {}}
     />
-  </ForwardRef>
+  </PanelTitle>
   <FormattedMessage
     defaultMessage="Search"
     id="streamchange.components.UserList.search.placeholder"
@@ -16,8 +16,8 @@ exports[`<UserList /> should render and match the snapshot 1`] = `
   >
     [Function]
   </FormattedMessage>
-  <ForwardRef />
-  <ForwardRef
+  <UserList__Ul />
+  <UserList__StyledButton
     onClick={[Function]}
   >
     <FormattedMessage
@@ -25,8 +25,8 @@ exports[`<UserList /> should render and match the snapshot 1`] = `
       id="streamchange.components.UserList.clearBtn"
       values={Object {}}
     />
-  </ForwardRef>
-  <ForwardRef>
+  </UserList__StyledButton>
+  <UserList__Counts>
     <FormattedMessage
       defaultMessage="{selected} out of {all} are participating"
       id="streamchange.components.UserList.counter"
@@ -37,6 +37,6 @@ exports[`<UserList /> should render and match the snapshot 1`] = `
         }
       }
     />
-  </ForwardRef>
-</ForwardRef>
+  </UserList__Counts>
+</UserList__UserListPanel>
 `;

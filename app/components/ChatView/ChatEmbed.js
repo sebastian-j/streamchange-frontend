@@ -13,9 +13,7 @@ function ChatEmbed(props) {
     <ChatFrame
       className="chat-frame"
       title="Youtube Chat"
-      src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${
-        window.location.hostname
-      }`}
+      src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${window.location.hostname}`}
     />
   );
 }

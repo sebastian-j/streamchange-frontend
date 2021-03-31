@@ -11,40 +11,36 @@ import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
-  color: ${props => props.theme.subStatusPositive};
+  color: ${(props) => props.theme.subStatusPositive};
   font-weight: bold;
   font-size: 0.9rem;
   padding-bottom: 3px;
 `;
 
 const NotSubscribed = styled.span`
-  color: ${props => props.theme.subStatusNegative};
+  color: ${(props) => props.theme.subStatusNegative};
   font-weight: bold;
   font-size: 0.9rem;
   padding-bottom: 3px;
 `;
 
 const PrivateSubs = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   font-size: 0.9rem;
   max-width: 60%;
   padding-bottom: 3px;
 `;
 
-const SubStatus = props => {
+const SubStatus = (props) => {
   const [status, setStatus] = useState(null);
   const [subscriberFrom, setSubscriberFrom] = useState(null);
 
   const checkStatus = () => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${
-          props.id
-        }&forChannelId=${props.ownerId}&fields=items/snippet/publishedAt&key=${
-          props.apiKey
-        }`,
+        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${props.id}&forChannelId=${props.ownerId}&fields=items/snippet/publishedAt&key=${props.apiKey}`,
       )
-      .then(res => {
+      .then((res) => {
         if (res.data.items.length > 0) {
           setStatus('true');
           setSubscriberFrom(res.data.items[0].snippet.publishedAt);
@@ -52,7 +48,7 @@ const SubStatus = props => {
           setStatus('false');
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (
           err.response &&
           err.response.data &&
@@ -110,7 +106,4 @@ const mapStateToProps = createStructuredSelector({
   ownerId: makeSelectOwnerId(),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(SubStatus);
+export default connect(mapStateToProps, null)(SubStatus);

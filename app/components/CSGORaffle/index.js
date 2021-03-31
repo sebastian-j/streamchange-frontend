@@ -7,7 +7,7 @@ import db from '../YoutubeWorker/db';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 import './style.css';
 
-const CSGORaffle = props => {
+const CSGORaffle = (props) => {
   const [users, setUsers] = useState([]);
   const [scrollSize, setScrollSize] = useState(0);
   const [winner, setWinner] = useState(null);
@@ -20,9 +20,9 @@ const CSGORaffle = props => {
 
   useEffect(() => {
     db.table('users')
-      .filter(user => user.isEligible === true)
+      .filter((user) => user.isEligible === true)
       .toArray()
-      .then(items => {
+      .then((items) => {
         const shuffled = [];
         for (let i = 0; i < 30 + props.duration * 3; i += 1) {
           shuffled.push(items[Math.floor(Math.random() * items.length)]);
@@ -49,6 +49,7 @@ const CSGORaffle = props => {
   return (
     <div className="dialog-root">
       <button
+        aria-label="stop the raffle immediately"
         className="dialog-backdrop"
         onClick={closeImmediately}
         type="button"
@@ -65,7 +66,7 @@ const CSGORaffle = props => {
                   transitionDuration: `${props.duration}s`,
                 }}
               >
-                {users.map(item => (
+                {users.map((item) => (
                   <td>
                     <div className="roller-cell">
                       <img src={item.imageUrl} alt="logo" />
@@ -102,7 +103,4 @@ const mapStateToProps = createStructuredSelector({
   preWinner: makeSelectGiveawayPreWinner(),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(CSGORaffle);
+export default connect(mapStateToProps, null)(CSGORaffle);

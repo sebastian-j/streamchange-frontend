@@ -19,13 +19,13 @@ import SuperChat from './SuperChat';
 import db from './db';
 
 const ThreeSections = styled.div`
-  background-color: ${props => props.theme.bodyBackground};
+  background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: row;
   height: 95vh;
 `;
 
-const QueueWorker = props => {
+const QueueWorker = (props) => {
   const [timer, setTimer] = useState(null);
   const [superChat, setSuperChat] = useState(null);
 
@@ -36,11 +36,9 @@ const QueueWorker = props => {
     }
     axios
       .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${
-          props.videoId
-        }&pageToken=${nextPageToken}`,
+        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
       )
-      .then(res => {
+      .then((res) => {
         localStorage.setItem('nextPageToken', res.data.nextPageToken);
         for (let i = 0; i < res.data.items.length; i += 1) {
           const author = {
@@ -62,11 +60,11 @@ const QueueWorker = props => {
             .where('id')
             .equals(author.id)
             .first()
-            .then(user => {
+            .then((user) => {
               if (user === undefined && isEligible) {
                 db.table('queue')
                   .toArray()
-                  .then(items => {
+                  .then((items) => {
                     if (
                       items.length <
                       parseInt(localStorage.getItem('queue-capacity'), 10)
@@ -95,7 +93,7 @@ const QueueWorker = props => {
       });
   };
 
-  const saveMessage = msg => {
+  const saveMessage = (msg) => {
     const chatViewMessage = {
       authorId: msg.authorDetails.channelId,
       displayText: msg.snippet.displayMessage,
@@ -136,7 +134,7 @@ const QueueWorker = props => {
     }
   };
 
-  const checkResignation = author => {
+  const checkResignation = (author) => {
     if (
       localStorage.getItem('gv-abortCommand') !== null &&
       author.message === localStorage.getItem('gv-abortCommand')
@@ -177,16 +175,13 @@ QueueWorker.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    addMessage: m => dispatch(addMessage(m)),
-    deleteItem: id => dispatch(deleteQueueItem(id)),
-    onColorChange: col => dispatch(changeColor(col)),
-    pushItem: item => dispatch(pushQueueItem(item)),
-    updateItem: item => dispatch(updateQueueItem(item)),
+    addMessage: (m) => dispatch(addMessage(m)),
+    deleteItem: (id) => dispatch(deleteQueueItem(id)),
+    onColorChange: (col) => dispatch(changeColor(col)),
+    pushItem: (item) => dispatch(pushQueueItem(item)),
+    updateItem: (item) => dispatch(updateQueueItem(item)),
     dispatch,
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(QueueWorker);
+export default connect(null, mapDispatchToProps)(QueueWorker);

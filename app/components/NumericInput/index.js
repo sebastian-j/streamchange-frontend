@@ -8,15 +8,15 @@ const Container = styled.div`
 `;
 
 const Label = styled.div`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   line-height: 30px;
   margin-right: 5px;
 `;
 const Button = styled.button`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
+  background: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
   border-radius: 0 4px 4px 0;
-  color: ${props => props.theme.buttonTextColor};
+  color: ${(props) => props.theme.buttonTextColor};
   font-size: 1.5rem;
   line-height: 23px;
   height: 30px;
@@ -29,22 +29,22 @@ const Button = styled.button`
     border-radius: 4px 0 0 4px;
   `}
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
 const NumberDisplay = styled.input`
   background: transparent;
   border: 1px solid gray;
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   font-size: 1.5rem;
   height: 100%;
   max-width: 70px;
   padding: 0 10px;
 `;
 
-const NumericInput = props => {
+const NumericInput = (props) => {
   const inc = () => {
     let val = props.value;
     if (props.maxValue === null || val + props.step < props.maxValue) {
@@ -78,7 +78,7 @@ const NumericInput = props => {
       </Button>
       <NumberDisplay
         value={props.value}
-        onChange={event => props.onChange(event.target.value)}
+        onChange={(event) => props.onChange(event.target.value)}
         onBlur={checkValue}
       />
       <Button onClick={inc} type="button">

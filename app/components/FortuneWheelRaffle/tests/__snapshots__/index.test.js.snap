@@ -1,14 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FortuneWheelRaffle /> should render and match the snapshot 1`] = `
-<ForwardRef>
+<DialogRoot>
   <button
+    aria-label="stop the wheel immediately"
     className="dialog-backdrop"
     onClick={[Function]}
     type="button"
   />
-  <ForwardRef>
-    <ForwardRef
+  <RaffleDialog>
+    <FortuneWheelRaffle__WheelMovable
       style={
         Object {
           "position": "absolute",
@@ -17,20 +18,20 @@ exports[`<FortuneWheelRaffle /> should render and match the snapshot 1`] = `
         }
       }
     >
-      <ForwardRef
+      <FortuneWheelRaffle__WheelImg
         src="IMAGE_MOCK"
       />
-    </ForwardRef>
-    <ForwardRef
+    </FortuneWheelRaffle__WheelMovable>
+    <FortuneWheelRaffle__WheelBorder
       src="IMAGE_MOCK"
     />
-    <ForwardRef
+    <RaffleWinner
       style={
         Object {
           "animationDelay": "7.1s",
         }
       }
     />
-  </ForwardRef>
-</ForwardRef>
+  </RaffleDialog>
+</DialogRoot>
 `;

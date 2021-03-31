@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HistoryTable /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
+<HistoryTable__Table>
+  <HistoryTable__Thead>
     <tr>
       <td />
       <td>
-        <ForwardRef
+        <HistoryTable__HeaderButton
           id="displayName"
           onClick={[Function]}
           type="button"
@@ -19,10 +19,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </ForwardRef>
+        </HistoryTable__HeaderButton>
       </td>
       <td>
-        <ForwardRef
+        <HistoryTable__HeaderButton
           id="prize"
           onClick={[Function]}
           type="button"
@@ -35,10 +35,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </ForwardRef>
+        </HistoryTable__HeaderButton>
       </td>
       <td>
-        <ForwardRef
+        <HistoryTable__HeaderButton
           id="message"
           onClick={[Function]}
           type="button"
@@ -51,10 +51,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </ForwardRef>
+        </HistoryTable__HeaderButton>
       </td>
       <td>
-        <ForwardRef
+        <HistoryTable__HeaderButton
           id="createdAt"
           onClick={[Function]}
           type="button"
@@ -67,10 +67,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon active icon-direction-desc"
           />
-        </ForwardRef>
+        </HistoryTable__HeaderButton>
       </td>
     </tr>
-  </ForwardRef>
+  </HistoryTable__Thead>
   <tbody>
     <HistoryItem
       channelId="id"
@@ -78,5 +78,5 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
       displayName="name"
     />
   </tbody>
-</ForwardRef>
+</HistoryTable__Table>
 `;

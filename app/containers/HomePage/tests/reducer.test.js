@@ -21,7 +21,7 @@ describe('homePageReducer', () => {
 
   it('should handle the changeOwnerId action correctly', () => {
     const fixture = 'id';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.ownerId = fixture;
     });
 

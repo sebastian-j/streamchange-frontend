@@ -32,7 +32,7 @@ const Image = styled.img`
   width: 31vw;
 `;
 
-const PromotedBanner = props => {
+const PromotedBanner = (props) => {
   const [imgHeight, setImgHeight] = useState(0);
   const isVideo = props.imageUrl.substr(props.imageUrl.length - 3) === 'mp4';
 

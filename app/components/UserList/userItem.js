@@ -18,20 +18,20 @@ const Svg = styled.svg`
 const UserButton = styled.button`
   background: none;
   border: none;
-  color: ${props => props.theme.inactiveUser};
+  color: ${(props) => props.theme.inactiveUser};
   cursor: pointer;
   line-height: 1.43;
   margin: 6px 5px;
   padding: 0;
   outline: 0;
-  ${props =>
+  ${(props) =>
     props.isEligible &&
     `
     color: ${props.theme.color};
 `}
 `;
 
-const UserItem = props => {
+const UserItem = (props) => {
   const toggleEligible = () => {
     props.handleToggleUser(props.channelId);
   };

@@ -16,7 +16,7 @@ import messages from './messages';
 
 const Backdrop = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.bodyBackground};
+  background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +25,7 @@ const Backdrop = styled.div`
   width: 100vw;
 `;
 const Title = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   display: block;
   font-size: 2rem;
   margin-bottom: 1vh;
@@ -118,23 +118,23 @@ const ThemeImg = styled.img`
 `;
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.materialButtonColor};
+    color: ${(props) => props.theme.materialButtonColor};
     font-size: 1.25rem;
   }
 `;
 
-const FirstUseScreen = props => {
+const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem('darkMode') === 'true',
   );
   const [language, setLanguage] = useState(props.locale);
 
-  const changeLanguage = event => {
+  const changeLanguage = (event) => {
     setLanguage(event.target.value);
     props.onLocaleToggle(event.target.value);
   };
 
-  const changeTheme = event => {
+  const changeTheme = (event) => {
     setDarkMode(event.target.value === '1');
     localStorage.setItem('darkMode', event.target.value === '1');
   };
@@ -237,21 +237,15 @@ FirstUseScreen.propTypes = {
   locale: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
+  locale,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLocaleToggle: value => dispatch(changeLocale(value)),
+    onLocaleToggle: (value) => dispatch(changeLocale(value)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FirstUseScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FirstUseScreen);

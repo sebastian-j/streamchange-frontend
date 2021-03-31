@@ -22,17 +22,17 @@ import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
 
 const SettingsButton = styled.button`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.color};
+  background: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
+  color: ${(props) => props.theme.color};
   border-radius: 4px;
   height: 80%;
   padding: 3px 5px;
   margin: 10px 15px 0 0;
   text-decoration: none;
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
@@ -42,7 +42,7 @@ const HintParagraph = styled.span`
   display: block;
 `;
 
-const SettingsDialog = props => {
+const SettingsDialog = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [themeColor, setThemeColor] = useState(props.themeColor);
   const [saveCommands, setSaveCommands] = useState(false);
@@ -58,7 +58,7 @@ const SettingsDialog = props => {
     setIsOpen(false);
   };
 
-  const changeThemeColor = value => {
+  const changeThemeColor = (value) => {
     setThemeColor(value);
   };
 
@@ -105,7 +105,7 @@ const SettingsDialog = props => {
         <DialogContent>
           <DarkModeSwitch />
           <FormattedMessage {...messages.themeColor}>
-            {label => (
+            {(label) => (
               <ColorPicker
                 color={themeColor}
                 handleChange={(name, value) => changeThemeColor(value)}
@@ -117,7 +117,7 @@ const SettingsDialog = props => {
           <LocaleToggle />
           <div>
             <FormattedMessage {...messages.saveCommandsLabel}>
-              {label => (
+              {(label) => (
                 <Tooltip
                   title={
                     <HintParagraph>
@@ -129,7 +129,7 @@ const SettingsDialog = props => {
                     control={
                       <Checkbox
                         checked={saveCommands}
-                        onChange={event =>
+                        onChange={(event) =>
                           setSaveCommands(event.target.checked)
                         }
                         color="primary"
@@ -144,7 +144,7 @@ const SettingsDialog = props => {
             </FormattedMessage>
           </div>
           <FormattedMessage {...messages.deleteWinnerLabel}>
-            {label => (
+            {(label) => (
               <Tooltip
                 title={
                   <HintParagraph>
@@ -156,7 +156,9 @@ const SettingsDialog = props => {
                   control={
                     <Checkbox
                       checked={deleteWinner}
-                      onChange={event => setDeleteWinner(event.target.checked)}
+                      onChange={(event) =>
+                        setDeleteWinner(event.target.checked)
+                      }
                       color="primary"
                       name="deleteWinner"
                       type="checkbox"
@@ -168,14 +170,14 @@ const SettingsDialog = props => {
             )}
           </FormattedMessage>
           <FormattedMessage {...messages.resignationCommand}>
-            {label => (
+            {(label) => (
               <TextField
                 error={!!error}
                 id="abortCommand"
                 name="abortCommand"
                 label={label}
                 value={abortCommand}
-                onChange={event => {
+                onChange={(event) => {
                   setAbortCommand(event.target.value);
                   setError(null);
                 }}
@@ -204,21 +206,15 @@ SettingsDialog.propTypes = {
   themeColor: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectColor(),
-  themeColor => ({
-    themeColor,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectColor(), (themeColor) => ({
+  themeColor,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onColorChange: col => dispatch(changeColor(col)),
+    onColorChange: (col) => dispatch(changeColor(col)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SettingsDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsDialog);

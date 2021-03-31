@@ -20,7 +20,7 @@ describe('giveawayRulesReducer', () => {
 
   it('should handle the changeKeyword action correctly', () => {
     const fixture = 'join the raffle';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.keyword = fixture;
     });
 
@@ -31,7 +31,7 @@ describe('giveawayRulesReducer', () => {
 
   it('should handle the changePreWinner action correctly', () => {
     const fixture = { id: 'id2' };
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.preWinner = fixture;
     });
 
@@ -42,7 +42,7 @@ describe('giveawayRulesReducer', () => {
 
   it('should handle the changePrize action correctly', () => {
     const fixture = 'cash';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.prize = fixture;
     });
 

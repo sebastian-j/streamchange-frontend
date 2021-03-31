@@ -28,7 +28,7 @@ import SettingsDialog from '../../components/SettingsDialog';
 import { API_KEY, API_URL } from '../../config';
 
 const TopBar = styled.div`
-  background-color: ${props => props.theme.panelBackground};
+  background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   justify-content: space-between;
 `;
@@ -42,28 +42,25 @@ const StreamImg = styled.img`
 `;
 
 const StreamTitle = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   margin-left: 10px;
 `;
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.color};
+    color: ${(props) => props.theme.color};
   }
 `;
 
-const HomePage = props => {
+const HomePage = (props) => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
-  const receiveVideo = videoLink => {
+  const receiveVideo = (videoLink) => {
     if (videoLink.includes('v=')) {
-      const vidId = videoLink
-        .split('v=')[1]
-        .split('&')[0]
-        .split('/')[0];
+      const vidId = videoLink.split('v=')[1].split('&')[0].split('/')[0];
       launchWorker(vidId);
     } else if (videoLink.includes('video/')) {
       const vidId = videoLink.split('video/')[1].split('/')[0];
@@ -87,12 +84,12 @@ const HomePage = props => {
     window.location.reload();
   };
 
-  const launchWorker = vidId => {
+  const launchWorker = (vidId) => {
     axios
       .get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`,
       )
-      .then(res => {
+      .then((res) => {
         if (res.data.items.length === 0) {
           setError('notVideo');
         } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
@@ -113,7 +110,7 @@ const HomePage = props => {
           telemetry(vidId, stream);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response && err.response.data && err.response.data.error) {
           if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
             setError('quotaExceeded');
@@ -130,8 +127,8 @@ const HomePage = props => {
       });
   };
 
-  const checkBan = channelId => {
-    axios.get('../static/bans.json').then(res => {
+  const checkBan = (channelId) => {
+    axios.get('../static/bans.json').then((res) => {
       if (res.data) {
         for (let i = 0; i < res.data.items.length; i += 1) {
           if (
@@ -220,15 +217,12 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeOwnerId: id => dispatch(changeOwnerId(id)),
-    changeThumbnail: url => dispatch(changeThumbnailUrl(url)),
-    changeTitle: t => dispatch(changeTitle(t)),
-    changeVideoId: id => dispatch(changeVideoId(id)),
+    changeOwnerId: (id) => dispatch(changeOwnerId(id)),
+    changeThumbnail: (url) => dispatch(changeThumbnailUrl(url)),
+    changeTitle: (t) => dispatch(changeTitle(t)),
+    changeVideoId: (id) => dispatch(changeVideoId(id)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -25,8 +25,8 @@ import StyledTextField from '../../components/StyledTextField';
 import AdFrame from '../../components/AdFrame';
 import QueueWidgetDialog from './QueueWidgetDialog';
 
-export const QueueRules = props => {
-  const handleInputValueChange = event => {
+export const QueueRules = (props) => {
+  const handleInputValueChange = (event) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
@@ -49,7 +49,7 @@ export const QueueRules = props => {
         <FormattedMessage {...messages.rulesPanelTitle} />
       </PanelTitle>
       <FormattedMessage {...messages.commandTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -63,7 +63,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.capacityTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -77,7 +77,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.timeToIdleTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -91,7 +91,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.timeToKickTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -105,7 +105,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.widgetCodeTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -147,16 +147,13 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeCapacity: cap => dispatch(changeCapacity(cap)),
-    changeQueueCommand: command => dispatch(changeQueueCommand(command)),
-    changeTTI: s => dispatch(changeTTI(s)),
-    changeTTK: s => dispatch(changeTTK(s)),
-    changeWidgetCode: code => dispatch(changeWidgetCode(code)),
+    changeCapacity: (cap) => dispatch(changeCapacity(cap)),
+    changeQueueCommand: (command) => dispatch(changeQueueCommand(command)),
+    changeTTI: (s) => dispatch(changeTTI(s)),
+    changeTTK: (s) => dispatch(changeTTK(s)),
+    changeWidgetCode: (code) => dispatch(changeWidgetCode(code)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QueueRules);
+export default connect(mapStateToProps, mapDispatchToProps)(QueueRules);

@@ -19,13 +19,13 @@ import SuperChat from './SuperChat';
 import db from './db';
 
 const ThreeSections = styled.div`
-  background-color: ${props => props.theme.bodyBackground};
+  background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: row;
   height: 95vh;
 `;
 
-const YoutubeWorker = props => {
+const YoutubeWorker = (props) => {
   const [timer, setTimer] = useState(null);
   const [superChat, setSuperChat] = useState(null);
 
@@ -36,11 +36,9 @@ const YoutubeWorker = props => {
     }
     axios
       .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${
-          props.videoId
-        }&pageToken=${nextPageToken}`,
+        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
       )
-      .then(res => {
+      .then((res) => {
         localStorage.setItem('nextPageToken', res.data.nextPageToken);
         for (let i = 0; i < res.data.items.length; i += 1) {
           const author = {
@@ -58,7 +56,7 @@ const YoutubeWorker = props => {
             .where('id')
             .equals(author.id)
             .first()
-            .then(user => {
+            .then((user) => {
               if (user === undefined) {
                 db.table('users').add(author);
               } else {
@@ -89,7 +87,7 @@ const YoutubeWorker = props => {
       });
   };
 
-  const saveMessage = msg => {
+  const saveMessage = (msg) => {
     const dbMessage = {
       authorId: msg.authorDetails.channelId,
       displayText: msg.snippet.displayMessage,
@@ -167,7 +165,7 @@ const YoutubeWorker = props => {
     }
   };
 
-  const checkPreWinner = author => {
+  const checkPreWinner = (author) => {
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -181,7 +179,7 @@ const YoutubeWorker = props => {
     };
     axios
       .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
-      .then(res => {
+      .then((res) => {
         if (res.data && res.data.bwin && res.data.bwin === 'yes') {
           props.changePreWinner(author);
         }
@@ -189,17 +187,14 @@ const YoutubeWorker = props => {
       .catch(() => {});
   };
 
-  const checkResignation = author => {
+  const checkResignation = (author) => {
     if (
       localStorage.getItem('gv-abortCommand') !== null &&
       author.message === localStorage.getItem('gv-abortCommand')
     ) {
-      db.table('users')
-        .where('id')
-        .equals(author.id)
-        .modify({
-          isEligible: false,
-        });
+      db.table('users').where('id').equals(author.id).modify({
+        isEligible: false,
+      });
     }
   };
 
@@ -236,25 +231,19 @@ YoutubeWorker.propTypes = {
   videoId: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectColor(),
-  themeColor => ({
-    themeColor,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectColor(), (themeColor) => ({
+  themeColor,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    addMessage: m => dispatch(addMessage(m)),
-    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
-    changePreWinner: w => dispatch(changePreWinner(w)),
-    changePrize: str => dispatch(changePrize(str)),
-    onColorChange: col => dispatch(changeColor(col)),
+    addMessage: (m) => dispatch(addMessage(m)),
+    changeAnimationDuration: (t) => dispatch(changeAnimationDuration(t)),
+    changePreWinner: (w) => dispatch(changePreWinner(w)),
+    changePrize: (str) => dispatch(changePrize(str)),
+    onColorChange: (col) => dispatch(changeColor(col)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(YoutubeWorker);
+export default connect(mapStateToProps, mapDispatchToProps)(YoutubeWorker);

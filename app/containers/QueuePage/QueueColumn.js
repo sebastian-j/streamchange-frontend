@@ -15,7 +15,7 @@ import { makeSelectQueueArray } from './selectors';
 import { getQueueFromIdb, purgeQueue } from './actions';
 
 const UserListPanel = styled.div`
-  background-color: ${props => props.theme.panelBackground};
+  background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   flex-direction: column;
   flex-basis: 0;
@@ -32,7 +32,7 @@ const Ul = styled.ul`
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.color};
+    color: ${(props) => props.theme.color};
   }
 `;
 
@@ -51,7 +51,7 @@ export class QueueColumn extends React.Component {
   getUsers() {
     db.table('queue')
       .toArray()
-      .then(items => {
+      .then((items) => {
         let it = Array.from(items);
         const now = new Date();
         for (let i = 0; i < it.length; i += 1) {
@@ -65,7 +65,7 @@ export class QueueColumn extends React.Component {
           }
         }
         it = it.filter(
-          value =>
+          (value) =>
             (now.getTime() - value.lastActiveAtDate.getTime()) / 1000 <
             parseInt(localStorage.getItem('queue-timeToKick'), 10),
         );
@@ -99,7 +99,7 @@ export class QueueColumn extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <FormattedMessage {...messages.searchPlaceholder}>
-          {placeholder => (
+          {(placeholder) => (
             <StyledTextField
               autoFocus
               margin="dense"
@@ -113,7 +113,7 @@ export class QueueColumn extends React.Component {
           )}
         </FormattedMessage>
         <Ul>
-          {this.props.queueArray.map(item => (
+          {this.props.queueArray.map((item) => (
             <QueueItem
               key={item.id}
               addedAt={item.addedAt}
@@ -146,13 +146,10 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getQueueFromIdb: arr => dispatch(getQueueFromIdb(arr)),
+    getQueueFromIdb: (arr) => dispatch(getQueueFromIdb(arr)),
     purgeQueue: () => dispatch(purgeQueue()),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QueueColumn);
+export default connect(mapStateToProps, mapDispatchToProps)(QueueColumn);

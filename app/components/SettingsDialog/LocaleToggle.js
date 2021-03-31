@@ -13,7 +13,7 @@ import { changeLocale } from '../../containers/LanguageProvider/actions';
 import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
 
 export function LocaleToggle(props) {
-  const toggle = event => {
+  const toggle = (event) => {
     localStorage.setItem('locale', event.target.value);
     props.onLocaleToggle(event);
   };
@@ -24,7 +24,7 @@ export function LocaleToggle(props) {
         <FormattedMessage {...messages.localeTitle} />
       </Typography>
       <Select onChange={toggle} value={props.locale}>
-        {appLocales.map(item => (
+        {appLocales.map((item) => (
           <MenuItem value={item}>
             <FormattedMessage {...messages[item]} />
           </MenuItem>
@@ -39,21 +39,15 @@ LocaleToggle.propTypes = {
   locale: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
+  locale,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLocaleToggle: evt => dispatch(changeLocale(evt.target.value)),
+    onLocaleToggle: (evt) => dispatch(changeLocale(evt.target.value)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LocaleToggle);
+export default connect(mapStateToProps, mapDispatchToProps)(LocaleToggle);

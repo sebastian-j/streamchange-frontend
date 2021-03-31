@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
-<ForwardRef
+<PromotedBanner__PromotedContentWrapper
   offset={0}
 >
-  <ForwardRef>
+  <PromotedBanner__AdTitle>
     <FormattedMessage
       defaultMessage="Advertisement"
       id="streamchange.components.AdFrame.title"
       values={Object {}}
     />
-  </ForwardRef>
+  </PromotedBanner__AdTitle>
   <a
     href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
     target="_blank"
   >
-    <ForwardRef
+    <PromotedBanner__Image
       onLoad={[Function]}
       src="url"
     />
   </a>
-</ForwardRef>
+</PromotedBanner__PromotedContentWrapper>
 `;

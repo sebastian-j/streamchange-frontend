@@ -9,7 +9,7 @@ export function insertOrUpdateItem(item) {
     .where('id')
     .equals(item.id)
     .first()
-    .then(user => {
+    .then((user) => {
       if (user === undefined) {
         db.table('queue').add(item);
       } else if (typeof user !== 'undefined') {

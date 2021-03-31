@@ -9,7 +9,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import messages from './messages';
 
 const UserListPanel = styled.div`
-  background-color: ${props => props.theme.panelBackground};
+  background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   flex-direction: column;
   flex-basis: 0;
@@ -26,12 +26,12 @@ const Ul = styled.ul`
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.color};
+    color: ${(props) => props.theme.color};
   }
 `;
 
 const Counts = styled.span`
-  color: ${props => props.theme.secondaryTextColor};
+  color: ${(props) => props.theme.secondaryTextColor};
   font-size: 0.9rem;
 `;
 
@@ -52,11 +52,11 @@ export default class UserList extends React.Component {
 
   getUsers() {
     db.table('users')
-      .filter(user =>
+      .filter((user) =>
         user.title.toLowerCase().includes(this.state.search.toLowerCase()),
       )
       .toArray()
-      .then(items => {
+      .then((items) => {
         this.setState({ items });
       });
   }
@@ -90,7 +90,7 @@ export default class UserList extends React.Component {
       .where('id')
       .equals(id)
       .first()
-      .then(user => {
+      .then((user) => {
         db.table('users')
           .where('id')
           .equals(id)
@@ -110,7 +110,7 @@ export default class UserList extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <FormattedMessage {...messages.searchPlaceholder}>
-          {placeholder => (
+          {(placeholder) => (
             <StyledTextField
               autoFocus
               margin="dense"
@@ -124,7 +124,7 @@ export default class UserList extends React.Component {
           )}
         </FormattedMessage>
         <Ul>
-          {this.state.items.map(item => (
+          {this.state.items.map((item) => (
             <UserItem
               key={item.id}
               channelId={item.id}
@@ -144,7 +144,7 @@ export default class UserList extends React.Component {
             {...messages.counter}
             values={{
               selected: this.state.items.filter(
-                item => item.isEligible === true,
+                (item) => item.isEligible === true,
               ).length,
               all: this.state.items.length,
             }}
