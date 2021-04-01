@@ -2,10 +2,10 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="FirstUseScreen__Backdrop-sc-18wtu21-0 fBIFTj"
+  class="FirstUseScreen__Backdrop-sc-18wtu21-0 kRYRQJ"
 >
   <span
-    class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+    class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
   >
     <span>
       Welcome to StreamChange
@@ -15,7 +15,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     class="tiles-grid"
   >
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
     >
       <span>
         Select theme
@@ -26,22 +26,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="box FirstUseScreen__Box-sc-18wtu21-3 bPAypJ"
+        class="FirstUseScreen__Box-sc-18wtu21-3 OIduv box"
       >
         <img
           alt="light"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 hUTxbC"
         >
           <span>
             Light
@@ -53,22 +53,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="box FirstUseScreen__Box-sc-18wtu21-3 kcBKzb"
+        class="FirstUseScreen__Box-sc-18wtu21-3 gGasQn box"
       >
         <img
           alt="dark"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 hUTxbC"
         >
           <span>
             Dark
@@ -81,7 +81,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     class="tiles-grid"
   >
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
     >
       <span>
         Select language
@@ -91,21 +91,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="box FirstUseScreen__LangBox-sc-18wtu21-4 iFLZEI"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 cEtBbI box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 iFXKdt"
         >
           <img
             alt="pl"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
             src="IMAGE_MOCK"
           />
           <span>
@@ -119,21 +119,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="box FirstUseScreen__LangBox-sc-18wtu21-4 hsnTTl"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 bFJctQ box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 iFXKdt"
         >
           <img
             alt="en"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
             src="IMAGE_MOCK"
           />
           <span>
@@ -145,7 +145,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 eyFmjv"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 ebjHJy"
       tabindex="0"
       type="button"
     >
@@ -156,6 +156,9 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
           Save
         </span>
       </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
     </button>
   </div>
 </div>

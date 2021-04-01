@@ -2,20 +2,20 @@
 
 exports[`<YoutubeWorker /> should match the snapshot 1`] = `
 <div
-  className="YoutubeWorker__ThreeSections-dpgts1-0 cjrDdj"
+  className="YoutubeWorker__ThreeSections-dpgts1-0 jqvYVV"
 >
   <div
-    className="UserList__UserListPanel-sc-7bgn44-0 gjWqbF"
+    className="UserList__UserListPanel-sc-7bgn44-0 gQHssp"
   >
     <h2
-      className="PanelTitle-sc-100fqnu-0 dfyaea"
+      className="PanelTitle-sc-100fqnu-0 kbneGZ"
     >
       <span>
         Users
       </span>
     </h2>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 hALyhx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
@@ -44,10 +44,10 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </div>
     </div>
     <ul
-      className="UserList__Ul-sc-7bgn44-1 dFcjyK"
+      className="UserList__Ul-sc-7bgn44-1 ekvGqm"
     />
     <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-text UserList__StyledButton-sc-7bgn44-2 hMUTnL"
+      className="MuiButtonBase-root MuiButton-root MuiButton-text UserList__StyledButton-sc-7bgn44-2 DqEeb"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -76,7 +76,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       />
     </button>
     <span
-      className="UserList__Counts-sc-7bgn44-3 hhpEOQ"
+      className="UserList__Counts-sc-7bgn44-3 jnaVUG"
     >
       <span>
         0 out of 0 are participating
@@ -84,10 +84,10 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     </span>
   </div>
   <div
-    className="Panel-sc-15d2ub8-0 hhnpCF"
+    className="Panel-sc-15d2ub8-0 lhlUwA"
   >
     <h2
-      className="PanelTitle-sc-100fqnu-0 dfyaea"
+      className="PanelTitle-sc-100fqnu-0 kbneGZ"
     >
       <span>
         Giveaway rules
@@ -124,7 +124,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </span>
     </button>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 hALyhx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
@@ -153,7 +153,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
+      className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 hALyhx MuiFormControl-marginDense MuiFormControl-fullWidth"
     >
       <label
         className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
@@ -188,7 +188,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           <button
             aria-describedby={null}
             aria-label="toggle keyword visibility"
-            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ejSEdz"
+            className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 iRUjJZ"
             name="showKeyword"
             onBlur={[Function]}
             onClick={[Function]}
@@ -219,7 +219,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     </div>
     <div>
       <div
-        className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 jqDDzA MuiFormControl-marginNormal"
+        className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 hJudSC MuiFormControl-marginNormal"
       >
         <label
           className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
@@ -270,28 +270,28 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         </div>
       </div>
       <div
-        className="NumericInput__Container-sc-2ueyqw-0 iGHMIM"
+        className="NumericInput__Container-sc-2ueyqw-0 eNCQqt"
       >
         <div
-          className="NumericInput__Label-sc-2ueyqw-1 fqrMbr"
+          className="NumericInput__Label-sc-2ueyqw-1 dNgzEf"
         >
           Animation duration (seconds)
         </div>
         <button
-          className="NumericInput__Button-sc-2ueyqw-2 iASXYJ"
+          className="NumericInput__Button-sc-2ueyqw-2 egZSpV"
           onClick={[Function]}
           type="button"
         >
           -
         </button>
         <input
-          className="NumericInput__NumberDisplay-sc-2ueyqw-3 iputsX"
+          className="NumericInput__NumberDisplay-sc-2ueyqw-3 hBwKoe"
           onBlur={[Function]}
           onChange={[Function]}
           value={7}
         />
         <button
-          className="NumericInput__Button-sc-2ueyqw-2 hSxBBT"
+          className="NumericInput__Button-sc-2ueyqw-2 ioDaXV"
           onClick={[Function]}
           type="button"
         >
@@ -299,7 +299,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
         </button>
       </div>
       <button
-        className="RaffleWrapper__StartButton-emso03-0 elFpup"
+        className="RaffleWrapper__StartButton-emso03-0 ffgcbq"
         disabled={false}
         onClick={[Function]}
         type="button"
@@ -311,7 +311,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     </div>
     <div>
       <div
-        className="AdFrame__AdPlaceholder-wocikk-0 eQlpDm"
+        className="AdFrame__AdPlaceholder-wocikk-0 imvSfJ"
       >
         <span>
           <span>
@@ -351,13 +351,13 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Panel-sc-15d2ub8-0 hhnpCF"
+    className="Panel-sc-15d2ub8-0 lhlUwA"
   >
     <div
-      className="ChatView__Header-zon57q-1 kTQsRs"
+      className="ChatView__Header-zon57q-1 jPQgSa"
     >
       <h2
-        className="PanelTitle-sc-100fqnu-0 dfyaea"
+        className="PanelTitle-sc-100fqnu-0 kbneGZ"
       >
         <span>
           Chat
@@ -386,7 +386,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
           className="MuiIconButton-label"
         >
           <svg
-            className="ChatView__ThemedSvg-zon57q-0 cQurPG"
+            className="ChatView__ThemedSvg-zon57q-0 eUqiEk"
             height="18px"
             viewBox="0 0 24 24"
             width="18px"
@@ -407,7 +407,7 @@ exports[`<YoutubeWorker /> should match the snapshot 1`] = `
       </button>
     </div>
     <iframe
-      className="chat-frame ChatEmbed__ChatFrame-sc-1ho4a0z-0 iCspyk"
+      className="ChatEmbed__ChatFrame-sc-1ho4a0z-0 ivfMqf chat-frame"
       src="https://www.youtube.com/live_chat?v=vidId&embed_domain=localhost"
       title="Youtube Chat"
     />

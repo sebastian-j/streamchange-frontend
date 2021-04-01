@@ -5,7 +5,7 @@
 import { memoryHistory } from 'react-router-dom';
 import { put } from 'redux-saga/effects';
 import renderer from 'react-test-renderer';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -78,19 +78,6 @@ describe('injectSaga decorator', () => {
       injectSaga({ key: 'test', saga: testSaga })(() => null).displayName,
     ).toBe('withSaga(Component)');
   });
-
-  it('should propagate props', () => {
-    const props = { testProp: 'test' };
-    const renderedComponent = renderer.create(
-      <Provider store={store}>
-        <ComponentWithSaga {...props} />
-      </Provider>,
-    );
-    const {
-      props: { children },
-    } = renderedComponent.getInstance();
-    expect(children.props).toEqual(props);
-  });
 });
 
 describe('useInjectSaga hook', () => {
@@ -127,11 +114,11 @@ describe('useInjectSaga hook', () => {
       </Provider>,
     );
 
-    expect(injectors.injectSaga).toHaveBeenCalledTimes(0);
-    // expect(injectors.injectSaga).toHaveBeenCalledWith('test', {
-    //   saga: testSaga,
-    //   mode: 'testMode',
-    // });
+    expect(injectors.injectSaga).toHaveBeenCalledTimes(1);
+    expect(injectors.injectSaga).toHaveBeenCalledWith('test', {
+      saga: testSaga,
+      mode: 'testMode',
+    });
   });
 
   it('should eject on unmount with a correct saga key', () => {
@@ -143,7 +130,7 @@ describe('useInjectSaga hook', () => {
     );
     unmount();
 
-    expect(injectors.ejectSaga).toHaveBeenCalledTimes(0);
-    // expect(injectors.ejectSaga).toHaveBeenCalledWith('test');
+    expect(injectors.ejectSaga).toHaveBeenCalledTimes(1);
+    expect(injectors.ejectSaga).toHaveBeenCalledWith('test');
   });
 });
