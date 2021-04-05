@@ -3,11 +3,9 @@ import axios from 'axios';
 import qs from 'qs';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import styled from 'styled-components';
 
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
-import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
@@ -26,7 +24,7 @@ const ThreeSections = styled.div`
 `;
 
 const YoutubeWorker = (props) => {
-  const [timer, setTimer] = useState(null);
+  const [timer, setTimer] = useState(0);
   const [superChat, setSuperChat] = useState(null);
 
   const messageProcessor = () => {
@@ -47,7 +45,9 @@ const YoutubeWorker = (props) => {
             title: res.data.items[i].authorDetails.displayName,
             message: res.data.items[i].snippet.displayMessage,
             isModerator: res.data.items[i].authorDetails.isChatModerator,
-            isSponsor: res.data.items[i].authorDetails.isChatSponsor,
+            isSponsor: res.data.items[i].authorDetails.isChatSponsor
+              ? res.data.items[i].authorDetails.sponsorBadge
+              : false,
             isEligible: res.data.items[i].snippet.displayMessage
               .toLowerCase()
               .includes(localStorage.getItem('keyword').toLowerCase()),
@@ -231,10 +231,6 @@ YoutubeWorker.propTypes = {
   videoId: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(makeSelectColor(), (themeColor) => ({
-  themeColor,
-}));
-
 export function mapDispatchToProps(dispatch) {
   return {
     addMessage: (m) => dispatch(addMessage(m)),
@@ -246,4 +242,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(YoutubeWorker);
+export default connect(null, mapDispatchToProps)(YoutubeWorker);
