@@ -11,6 +11,8 @@ describe('<PromotedBanner />', () => {
       <PromotedBanner
         channelUrl="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
         imageUrl="url"
+        testMargins
+        title="test-advertisement"
       />,
     );
     const renderedOutput = renderer.getRenderOutput();

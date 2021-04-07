@@ -2,9 +2,12 @@
 
 exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
 <PromotedBanner__PromotedContentWrapper
+  margin={1}
   offset={0}
 >
-  <PromotedBanner__AdTitle>
+  <PromotedBanner__AdTitle
+    margin={1}
+  >
     <FormattedMessage
       defaultMessage="Advertisement"
       id="streamchange.components.AdFrame.title"
@@ -15,9 +18,21 @@ exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
     href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
     target="_blank"
   >
-    <PromotedBanner__Image
-      onLoad={[Function]}
-      src="url"
+    <div>
+      <PromotedBanner__Image
+        alt="test-advertisement"
+        onLoad={[Function]}
+        src="url"
+      />
+    </div>
+    <PromotedBanner__Shield
+      margin={1}
+    />
+    <PromotedBanner__Shield
+      margin={1}
+    />
+    <PromotedBanner__Shield
+      margin={1}
     />
   </a>
 </PromotedBanner__PromotedContentWrapper>
