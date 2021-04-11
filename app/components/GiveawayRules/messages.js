@@ -12,17 +12,17 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Giveaway rules',
   },
-  moderators: {
-    id: `${scope}.moderators`,
-    defaultMessage: 'Moderators',
+  allViewers: {
+    id: `${scope}.forAll`,
+    defaultMessage: 'All viewers',
   },
   sponsors: {
-    id: `${scope}.sponsors`,
-    defaultMessage: 'Sponsors',
+    id: `${scope}.forSponsors`,
+    defaultMessage: 'Sponsors only',
   },
-  regulars: {
-    id: `${scope}.regulars`,
-    defaultMessage: 'Regulars',
+  userTypeLabel: {
+    id: `${scope}.userTypeLabel`,
+    defaultMessage: 'Who can participate in raffle',
   },
   keyword: {
     id: `${scope}.KeywordInput.label`,

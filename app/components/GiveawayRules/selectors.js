@@ -15,9 +15,13 @@ const makeSelectGiveawayPreWinner = () =>
 const makeSelectGiveawayPrize = () =>
   createSelector(selectRules, (rulesState) => rulesState.prize);
 
+const makeSelectGiveawayRequirement = () =>
+  createSelector(selectRules, (rulesState) => rulesState.requirement);
+
 export {
   selectRules,
   makeSelectGiveawayKeyword,
   makeSelectGiveawayPreWinner,
   makeSelectGiveawayPrize,
+  makeSelectGiveawayRequirement,
 };

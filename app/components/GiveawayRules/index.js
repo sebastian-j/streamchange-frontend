@@ -4,10 +4,17 @@ import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 import messages from './messages';
-import { makeSelectGiveawayPrize } from './selectors';
-import { changePrize } from './actions';
+import {
+  makeSelectGiveawayPrize,
+  makeSelectGiveawayRequirement,
+} from './selectors';
+import { changePrize, changeRequirement } from './actions';
 import AdFrame from '../AdFrame';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
@@ -16,73 +23,37 @@ import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
 
-const UserTypeButton = styled.button`
-  background-color: transparent;
-  border: 1px solid gray;
-  color: ${(props) => props.theme.buttonTextColor};
-  cursor: pointer;
-  padding: 6px 12px;
-  outline: none;
-  ${({ active }) =>
-    active &&
-    `
-    border: 1px solid #0094ff;
-    text-shadow: 0px 0px 4px #0cd2ef;
-  `}
+const StyledFormControl = styled(FormControl)`
+  width: 100%;
+  input {
+    color: ${(props) => props.theme.staticTextColor};
+  }
+  span,
+  svg {
+    color: ${(props) => props.theme.staticTextColor};
+  }
+  label span {
+    color: ${(props) => props.theme.inputLabel};
+  }
+  label.Mui-focused span {
+    color: ${(props) => props.theme.color};
+  }
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid ${(props) => props.theme.color};
+  }
+  .MuiInput-underline:after {
+    border-bottom: 2px solid ${(props) => props.theme.color};
+  }
 `;
 
 export class GiveawayRules extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      forMods: true,
-      forSponsors: true,
-      forRegulars: true,
       winnerId: null,
     };
-    this.handleToggleButton = this.handleToggleButton.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
     this.winHandler = this.winHandler.bind(this);
-  }
-
-  componentDidMount() {
-    const forMods = localStorage.getItem('gv-forMods') === 'true';
-    const forSponsors = localStorage.getItem('gv-forSponsors') === 'true';
-    const forRegulars = localStorage.getItem('gv-forRegulars') === 'true';
-    this.setState({ forMods, forSponsors, forRegulars });
-  }
-
-  handleToggleButton(event) {
-    const { target } = event;
-    const { name } = target;
-    if (name === 'forMods') {
-      this.setState(
-        (prevState) => ({
-          forMods: !prevState.forMods,
-        }),
-        () => {
-          localStorage.setItem('gv-forMods', this.state.forMods);
-        },
-      );
-    } else if (name === 'forSponsors') {
-      this.setState(
-        (prevState) => ({
-          forSponsors: !prevState.forSponsors,
-        }),
-        () => {
-          localStorage.setItem('gv-forSponsors', this.state.forSponsors);
-        },
-      );
-    } else if (name === 'forRegulars') {
-      this.setState(
-        (prevState) => ({
-          forRegulars: !prevState.forRegulars,
-        }),
-        () => {
-          localStorage.setItem('gv-forRegulars', this.state.forRegulars);
-        },
-      );
-    }
   }
 
   handleInputValueChange(event) {
@@ -120,30 +91,22 @@ export class GiveawayRules extends React.Component {
         <PanelTitle>
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
-        <UserTypeButton
-          name="forMods"
-          type="button"
-          active={this.state.forMods}
-          onClick={this.handleToggleButton}
-        >
-          <FormattedMessage {...messages.moderators} />
-        </UserTypeButton>
-        <UserTypeButton
-          name="forSponsors"
-          type="button"
-          active={this.state.forSponsors}
-          onClick={this.handleToggleButton}
-        >
-          <FormattedMessage {...messages.sponsors} />
-        </UserTypeButton>
-        <UserTypeButton
-          name="forRegulars"
-          type="button"
-          active={this.state.forRegulars}
-          onClick={this.handleToggleButton}
-        >
-          <FormattedMessage {...messages.regulars} />
-        </UserTypeButton>
+        <StyledFormControl margin="normal">
+          <InputLabel id="user-type-select">
+            <FormattedMessage {...messages.userTypeLabel} />
+          </InputLabel>
+          <Select
+            onChange={(event) => this.props.changeReq(event.target.value)}
+            value={this.props.requirement}
+          >
+            <MenuItem value={0}>
+              <FormattedMessage {...messages.allViewers} />
+            </MenuItem>
+            <MenuItem value={1}>
+              <FormattedMessage {...messages.sponsors} />
+            </MenuItem>
+          </Select>
+        </StyledFormControl>
         <FormattedMessage {...messages.prize}>
           {(label) => (
             <StyledTextField
@@ -171,16 +134,20 @@ export class GiveawayRules extends React.Component {
 GiveawayRules.propTypes = {
   apiKey: PropTypes.string.isRequired,
   changePrize: PropTypes.func.isRequired,
+  changeReq: PropTypes.func.isRequired,
   prize: PropTypes.string,
+  requirement: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   prize: makeSelectGiveawayPrize(),
+  requirement: makeSelectGiveawayRequirement(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     changePrize: (a) => dispatch(changePrize(a)),
+    changeReq: (r) => dispatch(changeRequirement(r)),
     dispatch,
   };
 }

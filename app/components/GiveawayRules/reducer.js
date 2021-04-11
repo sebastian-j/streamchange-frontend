@@ -5,12 +5,18 @@
  */
 import produce from 'immer';
 
-import { CHANGE_KEYWORD, CHANGE_PREWINNER, CHANGE_PRIZE } from './constants';
+import {
+  CHANGE_KEYWORD,
+  CHANGE_PARTICIPANT_REQUIREMENT,
+  CHANGE_PREWINNER,
+  CHANGE_PRIZE,
+} from './constants';
 
 export const initialState = {
   keyword: localStorage.getItem('keyword') || '',
   preWinner: null,
   prize: localStorage.getItem('gv-prize') || '',
+  requirement: 0,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -27,6 +33,9 @@ const giveawayRulesReducer = (state = initialState, action) =>
       case CHANGE_PRIZE:
         draft.prize = action.prize;
         localStorage.setItem('gv-prize', action.prize);
+        break;
+      case CHANGE_PARTICIPANT_REQUIREMENT:
+        draft.requirement = action.requirement;
         break;
     }
   });
