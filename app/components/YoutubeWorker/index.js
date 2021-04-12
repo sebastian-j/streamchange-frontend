@@ -10,6 +10,7 @@ import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
 import { changeAnimationDuration } from '../RaffleWrapper/actions';
+import { pushUser } from '../UserList/actions';
 import ChatView from '../ChatView';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
@@ -52,27 +53,8 @@ const YoutubeWorker = (props) => {
               .toLowerCase()
               .includes(localStorage.getItem('keyword').toLowerCase()),
           };
-          db.users
-            .where('id')
-            .equals(author.id)
-            .first()
-            .then((user) => {
-              if (user === undefined) {
-                db.table('users').add(author);
-              } else {
-                db.table('users')
-                  .where('id')
-                  .equals(author.id)
-                  .modify({
-                    message: author.isEligible ? author.message : user.message,
-                    isEligible:
-                      user.isEligible === true ? true : author.isEligible,
-                  })
-                  .then(() => {
-                    checkResignation(author);
-                  });
-              }
-            });
+          props.pushUser(author);
+          checkResignation(author);
           saveMessage(res.data.items[i]);
           superChatFeatures(author, res.data.items[i]);
         }
@@ -97,6 +79,7 @@ const YoutubeWorker = (props) => {
       imageUrl: msg.authorDetails.profileImageUrl,
       isModerator: msg.authorDetails.isChatModerator,
       isOwner: msg.authorDetails.isChatOwner,
+      isSponsor: msg.authorDetails.isChatSponsor,
       isVerified: msg.authorDetails.isVerified,
       title: msg.authorDetails.displayName,
       ...dbMessage,
@@ -228,6 +211,7 @@ YoutubeWorker.propTypes = {
   changePreWinner: PropTypes.func,
   changePrize: PropTypes.func,
   onColorChange: PropTypes.func,
+  pushUser: PropTypes.func.isRequired,
   videoId: PropTypes.string,
 };
 
@@ -238,6 +222,7 @@ export function mapDispatchToProps(dispatch) {
     changePreWinner: (w) => dispatch(changePreWinner(w)),
     changePrize: (str) => dispatch(changePrize(str)),
     onColorChange: (col) => dispatch(changeColor(col)),
+    pushUser: (u) => dispatch(pushUser(u)),
     dispatch,
   };
 }

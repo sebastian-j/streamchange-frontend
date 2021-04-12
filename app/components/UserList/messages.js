@@ -24,4 +24,40 @@ export default defineMessages({
     id: `${scope}.counter`,
     defaultMessage: '{selected} out of {all} are participating',
   },
+  selectUsers: {
+    id: `${scope}.selectAllMenuItem`,
+    defaultMessage: 'Select all',
+  },
+  deselectUsers: {
+    id: `${scope}.deselectAllMenuItem`,
+    defaultMessage: 'Deselect all',
+  },
+  filtersTooltip: {
+    id: `${scope}.filtersTooltip`,
+    defaultMessage: 'Filters',
+  },
+  sponsorsFilter: {
+    id: `${scope}.filters.sponsors`,
+    defaultMessage: 'Sponsors',
+  },
+  moderatorsFilter: {
+    id: `${scope}.filters.moderators`,
+    defaultMessage: 'Moderators',
+  },
+  verifiedFilter: {
+    id: `${scope}.filters.verified`,
+    defaultMessage: 'Verified',
+  },
+  regularsFilter: {
+    id: `${scope}.filters.regulars`,
+    defaultMessage: 'Regular viewers',
+  },
+  selectedFilter: {
+    id: `${scope}.filters.selected`,
+    defaultMessage: 'Participating',
+  },
+  notSelectedFilter: {
+    id: `${scope}.filters.notSelected`,
+    defaultMessage: 'Not participating',
+  },
 });
