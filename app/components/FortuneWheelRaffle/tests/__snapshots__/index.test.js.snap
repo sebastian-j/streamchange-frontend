@@ -1,37 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FortuneWheelRaffle /> should render and match the snapshot 1`] = `
-<DialogRoot>
-  <button
-    aria-label="stop the wheel immediately"
-    className="dialog-backdrop"
-    onClick={[Function]}
-    type="button"
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <Memo(Connect(FortuneWheelRaffle))
+    onClose={[Function]}
+    onWin={[Function]}
   />
-  <RaffleDialog>
-    <FortuneWheelRaffle__WheelMovable
-      style={
-        Object {
-          "position": "absolute",
-          "transform": "rotate(0deg)",
-          "transitionDuration": "7s",
-        }
-      }
-    >
-      <FortuneWheelRaffle__WheelImg
-        src="IMAGE_MOCK"
-      />
-    </FortuneWheelRaffle__WheelMovable>
-    <FortuneWheelRaffle__WheelBorder
-      src="IMAGE_MOCK"
-    />
-    <RaffleWinner
-      style={
-        Object {
-          "animationDelay": "7.1s",
-        }
-      }
-    />
-  </RaffleDialog>
-</DialogRoot>
+</Context.Provider>
 `;

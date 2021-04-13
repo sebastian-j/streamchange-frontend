@@ -20,10 +20,11 @@ import {
   changeAnimationDuration,
   changeVisibility,
 } from './actions';
+import { makeSelectUserArray } from '../UserList/selectors';
+import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import NumericInput from '../NumericInput';
-import db from '../YoutubeWorker/db';
 
 const StartButton = styled.button`
   background-color: ${(props) => props.theme.buttonBackground};
@@ -44,32 +45,39 @@ const StyledFormControl = styled(FormControl)`
   input {
     color: ${(props) => props.theme.staticTextColor};
   }
-  label {
-    color: ${(props) => props.theme.inputLabel};
-  }
-  label.Mui-focused {
-    color: ${(props) => props.theme.inputLabelFocused};
-  }
   span,
   svg {
     color: ${(props) => props.theme.staticTextColor};
+  }
+  label span {
+    color: ${(props) => props.theme.inputLabel};
+  }
+  label.Mui-focused span {
+    color: ${(props) => props.theme.color};
+  }
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid ${(props) => props.theme.color};
+  }
+  .MuiInput-underline:after {
+    border-bottom: 2px solid ${(props) => props.theme.color};
   }
 `;
 export const RaffleWrapper = (props) => {
   const [noUsers, setNoUsers] = useState(false);
 
   const openDialog = () => {
-    db.table('users')
-      .filter((user) => user.isEligible === true)
-      .toArray()
-      .then((items) => {
-        if (items.length > 0) {
-          props.openRaffle();
-        } else {
-          setNoUsers(true);
-          setTimeout(() => setNoUsers(false), 3000);
-        }
-      });
+    let eligibleUsers = props.userArray.filter(
+      (user) => user.isEligible === true,
+    );
+    if (props.giveawayReq === 1) {
+      eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
+    }
+    if (eligibleUsers.length > 0) {
+      props.openRaffle();
+    } else {
+      setNoUsers(true);
+      setTimeout(() => setNoUsers(false), 3000);
+    }
   };
 
   const winnerHandler = (event) => {
@@ -102,7 +110,7 @@ export const RaffleWrapper = (props) => {
             minValue={1}
             maxValue={600}
             value={props.animationDuration}
-            onChange={(ret) => props.changeAnimationDuration(ret)}
+            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
           />
         )}
       </FormattedMessage>
@@ -138,14 +146,18 @@ RaffleWrapper.propTypes = {
   changeAnimationType: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeRaffle: PropTypes.func.isRequired,
+  giveawayReq: PropTypes.number,
   openRaffle: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+  userArray: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   animationDuration: makeSelectDuration(),
   animationType: makeSelectAnimation(),
+  giveawayReq: makeSelectGiveawayRequirement(),
   isOpen: makeSelectVisibility(),
+  userArray: makeSelectUserArray(),
 });
 
 export function mapDispatchToProps(dispatch) {

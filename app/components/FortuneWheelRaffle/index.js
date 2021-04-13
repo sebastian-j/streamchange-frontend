@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Howl } from 'howler';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 
-import db from '../YoutubeWorker/db';
+import { makeSelectUserArray } from '../UserList/selectors';
+import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import DialogRoot from './DialogRoot';
 import FortuneWheelImg from './fortune-wheel-inner.png';
 import FortuneWheelBorder from './fortune-wheel-outer.png';
@@ -46,43 +49,47 @@ const FortuneWheelRaffle = (props) => {
   };
 
   useEffect(() => {
-    db.table('users')
-      .filter((user) => user.isEligible === true)
-      .toArray()
-      .then((items) => {
-        const shuffled = [];
-        for (let i = 0; i < 10; i += 1) {
-          shuffled.push(items[Math.floor(Math.random() * items.length)]);
-        }
-        const winnerIndex = Math.floor(Math.random() * 10);
-        const scroll = -(
-          winnerIndex * 36 +
-          Math.floor(Math.random() * 15) +
-          Math.ceil(props.duration / 2) * 360
-        );
-        setUsers(shuffled);
-        setScrollSize(scroll);
-        setWinner(shuffled[winnerIndex]);
-        const sId1 = tickSound.play('start');
-        tickSound.on(
-          'end',
-          () => {
-            tickSound.play('tick');
-            tickSound.loop(true);
-          },
-          sId1,
-        );
-        setTimeout(() => {
-          tickSound.stop();
-          tickSound.unload();
-        }, props.duration * 1000);
-        setTimer(
-          setTimeout(() => {
-            props.onWin(shuffled[winnerIndex].id);
-          }, (props.duration + 1) * 1000),
-        );
-      });
+    let eligibleUsers = props.userArray.filter(
+      (user) => user.isEligible === true,
+    );
+    if (props.giveawayReq === 1) {
+      eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
+    }
+    const shuffled = [];
+    for (let i = 0; i < 10; i += 1) {
+      shuffled.push(
+        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)],
+      );
+    }
+    const winnerIndex = Math.floor(Math.random() * 10);
+    const scroll = -(
+      winnerIndex * 36 +
+      Math.floor(Math.random() * 15) +
+      Math.ceil(props.duration / 2) * 360
+    );
+    setUsers(shuffled);
+    setTimeout(() => setScrollSize(scroll), 10);
+    setWinner(shuffled[winnerIndex]);
+    const sId1 = tickSound.play('start');
+    tickSound.on(
+      'end',
+      () => {
+        tickSound.play('tick');
+        tickSound.loop(true);
+      },
+      sId1,
+    );
+    setTimeout(() => {
+      tickSound.stop();
+      tickSound.unload();
+    }, props.duration * 1000);
+    setTimer(
+      setTimeout(() => {
+        props.onWin(shuffled[winnerIndex].id);
+      }, (props.duration + 1) * 1000),
+    );
   }, []);
+
   const positions = [
     { x: '43%', y: '8%' },
     { x: '63%', y: '15%' },
@@ -144,11 +151,18 @@ const FortuneWheelRaffle = (props) => {
 
 FortuneWheelRaffle.propTypes = {
   duration: PropTypes.number,
+  giveawayReq: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+  userArray: PropTypes.array,
 };
 FortuneWheelRaffle.defaultProps = {
   duration: 7,
 };
 
-export default FortuneWheelRaffle;
+const mapStateToProps = createStructuredSelector({
+  giveawayReq: makeSelectGiveawayRequirement(),
+  userArray: makeSelectUserArray(),
+});
+
+export default connect(mapStateToProps, null)(FortuneWheelRaffle);
