@@ -161,5 +161,29 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
       />
     </button>
   </div>
+  <div
+    class="CookieConsent__Wrapper-sc-11ka7to-0 fTySQG"
+  >
+    <img
+      alt="cookie"
+      class="CookieConsent__Image-sc-11ka7to-1 dPctfx"
+      src="IMAGE_MOCK"
+    />
+    <span
+      class="CookieConsent__Description-sc-11ka7to-2 DUwQW"
+    >
+      <span>
+        This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+      </span>
+    </span>
+    <button
+      class="CookieConsent__AcceptButton-sc-11ka7to-3 egLihp"
+      type="button"
+    >
+      <span>
+        Accept
+      </span>
+    </button>
+  </div>
 </div>
 `;

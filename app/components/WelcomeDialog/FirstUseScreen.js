@@ -12,6 +12,7 @@ import FlagPL from './flag-pl.png';
 import FlagUK from './flag-uk.png';
 import LightModeImg from './light-mode.png';
 import DarkModeImg from './dark-mode.png';
+import CookieConsent from './CookieConsent';
 import messages from './messages';
 
 const Backdrop = styled.div`
@@ -228,6 +229,7 @@ const FirstUseScreen = (props) => {
           <FormattedMessage {...messages.firstUseSaveBtn} />
         </StyledButton>
       </div>
+      <CookieConsent />
     </Backdrop>
   );
 };

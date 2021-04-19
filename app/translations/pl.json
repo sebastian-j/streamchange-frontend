@@ -60,6 +60,8 @@
   "streamchange.components.UserList.title": "Użytkownicy",
   "streamchange.components.WelcomeDialog.banDate": "Ban do",
   "streamchange.components.WelcomeDialog.banReason": "Powód:",
+  "streamchange.components.WelcomeDialog.CookieConsent.acceptButton": "Zgoda",
+  "streamchange.components.WelcomeDialog.CookieConsent.info": "Na tej stronie są używane tylko niezbędne, techniczne pliki cookies. StreamChange nie korzysta z cookies do śledzenia ani spersonalizowanych reklam.",
   "streamchange.components.WelcomeDialog.FirstUseScreen.saveBtn": "Dalej",
   "streamchange.components.WelcomeDialog.FirstUseScreen.selectLanguage": "Wybierz język",
   "streamchange.components.WelcomeDialog.FirstUseScreen.selectTheme": "Wybierz motyw",

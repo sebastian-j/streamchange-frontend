@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import CookieConsent from './CookieConsent';
 import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
@@ -191,6 +192,7 @@ const WelcomeDialog = (props) => {
           </Dialog>
           <WelcomeHint />
         </DialogWrapper>
+        <CookieConsent />
       </WelcomePage>
     );
   }

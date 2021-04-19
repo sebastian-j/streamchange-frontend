@@ -50,5 +50,6 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
     </WelcomeDialog__Dialog>
     <WelcomeHint />
   </WelcomeDialog__DialogWrapper>
+  <CookieConsent />
 </WelcomeDialog__WelcomePage>
 `;

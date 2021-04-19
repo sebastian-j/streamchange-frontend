@@ -56,6 +56,15 @@ export default defineMessages({
     id: `${scope}.banReason`,
     defaultMessage: 'Reason:',
   },
+  cookieInfo: {
+    id: `${scope}.CookieConsent.info`,
+    defaultMessage:
+      'This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.',
+  },
+  cookieAcceptButton: {
+    id: `${scope}.CookieConsent.acceptButton`,
+    defaultMessage: 'Accept',
+  },
   firstUseSaveBtn: {
     id: `${scope}.FirstUseScreen.saveBtn`,
     defaultMessage: 'Save',
