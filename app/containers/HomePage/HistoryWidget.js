@@ -21,6 +21,9 @@ const StyledLink = styled.span`
     background-color: ${(props) => props.theme.buttonBackgroundHover};
     color: ${(props) => props.theme.buttonTextColorHover};
   }
+  @media (orientation: portrait) {
+    line-height: 3em;
+  }
 `;
 
 const WinnerTableTitle = styled.div`

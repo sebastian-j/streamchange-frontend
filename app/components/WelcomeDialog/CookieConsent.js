@@ -17,16 +17,26 @@ const Wrapper = styled.div`
   height: 10vh;
   position: fixed;
   transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  width: auto;
+  @media (orientation: portrait) {
+    height: auto;
+    right: 2%;
+    width: 96%;
+  }
 `;
 
 const Image = styled.img`
   margin: 1% 10px 1% 10px;
   height: 90%;
+  @media (orientation: portrait) {
+    height: 5vh;
+  }
 `;
 
 const Description = styled.span`
   max-width: 30vw;
+  @media (orientation: portrait) {
+    max-width: 58vw;
+  }
 `;
 const AcceptButton = styled.button`
   background: white;
@@ -41,6 +51,9 @@ const AcceptButton = styled.button`
   :hover {
     background-color: #0084b5;
     color: white;
+  }
+  @media (orientation: portrait) {
+    margin: 5px;
   }
 `;
 

@@ -11,9 +11,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       Welcome to StreamChange
     </span>
   </span>
-  <div
-    class="tiles-grid"
-  >
+  <div>
     <span
       class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
     >
@@ -33,7 +31,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
         value="0"
       />
       <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 OIduv box"
+        class="FirstUseScreen__Box-sc-18wtu21-3 fNpMrm box"
       >
         <img
           alt="light"
@@ -41,7 +39,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 hUTxbC"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
         >
           <span>
             Light
@@ -60,7 +58,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
         value="1"
       />
       <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 gGasQn box"
+        class="FirstUseScreen__Box-sc-18wtu21-3 eVbKMi box"
       >
         <img
           alt="dark"
@@ -68,7 +66,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 hUTxbC"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
         >
           <span>
             Dark
@@ -77,9 +75,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       </div>
     </label>
   </div>
-  <div
-    class="tiles-grid"
-  >
+  <div>
     <span
       class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
     >
@@ -98,10 +94,10 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
         value="pl"
       />
       <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 cEtBbI box"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 kZNYNM box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 iFXKdt"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
         >
           <img
             alt="pl"
@@ -126,10 +122,10 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
         value="en"
       />
       <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 bFJctQ box"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 TdfuY box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 iFXKdt"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
         >
           <img
             alt="en"
@@ -162,22 +158,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="CookieConsent__Wrapper-sc-11ka7to-0 fTySQG"
+    class="CookieConsent__Wrapper-sc-11ka7to-0 eviiNM"
   >
     <img
       alt="cookie"
-      class="CookieConsent__Image-sc-11ka7to-1 dPctfx"
+      class="CookieConsent__Image-sc-11ka7to-1 bixBlA"
       src="IMAGE_MOCK"
     />
     <span
-      class="CookieConsent__Description-sc-11ka7to-2 DUwQW"
+      class="CookieConsent__Description-sc-11ka7to-2 cgtSxg"
     >
       <span>
         This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
       </span>
     </span>
     <button
-      class="CookieConsent__AcceptButton-sc-11ka7to-3 egLihp"
+      class="CookieConsent__AcceptButton-sc-11ka7to-3 bJZjGr"
       type="button"
     >
       <span>

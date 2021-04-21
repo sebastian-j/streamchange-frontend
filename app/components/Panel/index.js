@@ -6,6 +6,10 @@ const Panel = styled.div`
   flex-grow: 1;
   margin: 15px;
   padding: 15px;
+  @media (orientation: portrait) {
+    min-height: 95vh;
+    margin: 5px;
+  }
 `;
 
 export default Panel;

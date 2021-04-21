@@ -27,6 +27,12 @@ const DialogWrapper = styled.div`
   top: 55%;
   left: 30%;
   transform: translate(-50%, -50%);
+  @media (orientation: portrait) {
+    left: 50%;
+    top: 20%;
+    width: 98%;
+    transform: translate(-50%, 0%);
+  }
 `;
 
 const SlideDown = keyframes`

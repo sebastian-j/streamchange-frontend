@@ -61,6 +61,10 @@ const Box = styled.div`
     `
     border-radius: 0 5px 5px 0;
   `}
+  @media (orientation: portrait) {
+    height: 40vw;
+    width: 40vw;
+  }
 `;
 
 const LangBox = styled.div`
@@ -84,6 +88,10 @@ const LangBox = styled.div`
     `
     border-radius: 0 4px 4px 0;
   `}
+  @media (orientation: portrait) {
+    height: 14vw;
+    width: 40vw;
+  }
 `;
 
 const Tile = styled.span`
@@ -95,6 +103,9 @@ const Tile = styled.span`
   transition: all 300ms ease;
   font-size: 1.2vw;
   user-select: none;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 `;
 
 const LangTile = styled.span`
@@ -106,6 +117,9 @@ const LangTile = styled.span`
   transition: all 300ms ease;
   font-size: 1.2vw;
   user-select: none;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 `;
 
 const Flag = styled.img`
@@ -150,7 +164,7 @@ const FirstUseScreen = (props) => {
       <Title>
         <FormattedMessage {...messages.firstUseTitle} />
       </Title>
-      <div className="tiles-grid">
+      <div>
         <Title>
           <FormattedMessage {...messages.firstUseSelectTheme} />
         </Title>
@@ -187,7 +201,7 @@ const FirstUseScreen = (props) => {
           </Box>
         </label>
       </div>
-      <div className="tiles-grid">
+      <div>
         <Title>
           <FormattedMessage {...messages.firstUseSelectLang} />
         </Title>

@@ -22,6 +22,9 @@ const UserListPanel = styled.div`
   flex-grow: 1;
   margin: 15px;
   padding: 15px;
+  @media (orientation: portrait) {
+    margin: 5px;
+  }
 `;
 
 const Ul = styled.ul`

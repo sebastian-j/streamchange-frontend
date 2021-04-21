@@ -47,6 +47,9 @@ const Button = styled.button`
   background: none;
   border: none;
   outline: none;
+  @media (orientation: portrait) {
+    margin: 0 -20px 0 -10px;
+  }
 `;
 
 const Image = styled.img`

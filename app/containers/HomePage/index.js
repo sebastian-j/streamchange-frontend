@@ -31,6 +31,9 @@ const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   justify-content: space-between;
+  @media (orientation: portrait) {
+    flex-direction: column;
+  }
 `;
 
 const StreamInfo = styled.div`
@@ -44,6 +47,15 @@ const StreamImg = styled.img`
 const StreamTitle = styled.span`
   color: ${(props) => props.theme.staticTextColor};
   margin-left: 10px;
+`;
+
+const TopButtons = styled.div`
+  display: block;
+  @media (orientation: portrait) {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 10px 4px 10px;
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -187,10 +199,10 @@ const HomePage = (props) => {
             <FormattedMessage {...messages.leaveStreamBtn} />
           </StyledButton>
         </StreamInfo>
-        <div style={{ display: 'block' }}>
+        <TopButtons>
           <HistoryWidget />
           <SettingsDialog />
-        </div>
+        </TopButtons>
       </TopBar>
       <YoutubeWorker videoId={videoId} apiKey={API_KEY} />
     </div>
