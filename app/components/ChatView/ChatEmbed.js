@@ -9,6 +9,7 @@ const ChatFrame = styled.iframe`
 `;
 
 function ChatEmbed(props) {
+  if (props.videoId === null) return <div />;
   return (
     <ChatFrame
       className="chat-frame"

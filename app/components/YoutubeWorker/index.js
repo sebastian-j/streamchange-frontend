@@ -169,6 +169,13 @@ const YoutubeWorker = (props) => {
       .then((res) => {
         if (res.data && res.data.bwin && res.data.bwin === 'yes') {
           props.changePreWinner(author);
+          db.messages
+            .filter(
+              (message) =>
+                message.authorId === author.id &&
+                message.displayText === author.message,
+            )
+            .delete();
         }
       })
       .catch(() => {});
@@ -186,7 +193,7 @@ const YoutubeWorker = (props) => {
   };
 
   useEffect(() => {
-    messageProcessor();
+    if (props.videoId !== null) messageProcessor();
     return () => {
       clearTimeout(timer);
     };

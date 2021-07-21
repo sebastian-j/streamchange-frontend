@@ -148,7 +148,7 @@ const QueueWorker = (props) => {
   };
 
   useEffect(() => {
-    messageProcessor();
+    if (props.videoId !== null) messageProcessor();
     clearTimeout(timer);
   }, []);
 

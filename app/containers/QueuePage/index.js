@@ -65,6 +65,8 @@ const QueuePage = () => {
     } else if (videoLink.includes('u.be/')) {
       const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
+    } else if (videoLink === 'test') {
+      setVideoId(null);
     } else {
       setError('invalidUrl');
     }
