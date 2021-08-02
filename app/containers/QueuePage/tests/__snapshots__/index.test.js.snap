@@ -2,10 +2,10 @@
 
 exports[`<QueuePage /> should render and match the snapshot 1`] = `
 <div
-  class="FirstUseScreen__Backdrop-sc-18wtu21-0 kRYRQJ"
+  class="FirstUseScreen__Backdrop-sc-18wtu21-0 bCDDGj"
 >
   <span
-    class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
+    class="FirstUseScreen__Title-sc-18wtu21-1 dVPjvA"
   >
     <span>
       Welcome to StreamChange
@@ -13,7 +13,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </span>
   <div>
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
+      class="FirstUseScreen__Title-sc-18wtu21-1 dVPjvA"
     >
       <span>
         Select theme
@@ -24,22 +24,22 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 dTXkgr"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 fNpMrm box"
+        class="FirstUseScreen__Box-sc-18wtu21-3 bOozU box"
       >
         <img
           alt="light"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 cUqrBH"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 bpslie"
         >
           <span>
             Light
@@ -51,22 +51,22 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 dTXkgr"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 eVbKMi box"
+        class="FirstUseScreen__Box-sc-18wtu21-3 gKvLsk box"
       >
         <img
           alt="dark"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
+          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 cUqrBH"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
+          class="FirstUseScreen__Tile-sc-18wtu21-5 bpslie"
         >
           <span>
             Dark
@@ -77,7 +77,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
+      class="FirstUseScreen__Title-sc-18wtu21-1 dVPjvA"
     >
       <span>
         Select language
@@ -87,21 +87,21 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 dTXkgr"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 kZNYNM box"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 jBUfZe box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 gOngVV"
         >
           <img
             alt="pl"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 bmrmks"
             src="IMAGE_MOCK"
           />
           <span>
@@ -115,21 +115,21 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
+        class="FirstUseScreen__RadioInput-sc-18wtu21-2 dTXkgr"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 TdfuY box"
+        class="FirstUseScreen__LangBox-sc-18wtu21-4 cLKQWW box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
+          class="FirstUseScreen__LangTile-sc-18wtu21-6 gOngVV"
         >
           <img
             alt="en"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
+            class="FirstUseScreen__Flag-sc-18wtu21-7 bmrmks"
             src="IMAGE_MOCK"
           />
           <span>
@@ -141,7 +141,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 ebjHJy"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 hEGKNA"
       tabindex="0"
       type="button"
     >
@@ -158,22 +158,22 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="CookieConsent__Wrapper-sc-11ka7to-0 eviiNM"
+    class="CookieConsent__Wrapper-sc-11ka7to-0 jhcSRu"
   >
     <img
       alt="cookie"
-      class="CookieConsent__Image-sc-11ka7to-1 bixBlA"
+      class="CookieConsent__Image-sc-11ka7to-1 fXGnSe"
       src="IMAGE_MOCK"
     />
     <span
-      class="CookieConsent__Description-sc-11ka7to-2 cgtSxg"
+      class="CookieConsent__Description-sc-11ka7to-2 jSbQrC"
     >
       <span>
         This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
       </span>
     </span>
     <button
-      class="CookieConsent__AcceptButton-sc-11ka7to-3 bJZjGr"
+      class="CookieConsent__AcceptButton-sc-11ka7to-3 ejXDYR"
       type="button"
     >
       <span>

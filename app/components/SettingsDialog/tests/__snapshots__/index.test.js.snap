@@ -5,6 +5,7 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
   value={
     Object {
       "store": Object {
+        "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "injectedReducers": Object {},
@@ -12,7 +13,6 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
         "replaceReducer": [Function],
         "runSaga": [Function],
         "subscribe": [Function],
-        Symbol(observable): [Function],
       },
       "subscription": Subscription {
         "handleChangeWrapper": [Function],
@@ -22,6 +22,7 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
         "onStateChange": [Function],
         "parentSub": undefined,
         "store": Object {
+          "@@observable": [Function],
           "dispatch": [Function],
           "getState": [Function],
           "injectedReducers": Object {},
@@ -29,7 +30,6 @@ exports[`<SettingsDialog /> should render and match the snapshot 1`] = `
           "replaceReducer": [Function],
           "runSaga": [Function],
           "subscribe": [Function],
-          Symbol(observable): [Function],
         },
         "unsubscribe": null,
       },
