@@ -25,6 +25,7 @@ import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
+import SupportInformation from '../../components/SupportInformation';
 import { API_KEY, API_URL } from '../../config';
 
 const TopBar = styled.div`
@@ -50,7 +51,8 @@ const StreamTitle = styled.span`
 `;
 
 const TopButtons = styled.div`
-  display: block;
+  align-items: center;
+  display: flex;
   @media (orientation: portrait) {
     display: flex;
     justify-content: space-between;
@@ -203,6 +205,7 @@ const HomePage = (props) => {
         </StreamInfo>
         <TopButtons>
           <HistoryWidget />
+          <SupportInformation />
           <SettingsDialog />
         </TopButtons>
       </TopBar>

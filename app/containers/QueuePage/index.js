@@ -9,6 +9,7 @@ import messages from './messages';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import QueueWorker from '../../components/YoutubeWorker/QueueWorker';
 import SettingsDialog from '../../components/SettingsDialog';
+import SupportInformation from '../../components/SupportInformation';
 import { API_KEY, API_URL } from '../../config';
 
 const TopBar = styled.div`
@@ -34,7 +35,8 @@ const StreamTitle = styled.span`
 `;
 
 const TopButtons = styled.div`
-  display: block;
+  align-items: center;
+  display: flex;
   @media (orientation: portrait) {
     display: flex;
     flex-direction: row-reverse;
@@ -172,6 +174,7 @@ const QueuePage = () => {
           </StyledButton>
         </StreamInfo>
         <TopButtons>
+          <SupportInformation />
           <SettingsDialog />
         </TopButtons>
       </TopBar>

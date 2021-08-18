@@ -9,13 +9,14 @@ import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 
 const StyledLink = styled.span`
-  background: ${(props) => props.theme.buttonBackground};
-  border: 1px solid ${(props) => props.theme.color};
+  background: ${(props) => props.theme.iconButtonBackground};
+  border: none;
+  border-radius: 6px;
   color: ${(props) => props.theme.buttonTextColor};
-  border-radius: 4px;
+  font-size: 1.05rem;
   height: 80%;
-  padding: 3px 5px;
-  margin: 10px 15px 0 0;
+  padding: 8px 8px;
+  margin: 0 15px 0 0;
   text-decoration: none;
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover};
