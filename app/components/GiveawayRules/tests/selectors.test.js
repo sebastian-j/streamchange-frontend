@@ -6,7 +6,7 @@ import {
 } from '../selectors';
 import { initialState } from '../reducer';
 
-describe('QueuePage selectors', () => {
+describe('GiveawayRules selectors', () => {
   it('should select the global state', () => {
     const globalState = {};
     const mockedState = {
@@ -15,7 +15,7 @@ describe('QueuePage selectors', () => {
     expect(selectRules(mockedState)).toEqual(globalState);
   });
 
-  it('should select the QueuePage initial state', () => {
+  it('should select the GiveawayRules initial state', () => {
     const mockedState = {};
     expect(selectRules(mockedState)).toEqual(initialState);
   });

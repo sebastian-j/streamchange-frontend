@@ -2,146 +2,125 @@
 
 exports[`<QueueRules /> should render and match the snapshot 1`] = `
 <div
-  class="FirstUseScreen__Backdrop-sc-18wtu21-0 kRYRQJ"
+  class="Panel-sc-15d2ub8-0 jdZvLT"
 >
-  <span
-    class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
+  <h2
+    class="PanelTitle-sc-100fqnu-0 beOMwz"
   >
     <span>
-      Welcome to StreamChange
+      Queue rules
     </span>
-  </span>
-  <div>
-    <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
-    >
-      <span>
-        Select theme
-      </span>
-    </span>
+  </h2>
+  <div
+    class="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dAuHxf MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
     <label
-      for="themeLight"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
+      data-shrink="false"
+    >
+      Command for joining the queue
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
     >
       <input
-        checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
-        id="themeLight"
-        name="theme"
-        type="radio"
-        value="0"
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        name="command"
+        type="text"
+        value=""
       />
-      <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 fNpMrm box"
-      >
-        <img
-          alt="light"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
-          src="IMAGE_MOCK"
-        />
-        <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
-        >
-          <span>
-            Light
-          </span>
-        </span>
-      </div>
-    </label>
-    <label
-      for="themeDark"
-    >
-      <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
-        id="themeDark"
-        name="theme"
-        type="radio"
-        value="1"
-      />
-      <div
-        class="FirstUseScreen__Box-sc-18wtu21-3 eVbKMi box"
-      >
-        <img
-          alt="dark"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 ljEAMx"
-          src="IMAGE_MOCK"
-        />
-        <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 lbarjY"
-        >
-          <span>
-            Dark
-          </span>
-        </span>
-      </div>
-    </label>
+    </div>
   </div>
-  <div>
-    <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 cUQLCS"
-    >
-      <span>
-        Select language
-      </span>
-    </span>
+  <div
+    class="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dAuHxf MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
     <label
-      for="pl"
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      data-shrink="true"
+    >
+      Queue capacity
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
-        id="pl"
-        name="language"
-        type="radio"
-        value="pl"
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        name="capacity"
+        type="number"
+        value="10"
       />
-      <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 kZNYNM box"
-      >
-        <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
-        >
-          <img
-            alt="pl"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
-            src="IMAGE_MOCK"
-          />
-          <span>
-            pl
-          </span>
-        </span>
-      </div>
-    </label>
-    <label
-      for="en"
-    >
-      <input
-        checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hzFsnN"
-        id="en"
-        name="language"
-        type="radio"
-        value="en"
-      />
-      <div
-        class="FirstUseScreen__LangBox-sc-18wtu21-4 TdfuY box"
-      >
-        <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 jLgNnf"
-        >
-          <img
-            alt="en"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 jIbley"
-            src="IMAGE_MOCK"
-          />
-          <span>
-            en
-          </span>
-        </span>
-      </div>
-    </label>
+    </div>
   </div>
-  <div>
+  <div
+    class="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dAuHxf MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      data-shrink="true"
+    >
+      Time without any message to mark as inactive (sec)
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        name="timeToIdle"
+        type="number"
+        value="600"
+      />
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dAuHxf MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      data-shrink="true"
+    >
+      Time without any message to kick (sec)
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        name="timeToKick"
+        type="number"
+        value="900"
+      />
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 dAuHxf MuiFormControl-marginDense MuiFormControl-fullWidth"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense Mui-focused Mui-focused"
+      data-shrink="true"
+    >
+      Code for OBS widget with queue
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth Mui-focused Mui-focused MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        name="widgetCode"
+        type="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    style="display: inline-block;"
+  >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 ebjHJy"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text QueueWidgetDialog__StyledButton-sc-1iwy2h-0 lpjbvZ"
       tabindex="0"
       type="button"
     >
@@ -149,7 +128,7 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
         class="MuiButton-label"
       >
         <span>
-          Save
+          Queue widget for OBS
         </span>
       </span>
       <span
@@ -157,29 +136,32 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
       />
     </button>
   </div>
-  <div
-    class="CookieConsent__Wrapper-sc-11ka7to-0 eviiNM"
-  >
-    <img
-      alt="cookie"
-      class="CookieConsent__Image-sc-11ka7to-1 bixBlA"
-      src="IMAGE_MOCK"
-    />
-    <span
-      class="CookieConsent__Description-sc-11ka7to-2 cgtSxg"
+  <div>
+    <div
+      class="AdFrame__AdPlaceholder-wocikk-0 jcTKFz"
     >
       <span>
-        This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+        <span>
+          This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
+        </span>
       </span>
-    </span>
-    <button
-      class="CookieConsent__AcceptButton-sc-11ka7to-3 bJZjGr"
-      type="button"
-    >
-      <span>
-        Accept
-      </span>
-    </button>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <span>
+            Show the details
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;

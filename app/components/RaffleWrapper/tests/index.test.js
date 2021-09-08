@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 
@@ -18,7 +19,9 @@ describe('<RaffleWrapper />', () => {
     const renderedComponent = renderer
       .create(
         <Provider store={store}>
-          <RaffleWrapper onWin={() => 0} />
+          <IntlProvider locale="en">
+            <RaffleWrapper onWin={() => 0} />
+          </IntlProvider>
         </Provider>,
       )
       .toJSON();

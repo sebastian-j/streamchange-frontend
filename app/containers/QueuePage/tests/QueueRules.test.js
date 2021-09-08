@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
-import QueueRules from '../index';
+import QueueRules from '../QueueRules';
 import configureStore from '../../../configureStore';
 
 describe('<QueueRules />', () => {
