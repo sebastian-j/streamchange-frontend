@@ -2,25 +2,27 @@
 
 exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
 <WelcomeHint__Wrapper>
-  <WelcomeHint__Button
-    onClick={[Function]}
-  >
-    <WelcomeHint__Image
-      alt="light bulb"
-      src="IMAGE_MOCK"
-    />
-  </WelcomeHint__Button>
-  <div>
-    <WelcomeHint__DialogTitle>
-      <FormattedMessage
-        defaultMessage="Did you know..."
-        id="streamchange.components.WelcomeDialog.WelcomeHint.title"
-        values={Object {}}
+  <WelcomeHint__HintPanel>
+    <WelcomeHint__Button
+      onClick={[Function]}
+    >
+      <WelcomeHint__Image
+        alt="light bulb"
+        src="IMAGE_MOCK"
       />
-    </WelcomeHint__DialogTitle>
-    <WelcomeHint__DialogContent>
-      
-    </WelcomeHint__DialogContent>
-  </div>
+    </WelcomeHint__Button>
+    <div>
+      <WelcomeHint__DialogTitle>
+        <FormattedMessage
+          defaultMessage="Did you know..."
+          id="streamchange.components.WelcomeDialog.WelcomeHint.title"
+          values={Object {}}
+        />
+      </WelcomeHint__DialogTitle>
+      <WelcomeHint__DialogContent>
+        
+      </WelcomeHint__DialogContent>
+    </div>
+  </WelcomeHint__HintPanel>
 </WelcomeHint__Wrapper>
 `;
