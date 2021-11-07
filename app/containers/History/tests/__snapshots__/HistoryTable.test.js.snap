@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HistoryTable /> should render and match the snapshot 1`] = `
-<HistoryTable__Table>
-  <HistoryTable__Thead>
+<styled.table>
+  <styled.thead>
     <tr>
       <td />
       <td>
-        <HistoryTable__HeaderButton
+        <styled.button
           id="displayName"
           onClick={[Function]}
           type="button"
@@ -19,10 +19,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </HistoryTable__HeaderButton>
+        </styled.button>
       </td>
       <td>
-        <HistoryTable__HeaderButton
+        <styled.button
           id="prize"
           onClick={[Function]}
           type="button"
@@ -35,10 +35,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </HistoryTable__HeaderButton>
+        </styled.button>
       </td>
       <td>
-        <HistoryTable__HeaderButton
+        <styled.button
           id="message"
           onClick={[Function]}
           type="button"
@@ -51,10 +51,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon"
           />
-        </HistoryTable__HeaderButton>
+        </styled.button>
       </td>
       <td>
-        <HistoryTable__HeaderButton
+        <styled.button
           id="createdAt"
           onClick={[Function]}
           type="button"
@@ -67,10 +67,10 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           <ArrowUpIcon
             className="sort-icon active icon-direction-desc"
           />
-        </HistoryTable__HeaderButton>
+        </styled.button>
       </td>
     </tr>
-  </HistoryTable__Thead>
+  </styled.thead>
   <tbody>
     <HistoryItem
       channelId="id"
@@ -78,5 +78,5 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
       displayName="name"
     />
   </tbody>
-</HistoryTable__Table>
+</styled.table>
 `;

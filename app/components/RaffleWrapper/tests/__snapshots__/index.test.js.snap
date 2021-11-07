@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root RaffleWrapper__StyledFormControl-emso03-1 cGrqnK MuiFormControl-marginNormal"
+    className="MuiFormControl-root sc-iqseJM fGAEcW MuiFormControl-marginNormal"
   >
     <label
       className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
@@ -54,27 +54,27 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    className="NumericInput__Container-sc-2ueyqw-0 bnMphv"
+    className="sc-iCfMLu hMAwuh"
   >
     <div
-      className="NumericInput__Label-sc-2ueyqw-1 kGOqhd"
+      className="sc-furwcr eBLZaS"
     >
       Animation duration (seconds)
     </div>
     <button
-      className="NumericInput__Button-sc-2ueyqw-2 kbTenv"
+      className="sc-pVTFL dVNenI"
       onClick={[Function]}
       type="button"
     >
       -
     </button>
     <input
-      className="NumericInput__NumberDisplay-sc-2ueyqw-3 cLRBAM"
+      className="sc-jrQzAO eJQxxo"
       onChange={[Function]}
       value={7}
     />
     <button
-      className="NumericInput__Button-sc-2ueyqw-2 cjArkj"
+      className="sc-pVTFL jOKNtY"
       onClick={[Function]}
       type="button"
     >
@@ -82,7 +82,7 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <button
-    className="RaffleWrapper__StartButton-emso03-0 hpyrIX"
+    className="sc-kDTinF ceKVlt"
     disabled={false}
     onClick={[Function]}
     type="button"

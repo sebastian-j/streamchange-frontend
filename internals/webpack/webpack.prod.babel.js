@@ -22,6 +22,17 @@ module.exports = require('./webpack.base.babel')({
     chunkFilename: 'giveaway/[name].[chunkhash].chunk.js',
   },
 
+  tsLoaders: [
+    { loader: 'babel-loader' }, // using babel after typescript transpiles to target es6
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true, // fork-ts-checker-webpack-plugin is used for type checking
+        logLevel: 'info',
+      },
+    },
+  ],
+
   optimization: {
     minimize: true,
     minimizer: [

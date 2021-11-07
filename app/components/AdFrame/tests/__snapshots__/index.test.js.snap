@@ -2,7 +2,7 @@
 
 exports[`<AdFrame /> should render and match the snapshot 1`] = `
 <div>
-  <AdFrame__AdPlaceholder>
+  <styled.div>
     <span>
       <FormattedMessage
         defaultMessage="This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers."
@@ -20,7 +20,7 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         values={Object {}}
       />
     </WithStyles(ForwardRef(Button))>
-  </AdFrame__AdPlaceholder>
+  </styled.div>
   <WithStyles(ForwardRef(Dialog))
     aria-labelledby="form-dialog-title"
     onClose={[Function]}
@@ -59,16 +59,16 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         <WithStyles(ForwardRef(Typography))>
           Discord: Baf#5501
         </WithStyles(ForwardRef(Typography))>
-        <AdFrame__ColoredLink
+        <styled.a
           href="https://www.facebook.com/BafYT/"
         >
           https://www.facebook.com/BafYT/
-        </AdFrame__ColoredLink>
-        <AdFrame__ColoredLink
+        </styled.a>
+        <styled.a
           href="https://www.instagram.com/grafika3d/"
         >
           Instagram grafika3d
-        </AdFrame__ColoredLink>
+        </styled.a>
       </WithStyles(ForwardRef(DialogContentText))>
     </WithStyles(ForwardRef(DialogContent))>
     <WithStyles(ForwardRef(DialogActions))>

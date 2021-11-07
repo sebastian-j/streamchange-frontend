@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PromotedVideo /> should render and match the snapshot 1`] = `
-<PromotedVideo__PromotedContentWrapper>
-  <PromotedVideo__AdTitle>
+<styled.div>
+  <styled.span>
     <FormattedMessage
       defaultMessage="Advertisement"
       id="streamchange.components.AdFrame.title"
       values={Object {}}
     />
-  </PromotedVideo__AdTitle>
-  <PromotedVideo__PromotedContent>
+  </styled.span>
+  <styled.div>
     <iframe
       frameBorder="0"
       height="170"
@@ -19,6 +19,6 @@ exports[`<PromotedVideo /> should render and match the snapshot 1`] = `
       width="500"
     />
     <div />
-  </PromotedVideo__PromotedContent>
-</PromotedVideo__PromotedContentWrapper>
+  </styled.div>
+</styled.div>
 `;

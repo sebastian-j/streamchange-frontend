@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
-<PromotedBanner__PromotedContentWrapper
+<styled.div
   margin={1}
   offset={0}
 >
-  <PromotedBanner__AdTitle
+  <styled.span
     margin={1}
   >
     <FormattedMessage
@@ -13,27 +13,27 @@ exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
       id="streamchange.components.AdFrame.title"
       values={Object {}}
     />
-  </PromotedBanner__AdTitle>
+  </styled.span>
   <a
     href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
     target="_blank"
   >
     <div>
-      <PromotedBanner__Image
+      <styled.img
         alt="test-advertisement"
         onLoad={[Function]}
         src="url"
       />
     </div>
-    <PromotedBanner__Shield
+    <styled.div
       margin={1}
     />
-    <PromotedBanner__Shield
+    <styled.div
       margin={1}
     />
-    <PromotedBanner__Shield
+    <styled.div
       margin={1}
     />
   </a>
-</PromotedBanner__PromotedContentWrapper>
+</styled.div>
 `;

@@ -13,14 +13,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import history from 'utils/history';
+import history from './utils/history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
-import App from 'containers/App';
+import App from './containers/App';
 
 // Import Language and Theme Providers
-import LanguageProvider from 'containers/LanguageProvider';
+import LanguageProvider from './containers/LanguageProvider';
 import StyleProvider from './containers/StyleProvider';
 
 // Load the favicon and the .htaccess file

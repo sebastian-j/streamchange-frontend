@@ -36,7 +36,7 @@ Streamers can choose from multiple raffle animations.
 
 ## Quick start
 
-1. Make sure that you have Node.js v8.15.1 and npm v5 or above installed.
+1. Make sure that you have Node.js v10.13.0 and npm v5 or above installed.
 2. Clone this repo using `git clone --depth=1 https://github.com/sebastian-j/streamchange-giveaway.git <YOUR_PROJECT_NAME>`
 3. Run `npm install` in order to install dependencies
 4. Set values of constants in `app/config.js`

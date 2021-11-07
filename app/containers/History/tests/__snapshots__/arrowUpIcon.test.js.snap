@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArrowUpIcon /> should render and match the snapshot 1`] = `
-<arrowUpIcon__Svg
+<styled.svg
   height="24"
   viewBox="0 0 24 24"
   width="24"
@@ -14,5 +14,5 @@ exports[`<ArrowUpIcon /> should render and match the snapshot 1`] = `
   <path
     d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
   />
-</arrowUpIcon__Svg>
+</styled.svg>
 `;

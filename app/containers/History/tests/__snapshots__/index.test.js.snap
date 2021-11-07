@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<History /> should render and match the snapshot 1`] = `
-<History__PageWrapper>
+<styled.div>
   <WithStyles(ForwardRef(LinearProgress)) />
   <div
     style={
@@ -21,5 +21,5 @@ exports[`<History /> should render and match the snapshot 1`] = `
       values={Object {}}
     />
   </div>
-</History__PageWrapper>
+</styled.div>
 `;

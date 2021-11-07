@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SuperChat /> should render and match the snapshot 1`] = `
-<SuperChat__OuterFrame>
-  <SuperChat__TopBar>
-    <SuperChat__Logo
+<styled.div>
+  <styled.div>
+    <styled.img
       alt="logo"
       src="url"
     />
      
     title
-  </SuperChat__TopBar>
-  <SuperChat__MessageContent>
+  </styled.div>
+  <styled.span>
     message
-  </SuperChat__MessageContent>
-</SuperChat__OuterFrame>
+  </styled.span>
+</styled.div>
 `;

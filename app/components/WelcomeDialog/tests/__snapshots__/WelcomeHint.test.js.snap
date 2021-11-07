@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
-<WelcomeHint__Wrapper>
-  <WelcomeHint__HintPanel>
-    <WelcomeHint__Button
+<styled.div>
+  <styled.div>
+    <styled.button
       onClick={[Function]}
     >
-      <WelcomeHint__Image
+      <styled.img
         alt="light bulb"
         src="IMAGE_MOCK"
       />
-    </WelcomeHint__Button>
+    </styled.button>
     <div>
-      <WelcomeHint__DialogTitle>
+      <styled.span>
         <FormattedMessage
           defaultMessage="Did you know..."
           id="streamchange.components.WelcomeDialog.WelcomeHint.title"
           values={Object {}}
         />
-      </WelcomeHint__DialogTitle>
-      <WelcomeHint__DialogContent>
+      </styled.span>
+      <styled.span>
         
-      </WelcomeHint__DialogContent>
+      </styled.span>
     </div>
-  </WelcomeHint__HintPanel>
-</WelcomeHint__Wrapper>
+  </styled.div>
+</styled.div>
 `;
