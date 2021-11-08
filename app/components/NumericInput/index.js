@@ -52,7 +52,7 @@ const NumericInput = (props) => {
     } else {
       val = props.maxValue;
     }
-    if (val !== props.value) props.onChange(Number(val));
+    if (val !== props.value) checkValue(Number(val));
   };
   const dec = () => {
     let val = props.value;
@@ -61,14 +61,14 @@ const NumericInput = (props) => {
     } else {
       val = props.minValue;
     }
-    if (val !== props.value) props.onChange(Number(val));
+    if (val !== props.value) checkValue(Number(val));
   };
-  const checkValue = () => {
-    let val = props.value;
-    if (val < props.minValue) val = props.minValue;
+  const checkValue = (value) => {
+    let val = value;
+    if (val < props.minValue && val !== '') val = props.minValue;
     if (val > props.maxValue) val = props.maxValue;
-    if (Number.isNaN(Number(val))) val = props.value;
-    props.onChange(Number(val));
+    if (Number.isNaN(Number(val)) && val !== '') val = props.value;
+    props.onChange(val);
   };
   return (
     <Container>
@@ -78,8 +78,7 @@ const NumericInput = (props) => {
       </Button>
       <NumberDisplay
         value={props.value}
-        onChange={(event) => props.onChange(event.target.value)}
-        onBlur={checkValue}
+        onChange={(event) => checkValue(event.target.value)}
       />
       <Button onClick={inc} type="button">
         +
