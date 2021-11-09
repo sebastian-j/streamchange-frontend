@@ -4,31 +4,19 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the HomePage state domain
  */
-const selectHomePage = state => state.streamInfo || initialState;
+const selectHomePage = (state) => state.streamInfo || initialState;
 
 const makeSelectOwnerId = () =>
-  createSelector(
-    selectHomePage,
-    state => state.ownerId,
-  );
+  createSelector(selectHomePage, (state) => state.ownerId);
 
 const makeSelectThumbnailUrl = () =>
-  createSelector(
-    selectHomePage,
-    state => state.thumbnailUrl,
-  );
+  createSelector(selectHomePage, (state) => state.thumbnailUrl);
 
 const makeSelectTitle = () =>
-  createSelector(
-    selectHomePage,
-    state => state.title,
-  );
+  createSelector(selectHomePage, (state) => state.title);
 
 const makeSelectVideoId = () =>
-  createSelector(
-    selectHomePage,
-    state => state.videoId,
-  );
+  createSelector(selectHomePage, (state) => state.videoId);
 
 export {
   selectHomePage,

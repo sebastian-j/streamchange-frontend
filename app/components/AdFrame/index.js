@@ -24,7 +24,7 @@ const AdPlaceholder = styled.div`
 `;
 
 const ColoredLink = styled.a`
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
   display: block;
   padding-top: 5px;
 `;
@@ -54,7 +54,7 @@ const AdFrame = () => {
   };
 
   const getPromotedChannels = () => {
-    axios.get('../static/sellers.json').then(res => {
+    axios.get('../static/sellers.json').then((res) => {
       if (res.data.items) {
         for (let i = 0; i < res.data.items.length; i += 1) {
           if (res.data.items[i].date.includes(getToday()))

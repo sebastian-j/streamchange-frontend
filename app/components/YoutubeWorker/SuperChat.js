@@ -44,7 +44,7 @@ const MessageContent = styled.span`
   margin: 6px;
 `;
 
-const SuperChat = props => (
+const SuperChat = (props) => (
   <OuterFrame>
     <TopBar>
       <Logo src={props.imageUrl} alt="logo" /> {props.title}

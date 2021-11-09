@@ -7,11 +7,11 @@ const MessageLi = styled.li`
 `;
 
 const MessageDate = styled.span`
-  color: ${props => props.theme.secondaryTextColor};
+  color: ${(props) => props.theme.secondaryTextColor};
   margin-right: 10px;
 `;
 const MessageText = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
 `;
 
 function MessageItem(props) {

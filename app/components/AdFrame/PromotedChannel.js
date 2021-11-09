@@ -29,7 +29,7 @@ const PromotedContentWrapper = styled.div`
 
 const PromotedContent = styled.div`
   border: 1px solid #cecece;
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   display: flex;
   flex-direction: row;
   padding: 14px;
@@ -41,14 +41,14 @@ const PromotedChannelLogo = styled.img`
 `;
 
 const PromotedChannelTitle = styled.a`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: 4px;
   text-decoration: none;
 `;
 
-const PromotedChannel = props => (
+const PromotedChannel = (props) => (
   <PromotedContentWrapper>
     <AdTitle>
       <FormattedMessage {...messages.title} />

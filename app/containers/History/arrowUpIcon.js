@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Svg = styled.svg`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   pointer-events: none;
   transition: opacity 300ms ease-out 0ms,
     transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
-const ArrowUpIcon = props => (
+const ArrowUpIcon = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

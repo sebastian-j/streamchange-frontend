@@ -21,7 +21,7 @@ const ScrollerEnd = styled.div`
   clear: both;
 `;
 
-export const InternalChat = props => {
+export const InternalChat = (props) => {
   let messagesEndRef = useRef(null);
   useInjectReducer({ key: 'chat', reducer });
 
@@ -35,11 +35,11 @@ export const InternalChat = props => {
 
   return (
     <ItemScroller>
-      {props.messages.map(message => (
+      {props.messages.map((message) => (
         <InternalChatMessage key={message.publishedAt} message={message} />
       ))}
       <ScrollerEnd
-        ref={el => {
+        ref={(el) => {
           messagesEndRef = el;
         }}
       />
@@ -55,7 +55,4 @@ const mapStateToProps = createStructuredSelector({
   messages: makeSelectMessages(),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(InternalChat);
+export default connect(mapStateToProps, null)(InternalChat);

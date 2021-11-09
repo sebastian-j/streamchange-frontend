@@ -12,11 +12,12 @@ import FlagPL from './flag-pl.png';
 import FlagUK from './flag-uk.png';
 import LightModeImg from './light-mode.png';
 import DarkModeImg from './dark-mode.png';
+import CookieConsent from './CookieConsent';
 import messages from './messages';
 
 const Backdrop = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.bodyBackground};
+  background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +26,7 @@ const Backdrop = styled.div`
   width: 100vw;
 `;
 const Title = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   display: block;
   font-size: 2rem;
   margin-bottom: 1vh;
@@ -60,6 +61,10 @@ const Box = styled.div`
     `
     border-radius: 0 5px 5px 0;
   `}
+  @media (orientation: portrait) {
+    height: 40vw;
+    width: 40vw;
+  }
 `;
 
 const LangBox = styled.div`
@@ -83,6 +88,10 @@ const LangBox = styled.div`
     `
     border-radius: 0 4px 4px 0;
   `}
+  @media (orientation: portrait) {
+    height: 14vw;
+    width: 40vw;
+  }
 `;
 
 const Tile = styled.span`
@@ -94,6 +103,9 @@ const Tile = styled.span`
   transition: all 300ms ease;
   font-size: 1.2vw;
   user-select: none;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 `;
 
 const LangTile = styled.span`
@@ -105,6 +117,9 @@ const LangTile = styled.span`
   transition: all 300ms ease;
   font-size: 1.2vw;
   user-select: none;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 `;
 
 const Flag = styled.img`
@@ -118,23 +133,23 @@ const ThemeImg = styled.img`
 `;
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.materialButtonColor};
+    color: ${(props) => props.theme.materialButtonColor};
     font-size: 1.25rem;
   }
 `;
 
-const FirstUseScreen = props => {
+const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem('darkMode') === 'true',
   );
   const [language, setLanguage] = useState(props.locale);
 
-  const changeLanguage = event => {
+  const changeLanguage = (event) => {
     setLanguage(event.target.value);
     props.onLocaleToggle(event.target.value);
   };
 
-  const changeTheme = event => {
+  const changeTheme = (event) => {
     setDarkMode(event.target.value === '1');
     localStorage.setItem('darkMode', event.target.value === '1');
   };
@@ -149,7 +164,7 @@ const FirstUseScreen = props => {
       <Title>
         <FormattedMessage {...messages.firstUseTitle} />
       </Title>
-      <div className="tiles-grid">
+      <div>
         <Title>
           <FormattedMessage {...messages.firstUseSelectTheme} />
         </Title>
@@ -159,6 +174,7 @@ const FirstUseScreen = props => {
             type="radio"
             name="theme"
             value="0"
+            onChange={() => {}}
             onClick={changeTheme}
             checked={!darkMode}
           />
@@ -175,6 +191,7 @@ const FirstUseScreen = props => {
             type="radio"
             name="theme"
             value="1"
+            onChange={() => {}}
             onClick={changeTheme}
             checked={darkMode}
           />
@@ -186,7 +203,7 @@ const FirstUseScreen = props => {
           </Box>
         </label>
       </div>
-      <div className="tiles-grid">
+      <div>
         <Title>
           <FormattedMessage {...messages.firstUseSelectLang} />
         </Title>
@@ -196,6 +213,7 @@ const FirstUseScreen = props => {
             type="radio"
             name="language"
             value="pl"
+            onChange={() => {}}
             onClick={changeLanguage}
             checked={language === 'pl'}
           />
@@ -212,6 +230,7 @@ const FirstUseScreen = props => {
             type="radio"
             name="language"
             value="en"
+            onChange={() => {}}
             onClick={changeLanguage}
             checked={language === 'en'}
           />
@@ -228,6 +247,7 @@ const FirstUseScreen = props => {
           <FormattedMessage {...messages.firstUseSaveBtn} />
         </StyledButton>
       </div>
+      <CookieConsent />
     </Backdrop>
   );
 };
@@ -237,21 +257,15 @@ FirstUseScreen.propTypes = {
   locale: PropTypes.string,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
+  locale,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLocaleToggle: value => dispatch(changeLocale(value)),
+    onLocaleToggle: (value) => dispatch(changeLocale(value)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FirstUseScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FirstUseScreen);

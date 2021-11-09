@@ -7,7 +7,7 @@ const prettierOptions = JSON.parse(
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier'],
   plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
   env: {
     jest: true,
@@ -70,11 +70,14 @@ module.exports = {
     'react/jsx-first-prop-new-line': [2, 'multiline'],
     'react/jsx-filename-extension': 0,
     'react/jsx-no-target-blank': 0,
+    'react/jsx-props-no-spreading': 0,
     'react/jsx-uses-vars': 2,
     'react/require-default-props': 0,
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
+    'react/state-in-constructor': 0,
+    'react/static-property-placement': 0,
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,

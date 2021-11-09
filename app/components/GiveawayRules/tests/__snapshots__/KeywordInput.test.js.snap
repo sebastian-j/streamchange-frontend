@@ -2,7 +2,14 @@
 
 exports[`<KeywordInput /> should render and match the snapshot 1`] = `
 <div
-  className="MuiFormControl-root MuiTextField-root StyledTextField-sc-1otd4ny-0 BSuXx MuiFormControl-marginDense MuiFormControl-fullWidth"
+  aria-describedby={null}
+  aria-label="keyword"
+  className="MuiFormControl-root MuiTextField-root sc-bdvvtL icqVYv MuiFormControl-marginDense MuiFormControl-fullWidth"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  title={null}
 >
   <label
     className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
@@ -18,7 +25,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
   >
     <input
       aria-invalid={false}
-      autoFocus={true}
+      autoFocus={false}
       className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
       disabled={false}
       id="keyword"
@@ -37,7 +44,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
       <button
         aria-describedby={null}
         aria-label="toggle keyword visibility"
-        className="KeywordInput__ToggleVisibilityBtn-sc-1i66nol-0 ejSEdz"
+        className="sc-dkPtRN evjlnr"
         name="showKeyword"
         onBlur={[Function]}
         onClick={[Function]}
@@ -46,7 +53,7 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
         onMouseOver={[Function]}
         onTouchEnd={[Function]}
         onTouchStart={[Function]}
-        title="Toggle keyword visibility"
+        title={null}
         type="button"
       >
         <svg
@@ -65,5 +72,6 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
       </button>
     </div>
   </div>
+  
 </div>
 `;

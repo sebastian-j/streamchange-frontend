@@ -12,7 +12,7 @@ import './style.css';
 const HeaderButton = styled.button`
   background: none;
   border: none;
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   padding: 14px 10px 14px 16px;
   outline: none;
   width: 100%;
@@ -31,9 +31,9 @@ const Thead = styled.thead`
   user-select: none;
 `;
 
-const HistoryTable = props => {
+const HistoryTable = (props) => {
   const [sort, setSort] = useState('createdAtDESC');
-  const handleSortChange = event => {
+  const handleSortChange = (event) => {
     const { target } = event;
     let value = target.id;
     if (value === sort) {
@@ -109,7 +109,7 @@ const HistoryTable = props => {
         </tr>
       </Thead>
       <tbody>
-        {props.items.map(item => (
+        {props.items.map((item) => (
           <HistoryItem
             key={item.createdAt}
             channelId={item.channelId}

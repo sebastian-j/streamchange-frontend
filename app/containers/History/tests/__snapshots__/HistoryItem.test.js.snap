@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HistoryItem /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef
+<styled.tr>
+  <styled.td
     image={true}
   >
     <a
@@ -15,35 +15,35 @@ exports[`<HistoryItem /> should render and match the snapshot 1`] = `
         src="url"
       />
     </a>
-  </ForwardRef>
-  <ForwardRef
+  </styled.td>
+  <styled.td
     textLeft={true}
   >
     <span>
       abc
     </span>
-  </ForwardRef>
-  <ForwardRef
+  </styled.td>
+  <styled.td
     text={true}
   >
     <span>
       prize
     </span>
-  </ForwardRef>
-  <ForwardRef
+  </styled.td>
+  <styled.td
     text={true}
   >
     <span>
       abc
     </span>
-  </ForwardRef>
-  <ForwardRef
+  </styled.td>
+  <styled.td
     text={true}
   >
     <RelativeDate
       ISO8601Date="2019-12-24T07:27:56.273Z"
       className="relativeDate"
     />
-  </ForwardRef>
-</ForwardRef>
+  </styled.td>
+</styled.tr>
 `;

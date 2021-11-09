@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import CookieConsent from './CookieConsent';
 import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
@@ -26,6 +27,12 @@ const DialogWrapper = styled.div`
   top: 55%;
   left: 30%;
   transform: translate(-50%, -50%);
+  @media (orientation: portrait) {
+    left: 50%;
+    top: 20%;
+    width: 98%;
+    transform: translate(-50%, 0%);
+  }
 `;
 
 const SlideDown = keyframes`
@@ -88,7 +95,7 @@ const CompatibilityInfo = styled.div`
   }
 `;
 
-const WelcomeDialog = props => {
+const WelcomeDialog = (props) => {
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
@@ -110,13 +117,13 @@ const WelcomeDialog = props => {
     if (props.error) setIsLoading(false);
   }, [props.error]);
 
-  const handleInputValueChange = event => {
+  const handleInputValueChange = (event) => {
     const { target } = event;
     const { value } = target;
     setVideoLink(value);
   };
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !isLoading) {
       sendVideoLink();
     }
@@ -135,7 +142,7 @@ const WelcomeDialog = props => {
             </DialogTitle>
             <DialogContent>
               <FormattedMessage {...messages.videoInputLabel}>
-                {label => (
+                {(label) => (
                   <TextField
                     autoFocus
                     margin="dense"
@@ -191,6 +198,7 @@ const WelcomeDialog = props => {
           </Dialog>
           <WelcomeHint />
         </DialogWrapper>
+        <CookieConsent />
       </WelcomePage>
     );
   }

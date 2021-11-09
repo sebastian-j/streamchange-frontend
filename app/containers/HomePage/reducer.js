@@ -21,7 +21,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const homePageReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case CHANGE_OWNER_ID:
         draft.ownerId = action.ownerId;

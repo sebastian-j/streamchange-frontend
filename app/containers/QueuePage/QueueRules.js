@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 
+import Tooltip from '@material-ui/core/Tooltip';
 import messages from './messages';
 import {
   makeSelectCapacity,
@@ -21,12 +22,13 @@ import {
 } from './actions';
 import Panel from '../../components/Panel';
 import PanelTitle from '../../components/Panel/PanelTitle';
+import HintParagraph from '../../components/Tooltip/HintParagraph';
 import StyledTextField from '../../components/StyledTextField';
 import AdFrame from '../../components/AdFrame';
 import QueueWidgetDialog from './QueueWidgetDialog';
 
-export const QueueRules = props => {
-  const handleInputValueChange = event => {
+export const QueueRules = (props) => {
+  const handleInputValueChange = (event) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
@@ -48,36 +50,59 @@ export const QueueRules = props => {
       <PanelTitle>
         <FormattedMessage {...messages.rulesPanelTitle} />
       </PanelTitle>
-      <FormattedMessage {...messages.commandTextField}>
-        {label => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="command"
-            onChange={handleInputValueChange}
-            label={label}
-            type="text"
-            value={props.command}
-            fullWidth
-          />
+      <FormattedMessage {...messages.commandTextFieldLabel}>
+        {(label) => (
+          <Tooltip
+            title={
+              <HintParagraph>
+                <FormattedMessage {...messages.commandTextFieldTooltip} />
+              </HintParagraph>
+            }
+            aria-label="keyword"
+          >
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="command"
+              onChange={handleInputValueChange}
+              label={label}
+              type="text"
+              value={props.command}
+              fullWidth
+            />
+          </Tooltip>
         )}
       </FormattedMessage>
-      <FormattedMessage {...messages.capacityTextField}>
-        {label => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="capacity"
-            onChange={handleInputValueChange}
-            label={label}
-            type="number"
-            value={props.capacity}
-            fullWidth
-          />
+      <FormattedMessage {...messages.capacityTextFieldLabel}>
+        {(label) => (
+          <Tooltip
+            title={
+              <div>
+                <HintParagraph>
+                  <FormattedMessage {...messages.capacityTextFieldTooltip1} />
+                </HintParagraph>
+                <HintParagraph>
+                  <FormattedMessage {...messages.capacityTextFieldTooltip2} />
+                </HintParagraph>
+              </div>
+            }
+            aria-label="keyword"
+          >
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="capacity"
+              onChange={handleInputValueChange}
+              label={label}
+              type="number"
+              value={props.capacity}
+              fullWidth
+            />
+          </Tooltip>
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.timeToIdleTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -91,7 +116,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.timeToKickTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -105,7 +130,7 @@ export const QueueRules = props => {
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.widgetCodeTextField}>
-        {label => (
+        {(label) => (
           <StyledTextField
             autoFocus
             margin="dense"
@@ -147,16 +172,13 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeCapacity: cap => dispatch(changeCapacity(cap)),
-    changeQueueCommand: command => dispatch(changeQueueCommand(command)),
-    changeTTI: s => dispatch(changeTTI(s)),
-    changeTTK: s => dispatch(changeTTK(s)),
-    changeWidgetCode: code => dispatch(changeWidgetCode(code)),
+    changeCapacity: (cap) => dispatch(changeCapacity(cap)),
+    changeQueueCommand: (command) => dispatch(changeQueueCommand(command)),
+    changeTTI: (s) => dispatch(changeTTI(s)),
+    changeTTK: (s) => dispatch(changeTTK(s)),
+    changeWidgetCode: (code) => dispatch(changeWidgetCode(code)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QueueRules);
+export default connect(mapStateToProps, mapDispatchToProps)(QueueRules);

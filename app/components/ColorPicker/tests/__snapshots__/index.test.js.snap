@@ -8,6 +8,7 @@ exports[`<ColorPicker /> should render and match the snapshot 1`] = `
     className="color-picker-label"
   />
   <button
+    aria-label="toggle picker"
     className="color-picker-button"
     onClick={[Function]}
     style={

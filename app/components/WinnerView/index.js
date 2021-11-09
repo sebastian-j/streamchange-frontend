@@ -15,13 +15,14 @@ import db from '../YoutubeWorker/db';
 import { API_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
+import HintParagraph from '../Tooltip/HintParagraph';
 import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 
 const WinnerPanel = styled.div`
-  background-color: ${props => props.theme.panelBackground};
+  background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   flex-direction: column;
   flex-basis: 0;
@@ -48,34 +49,34 @@ const WinnerInfo = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   font-size: 20px;
 `;
 
 const ChannelLink = styled.a`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.buttonTextColor};
+  background: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
+  color: ${(props) => props.theme.buttonTextColor};
   border-radius: 4px;
   padding: 3px 5px;
   text-decoration: none;
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
 const Button = styled.button`
-  background: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.buttonTextColor};
+  background: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
+  color: ${(props) => props.theme.buttonTextColor};
   border-radius: 4px;
   margin-top: 20px;
   padding: 8px 5px;
   text-decoration: none;
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
@@ -83,12 +84,6 @@ const MessageList = styled.ul`
   overflow-y: auto;
   list-style: none;
   padding: 0;
-`;
-
-const HintParagraph = styled.span`
-  font-size: 0.9rem;
-  line-height: 1.1rem;
-  display: block;
 `;
 
 export class WinnerView extends React.Component {
@@ -108,9 +103,9 @@ export class WinnerView extends React.Component {
 
   getMessages() {
     db.table('messages')
-      .filter(message => message.authorId === this.props.id)
+      .filter((message) => message.authorId === this.props.id)
       .toArray()
-      .then(items => {
+      .then((items) => {
         this.setState({ messages: items });
       });
   }
@@ -126,12 +121,9 @@ export class WinnerView extends React.Component {
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {
-      db.table('users')
-        .where('id')
-        .equals(winner.channelId)
-        .modify({
-          isEligible: false,
-        });
+      db.table('users').where('id').equals(winner.channelId).modify({
+        isEligible: false,
+      });
     }
     db.table('history')
       .add(winner)
@@ -178,9 +170,9 @@ export class WinnerView extends React.Component {
   componentDidMount() {
     const userId = this.props.id;
     db.table('users')
-      .filter(user => user.id === userId)
+      .filter((user) => user.id === userId)
       .toArray()
-      .then(items => {
+      .then((items) => {
         this.setState({ user: items[0] });
       });
     this.getMessages();
@@ -229,12 +221,12 @@ export class WinnerView extends React.Component {
           <Timer />
         </WinnerHeading>
         <MessageList>
-          {this.state.messages.map(item => (
+          {this.state.messages.map((item) => (
             <MessageItem date={item.publishedAt} text={item.displayText} />
           ))}
         </MessageList>
         <FormattedMessage {...messages.prize}>
-          {label => (
+          {(label) => (
             <StyledTextField
               autoFocus
               margin="dense"
@@ -282,13 +274,10 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changePreWinner: w => dispatch(changePreWinner(w)),
+    changePreWinner: (w) => dispatch(changePreWinner(w)),
     onRepeat: () => dispatch(changeVisibility(true)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(WinnerView);
+export default connect(mapStateToProps, mapDispatchToProps)(WinnerView);

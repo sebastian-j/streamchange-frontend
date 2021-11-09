@@ -9,13 +9,12 @@ const ChatFrame = styled.iframe`
 `;
 
 function ChatEmbed(props) {
+  if (props.videoId === null) return <div />;
   return (
     <ChatFrame
       className="chat-frame"
       title="Youtube Chat"
-      src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${
-        window.location.hostname
-      }`}
+      src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${window.location.hostname}`}
     />
   );
 }

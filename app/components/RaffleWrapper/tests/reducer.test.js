@@ -24,7 +24,7 @@ describe('rafleWrapperReducer', () => {
 
   it('should handle the changeAnimation action correctly', () => {
     const fixture = 1;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.animationType = fixture;
     });
 
@@ -35,7 +35,7 @@ describe('rafleWrapperReducer', () => {
 
   it('should handle the changeAnimationDuration action correctly', () => {
     const fixture = 16;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.animationDuration = fixture;
     });
 
@@ -46,7 +46,7 @@ describe('rafleWrapperReducer', () => {
 
   it('should handle the changeVisibility action correctly', () => {
     const fixture = true;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.isOpen = fixture;
     });
 

@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
-    <ForwardRef>
-      <ForwardRef>
+<styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div>
         <FormattedMessage
           defaultMessage="Choose stream"
           id="streamchange.components.WelcomeDialog.title"
           values={Object {}}
         />
-      </ForwardRef>
-      <ForwardRef>
+      </styled.div>
+      <styled.div>
         <FormattedMessage
           defaultMessage="Paste stream url"
           id="streamchange.components.WelcomeDialog.videoInput.label"
@@ -19,7 +19,7 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
         >
           [Function]
         </FormattedMessage>
-        <ForwardRef>
+        <styled.div>
           <span
             style={
               Object {
@@ -33,10 +33,10 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
               values={Object {}}
             />
           </span>
-        </ForwardRef>
-      </ForwardRef>
-      <ForwardRef>
-        <ForwardRef(WithStyles)
+        </styled.div>
+      </styled.div>
+      <styled.div>
+        <WithStyles(ForwardRef(Button))
           color="primary"
           onClick={[Function]}
         >
@@ -45,10 +45,11 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
             id="streamchange.components.WelcomeDialog.saveBtn"
             values={Object {}}
           />
-        </ForwardRef(WithStyles)>
-      </ForwardRef>
-    </ForwardRef>
+        </WithStyles(ForwardRef(Button))>
+      </styled.div>
+    </styled.div>
     <WelcomeHint />
-  </ForwardRef>
-</ForwardRef>
+  </styled.div>
+  <CookieConsent />
+</styled.div>
 `;

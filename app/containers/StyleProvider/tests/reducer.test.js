@@ -20,7 +20,7 @@ describe('styleProviderReducer', () => {
 
   it('should handle the changeColor action correctly', () => {
     const fixture = '#fffbdd';
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.color = fixture;
     });
 
@@ -31,7 +31,7 @@ describe('styleProviderReducer', () => {
 
   it('should handle the toggleDarkMode action correctly', () => {
     const fixture = true;
-    const expectedResult = produce(state, draft => {
+    const expectedResult = produce(state, (draft) => {
       draft.isDarkMode = fixture;
     });
 

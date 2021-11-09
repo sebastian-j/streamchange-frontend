@@ -14,7 +14,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import messages from './messages';
 
 const ThemedSvg = styled.svg`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
 `;
 
 const Header = styled.div`
@@ -26,7 +26,7 @@ function ChatView(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [chatMode, setChatMode] = useState(0);
 
-  const openMenu = event => {
+  const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -34,7 +34,7 @@ function ChatView(props) {
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = index => {
+  const handleMenuItemClick = (index) => {
     setChatMode(index);
     closeMenu();
   };

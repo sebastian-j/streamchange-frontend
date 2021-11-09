@@ -13,14 +13,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import history from 'utils/history';
+import history from './utils/history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
-import App from 'containers/App';
+import App from './containers/App';
 
 // Import Language and Theme Providers
-import LanguageProvider from 'containers/LanguageProvider';
+import LanguageProvider from './containers/LanguageProvider';
 import StyleProvider from './containers/StyleProvider';
 
 // Load the favicon and the .htaccess file
@@ -39,7 +39,7 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-const render = messages => {
+const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
@@ -66,12 +66,12 @@ if (module.hot) {
 
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
-  new Promise(resolve => {
+  new Promise((resolve) => {
     resolve(import('intl'));
   })
-    .then(() => Promise.all([import('intl/locale-data/jsonp/en.js')]))
+    .then(() => Promise.all([import('intl/locale-data/jsonp/en')]))
     .then(() => render(translationMessages))
-    .catch(err => {
+    .catch((err) => {
       throw err;
     });
 } else {

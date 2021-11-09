@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -20,59 +19,47 @@ import {
   changeAnimationDuration,
   changeVisibility,
 } from './actions';
+import { makeSelectUserArray } from '../UserList/selectors';
+import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import NumericInput from '../NumericInput';
-import db from '../YoutubeWorker/db';
+import StyledFormControl from '../StyledTextField/StyledFormControl';
 
 const StartButton = styled.button`
-  background-color: ${props => props.theme.buttonBackground};
-  border: 1px solid ${props => props.theme.color};
-  color: ${props => props.theme.buttonTextColor};
+  background-color: ${(props) => props.theme.buttonBackground};
+  border: 1px solid ${(props) => props.theme.color};
+  color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
+  font-size: 1.2rem;
   margin-top: 10px;
-  padding: 8px 12px;
+  padding: 10px 0;
   width: 100%;
   &:hover {
-    background-color: ${props => props.theme.buttonBackgroundHover};
-    color: ${props => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
-const StyledFormControl = styled(FormControl)`
-  width: 100%;
-  input {
-    color: ${props => props.theme.staticTextColor};
-  }
-  label {
-    color: ${props => props.theme.inputLabel};
-  }
-  label.Mui-focused {
-    color: ${props => props.theme.inputLabelFocused};
-  }
-  span,
-  svg {
-    color: ${props => props.theme.staticTextColor};
-  }
-`;
-export const RaffleWrapper = props => {
+export const RaffleWrapper = (props) => {
   const [noUsers, setNoUsers] = useState(false);
 
   const openDialog = () => {
-    db.table('users')
-      .filter(user => user.isEligible === true)
-      .toArray()
-      .then(items => {
-        if (items.length > 0) {
-          props.openRaffle();
-        } else {
-          setNoUsers(true);
-          setTimeout(() => setNoUsers(false), 3000);
-        }
-      });
+    let eligibleUsers = props.userArray.filter(
+      (user) => user.isEligible === true,
+    );
+    if (props.giveawayReq === 1) {
+      eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
+    }
+    if (eligibleUsers.length > 0) {
+      props.openRaffle();
+    } else {
+      setNoUsers(true);
+      setTimeout(() => setNoUsers(false), 3000);
+    }
   };
 
-  const winnerHandler = event => {
+  const winnerHandler = (event) => {
     props.closeRaffle();
     props.onWin(event);
   };
@@ -84,7 +71,7 @@ export const RaffleWrapper = props => {
           <FormattedMessage {...messages.raffleType} />
         </InputLabel>
         <Select
-          onChange={event => props.changeAnimationType(event.target.value)}
+          onChange={(event) => props.changeAnimationType(event.target.value)}
           value={props.animationType}
         >
           <MenuItem value={0}>
@@ -96,13 +83,13 @@ export const RaffleWrapper = props => {
         </Select>
       </StyledFormControl>
       <FormattedMessage {...messages.animationDuration}>
-        {label => (
+        {(label) => (
           <NumericInput
             label={label}
             minValue={1}
             maxValue={600}
             value={props.animationDuration}
-            onChange={ret => props.changeAnimationDuration(ret)}
+            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
           />
         )}
       </FormattedMessage>
@@ -138,27 +125,28 @@ RaffleWrapper.propTypes = {
   changeAnimationType: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeRaffle: PropTypes.func.isRequired,
+  giveawayReq: PropTypes.number,
   openRaffle: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+  userArray: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   animationDuration: makeSelectDuration(),
   animationType: makeSelectAnimation(),
+  giveawayReq: makeSelectGiveawayRequirement(),
   isOpen: makeSelectVisibility(),
+  userArray: makeSelectUserArray(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeAnimationDuration: t => dispatch(changeAnimationDuration(t)),
-    changeAnimationType: a => dispatch(changeAnimation(a)),
+    changeAnimationDuration: (t) => dispatch(changeAnimationDuration(t)),
+    changeAnimationType: (a) => dispatch(changeAnimation(a)),
     closeRaffle: () => dispatch(changeVisibility(false)),
     openRaffle: () => dispatch(changeVisibility(true)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RaffleWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(RaffleWrapper);

@@ -48,7 +48,7 @@ const UserBar = styled.div`
   );
   border: none;
   border-radius: 0 16px 16px 0;
-  color: ${props => props.theme.inactiveUser};
+  color: ${(props) => props.theme.inactiveUser};
   line-height: 1.43;
   margin-bottom: 5px;
   max-width: 90%;
@@ -85,27 +85,27 @@ const Logo = styled.img`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
   cursor: pointer;
   outline: none;
   &:hover {
-    color: ${props => props.theme.buttonTextColorHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
 const EditModeButton = styled.button`
   background: none;
   border: none;
-  color: ${props => props.theme.buttonTextColor};
+  color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
   font-weight: bold;
   outline: none;
   &:hover {
-    color: ${props => props.theme.buttonTextColorHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 
-const ExtendedTooltip = withStyles(theme => ({
+const ExtendedTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: 'rgba(225,246,246,0.9)',
     color: 'rgba(0, 0, 0, 0.87)',
@@ -115,11 +115,11 @@ const ExtendedTooltip = withStyles(theme => ({
   },
 }))(Tooltip);
 
-export const QueueItem = props => {
+export const QueueItem = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState(props.message);
   const [isActive, setIsActive] = useState(true);
-  const convertDate = dt =>
+  const convertDate = (dt) =>
     `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''}${dt.getMinutes()}:${
       dt.getSeconds() < 10 ? '0' : ''
     }${dt.getSeconds()}`;
@@ -130,7 +130,7 @@ export const QueueItem = props => {
     props.deleteItem(props.channelId);
   };
 
-  const toggleEditMode = mode => {
+  const toggleEditMode = (mode) => {
     setEditMode(mode);
     window.getSelection().removeAllRanges();
   };
@@ -147,7 +147,7 @@ export const QueueItem = props => {
     setEditMode(false);
   };
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       updateDescription();
     }
@@ -185,7 +185,7 @@ export const QueueItem = props => {
               <Title active={isActive}>{props.title}</Title>
               <DescriptionBox
                 type="text"
-                onChange={event => setEditedDescription(event.target.value)}
+                onChange={(event) => setEditedDescription(event.target.value)}
                 onKeyPress={handleKeyPress}
                 value={editedDescription}
               />
@@ -211,7 +211,7 @@ export const QueueItem = props => {
     <li>
       <ExtendedTooltip
         title={
-          <React.Fragment>
+          <>
             <div>
               <FormattedMessage {...messages.addedAtTooltipField} />{' '}
               {convertDate(addedAt)}
@@ -220,7 +220,7 @@ export const QueueItem = props => {
               <FormattedMessage {...messages.activeAtTooltipField} />{' '}
               {convertDate(new Date(props.lastActiveAt))}
             </div>
-          </React.Fragment>
+          </>
         }
         placement="right"
       >
@@ -265,13 +265,10 @@ QueueItem.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    deleteItem: id => dispatch(deleteQueueItem(id)),
-    updateItem: item => dispatch(updateQueueItem(item)),
+    deleteItem: (id) => dispatch(deleteQueueItem(id)),
+    updateItem: (item) => dispatch(updateQueueItem(item)),
     dispatch,
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(QueueItem);
+export default connect(null, mapDispatchToProps)(QueueItem);

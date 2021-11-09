@@ -2,20 +2,18 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="FirstUseScreen__Backdrop-sc-18wtu21-0 fBIFTj"
+  class="sc-furwcr bTfITO"
 >
   <span
-    class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+    class="sc-pVTFL ewAAfd"
   >
     <span>
       Welcome to StreamChange
     </span>
   </span>
-  <div
-    class="tiles-grid"
-  >
+  <div>
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+      class="sc-pVTFL ewAAfd"
     >
       <span>
         Select theme
@@ -26,22 +24,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="sc-jrQzAO gKHmgP"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="box FirstUseScreen__Box-sc-18wtu21-3 bPAypJ"
+        class="sc-kDTinF dqRTJY box"
       >
         <img
           alt="light"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          class="sc-ksdxgE BsMMj"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+          class="sc-crHmcD ePdCJW"
         >
           <span>
             Light
@@ -53,22 +51,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="sc-jrQzAO gKHmgP"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="box FirstUseScreen__Box-sc-18wtu21-3 kcBKzb"
+        class="sc-kDTinF iamNNI box"
       >
         <img
           alt="dark"
-          class="FirstUseScreen__ThemeImg-sc-18wtu21-8 lmaBwM"
+          class="sc-ksdxgE BsMMj"
           src="IMAGE_MOCK"
         />
         <span
-          class="FirstUseScreen__Tile-sc-18wtu21-5 kyBueP"
+          class="sc-crHmcD ePdCJW"
         >
           <span>
             Dark
@@ -77,11 +75,9 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       </div>
     </label>
   </div>
-  <div
-    class="tiles-grid"
-  >
+  <div>
     <span
-      class="FirstUseScreen__Title-sc-18wtu21-1 dTkyKr"
+      class="sc-pVTFL ewAAfd"
     >
       <span>
         Select language
@@ -91,21 +87,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="sc-jrQzAO gKHmgP"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="box FirstUseScreen__LangBox-sc-18wtu21-4 iFLZEI"
+        class="sc-iqseJM btTgfy box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+          class="sc-egiyK fkBTTA"
         >
           <img
             alt="pl"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            class="sc-bqiRlB dWqNkp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -119,21 +115,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="FirstUseScreen__RadioInput-sc-18wtu21-2 hVNXhY"
+        class="sc-jrQzAO gKHmgP"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="box FirstUseScreen__LangBox-sc-18wtu21-4 hsnTTl"
+        class="sc-iqseJM bPBVfO box"
       >
         <span
-          class="FirstUseScreen__LangTile-sc-18wtu21-6 gDeyJE"
+          class="sc-egiyK fkBTTA"
         >
           <img
             alt="en"
-            class="FirstUseScreen__Flag-sc-18wtu21-7 fyboRz"
+            class="sc-bqiRlB dWqNkp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -145,7 +141,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text FirstUseScreen__StyledButton-sc-18wtu21-9 eyFmjv"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-hBUSln hNbuja"
       tabindex="0"
       type="button"
     >
@@ -159,6 +155,30 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       <span
         class="MuiTouchRipple-root"
       />
+    </button>
+  </div>
+  <div
+    class="sc-eCImPb hlVgAE"
+  >
+    <img
+      alt="cookie"
+      class="sc-jRQBWg gcWUOg"
+      src="IMAGE_MOCK"
+    />
+    <span
+      class="sc-gKclnd dnVwcj"
+    >
+      <span>
+        This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+      </span>
+    </span>
+    <button
+      class="sc-iCfMLu iRwhql"
+      type="button"
+    >
+      <span>
+        Accept
+      </span>
     </button>
   </div>
 </div>

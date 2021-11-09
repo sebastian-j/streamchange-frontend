@@ -10,14 +10,14 @@ import messages from './messages';
 import { makeSelectDarkMode } from '../../containers/StyleProvider/selectors';
 import { toggleDarkMode } from '../../containers/StyleProvider/actions';
 
-const DarkModeSwitch = props => {
+const DarkModeSwitch = (props) => {
   const [state, setState] = useState(false);
 
   useEffect(() => {
     setState(localStorage.getItem('darkMode') === 'true');
   }, []);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setState(event.target.checked);
     localStorage.setItem('darkMode', event.target.checked.toString());
     props.onModeToggle(event);
@@ -26,7 +26,7 @@ const DarkModeSwitch = props => {
   return (
     <div>
       <FormattedMessage {...messages.darkModeLabel}>
-        {label => (
+        {(label) => (
           <FormControlLabel
             control={
               <Switch checked={state} onChange={handleChange} color="primary" />
@@ -43,21 +43,15 @@ DarkModeSwitch.propTypes = {
   onModeToggle: PropTypes.func,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectDarkMode(),
-  isDarkMode => ({
-    isDarkMode,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectDarkMode(), (isDarkMode) => ({
+  isDarkMode,
+}));
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onModeToggle: evt => dispatch(toggleDarkMode(evt.target.checked)),
+    onModeToggle: (evt) => dispatch(toggleDarkMode(evt.target.checked)),
     dispatch,
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DarkModeSwitch);
+export default connect(mapStateToProps, mapDispatchToProps)(DarkModeSwitch);

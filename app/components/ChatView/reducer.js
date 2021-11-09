@@ -13,7 +13,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const chatReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case ADD_MESSAGE:
         if (draft.messages.length > 50) {

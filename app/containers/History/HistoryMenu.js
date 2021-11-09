@@ -16,14 +16,14 @@ import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 
 const ThemedSvg = styled.svg`
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
 `;
 
-const HistoryMenu = props => {
+const HistoryMenu = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
-  const openMenu = event => {
+  const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 

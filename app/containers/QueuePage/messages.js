@@ -28,13 +28,28 @@ export default defineMessages({
     id: `${scope}.QueueRules.panelTitle`,
     defaultMessage: 'Queue rules',
   },
-  commandTextField: {
-    id: `${scope}.QueueRules.command`,
+  commandTextFieldLabel: {
+    id: `${scope}.QueueRules.command.label`,
     defaultMessage: 'Command for joining the queue',
   },
-  capacityTextField: {
-    id: `${scope}.QueueRules.capacity`,
+  commandTextFieldTooltip: {
+    id: `${scope}.QueueRules.command.tooltip`,
+    defaultMessage:
+      'A viewer have to send this command in a chat message to join the queue',
+  },
+  capacityTextFieldLabel: {
+    id: `${scope}.QueueRules.capacity.label`,
     defaultMessage: 'Queue capacity',
+  },
+  capacityTextFieldTooltip1: {
+    id: `${scope}.QueueRules.capacity.tooltip.1`,
+    defaultMessage:
+      'Decide how many viewers can wait in the queue in the same time.',
+  },
+  capacityTextFieldTooltip2: {
+    id: `${scope}.QueueRules.capacity.tooltip.2`,
+    defaultMessage:
+      'If more viewers try to join the queue, they will be rejected automatically.',
   },
   timeToIdleTextField: {
     id: `${scope}.QueueRules.timeToIdle`,

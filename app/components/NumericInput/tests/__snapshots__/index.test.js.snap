@@ -1,25 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NumericInput /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef />
-  <ForwardRef
+<styled.div>
+  <styled.div />
+  <styled.button
     left="true"
     onClick={[Function]}
     type="button"
   >
     -
-  </ForwardRef>
-  <ForwardRef
-    onBlur={[Function]}
+  </styled.button>
+  <styled.input
     onChange={[Function]}
     value={0}
   />
-  <ForwardRef
+  <styled.button
     onClick={[Function]}
     type="button"
   >
     +
-  </ForwardRef>
-</ForwardRef>
+  </styled.button>
+</styled.div>
 `;

@@ -4,7 +4,12 @@
  *
  */
 
-import { CHANGE_KEYWORD, CHANGE_PREWINNER, CHANGE_PRIZE } from './constants';
+import {
+  CHANGE_KEYWORD,
+  CHANGE_PARTICIPANT_REQUIREMENT,
+  CHANGE_PREWINNER,
+  CHANGE_PRIZE,
+} from './constants';
 
 export function changeKeyword(str) {
   return {
@@ -24,5 +29,12 @@ export function changePrize(str) {
   return {
     type: CHANGE_PRIZE,
     prize: str,
+  };
+}
+
+export function changeRequirement(r) {
+  return {
+    type: CHANGE_PARTICIPANT_REQUIREMENT,
+    requirement: r,
   };
 }

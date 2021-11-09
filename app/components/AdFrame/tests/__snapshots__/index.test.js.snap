@@ -2,7 +2,7 @@
 
 exports[`<AdFrame /> should render and match the snapshot 1`] = `
 <div>
-  <ForwardRef>
+  <styled.div>
     <span>
       <FormattedMessage
         defaultMessage="This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers."
@@ -10,7 +10,7 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         values={Object {}}
       />
     </span>
-    <ForwardRef(WithStyles)
+    <WithStyles(ForwardRef(Button))
       color="primary"
       onClick={[Function]}
     >
@@ -19,14 +19,14 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         id="streamchange.components.AdFrame.showMoreButton"
         values={Object {}}
       />
-    </ForwardRef(WithStyles)>
-  </ForwardRef>
-  <ForwardRef(WithStyles)
+    </WithStyles(ForwardRef(Button))>
+  </styled.div>
+  <WithStyles(ForwardRef(Dialog))
     aria-labelledby="form-dialog-title"
     onClose={[Function]}
     open={false}
   >
-    <ForwardRef(WithStyles)
+    <WithStyles(ForwardRef(DialogTitle))
       id="form-dialog-title"
     >
       <FormattedMessage
@@ -34,45 +34,45 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         id="streamchange.components.AdFrame.dialogTitle"
         values={Object {}}
       />
-    </ForwardRef(WithStyles)>
-    <ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)>
+    </WithStyles(ForwardRef(DialogTitle))>
+    <WithStyles(ForwardRef(DialogContent))>
+      <WithStyles(ForwardRef(DialogContentText))>
         <FormattedMessage
           defaultMessage="There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner."
           id="streamchange.components.AdFrame.dialogFirstLine"
           values={Object {}}
         />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)>
+      </WithStyles(ForwardRef(DialogContentText))>
+      <WithStyles(ForwardRef(DialogContentText))>
         <FormattedMessage
           defaultMessage="If you chose full version, your ad will be displayed on every stream that will show streamchange app that day. Bank transfer is a preferred payment method."
           id="streamchange.components.AdFrame.dialogSecondLine"
           values={Object {}}
         />
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)>
+      </WithStyles(ForwardRef(DialogContentText))>
+      <WithStyles(ForwardRef(DialogContentText))>
         <FormattedMessage
           defaultMessage="Contact:"
           id="streamchange.components.AdFrame.dialogThirdLine"
           values={Object {}}
         />
-        <ForwardRef(WithStyles)>
+        <WithStyles(ForwardRef(Typography))>
           Discord: Baf#5501
-        </ForwardRef(WithStyles)>
-        <ForwardRef
+        </WithStyles(ForwardRef(Typography))>
+        <styled.a
           href="https://www.facebook.com/BafYT/"
         >
           https://www.facebook.com/BafYT/
-        </ForwardRef>
-        <ForwardRef
+        </styled.a>
+        <styled.a
           href="https://www.instagram.com/grafika3d/"
         >
           Instagram grafika3d
-        </ForwardRef>
-      </ForwardRef(WithStyles)>
-    </ForwardRef(WithStyles)>
-    <ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
+        </styled.a>
+      </WithStyles(ForwardRef(DialogContentText))>
+    </WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogActions))>
+      <WithStyles(ForwardRef(Button))
         color="secondary"
         onClick={[Function]}
       >
@@ -81,8 +81,8 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
           id="streamchange.components.AdFrame.dialogCloseButton"
           values={Object {}}
         />
-      </ForwardRef(WithStyles)>
-    </ForwardRef(WithStyles)>
-  </ForwardRef(WithStyles)>
+      </WithStyles(ForwardRef(Button))>
+    </WithStyles(ForwardRef(DialogActions))>
+  </WithStyles(ForwardRef(Dialog))>
 </div>
 `;

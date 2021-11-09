@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SketchPicker } from 'react-color';
 import './style.css';
 
-const ColorPicker = props => {
+const ColorPicker = (props) => {
   const [color, setColor] = useState(props.color);
   const [colorString, setColorString] = useState(props.color);
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -12,7 +12,7 @@ const ColorPicker = props => {
     setColorString(props.color);
   }, [color]);
 
-  const handleColorChange = colorObject => {
+  const handleColorChange = (colorObject) => {
     const rgba = colorObject.rgb;
     const hex = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
     setColor(rgba);
@@ -21,12 +21,13 @@ const ColorPicker = props => {
   };
 
   const onTogglePicker = () => {
-    setPickerVisible(prevState => !prevState);
+    setPickerVisible((prevState) => !prevState);
   };
   return (
     <div className="color-picker-wrapper">
       <div className="color-picker-label">{props.label}</div>
       <button
+        aria-label="toggle picker"
         className="color-picker-button"
         style={{ backgroundColor: colorString }}
         onClick={onTogglePicker}
@@ -35,6 +36,7 @@ const ColorPicker = props => {
       {pickerVisible && (
         <div>
           <button
+            aria-label="color picker"
             className="active-picker-background"
             onClick={onTogglePicker}
             type="button"

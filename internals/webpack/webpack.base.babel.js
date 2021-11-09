@@ -5,17 +5,17 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = options => ({
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
+module.exports = (options) => ({
   mode: options.mode,
   entry: options.entry,
-  output: Object.assign(
-    {
-      // Compile into js/build.js
-      path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/',
-    },
-    options.output,
-  ), // Merge with env dependent settings
+  output: {
+    // Compile into js/build.js
+    path: path.resolve(process.cwd(), 'build'),
+    publicPath: '/',
+    ...options.output,
+  }, // Merge with env dependent settings
   optimization: options.optimization,
   module: {
     rules: [
@@ -26,6 +26,11 @@ module.exports = options => ({
           loader: 'babel-loader',
           options: options.babelQuery,
         },
+      },
+      {
+        test: /\.ts(x?)$/, // Transform typescript files with ts-loader
+        exclude: /node_modules/,
+        use: options.tsLoaders,
       },
       {
         // Preprocess our own .css files
@@ -59,13 +64,14 @@ module.exports = options => ({
         ],
       },
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|webp)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               // Inline files smaller than 10 kB
               limit: 10 * 1024,
+              outputPath: 'static',
             },
           },
           {
@@ -102,6 +108,7 @@ module.exports = options => ({
           loader: 'url-loader',
           options: {
             limit: 10000,
+            outputPath: 'static',
           },
         },
       },
@@ -114,10 +121,12 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    // Run typescript checker
+    new ForkTsCheckerWebpackPlugin(),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
-    extensions: ['.js', '.jsx', '.react.js'],
+    extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
     mainFields: ['browser', 'jsnext:main', 'main'],
   },
   devtool: options.devtool,

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MessageItem /> should render and match the snapshot 1`] = `
-<ForwardRef>
-  <ForwardRef>
+<styled.li>
+  <styled.span>
     7:27:56
-  </ForwardRef>
-  <ForwardRef>
+  </styled.span>
+  <styled.span>
     text
-  </ForwardRef>
-</ForwardRef>
+  </styled.span>
+</styled.li>
 `;

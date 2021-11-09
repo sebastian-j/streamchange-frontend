@@ -17,7 +17,7 @@ import messages from './messages';
 
 const StyledButton = styled(Button)`
   span {
-    color: ${props => props.theme.color};
+    color: ${(props) => props.theme.color};
   }
 `;
 
@@ -49,7 +49,7 @@ const UrlContainer = styled.div`
   }
 `;
 
-export const QueueWidgetDialog = props => {
+export const QueueWidgetDialog = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [widgetUrl, setWidgetUrl] = useState('');
   const urlInput = useRef(null);
@@ -68,7 +68,7 @@ export const QueueWidgetDialog = props => {
   };
 
   useEffect(() => {
-    axios.get(`${API_URL}/v4/queueUrl?key=${props.widgetCode}`).then(res => {
+    axios.get(`${API_URL}/v4/queueUrl?key=${props.widgetCode}`).then((res) => {
       if (res.data.url) {
         setWidgetUrl(res.data.url);
       }
@@ -97,7 +97,7 @@ export const QueueWidgetDialog = props => {
         <DialogContent>
           <UrlContainer>
             <input
-              onFocus={event => event.target.select()}
+              onFocus={(event) => event.target.select()}
               readOnly="readonly"
               ref={urlInput}
               type="text"
@@ -128,7 +128,4 @@ const mapStateToProps = createStructuredSelector({
   widgetCode: makeSelectWidgetCode(),
 });
 
-export default connect(
-  mapStateToProps,
-  null,
-)(QueueWidgetDialog);
+export default connect(mapStateToProps, null)(QueueWidgetDialog);

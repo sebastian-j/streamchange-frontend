@@ -29,13 +29,13 @@ const PromotedContentWrapper = styled.div`
 
 const PromotedContent = styled.div`
   border: 1px solid #cecece;
-  color: ${props => props.theme.staticTextColor};
+  color: ${(props) => props.theme.staticTextColor};
   display: flex;
   flex-direction: row;
   padding: 14px;
 `;
 
-const PromotedVideo = props => (
+const PromotedVideo = (props) => (
   <PromotedContentWrapper>
     <AdTitle>
       <FormattedMessage {...messages.title} />
@@ -45,9 +45,7 @@ const PromotedVideo = props => (
         id="ytplayer"
         width="500"
         height="170"
-        src={`https://www.youtube.com/embed/${
-          props.videoId
-        }?autoplay=0origin=https://www.streamchange.pl`}
+        src={`https://www.youtube.com/embed/${props.videoId}?autoplay=0origin=https://www.streamchange.pl`}
         frameBorder="0"
         title="video"
       />

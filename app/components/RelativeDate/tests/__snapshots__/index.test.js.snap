@@ -10,6 +10,6 @@ exports[`<RelativeDate /> should render and match the snapshot 1`] = `
     value={2019-12-24T07:27:56.270Z}
     year="numeric"
   />
-   7:27
+   8:27
 </span>
 `;
