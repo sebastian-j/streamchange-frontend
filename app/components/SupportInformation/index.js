@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -14,17 +13,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import messages from './messages';
 import ColoredLink from './ColoredLink';
+import HintParagraph from '../Tooltip/HintParagraph';
 import ToolbarButton from './ToolbarButton';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { makeSelectDialogVisibility } from './selectors';
 import reducer from './reducer';
 import { changeDialogVisibility } from './actions';
-
-const HintParagraph = styled.span`
-  font-size: 0.9rem;
-  line-height: 1.1rem;
-  display: block;
-`;
 
 export const SupportInformation = (props) => {
   useInjectReducer({ key: 'supportInfo', reducer });

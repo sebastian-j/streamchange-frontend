@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,15 +17,10 @@ import messages from './messages';
 import ColorPicker from '../ColorPicker';
 import DarkModeSwitch from './DarkModeSwitch';
 import LocaleToggle from './LocaleToggle';
+import HintParagraph from '../Tooltip/HintParagraph';
 import ToolbarButton from '../SupportInformation/ToolbarButton';
 import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
-
-const HintParagraph = styled.span`
-  font-size: 0.9rem;
-  line-height: 1.1rem;
-  display: block;
-`;
 
 const SettingsDialog = (props) => {
   const [isOpen, setIsOpen] = useState(false);

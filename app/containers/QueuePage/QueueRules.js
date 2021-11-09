@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 
+import Tooltip from '@material-ui/core/Tooltip';
 import messages from './messages';
 import {
   makeSelectCapacity,
@@ -21,6 +22,7 @@ import {
 } from './actions';
 import Panel from '../../components/Panel';
 import PanelTitle from '../../components/Panel/PanelTitle';
+import HintParagraph from '../../components/Tooltip/HintParagraph';
 import StyledTextField from '../../components/StyledTextField';
 import AdFrame from '../../components/AdFrame';
 import QueueWidgetDialog from './QueueWidgetDialog';
@@ -48,32 +50,55 @@ export const QueueRules = (props) => {
       <PanelTitle>
         <FormattedMessage {...messages.rulesPanelTitle} />
       </PanelTitle>
-      <FormattedMessage {...messages.commandTextField}>
+      <FormattedMessage {...messages.commandTextFieldLabel}>
         {(label) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="command"
-            onChange={handleInputValueChange}
-            label={label}
-            type="text"
-            value={props.command}
-            fullWidth
-          />
+          <Tooltip
+            title={
+              <HintParagraph>
+                <FormattedMessage {...messages.commandTextFieldTooltip} />
+              </HintParagraph>
+            }
+            aria-label="keyword"
+          >
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="command"
+              onChange={handleInputValueChange}
+              label={label}
+              type="text"
+              value={props.command}
+              fullWidth
+            />
+          </Tooltip>
         )}
       </FormattedMessage>
-      <FormattedMessage {...messages.capacityTextField}>
+      <FormattedMessage {...messages.capacityTextFieldLabel}>
         {(label) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="capacity"
-            onChange={handleInputValueChange}
-            label={label}
-            type="number"
-            value={props.capacity}
-            fullWidth
-          />
+          <Tooltip
+            title={
+              <div>
+                <HintParagraph>
+                  <FormattedMessage {...messages.capacityTextFieldTooltip1} />
+                </HintParagraph>
+                <HintParagraph>
+                  <FormattedMessage {...messages.capacityTextFieldTooltip2} />
+                </HintParagraph>
+              </div>
+            }
+            aria-label="keyword"
+          >
+            <StyledTextField
+              autoFocus
+              margin="dense"
+              name="capacity"
+              onChange={handleInputValueChange}
+              label={label}
+              type="number"
+              value={props.capacity}
+              fullWidth
+            />
+          </Tooltip>
         )}
       </FormattedMessage>
       <FormattedMessage {...messages.timeToIdleTextField}>

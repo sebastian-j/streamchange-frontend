@@ -15,6 +15,7 @@ import db from '../YoutubeWorker/db';
 import { API_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
+import HintParagraph from '../Tooltip/HintParagraph';
 import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
@@ -83,12 +84,6 @@ const MessageList = styled.ul`
   overflow-y: auto;
   list-style: none;
   padding: 0;
-`;
-
-const HintParagraph = styled.span`
-  font-size: 0.9rem;
-  line-height: 1.1rem;
-  display: block;
 `;
 
 export class WinnerView extends React.Component {
