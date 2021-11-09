@@ -39,7 +39,7 @@ const PromotedBanner = (props) => {
   };
 
   const onVideoLoad = ({ target: video }) => {
-    setImgHeight(Math.round(video.videoHeight * 0.6));
+    setImgHeight(Math.round(video.videoHeight * 0.8));
   };
 
   return (

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -19,32 +17,10 @@ import AdFrame from '../AdFrame';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
+import StyledFormControl from '../StyledTextField/StyledFormControl';
 import KeywordInput from './KeywordInput';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
-
-const StyledFormControl = styled(FormControl)`
-  width: 100%;
-  input {
-    color: ${(props) => props.theme.staticTextColor};
-  }
-  span,
-  svg {
-    color: ${(props) => props.theme.staticTextColor};
-  }
-  label span {
-    color: ${(props) => props.theme.inputLabel};
-  }
-  label.Mui-focused span {
-    color: ${(props) => props.theme.color};
-  }
-  .MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: 2px solid ${(props) => props.theme.color};
-  }
-  .MuiInput-underline:after {
-    border-bottom: 2px solid ${(props) => props.theme.color};
-  }
-`;
 
 export class GiveawayRules extends React.Component {
   constructor(props) {

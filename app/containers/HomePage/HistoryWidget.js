@@ -92,15 +92,19 @@ const HistoryWidget = () => {
               <FormattedMessage {...messages.historyWidgetTableTitle} />
             </WinnerTableTitle>
           )}
-          {winners.map((item) => (
-            <tr key={item.createdAt}>
-              <Td>
-                <img src={item.imageUrl} alt="Logo" width="32px" />
-              </Td>
-              <Td>{item.displayName}</Td>
-              <Td>{item.prize}</Td>
-            </tr>
-          ))}
+          <table>
+            <tbody>
+              {winners.map((item) => (
+                <tr key={item.createdAt}>
+                  <Td>
+                    <img src={item.imageUrl} alt="Logo" width="32px" />
+                  </Td>
+                  <Td>{item.displayName}</Td>
+                  <Td>{item.prize}</Td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
       }
     >

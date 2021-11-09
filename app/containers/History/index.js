@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -12,6 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 import StyledTextField from '../../components/StyledTextField';
+import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
 import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
 
@@ -43,25 +43,6 @@ const ReturnButton = styled(NavLink)`
   }
 `;
 
-const StyledFormControl = styled(FormControl)`
-  width: 128px;
-  div.MuiInput-input {
-    color: ${(props) => props.theme.staticTextColor};
-  }
-  label {
-    color: ${(props) => props.theme.inputLabel};
-  }
-  label.Mui-focused {
-    color: ${(props) => props.theme.inputLabelFocused};
-  }
-  svg.MuiSelect-icon {
-    color: ${(props) => props.theme.secondaryTextColor};
-  }
-  .MuiInput-underline:before {
-    border-bottom-color: ${(props) => props.theme.secondaryTextColor};
-  }
-`;
-
 const Information = styled.div`
   color: ${(props) => props.theme.staticTextColor};
   font-size: 2vw;
@@ -72,6 +53,7 @@ const Footer = styled.div`
   display: flex;
   flex-direction: row-reverse;
   margin-top: 10px;
+  max-width: 200px;
 `;
 
 export default class History extends React.Component {
@@ -259,7 +241,7 @@ export default class History extends React.Component {
               </svg>
             </IconButton>
           )}
-          <StyledFormControl>
+          <StyledFormControl margin="normal">
             <InputLabel htmlFor="maxResults">
               <FormattedMessage {...messages.resultsPerPage} />
             </InputLabel>

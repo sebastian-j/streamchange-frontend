@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root sc-iqseJM fGAEcW MuiFormControl-marginNormal"
+    className="MuiFormControl-root sc-kDTinF cEaVdy MuiFormControl-marginNormal"
   >
     <label
       className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
@@ -82,7 +82,7 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <button
-    className="sc-kDTinF ceKVlt"
+    className="sc-iqseJM dYCYFG"
     disabled={false}
     onClick={[Function]}
     type="button"

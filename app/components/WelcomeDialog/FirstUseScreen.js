@@ -174,6 +174,7 @@ const FirstUseScreen = (props) => {
             type="radio"
             name="theme"
             value="0"
+            onChange={() => {}}
             onClick={changeTheme}
             checked={!darkMode}
           />
@@ -190,6 +191,7 @@ const FirstUseScreen = (props) => {
             type="radio"
             name="theme"
             value="1"
+            onChange={() => {}}
             onClick={changeTheme}
             checked={darkMode}
           />
@@ -211,6 +213,7 @@ const FirstUseScreen = (props) => {
             type="radio"
             name="language"
             value="pl"
+            onChange={() => {}}
             onClick={changeLanguage}
             checked={language === 'pl'}
           />
@@ -227,6 +230,7 @@ const FirstUseScreen = (props) => {
             type="radio"
             name="language"
             value="en"
+            onChange={() => {}}
             onClick={changeLanguage}
             checked={language === 'en'}
           />

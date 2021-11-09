@@ -54,6 +54,7 @@ const DialogTitle = styled.span`
 const DialogContent = styled.span`
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   display: block;
+  line-height: 1.1;
   margin: 10px;
 `;
 
@@ -61,7 +62,7 @@ const HolidayPanel = styled.div`
   background-color: wheat;
   border-radius: 0 0 4px 4px;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  margin-top: 2px;
+  margin-top: -2px;
   padding: 6px;
   width: 100%;
 `;

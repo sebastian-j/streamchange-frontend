@@ -166,7 +166,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       src="IMAGE_MOCK"
     />
     <span
-      class="sc-gKclnd jGrLhS"
+      class="sc-gKclnd dnVwcj"
     >
       <span>
         This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.

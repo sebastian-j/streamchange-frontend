@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -25,14 +24,16 @@ import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import NumericInput from '../NumericInput';
+import StyledFormControl from '../StyledTextField/StyledFormControl';
 
 const StartButton = styled.button`
   background-color: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
   color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
+  font-size: 1.2rem;
   margin-top: 10px;
-  padding: 8px 12px;
+  padding: 10px 0;
   width: 100%;
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover};
@@ -40,28 +41,6 @@ const StartButton = styled.button`
   }
 `;
 
-const StyledFormControl = styled(FormControl)`
-  width: 100%;
-  input {
-    color: ${(props) => props.theme.staticTextColor};
-  }
-  span,
-  svg {
-    color: ${(props) => props.theme.staticTextColor};
-  }
-  label span {
-    color: ${(props) => props.theme.inputLabel};
-  }
-  label.Mui-focused span {
-    color: ${(props) => props.theme.color};
-  }
-  .MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: 2px solid ${(props) => props.theme.color};
-  }
-  .MuiInput-underline:after {
-    border-bottom: 2px solid ${(props) => props.theme.color};
-  }
-`;
 export const RaffleWrapper = (props) => {
   const [noUsers, setNoUsers] = useState(false);
 

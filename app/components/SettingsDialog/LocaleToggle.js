@@ -25,7 +25,7 @@ export function LocaleToggle(props) {
       </Typography>
       <Select onChange={toggle} value={props.locale}>
         {appLocales.map((item) => (
-          <MenuItem value={item}>
+          <MenuItem value={item} key={item}>
             <FormattedMessage {...messages[item]} />
           </MenuItem>
         ))}

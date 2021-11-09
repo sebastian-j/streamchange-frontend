@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import YoutubeLogo from './YoutubeLogo';
 
 const Span = styled.span`
+  font-size: 16px;
   margin-right: 5px;
   vertical-align: middle;
 `;
@@ -21,8 +22,9 @@ const UserButton = styled.button`
   border: none;
   color: ${(props) => props.theme.inactiveUser};
   cursor: pointer;
+  display: flex;
   line-height: 1.43;
-  margin: 6px 5px;
+  margin: 12px 5px;
   padding: 0;
   outline: 0;
   ${(props) =>
