@@ -33,6 +33,56 @@ const QueueWorker = (props) => {
   const [timer, setTimer] = useState(null);
   const [superChat, setSuperChat] = useState(null);
 
+  const saveMessage = (msg) => {
+    const chatViewMessage = {
+      authorId: msg.authorDetails.channelId,
+      displayText: msg.snippet.displayMessage,
+      imageUrl: msg.authorDetails.profileImageUrl,
+      isModerator: msg.authorDetails.isChatModerator,
+      isOwner: msg.authorDetails.isChatOwner,
+      isVerified: msg.authorDetails.isVerified,
+      publishedAt: msg.snippet.publishedAt,
+      title: msg.authorDetails.displayName,
+    };
+    props.addMessage(chatViewMessage);
+  };
+
+  const superChatFeatures = (author, chatMessage) => {
+    if (
+      PRIVILEGED_CHANNELS.includes(author.id) ||
+      chatMessage.authorDetails.isChatOwner
+    ) {
+      if (author.message.startsWith('!s ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: author.message.replace('!s ', ''),
+        });
+        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
+      } else if (author.message.startsWith('!color ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed color to ${author.message.replace(
+            '!color ',
+            '',
+          )}`,
+        });
+        props.onColorChange(author.message.replace('!color ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      }
+    }
+  };
+
+  const checkResignation = (author) => {
+    if (
+      localStorage.getItem('gv-abortCommand') !== null &&
+      author.message === localStorage.getItem('gv-abortCommand')
+    ) {
+      props.deleteItem(author.id);
+    }
+  };
+
   const messageProcessor = () => {
     let nextPageToken = localStorage.getItem('nextPageToken');
     if (nextPageToken === null) {
@@ -95,56 +145,6 @@ const QueueWorker = (props) => {
         setTimer(null);
         setTimer(setTimeout(messageProcessor, 6000));
       });
-  };
-
-  const saveMessage = (msg) => {
-    const chatViewMessage = {
-      authorId: msg.authorDetails.channelId,
-      displayText: msg.snippet.displayMessage,
-      imageUrl: msg.authorDetails.profileImageUrl,
-      isModerator: msg.authorDetails.isChatModerator,
-      isOwner: msg.authorDetails.isChatOwner,
-      isVerified: msg.authorDetails.isVerified,
-      publishedAt: msg.snippet.publishedAt,
-      title: msg.authorDetails.displayName,
-    };
-    props.addMessage(chatViewMessage);
-  };
-
-  const superChatFeatures = (author, chatMessage) => {
-    if (
-      PRIVILEGED_CHANNELS.includes(author.id) ||
-      chatMessage.authorDetails.isChatOwner
-    ) {
-      if (author.message.startsWith('!s ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: author.message.replace('!s ', ''),
-        });
-        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
-      } else if (author.message.startsWith('!color ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: `${author.title} changed color to ${author.message.replace(
-            '!color ',
-            '',
-          )}`,
-        });
-        props.onColorChange(author.message.replace('!color ', ''));
-        setTimeout(() => setSuperChat(null), 10000);
-      }
-    }
-  };
-
-  const checkResignation = (author) => {
-    if (
-      localStorage.getItem('gv-abortCommand') !== null &&
-      author.message === localStorage.getItem('gv-abortCommand')
-    ) {
-      props.deleteItem(author.id);
-    }
   };
 
   useEffect(() => {

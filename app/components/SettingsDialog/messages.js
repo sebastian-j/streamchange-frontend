@@ -51,7 +51,7 @@ export default defineMessages({
   saveCommandsHint: {
     id: `${scope}.SaveCommands.hint`,
     defaultMessage:
-      "If checked, winner chat log will show all sent commands. They can be hundreds of identical messages, so usually it's better to uncheck this setting.",
+      'If checked, winner chat log will show all sent commands. They can be hundreds of identical messages, so usually it\'s better to uncheck this setting.',
   },
   saveBtn: {
     id: `${scope}.SaveButton`,

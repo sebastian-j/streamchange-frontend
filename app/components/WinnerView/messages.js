@@ -39,7 +39,7 @@ export default defineMessages({
   replayBtnTooltip: {
     id: `${scope}.replayBtnTooltip`,
     defaultMessage:
-      "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
+      'Repeats the draw immediately using the same settings. Current winner won\'t be saved in history.',
   },
   notSubscribed: {
     id: `${scope}.SubStatus.notSubscribed`,

@@ -58,7 +58,7 @@ export default defineMessages({
   },
   holiday1402: {
     id: `${scope}.holidays.14-02`,
-    defaultMessage: "February 14 - Valetine's Day",
+    defaultMessage: 'February 14 - Valetine\'s Day',
   },
   holiday1403: {
     id: `${scope}.holidays.14-03`,
@@ -107,7 +107,7 @@ export default defineMessages({
   },
   holiday3112: {
     id: `${scope}.holiday.31-12`,
-    defaultMessage: "December 31 - New Year's Eve",
+    defaultMessage: 'December 31 - New Year\'s Eve',
   },
   cookieInfo: {
     id: `${scope}.CookieConsent.info`,
@@ -143,11 +143,11 @@ export default defineMessages({
     defaultMessage: 'Welcome to StreamChange',
   },
   en: {
-    id: `streamchange.components.SettingsDialog.LocaleToggle.en`,
+    id: 'streamchange.components.SettingsDialog.LocaleToggle.en',
     defaultMessage: 'en',
   },
   pl: {
-    id: `streamchange.components.SettingsDialog.LocaleToggle.pl`,
+    id: 'streamchange.components.SettingsDialog.LocaleToggle.pl',
     defaultMessage: 'pl',
   },
 });

@@ -9,7 +9,7 @@ export const scope = 'streamchange.containers.QueuePage';
 
 export default defineMessages({
   leaveStreamBtn: {
-    id: `streamchange.containers.HomePage.leaveStreamBtn`,
+    id: 'streamchange.containers.HomePage.leaveStreamBtn',
     defaultMessage: 'Leave stream',
   },
   panelTitle: {
@@ -17,11 +17,11 @@ export default defineMessages({
     defaultMessage: 'Queue',
   },
   searchPlaceholder: {
-    id: `streamchange.components.UserList.search.placeholder`,
+    id: 'streamchange.components.UserList.search.placeholder',
     defaultMessage: 'Search',
   },
   clearBtn: {
-    id: `streamchange.components.UserList.clearBtn`,
+    id: 'streamchange.components.UserList.clearBtn',
     defaultMessage: 'Clear all',
   },
   rulesPanelTitle: {

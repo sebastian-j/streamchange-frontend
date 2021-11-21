@@ -32,7 +32,7 @@ export default defineMessages({
   },
   facebookLink: {
     id: `${scope}.facebookLink`,
-    defaultMessage: "StreamChange developer's Facebook page",
+    defaultMessage: 'StreamChange developer\'s Facebook page',
   },
   toolbarButtonTooltip: {
     id: `${scope}.toolbarButtonTooltip`,
