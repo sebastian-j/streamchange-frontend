@@ -12,21 +12,21 @@ import { initialState } from '../reducer';
 describe('QueuePage selectors', () => {
   it('should select the global state', () => {
     const globalState = {};
-    const mockedState = {
+    const mockedState: any = {
       queue: globalState,
     };
     expect(selectQueue(mockedState)).toEqual(globalState);
   });
 
   it('should select the QueuePage initial state', () => {
-    const mockedState = {};
+    const mockedState: any = {};
     expect(selectQueue(mockedState)).toEqual(initialState);
   });
 
   it('should select the capacity', () => {
     const capacitySelector = makeSelectCapacity();
     const capacity = 10;
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         capacity,
       },
@@ -37,7 +37,7 @@ describe('QueuePage selectors', () => {
   it('should select queue array', () => {
     const arraySelector = makeSelectQueueArray();
     const queueArray = [{ id: 'id', title: 'queueItem' }];
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         queueArray,
       },
@@ -48,7 +48,7 @@ describe('QueuePage selectors', () => {
   it('should select queue command', () => {
     const commandSelector = makeSelectQueueCommand();
     const command = 'join';
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         command,
       },
@@ -59,7 +59,7 @@ describe('QueuePage selectors', () => {
   it('should select widget code', () => {
     const codeSelector = makeSelectWidgetCode();
     const widgetCode = 'code';
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         widgetCode,
       },
@@ -70,7 +70,7 @@ describe('QueuePage selectors', () => {
   it('should select time to mark as idle', () => {
     const timeSelector = makeSelectTTI();
     const timeToIdle = 300;
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         timeToIdle,
       },
@@ -81,7 +81,7 @@ describe('QueuePage selectors', () => {
   it('should select time to kick', () => {
     const timeSelector = makeSelectTTK();
     const timeToKick = 600;
-    const mockedState = {
+    const mockedState: any = {
       queue: {
         timeToKick,
       },

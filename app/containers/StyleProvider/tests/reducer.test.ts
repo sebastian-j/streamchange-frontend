@@ -15,7 +15,7 @@ describe('styleProviderReducer', () => {
 
   it('should return the initial state', () => {
     const expectedResult = state;
-    expect(styleProviderReducer(undefined, {})).toEqual(expectedResult);
+    expect(styleProviderReducer(undefined, {} as any)).toEqual(expectedResult);
   });
 
   it('should handle the changeColor action correctly', () => {

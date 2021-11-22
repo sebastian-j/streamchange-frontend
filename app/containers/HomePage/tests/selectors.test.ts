@@ -10,21 +10,21 @@ import { initialState } from '../reducer';
 describe('HomePage selectors', () => {
   it('should select the global state', () => {
     const globalState = {};
-    const mockedState = {
+    const mockedState: any = {
       streamInfo: globalState,
     };
     expect(selectHomePage(mockedState)).toEqual(globalState);
   });
 
   it('should select the HomePage initial state', () => {
-    const mockedState = {};
+    const mockedState: any = {};
     expect(selectHomePage(mockedState)).toEqual(initialState);
   });
 
   it('should select ownerId', () => {
     const idSelector = makeSelectOwnerId();
     const ownerId = 'some text';
-    const mockedState = {
+    const mockedState: any = {
       streamInfo: {
         ownerId,
       },
@@ -35,7 +35,7 @@ describe('HomePage selectors', () => {
   it('should select videoId', () => {
     const idSelector = makeSelectVideoId();
     const videoId = 'some text';
-    const mockedState = {
+    const mockedState: any = {
       streamInfo: {
         videoId,
       },
@@ -46,7 +46,7 @@ describe('HomePage selectors', () => {
   it('should select thumbnailUrl', () => {
     const urlSelector = makeSelectThumbnailUrl();
     const thumbnailUrl = 'some text';
-    const mockedState = {
+    const mockedState: any = {
       streamInfo: {
         thumbnailUrl,
       },
@@ -57,7 +57,7 @@ describe('HomePage selectors', () => {
   it('should select title', () => {
     const titleSelector = makeSelectTitle();
     const title = 'some text';
-    const mockedState = {
+    const mockedState: any = {
       streamInfo: {
         title,
       },

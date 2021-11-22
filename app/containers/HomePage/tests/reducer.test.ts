@@ -16,7 +16,7 @@ describe('homePageReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(homePageReducer(undefined, {})).toEqual(initialState);
+    expect(homePageReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeOwnerId action correctly', () => {

@@ -1,37 +1,37 @@
-import { CHANGE_KEYWORD, CHANGE_PREWINNER, CHANGE_PRIZE } from '../constants';
+import { action } from 'typesafe-actions';
+import ActionTypes from '../constants';
 
 import { changeKeyword, changePreWinner, changePrize } from '../actions';
 
 describe('GiveawayRules Actions', () => {
   describe('changeKeyword', () => {
     it('should return the correct type and the passed keyword', () => {
-      const fixture = 'join';
-      const expectedResult = {
-        type: CHANGE_KEYWORD,
-        keyword: fixture,
-      };
+      const fixture: string = 'join';
+      const expectedResult = action(ActionTypes.CHANGE_KEYWORD, fixture);
 
       expect(changeKeyword(fixture)).toEqual(expectedResult);
     });
   });
   describe('changePreWinner', () => {
     it('should return the correct type and the passed preWinner', () => {
-      const fixture = { id: 'id' };
-      const expectedResult = {
-        type: CHANGE_PREWINNER,
-        preWinner: fixture,
+      const fixture = {
+        id: 'id2',
+        imageUrl: 'url',
+        isEligible: true,
+        isModerator: false,
+        isSponsor: false,
+        message: 'test',
+        title: 'user',
       };
+      const expectedResult = action(ActionTypes.CHANGE_PREWINNER, fixture);
 
       expect(changePreWinner(fixture)).toEqual(expectedResult);
     });
   });
   describe('changePrize', () => {
     it('should return the correct type and the passed string', () => {
-      const fixture = 'trophy';
-      const expectedResult = {
-        type: CHANGE_PRIZE,
-        prize: fixture,
-      };
+      const fixture: string = 'trophy';
+      const expectedResult = action(ActionTypes.CHANGE_PRIZE, fixture);
 
       expect(changePrize(fixture)).toEqual(expectedResult);
     });

@@ -15,7 +15,7 @@ describe('giveawayRulesReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(giveawayRulesReducer(undefined, {})).toEqual(initialState);
+    expect(giveawayRulesReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeKeyword action correctly', () => {
@@ -30,7 +30,15 @@ describe('giveawayRulesReducer', () => {
   });
 
   it('should handle the changePreWinner action correctly', () => {
-    const fixture = { id: 'id2' };
+    const fixture = {
+      id: 'id2',
+      imageUrl: 'url',
+      isEligible: true,
+      isModerator: false,
+      isSponsor: false,
+      message: 'test',
+      title: 'user',
+    };
     const expectedResult = produce(state, (draft) => {
       draft.preWinner = fixture;
     });

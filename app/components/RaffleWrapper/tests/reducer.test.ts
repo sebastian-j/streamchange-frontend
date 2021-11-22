@@ -19,7 +19,7 @@ describe('rafleWrapperReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(raffleWrapperReducer(undefined, {})).toEqual(initialState);
+    expect(raffleWrapperReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeAnimation action correctly', () => {

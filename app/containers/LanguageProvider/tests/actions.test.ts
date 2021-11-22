@@ -1,14 +1,12 @@
-import { changeLocale } from '../actions';
+import { action } from 'typesafe-actions';
+import ActionTypes from '../constants';
 
-import { CHANGE_LOCALE } from '../constants';
+import { changeLocale } from '../actions';
 
 describe('LanguageProvider actions', () => {
   describe('Change Local Action', () => {
     it('has a type of CHANGE_LOCALE', () => {
-      const expected = {
-        type: CHANGE_LOCALE,
-        locale: 'de',
-      };
+      const expected = action(ActionTypes.CHANGE_LOCALE, 'de');
       expect(changeLocale('de')).toEqual(expected);
     });
   });

@@ -9,21 +9,21 @@ import { initialState } from '../reducer';
 describe('GiveawayRules selectors', () => {
   it('should select the global state', () => {
     const globalState = {};
-    const mockedState = {
+    const mockedState: any = {
       giveawayRules: globalState,
     };
     expect(selectRules(mockedState)).toEqual(globalState);
   });
 
   it('should select the GiveawayRules initial state', () => {
-    const mockedState = {};
+    const mockedState: any = {};
     expect(selectRules(mockedState)).toEqual(initialState);
   });
 
   it('should select the keyword', () => {
     const keywordSelector = makeSelectGiveawayKeyword();
     const keyword = 'join';
-    const mockedState = {
+    const mockedState: any = {
       giveawayRules: {
         keyword,
       },
@@ -34,7 +34,7 @@ describe('GiveawayRules selectors', () => {
   it('should select preWinner', () => {
     const winnerSelector = makeSelectGiveawayPreWinner();
     const preWinner = { id: 'id' };
-    const mockedState = {
+    const mockedState: any = {
       giveawayRules: {
         preWinner,
       },
@@ -45,7 +45,7 @@ describe('GiveawayRules selectors', () => {
   it('should select the prize', () => {
     const prizeSelector = makeSelectGiveawayPrize();
     const prize = 'trophy';
-    const mockedState = {
+    const mockedState: any = {
       giveawayRules: {
         prize,
       },
