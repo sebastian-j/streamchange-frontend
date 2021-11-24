@@ -1,6 +1,7 @@
 import produce from 'immer';
 
 import queueReducer, { initialState } from '../reducer';
+import { QueueItem } from '../types';
 import {
   changeQueueCommand,
   changeCapacity,
@@ -32,7 +33,7 @@ describe('queueReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(queueReducer(undefined, {})).toEqual(initialState);
+    expect(queueReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeCapacity action correctly', () => {
@@ -76,7 +77,7 @@ describe('queueReducer', () => {
   });
 
   it('should handle the changeWidgetCode action correctly', () => {
-    const fixture = 400;
+    const fixture = 'test password';
     const expectedResult = produce(state, (draft) => {
       draft.widgetCode = fixture;
     });
@@ -112,10 +113,31 @@ describe('queueReducer', () => {
   });
 
   it('should handle the getQueueFromIdb action correctly', () => {
-    const fixture = [
-      { id: 'id', title: 'item1' },
-      { id: 'id2', title: 'item2' },
-      { id: 'id3', title: 'item3' },
+    const fixture: QueueItem[] = [
+      {
+        id: 'id',
+        addedAt: '2019-12-23T07:27:56.27-00:00',
+        imageUrl: 'url',
+        lastActiveAt: '2019-12-23T08:27:56.27-00:00',
+        message: 'text',
+        title: 'item1',
+      },
+      {
+        id: 'id2',
+        addedAt: '2019-12-24T07:27:56.27-00:00',
+        imageUrl: 'url',
+        lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+        message: 'text',
+        title: 'item2',
+      },
+      {
+        id: 'id3',
+        addedAt: '2019-12-25T07:27:56.27-00:00',
+        imageUrl: 'url',
+        lastActiveAt: '2019-12-25T08:27:56.27-00:00',
+        message: 'text',
+        title: 'item3',
+      },
     ];
     const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
@@ -136,12 +158,16 @@ describe('queueReducer', () => {
   });
 
   it('should add item to the queue', () => {
-    const fixture = [
-      { id: 'id', title: 'item1' },
-      { id: 'id2', title: 'item2' },
-      { id: 'id3', title: 'item3' },
-    ];
-    const newItem = { id: 'id3', title: 'item3' };
+    const newItem = {
+      id: 'id3',
+      addedAt: '2019-12-24T07:27:56.27-00:00',
+      imageUrl: 'url',
+      lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+      message: 'text',
+      title: 'item3',
+    };
+    const fixture = state.queueArray.map(a => ({...a}));
+    fixture.push(newItem);
     const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });
@@ -149,12 +175,19 @@ describe('queueReducer', () => {
     expect(queueReducer(state, pushQueueItem(newItem))).toEqual(expectedResult);
   });
 
-  it('should not add second item with the same id to the queue', () => {
+  it('should not add second item with the same id to the queue, instead should update existing item', () => {
     const fixture = [
       { id: 'id', title: 'item1' },
-      { id: 'id2', title: 'item2' },
+      { id: 'id2', lastActiveAt: '2019-12-24T08:27:56.27-00:00',  message: 'text', title: 'item2' },
     ];
-    const newItem = { id: 'id2', title: 'item3' };
+    const newItem = {
+      id: 'id2',
+      addedAt: '2019-12-24T07:27:56.27-00:00',
+      imageUrl: 'url',
+      lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+      message: 'text',
+      title: 'item3',
+    };
     const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
     });

@@ -132,7 +132,7 @@ const WelcomeDialog = (props) => {
   if (isFirstUse) {
     return <FirstUseScreen />;
   }
-  if (isChrome) {
+  if (isChrome || props.variant === 1) {
     return (
       <WelcomePage>
         <DialogWrapper>
@@ -215,6 +215,7 @@ WelcomeDialog.propTypes = {
   ban: PropTypes.object,
   error: PropTypes.string,
   passVideo: PropTypes.func,
+  variant: PropTypes.number,
 };
 
 export default WelcomeDialog;

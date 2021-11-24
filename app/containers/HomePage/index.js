@@ -192,7 +192,14 @@ const HomePage = (props) => {
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} ban={ban} error={error} />;
+    return (
+      <WelcomeDialog
+        passVideo={receiveVideo}
+        ban={ban}
+        error={error}
+        variant={0}
+      />
+    );
   }
   return (
     <div>

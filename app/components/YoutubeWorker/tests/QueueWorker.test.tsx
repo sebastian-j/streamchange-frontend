@@ -19,8 +19,22 @@ describe('<QueueWorker />', () => {
   beforeEach(() => {
     store = mockStore({
       queueArray: [
-        { id: 'id', title: 'item1' },
-        { id: 'id2', title: 'item2' },
+        {
+          id: 'id',
+          addedAt: '2019-12-24T07:27:56.27-00:00',
+          imageUrl: 'url',
+          lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+          message: 'text',
+          title: 'item1',
+        },
+        {
+          id: 'id2',
+          addedAt: '2019-12-24T09:27:56.27-00:00',
+          imageUrl: 'url2',
+          lastActiveAt: '2019-12-24T10:27:56.27-00:00',
+          message: 'text',
+          title: 'item2',
+        },
       ],
     });
   });
@@ -77,7 +91,14 @@ describe('<QueueWorker />', () => {
       it('should dispatch pushQueueItem when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        const item = { id: 'id' };
+        const item = {
+          id: 'id',
+          addedAt: '2019-12-24T07:27:56.27-00:00',
+          imageUrl: 'url',
+          lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+          message: 'text',
+          title: 'queueItem',
+        };
         result.pushItem(item);
         expect(dispatch).toHaveBeenCalledWith(pushQueueItem(item));
       });

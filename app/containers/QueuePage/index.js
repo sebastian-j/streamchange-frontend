@@ -161,7 +161,14 @@ const QueuePage = () => {
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} ban={ban} error={error} />;
+    return (
+      <WelcomeDialog
+        passVideo={receiveVideo}
+        ban={ban}
+        error={error}
+        variant={1}
+      />
+    );
   }
   return (
     <div>

@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
+import { ApplicationRootState } from 'types';
 import { initialState } from './reducer';
 
 /**
  * Direct selector to the QueuePage state domain
  */
-const selectQueue = (state) => state.queue || initialState;
+const selectQueue = (state: ApplicationRootState) =>
+  state.queue || initialState;
 
 const makeSelectCapacity = () =>
   createSelector(selectQueue, (state) => state.capacity);

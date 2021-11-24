@@ -30,4 +30,4 @@ type ContainerState = QueueState;
 type ContainerActions = AppActions;
 type QueueItem = IQueueItem;
 
-export { ContainerState, ContainerActions };
+export { ContainerState, ContainerActions, QueueItem };

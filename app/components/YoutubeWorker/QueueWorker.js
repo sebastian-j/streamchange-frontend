@@ -16,7 +16,6 @@ import ChatView from '../ChatView';
 import QueueColumn from '../../containers/QueuePage/QueueColumn';
 import QueueRules from '../../containers/QueuePage/QueueRules';
 import SuperChat from './SuperChat';
-import db from './db';
 
 const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
@@ -108,30 +107,14 @@ const QueueWorker = (props) => {
             .includes(localStorage.getItem('queue-command').toLowerCase());
           author.message = author.message.replace(
             localStorage.getItem('queue-command'),
-            ' ',
+            '',
           );
-          db.queue
-            .where('id')
-            .equals(author.id)
-            .first()
-            .then((user) => {
-              if (user === undefined && isEligible) {
-                db.table('queue')
-                  .toArray()
-                  .then((items) => {
-                    if (
-                      items.length <
-                      parseInt(localStorage.getItem('queue-capacity'), 10)
-                    ) {
-                      props.pushItem(author);
-                    }
-                  });
-              } else if (typeof user !== 'undefined') {
-                if (!isEligible) delete author.message;
-                delete author.addedAt;
-                props.updateItem(author);
-              }
-            });
+          if (isEligible) props.pushItem(author);
+          else {
+            delete author.message;
+            delete author.addedAt;
+            props.updateItem(author);
+          }
           checkResignation(author);
           saveMessage(res.data.items[i]);
           superChatFeatures(author, res.data.items[i]);
