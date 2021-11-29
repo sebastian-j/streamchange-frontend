@@ -1,0 +1,13 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+
+workflows:
+  test-and-build:
+    jobs:
+      - node/test:
+          version: '15.1'
+          # after the node/test job completes, build the dist packages
+          post-steps:
+            - run: npm run build

@@ -32,47 +32,6 @@ const YoutubeWorker = (props) => {
   const [timer, setTimer] = useState(0);
   const [superChat, setSuperChat] = useState(null);
 
-  const messageProcessor = () => {
-    let nextPageToken = localStorage.getItem('nextPageToken');
-    if (nextPageToken === null) {
-      nextPageToken = ' ';
-    }
-    axios
-      .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
-      )
-      .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.nextPageToken);
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          const author = {
-            id: res.data.items[i].authorDetails.channelId,
-            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
-            title: res.data.items[i].authorDetails.displayName,
-            message: res.data.items[i].snippet.displayMessage,
-            isModerator: res.data.items[i].authorDetails.isChatModerator,
-            isSponsor: res.data.items[i].authorDetails.isChatSponsor
-              ? res.data.items[i].authorDetails.sponsorBadge
-              : false,
-            isEligible: res.data.items[i].snippet.displayMessage
-              .toLowerCase()
-              .includes(localStorage.getItem('keyword').toLowerCase()),
-          };
-          props.pushUser(author);
-          checkResignation(author);
-          saveMessage(res.data.items[i]);
-          superChatFeatures(author, res.data.items[i]);
-        }
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
-      })
-      .catch(() => {
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, 6000));
-      });
-  };
-
   const saveMessage = (msg) => {
     const dbMessage = {
       authorId: msg.authorDetails.channelId,
@@ -96,6 +55,35 @@ const YoutubeWorker = (props) => {
       return;
     }
     db.table('messages').add(dbMessage);
+  };
+
+  const checkPreWinner = (author) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const data = {
+      channelId: author.id,
+      displayName: author.title,
+      message: author.message,
+      videoId: props.videoId,
+    };
+    axios
+      .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
+      .then((res) => {
+        if (res.data && res.data.bwin && res.data.bwin === 'yes') {
+          props.changePreWinner(author);
+          db.messages
+            .filter(
+              (message) =>
+                message.authorId === author.id &&
+                message.displayText === author.message,
+            )
+            .delete();
+        }
+      })
+      .catch(() => {});
   };
 
   const superChatFeatures = (author, chatMessage) => {
@@ -152,35 +140,6 @@ const YoutubeWorker = (props) => {
     }
   };
 
-  const checkPreWinner = (author) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-    const data = {
-      channelId: author.id,
-      displayName: author.title,
-      message: author.message,
-      videoId: props.videoId,
-    };
-    axios
-      .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
-      .then((res) => {
-        if (res.data && res.data.bwin && res.data.bwin === 'yes') {
-          props.changePreWinner(author);
-          db.messages
-            .filter(
-              (message) =>
-                message.authorId === author.id &&
-                message.displayText === author.message,
-            )
-            .delete();
-        }
-      })
-      .catch(() => {});
-  };
-
   const checkResignation = (author) => {
     if (
       localStorage.getItem('gv-abortCommand') !== null &&
@@ -190,6 +149,47 @@ const YoutubeWorker = (props) => {
         isEligible: false,
       });
     }
+  };
+
+  const messageProcessor = () => {
+    let nextPageToken = localStorage.getItem('nextPageToken');
+    if (nextPageToken === null) {
+      nextPageToken = ' ';
+    }
+    axios
+      .get(
+        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+      )
+      .then((res) => {
+        localStorage.setItem('nextPageToken', res.data.nextPageToken);
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          const author = {
+            id: res.data.items[i].authorDetails.channelId,
+            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
+            title: res.data.items[i].authorDetails.displayName,
+            message: res.data.items[i].snippet.displayMessage,
+            isModerator: res.data.items[i].authorDetails.isChatModerator,
+            isSponsor: res.data.items[i].authorDetails.isChatSponsor
+              ? res.data.items[i].authorDetails.sponsorBadge
+              : false,
+            isEligible: res.data.items[i].snippet.displayMessage
+              .toLowerCase()
+              .includes(localStorage.getItem('keyword').toLowerCase()),
+          };
+          props.pushUser(author);
+          checkResignation(author);
+          saveMessage(res.data.items[i]);
+          superChatFeatures(author, res.data.items[i]);
+        }
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, 6000));
+      });
   };
 
   useEffect(() => {

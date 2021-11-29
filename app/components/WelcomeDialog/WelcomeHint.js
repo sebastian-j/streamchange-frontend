@@ -101,6 +101,17 @@ const WelcomeHint = () => {
     [/31-12/, FireworksImg, 'holiday3112'],
   ];
 
+  const getToday = () => {
+    const d = new Date();
+    let day = `${d.getDate()}`;
+    let month = `${d.getMonth() + 1}`;
+
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0${day}`;
+
+    return [day, month].join('-');
+  };
+
   useEffect(() => {
     setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);
     for (let i = 0; i < holidaysDates.length; i += 1) {
@@ -116,16 +127,7 @@ const WelcomeHint = () => {
     setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);
   };
 
-  const getToday = () => {
-    const d = new Date();
-    let day = `${d.getDate()}`;
-    let month = `${d.getMonth() + 1}`;
 
-    if (month.length < 2) month = `0${month}`;
-    if (day.length < 2) day = `0${day}`;
-
-    return [day, month].join('-');
-  };
 
   return (
     <Wrapper>

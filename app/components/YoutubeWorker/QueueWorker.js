@@ -16,7 +16,6 @@ import ChatView from '../ChatView';
 import QueueColumn from '../../containers/QueuePage/QueueColumn';
 import QueueRules from '../../containers/QueuePage/QueueRules';
 import SuperChat from './SuperChat';
-import db from './db';
 
 const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
@@ -32,70 +31,6 @@ const ThreeSections = styled.div`
 const QueueWorker = (props) => {
   const [timer, setTimer] = useState(null);
   const [superChat, setSuperChat] = useState(null);
-
-  const messageProcessor = () => {
-    let nextPageToken = localStorage.getItem('nextPageToken');
-    if (nextPageToken === null) {
-      nextPageToken = ' ';
-    }
-    axios
-      .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
-      )
-      .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.nextPageToken);
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          const author = {
-            id: res.data.items[i].authorDetails.channelId,
-            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
-            title: res.data.items[i].authorDetails.displayName,
-            message: res.data.items[i].snippet.displayMessage,
-            addedAt: res.data.items[i].snippet.publishedAt,
-            lastActiveAt: res.data.items[i].snippet.publishedAt,
-          };
-          const isEligible = res.data.items[i].snippet.displayMessage
-            .toLowerCase()
-            .includes(localStorage.getItem('queue-command').toLowerCase());
-          author.message = author.message.replace(
-            localStorage.getItem('queue-command'),
-            ' ',
-          );
-          db.queue
-            .where('id')
-            .equals(author.id)
-            .first()
-            .then((user) => {
-              if (user === undefined && isEligible) {
-                db.table('queue')
-                  .toArray()
-                  .then((items) => {
-                    if (
-                      items.length <
-                      parseInt(localStorage.getItem('queue-capacity'), 10)
-                    ) {
-                      props.pushItem(author);
-                    }
-                  });
-              } else if (typeof user !== 'undefined') {
-                if (!isEligible) delete author.message;
-                delete author.addedAt;
-                props.updateItem(author);
-              }
-            });
-          checkResignation(author);
-          saveMessage(res.data.items[i]);
-          superChatFeatures(author, res.data.items[i]);
-        }
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
-      })
-      .catch(() => {
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, 6000));
-      });
-  };
 
   const saveMessage = (msg) => {
     const chatViewMessage = {
@@ -145,6 +80,54 @@ const QueueWorker = (props) => {
     ) {
       props.deleteItem(author.id);
     }
+  };
+
+  const messageProcessor = () => {
+    let nextPageToken = localStorage.getItem('nextPageToken');
+    if (nextPageToken === null) {
+      nextPageToken = ' ';
+    }
+    axios
+      .get(
+        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+      )
+      .then((res) => {
+        localStorage.setItem('nextPageToken', res.data.nextPageToken);
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          const author = {
+            id: res.data.items[i].authorDetails.channelId,
+            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
+            title: res.data.items[i].authorDetails.displayName,
+            message: res.data.items[i].snippet.displayMessage,
+            addedAt: res.data.items[i].snippet.publishedAt,
+            lastActiveAt: res.data.items[i].snippet.publishedAt,
+          };
+          const isEligible = res.data.items[i].snippet.displayMessage
+            .toLowerCase()
+            .includes(localStorage.getItem('queue-command').toLowerCase());
+          author.message = author.message.replace(
+            localStorage.getItem('queue-command'),
+            '',
+          );
+          if (isEligible) props.pushItem(author);
+          else {
+            delete author.message;
+            delete author.addedAt;
+            props.updateItem(author);
+          }
+          checkResignation(author);
+          saveMessage(res.data.items[i]);
+          superChatFeatures(author, res.data.items[i]);
+        }
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, 6000));
+      });
   };
 
   useEffect(() => {

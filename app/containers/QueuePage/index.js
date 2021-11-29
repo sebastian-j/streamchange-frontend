@@ -57,29 +57,47 @@ const QueuePage = () => {
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
 
-  const receiveVideo = (videoLink) => {
-    if (videoLink.includes('v=')) {
-      const vidId = videoLink.split('v=')[1].split('&')[0].split('/')[0];
-      launchWorker(vidId);
-    } else if (videoLink.includes('video/')) {
-      const vidId = videoLink.split('video/')[1].split('/')[0];
-      launchWorker(vidId);
-    } else if (videoLink.includes('u.be/')) {
-      const vidId = videoLink.split('be/')[1].split('?')[0];
-      launchWorker(vidId);
-    } else if (videoLink === 'test') {
-      setVideoId(null);
-    } else {
-      setError('invalidUrl');
-    }
-  };
-
   const leaveStream = () => {
     setVideoId('');
     setTitle('');
     setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
+  };
+
+  const telemetry = (vidId, stream) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const telemetryData = {
+      id: vidId,
+      channelId: stream.snippet.channelId,
+      title: stream.snippet.title,
+      thumbnailUrl: stream.snippet.thumbnails.medium.url,
+    };
+    axios
+      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const checkBan = (channelId) => {
+    axios.get('../static/bans.json').then((res) => {
+      if (res.data) {
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          if (
+            res.data.items[i].channelId.includes(channelId) &&
+            new Date(res.data.items[i].endsAt) > new Date()
+          ) {
+            setVideoId('');
+            setBan(res.data.items[i]);
+            return;
+          }
+        }
+      }
+    });
   };
 
   const launchWorker = (vidId) => {
@@ -118,39 +136,21 @@ const QueuePage = () => {
       });
   };
 
-  const checkBan = (channelId) => {
-    axios.get('../static/bans.json').then((res) => {
-      if (res.data) {
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          if (
-            res.data.items[i].channelId.includes(channelId) &&
-            new Date(res.data.items[i].endsAt) > new Date()
-          ) {
-            setVideoId('');
-            setBan(res.data.items[i]);
-            return;
-          }
-        }
-      }
-    });
-  };
-
-  const telemetry = (vidId, stream) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-    const telemetryData = {
-      id: vidId,
-      channelId: stream.snippet.channelId,
-      title: stream.snippet.title,
-      thumbnailUrl: stream.snippet.thumbnails.medium.url,
-    };
-    axios
-      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
-      .then(() => {})
-      .catch(() => {});
+  const receiveVideo = (videoLink) => {
+    if (videoLink.includes('v=')) {
+      const vidId = videoLink.split('v=')[1].split('&')[0].split('/')[0];
+      launchWorker(vidId);
+    } else if (videoLink.includes('video/')) {
+      const vidId = videoLink.split('video/')[1].split('/')[0];
+      launchWorker(vidId);
+    } else if (videoLink.includes('u.be/')) {
+      const vidId = videoLink.split('be/')[1].split('?')[0];
+      launchWorker(vidId);
+    } else if (videoLink === 'test') {
+      setVideoId(null);
+    } else {
+      setError('invalidUrl');
+    }
   };
 
   useEffect(() => {
@@ -161,7 +161,14 @@ const QueuePage = () => {
   }, []);
 
   if (videoId === '') {
-    return <WelcomeDialog passVideo={receiveVideo} ban={ban} error={error} />;
+    return (
+      <WelcomeDialog
+        passVideo={receiveVideo}
+        ban={ban}
+        error={error}
+        variant={1}
+      />
+    );
   }
   return (
     <div>
