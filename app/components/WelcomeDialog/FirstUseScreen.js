@@ -8,10 +8,10 @@ import Button from '@material-ui/core/Button';
 
 import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
 import { changeLocale } from '../../containers/LanguageProvider/actions';
-import FlagPL from './flag-pl.png';
-import FlagUK from './flag-uk.png';
-import LightModeImg from './light-mode.png';
-import DarkModeImg from './dark-mode.png';
+import FlagPL from './assets/flag-pl.png';
+import FlagUK from './assets/flag-uk.png';
+import LightModeImg from './assets/light-mode.png';
+import DarkModeImg from './assets/dark-mode.png';
 import CookieConsent from './CookieConsent';
 import messages from './messages';
 

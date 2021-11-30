@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import CookieImage from './cookies.webp';
+import CookieImage from './assets/cookies.webp';
 
 const Wrapper = styled.div`
   align-items: center;
