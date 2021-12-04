@@ -34,14 +34,14 @@ const QueueWorker = (props) => {
 
   const saveMessage = (msg) => {
     const chatViewMessage = {
-      authorId: msg.authorDetails.channelId,
-      displayText: msg.snippet.displayMessage,
-      imageUrl: msg.authorDetails.profileImageUrl,
-      isModerator: msg.authorDetails.isChatModerator,
-      isOwner: msg.authorDetails.isChatOwner,
-      isVerified: msg.authorDetails.isVerified,
-      publishedAt: msg.snippet.publishedAt,
-      title: msg.authorDetails.displayName,
+      authorId: msg.a.id,
+      displayText: msg.s.m,
+      imageUrl: msg.a.img,
+      isModerator: msg.a.isChatModerator,
+      isOwner: msg.a.isChatOwner,
+      isVerified: msg.a.isVerified,
+      publishedAt: msg.s.publishedAt,
+      title: msg.a.n,
     };
     props.addMessage(chatViewMessage);
   };
@@ -49,7 +49,7 @@ const QueueWorker = (props) => {
   const superChatFeatures = (author, chatMessage) => {
     if (
       PRIVILEGED_CHANNELS.includes(author.id) ||
-      chatMessage.authorDetails.isChatOwner
+      chatMessage.a.isChatOwner
     ) {
       if (author.message.startsWith('!s ')) {
         setSuperChat({
@@ -89,20 +89,20 @@ const QueueWorker = (props) => {
     }
     axios
       .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+        `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
       )
       .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.nextPageToken);
+        localStorage.setItem('nextPageToken', res.data.tag);
         for (let i = 0; i < res.data.items.length; i += 1) {
           const author = {
-            id: res.data.items[i].authorDetails.channelId,
-            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
-            title: res.data.items[i].authorDetails.displayName,
-            message: res.data.items[i].snippet.displayMessage,
-            addedAt: res.data.items[i].snippet.publishedAt,
-            lastActiveAt: res.data.items[i].snippet.publishedAt,
+            id: res.data.items[i].a.id,
+            imageUrl: res.data.items[i].a.img,
+            title: res.data.items[i].a.n,
+            message: res.data.items[i].s.m,
+            addedAt: res.data.items[i].s.publishedAt,
+            lastActiveAt: res.data.items[i].s.publishedAt,
           };
-          const isEligible = res.data.items[i].snippet.displayMessage
+          const isEligible = res.data.items[i].s.m
             .toLowerCase()
             .includes(localStorage.getItem('queue-command').toLowerCase());
           author.message = author.message.replace(

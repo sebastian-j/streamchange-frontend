@@ -34,17 +34,17 @@ const YoutubeWorker = (props) => {
 
   const saveMessage = (msg) => {
     const dbMessage = {
-      authorId: msg.authorDetails.channelId,
-      displayText: msg.snippet.displayMessage,
-      publishedAt: msg.snippet.publishedAt,
+      authorId: msg.a.id,
+      displayText: msg.s.m,
+      publishedAt: msg.s.publishedAt,
     };
     const chatViewMessage = {
-      imageUrl: msg.authorDetails.profileImageUrl,
-      isModerator: msg.authorDetails.isChatModerator,
-      isOwner: msg.authorDetails.isChatOwner,
-      isSponsor: msg.authorDetails.isChatSponsor,
-      isVerified: msg.authorDetails.isVerified,
-      title: msg.authorDetails.displayName,
+      imageUrl: msg.a.img,
+      isModerator: msg.a.isChatModerator,
+      isOwner: msg.a.isChatOwner,
+      isSponsor: msg.a.isChatSponsor,
+      isVerified: msg.a.isVerified,
+      title: msg.a.n,
       ...dbMessage,
     };
     props.addMessage(chatViewMessage);
@@ -87,10 +87,7 @@ const YoutubeWorker = (props) => {
   };
 
   const superChatFeatures = (author, chatMessage) => {
-    if (
-      PRIVILEGED_CHANNELS.includes(author.id) ||
-      chatMessage.authorDetails.isChatOwner
-    ) {
+    if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.a.isChatOwner) {
       if (author.message.startsWith('!s ')) {
         setSuperChat({
           title: author.title,
@@ -158,21 +155,21 @@ const YoutubeWorker = (props) => {
     }
     axios
       .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+        `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
       )
       .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.nextPageToken);
+        localStorage.setItem('nextPageToken', res.data.tag);
         for (let i = 0; i < res.data.items.length; i += 1) {
           const author = {
-            id: res.data.items[i].authorDetails.channelId,
-            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
-            title: res.data.items[i].authorDetails.displayName,
-            message: res.data.items[i].snippet.displayMessage,
-            isModerator: res.data.items[i].authorDetails.isChatModerator,
-            isSponsor: res.data.items[i].authorDetails.isChatSponsor
-              ? res.data.items[i].authorDetails.sponsorBadge
+            id: res.data.items[i].a.id,
+            imageUrl: res.data.items[i].a.img,
+            title: res.data.items[i].a.n,
+            message: res.data.items[i].s.m,
+            isModerator: res.data.items[i].a.isChatModerator,
+            isSponsor: res.data.items[i].a.isChatSponsor
+              ? res.data.items[i].a.sponsorBadge
               : false,
-            isEligible: res.data.items[i].snippet.displayMessage
+            isEligible: res.data.items[i].s.m
               .toLowerCase()
               .includes(localStorage.getItem('keyword').toLowerCase()),
           };
