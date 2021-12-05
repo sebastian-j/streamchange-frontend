@@ -9,6 +9,9 @@ const Panel = styled.div`
   @media (orientation: portrait) {
     min-height: 95vh;
     margin: 5px;
+    &.chat {
+      height: 95vh;
+    }
   }
 `;
 

@@ -40,7 +40,7 @@ function ChatView(props) {
   };
 
   return (
-    <Panel>
+    <Panel className="chat">
       <Header>
         <PanelTitle>
           <FormattedMessage {...messages.panelTitle} />
