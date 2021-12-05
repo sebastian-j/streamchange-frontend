@@ -54,11 +54,10 @@ const UserBar = styled.div`
   max-width: 90%;
   padding: 0;
   outline: 0;
-`;
-
-const FlexRow = styled.div`
-  display: flex;
-  flex-direction: row;
+  > div {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const FlexSpacer = styled.div`
@@ -174,7 +173,7 @@ export const QueueItem = (props) => {
     return (
       <li>
         <UserBar>
-          <FlexRow>
+          <div>
             <a
               href={`https://www.youtube.com/channel/${props.channelId}`}
               target="_blank"
@@ -190,8 +189,8 @@ export const QueueItem = (props) => {
                 value={editedDescription}
               />
             </UserBarColumn>
-          </FlexRow>
-          <FlexRow>
+          </div>
+          <div>
             <EditModeButton onClick={markActive} type="button">
               <FormattedMessage {...messages.markActiveBtn} />
             </EditModeButton>
@@ -202,7 +201,7 @@ export const QueueItem = (props) => {
             <EditModeButton onClick={updateDescription} type="button">
               <FormattedMessage {...messages.saveBtn} />
             </EditModeButton>
-          </FlexRow>
+          </div>
         </UserBar>
       </li>
     );
@@ -228,7 +227,7 @@ export const QueueItem = (props) => {
           onDoubleClick={() => toggleEditMode(true)}
           onMouseEnter={refresh}
         >
-          <FlexRow>
+          <div>
             <a
               href={`https://www.youtube.com/channel/${props.channelId}`}
               target="_blank"
@@ -245,7 +244,7 @@ export const QueueItem = (props) => {
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
               </svg>
             </CloseButton>
-          </FlexRow>
+          </div>
         </UserBar>
       </ExtendedTooltip>
     </li>

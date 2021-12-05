@@ -3,15 +3,21 @@
 exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
 <styled.div>
   <styled.div>
-    <styled.div>
-      <styled.div>
+    <div
+      className="dialog"
+    >
+      <div
+        className="title"
+      >
         <FormattedMessage
           defaultMessage="Choose stream"
           id="streamchange.components.WelcomeDialog.title"
           values={Object {}}
         />
-      </styled.div>
-      <styled.div>
+      </div>
+      <div
+        className="content"
+      >
         <FormattedMessage
           defaultMessage="Paste stream url"
           id="streamchange.components.WelcomeDialog.videoInput.label"
@@ -19,7 +25,9 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
         >
           [Function]
         </FormattedMessage>
-        <styled.div>
+        <div
+          className="text"
+        >
           <span
             style={
               Object {
@@ -33,9 +41,11 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
               values={Object {}}
             />
           </span>
-        </styled.div>
-      </styled.div>
-      <styled.div>
+        </div>
+      </div>
+      <div
+        className="actions"
+      >
         <WithStyles(ForwardRef(Button))
           color="primary"
           onClick={[Function]}
@@ -46,8 +56,8 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
             values={Object {}}
           />
         </WithStyles(ForwardRef(Button))>
-      </styled.div>
-    </styled.div>
+      </div>
+    </div>
     <WelcomeHint />
   </styled.div>
   <CookieConsent />

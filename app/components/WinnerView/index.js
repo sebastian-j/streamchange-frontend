@@ -20,6 +20,7 @@ import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
+import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -35,17 +36,15 @@ const WinnerHeading = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px;
-`;
-
-const Logo = styled.img`
-  height: 70px;
-  width: 70px;
-  margin-right: 10px;
-`;
-
-const WinnerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
+  > img {
+    height: 70px;
+    width: 70px;
+    margin-right: 10px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const WinnerTitle = styled.span`
@@ -154,6 +153,7 @@ export class WinnerView extends React.Component {
     };
     const telemetryData = {
       id: sessionStorage.getItem('gv-videoId'),
+      ownerId: this.props.ownerId,
       prize: this.state.prize,
       winnerId: this.props.id,
       part: 'winner',
@@ -207,8 +207,8 @@ export class WinnerView extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <WinnerHeading>
-          <Logo alt="logo" src={this.state.user.imageUrl} />
-          <WinnerInfo>
+          <img alt="logo" src={this.state.user.imageUrl} />
+          <div className="info">
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
             <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
             <ChannelLink
@@ -217,7 +217,7 @@ export class WinnerView extends React.Component {
             >
               <FormattedMessage {...messages.openChannel} />
             </ChannelLink>
-          </WinnerInfo>
+          </div>
           <Timer />
         </WinnerHeading>
         <MessageList>
@@ -266,10 +266,12 @@ WinnerView.propTypes = {
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
+  ownerId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   preWinner: makeSelectGiveawayPreWinner(),
+  ownerId: makeSelectOwnerId(),
 });
 
 export function mapDispatchToProps(dispatch) {

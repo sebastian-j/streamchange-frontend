@@ -2,10 +2,10 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="sc-furwcr bTfITO"
+  class="sc-pVTFL jStHWd"
 >
   <span
-    class="sc-pVTFL ewAAfd"
+    class="sc-jrQzAO hmRIdg"
   >
     <span>
       Welcome to StreamChange
@@ -13,7 +13,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   </span>
   <div>
     <span
-      class="sc-pVTFL ewAAfd"
+      class="sc-jrQzAO hmRIdg"
     >
       <span>
         Select theme
@@ -24,22 +24,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-jrQzAO gKHmgP"
+        class="sc-kDTinF bOpoJQ"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="sc-kDTinF dqRTJY box"
+        class="sc-iqseJM GttEL box"
       >
         <img
           alt="light"
-          class="sc-ksdxgE BsMMj"
+          class="sc-hBUSln hidxxT"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-crHmcD ePdCJW"
+          class="sc-egiyK euxJzI"
         >
           <span>
             Light
@@ -51,22 +51,22 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="sc-jrQzAO gKHmgP"
+        class="sc-kDTinF bOpoJQ"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="sc-kDTinF iamNNI box"
+        class="sc-iqseJM fXjCvj box"
       >
         <img
           alt="dark"
-          class="sc-ksdxgE BsMMj"
+          class="sc-hBUSln hidxxT"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-crHmcD ePdCJW"
+          class="sc-egiyK euxJzI"
         >
           <span>
             Dark
@@ -77,7 +77,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="sc-pVTFL ewAAfd"
+      class="sc-jrQzAO hmRIdg"
     >
       <span>
         Select language
@@ -87,21 +87,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="sc-jrQzAO gKHmgP"
+        class="sc-kDTinF bOpoJQ"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="sc-iqseJM btTgfy box"
+        class="sc-crHmcD ldNcsE box"
       >
         <span
-          class="sc-egiyK fkBTTA"
+          class="sc-bqiRlB cAlbTD"
         >
           <img
             alt="pl"
-            class="sc-bqiRlB dWqNkp"
+            class="sc-ksdxgE bqGlAp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -115,21 +115,21 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-jrQzAO gKHmgP"
+        class="sc-kDTinF bOpoJQ"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="sc-iqseJM bPBVfO box"
+        class="sc-crHmcD loSFqw box"
       >
         <span
-          class="sc-egiyK fkBTTA"
+          class="sc-bqiRlB cAlbTD"
         >
           <img
             alt="en"
-            class="sc-bqiRlB dWqNkp"
+            class="sc-ksdxgE bqGlAp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -141,7 +141,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-hBUSln hNbuja"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-fotOHu ImpKv"
       tabindex="0"
       type="button"
     >

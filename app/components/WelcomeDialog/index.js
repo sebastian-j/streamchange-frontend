@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
 import CookieConsent from './CookieConsent';
+import DialogWrapper from './DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import WelcomeHint from './WelcomeHint';
 
@@ -20,70 +21,6 @@ const WelcomePage = styled.div`
   width: 100vw;
 `;
 
-const DialogWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 55%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  @media (orientation: portrait) {
-    left: 50%;
-    top: 20%;
-    width: 98%;
-    transform: translate(-50%, 0%);
-  }
-`;
-
-const SlideDown = keyframes`
-  0% {
-    transform: translateY(-650px) translateX(-100px);
-  }
-  20% {
-    transform: translateY(-650px) translateX(-100px);
-  }
-  100% {
-    transform: translateY(0px) translateX(0px);
-  }
-`;
-
-const Dialog = styled.div`
-  animation: ${SlideDown} 0.7s ease-out;
-  background-color: white;
-  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-    0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.52);
-  border-radius: 4px;
-  max-width: 600px;
-  z-index: -1;
-`;
-
-const DialogTitle = styled.div`
-  font-size: 1.25rem;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.0075em;
-  padding: 16px 24px;
-`;
-
-const DialogContent = styled.div`
-  padding: 8px 24px;
-`;
-
-const DialogActions = styled.div`
-  flex: 0 0 auto;
-  display: flex;
-  padding: 8px;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const TextSecondary = styled.div`
-  color: rgba(0, 0, 0, 0.54);
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  line-height: 1.5;
-  margin-bottom: 12px;
-`;
 const CompatibilityInfo = styled.div`
   position: absolute;
   top: 50%;
@@ -136,11 +73,11 @@ const WelcomeDialog = (props) => {
     return (
       <WelcomePage>
         <DialogWrapper>
-          <Dialog>
-            <DialogTitle>
+          <div className="dialog">
+            <div className="title">
               <FormattedMessage {...messages.dialogTitle} />
-            </DialogTitle>
-            <DialogContent>
+            </div>
+            <div className="content">
               <FormattedMessage {...messages.videoInputLabel}>
                 {(label) => (
                   <TextField
@@ -157,7 +94,7 @@ const WelcomeDialog = (props) => {
                   />
                 )}
               </FormattedMessage>
-              <TextSecondary>
+              <div className="text">
                 <span style={{ fontSize: '0.8rem' }}>
                   <FormattedMessage {...messages.example} />
                 </span>
@@ -185,17 +122,17 @@ const WelcomeDialog = (props) => {
                     {props.ban.description}
                   </span>
                 )}
-              </TextSecondary>
-            </DialogContent>
-            <DialogActions>
+              </div>
+            </div>
+            <div className="actions">
               {!isLoading && (
                 <Button onClick={sendVideoLink} color="primary">
                   <FormattedMessage {...messages.saveBtn} />
                 </Button>
               )}
               {isLoading && <CircularProgress />}
-            </DialogActions>
-          </Dialog>
+            </div>
+          </div>
           <WelcomeHint />
         </DialogWrapper>
         <CookieConsent />
