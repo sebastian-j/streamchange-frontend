@@ -5,25 +5,21 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the HomePage state domain
  */
-const selectHomePage = (state: ApplicationRootState) =>
-  state.streamInfo || initialState;
+const selectGiveawayPage = (state: ApplicationRootState) =>
+  state.giveawayPage || initialState;
 
-const makeSelectOwnerId = () =>
-  createSelector(selectHomePage, (state) => state.ownerId);
+const makeSelectAuthKey = () =>
+  createSelector(selectGiveawayPage, (state) => state.authKey);
 
-const makeSelectThumbnailUrl = () =>
-  createSelector(selectHomePage, (state) => state.thumbnailUrl);
+const makeSelectBanStatus = () =>
+  createSelector(selectGiveawayPage, (state) => state.ban);
 
-const makeSelectTitle = () =>
-  createSelector(selectHomePage, (state) => state.title);
-
-const makeSelectVideoId = () =>
-  createSelector(selectHomePage, (state) => state.videoId);
+const makeSelectStreamInfo = () =>
+  createSelector(selectGiveawayPage, (state) => state.stream);
 
 export {
-  selectHomePage,
-  makeSelectOwnerId,
-  makeSelectThumbnailUrl,
-  makeSelectTitle,
-  makeSelectVideoId,
+  selectGiveawayPage,
+  makeSelectAuthKey,
+  makeSelectBanStatus,
+  makeSelectStreamInfo,
 };

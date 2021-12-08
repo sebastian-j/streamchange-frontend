@@ -190,7 +190,7 @@ const YoutubeWorker = (props) => {
   };
 
   useEffect(() => {
-    if (props.videoId !== null) messageProcessor();
+    if (props.videoId !== 'test') messageProcessor();
     return () => {
       clearTimeout(timer);
     };

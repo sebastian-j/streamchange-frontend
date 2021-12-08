@@ -20,7 +20,7 @@ import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
-import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
+import { makeSelectStreamInfo} from '../../containers/HomePage/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -153,7 +153,7 @@ export class WinnerView extends React.Component {
     };
     const telemetryData = {
       id: sessionStorage.getItem('gv-videoId'),
-      ownerId: this.props.ownerId,
+      ownerId: this.props.streamInfo.ownerId,
       prize: this.state.prize,
       winnerId: this.props.id,
       part: 'winner',
@@ -266,12 +266,12 @@ WinnerView.propTypes = {
   prize: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
-  ownerId: PropTypes.string,
+  streamInfo: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   preWinner: makeSelectGiveawayPreWinner(),
-  ownerId: makeSelectOwnerId(),
+  streamInfo: makeSelectStreamInfo(),
 });
 
 export function mapDispatchToProps(dispatch) {

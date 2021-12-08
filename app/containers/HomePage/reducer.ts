@@ -4,52 +4,47 @@
  *
  */
 import ActionTypes from './constants';
-import { ContainerState, ContainerActions } from './types';
+import { ContainerActions, ContainerState } from './types';
 
 export const initialState: ContainerState = {
-  ownerId: '',
-  thumbnailUrl: '',
-  title: '',
-  videoId: '',
+  authKey: '',
+  ban: null,
+  stream: {
+    ownerId: '',
+    thumbnailUrl: '',
+    title: '',
+    videoId: '',
+  },
 };
 
-/* eslint-disable default-case, no-param-reassign */
-const homePageReducer = (
+const giveawayPageReducer = (
   state: ContainerState = initialState,
   action: ContainerActions,
 ): ContainerState => {
   switch (action.type) {
-    case ActionTypes.CHANGE_OWNER_ID:
+    case ActionTypes.CHANGE_STREAM_PROPERTIES:
       return {
-        ownerId: action.payload,
-        thumbnailUrl: state.thumbnailUrl,
-        title: state.title,
-        videoId: state.videoId,
+        authKey: state.authKey,
+        ban: state.ban,
+        stream: action.payload,
       };
-    case ActionTypes.CHANGE_THUMBNAIL_URL:
+    case ActionTypes.CHANGE_BAN_STATUS:
       return {
-        ownerId: state.ownerId,
-        thumbnailUrl: action.payload,
-        title: state.title,
-        videoId: state.videoId,
+        authKey: state.authKey,
+        ban: action.payload,
+        stream: state.stream,
       };
-    case ActionTypes.CHANGE_TITLE:
+    case ActionTypes.LOAD_AUTH_KEY:
       return {
-        ownerId: state.ownerId,
-        thumbnailUrl: state.thumbnailUrl,
-        title: action.payload,
-        videoId: state.videoId,
+        authKey: action.payload,
+        ban: state.ban,
+        stream: state.stream,
       };
-    case ActionTypes.CHANGE_VIDEO_ID:
-      return {
-        ownerId: state.ownerId,
-        thumbnailUrl: state.thumbnailUrl,
-        title: state.title,
-        videoId: action.payload,
-      };
+    case ActionTypes.SEND_TELEMETRY_DATA:
+      return state;
     default:
       return state;
   }
 };
 
-export default homePageReducer;
+export default giveawayPageReducer;

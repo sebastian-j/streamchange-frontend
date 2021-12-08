@@ -1,17 +1,21 @@
 import produce from 'immer';
 
 import homePageReducer, { initialState } from '../reducer';
-import { changeOwnerId } from '../actions';
+import { changeStreamProperties } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('homePageReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      ownerId: '',
-      thumbnailUrl: '',
-      title: '',
-      videoId: '',
+      authKey: '',
+      ban: null,
+      stream: {
+        ownerId: '',
+        thumbnailUrl: '',
+        title: '',
+        videoId: '',
+      },
     };
   });
 
@@ -20,12 +24,12 @@ describe('homePageReducer', () => {
   });
 
   it('should handle the changeOwnerId action correctly', () => {
-    const fixture = 'id';
+    const fixture = {ownerId: 'id', thumbnailUrl: 'url', title: 'stream', videoId: 'vid'};
     const expectedResult = produce(state, (draft) => {
-      draft.ownerId = fixture;
+      draft.stream = fixture;
     });
 
-    expect(homePageReducer(state, changeOwnerId(fixture))).toEqual(
+    expect(homePageReducer(state, changeStreamProperties(fixture))).toEqual(
       expectedResult,
     );
   });

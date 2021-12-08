@@ -28,7 +28,14 @@ exports[`<SubStatus /> should render and match the snapshot 1`] = `
   <Memo(Connect(SubStatus))
     apiKey="key"
     id="id"
-    ownerId="owner"
+    streamInfo={
+      Object {
+        "ownerId": "owner",
+        "thumbnailUrl": "url",
+        "title": "stream",
+        "videoId": "vid",
+      }
+    }
   />
 </Context.Provider>
 `;

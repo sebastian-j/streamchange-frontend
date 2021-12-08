@@ -18,7 +18,16 @@ describe('<SubStatus />', () => {
   it('should render and match the snapshot', () => {
     shallowRenderer.render(
       <Provider store={store}>
-        <SubStatus apiKey="key" id="id" ownerId="owner" />
+        <SubStatus
+          apiKey="key"
+          id="id"
+          streamInfo={{
+            ownerId: 'owner',
+            thumbnailUrl: 'url',
+            title: 'stream',
+            videoId: 'vid',
+          }}
+        />
       </Provider>,
     );
     const renderedOutput = shallowRenderer.getRenderOutput();

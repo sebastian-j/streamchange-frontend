@@ -37,7 +37,7 @@ export interface ApplicationRootState {
   readonly language: LanguageProviderState;
   readonly theme: StyleProviderState;
   readonly raffleWrapper: RaffleWrapperState;
-  readonly streamInfo: HomeState;
+  readonly giveawayPage: HomeState;
   readonly queue: QueueState;
   readonly giveawayRules: GiveawayRulesState;
   readonly supportInfo?: SupportInformationState;

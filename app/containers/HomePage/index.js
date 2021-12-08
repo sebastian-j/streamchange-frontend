@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import qs from 'qs';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -9,24 +8,16 @@ import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import {
-  makeSelectOwnerId,
-  makeSelectThumbnailUrl,
-  makeSelectTitle,
-  makeSelectVideoId,
-} from './selectors';
-import {
-  changeOwnerId,
-  changeThumbnailUrl,
-  changeTitle,
-  changeVideoId,
-} from './actions';
+import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
+import { changeStreamProperties, sendTelemetryData } from './actions';
+import { useInjectSaga } from 'utils/injectSaga';
+import saga from './saga';
 import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
-import { API_KEY, API_URL } from '../../config';
+import { API_KEY } from '../../config';
 
 const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -67,57 +58,21 @@ const StyledButton = styled(Button)`
 `;
 
 const HomePage = (props) => {
-  const [videoId, setVideoId] = useState('');
-  const [title, setTitle] = useState('');
-  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
-  const [ban, setBan] = useState(null);
+  useInjectSaga({ key: 'giveawayPage', saga: saga });
 
   const leaveStream = () => {
-    props.changeOwnerId('');
-    setVideoId('');
-    setTitle('');
-    props.changeThumbnail('');
+    const streamProps = {
+      ownerId: '',
+      thumbnailUrl: '',
+      title: '',
+      videoId: '',
+    };
+    props.changeStreamProperties(streamProps);
     sessionStorage.removeItem('gv-videoId');
     sessionStorage.removeItem('gv-title');
     sessionStorage.removeItem('gv-thumbnailUrl');
     window.location.reload();
-  };
-
-  const checkBan = (channelId) => {
-    axios.get('../static/bans.json').then((res) => {
-      if (res.data) {
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          if (
-            res.data.items[i].channelId.includes(channelId) &&
-            new Date(res.data.items[i].endsAt) > new Date()
-          ) {
-            setVideoId('');
-            setBan(res.data.items[i]);
-            return;
-          }
-        }
-      }
-    });
-  };
-
-  const telemetry = (vidId, stream) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-    const telemetryData = {
-      id: vidId,
-      channelId: stream.snippet.channelId,
-      part: 'stream',
-      title: stream.snippet.title,
-      thumbnailUrl: stream.snippet.thumbnails.medium.url,
-    };
-    axios
-      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
-      .then(() => {})
-      .catch(() => {});
   };
 
   const launchWorker = (vidId) => {
@@ -132,18 +87,18 @@ const HomePage = (props) => {
           setError('notStream');
         } else {
           const stream = res.data.items[0];
-          setVideoId(vidId);
-          props.changeOwnerId(stream.snippet.channelId);
-          setTitle(stream.snippet.title);
-          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
+          const streamProps = {
+            ownerId: stream.snippet.channelId,
+            thumbnailUrl: stream.snippet.thumbnails.medium.url,
+            title: stream.snippet.title,
+            videoId: vidId,
+          };
+          props.changeStreamProperties(streamProps);
+          props.sendTelemetryData(streamProps);
           sessionStorage.setItem('gv-videoId', vidId);
-          sessionStorage.setItem('gv-title', stream.snippet.title);
-          sessionStorage.setItem(
-            'gv-thumbnailUrl',
-            stream.snippet.thumbnails.medium.url,
-          );
-          checkBan(stream.snippet.channelId);
-          telemetry(vidId, stream);
+          sessionStorage.setItem('gv-title', streamProps.title);
+          sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
+          sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
         }
       })
       .catch((err) => {
@@ -152,12 +107,14 @@ const HomePage = (props) => {
             setError('quotaExceeded');
           }
         } else {
-          setVideoId(vidId);
-          props.changeOwnerId('');
-          setTitle('Tytuł nieznany');
-          props.changeThumbnail(
-            'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
-          );
+          const streamProps = {
+            ownerId: '',
+            thumbnailUrl:
+              'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+            title: 'Tytuł nieznany',
+            videoId: vidId,
+          };
+          props.changeStreamProperties(streamProps);
           sessionStorage.setItem('gv-videoId', vidId);
         }
       });
@@ -174,7 +131,12 @@ const HomePage = (props) => {
       const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
     } else if (videoLink === 'test') {
-      setVideoId(null);
+      props.changeStreamProperties({
+        ownerId: '',
+        thumbnailUrl: 'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+        title: '',
+        videoId: 'test',
+      });
     } else {
       setError('invalidUrl');
     }
@@ -184,18 +146,28 @@ const HomePage = (props) => {
     const id = sessionStorage.getItem('gv-videoId');
     const storedTitle = sessionStorage.getItem('gv-title');
     const storedThumbnail = sessionStorage.getItem('gv-thumbnailUrl');
-    if (id !== null && storedTitle !== null && storedThumbnail !== null) {
-      setVideoId(id);
-      setTitle(storedTitle);
-      setThumbnailUrl(storedThumbnail);
+    const storedOwnerId = sessionStorage.getItem('gv-ownerId');
+    if (
+      id !== null &&
+      storedTitle !== null &&
+      storedThumbnail !== null &&
+      storedOwnerId !== null
+    ) {
+      const streamProps = {
+        ownerId: storedOwnerId,
+        thumbnailUrl: storedThumbnail,
+        title: storedTitle,
+        videoId: id,
+      };
+      props.changeStreamProperties(streamProps);
     }
   }, []);
 
-  if (videoId === '') {
+  if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
       <WelcomeDialog
         passVideo={receiveVideo}
-        ban={ban}
+        ban={props.ban}
         error={error}
         variant={0}
       />
@@ -205,8 +177,8 @@ const HomePage = (props) => {
     <div>
       <TopBar>
         <StreamInfo>
-          <StreamImg alt="Thumbnail" src={thumbnailUrl} />
-          <StreamTitle>{title}</StreamTitle>
+          <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
+          <StreamTitle>{props.streamInfo.title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <FormattedMessage {...messages.leaveStreamBtn} />
           </StyledButton>
@@ -217,35 +189,27 @@ const HomePage = (props) => {
           <SettingsDialog />
         </TopButtons>
       </TopBar>
-      <YoutubeWorker videoId={videoId} apiKey={API_KEY} />
+      <YoutubeWorker videoId={props.streamInfo.videoId} apiKey={API_KEY} />
     </div>
   );
 };
 
 HomePage.propTypes = {
-  changeOwnerId: PropTypes.func.isRequired,
-  changeThumbnail: PropTypes.func.isRequired,
-  changeTitle: PropTypes.func.isRequired,
-  changeVideoId: PropTypes.func.isRequired,
-  ownerId: PropTypes.string.isRequired,
-  thumbnailUrl: PropTypes.string,
-  title: PropTypes.string,
-  videoId: PropTypes.string.isRequired,
+  ban: PropTypes.object,
+  changeStreamProperties: PropTypes.func.isRequired,
+  sendTelemetryData: PropTypes.func,
+  streamInfo: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  ownerId: makeSelectOwnerId(),
-  thumbnailUrl: makeSelectThumbnailUrl(),
-  title: makeSelectTitle(),
-  videoId: makeSelectVideoId(),
+  ban: makeSelectBanStatus(),
+  streamInfo: makeSelectStreamInfo(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    changeOwnerId: (id) => dispatch(changeOwnerId(id)),
-    changeThumbnail: (url) => dispatch(changeThumbnailUrl(url)),
-    changeTitle: (t) => dispatch(changeTitle(t)),
-    changeVideoId: (id) => dispatch(changeVideoId(id)),
+    changeStreamProperties: (st) => dispatch(changeStreamProperties(st)),
+    sendTelemetryData: (st) => dispatch(sendTelemetryData(st)),
     dispatch,
   };
 }
