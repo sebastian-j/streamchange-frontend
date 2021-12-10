@@ -5,7 +5,8 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the SupportInformation state domain
  */
-const selectSupportInfo = (state: ApplicationRootState) => state.supportInfo || initialState;
+const selectSupportInfo = (state: ApplicationRootState) =>
+  state.supportInfo || initialState;
 
 const makeSelectDialogVisibility = () =>
   createSelector(selectSupportInfo, (state) => state.isOpen);

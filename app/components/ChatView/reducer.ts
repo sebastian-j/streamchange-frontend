@@ -22,7 +22,7 @@ function chatReducer(
       }
       state.messages.push(action.payload);
       return {
-        messages: state.messages.map(a => ({...a})),
+        messages: state.messages.map((a) => ({ ...a })),
       };
     default:
       return state;

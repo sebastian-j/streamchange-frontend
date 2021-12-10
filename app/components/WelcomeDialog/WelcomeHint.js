@@ -127,8 +127,6 @@ const WelcomeHint = () => {
     setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);
   };
 
-
-
   return (
     <Wrapper>
       <HintPanel>

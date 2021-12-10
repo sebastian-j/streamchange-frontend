@@ -5,7 +5,8 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the UserList state domain
  */
-const selectUserList = (state: ApplicationRootState) => state.userList || initialState;
+const selectUserList = (state: ApplicationRootState) =>
+  state.userList || initialState;
 
 const makeSelectUserArray = () =>
   createSelector(selectUserList, (state) => state.userArray);

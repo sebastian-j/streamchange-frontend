@@ -5,7 +5,8 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the RaffleWrapper state domain
  */
-const selectRaffle = (state: ApplicationRootState) => state.raffleWrapper || initialState;
+const selectRaffle = (state: ApplicationRootState) =>
+  state.raffleWrapper || initialState;
 
 const makeSelectAnimation = () =>
   createSelector(selectRaffle, (raffleState) => raffleState.animationType);

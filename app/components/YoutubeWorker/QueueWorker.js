@@ -47,10 +47,7 @@ const QueueWorker = (props) => {
   };
 
   const superChatFeatures = (author, chatMessage) => {
-    if (
-      PRIVILEGED_CHANNELS.includes(author.id) ||
-      chatMessage.a.isChatOwner
-    ) {
+    if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.a.isChatOwner) {
       if (author.message.startsWith('!s ')) {
         setSuperChat({
           title: author.title,

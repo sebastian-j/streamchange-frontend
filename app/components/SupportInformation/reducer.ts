@@ -5,12 +5,14 @@ export const initialState: ContainerState = {
   isOpen: false,
 };
 
-function supportInfoReducer(state: ContainerState = initialState, action: ContainerActions): ContainerState
-{
+function supportInfoReducer(
+  state: ContainerState = initialState,
+  action: ContainerActions,
+): ContainerState {
   switch (action.type) {
     case ActionTypes.CHANGE_DIALOG_VISIBILITY:
       return {
-        isOpen: action.payload
+        isOpen: action.payload,
       };
     default:
       return state;

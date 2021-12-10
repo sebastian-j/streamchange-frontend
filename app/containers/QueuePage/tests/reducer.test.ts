@@ -166,7 +166,7 @@ describe('queueReducer', () => {
       message: 'text',
       title: 'item3',
     };
-    const fixture = state.queueArray.map(a => ({...a}));
+    const fixture = state.queueArray.map((a) => ({ ...a }));
     fixture.push(newItem);
     const expectedResult = produce(state, (draft) => {
       draft.queueArray = fixture;
@@ -178,7 +178,12 @@ describe('queueReducer', () => {
   it('should not add second item with the same id to the queue, instead should update existing item', () => {
     const fixture = [
       { id: 'id', title: 'item1' },
-      { id: 'id2', lastActiveAt: '2019-12-24T08:27:56.27-00:00',  message: 'text', title: 'item2' },
+      {
+        id: 'id2',
+        lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+        message: 'text',
+        title: 'item2',
+      },
     ];
     const newItem = {
       id: 'id2',

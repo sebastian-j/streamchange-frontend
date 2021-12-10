@@ -24,6 +24,6 @@ type AppActions = ActionType<typeof actions>;
 
 type ContainerState = UserListState;
 type ContainerActions = AppActions;
-type User = IUser
+type User = IUser;
 
 export { ContainerState, ContainerActions, User };

@@ -5,7 +5,8 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the GiveawayRules state domain
  */
-const selectRules = (state: ApplicationRootState) => state.giveawayRules || initialState;
+const selectRules = (state: ApplicationRootState) =>
+  state.giveawayRules || initialState;
 
 const makeSelectGiveawayKeyword = () =>
   createSelector(selectRules, (rulesState) => rulesState.keyword);
