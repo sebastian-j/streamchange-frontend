@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Tooltip from '@material-ui/core/Tooltip';
-import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import { changeKeyword } from './actions';
+import { makeSelectGiveawayKeyword } from './selectors';
 import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
 import ToggleVisibilityBtn from './ToggleVisibilityButton';
 
-const KeywordInput = () => {
-  const [keyword, setKeyword] = useState('');
+const KeywordInput = (props) => {
   const [visible, setVisible] = useState(true);
   const [error, setError] = useState(0);
-
-  useEffect(() => {
-    let storedKeyword = localStorage.getItem('keyword');
-    if (storedKeyword === null) {
-      storedKeyword = '';
-    }
-    setKeyword(storedKeyword);
-  }, []);
 
   const handleInputChange = (event) => {
     if (event.target.value.includes(localStorage.getItem('gv-abortCommand'))) {
@@ -27,8 +23,7 @@ const KeywordInput = () => {
       return;
     }
     setError(0);
-    setKeyword(event.target.value);
-    localStorage.setItem('keyword', event.target.value);
+    props.changeKeyword(event.target.value);
   };
   const handleToggleButton = () => setVisible((prevState) => !prevState);
 
@@ -53,7 +48,7 @@ const KeywordInput = () => {
                 id="keyword"
                 label={label}
                 type={visible ? 'text' : 'password'}
-                value={keyword}
+                value={props.keyword}
                 helperText={error === 1 ? errorText : ''}
                 fullWidth
                 InputProps={{
@@ -101,4 +96,20 @@ const KeywordInput = () => {
   );
 };
 
-export default KeywordInput;
+KeywordInput.propTypes = {
+  keyword: PropTypes.string,
+  changeKeyword: PropTypes.func,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    changeKeyword: (t) => dispatch(changeKeyword(t)),
+    dispatch,
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  keyword: makeSelectGiveawayKeyword(),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(KeywordInput);
