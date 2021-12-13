@@ -1,6 +1,6 @@
 /*
  *
- * HomePage reducer
+ * GiveawayPage reducer
  *
  */
 import ActionTypes from './constants';

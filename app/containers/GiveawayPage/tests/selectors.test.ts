@@ -1,7 +1,7 @@
 import { selectGiveawayPage, makeSelectStreamInfo } from '../selectors';
 import { initialState } from '../reducer';
 
-describe('HomePage selectors', () => {
+describe('GiveawayPage selectors', () => {
   it('should select the global state', () => {
     const globalState = {
       authKey: '',

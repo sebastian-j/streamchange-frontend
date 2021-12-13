@@ -3,11 +3,11 @@ import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 
-import HomePage from '../index';
+import GiveawayPage from '../index';
 import configureStore from '../../../configureStore';
 
 
-describe('<HomePage />', () => {
+describe('<GiveawayPage />', () => {
   let store;
   beforeAll(() => {
     store = configureStore({
@@ -28,7 +28,7 @@ describe('<HomePage />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale="en">
-          <HomePage />
+          <GiveawayPage />
         </IntlProvider>
       </Provider>,
     );

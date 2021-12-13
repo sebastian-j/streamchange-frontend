@@ -1,11 +1,11 @@
 /*
- * HomePage Messages
+ * GiveawayPage Messages
  *
- * This contains all the text for the HomePage container.
+ * This contains all the text for the GiveawayPage container.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'streamchange.containers.HomePage';
+export const scope = 'streamchange.containers.GiveawayPage';
 
 export default defineMessages({
   historyLink: {

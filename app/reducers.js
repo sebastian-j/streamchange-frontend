@@ -7,7 +7,7 @@ import { connectRouter } from 'connected-react-router';
 
 import history from './utils/history';
 import giveawayRulesReducer from './components/GiveawayRules/reducer';
-import giveawayPageReducer from './containers/HomePage/reducer';
+import giveawayPageReducer from './containers/GiveawayPage/reducer';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
 import styleProviderReducer from './containers/StyleProvider/reducer';
 import raffleWrapperReducer from './components/RaffleWrapper/reducer';

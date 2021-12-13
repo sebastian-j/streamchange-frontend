@@ -3,7 +3,7 @@ import { ApplicationRootState } from 'types';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the HomePage state domain
+ * Direct selector to the GiveawayPage state domain
  */
 const selectGiveawayPage = (state: ApplicationRootState) =>
   state.giveawayPage || initialState;

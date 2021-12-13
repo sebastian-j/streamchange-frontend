@@ -4,7 +4,7 @@ import { Saga } from 'redux-saga';
 import { SagaInjectionModes } from 'redux-injectors';
 
 import { ContainerState as LanguageProviderState } from '../containers/LanguageProvider/types';
-import { ContainerState as HomeState } from '../containers/HomePage/types';
+import { ContainerState as GiveawayState } from '../containers/GiveawayPage/types';
 import { ContainerState as StyleProviderState } from '../containers/StyleProvider/types';
 import { ContainerState as QueueState } from '../containers/QueuePage/types';
 import { ContainerState as ChatViewState } from '../components/ChatView/types';
@@ -37,7 +37,7 @@ export interface ApplicationRootState {
   readonly language: LanguageProviderState;
   readonly theme: StyleProviderState;
   readonly raffleWrapper: RaffleWrapperState;
-  readonly giveawayPage: HomeState;
+  readonly giveawayPage: GiveawayState;
   readonly queue: QueueState;
   readonly giveawayRules: GiveawayRulesState;
   readonly supportInfo?: SupportInformationState;

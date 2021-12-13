@@ -57,7 +57,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const HomePage = (props) => {
+const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
   useInjectSaga({ key: 'giveawayPage', saga: saga });
 
@@ -194,7 +194,7 @@ const HomePage = (props) => {
   );
 };
 
-HomePage.propTypes = {
+GiveawayPage.propTypes = {
   ban: PropTypes.object,
   changeStreamProperties: PropTypes.func.isRequired,
   sendTelemetryData: PropTypes.func,
@@ -214,4 +214,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(GiveawayPage);

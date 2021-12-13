@@ -19,7 +19,7 @@ type Stream = IStream;
 
 /* --- STATE --- */
 
-interface HomeState {
+interface GiveawayState {
   readonly authKey: string;
   readonly ban: Ban | null;
   readonly stream: Stream;
@@ -30,7 +30,7 @@ type AppActions = ActionType<typeof actions>;
 
 /* --- EXPORTS --- */
 
-type ContainerState = HomeState;
+type ContainerState = GiveawayState;
 type ContainerActions = AppActions;
 
 export { ContainerState, ContainerActions, Ban, Stream };

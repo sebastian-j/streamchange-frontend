@@ -1,6 +1,6 @@
 /*
  *
- * HomePage actions
+ * GiveawayPage actions
  *
  */
 import { action } from 'typesafe-actions';

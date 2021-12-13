@@ -20,7 +20,7 @@ import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
-import { makeSelectStreamInfo} from '../../containers/HomePage/selectors';
+import { makeSelectStreamInfo} from '../../containers/GiveawayPage/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};

@@ -1,10 +1,10 @@
 import produce from 'immer';
 
-import homePageReducer, { initialState } from '../reducer';
+import giveawayPageReducer, { initialState } from '../reducer';
 import { changeStreamProperties } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
-describe('homePageReducer', () => {
+describe('giveawayPageReducer', () => {
   let state;
   beforeEach(() => {
     state = {
@@ -20,7 +20,7 @@ describe('homePageReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(homePageReducer(undefined, {} as any)).toEqual(initialState);
+    expect(giveawayPageReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeOwnerId action correctly', () => {
@@ -29,7 +29,7 @@ describe('homePageReducer', () => {
       draft.stream = fixture;
     });
 
-    expect(homePageReducer(state, changeStreamProperties(fixture))).toEqual(
+    expect(giveawayPageReducer(state, changeStreamProperties(fixture))).toEqual(
       expectedResult,
     );
   });

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import { makeSelectStreamInfo } from '../../containers/HomePage/selectors';
+import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
