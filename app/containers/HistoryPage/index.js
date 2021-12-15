@@ -56,7 +56,7 @@ const Footer = styled.div`
   max-width: 200px;
 `;
 
-export default class History extends React.Component {
+export default class HistoryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
