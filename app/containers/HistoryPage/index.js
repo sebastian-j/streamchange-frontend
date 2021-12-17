@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -56,211 +56,189 @@ const Footer = styled.div`
   max-width: 200px;
 `;
 
-export default class HistoryPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false,
-      isLoaded: false,
-      items: [],
-      search: '',
-      maxResults: 20,
-      page: 0,
-      isLastPage: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.prevPage = this.prevPage.bind(this);
-    this.nextPage = this.nextPage.bind(this);
-    this.getHistory = this.getHistory.bind(this);
-  }
+const HistoryPage = () => {
+  const [error, setError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [maxResults, setMaxResults] = useState(20);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
 
-  handleChange(event) {
-    const { target } = event;
-    const { value } = target;
-    const { name } = target;
-    this.setState(
-      {
-        [name]: value,
-      },
-      () => {
-        this.getHistory();
-      },
-    );
-  }
-
-  prevPage() {
-    const oldPage = this.state.page;
-    if (this.state.page > 0) {
-      this.setState({ page: oldPage - 1 }, () => {
-        this.getHistory();
-      });
-    }
-  }
-
-  nextPage() {
-    const oldPage = this.state.page;
-    this.setState({ page: Number(oldPage + 1) }, () => {
-      this.getHistory();
-    });
-  }
-
-  getHistory() {
-    const firstResult = Number(this.state.page * this.state.maxResults);
+  const getHistory = () => {
+    const firstResult = Number(page * maxResults);
     db.table('history')
       .filter((winner) =>
-        winner.displayName
-          .toLowerCase()
-          .includes(this.state.search.toLowerCase()),
+        winner.displayName.toLowerCase().includes(searchQuery.toLowerCase()),
       )
       .reverse()
       .offset(firstResult)
-      .limit(this.state.maxResults)
+      .limit(maxResults)
       .toArray()
-      .then((items) => {
-        this.setState({ isLoaded: true, error: false, items });
-        if (this.state.maxResults > items.length) {
-          this.setState({ isLastPage: true });
-        } else this.setState({ isLastPage: false });
+      .then((it) => {
+        setIsLoaded(true);
+        setError(false);
+        setItems(it);
+        if (maxResults > it.length) {
+          setIsLastPage(true);
+        } else setIsLastPage(false);
       })
       .catch(() => {
-        this.setState({
-          isLoaded: true,
-          error: true,
-        });
+        setIsLoaded(true);
+        setError(true);
       });
-  }
+  };
 
-  componentDidMount() {
-    this.getHistory();
-  }
+  const prevPage = () => {
+    if (page > 0) {
+      setPage((prevState) => prevState - 1);
+    }
+  };
 
-  render() {
-    if (this.state.error) {
-      return (
-        <div>
-          <FormattedMessage {...messages.infoError} />
-        </div>
-      );
-    }
-    if (!this.state.isLoaded) {
-      return (
-        <PageWrapper>
-          <LinearProgress />
-          <div
-            style={{
-              fontSize: '2vw',
-              position: 'absolute',
-              left: '55%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              textAlign: 'center',
-            }}
-          >
-            <FormattedMessage {...messages.infoLoading} />
-          </div>
-        </PageWrapper>
-      );
-    }
+  const nextPage = () => {
+    setPage((prevState) => prevState + 1);
+  };
+
+  useEffect(() => {
+    getHistory();
+  }, [maxResults]);
+  useEffect(() => {
+    getHistory();
+  }, [page]);
+  useEffect(() => {
+    getHistory();
+  }, [searchQuery]);
+  useEffect(() => {
+    getHistory();
+  }, []);
+
+  if (error) {
+    return (
+      <div>
+        <FormattedMessage {...messages.infoError} />
+      </div>
+    );
+  }
+  if (!isLoaded) {
     return (
       <PageWrapper>
-        <Header>
-          <ReturnButton to="/giveaway" activeClassName="active">
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-              </svg>
-              <span>
-                <FormattedMessage {...messages.returnButton} />
-              </span>
-            </div>
-          </ReturnButton>
-          <HistoryMenu onClear={this.getHistory} />
-        </Header>
-        <FormattedMessage {...messages.searchLabel}>
-          {(label) => (
-            <StyledTextField
-              id="search"
-              name="search"
-              label={label}
-              value={this.state.search}
-              onChange={this.handleChange}
-              type="text"
-              margin="normal"
-              fullWidth
-            />
-          )}
-        </FormattedMessage>
-        {this.state.search.length > 0 && this.state.items.length === 0 && (
-          <Information>
-            <FormattedMessage {...messages.infoNoResults} />
-          </Information>
-        )}
-        {this.state.items.length > 0 && (
-          <HistoryTable items={this.state.items} />
-        )}
-        <Footer>
-          {!this.state.isLastPage && (
-            <IconButton
-              edge="end"
-              aria-label="Next page"
-              name="next"
-              onClick={this.nextPage}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
-                <path fill="none" d="M0 0h24v24H0V0z" />
-              </svg>
-            </IconButton>
-          )}
-          {this.state.page !== 0 && (
-            <IconButton
-              edge="end"
-              aria-label="Previous page"
-              name="prev"
-              onClick={this.prevPage}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
-                <path fill="none" d="M0 0h24v24H0V0z" />
-              </svg>
-            </IconButton>
-          )}
-          <StyledFormControl margin="normal">
-            <InputLabel htmlFor="maxResults">
-              <FormattedMessage {...messages.resultsPerPage} />
-            </InputLabel>
-            <Select
-              value={this.state.maxResults}
-              onChange={this.handleChange}
-              inputProps={{
-                name: 'maxResults',
-                id: 'maxResults',
-              }}
-            >
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-              <MenuItem value={50}>50</MenuItem>
-              <MenuItem value={100}>100</MenuItem>
-            </Select>
-          </StyledFormControl>
-        </Footer>
+        <LinearProgress />
+        <div
+          style={{
+            fontSize: '2vw',
+            position: 'absolute',
+            left: '55%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            textAlign: 'center',
+          }}
+        >
+          <FormattedMessage {...messages.infoLoading} />
+        </div>
       </PageWrapper>
     );
   }
-}
+  return (
+    <PageWrapper>
+      <Header>
+        <ReturnButton to="/giveaway" activeClassName="active">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+            <span>
+              <FormattedMessage {...messages.returnButton} />
+            </span>
+          </div>
+        </ReturnButton>
+        <HistoryMenu onClear={getHistory} />
+      </Header>
+      <FormattedMessage {...messages.searchLabel}>
+        {(label) => (
+          <StyledTextField
+            id="search"
+            name="search"
+            label={label}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            type="text"
+            margin="normal"
+            fullWidth
+          />
+        )}
+      </FormattedMessage>
+      {searchQuery.length > 0 && items.length === 0 && (
+        <Information>
+          <FormattedMessage {...messages.infoNoResults} />
+        </Information>
+      )}
+      {items.length > 0 && <HistoryTable items={items} />}
+      <Footer>
+        {!isLastPage && (
+          <IconButton
+            edge="end"
+            aria-label="Next page"
+            name="next"
+            onClick={nextPage}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+              <path fill="none" d="M0 0h24v24H0V0z" />
+            </svg>
+          </IconButton>
+        )}
+        {page !== 0 && (
+          <IconButton
+            edge="end"
+            aria-label="Previous page"
+            name="prev"
+            onClick={prevPage}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+              <path fill="none" d="M0 0h24v24H0V0z" />
+            </svg>
+          </IconButton>
+        )}
+        <StyledFormControl margin="normal">
+          <InputLabel htmlFor="maxResults">
+            <FormattedMessage {...messages.resultsPerPage} />
+          </InputLabel>
+          <Select
+            value={maxResults}
+            onChange={(event) => {
+              setMaxResults(event.target.value);
+            }}
+            inputProps={{
+              name: 'maxResults',
+              id: 'maxResults',
+            }}
+          >
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+          </Select>
+        </StyledFormControl>
+      </Footer>
+    </PageWrapper>
+  );
+};
+
+export default HistoryPage;
