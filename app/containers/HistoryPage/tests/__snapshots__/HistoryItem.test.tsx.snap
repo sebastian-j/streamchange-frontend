@@ -3,7 +3,7 @@
 exports[`<HistoryItem /> should render and match the snapshot 1`] = `
 <styled.tr>
   <styled.td
-    image={true}
+    className="image"
   >
     <a
       href="https://www.youtube.com/channel/id"
@@ -17,28 +17,28 @@ exports[`<HistoryItem /> should render and match the snapshot 1`] = `
     </a>
   </styled.td>
   <styled.td
-    textLeft={true}
+    className="textLeft"
   >
     <span>
       abc
     </span>
   </styled.td>
   <styled.td
-    text={true}
+    className="text"
   >
     <span>
       prize
     </span>
   </styled.td>
   <styled.td
-    text={true}
+    className="text"
   >
     <span>
       abc
     </span>
   </styled.td>
   <styled.td
-    text={true}
+    className="text"
   >
     <RelativeDate
       ISO8601Date="2019-12-24T07:27:56.273Z"

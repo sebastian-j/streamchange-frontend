@@ -76,6 +76,9 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
       channelId="id"
       createdAt="2019-12-24T07:27:56.273Z"
       displayName="name"
+      imageUrl="url"
+      message="test message"
+      prize="trophy"
     />
   </tbody>
 </styled.table>

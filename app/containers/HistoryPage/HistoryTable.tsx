@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -7,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import ArrowUpIcon from './arrowUpIcon';
 import HistoryItem from './HistoryItem';
+import { HistoryItem as HItem } from './types';
 import './style.css';
 
 const HeaderButton = styled.button`
@@ -31,8 +31,12 @@ const Thead = styled.thead`
   user-select: none;
 `;
 
-const HistoryTable = (props) => {
-  const [sort, setSort] = useState('createdAtDESC');
+interface Props {
+  items: HItem[];
+}
+
+const HistoryTable = ({ items }: Props) => {
+  const [sort, setSort] = useState<string>('createdAtDESC');
   const handleSortChange = (event) => {
     const { target } = event;
     let value = target.id;
@@ -109,7 +113,7 @@ const HistoryTable = (props) => {
         </tr>
       </Thead>
       <tbody>
-        {props.items.map((item) => (
+        {items.map((item) => (
           <HistoryItem
             key={item.createdAt}
             channelId={item.channelId}
@@ -123,10 +127,6 @@ const HistoryTable = (props) => {
       </tbody>
     </Table>
   );
-};
-
-HistoryTable.propTypes = {
-  items: PropTypes.array,
 };
 
 export default HistoryTable;

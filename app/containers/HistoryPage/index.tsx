@@ -14,6 +14,7 @@ import StyledTextField from '../../components/StyledTextField';
 import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
 import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
+import { HistoryItem } from './types';
 
 const PageWrapper = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
@@ -57,13 +58,13 @@ const Footer = styled.div`
 `;
 
 const HistoryPage = () => {
-  const [error, setError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [maxResults, setMaxResults] = useState(20);
-  const [page, setPage] = useState(0);
-  const [isLastPage, setIsLastPage] = useState(false);
+  const [error, setError] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [items, setItems] = useState<HistoryItem[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [maxResults, setMaxResults] = useState<number>(20);
+  const [page, setPage] = useState<number>(0);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
   const getHistory = () => {
     const firstResult = Number(page * maxResults);
@@ -75,7 +76,7 @@ const HistoryPage = () => {
       .offset(firstResult)
       .limit(maxResults)
       .toArray()
-      .then((it) => {
+      .then((it: HistoryItem[]) => {
         setIsLoaded(true);
         setError(false);
         setItems(it);
@@ -223,7 +224,7 @@ const HistoryPage = () => {
           <Select
             value={maxResults}
             onChange={(event) => {
-              setMaxResults(event.target.value);
+              setMaxResults(Number(event.target.value));
             }}
             inputProps={{
               name: 'maxResults',

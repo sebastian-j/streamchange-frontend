@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import Button from '@material-ui/core/Button';
@@ -19,9 +18,13 @@ const ThemedSvg = styled.svg`
   color: ${(props) => props.theme.staticTextColor};
 `;
 
-const HistoryMenu = (props) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
+interface Props {
+  onClear: () => void;
+}
+
+const HistoryMenu = ({onClear}: Props) => {
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +44,7 @@ const HistoryMenu = (props) => {
   };
 
   const clearHistory = () => {
-    db.history.clear().then(() => props.onClear());
+    db.table('history').clear().then(() => onClear());
     closeDialog();
   };
 
@@ -92,10 +95,6 @@ const HistoryMenu = (props) => {
       </Dialog>
     </div>
   );
-};
-
-HistoryMenu.propTypes = {
-  onClear: PropTypes.func,
 };
 
 export default HistoryMenu;

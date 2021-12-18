@@ -11,9 +11,13 @@ describe('<HistoryTable />', () => {
       <HistoryTable
         items={[
           {
+            id: 1,
             channelId: 'id',
-            displayName: 'name',
             createdAt: '2019-12-24T07:27:56.273Z',
+            displayName: 'name',
+            imageUrl: 'url',
+            message: 'test message',
+            prize: 'trophy',
           },
         ]}
       />,

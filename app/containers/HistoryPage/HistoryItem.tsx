@@ -13,30 +13,24 @@ const Cell = styled.td`
   border-collapse: collapse;
   color: ${(props) => props.theme.staticTextColor};
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  ${({ image }) =>
-    image &&
-    `
+  &.image {
     max-width: 100px;
-  `}
-  ${({ textLeft }) =>
-    textLeft &&
-    `
+  }
+  &.textLeft {
     font-size: 1rem;
     padding: 14px 30px 14px 16px;
     text-align: left;
-  `}
-  ${({ text }) =>
-    text &&
-    `
+  }
+  &.text {
     font-size: 0.875rem;
     padding: 14px 30px 14px 16px;
     text-align: right;
-  `}
+  }
 `;
 
 const HistoryItem = (props) => (
   <Row>
-    <Cell image>
+    <Cell className="image">
       <a
         href={`https://www.youtube.com/channel/${props.channelId}`}
         target="_blank"
@@ -44,16 +38,16 @@ const HistoryItem = (props) => (
         <img alt="Logo" src={props.imageUrl} height="45px" />
       </a>
     </Cell>
-    <Cell textLeft>
+    <Cell className="textLeft">
       <span>{props.displayName}</span>
     </Cell>
-    <Cell text>
+    <Cell className="text">
       <span>{props.prize}</span>
     </Cell>
-    <Cell text>
+    <Cell className="text">
       <span>{props.message}</span>
     </Cell>
-    <Cell text>
+    <Cell className="text">
       <RelativeDate ISO8601Date={props.createdAt} />
     </Cell>
   </Row>
