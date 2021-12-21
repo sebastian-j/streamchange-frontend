@@ -117,10 +117,12 @@ const YoutubeWorker = (props) => {
             '',
           )}`,
         });
-        props.changeAnimationDuration(
-          Number(author.message.replace('!time ', '')),
-        );
         setTimeout(() => setSuperChat(null), 10000);
+        if (!Number.isNaN(Number(author.message.replace('!time ', '')))) {
+          props.changeAnimationDuration(
+            Number(author.message.replace('!time ', '')),
+          );
+        }
       } else if (author.message.startsWith('!prize ')) {
         setSuperChat({
           title: author.title,
