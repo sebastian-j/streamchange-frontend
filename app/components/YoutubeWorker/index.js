@@ -107,18 +107,16 @@ const YoutubeWorker = (props) => {
         props.onColorChange(author.message.replace('!color ', ''));
         setTimeout(() => setSuperChat(null), 10000);
       } else if (author.message.startsWith('!time ')) {
+        const seconds = Number(author.message.replace('!time ', ''));
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
           message: `${
             author.title
-          } changed animation duration to ${author.message.replace(
-            '!time ',
-            '',
-          )}`,
+          } changed animation duration to ${seconds}`,
         });
         setTimeout(() => setSuperChat(null), 10000);
-        if (!Number.isNaN(Number(author.message.replace('!time ', '')))) {
+        if (!Number.isNaN(seconds) && seconds > 0 && seconds < 601) {
           props.changeAnimationDuration(
             Number(author.message.replace('!time ', '')),
           );
