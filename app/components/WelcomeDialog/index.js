@@ -1,36 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
+import { CompatibilityInfo } from './components/CompatibilityInfo';
 import CookieConsent from './CookieConsent';
-import DialogWrapper from './DialogWrapper';
+import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
+import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WelcomeHint from './WelcomeHint';
-
-const WelcomePage = styled.div`
-  background: url(../static/streamchange-cover.webp) no-repeat center center
-    fixed;
-  background-size: cover;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-`;
-
-const CompatibilityInfo = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  div {
-    font-size: 3vw;
-    text-align: center;
-  }
-`;
 
 const WelcomeDialog = (props) => {
   const [videoLink, setVideoLink] = useState('');
@@ -71,7 +52,7 @@ const WelcomeDialog = (props) => {
   }
   if (isChrome || props.variant === 1) {
     return (
-      <WelcomePage>
+      <PhotoBackdrop>
         <DialogWrapper>
           <div className="dialog">
             <div className="title">
@@ -136,7 +117,7 @@ const WelcomeDialog = (props) => {
           <WelcomeHint />
         </DialogWrapper>
         <CookieConsent />
-      </WelcomePage>
+      </PhotoBackdrop>
     );
   }
   return (

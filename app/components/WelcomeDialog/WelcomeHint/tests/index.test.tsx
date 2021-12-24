@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 
-import WelcomeHint from '../WelcomeHint';
+import WelcomeHint from '../index';
 
 const shallowRenderer = createRenderer();
 

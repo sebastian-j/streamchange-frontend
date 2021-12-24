@@ -2,10 +2,10 @@
 
 exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
 <div
-  class="sc-pVTFL jStHWd"
+  class="sc-jrQzAO kRluvY"
 >
   <span
-    class="sc-jrQzAO hmRIdg"
+    class="sc-hBUSln gasaX"
   >
     <span>
       Welcome to StreamChange
@@ -13,7 +13,7 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
   </span>
   <div>
     <span
-      class="sc-jrQzAO hmRIdg"
+      class="sc-hBUSln gasaX"
     >
       <span>
         Select theme
@@ -24,22 +24,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-kDTinF bOpoJQ"
+        class="sc-egiyK dHVmLx"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="sc-iqseJM GttEL box"
+        class="sc-kDTinF iBZAcK box left"
       >
         <img
           alt="light"
-          class="sc-hBUSln hidxxT"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-egiyK euxJzI"
+          class="sc-ksdxgE dwWHTf"
         >
           <span>
             Light
@@ -51,22 +50,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="sc-kDTinF bOpoJQ"
+        class="sc-egiyK dHVmLx"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="sc-iqseJM fXjCvj box"
+        class="sc-kDTinF iBZAcK box right"
       >
         <img
           alt="dark"
-          class="sc-hBUSln hidxxT"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-egiyK euxJzI"
+          class="sc-ksdxgE dwWHTf"
         >
           <span>
             Dark
@@ -77,7 +75,7 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="sc-jrQzAO hmRIdg"
+      class="sc-hBUSln gasaX"
     >
       <span>
         Select language
@@ -87,21 +85,20 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="sc-kDTinF bOpoJQ"
+        class="sc-egiyK dHVmLx"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="sc-crHmcD ldNcsE box"
+        class="sc-iqseJM hcrhBp box left"
       >
         <span
-          class="sc-bqiRlB cAlbTD"
+          class="sc-crHmcD etoWxl"
         >
           <img
             alt="pl"
-            class="sc-ksdxgE bqGlAp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -115,21 +112,20 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-kDTinF bOpoJQ"
+        class="sc-egiyK dHVmLx"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="sc-crHmcD loSFqw box"
+        class="sc-iqseJM hcrhBp box right"
       >
         <span
-          class="sc-bqiRlB cAlbTD"
+          class="sc-crHmcD etoWxl"
         >
           <img
             alt="en"
-            class="sc-ksdxgE bqGlAp"
             src="IMAGE_MOCK"
           />
           <span>
@@ -141,7 +137,7 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-fotOHu ImpKv"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-bqiRlB gNEjRC"
       tabindex="0"
       type="button"
     >
@@ -158,11 +154,11 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="sc-eCImPb hlVgAE"
+    class="sc-furwcr dCipSX"
   >
     <img
       alt="cookie"
-      class="sc-jRQBWg gcWUOg"
+      class="sc-iCfMLu gLHhKf"
       src="IMAGE_MOCK"
     />
     <span
@@ -173,7 +169,7 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       </span>
     </span>
     <button
-      class="sc-iCfMLu iRwhql"
+      class="sc-jRQBWg hvQnvK"
       type="button"
     >
       <span>

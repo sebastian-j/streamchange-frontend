@@ -1,142 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 
-import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
-import { changeLocale } from '../../containers/LanguageProvider/actions';
-import FlagPL from './assets/flag-pl.png';
-import FlagUK from './assets/flag-uk.png';
-import LightModeImg from './assets/light-mode.png';
-import DarkModeImg from './assets/dark-mode.png';
-import CookieConsent from './CookieConsent';
+import { makeSelectLocale } from '../../../containers/LanguageProvider/selectors';
+import { changeLocale } from '../../../containers/LanguageProvider/actions';
+import FlagPL from '../assets/flag-pl.png';
+import FlagUK from '../assets/flag-uk.png';
+import LightModeImg from '../assets/light-mode.png';
+import DarkModeImg from '../assets/dark-mode.png';
+import { Backdrop } from './components/Backdrop';
+import { Box } from './components/Box';
+import CookieConsent from '../CookieConsent';
+import { LangBox } from './components/LangBox';
+import { LangTile } from './components/LangTile';
+import { RadioInput } from './components/RadioInput';
+import { StyledButton } from './components/StyledButton';
+import { Tile } from './components/Tile';
+import { Title } from './components/Title';
 import messages from './messages';
-
-const Backdrop = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.bodyBackground};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-`;
-const Title = styled.span`
-  color: ${(props) => props.theme.staticTextColor};
-  display: block;
-  font-size: 2rem;
-  margin-bottom: 1vh;
-  margin-top: 5vh;
-  text-align: center;
-`;
-const RadioInput = styled.input`
-  display: none;
-  &:checked + .box {
-    background-color: #0068ad;
-  }
-`;
-
-const Box = styled.div`
-  width: 11vw;
-  height: 11vw;
-  background-color: #ffffffd9;
-  transition: all 300ms ease;
-  will-change: transition;
-  display: inline-block;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  font-family: sans-serif;
-  ${({ left }) =>
-    left &&
-    `
-    border-radius: 5px 0 0 5px;
-  `}
-  ${({ right }) =>
-    right &&
-    `
-    border-radius: 0 5px 5px 0;
-  `}
-  @media (orientation: portrait) {
-    height: 40vw;
-    width: 40vw;
-  }
-`;
-
-const LangBox = styled.div`
-  width: 11vw;
-  height: 4vw;
-  background-color: #ffffffd9;
-  transition: all 250ms ease;
-  will-change: transition;
-  display: inline-block;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  font-family: sans-serif;
-  ${({ left }) =>
-    left &&
-    `
-    border-radius: 4px 0 0 4px;
-  `}
-  ${({ right }) =>
-    right &&
-    `
-    border-radius: 0 4px 4px 0;
-  `}
-  @media (orientation: portrait) {
-    height: 14vw;
-    width: 40vw;
-  }
-`;
-
-const Tile = styled.span`
-  position: absolute;
-  transform: translate(0, -50%);
-  left: 5px;
-  right: 5px;
-  top: 85%;
-  transition: all 300ms ease;
-  font-size: 1.2vw;
-  user-select: none;
-  @media (orientation: portrait) {
-    font-size: 5vw;
-  }
-`;
-
-const LangTile = styled.span`
-  position: absolute;
-  transform: translate(0, -50%);
-  left: 5px;
-  right: 5px;
-  top: 50%;
-  transition: all 300ms ease;
-  font-size: 1.2vw;
-  user-select: none;
-  @media (orientation: portrait) {
-    font-size: 5vw;
-  }
-`;
-
-const Flag = styled.img`
-  margin-right: 10%;
-  width: 20%;
-`;
-
-const ThemeImg = styled.img`
-  margin-top: 10%;
-  width: 96%;
-`;
-const StyledButton = styled(Button)`
-  span {
-    color: ${(props) => props.theme.materialButtonColor};
-    font-size: 1.25rem;
-  }
-`;
 
 const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
@@ -151,7 +34,7 @@ const FirstUseScreen = (props) => {
 
   const changeTheme = (event) => {
     setDarkMode(event.target.value === '1');
-    localStorage.setItem('darkMode', event.target.value === '1');
+    localStorage.setItem('darkMode', (event.target.value === '1').toString());
   };
 
   const save = () => {
@@ -178,8 +61,8 @@ const FirstUseScreen = (props) => {
             onClick={changeTheme}
             checked={!darkMode}
           />
-          <Box className="box" left>
-            <ThemeImg src={LightModeImg} alt="light" />
+          <Box className="box left">
+            <img src={LightModeImg} alt="light" />
             <Tile>
               <FormattedMessage {...messages.lightTheme} />
             </Tile>
@@ -195,8 +78,8 @@ const FirstUseScreen = (props) => {
             onClick={changeTheme}
             checked={darkMode}
           />
-          <Box className="box" right>
-            <ThemeImg src={DarkModeImg} alt="dark" />
+          <Box className="box right">
+            <img src={DarkModeImg} alt="dark" />
             <Tile>
               <FormattedMessage {...messages.darkTheme} />
             </Tile>
@@ -217,9 +100,9 @@ const FirstUseScreen = (props) => {
             onClick={changeLanguage}
             checked={language === 'pl'}
           />
-          <LangBox className="box" left>
+          <LangBox className="box left">
             <LangTile>
-              <Flag src={FlagPL} alt="pl" />
+              <img src={FlagPL} alt="pl" />
               <FormattedMessage {...messages.pl} />
             </LangTile>
           </LangBox>
@@ -234,9 +117,9 @@ const FirstUseScreen = (props) => {
             onClick={changeLanguage}
             checked={language === 'en'}
           />
-          <LangBox className="box" right>
+          <LangBox className="box right">
             <LangTile>
-              <Flag src={FlagUK} alt="en" />
+              <img src={FlagUK} alt="en" />
               <FormattedMessage {...messages.en} />
             </LangTile>
           </LangBox>

@@ -6,7 +6,7 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
     <styled.button
       onClick={[Function]}
     >
-      <styled.img
+      <img
         alt="light bulb"
         src="IMAGE_MOCK"
       />
