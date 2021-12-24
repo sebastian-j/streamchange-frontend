@@ -1,35 +1,14 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import ArrowUpIcon from './arrowUpIcon';
+import ArrowUpIcon from './components/arrowUpIcon';
 import HistoryItem from './HistoryItem';
+import { Table } from './components/Table';
+import { TableHeaderButton } from './components/TableHeaderButton';
+import { Thead } from './components/Thead';
 import { HistoryItem as HItem } from './types';
-import './style.css';
-
-const HeaderButton = styled.button`
-  background: none;
-  border: none;
-  color: ${(props) => props.theme.staticTextColor};
-  padding: 14px 10px 14px 16px;
-  outline: none;
-  width: 100%;
-`;
-
-const Table = styled.table`
-  display: table;
-  overflow-y: auto;
-  min-width: 1052px;
-  width: 100%;
-`;
-
-const Thead = styled.thead`
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
-  cursor: pointer;
-  user-select: none;
-`;
 
 interface Props {
   items: HItem[];
@@ -52,7 +31,7 @@ const HistoryTable = ({ items }: Props) => {
         <tr>
           <td />
           <td>
-            <HeaderButton
+            <TableHeaderButton
               id="displayName"
               onClick={handleSortChange}
               type="button"
@@ -60,42 +39,44 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.nameHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  'sort-icon',
                   sort === 'displayName' && 'active',
-                  sort === 'displayNameDESC' && [
-                    'active',
-                    'icon-direction-desc',
-                  ],
+                  sort === 'displayNameDESC' && ['active', 'descending'],
                 )}
               />
-            </HeaderButton>
+            </TableHeaderButton>
           </td>
           <td>
-            <HeaderButton id="prize" onClick={handleSortChange} type="button">
+            <TableHeaderButton
+              id="prize"
+              onClick={handleSortChange}
+              type="button"
+            >
               <FormattedMessage {...messages.prizeHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  'sort-icon',
                   sort === 'prize' && 'active',
-                  sort === 'prizeDESC' && ['active', 'icon-direction-desc'],
+                  sort === 'prizeDESC' && ['active', 'descending'],
                 )}
               />
-            </HeaderButton>
+            </TableHeaderButton>
           </td>
           <td>
-            <HeaderButton id="message" onClick={handleSortChange} type="button">
+            <TableHeaderButton
+              id="message"
+              onClick={handleSortChange}
+              type="button"
+            >
               <FormattedMessage {...messages.messageHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  'sort-icon',
                   sort === 'message' && 'active',
-                  sort === 'messageDESC' && ['active', 'icon-direction-desc'],
+                  sort === 'messageDESC' && ['active', 'descending'],
                 )}
               />
-            </HeaderButton>
+            </TableHeaderButton>
           </td>
           <td>
-            <HeaderButton
+            <TableHeaderButton
               id="createdAt"
               onClick={handleSortChange}
               type="button"
@@ -103,12 +84,11 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.dateHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  'sort-icon',
                   sort === 'createdAt' && 'active',
-                  sort === 'createdAtDESC' && ['active', 'icon-direction-desc'],
+                  sort === 'createdAtDESC' && ['active', 'descending'],
                 )}
               />
-            </HeaderButton>
+            </TableHeaderButton>
           </td>
         </tr>
       </Thead>

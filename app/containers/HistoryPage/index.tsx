@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,48 +12,12 @@ import StyledTextField from '../../components/StyledTextField';
 import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
 import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
+import { InformationText } from './components/InformationText';
+import { PageHeader } from './components/PageHeader';
+import { PageWrapper } from './components/PageWrapper';
+import { ReturnButton } from './components/ReturnButton';
+import { TableFooter } from './components/TableFooter';
 import { HistoryItem } from './types';
-
-const PageWrapper = styled.div`
-  background-color: ${(props) => props.theme.bodyBackground};
-  padding: 10px;
-  overflow-x: hidden;
-  min-height: 100vh;
-  width: 100%;
-`;
-
-const Header = styled.header`
-  display: flex;
-  flex-direction: row;
-`;
-
-const ReturnButton = styled(NavLink)`
-  display: block;
-  color: ${(props) => props.theme.staticTextColor};
-  flex-grow: 1;
-  line-height: 48px;
-  min-height: 48px;
-  text-decoration: none;
-  & span {
-    margin-left: 24px;
-  }
-  &:hover {
-    background: rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const Information = styled.div`
-  color: ${(props) => props.theme.staticTextColor};
-  font-size: 2vw;
-  margin-top: 5vh;
-  text-align: center;
-`;
-const Footer = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  margin-top: 10px;
-  max-width: 200px;
-`;
 
 const HistoryPage = () => {
   const [error, setError] = useState<boolean>(false);
@@ -141,7 +103,7 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
-      <Header>
+      <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
           <div>
             <svg
@@ -159,7 +121,7 @@ const HistoryPage = () => {
           </div>
         </ReturnButton>
         <HistoryMenu onClear={getHistory} />
-      </Header>
+      </PageHeader>
       <FormattedMessage {...messages.searchLabel}>
         {(label) => (
           <StyledTextField
@@ -175,12 +137,12 @@ const HistoryPage = () => {
         )}
       </FormattedMessage>
       {searchQuery.length > 0 && items.length === 0 && (
-        <Information>
+        <InformationText>
           <FormattedMessage {...messages.infoNoResults} />
-        </Information>
+        </InformationText>
       )}
       {items.length > 0 && <HistoryTable items={items} />}
-      <Footer>
+      <TableFooter>
         {!isLastPage && (
           <IconButton
             edge="end"
@@ -237,7 +199,7 @@ const HistoryPage = () => {
             <MenuItem value={100}>100</MenuItem>
           </Select>
         </StyledFormControl>
-      </Footer>
+      </TableFooter>
     </PageWrapper>
   );
 };

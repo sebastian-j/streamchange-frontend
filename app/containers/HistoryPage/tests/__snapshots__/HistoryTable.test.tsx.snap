@@ -17,7 +17,7 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
             values={Object {}}
           />
           <ArrowUpIcon
-            className="sort-icon"
+            className=""
           />
         </styled.button>
       </td>
@@ -33,7 +33,7 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
             values={Object {}}
           />
           <ArrowUpIcon
-            className="sort-icon"
+            className=""
           />
         </styled.button>
       </td>
@@ -49,7 +49,7 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
             values={Object {}}
           />
           <ArrowUpIcon
-            className="sort-icon"
+            className=""
           />
         </styled.button>
       </td>
@@ -65,7 +65,7 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
             values={Object {}}
           />
           <ArrowUpIcon
-            className="sort-icon active icon-direction-desc"
+            className="active descending"
           />
         </styled.button>
       </td>

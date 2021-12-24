@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 
-import ArrowUpIcon from '../arrowUpIcon';
+import ArrowUpIcon from '../components/arrowUpIcon';
 
 const shallowRenderer = createRenderer();
 
