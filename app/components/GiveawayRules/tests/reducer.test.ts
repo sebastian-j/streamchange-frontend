@@ -36,6 +36,7 @@ describe('giveawayRulesReducer', () => {
       isEligible: true,
       isModerator: false,
       isSponsor: false,
+      isVerified: false,
       message: 'test',
       title: 'user',
     };

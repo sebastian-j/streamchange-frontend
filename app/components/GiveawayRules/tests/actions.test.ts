@@ -20,6 +20,7 @@ describe('GiveawayRules Actions', () => {
         isEligible: true,
         isModerator: false,
         isSponsor: false,
+        isVerified: false,
         message: 'test',
         title: 'user',
       };

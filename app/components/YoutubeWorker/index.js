@@ -169,6 +169,7 @@ const YoutubeWorker = (props) => {
             isSponsor: res.data.items[i].a.isChatSponsor
               ? res.data.items[i].a.sponsorBadge
               : false,
+            isVerified: res.data.items[i].a.isVerified,
             isEligible: res.data.items[i].s.m
               .toLowerCase()
               .includes(localStorage.getItem('keyword').toLowerCase()),

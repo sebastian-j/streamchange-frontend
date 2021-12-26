@@ -8,7 +8,7 @@ import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../../components/StyledTextField';
 import QueueItem from './QueueItem';
 import PanelTitle from '../../components/Panel/PanelTitle';
-import { UserListPanel } from './components/UserListPanel';
+import { UserListPanel } from '../../components/Panel/UserListPanel';
 import messages from './messages';
 import { makeSelectQueueArray, makeSelectWidgetCode } from './selectors';
 import {

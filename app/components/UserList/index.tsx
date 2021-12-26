@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,9 +10,15 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import db from '../YoutubeWorker/db';
 import { useInjectReducer } from '../../utils/injectReducer';
+import { Counts } from './components/Counts';
 import FilterChips from './FilterChips';
+import { Header } from './components/Header';
+import { HeaderButtons } from './components/HeaderButtons';
+import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../StyledTextField';
+import { ThemedSvg } from './components/ThemedSvg';
 import UserItem from './userItem';
+import { UserListPanel } from '../Panel/UserListPanel';
 import PanelTitle from '../Panel/PanelTitle';
 import { makeSelectUserArray } from './selectors';
 import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
@@ -28,58 +31,25 @@ import {
 } from './actions';
 import messages from './messages';
 import reducer from './reducer';
+import { FilteringOptions, User } from './types';
 
-const UserListPanel = styled.div`
-  background-color: ${(props) => props.theme.panelBackground};
-  display: flex;
-  flex-direction: column;
-  flex-basis: 0;
-  flex-grow: 1;
-  margin: 15px;
-  padding: 15px;
-  @media (orientation: portrait) {
-    margin: 5px;
-  }
-`;
+interface Props {
+  deselectAllUsers: () => void;
+  getList: (arr: User[]) => void;
+  giveawayReq: number;
+  purgeList: () => void;
+  selectAllUsers: () => void;
+  toggleEligibility: (id: string) => void;
+  userArray: Array<User>;
+}
 
-const Ul = styled.ul`
-  overflow-y: scroll;
-  list-style: none;
-  padding: 0;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const HeaderButtons = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const StyledButton = styled(Button)`
-  span {
-    color: ${(props) => props.theme.color};
-  }
-`;
-
-const Counts = styled.span`
-  color: ${(props) => props.theme.secondaryTextColor};
-  font-size: 0.9rem;
-`;
-
-const ThemedSvg = styled.svg`
-  color: ${(props) => props.theme.staticTextColor};
-`;
-
-const UserList = (props) => {
+const UserList = (props: Props) => {
   useInjectReducer({ key: 'userList', reducer });
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [filtersAnchorEl, setFiltersAnchorEl] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [items, setItems] = useState([]);
-  const [filters, setFilters] = useState({
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [filtersAnchorEl, setFiltersAnchorEl] = useState<Element | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [items, setItems] = useState<Array<User>>([]);
+  const [filters, setFilters] = useState<FilteringOptions>({
     moderators: false,
     sponsors: false,
     verified: false,
@@ -121,13 +91,13 @@ const UserList = (props) => {
     }
   };
 
-  const isFiltering = () => !Object.values(filters).some((x) => x);
+  const isFiltering = () => Object.values(filters).some((x) => x);
 
-  const getUsers = () => {
-    let ret = items.length === 0 ? props.userArray : items;
+  const getUsers = (): Array<User> => {
+    let ret: Array<User> = items.length === 0 ? props.userArray : items;
     if (props.giveawayReq === 1)
       ret = ret.filter((user) => user.isSponsor !== false);
-    if (isFiltering) {
+    if (isFiltering()) {
       if (filters.participating && !filters.notParticipating) {
         ret = ret.filter((user) => user.isEligible);
       } else if (!filters.participating && filters.notParticipating) {
@@ -148,7 +118,7 @@ const UserList = (props) => {
         );
       }
     }
-    selectedCount = ret.filter((item) => item.isEligible === true).length;
+    selectedCount = ret.filter((item) => item.isEligible).length;
     allCount = ret.length;
     return ret;
   };
@@ -392,7 +362,7 @@ const UserList = (props) => {
           />
         )}
       </FormattedMessage>
-      <Ul>
+      <ul>
         {getUsers().map((item) => (
           <UserItem
             key={item.id}
@@ -400,11 +370,12 @@ const UserList = (props) => {
             title={item.title}
             isModerator={item.isModerator}
             isSponsor={item.isSponsor}
+            isVerified={item.isVerified}
             isEligible={item.isEligible}
             handleToggleUser={props.toggleEligibility}
           />
         ))}
-      </Ul>
+      </ul>
       <StyledButton onClick={props.purgeList}>
         <FormattedMessage {...messages.clearBtn} />
       </StyledButton>
@@ -419,16 +390,6 @@ const UserList = (props) => {
       </Counts>
     </UserListPanel>
   );
-};
-
-UserList.propTypes = {
-  deselectAllUsers: PropTypes.func,
-  getList: PropTypes.func,
-  giveawayReq: PropTypes.number,
-  purgeList: PropTypes.func,
-  selectAllUsers: PropTypes.func,
-  toggleEligibility: PropTypes.func,
-  userArray: PropTypes.array,
 };
 
 export function mapDispatchToProps(dispatch) {
