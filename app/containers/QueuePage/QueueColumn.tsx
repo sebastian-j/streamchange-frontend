@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import Button from '@material-ui/core/Button';
 import { createStructuredSelector } from 'reselect';
 
+import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../../components/StyledTextField';
 import QueueItem from './QueueItem';
 import PanelTitle from '../../components/Panel/PanelTitle';
+import { UserListPanel } from './components/UserListPanel';
 import messages from './messages';
 import { makeSelectQueueArray, makeSelectWidgetCode } from './selectors';
 import {
@@ -17,31 +17,6 @@ import {
 } from './actions';
 import { QueueItem as QItem } from './types';
 import { API_URL } from '../../config';
-
-const UserListPanel = styled.div`
-  background-color: ${(props) => props.theme.panelBackground};
-  display: flex;
-  flex-direction: column;
-  flex-basis: 0;
-  flex-grow: 1;
-  margin: 15px;
-  padding: 15px;
-  @media (orientation: portrait) {
-    margin: 5px;
-  }
-`;
-
-const Ul = styled.ul`
-  overflow-y: scroll;
-  list-style: none;
-  padding: 0;
-`;
-
-const StyledButton = styled(Button)`
-  span {
-    color: ${(props) => props.theme.color};
-  }
-`;
 
 interface Props {
   getQueueFromIdb: (items: QItem[]) => void;
@@ -56,7 +31,7 @@ const QueueColumn = ({
   queueArray,
   widgetCode,
 }: Props) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const getUsers = () => {
     const config = {
@@ -110,7 +85,7 @@ const QueueColumn = ({
           />
         )}
       </FormattedMessage>
-      <Ul>
+      <ul>
         {queueArray.map((item: QItem) => (
           <QueueItem
             key={item.id}
@@ -122,7 +97,7 @@ const QueueColumn = ({
             lastActiveAt={item.lastActiveAt}
           />
         ))}
-      </Ul>
+      </ul>
       <StyledButton onClick={() => purgeQueue()}>
         <FormattedMessage {...messages.clearBtn} />
       </StyledButton>

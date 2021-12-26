@@ -9,7 +9,7 @@ export const scope = 'streamchange.containers.QueuePage';
 
 export default defineMessages({
   leaveStreamBtn: {
-    id: 'streamchange.containers.HomePage.leaveStreamBtn',
+    id: 'streamchange.containers.GiveawayPage.leaveStreamBtn',
     defaultMessage: 'Leave stream',
   },
   panelTitle: {
@@ -58,26 +58,6 @@ export default defineMessages({
   timeToKickTextField: {
     id: `${scope}.QueueRules.timeToKick`,
     defaultMessage: 'Time without any message to kick (sec)',
-  },
-  addedAtTooltipField: {
-    id: `${scope}.QueueItem.addedAt`,
-    defaultMessage: 'Joined at',
-  },
-  activeAtTooltipField: {
-    id: `${scope}.QueueItem.activeAt`,
-    defaultMessage: 'Last message at',
-  },
-  saveBtn: {
-    id: `${scope}.QueueItem.save`,
-    defaultMessage: 'Save',
-  },
-  cancelBtn: {
-    id: `${scope}.QueueItem.quitEditMode`,
-    defaultMessage: 'Cancel',
-  },
-  markActiveBtn: {
-    id: `${scope}.QueueItem.markAsActive`,
-    defaultMessage: 'Mark as active',
   },
   widgetCodeTextField: {
     id: `${scope}.QueueRules.widgetCodeTextField`,

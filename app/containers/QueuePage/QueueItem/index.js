@@ -1,108 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import clsx from 'clsx';
 import { FormattedMessage } from 'react-intl';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import messages from './messages';
-import { deleteQueueItem, updateQueueItem } from './actions';
-
-const Title = styled.span`
-  color: gray;
-  font-weight: bold;
-  font-size: 1.1rem;
-  vertical-align: middle;
-  ${({ active }) =>
-    active &&
-    `
-    color: black;
-  `}
-`;
-
-const Description = styled.div`
-  color: gray;
-  font-size: 0.8rem;
-  ${({ active }) =>
-    active &&
-    `
-    color: black;
-  `}
-`;
-
-const DescriptionBox = styled.input`
-  background: none;
-  border: none;
-  border-bottom: 2px solid black;
-  font-size: 0.8rem;
-  padding-left: 0px;
-  outline: none;
-`;
-
-const UserBar = styled.div`
-  background: linear-gradient(
-    to right,
-    rgba(230, 150, 230, 0.9) 0%,
-    rgba(78, 187, 242, 0.9) 100%
-  );
-  border: none;
-  border-radius: 0 16px 16px 0;
-  color: ${(props) => props.theme.inactiveUser};
-  line-height: 1.43;
-  margin-bottom: 5px;
-  max-width: 90%;
-  padding: 0;
-  outline: 0;
-  > div {
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const FlexSpacer = styled.div`
-  flex: 1;
-`;
-
-const UserBarColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 5px 2px;
-  ${({ fullWidth }) =>
-    fullWidth &&
-    `
-    flex: 1;
-  `}
-`;
-
-const Logo = styled.img`
-  height: 50px;
-  width: 50px;
-  margin: 5px;
-`;
-
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  color: ${(props) => props.theme.color};
-  cursor: pointer;
-  outline: none;
-  &:hover {
-    color: ${(props) => props.theme.buttonTextColorHover};
-  }
-`;
-
-const EditModeButton = styled.button`
-  background: none;
-  border: none;
-  color: ${(props) => props.theme.buttonTextColor};
-  cursor: pointer;
-  font-weight: bold;
-  outline: none;
-  &:hover {
-    color: ${(props) => props.theme.buttonTextColorHover};
-  }
-`;
+import { CloseButton } from './components/CloseButton';
+import { Description } from './components/Description';
+import { DescriptionBox } from './components/DescriptionBox';
+import { EditModeButton } from './components/EditModeButton';
+import { FlexSpacer } from './components/FlexSpacer';
+import { Logo } from './components/Logo';
+import { Title } from './components/Title';
+import { UserBar } from './components/UserBar';
+import { UserBarColumn } from './components/UserBarColumn';
+import { deleteQueueItem, updateQueueItem } from '../actions';
 
 const ExtendedTooltip = withStyles((theme) => ({
   tooltip: {
@@ -180,8 +94,10 @@ export const QueueItem = (props) => {
             >
               <Logo alt="logo" src={props.imageUrl} edit={editMode} />
             </a>
-            <UserBarColumn fullWidth>
-              <Title active={isActive}>{props.title}</Title>
+            <UserBarColumn className="fullWidth">
+              <Title className={clsx(isActive && 'active')}>
+                {props.title}
+              </Title>
               <DescriptionBox
                 type="text"
                 onChange={(event) => setEditedDescription(event.target.value)}
@@ -235,8 +151,12 @@ export const QueueItem = (props) => {
               <Logo alt="logo" src={props.imageUrl} />
             </a>
             <UserBarColumn>
-              <Title active={isActive}>{props.title}</Title>
-              <Description active={isActive}>{props.message}</Description>
+              <Title className={clsx(isActive && 'active')}>
+                {props.title}
+              </Title>
+              <Description className={clsx(isActive && 'active')}>
+                {props.message}
+              </Description>
             </UserBarColumn>
             <FlexSpacer />
             <CloseButton onClick={deleteUser} type="button">

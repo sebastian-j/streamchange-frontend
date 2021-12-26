@@ -2,10 +2,10 @@
 
 exports[`<QueuePage /> should render and match the snapshot 1`] = `
 <div
-  class="sc-gKclnd cagHsQ"
+  class="sc-jrQzAO kRluvY"
 >
   <span
-    class="sc-crHmcD tfGha"
+    class="sc-hBUSln gasaX"
   >
     <span>
       Welcome to StreamChange
@@ -13,7 +13,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </span>
   <div>
     <span
-      class="sc-crHmcD tfGha"
+      class="sc-hBUSln gasaX"
     >
       <span>
         Select theme
@@ -24,21 +24,21 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-jrQzAO fyoflt"
+        class="sc-egiyK dHVmLx"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="sc-iCfMLu cFgZXk box left"
+        class="sc-kDTinF iBZAcK box left"
       >
         <img
           alt="light"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-iqseJM kVtlPs"
+          class="sc-ksdxgE dwWHTf"
         >
           <span>
             Light
@@ -50,21 +50,21 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="sc-jrQzAO fyoflt"
+        class="sc-egiyK dHVmLx"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="sc-iCfMLu cFgZXk box right"
+        class="sc-kDTinF iBZAcK box right"
       >
         <img
           alt="dark"
           src="IMAGE_MOCK"
         />
         <span
-          class="sc-iqseJM kVtlPs"
+          class="sc-ksdxgE dwWHTf"
         >
           <span>
             Dark
@@ -75,7 +75,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="sc-crHmcD tfGha"
+      class="sc-hBUSln gasaX"
     >
       <span>
         Select language
@@ -85,17 +85,17 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="sc-jrQzAO fyoflt"
+        class="sc-egiyK dHVmLx"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="sc-furwcr jwWrlj box left"
+        class="sc-iqseJM hcrhBp box left"
       >
         <span
-          class="sc-pVTFL bwKJHy"
+          class="sc-crHmcD etoWxl"
         >
           <img
             alt="pl"
@@ -112,17 +112,17 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-jrQzAO fyoflt"
+        class="sc-egiyK dHVmLx"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="sc-furwcr jwWrlj box right"
+        class="sc-iqseJM hcrhBp box right"
       >
         <span
-          class="sc-pVTFL bwKJHy"
+          class="sc-crHmcD etoWxl"
         >
           <img
             alt="en"
@@ -137,7 +137,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-kDTinF gATzTG"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-bqiRlB gNEjRC"
       tabindex="0"
       type="button"
     >
@@ -154,22 +154,22 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="sc-eCImPb hlVgAE"
+    class="sc-furwcr dCipSX"
   >
     <img
       alt="cookie"
-      class="sc-hKwDye jsDaCH"
+      class="sc-iCfMLu gLHhKf"
       src="IMAGE_MOCK"
     />
     <span
-      class="sc-dkPtRN FxaGp"
+      class="sc-gKclnd dnVwcj"
     >
       <span>
         This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
       </span>
     </span>
     <button
-      class="sc-gsDKAQ jgVlOy"
+      class="sc-jRQBWg hvQnvK"
       type="button"
     >
       <span>
