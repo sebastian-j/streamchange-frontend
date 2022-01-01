@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
+<div
+  class="sc-jrQzAO kRluvY"
+>
+  <span
+    class="sc-hBUSln gasaX"
+  >
+    <span>
+      Welcome to StreamChange
+    </span>
+  </span>
+  <div>
+    <span
+      class="sc-hBUSln gasaX"
+    >
+      <span>
+        Select theme
+      </span>
+    </span>
+    <label
+      for="themeLight"
+    >
+      <input
+        checked=""
+        class="sc-egiyK dHVmLx"
+        id="themeLight"
+        name="theme"
+        type="radio"
+        value="0"
+      />
+      <div
+        class="sc-kDTinF iBZAcK box left"
+      >
+        <img
+          alt="light"
+          src="IMAGE_MOCK"
+        />
+        <span
+          class="sc-ksdxgE dwWHTf"
+        >
+          <span>
+            Light
+          </span>
+        </span>
+      </div>
+    </label>
+    <label
+      for="themeDark"
+    >
+      <input
+        class="sc-egiyK dHVmLx"
+        id="themeDark"
+        name="theme"
+        type="radio"
+        value="1"
+      />
+      <div
+        class="sc-kDTinF iBZAcK box right"
+      >
+        <img
+          alt="dark"
+          src="IMAGE_MOCK"
+        />
+        <span
+          class="sc-ksdxgE dwWHTf"
+        >
+          <span>
+            Dark
+          </span>
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <span
+      class="sc-hBUSln gasaX"
+    >
+      <span>
+        Select language
+      </span>
+    </span>
+    <label
+      for="pl"
+    >
+      <input
+        class="sc-egiyK dHVmLx"
+        id="pl"
+        name="language"
+        type="radio"
+        value="pl"
+      />
+      <div
+        class="sc-iqseJM hcrhBp box left"
+      >
+        <span
+          class="sc-crHmcD etoWxl"
+        >
+          <img
+            alt="pl"
+            src="IMAGE_MOCK"
+          />
+          <span>
+            pl
+          </span>
+        </span>
+      </div>
+    </label>
+    <label
+      for="en"
+    >
+      <input
+        checked=""
+        class="sc-egiyK dHVmLx"
+        id="en"
+        name="language"
+        type="radio"
+        value="en"
+      />
+      <div
+        class="sc-iqseJM hcrhBp box right"
+      >
+        <span
+          class="sc-crHmcD etoWxl"
+        >
+          <img
+            alt="en"
+            src="IMAGE_MOCK"
+          />
+          <span>
+            en
+          </span>
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-bqiRlB gNEjRC"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span>
+          Save
+        </span>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    class="sc-furwcr dCipSX"
+  >
+    <img
+      alt="cookie"
+      class="sc-iCfMLu gLHhKf"
+      src="IMAGE_MOCK"
+    />
+    <span
+      class="sc-gKclnd dnVwcj"
+    >
+      <span>
+        This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+      </span>
+    </span>
+    <button
+      class="sc-jRQBWg hvQnvK"
+      type="button"
+    >
+      <span>
+        Accept
+      </span>
+    </button>
+  </div>
+</div>
+`;

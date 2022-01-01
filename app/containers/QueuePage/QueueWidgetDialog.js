@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
@@ -12,42 +11,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { API_URL } from '../../config';
+import { StyledButton } from './components/StyledButton';
+import { UrlContainer } from './components/UrlContainer';
 import { makeSelectWidgetCode } from './selectors';
 import messages from './messages';
-
-const StyledButton = styled(Button)`
-  span {
-    color: ${(props) => props.theme.color};
-  }
-`;
-
-const UrlContainer = styled.div`
-  display: flex;
-  background-color: hsl(300, 2%, 12%);
-  border-radius: 4px;
-  input {
-    color: #e1e0e1;
-    flex: 1;
-    border: none;
-    background-color: #00000000;
-    overflow: hidden;
-    padding: 8px 6px;
-  }
-  div {
-    flex: 0.2;
-  }
-  div button {
-    background-color: transparent;
-    border: none;
-    color: rgb(27, 142, 230);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    outline: none;
-    padding: 10px 14px;
-    text-transform: uppercase;
-  }
-`;
 
 export const QueueWidgetDialog = (props) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -5,19 +5,7 @@
  */
 import produce from 'immer';
 
-import {
-  CHANGE_QUEUE_CAPACITY,
-  CHANGE_QUEUE_COMMAND,
-  CHANGE_QUEUE_TTI,
-  CHANGE_QUEUE_TTK,
-  CHANGE_QUEUE_WIDGET_CODE,
-  DELETE_QUEUE_ITEM,
-  GET_QUEUE_FROM_IDB,
-  PURGE_QUEUE,
-  PUSH_QUEUE_ITEM,
-  UPDATE_QUEUE_ITEM,
-} from './constants';
-import { deleteItem, insertOrUpdateItem, purgeQueueTable } from './model';
+import ActionTypes from './constants';
 import {
   deleteQueueItem,
   postQueueItem,
@@ -37,57 +25,58 @@ export const initialState = {
 const queueReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case CHANGE_QUEUE_CAPACITY:
-        draft.capacity = action.capacity;
+      case ActionTypes.CHANGE_QUEUE_CAPACITY:
+        draft.capacity = action.payload;
         break;
-      case CHANGE_QUEUE_COMMAND:
-        draft.command = action.command;
+      case ActionTypes.CHANGE_QUEUE_COMMAND:
+        draft.command = action.payload;
         break;
-      case CHANGE_QUEUE_TTI:
-        draft.timeToIdle = action.timeToIdle;
+      case ActionTypes.CHANGE_QUEUE_TTI:
+        draft.timeToIdle = action.payload;
         break;
-      case CHANGE_QUEUE_TTK:
-        draft.timeToKick = action.timeToKick;
+      case ActionTypes.CHANGE_QUEUE_TTK:
+        draft.timeToKick = action.payload;
         break;
-      case CHANGE_QUEUE_WIDGET_CODE:
-        draft.widgetCode = action.widgetCode;
-        localStorage.setItem('queue-widget-code', action.widgetCode);
+      case ActionTypes.CHANGE_QUEUE_WIDGET_CODE:
+        draft.widgetCode = action.payload;
+        localStorage.setItem('queue-widget-code', action.payload);
         break;
-      case DELETE_QUEUE_ITEM:
+      case ActionTypes.DELETE_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
-          if (draft.queueArray[i].id === action.id) {
+          if (draft.queueArray[i].id === action.payload) {
             draft.queueArray.splice(i, 1);
           }
         }
-        deleteItem(action.id);
-        deleteQueueItem(action.id);
+        deleteQueueItem(action.payload);
         break;
-      case GET_QUEUE_FROM_IDB:
-        draft.queueArray = action.queueArray;
+      case ActionTypes.GET_QUEUE_FROM_DB:
+        draft.queueArray = action.payload;
         break;
-      case PURGE_QUEUE:
+      case ActionTypes.PURGE_QUEUE:
         draft.queueArray = [];
-        purgeQueueTable();
         deleteQueueItem(null);
         break;
-      case PUSH_QUEUE_ITEM:
+      case ActionTypes.PUSH_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
-          if (draft.queueArray[i].id === action.item.id) {
+          if (draft.queueArray[i].id === action.payload.id) {
+            draft.queueArray[i].lastActiveAt = action.payload.lastActiveAt;
+            draft.queueArray[i].message = action.payload.message;
+            updateQueueItem(action.payload);
             return;
           }
         }
-        draft.queueArray.push(action.item);
-        insertOrUpdateItem(action.item);
-        postQueueItem(action.item);
+        if (draft.capacity > draft.queueArray.length) {
+          draft.queueArray.push(action.payload);
+          postQueueItem(action.payload);
+        }
         break;
-      case UPDATE_QUEUE_ITEM:
+      case ActionTypes.UPDATE_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {
-          if (draft.queueArray[i].id === action.item.id) {
-            draft.queueArray[i] = { ...draft.queueArray[i], ...action.item };
+          if (draft.queueArray[i].id === action.payload.id) {
+            draft.queueArray[i] = { ...draft.queueArray[i], ...action.payload };
+            updateQueueItem(action.payload);
           }
         }
-        insertOrUpdateItem(action.item);
-        updateQueueItem(action.item);
         break;
     }
   });

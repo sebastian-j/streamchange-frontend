@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
+<styled.div>
+  <styled.div>
+    <div
+      className="dialog"
+    >
+      <div
+        className="title"
+      >
+        <FormattedMessage
+          defaultMessage="Choose stream"
+          id="streamchange.components.WelcomeDialog.title"
+          values={Object {}}
+        />
+      </div>
+      <div
+        className="content"
+      >
+        <FormattedMessage
+          defaultMessage="Paste stream url"
+          id="streamchange.components.WelcomeDialog.videoInput.label"
+          values={Object {}}
+        >
+          [Function]
+        </FormattedMessage>
+        <div
+          className="text"
+        >
+          <span
+            style={
+              Object {
+                "fontSize": "0.8rem",
+              }
+            }
+          >
+            <FormattedMessage
+              defaultMessage="Example: https://www.youtube.com/watch?v=CBUBY45me_A"
+              id="streamchange.components.WelcomeDialog.example"
+              values={Object {}}
+            />
+          </span>
+        </div>
+      </div>
+      <div
+        className="actions"
+      >
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            defaultMessage="OK"
+            id="streamchange.components.WelcomeDialog.saveBtn"
+            values={Object {}}
+          />
+        </WithStyles(ForwardRef(Button))>
+      </div>
+    </div>
+    <WelcomeHint />
+  </styled.div>
+  <CookieConsent />
+</styled.div>
+`;

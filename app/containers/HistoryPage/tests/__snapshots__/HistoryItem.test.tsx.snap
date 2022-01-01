@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HistoryItem /> should render and match the snapshot 1`] = `
+<styled.tr>
+  <styled.td
+    className="image"
+  >
+    <a
+      href="https://www.youtube.com/channel/id"
+      target="_blank"
+    >
+      <img
+        alt="Logo"
+        height="45px"
+        src="url"
+      />
+    </a>
+  </styled.td>
+  <styled.td
+    className="textLeft"
+  >
+    <span>
+      abc
+    </span>
+  </styled.td>
+  <styled.td
+    className="text"
+  >
+    <span>
+      prize
+    </span>
+  </styled.td>
+  <styled.td
+    className="text"
+  >
+    <span>
+      abc
+    </span>
+  </styled.td>
+  <styled.td
+    className="text"
+  >
+    <RelativeDate
+      ISO8601Date="2019-12-24T07:27:56.273Z"
+      className="relativeDate"
+    />
+  </styled.td>
+</styled.tr>
+`;

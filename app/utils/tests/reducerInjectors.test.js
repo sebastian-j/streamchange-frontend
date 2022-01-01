@@ -66,7 +66,7 @@ describe('reducer injectors', () => {
       expect(() => injectReducer('test', reducer)).not.toThrow();
     });
 
-    it("should validate a reducer and reducer's key", () => {
+    it('should validate a reducer and reducer\'s key', () => {
       expect(() => injectReducer('', reducer)).toThrow();
       expect(() => injectReducer(1, reducer)).toThrow();
       expect(() => injectReducer(1, 1)).toThrow();

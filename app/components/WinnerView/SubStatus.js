@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
-import { makeSelectOwnerId } from '../../containers/HomePage/selectors';
+import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 import RelativeDate from '../RelativeDate';
 
 const Subscribed = styled.span`
@@ -38,7 +38,7 @@ const SubStatus = (props) => {
   const checkStatus = () => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${props.id}&forChannelId=${props.ownerId}&fields=items/snippet/publishedAt&key=${props.apiKey}`,
+        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${props.id}&forChannelId=${props.streamInfo.ownerId}&fields=items/snippet/publishedAt&key=${props.apiKey}`,
       )
       .then((res) => {
         if (res.data.items.length > 0) {
@@ -99,11 +99,11 @@ const SubStatus = (props) => {
 SubStatus.propTypes = {
   apiKey: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
+  streamInfo: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  ownerId: makeSelectOwnerId(),
+  streamInfo: makeSelectStreamInfo(),
 });
 
 export default connect(mapStateToProps, null)(SubStatus);

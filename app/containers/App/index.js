@@ -10,8 +10,8 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from '../HomePage/Loadable';
-import History from '../History/Loadable';
+import GiveawayPage from '../GiveawayPage/Loadable';
+import HistoryPage from '../HistoryPage/Loadable';
 import QueuePage from '../QueuePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 
@@ -26,8 +26,8 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/giveaway" component={HomePage} />
-        <Route exact path="/giveaway-history" component={History} />
+        <Route exact path="/giveaway" component={GiveawayPage} />
+        <Route exact path="/giveaway-history" component={HistoryPage} />
         <Route exact path="/queue" component={QueuePage} />
         <Route component={NotFoundPage} />
       </Switch>

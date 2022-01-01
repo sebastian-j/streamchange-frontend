@@ -32,60 +32,19 @@ const YoutubeWorker = (props) => {
   const [timer, setTimer] = useState(0);
   const [superChat, setSuperChat] = useState(null);
 
-  const messageProcessor = () => {
-    let nextPageToken = localStorage.getItem('nextPageToken');
-    if (nextPageToken === null) {
-      nextPageToken = ' ';
-    }
-    axios
-      .get(
-        `${API_URL}/v4/liveChat/messages?part=snippet,authorDetails&maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
-      )
-      .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.nextPageToken);
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          const author = {
-            id: res.data.items[i].authorDetails.channelId,
-            imageUrl: res.data.items[i].authorDetails.profileImageUrl,
-            title: res.data.items[i].authorDetails.displayName,
-            message: res.data.items[i].snippet.displayMessage,
-            isModerator: res.data.items[i].authorDetails.isChatModerator,
-            isSponsor: res.data.items[i].authorDetails.isChatSponsor
-              ? res.data.items[i].authorDetails.sponsorBadge
-              : false,
-            isEligible: res.data.items[i].snippet.displayMessage
-              .toLowerCase()
-              .includes(localStorage.getItem('keyword').toLowerCase()),
-          };
-          props.pushUser(author);
-          checkResignation(author);
-          saveMessage(res.data.items[i]);
-          superChatFeatures(author, res.data.items[i]);
-        }
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
-      })
-      .catch(() => {
-        clearTimeout(timer);
-        setTimer(null);
-        setTimer(setTimeout(messageProcessor, 6000));
-      });
-  };
-
   const saveMessage = (msg) => {
     const dbMessage = {
-      authorId: msg.authorDetails.channelId,
-      displayText: msg.snippet.displayMessage,
-      publishedAt: msg.snippet.publishedAt,
+      authorId: msg.a.id,
+      displayText: msg.s.m,
+      publishedAt: msg.s.publishedAt,
     };
     const chatViewMessage = {
-      imageUrl: msg.authorDetails.profileImageUrl,
-      isModerator: msg.authorDetails.isChatModerator,
-      isOwner: msg.authorDetails.isChatOwner,
-      isSponsor: msg.authorDetails.isChatSponsor,
-      isVerified: msg.authorDetails.isVerified,
-      title: msg.authorDetails.displayName,
+      imageUrl: msg.a.img,
+      isModerator: msg.a.isChatModerator,
+      isOwner: msg.a.isChatOwner,
+      isSponsor: msg.a.isChatSponsor,
+      isVerified: msg.a.isVerified,
+      title: msg.a.n,
       ...dbMessage,
     };
     props.addMessage(chatViewMessage);
@@ -96,60 +55,6 @@ const YoutubeWorker = (props) => {
       return;
     }
     db.table('messages').add(dbMessage);
-  };
-
-  const superChatFeatures = (author, chatMessage) => {
-    if (
-      PRIVILEGED_CHANNELS.includes(author.id) ||
-      chatMessage.authorDetails.isChatOwner
-    ) {
-      if (author.message.startsWith('!s ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: author.message.replace('!s ', ''),
-        });
-        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
-      } else if (author.message.startsWith('!color ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: `${author.title} changed color to ${author.message.replace(
-            '!color ',
-            '',
-          )}`,
-        });
-        props.onColorChange(author.message.replace('!color ', ''));
-        setTimeout(() => setSuperChat(null), 10000);
-      } else if (author.message.startsWith('!time ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: `${
-            author.title
-          } changed animation duration to ${author.message.replace(
-            '!time ',
-            '',
-          )}`,
-        });
-        props.changeAnimationDuration(
-          Number(author.message.replace('!time ', '')),
-        );
-        setTimeout(() => setSuperChat(null), 10000);
-      } else if (author.message.startsWith('!prize ')) {
-        setSuperChat({
-          title: author.title,
-          imageUrl: author.imageUrl,
-          message: `${author.title} changed prize to ${author.message.replace(
-            '!prize ',
-            '',
-          )}`,
-        });
-        props.changePrize(author.message.replace('!prize ', ''));
-        setTimeout(() => setSuperChat(null), 10000);
-      }
-      checkPreWinner(author);
-    }
   };
 
   const checkPreWinner = (author) => {
@@ -181,6 +86,57 @@ const YoutubeWorker = (props) => {
       .catch(() => {});
   };
 
+  const superChatFeatures = (author, chatMessage) => {
+    if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.a.isChatOwner) {
+      if (author.message.startsWith('!s ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: author.message.replace('!s ', ''),
+        });
+        setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
+      } else if (author.message.startsWith('!color ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed color to ${author.message.replace(
+            '!color ',
+            '',
+          )}`,
+        });
+        props.onColorChange(author.message.replace('!color ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      } else if (author.message.startsWith('!time ')) {
+        const seconds = Number(author.message.replace('!time ', ''));
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${
+            author.title
+          } changed animation duration to ${seconds}`,
+        });
+        setTimeout(() => setSuperChat(null), 10000);
+        if (!Number.isNaN(seconds) && seconds > 0 && seconds < 601) {
+          props.changeAnimationDuration(
+            Number(author.message.replace('!time ', '')),
+          );
+        }
+      } else if (author.message.startsWith('!prize ')) {
+        setSuperChat({
+          title: author.title,
+          imageUrl: author.imageUrl,
+          message: `${author.title} changed prize to ${author.message.replace(
+            '!prize ',
+            '',
+          )}`,
+        });
+        props.changePrize(author.message.replace('!prize ', ''));
+        setTimeout(() => setSuperChat(null), 10000);
+      }
+      checkPreWinner(author);
+    }
+  };
+
   const checkResignation = (author) => {
     if (
       localStorage.getItem('gv-abortCommand') !== null &&
@@ -192,8 +148,50 @@ const YoutubeWorker = (props) => {
     }
   };
 
+  const messageProcessor = () => {
+    let nextPageToken = localStorage.getItem('nextPageToken');
+    if (nextPageToken === null) {
+      nextPageToken = ' ';
+    }
+    axios
+      .get(
+        `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+      )
+      .then((res) => {
+        localStorage.setItem('nextPageToken', res.data.tag);
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          const author = {
+            id: res.data.items[i].a.id,
+            imageUrl: res.data.items[i].a.img,
+            title: res.data.items[i].a.n,
+            message: res.data.items[i].s.m,
+            isModerator: res.data.items[i].a.isChatModerator,
+            isSponsor: res.data.items[i].a.isChatSponsor
+              ? res.data.items[i].a.sponsorBadge
+              : false,
+            isVerified: res.data.items[i].a.isVerified,
+            isEligible: res.data.items[i].s.m
+              .toLowerCase()
+              .includes(localStorage.getItem('keyword').toLowerCase()),
+          };
+          props.pushUser(author);
+          checkResignation(author);
+          saveMessage(res.data.items[i]);
+          superChatFeatures(author, res.data.items[i]);
+        }
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, res.data.pollingIntervalMillis));
+      })
+      .catch(() => {
+        clearTimeout(timer);
+        setTimer(null);
+        setTimer(setTimeout(messageProcessor, 6000));
+      });
+  };
+
   useEffect(() => {
-    if (props.videoId !== null) messageProcessor();
+    if (props.videoId !== 'test') messageProcessor();
     return () => {
       clearTimeout(timer);
     };

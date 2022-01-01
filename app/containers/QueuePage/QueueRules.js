@@ -35,9 +35,9 @@ export const QueueRules = (props) => {
 
     if (value.length < 140 && name === 'command')
       props.changeQueueCommand(value);
-    if (name === 'capacity') props.changeCapacity(value);
-    if (name === 'timeToIdle') props.changeTTI(value);
-    if (name === 'timeToKick') props.changeTTK(value);
+    if (name === 'capacity') props.changeCapacity(parseInt(value, 10));
+    if (name === 'timeToIdle') props.changeTTI(parseInt(value, 10));
+    if (name === 'timeToKick') props.changeTTK(parseInt(value, 10));
     if (name === 'widgetCode') {
       props.changeWidgetCode(value);
       return;

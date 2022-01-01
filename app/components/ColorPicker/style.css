@@ -1,33 +1,33 @@
 .color-picker-wrapper {
-    display: flex;
-    flex-direction: row;
-    margin: 3px;
+  display: flex;
+  flex-direction: row;
+  margin: 3px;
 }
 
 .color-picker-button {
-    border: 1px gray solid;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    outline: none;
+  border: 1px gray solid;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  outline: none;
 }
 
 .color-picker-label {
-    margin: 5px 10px 0 0;
+  margin: 5px 10px 0 0;
 }
 
 .inner-picker {
-    position: absolute;
-    z-index: 100;
+  position: absolute;
+  z-index: 100;
 }
 
 .active-picker-background {
-    background-color: rgba(0, 0, 0, 0.2);
-    border: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    outline: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  outline: none;
 }

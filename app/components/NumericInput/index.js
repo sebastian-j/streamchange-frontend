@@ -45,6 +45,13 @@ const NumberDisplay = styled.input`
 `;
 
 const NumericInput = (props) => {
+  const checkValue = (value) => {
+    let val = value;
+    if (val < props.minValue && val !== '') val = props.minValue;
+    if (val > props.maxValue) val = props.maxValue;
+    if (Number.isNaN(Number(val)) && val !== '') val = props.value;
+    props.onChange(val);
+  };
   const inc = () => {
     let val = props.value;
     if (props.maxValue === null || val + props.step < props.maxValue) {
@@ -62,13 +69,6 @@ const NumericInput = (props) => {
       val = props.minValue;
     }
     if (val !== props.value) checkValue(Number(val));
-  };
-  const checkValue = (value) => {
-    let val = value;
-    if (val < props.minValue && val !== '') val = props.minValue;
-    if (val > props.maxValue) val = props.maxValue;
-    if (Number.isNaN(Number(val)) && val !== '') val = props.value;
-    props.onChange(val);
   };
   return (
     <Container>

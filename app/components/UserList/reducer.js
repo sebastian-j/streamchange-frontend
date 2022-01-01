@@ -5,15 +5,7 @@
  */
 import produce from 'immer';
 
-import {
-  DESELECT_ALL,
-  GET_LIST_FROM_IDB,
-  PURGE_LIST,
-  PUSH_USER,
-  SELECT_ALL,
-  TOGGLE_ELIGIBILITY,
-  UPDATE_MESSAGE,
-} from './constants';
+import ActionTypes from './constants';
 import {
   changeUsersEligibility,
   insertOrUpdateItem,
@@ -29,57 +21,46 @@ export const initialState = {
 const userListReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case DESELECT_ALL:
+      case ActionTypes.DESELECT_ALL:
         for (let i = 0; i < draft.userArray.length; i += 1) {
           draft.userArray[i].isEligible = false;
         }
         changeUsersEligibility(false);
         break;
-      case GET_LIST_FROM_IDB:
-        draft.userArray = action.userArray;
+      case ActionTypes.GET_LIST_FROM_IDB:
+        draft.userArray = action.payload;
         break;
-      case PURGE_LIST:
+      case ActionTypes.PURGE_LIST:
         draft.userArray = [];
         purgeUsersTable();
         break;
-      case PUSH_USER:
+      case ActionTypes.PUSH_USER:
         for (let i = 0; i < draft.userArray.length; i += 1) {
-          if (draft.userArray[i].id === action.item.id) {
-            draft.userArray[i].message = action.item.isEligible
-              ? action.item.message
+          if (draft.userArray[i].id === action.payload.id) {
+            draft.userArray[i].message = action.payload.isEligible
+              ? action.payload.message
               : draft.userArray[i].message;
             draft.userArray[i].isEligible =
-              draft.userArray[i].isEligible || action.item.isEligible;
+              draft.userArray[i].isEligible || action.payload.isEligible;
             return;
           }
         }
-        draft.userArray.push(action.item);
-        insertOrUpdateItem(action.item);
+        draft.userArray.push(action.payload);
+        insertOrUpdateItem(action.payload);
         break;
-      case SELECT_ALL:
+      case ActionTypes.SELECT_ALL:
         for (let i = 0; i < draft.userArray.length; i += 1) {
           draft.userArray[i].isEligible = true;
         }
         changeUsersEligibility(true);
         break;
-      case UPDATE_MESSAGE:
+      case ActionTypes.TOGGLE_ELIGIBILITY:
         for (let i = 0; i < draft.userArray.length; i += 1) {
-          if (draft.userArray[i].id === action.item.id) {
-            draft.userArray[i] = {
-              ...draft.userArray[i],
-              message: action.item.message,
-            };
-          }
-        }
-        insertOrUpdateItem(action.item);
-        break;
-      case TOGGLE_ELIGIBILITY:
-        for (let i = 0; i < draft.userArray.length; i += 1) {
-          if (draft.userArray[i].id === action.userId) {
+          if (draft.userArray[i].id === action.payload) {
             draft.userArray[i].isEligible = !draft.userArray[i].isEligible;
           }
         }
-        toggleEligibleIDB(action.userId);
+        toggleEligibleIDB(action.payload);
     }
   });
 
