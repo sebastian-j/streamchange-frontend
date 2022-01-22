@@ -19,6 +19,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 import KeywordInput from './KeywordInput';
+import LotteryLawWarning from './LotteryLawWarning';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
 
@@ -101,6 +102,7 @@ export class GiveawayRules extends React.Component {
         </FormattedMessage>
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
+        <LotteryLawWarning open={this.props.requirement === 1} />
         <AdFrame />
       </Panel>
     );
