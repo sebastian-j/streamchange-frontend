@@ -2,6 +2,7 @@
   "streamchange.components.AdFrame.emptyAdPlaceholder": "Tu może być reklama twojego kanału od 10zł na dzień. Zobaczą ją tysiące widzów. Zebrane pieniądze zostaną przeznaczone na utrzymanie serwera do StreamChange na kolejny miesiąc.",
   "streamchange.components.AdFrame.dialogCloseButton": "Zamknij",
   "streamchange.components.AdFrame.dialogFirstLine": "Możesz wybrać jedną z trzech dostępnych form reklamy: kanał Youtube (klikalne logo, nazwa i kilka zdań), wideo Youtube (mały odtwarzacz wideo oraz tekst obok), klikalny baner.",
+  "streamchange.components.AdFrame.dialogRulesLink": "Wytyczne dla reklamodawców",
   "streamchange.components.AdFrame.dialogSecondLine": "Gdy wybierzesz pełną wersję, twoja reklama będzie widoczna na każdym streamie z pokazaną aplikacją streamchange w dzień, na który opłacisz reklamę. Sugerowaną metodą płatności jest przelew bankowy.",
   "streamchange.components.AdFrame.dialogThirdLine": "Kontakt:",
   "streamchange.components.AdFrame.dialogTitle": "Informacje dla reklamodawców",

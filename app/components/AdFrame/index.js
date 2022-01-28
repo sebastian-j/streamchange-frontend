@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 
 import messages from './messages';
+import ColoredLink from '../SupportInformation/ColoredLink';
 import PromotedBanner from './PromotedBanner';
 import PromotedChannel from './PromotedChannel';
 import PromotedVideo from './PromotedVideo';
@@ -21,12 +22,6 @@ const AdPlaceholder = styled.div`
   padding: 14px;
   position: relative;
   top: 28vh;
-`;
-
-const ColoredLink = styled.a`
-  color: ${(props) => props.theme.color};
-  display: block;
-  padding-top: 5px;
 `;
 
 const AdFrame = () => {
@@ -95,15 +90,47 @@ const AdFrame = () => {
             </DialogContentText>
             <DialogContentText>
               <FormattedMessage {...messages.adDialogSecondLine} />
+              <ColoredLink href="/docs/advertisers-rules" target="_blank">
+                <FormattedMessage {...messages.adDialogRulesLink} />
+                <svg
+                  viewBox="0 0 24 24"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                >
+                  <g>
+                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                  </g>
+                </svg>
+              </ColoredLink>
             </DialogContentText>
             <DialogContentText>
               <FormattedMessage {...messages.adDialogThirdLine} />
               <Typography>Discord: Baf#5501</Typography>
               <ColoredLink href="https://www.facebook.com/BafYT/">
-                https://www.facebook.com/BafYT/
+                Facebook Baf
+                <svg
+                  viewBox="0 0 24 24"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                >
+                  <g>
+                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                  </g>
+                </svg>
               </ColoredLink>
+            </DialogContentText>
+            <DialogContentText>
               <ColoredLink href="https://www.instagram.com/grafika3d/">
                 Instagram grafika3d
+                <svg
+                  viewBox="0 0 24 24"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                >
+                  <g>
+                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                  </g>
+                </svg>
               </ColoredLink>
             </DialogContentText>
           </DialogContent>
