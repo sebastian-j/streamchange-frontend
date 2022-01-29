@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -20,7 +21,7 @@ import MessageItem from './MessageItem';
 import SubStatus from './SubStatus';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
-import { makeSelectStreamInfo} from '../../containers/GiveawayPage/selectors';
+import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -203,6 +204,13 @@ export class WinnerView extends React.Component {
     }
     return (
       <WinnerPanel>
+        <FormattedMessage {...messages.pageTitle}>
+          {(title) => (
+            <Helmet>
+              <title>{`${this.state.user.title} ${title}`}</title>
+            </Helmet>
+          )}
+        </FormattedMessage>
         <PanelTitle>
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>

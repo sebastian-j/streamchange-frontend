@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
@@ -128,16 +129,32 @@ const QueuePage = () => {
 
   if (videoId === '') {
     return (
-      <WelcomeDialog
-        passVideo={receiveVideo}
-        ban={ban}
-        error={error}
-        variant={1}
-      />
+      <>
+        <FormattedMessage {...messages.pageTitle}>
+          {(pTitle) => (
+            <Helmet>
+              <title>{pTitle}</title>
+            </Helmet>
+          )}
+        </FormattedMessage>
+        <WelcomeDialog
+          passVideo={receiveVideo}
+          ban={ban}
+          error={error}
+          variant={1}
+        />
+      </>
     );
   }
   return (
     <div>
+      <FormattedMessage {...messages.pageTitle}>
+        {(pTitle) => (
+          <Helmet>
+            <title>{pTitle}</title>
+          </Helmet>
+        )}
+      </FormattedMessage>
       <TopBar>
         <div>
           <img alt="Thumbnail" src={thumbnailUrl} />

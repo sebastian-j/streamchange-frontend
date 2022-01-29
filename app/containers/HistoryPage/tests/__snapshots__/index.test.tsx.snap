@@ -2,6 +2,18 @@
 
 exports[`<HistoryPage /> should render and match the snapshot 1`] = `
 <styled.div>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
+    <FormattedMessage
+      defaultMessage="Winner history"
+      id="streamchange.containers.History.title"
+      values={Object {}}
+    >
+      [Function]
+    </FormattedMessage>
+  </HelmetWrapper>
   <WithStyles(ForwardRef(LinearProgress)) />
   <div
     style={

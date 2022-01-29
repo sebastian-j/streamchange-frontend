@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.containers.GiveawayPage';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.title`,
+    defaultMessage: 'StreamChange Giveaway',
+  },
   historyLink: {
     id: `${scope}.HistoryWidget.ButtonText`,
     defaultMessage: 'Win history',

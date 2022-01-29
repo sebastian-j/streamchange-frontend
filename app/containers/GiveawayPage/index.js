@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -175,6 +176,13 @@ const GiveawayPage = (props) => {
   }
   return (
     <div>
+      <FormattedMessage {...messages.pageTitle}>
+        {(title) => (
+          <Helmet>
+            <title>{title}</title>
+          </Helmet>
+        )}
+      </FormattedMessage>
       <TopBar>
         <StreamInfo>
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />

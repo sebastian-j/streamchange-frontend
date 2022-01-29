@@ -108,6 +108,7 @@
   "streamchange.components.WinnerView.exitBtn": "Powrót",
   "streamchange.components.WinnerView.loading": "Ładowanie...",
   "streamchange.components.WinnerView.openChannel": "Przejdź na kanał",
+  "streamchange.components.WinnerView.pageTitle": "wygrywa losowanie",
   "streamchange.components.WinnerView.prize": "Nagroda",
   "streamchange.components.WinnerView.replayBtn" : "Powtórz losowanie",
   "streamchange.components.WinnerView.replayBtnTooltip" : "Natychmiast powtarza losowanie według tych samych zasad. Zwycięzca nie zostanie zapisany w historii wygranych.",
@@ -128,6 +129,7 @@
   "streamchange.containers.History.info.error": "Nie udało się załadować listy.",
   "streamchange.containers.History.info.loading": "Ładowanie listy",
   "streamchange.containers.History.info.noResults": "Żaden kanał nie pasuje do wyszukiwanego słowa.",
+  "streamchange.containers.History.title": "Historia wygranych",
   "streamchange.containers.History.resultsPerPage": "Ilość na stronę",
   "streamchange.containers.History.ReturnButton": "Powrót do losowania",
   "streamchange.containers.History.search.label": "Wyszukaj",
@@ -136,6 +138,7 @@
   "streamchange.containers.GiveawayPage.HistoryWidget.TableTitle": "Ostatni zwycięzcy",
   "streamchange.containers.GiveawayPage.HistoryWidget.WarningText": "Przechowywanie zbyt długiej historii wygranych może spowolnić działanie strony. Rozważ wyczyszczenie historii, gdy nie będziesz jej już potrzebować.",
   "streamchange.containers.GiveawayPage.leaveStreamBtn": "Opuść stream",
+  "streamchange.containers.GiveawayPage.title": "StreamChange Giveaway",
   "streamchange.containers.QueuePage.QueueColumn.title": "Kolejka",
   "streamchange.containers.QueuePage.QueueItem.addedAt": "Dołączył(a)",
   "streamchange.containers.QueuePage.QueueItem.activeAt": "Aktywny(a)",
@@ -154,5 +157,6 @@
   "streamchange.containers.QueuePage.QueueWidgetDialog.copyButton": "Kopiuj",
   "streamchange.containers.QueuePage.QueueWidgetDialog.firstLine": "URL widgetu jest obliczany z prywatnego kodu widgetu, który wpiszesz w polu tekstowym. Nie udostępniaj nikomu swojego kodu. Każdy, kto używa aplikacji z twoim kodem może dodawać, edytować i usuwać kanały przechowywane w twojej kolejce. URL do kolejki powstaje z prywatnego kodu przy użyciu funkcji kryptograficznej, dzięki czemu nie jest możliwe odzyskanie kodu z URL. URL możesz bezpiecznie udostępnić swoim widzom - służy on tylko do odczytu kolejki.",
   "streamchange.containers.QueuePage.QueueWidgetDialog.secondLine": "Ten url możesz wkleić do przeglądarki wbudowanej w OBS.",
-  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Widget kolejki do OBS"
+  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Widget kolejki do OBS",
+  "streamchange.containers.QueuePage.title": "Kolejka StreamChange"
 }

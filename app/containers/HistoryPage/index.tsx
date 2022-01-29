@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -78,6 +79,11 @@ const HistoryPage = () => {
   if (error) {
     return (
       <div>
+        <Helmet>
+          <FormattedMessage {...messages.pageTitle}>
+            {(title) => <title>{title}</title>}
+          </FormattedMessage>
+        </Helmet>
         <FormattedMessage {...messages.infoError} />
       </div>
     );
@@ -85,6 +91,11 @@ const HistoryPage = () => {
   if (!isLoaded) {
     return (
       <PageWrapper>
+        <Helmet>
+          <FormattedMessage {...messages.pageTitle}>
+            {(title) => <title>{title}</title>}
+          </FormattedMessage>
+        </Helmet>
         <LinearProgress />
         <div
           style={{
@@ -103,6 +114,13 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
+      <FormattedMessage {...messages.pageTitle}>
+        {(title) => (
+          <Helmet>
+            <title>{title}</title>
+          </Helmet>
+        )}
+      </FormattedMessage>
       <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
           <div>

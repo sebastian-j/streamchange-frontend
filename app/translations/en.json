@@ -108,6 +108,7 @@
   "streamchange.components.WinnerView.exitBtn": "Return",
   "streamchange.components.WinnerView.loading": "Loading...",
   "streamchange.components.WinnerView.openChannel": "Open channel page",
+  "streamchange.components.WinnerView.pageTitle": "wins the draw",
   "streamchange,components.WinnerView.prize": "Prize",
   "streamchange.components.WinnerView.replayBtn" : "Repeat the draw",
   "streamchange.components.WinnerView.replayBtnTooltip" : "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
@@ -128,6 +129,7 @@
   "streamchange.containers.History.info.error": "Cannot load list.",
   "streamchange.containers.History.info.loading": "Loading history",
   "streamchange.containers.History.info.noResults": "No channel match the search term.",
+  "streamchange.containers.History.title": "Winner history",
   "streamchange.containers.History.resultsPerPage": "Results per page",
   "streamchange.containers.History.ReturnButton": "Back to giveaway",
   "streamchange.containers.History.search.label": "Search",
@@ -136,6 +138,7 @@
   "streamchange.containers.GiveawayPage.HistoryWidget.TableTitle": "Last winners",
   "streamchange.containers.GiveawayPage.HistoryWidget.WarningText": "Storing too long history can affect app performance. Clear winner history when you no longer need it.",
   "streamchange.containers.GiveawayPage.leaveStreamBtn": "Leave stream",
+  "streamchange.containers.GiveawayPage.title": "StreamChange Giveaway",
   "streamchange.containers.QueuePage.QueueColumn.title": "Queue",
   "streamchange.containers.QueuePage.QueueItem.addedAt": "Joined at",
   "streamchange.containers.QueuePage.QueueItem.activeAt": "Last message at",
@@ -154,5 +157,6 @@
   "streamchange.containers.QueuePage.QueueWidgetDialog.copyButton": "Copy",
   "streamchange.containers.QueuePage.QueueWidgetDialog.firstLine": "Your widget url is created from your private widget code. Do not share your code with anyone. Everyone with your private code can add, edit and delete channels stored in your queue. As code cannot be restored from widget url, you can securely share the url with your audience.",
   "streamchange.containers.QueuePage.QueueWidgetDialog.secondLine": "Paste this url to embedded browser in OBS",
-  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Queue widget for OBS"
+  "streamchange.containers.QueuePage.QueueWidgetDialog.title": "Queue widget for OBS",
+  "streamchange.containers.QueuePage.title": "StreamChange Queue"
 }
