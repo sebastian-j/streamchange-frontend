@@ -72,6 +72,10 @@ const SettingsDialog = (props) => {
         }
       >
         <ToolbarButton onClick={openDialog} type="button">
+          <span className="border border-initial" />
+          <svg className="border border-hover" fill="none">
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
+          </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

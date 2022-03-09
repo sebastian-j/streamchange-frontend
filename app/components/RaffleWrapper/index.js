@@ -34,10 +34,27 @@ const StartButton = styled.button`
   font-size: 1.2rem;
   margin-top: 10px;
   padding: 10px 0;
+  position: relative;
+  transition: text-shadow .2s linear .3s;
   width: 100%;
+  z-index: 0;
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    text-shadow: 0 0 5px #000000;
+    transition: text-shadow 0s;
+    .btn-hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
+  }
+  .btn-hover {
+    background-color: ${(props) => props.theme.color};
+    clip-path: ellipse(120% 180% at 50% 310%);
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: clip-path 1.1s cubic-bezier(.215,.61,.355,1);
+    width: 100%;
+    z-index: -1;
   }
 `;
 
@@ -99,6 +116,7 @@ export const RaffleWrapper = (props) => {
         ) : (
           <FormattedMessage {...messages.startBtn} />
         )}
+        <div className="btn-hover" />
       </StartButton>
       {props.isOpen && props.animationType === 0 && (
         <CSGORaffle

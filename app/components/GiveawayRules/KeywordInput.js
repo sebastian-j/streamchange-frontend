@@ -39,6 +39,7 @@ const KeywordInput = (props) => {
                 </HintParagraph>
               }
               aria-label="keyword"
+              enterDelay="800"
             >
               <StyledTextField
                 error={!!error}
