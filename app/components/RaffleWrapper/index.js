@@ -39,7 +39,7 @@ const StartButton = styled.button`
   width: 100%;
   z-index: 0;
   &:hover {
-    text-shadow: 0 0 5px #000000;
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
     transition: text-shadow 0s;
     .btn-hover {
       clip-path: ellipse(120% 180% at 50% 60%);
@@ -47,12 +47,12 @@ const StartButton = styled.button`
   }
   .btn-hover {
     background-color: ${(props) => props.theme.color};
-    clip-path: ellipse(120% 180% at 50% 310%);
+    clip-path: ellipse(50% 180% at 50% 310%);
     left: 0;
     height: 100%;
     position: absolute;
     top: 0;
-    transition: clip-path 1.1s cubic-bezier(.215,.61,.355,1);
+    transition: clip-path 1s cubic-bezier(.215,.61,.355,1);
     width: 100%;
     z-index: -1;
   }

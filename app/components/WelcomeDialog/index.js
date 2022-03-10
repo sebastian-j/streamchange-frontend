@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
 import { FormattedMessage } from 'react-intl';
@@ -11,6 +10,7 @@ import CookieConsent from './CookieConsent';
 import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import { PhotoBackdrop } from './components/PhotoBackdrop';
+import WavyButton from './components/WavyButton';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomeDialog = (props) => {
@@ -107,9 +107,11 @@ const WelcomeDialog = (props) => {
             </div>
             <div className="actions">
               {!isLoading && (
-                <Button onClick={sendVideoLink} color="primary">
-                  <FormattedMessage {...messages.saveBtn} />
-                </Button>
+                <FormattedMessage {...messages.saveBtn} >
+                  {(label) => 
+                    <WavyButton onClick={sendVideoLink} text={label}/>
+                  }
+                </FormattedMessage>
               )}
               {isLoading && <CircularProgress />}
             </div>

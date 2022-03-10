@@ -8,19 +8,44 @@ import Tooltip from '@material-ui/core/Tooltip';
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
 
-const StyledLink = styled.span`
-  background: ${(props) => props.theme.iconButtonBackground};
+const StyledLink = styled(NavLink)`
   border: none;
   border-radius: 6px;
   color: ${(props) => props.theme.buttonTextColor};
   font-size: 1.05rem;
-  height: 80%;
-  padding: 8px 8px;
+  height: 70%;
+  padding: 5px 8px;
+  position: relative;
   margin: 0 15px 0 0;
   text-decoration: none;
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    svg.border-hover {
+      stroke-dashoffset: 0;
+    }
+  }
+  .border {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+  }
+  .border-initial {
+    border-radius: 6px;
+    border: 1px solid;
+    opacity: 0.2;
+  }
+  svg.border-hover {
+    stroke: currentColor;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset .5s cubic-bezier(.22,.28,.36,1);
+    rect {
+      transform-origin: 50% 50%;
+      vector-effect: non-scaling-stroke;
+    }
   }
   @media (orientation: portrait) {
     line-height: 3em;
@@ -108,16 +133,18 @@ const HistoryWidget = () => {
         </>
       }
     >
-      <NavLink to="/giveaway-history" style={{ textDecoration: 'none' }}>
-        <StyledLink onMouseEnter={getHistory}>
-          <FormattedMessage {...messages.historyLink} />
-          {warning && (
-            <span role="img" aria-label="warning">
+      <StyledLink onMouseEnter={getHistory} to="/giveaway-history">
+        <span className="border border-initial" />
+        <svg className="border border-hover" fill="none">
+          <rect width="100%" height="100%" rx="6px" pathLength="1"/>
+        </svg>
+        <FormattedMessage {...messages.historyLink} />
+        {warning && (
+          <span role="img" aria-label="warning">
               ⚠️
-            </span>
-          )}
-        </StyledLink>
-      </NavLink>
+          </span>
+        )}
+      </StyledLink>
     </ExtendedTooltip>
   );
 };
