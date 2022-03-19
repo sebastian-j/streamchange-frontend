@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import messages from './messages';
 import {
@@ -73,8 +73,11 @@ export class GiveawayRules extends React.Component {
             <FormattedMessage {...messages.userTypeLabel} />
           </InputLabel>
           <Select
+            labelId="user-type-select"
+            label="Kto może"
             onChange={(event) => this.props.changeReq(event.target.value)}
             value={this.props.requirement}
+            variant="standard"
           >
             <MenuItem value={0}>
               <FormattedMessage {...messages.allViewers} />
@@ -96,6 +99,7 @@ export class GiveawayRules extends React.Component {
               label={label}
               type="text"
               value={this.props.prize}
+              variant="standard"
               fullWidth
             />
           )}

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
@@ -18,6 +17,16 @@ const StyledLink = styled(NavLink)`
   position: relative;
   margin: 0 15px 0 0;
   text-decoration: none;
+  svg.border-hover {
+    stroke: currentColor;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset .5s cubic-bezier(.22,.28,.36,1);
+    rect {
+      transform-origin: 50% 50%;
+      vector-effect: non-scaling-stroke;
+    }
+  }
   &:hover {
     svg.border-hover {
       stroke-dashoffset: 0;
@@ -37,16 +46,6 @@ const StyledLink = styled(NavLink)`
     border: 1px solid;
     opacity: 0.2;
   }
-  svg.border-hover {
-    stroke: currentColor;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset .5s cubic-bezier(.22,.28,.36,1);
-    rect {
-      transform-origin: 50% 50%;
-      vector-effect: non-scaling-stroke;
-    }
-  }
   @media (orientation: portrait) {
     line-height: 3em;
   }
@@ -62,19 +61,11 @@ const WarningContent = styled.div`
   font-size: 13px;
 `;
 const Td = styled.td`
+  font-size: 0.75rem;
+  font-weight: normal;
   padding-right: 5px;
   vertical-align: middle;
 `;
-
-const ExtendedTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: 'rgba(225,246,246,0.9)',
-    color: 'rgba(0, 0, 0, 0.87)',
-    maxWidth: '300px',
-    fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #949499',
-  },
-}))(Tooltip);
 
 const HistoryWidget = () => {
   const [winners, setWinners] = useState([]);
@@ -99,7 +90,7 @@ const HistoryWidget = () => {
   }, []);
 
   return (
-    <ExtendedTooltip
+    <Tooltip
       title={
         <>
           {!warning && winners.length === 0 && (
@@ -145,7 +136,7 @@ const HistoryWidget = () => {
           </span>
         )}
       </StyledLink>
-    </ExtendedTooltip>
+    </Tooltip>
   );
 };
 

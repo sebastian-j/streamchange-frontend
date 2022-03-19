@@ -81,6 +81,7 @@ const QueueColumn = ({
             label={placeholder}
             type="text"
             value={searchQuery}
+            variant="standard"
             fullWidth
           />
         )}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 import messages from './messages';
 import {
   makeSelectCapacity,
@@ -68,6 +68,7 @@ export const QueueRules = (props) => {
               label={label}
               type="text"
               value={props.command}
+              variant="standard"
               fullWidth
             />
           </Tooltip>
@@ -96,6 +97,7 @@ export const QueueRules = (props) => {
               label={label}
               type="number"
               value={props.capacity}
+              variant="standard"
               fullWidth
             />
           </Tooltip>
@@ -111,6 +113,7 @@ export const QueueRules = (props) => {
             label={label}
             type="number"
             value={Number(props.timeToIdle)}
+            variant="standard"
             fullWidth
           />
         )}
@@ -125,6 +128,7 @@ export const QueueRules = (props) => {
             label={label}
             type="number"
             value={Number(props.timeToKick)}
+            variant="standard"
             fullWidth
           />
         )}
@@ -139,6 +143,7 @@ export const QueueRules = (props) => {
             label={label}
             type="password"
             value={props.widgetCode}
+            variant="standard"
             fullWidth
           />
         )}

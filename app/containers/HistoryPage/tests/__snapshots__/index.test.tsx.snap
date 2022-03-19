@@ -14,7 +14,7 @@ exports[`<HistoryPage /> should render and match the snapshot 1`] = `
       [Function]
     </FormattedMessage>
   </HelmetWrapper>
-  <WithStyles(ForwardRef(LinearProgress)) />
+  <ForwardRef(LinearProgress) />
   <div
     style={
       Object {

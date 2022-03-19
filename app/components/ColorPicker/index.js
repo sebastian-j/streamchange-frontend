@@ -11,6 +11,18 @@ const PickerButton = styled.button`
   width: 30px;
   position: relative;
   outline: none;
+  svg.border-hover {
+    stroke: currentColor;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset .25s cubic-bezier(.22,.28,.36,1);
+    circle {
+      r: calc(50% - .5px);
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      vector-effect: non-scaling-stroke;
+    }
+  }
   &:hover {
     svg.border-hover {
       stroke-dashoffset: 0;
@@ -29,18 +41,6 @@ const PickerButton = styled.button`
     border-radius: 50%;
     border: 1px solid;
     opacity: 0.2;
-  }
-  svg.border-hover {
-    stroke: currentColor;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset .25s cubic-bezier(.22,.28,.36,1);
-    circle {
-      r: calc(50% - .5px);
-      transform: rotate(-90deg);
-      transform-origin: 50% 50%;
-      vector-effect: non-scaling-stroke;
-    }
   }
 `;
 

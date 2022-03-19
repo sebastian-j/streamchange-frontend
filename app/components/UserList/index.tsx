@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/Menu';
-import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/Menu';
+import Tooltip from '@mui/material/Tooltip';
 
 import db from '../YoutubeWorker/db';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -358,6 +358,7 @@ const UserList = (props: Props) => {
             label={placeholder}
             type="text"
             value={searchQuery}
+            variant="standard"
             fullWidth
           />
         )}

@@ -2,6 +2,6 @@
 
 exports[`<ColoredLink /> should render and match the snapshot 1`] = `
 <a
-  className="sc-bdvvtL bHvNBw"
+  className="sc-bdvvtL cJBQlX"
 />
 `;

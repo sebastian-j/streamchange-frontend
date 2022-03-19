@@ -10,7 +10,7 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         values={Object {}}
       />
     </span>
-    <WithStyles(ForwardRef(Button))
+    <ForwardRef(Button)
       color="primary"
       onClick={[Function]}
     >
@@ -19,14 +19,14 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         id="streamchange.components.AdFrame.showMoreButton"
         values={Object {}}
       />
-    </WithStyles(ForwardRef(Button))>
+    </ForwardRef(Button)>
   </styled.div>
-  <WithStyles(ForwardRef(Dialog))
+  <ForwardRef(Dialog)
     aria-labelledby="form-dialog-title"
     onClose={[Function]}
     open={false}
   >
-    <WithStyles(ForwardRef(DialogTitle))
+    <ForwardRef(DialogTitle)
       id="form-dialog-title"
     >
       <FormattedMessage
@@ -34,16 +34,16 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         id="streamchange.components.AdFrame.dialogTitle"
         values={Object {}}
       />
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <WithStyles(ForwardRef(DialogContentText))>
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText)>
         <FormattedMessage
           defaultMessage="There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner."
           id="streamchange.components.AdFrame.dialogFirstLine"
           values={Object {}}
         />
-      </WithStyles(ForwardRef(DialogContentText))>
-      <WithStyles(ForwardRef(DialogContentText))>
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
         <FormattedMessage
           defaultMessage="If you chose full version, your ad will be displayed on every stream that will show streamchange app that day. Bank transfer is a preferred payment method."
           id="streamchange.components.AdFrame.dialogSecondLine"
@@ -70,16 +70,16 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
             </g>
           </svg>
         </styled.a>
-      </WithStyles(ForwardRef(DialogContentText))>
-      <WithStyles(ForwardRef(DialogContentText))>
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
         <FormattedMessage
           defaultMessage="Contact:"
           id="streamchange.components.AdFrame.dialogThirdLine"
           values={Object {}}
         />
-        <WithStyles(ForwardRef(Typography))>
+        <ForwardRef(Typography)>
           Discord: Baf#5501
-        </WithStyles(ForwardRef(Typography))>
+        </ForwardRef(Typography)>
         <styled.a
           href="https://www.facebook.com/BafYT/"
         >
@@ -96,8 +96,8 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
             </g>
           </svg>
         </styled.a>
-      </WithStyles(ForwardRef(DialogContentText))>
-      <WithStyles(ForwardRef(DialogContentText))>
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
         <styled.a
           href="https://www.instagram.com/grafika3d/"
         >
@@ -114,10 +114,10 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
             </g>
           </svg>
         </styled.a>
-      </WithStyles(ForwardRef(DialogContentText))>
-    </WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogActions))>
-      <WithStyles(ForwardRef(Button))
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button)
         color="secondary"
         onClick={[Function]}
       >
@@ -126,8 +126,8 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
           id="streamchange.components.AdFrame.dialogCloseButton"
           values={Object {}}
         />
-      </WithStyles(ForwardRef(Button))>
-    </WithStyles(ForwardRef(DialogActions))>
-  </WithStyles(ForwardRef(Dialog))>
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
 </div>
 `;

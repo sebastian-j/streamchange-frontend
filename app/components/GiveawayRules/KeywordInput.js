@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Tooltip from '@material-ui/core/Tooltip';
+import InputAdornment from '@mui/material/InputAdornment';
+import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import { changeKeyword } from './actions';
@@ -50,6 +50,7 @@ const KeywordInput = (props) => {
                 label={label}
                 type={visible ? 'text' : 'password'}
                 value={props.keyword}
+                variant="standard"
                 helperText={error === 1 ? errorText : ''}
                 fullWidth
                 InputProps={{

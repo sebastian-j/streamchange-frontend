@@ -17,6 +17,10 @@ export const ImageButton = styled.button`
   background: none;
   border: none;
   outline: none;
+  img {
+    cursor: pointer;
+    height: 140px;
+  }
   &:hover {
     img {
       animation: ${Shake} 0.5s linear;
@@ -24,9 +28,5 @@ export const ImageButton = styled.button`
   }
   @media (orientation: portrait) {
     margin: 0 -20px 0 -10px;
-  }
-  img {
-    cursor: pointer;
-    height: 140px;
   }
 `;

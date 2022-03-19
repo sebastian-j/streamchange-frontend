@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import IconButton from '@material-ui/core/IconButton';
+import LinearProgress from '@mui/material/LinearProgress';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
@@ -147,6 +147,7 @@ const HistoryPage = () => {
             name="search"
             label={label}
             value={searchQuery}
+            variant="standard"
             onChange={(event) => setSearchQuery(event.target.value)}
             type="text"
             margin="normal"
@@ -203,6 +204,7 @@ const HistoryPage = () => {
           </InputLabel>
           <Select
             value={maxResults}
+            variant="standard"
             onChange={(event) => {
               setMaxResults(Number(event.target.value));
             }}

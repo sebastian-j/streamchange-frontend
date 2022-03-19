@@ -2,6 +2,6 @@
 
 exports[`<ToolbarButton /> should render and match the snapshot 1`] = `
 <button
-  className="sc-bdvvtL cCVGgs"
+  className="sc-bdvvtL dUTvwA"
 />
 `;

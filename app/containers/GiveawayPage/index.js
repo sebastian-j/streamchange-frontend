@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';

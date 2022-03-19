@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
 import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
@@ -71,6 +71,7 @@ const WelcomeDialog = (props) => {
                     label={label}
                     type="text"
                     value={videoLink}
+                    variant="standard"
                     fullWidth
                   />
                 )}

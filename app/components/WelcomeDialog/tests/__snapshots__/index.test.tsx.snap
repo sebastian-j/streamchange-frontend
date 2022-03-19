@@ -46,16 +46,13 @@ exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
       <div
         className="actions"
       >
-        <WithStyles(ForwardRef(Button))
-          color="primary"
-          onClick={[Function]}
+        <FormattedMessage
+          defaultMessage="OK"
+          id="streamchange.components.WelcomeDialog.saveBtn"
+          values={Object {}}
         >
-          <FormattedMessage
-            defaultMessage="OK"
-            id="streamchange.components.WelcomeDialog.saveBtn"
-            values={Object {}}
-          />
-        </WithStyles(ForwardRef(Button))>
+          [Function]
+        </FormattedMessage>
       </div>
     </div>
     <WelcomeHint />

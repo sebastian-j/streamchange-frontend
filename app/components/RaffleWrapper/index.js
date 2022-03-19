@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import messages from './messages';
 import {
@@ -38,13 +38,6 @@ const StartButton = styled.button`
   transition: text-shadow .2s linear .3s;
   width: 100%;
   z-index: 0;
-  &:hover {
-    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
-    transition: text-shadow 0s;
-    .btn-hover {
-      clip-path: ellipse(120% 180% at 50% 60%);
-    }
-  }
   .btn-hover {
     background-color: ${(props) => props.theme.color};
     clip-path: ellipse(50% 180% at 50% 310%);
@@ -55,6 +48,13 @@ const StartButton = styled.button`
     transition: clip-path 1s cubic-bezier(.215,.61,.355,1);
     width: 100%;
     z-index: -1;
+  }
+  &:hover {
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
+    transition: text-shadow 0s;
+    .btn-hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
   }
 `;
 
@@ -90,6 +90,7 @@ export const RaffleWrapper = (props) => {
         <Select
           onChange={(event) => props.changeAnimationType(event.target.value)}
           value={props.animationType}
+          variant="standard"
         >
           <MenuItem value={0}>
             <FormattedMessage {...messages.raffleTypeCS} />
