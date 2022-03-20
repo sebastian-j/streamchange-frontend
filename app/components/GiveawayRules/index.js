@@ -74,7 +74,6 @@ export class GiveawayRules extends React.Component {
           </InputLabel>
           <Select
             labelId="user-type-select"
-            label="Kto może"
             onChange={(event) => this.props.changeReq(event.target.value)}
             value={this.props.requirement}
             variant="standard"
