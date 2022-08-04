@@ -6,6 +6,15 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
     <styled.button
       onClick={[Function]}
     >
+      <span
+        className="sr-only"
+      >
+        <FormattedMessage
+          defaultMessage="Draw another curiosity"
+          id="streamchange.components.WelcomeDialog.WelcomeHint.button.label"
+          values={Object {}}
+        />
+      </span>
       <img
         alt="light bulb"
         src="IMAGE_MOCK"

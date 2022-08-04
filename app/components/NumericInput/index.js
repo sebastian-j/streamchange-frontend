@@ -28,6 +28,9 @@ const Button = styled.button`
     `
     border-radius: 4px 0 0 4px;
   `}
+  &:focus-visible {
+    background-color: ${(props) => props.theme.color};
+  }
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover};
     color: ${(props) => props.theme.buttonTextColorHover};

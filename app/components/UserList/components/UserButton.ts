@@ -25,4 +25,7 @@ export const UserButton = styled.button`
     height: 1.4em;
     width: 1.1em;
   }
+  &:focus-visible {
+    outline: 1px solid ${(props) => props.theme.color};
+  }
 `;

@@ -104,6 +104,7 @@
   "streamchange.components.WelcomeDialog.saveBtn": "OK",
   "streamchange.components.WelcomeDialog.title": "Choose stream",
   "streamchange.components.WelcomeDialog.videoInput.label": "Paste stream url",
+  "streamchange.components.WelcomeDialog.WelcomeHint.button.label": "Draw another curiosity",
   "streamchange.components.WelcomeDialog.WelcomeHint.title": "Did you know...",
   "streamchange.components.WinnerView.exitBtn": "Return",
   "streamchange.components.WinnerView.loading": "Loading...",
