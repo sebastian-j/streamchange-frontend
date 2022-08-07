@@ -113,7 +113,8 @@ const QueuePage = () => {
       const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
     } else if (videoLink === 'test') {
-      setVideoId(null);
+      setVideoId('test');
+      setTitle('');
       setThumbnailUrl('https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg');
     } else {
       setError('invalidUrl');

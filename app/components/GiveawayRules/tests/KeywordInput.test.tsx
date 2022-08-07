@@ -1,4 +1,5 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
@@ -19,7 +20,9 @@ describe('<KeywordInput />', () => {
     const renderedComponent = renderer
       .create(
         <Provider store={store}>
-          <KeywordInput />
+          <IntlProvider locale="en">
+            <KeywordInput />
+          </IntlProvider>
         </Provider>,
       )
       .toJSON();

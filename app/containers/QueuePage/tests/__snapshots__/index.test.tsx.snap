@@ -7,17 +7,13 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
   <span
     class="sc-hBUSln gasaX"
   >
-    <span>
-      Welcome to StreamChange
-    </span>
+    Welcome to StreamChange
   </span>
   <div>
     <span
       class="sc-hBUSln gasaX"
     >
-      <span>
-        Select theme
-      </span>
+      Select theme
     </span>
     <label
       for="themeLight"
@@ -40,9 +36,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
         <span
           class="sc-ksdxgE dwWHTf"
         >
-          <span>
-            Light
-          </span>
+          Light
         </span>
       </div>
     </label>
@@ -66,9 +60,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
         <span
           class="sc-ksdxgE dwWHTf"
         >
-          <span>
-            Dark
-          </span>
+          Dark
         </span>
       </div>
     </label>
@@ -77,9 +69,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     <span
       class="sc-hBUSln gasaX"
     >
-      <span>
-        Select language
-      </span>
+      Select language
     </span>
     <label
       for="pl"
@@ -101,9 +91,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
             alt="pl"
             src="IMAGE_MOCK"
           />
-          <span>
-            pl
-          </span>
+          pl
         </span>
       </div>
     </label>
@@ -128,9 +116,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
             alt="en"
             src="IMAGE_MOCK"
           />
-          <span>
-            en
-          </span>
+          en
         </span>
       </div>
     </label>
@@ -141,9 +127,7 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
       tabindex="0"
       type="button"
     >
-      <span>
-        Save
-      </span>
+      Save
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
@@ -160,17 +144,13 @@ exports[`<QueuePage /> should render and match the snapshot 1`] = `
     <span
       class="sc-gKclnd dnVwcj"
     >
-      <span>
-        This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
-      </span>
+      This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
     </span>
     <button
       class="sc-jRQBWg hvQnvK"
       type="button"
     >
-      <span>
-        Accept
-      </span>
+      Accept
     </button>
   </div>
 </div>

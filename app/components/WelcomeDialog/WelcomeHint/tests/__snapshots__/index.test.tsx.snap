@@ -9,10 +9,9 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
       <span
         className="sr-only"
       >
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Draw another curiosity"
           id="streamchange.components.WelcomeDialog.WelcomeHint.button.label"
-          values={Object {}}
         />
       </span>
       <img
@@ -22,10 +21,9 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
     </styled.button>
     <div>
       <styled.span>
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Did you know..."
           id="streamchange.components.WelcomeDialog.WelcomeHint.title"
-          values={Object {}}
         />
       </styled.span>
       <styled.span>

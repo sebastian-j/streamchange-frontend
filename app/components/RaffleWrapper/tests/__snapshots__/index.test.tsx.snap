@@ -3,16 +3,14 @@
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF eYbxaK css-ufpu9p-MuiFormControl-root"
+    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF idYnmE css-ufpu9p-MuiFormControl-root"
   >
     <label
       className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink={true}
       id="animation-select"
     >
-      <span>
-        Animation
-      </span>
+      Animation
     </label>
     <div
       className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-88nv5c-MuiInputBase-root-MuiInput-root-MuiSelect-root"
@@ -29,9 +27,7 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
         role="button"
         tabIndex={0}
       >
-        <span>
-          CS:GO case opening
-        </span>
+        CS:GO case opening
       </div>
       <input
         aria-hidden={true}
@@ -90,9 +86,7 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     onClick={[Function]}
     type="button"
   >
-    <span>
-      Roll it!
-    </span>
+    Roll it!
     <div
       className="btn-hover"
     />

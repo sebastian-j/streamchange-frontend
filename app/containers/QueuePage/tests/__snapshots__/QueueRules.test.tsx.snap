@@ -7,9 +7,7 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
   <h2
     class="sc-gsDKAQ gzLYbA"
   >
-    <span>
-      Queue rules
-    </span>
+    Queue rules
   </h2>
   <div
     aria-label="keyword"
@@ -143,9 +141,7 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
       tabindex="0"
       type="button"
     >
-      <span>
-        Queue widget for OBS
-      </span>
+      Queue widget for OBS
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
@@ -156,18 +152,14 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
       class="sc-hBUSln iXsoMr"
     >
       <span>
-        <span>
-          This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
-        </span>
+        This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
       </span>
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
-        <span>
-          Show the details
-        </span>
+        Show the details
         <span
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />

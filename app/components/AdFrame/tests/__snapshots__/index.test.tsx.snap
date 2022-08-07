@@ -4,20 +4,18 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
 <div>
   <styled.div>
     <span>
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers."
         id="streamchange.components.AdFrame.emptyAdPlaceholder"
-        values={Object {}}
       />
     </span>
     <ForwardRef(Button)
       color="primary"
       onClick={[Function]}
     >
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="Show the details"
         id="streamchange.components.AdFrame.showMoreButton"
-        values={Object {}}
       />
     </ForwardRef(Button)>
   </styled.div>
@@ -29,34 +27,30 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
     <ForwardRef(DialogTitle)
       id="form-dialog-title"
     >
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="Information for advertisers"
         id="streamchange.components.AdFrame.dialogTitle"
-        values={Object {}}
       />
     </ForwardRef(DialogTitle)>
     <ForwardRef(DialogContent)>
       <ForwardRef(DialogContentText)>
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner."
           id="streamchange.components.AdFrame.dialogFirstLine"
-          values={Object {}}
         />
       </ForwardRef(DialogContentText)>
       <ForwardRef(DialogContentText)>
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="If you chose full version, your ad will be displayed on every stream that will show streamchange app that day. Bank transfer is a preferred payment method."
           id="streamchange.components.AdFrame.dialogSecondLine"
-          values={Object {}}
         />
         <styled.a
           href="/docs/advertisers-rules"
           target="_blank"
         >
-          <FormattedMessage
+          <Memo(MemoizedFormattedMessage)
             defaultMessage="Guidelines for advertisers"
             id="streamchange.components.AdFrame.dialogRulesLink"
-            values={Object {}}
           />
           <svg
             focusable="false"
@@ -72,10 +66,9 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         </styled.a>
       </ForwardRef(DialogContentText)>
       <ForwardRef(DialogContentText)>
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Contact:"
           id="streamchange.components.AdFrame.dialogThirdLine"
-          values={Object {}}
         />
         <ForwardRef(Typography)>
           Discord: Baf#5501
@@ -121,10 +114,9 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
         color="secondary"
         onClick={[Function]}
       >
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Close"
           id="streamchange.components.AdFrame.dialogCloseButton"
-          values={Object {}}
         />
       </ForwardRef(Button)>
     </ForwardRef(DialogActions)>
