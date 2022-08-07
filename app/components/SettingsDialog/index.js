@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import Button from '@mui/material/Button';
@@ -23,6 +23,7 @@ import { makeSelectColor } from '../../containers/StyleProvider/selectors';
 import { changeColor } from '../../containers/StyleProvider/actions';
 
 const SettingsDialog = (props) => {
+  const intl = useIntl();
   const [isOpen, setIsOpen] = useState(false);
   const [themeColor, setThemeColor] = useState(props.themeColor);
   const [saveCommands, setSaveCommands] = useState(false);
@@ -96,90 +97,74 @@ const SettingsDialog = (props) => {
         </DialogTitle>
         <DialogContent>
           <DarkModeSwitch />
-          <FormattedMessage {...messages.themeColor}>
-            {(label) => (
-              <ColorPicker
-                color={themeColor}
-                handleChange={(name, value) => changeThemeColor(value)}
-                label={label}
-                name="themeColor"
-              />
-            )}
-          </FormattedMessage>
+          <ColorPicker
+            color={themeColor}
+            handleChange={(name, value) => changeThemeColor(value)}
+            label={intl.formatMessage({...messages.themeColor})}
+            name="themeColor"
+          />
           <LocaleToggle />
           <div>
-            <FormattedMessage {...messages.saveCommandsLabel}>
-              {(label) => (
-                <Tooltip
-                  title={
-                    <HintParagraph>
-                      <FormattedMessage {...messages.saveCommandsHint} />
-                    </HintParagraph>
-                  }
-                >
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={saveCommands}
-                        onChange={(event) =>
-                          setSaveCommands(event.target.checked)
-                        }
-                        color="primary"
-                        name="saveCommands"
-                        type="checkbox"
-                      />
+            <Tooltip
+              title={
+                <HintParagraph>
+                  <FormattedMessage {...messages.saveCommandsHint} />
+                </HintParagraph>
+              }
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={saveCommands}
+                    onChange={(event) =>
+                      setSaveCommands(event.target.checked)
                     }
-                    label={label}
+                    color="primary"
+                    name="saveCommands"
+                    type="checkbox"
                   />
-                </Tooltip>
-              )}
-            </FormattedMessage>
-          </div>
-          <FormattedMessage {...messages.deleteWinnerLabel}>
-            {(label) => (
-              <Tooltip
-                title={
-                  <HintParagraph>
-                    <FormattedMessage {...messages.deleteWinnerHint} />
-                  </HintParagraph>
                 }
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={deleteWinner}
-                      onChange={(event) =>
-                        setDeleteWinner(event.target.checked)
-                      }
-                      color="primary"
-                      name="deleteWinner"
-                      type="checkbox"
-                    />
-                  }
-                  label={label}
-                />
-              </Tooltip>
-            )}
-          </FormattedMessage>
-          <FormattedMessage {...messages.resignationCommand}>
-            {(label) => (
-              <TextField
-                error={!!error}
-                id="abortCommand"
-                name="abortCommand"
-                label={label}
-                value={abortCommand}
-                variant="standard"
-                onChange={(event) => {
-                  setAbortCommand(event.target.value);
-                  setError(null);
-                }}
-                fullWidth
-                margin="normal"
-                helperText={error}
+                label={intl.formatMessage({...messages.saveCommandsLabel})}
               />
-            )}
-          </FormattedMessage>
+            </Tooltip>
+          </div>
+          <Tooltip
+            title={
+              <HintParagraph>
+                <FormattedMessage {...messages.deleteWinnerHint} />
+              </HintParagraph>
+            }
+          >
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={deleteWinner}
+                  onChange={(event) =>
+                    setDeleteWinner(event.target.checked)
+                  }
+                  color="primary"
+                  name="deleteWinner"
+                  type="checkbox"
+                />
+              }
+              label={intl.formatMessage({...messages.deleteWinnerLabel})}
+            />
+          </Tooltip>
+          <TextField
+            error={!!error}
+            id="abortCommand"
+            name="abortCommand"
+            label={intl.formatMessage({...messages.resignationCommand})}
+            value={abortCommand}
+            variant="standard"
+            onChange={(event) => {
+              setAbortCommand(event.target.value);
+              setError(null);
+            }}
+            fullWidth
+            margin="normal"
+            helperText={error}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDialog} color="secondary">

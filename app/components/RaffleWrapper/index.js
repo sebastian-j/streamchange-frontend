@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -59,6 +59,7 @@ const StartButton = styled.button`
 `;
 
 export const RaffleWrapper = (props) => {
+  const intl = useIntl();
   const [noUsers, setNoUsers] = useState(false);
 
   const openDialog = () => {
@@ -100,17 +101,13 @@ export const RaffleWrapper = (props) => {
           </MenuItem>
         </Select>
       </StyledFormControl>
-      <FormattedMessage {...messages.animationDuration}>
-        {(label) => (
-          <NumericInput
-            label={label}
-            minValue={1}
-            maxValue={600}
-            value={props.animationDuration}
-            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-          />
-        )}
-      </FormattedMessage>
+      <NumericInput
+        label={intl.formatMessage({...messages.animationDuration})}
+        minValue={1}
+        maxValue={600}
+        value={props.animationDuration}
+        onChange={(ret) => props.changeAnimationDuration(Number(ret))}
+      />
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
         {noUsers ? (
           <FormattedMessage {...messages.noUserSelected} />

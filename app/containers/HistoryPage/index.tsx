@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import IconButton from '@mui/material/IconButton';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
@@ -21,6 +21,7 @@ import { TableFooter } from './components/TableFooter';
 import { HistoryItem } from './types';
 
 const HistoryPage = () => {
+  const intl = useIntl();
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [items, setItems] = useState<HistoryItem[]>([]);
@@ -140,21 +141,17 @@ const HistoryPage = () => {
         </ReturnButton>
         <HistoryMenu onClear={getHistory} />
       </PageHeader>
-      <FormattedMessage {...messages.searchLabel}>
-        {(label) => (
-          <StyledTextField
-            id="search"
-            name="search"
-            label={label}
-            value={searchQuery}
-            variant="standard"
-            onChange={(event) => setSearchQuery(event.target.value)}
-            type="text"
-            margin="normal"
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
+      <StyledTextField
+        id="search"
+        name="search"
+        label={intl.formatMessage({...messages.searchLabel})}
+        value={searchQuery}
+        variant="standard"
+        onChange={(event) => setSearchQuery(event.target.value)}
+        type="text"
+        margin="normal"
+        fullWidth
+      />
       {searchQuery.length > 0 && items.length === 0 && (
         <InformationText>
           <FormattedMessage {...messages.infoNoResults} />

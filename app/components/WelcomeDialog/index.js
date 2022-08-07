@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { CompatibilityInfo } from './components/CompatibilityInfo';
@@ -14,6 +14,7 @@ import WavyButton from './components/WavyButton';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomeDialog = (props) => {
+  const intl = useIntl();
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
@@ -59,23 +60,19 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-              <FormattedMessage {...messages.videoInputLabel}>
-                {(label) => (
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    name="videoLink"
-                    onChange={handleInputValueChange}
-                    onKeyPress={handleKeyPress}
-                    id="videoLink"
-                    label={label}
-                    type="text"
-                    value={videoLink}
-                    variant="standard"
-                    fullWidth
-                  />
-                )}
-              </FormattedMessage>
+              <TextField
+                autoFocus
+                margin="dense"
+                name="videoLink"
+                onChange={handleInputValueChange}
+                onKeyPress={handleKeyPress}
+                id="videoLink"
+                label={intl.formatMessage({...messages.videoInputLabel})}
+                type="text"
+                value={videoLink}
+                variant="standard"
+                fullWidth
+              />
               <div className="text">
                 <span style={{ fontSize: '0.8rem' }}>
                   <FormattedMessage {...messages.example} />
@@ -108,11 +105,7 @@ const WelcomeDialog = (props) => {
             </div>
             <div className="actions">
               {!isLoading && (
-                <FormattedMessage {...messages.saveBtn} >
-                  {(label) => 
-                    <WavyButton onClick={sendVideoLink} text={label}/>
-                  }
-                </FormattedMessage>
+                <WavyButton onClick={sendVideoLink} text={intl.formatMessage({...messages.saveBtn})}/>
               )}
               {isLoading && <CircularProgress />}
             </div>
