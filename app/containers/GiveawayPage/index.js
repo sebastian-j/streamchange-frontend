@@ -188,7 +188,9 @@ const GiveawayPage = (props) => {
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
           <StreamTitle>{props.streamInfo.title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
-            <FormattedMessage {...messages.leaveStreamBtn} />
+            <span>
+              <FormattedMessage {...messages.leaveStreamBtn} />
+            </span>
           </StyledButton>
         </StreamInfo>
         <TopButtons>

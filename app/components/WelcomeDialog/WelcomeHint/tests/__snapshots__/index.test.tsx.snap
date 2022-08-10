@@ -16,6 +16,7 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
       </span>
       <img
         alt="light bulb"
+        aria-hidden="true"
         src="IMAGE_MOCK"
       />
     </styled.button>

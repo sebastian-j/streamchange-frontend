@@ -127,7 +127,9 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       tabindex="0"
       type="button"
     >
-      Save
+      <span>
+        Save
+      </span>
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />

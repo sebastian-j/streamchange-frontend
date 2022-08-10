@@ -45,7 +45,9 @@ export const QueueWidgetDialog = (props) => {
   return (
     <div style={{ display: 'inline-block' }}>
       <StyledButton onClick={openDialog} type="button">
-        <FormattedMessage {...messages.widgetDialogTitle} />
+        <span>
+          <FormattedMessage {...messages.widgetDialogTitle} />
+        </span>
       </StyledButton>
       <Dialog
         open={isOpen}

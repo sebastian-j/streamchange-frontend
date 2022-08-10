@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF idYnmE css-ufpu9p-MuiFormControl-root"
+    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF csSHwk css-ufpu9p-MuiFormControl-root"
   >
     <label
       className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"

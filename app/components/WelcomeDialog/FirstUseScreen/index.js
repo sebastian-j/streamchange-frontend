@@ -127,7 +127,9 @@ const FirstUseScreen = (props) => {
       </div>
       <div>
         <StyledButton onClick={save} type="button">
-          <FormattedMessage {...messages.firstUseSaveBtn} />
+          <span>
+            <FormattedMessage {...messages.firstUseSaveBtn} />
+          </span>
         </StyledButton>
       </div>
       <CookieConsent />

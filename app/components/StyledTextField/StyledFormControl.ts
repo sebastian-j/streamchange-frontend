@@ -13,7 +13,7 @@ const StyledFormControl = styled(FormControl)`
     left: -12px;
     color: ${(props) => props.theme.inputLabel};
   }
-  label.Mui-focused span {
+  label.Mui-focused {
     color: ${(props) => props.theme.color};
   }
   .MuiInput-input {

@@ -100,7 +100,9 @@ const QueueColumn = ({
         ))}
       </ul>
       <StyledButton onClick={() => purgeQueue()}>
-        <FormattedMessage {...messages.clearBtn} />
+        <span>
+          <FormattedMessage {...messages.clearBtn} />
+        </span>
       </StyledButton>
     </UserListPanel>
   );

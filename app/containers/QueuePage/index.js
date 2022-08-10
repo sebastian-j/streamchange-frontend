@@ -161,7 +161,9 @@ const QueuePage = () => {
           <img alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
-            <FormattedMessage {...messages.leaveStreamBtn} />
+            <span>
+              <FormattedMessage {...messages.leaveStreamBtn} />
+            </span>
           </StyledButton>
         </div>
         <TopButtons>

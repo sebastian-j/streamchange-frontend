@@ -141,7 +141,9 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
       tabindex="0"
       type="button"
     >
-      Queue widget for OBS
+      <span>
+        Queue widget for OBS
+      </span>
       <span
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />

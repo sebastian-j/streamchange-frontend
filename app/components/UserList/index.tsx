@@ -377,8 +377,10 @@ const UserList = (props: Props) => {
           />
         ))}
       </ul>
-      <StyledButton onClick={props.purgeList}>
-        <FormattedMessage {...messages.clearBtn} />
+      <StyledButton onClick={props.purgeList} color="inherit">
+        <span>
+          <FormattedMessage {...messages.clearBtn} />
+        </span>
       </StyledButton>
       <Counts>
         <FormattedMessage
