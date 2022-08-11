@@ -24,6 +24,8 @@
   "streamchange.components.GiveawayRules.prize": "Prize (optional)",
   "streamchange.components.GiveawayRules.title": "Giveaway rules",
   "streamchange.components.GiveawayRules.userTypeLabel": "Who can participate in a raffle",
+  "streamchange.components.NumericInput.decrease": "Decrease by one",
+  "streamchange.components.NumericInput.increase": "Increase by one",
   "streamchange.components.RaffleWrapper.animationDuration": "Animation duration (seconds)",
   "streamchange.components.RaffleWrapper.noUserSelected": "No user selected",
   "streamchange.components.RaffleWrapper.raffleType": "Animation",

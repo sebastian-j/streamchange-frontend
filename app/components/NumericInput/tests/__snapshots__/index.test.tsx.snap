@@ -1,24 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NumericInput /> should render and match the snapshot 1`] = `
-<styled.div>
-  <styled.div />
-  <styled.button
-    left="true"
-    onClick={[Function]}
-    type="button"
-  >
-    -
-  </styled.button>
-  <styled.input
+<Context.Provider
+  value={
+    Object {
+      "$t": [Function],
+      "defaultFormats": Object {},
+      "defaultLocale": "en",
+      "defaultRichTextElements": undefined,
+      "fallbackOnEmptyString": true,
+      "formatDate": [Function],
+      "formatDateTimeRange": [Function],
+      "formatDateToParts": [Function],
+      "formatDisplayName": [Function],
+      "formatList": [Function],
+      "formatListToParts": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatNumberToParts": [Function],
+      "formatPlural": [Function],
+      "formatRelativeTime": [Function],
+      "formatTime": [Function],
+      "formatTimeToParts": [Function],
+      "formats": Object {},
+      "formatters": Object {
+        "getDateTimeFormat": [Function],
+        "getDisplayNames": [Function],
+        "getListFormat": [Function],
+        "getMessageFormat": [Function],
+        "getNumberFormat": [Function],
+        "getPluralRules": [Function],
+        "getRelativeTimeFormat": [Function],
+      },
+      "locale": "en",
+      "messages": Object {},
+      "onError": [Function],
+      "onWarn": [Function],
+      "textComponent": Symbol(react.fragment),
+      "timeZone": undefined,
+      "wrapRichTextChunksInFragment": undefined,
+    }
+  }
+>
+  <NumericInput
+    maxValue={null}
+    minValue={null}
     onChange={[Function]}
+    step={1}
     value={0}
   />
-  <styled.button
-    onClick={[Function]}
-    type="button"
-  >
-    +
-  </styled.button>
-</styled.div>
+</Context.Provider>
 `;

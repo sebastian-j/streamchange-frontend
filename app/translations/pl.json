@@ -24,6 +24,8 @@
   "streamchange.components.GiveawayRules.prize": "Nagroda (opcjonalnie)",
   "streamchange.components.GiveawayRules.title": "Zasady losowania",
   "streamchange.components.GiveawayRules.userTypeLabel": "Kto może uczestniczyć w losowaniu",
+  "streamchange.components.NumericInput.decrease": "Zmniejsz o jeden",
+  "streamchange.components.NumericInput.increase": "Zwiększ o jeden",
   "streamchange.components.RaffleWrapper.animationDuration": "Czas trwania animacji (sekundy)",
   "streamchange.components.RaffleWrapper.noUserSelected": "Nie zaznaczono żadnego użytkownika",
   "streamchange.components.RaffleWrapper.raffleType": "Animacja losowania",
