@@ -60,4 +60,12 @@ export default defineMessages({
     id: `${scope}.filters.notSelected`,
     defaultMessage: 'Not participating',
   },
+  channelLinkTitle: {
+    id: `${scope}.YoutubeLogo.title`,
+    defaultMessage: 'Show the channel page',
+  },
+  skipListLinkText: {
+    id: `${scope}.skipLink`,
+    defaultMessage: 'Skip the viewers list',
+  }
 });

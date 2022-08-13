@@ -14,6 +14,7 @@ import { Counts } from './components/Counts';
 import FilterChips from './FilterChips';
 import { Header } from './components/Header';
 import { HeaderButtons } from './components/HeaderButtons';
+import { SkipListLink } from './components/SkipListLink';
 import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../StyledTextField';
 import { ThemedSvg } from './components/ThemedSvg';
@@ -363,6 +364,9 @@ const UserList = (props: Props) => {
           />
         )}
       </FormattedMessage>
+      <SkipListLink href="#purge-user-list-btn">
+        <FormattedMessage { ...messages.skipListLinkText} />
+      </SkipListLink>
       <ul>
         {getUsers().map((item) => (
           <UserItem
@@ -377,7 +381,7 @@ const UserList = (props: Props) => {
           />
         ))}
       </ul>
-      <StyledButton onClick={props.purgeList} color="inherit">
+      <StyledButton id="purge-user-list-btn" onClick={props.purgeList} color="inherit">
         <span>
           <FormattedMessage {...messages.clearBtn} />
         </span>

@@ -55,12 +55,14 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
   <div
     className="sc-iCfMLu hMAwuh"
   >
-    <div
-      className="sc-furwcr eBLZaS"
+    <label
+      className="sc-furwcr PHDDM"
+      htmlFor="number-display"
     >
       Animation duration (seconds)
-    </div>
+    </label>
     <button
+      aria-label="Decrease by one"
       className="sc-pVTFL jehgPn"
       onClick={[Function]}
       type="button"
@@ -69,10 +71,12 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </button>
     <input
       className="sc-jrQzAO eJQxxo"
+      id="number-display"
       onChange={[Function]}
       value={7}
     />
     <button
+      aria-label="Increase by one"
       className="sc-pVTFL jIQTEr"
       onClick={[Function]}
       type="button"
