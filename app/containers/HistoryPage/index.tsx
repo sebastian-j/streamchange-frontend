@@ -80,10 +80,8 @@ const HistoryPage = () => {
   if (error) {
     return (
       <div>
-        <Helmet>
-          <FormattedMessage {...messages.pageTitle}>
-            {(title) => <title>{title}</title>}
-          </FormattedMessage>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({...messages.pageTitle})}</title>
         </Helmet>
         <FormattedMessage {...messages.infoError} />
       </div>
@@ -92,10 +90,8 @@ const HistoryPage = () => {
   if (!isLoaded) {
     return (
       <PageWrapper>
-        <Helmet>
-          <FormattedMessage {...messages.pageTitle}>
-            {(title) => <title>{title}</title>}
-          </FormattedMessage>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({...messages.pageTitle})}</title>
         </Helmet>
         <LinearProgress />
         <div
@@ -115,13 +111,9 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
-      <FormattedMessage {...messages.pageTitle}>
-        {(title) => (
-          <Helmet>
-            <title>{title}</title>
-          </Helmet>
-        )}
-      </FormattedMessage>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({...messages.pageTitle})}</title>
+      </Helmet>
       <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
           <div>

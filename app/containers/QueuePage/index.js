@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { StreamTitle } from './components/StreamTitle';
@@ -21,6 +21,7 @@ const QueuePage = () => {
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
+  const intl = useIntl();
 
   const leaveStream = () => {
     setVideoId('');
@@ -131,13 +132,9 @@ const QueuePage = () => {
   if (videoId === '') {
     return (
       <>
-        <FormattedMessage {...messages.pageTitle}>
-          {(pTitle) => (
-            <Helmet>
-              <title>{pTitle}</title>
-            </Helmet>
-          )}
-        </FormattedMessage>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        </Helmet>
         <WelcomeDialog
           passVideo={receiveVideo}
           ban={ban}
@@ -148,14 +145,10 @@ const QueuePage = () => {
     );
   }
   return (
-    <div>
-      <FormattedMessage {...messages.pageTitle}>
-        {(pTitle) => (
-          <Helmet>
-            <title>{pTitle}</title>
-          </Helmet>
-        )}
-      </FormattedMessage>
+    <>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      </Helmet>
       <TopBar>
         <div>
           <img alt="Thumbnail" src={thumbnailUrl} />
@@ -172,7 +165,7 @@ const QueuePage = () => {
         </TopButtons>
       </TopBar>
       <QueueWorker videoId={videoId} />
-    </div>
+    </>
   );
 };
 

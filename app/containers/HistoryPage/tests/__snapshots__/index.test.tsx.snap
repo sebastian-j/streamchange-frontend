@@ -1,37 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HistoryPage /> should render and match the snapshot 1`] = `
-<styled.div>
-  <HelmetWrapper
-    defer={true}
-    encodeSpecialCharacters={true}
+<div
+  class="sc-kDTinF jixpeL"
+>
+  <span
+    class="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate css-eglki6-MuiLinearProgress-root"
+    role="progressbar"
   >
-    <FormattedMessage
-      defaultMessage="Winner history"
-      id="streamchange.containers.History.title"
-      values={Object {}}
-    >
-      [Function]
-    </FormattedMessage>
-  </HelmetWrapper>
-  <ForwardRef(LinearProgress) />
-  <div
-    style={
-      Object {
-        "fontSize": "2vw",
-        "left": "55%",
-        "position": "absolute",
-        "textAlign": "center",
-        "top": "50%",
-        "transform": "translate(-50%, -50%)",
-      }
-    }
-  >
-    <FormattedMessage
-      defaultMessage="Loading history"
-      id="streamchange.containers.History.info.loading"
-      values={Object {}}
+    <span
+      class="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate css-5ir5xx-MuiLinearProgress-bar1"
     />
+    <span
+      class="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar2Indeterminate css-1r8wrcl-MuiLinearProgress-bar2"
+    />
+  </span>
+  <div
+    style="font-size: 2vw; position: absolute; left: 55%; top: 50%; transform: translate(-50%, -50%); text-align: center;"
+  >
+    Loading history
   </div>
-</styled.div>
+</div>
 `;

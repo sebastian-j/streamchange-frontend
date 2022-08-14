@@ -1,62 +1,159 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
-<styled.div>
-  <styled.div>
-    <div
-      className="dialog"
+<div
+  class="sc-gKclnd cagHsQ"
+>
+  <span
+    class="sc-crHmcD tfGha"
+  >
+    Welcome to StreamChange
+  </span>
+  <div>
+    <span
+      class="sc-crHmcD tfGha"
     >
+      Select theme
+    </span>
+    <label
+      for="themeLight"
+    >
+      <input
+        checked=""
+        class="sc-jrQzAO fyoflt"
+        id="themeLight"
+        name="theme"
+        type="radio"
+        value="0"
+      />
       <div
-        className="title"
+        class="sc-iCfMLu cFgZXk box left"
       >
-        <FormattedMessage
-          defaultMessage="Choose stream"
-          id="streamchange.components.WelcomeDialog.title"
-          values={Object {}}
+        <img
+          alt="light"
+          src="IMAGE_MOCK"
         />
+        <span
+          class="sc-iqseJM kVtlPs"
+        >
+          Light
+        </span>
       </div>
+    </label>
+    <label
+      for="themeDark"
+    >
+      <input
+        class="sc-jrQzAO fyoflt"
+        id="themeDark"
+        name="theme"
+        type="radio"
+        value="1"
+      />
       <div
-        className="content"
+        class="sc-iCfMLu cFgZXk box right"
       >
-        <FormattedMessage
-          defaultMessage="Paste stream url"
-          id="streamchange.components.WelcomeDialog.videoInput.label"
-          values={Object {}}
+        <img
+          alt="dark"
+          src="IMAGE_MOCK"
+        />
+        <span
+          class="sc-iqseJM kVtlPs"
         >
-          [Function]
-        </FormattedMessage>
-        <div
-          className="text"
-        >
-          <span
-            style={
-              Object {
-                "fontSize": "0.8rem",
-              }
-            }
-          >
-            <FormattedMessage
-              defaultMessage="Example: https://www.youtube.com/watch?v=CBUBY45me_A"
-              id="streamchange.components.WelcomeDialog.example"
-              values={Object {}}
-            />
-          </span>
-        </div>
+          Dark
+        </span>
       </div>
+    </label>
+  </div>
+  <div>
+    <span
+      class="sc-crHmcD tfGha"
+    >
+      Select language
+    </span>
+    <label
+      for="pl"
+    >
+      <input
+        class="sc-jrQzAO fyoflt"
+        id="pl"
+        name="language"
+        type="radio"
+        value="pl"
+      />
       <div
-        className="actions"
+        class="sc-furwcr jwWrlj box left"
       >
-        <FormattedMessage
-          defaultMessage="OK"
-          id="streamchange.components.WelcomeDialog.saveBtn"
-          values={Object {}}
+        <span
+          class="sc-pVTFL bwKJHy"
         >
-          [Function]
-        </FormattedMessage>
+          <img
+            alt="pl"
+            src="IMAGE_MOCK"
+          />
+          pl
+        </span>
       </div>
-    </div>
-    <WelcomeHint />
-  </styled.div>
-  <CookieConsent />
-</styled.div>
+    </label>
+    <label
+      for="en"
+    >
+      <input
+        checked=""
+        class="sc-jrQzAO fyoflt"
+        id="en"
+        name="language"
+        type="radio"
+        value="en"
+      />
+      <div
+        class="sc-furwcr jwWrlj box right"
+      >
+        <span
+          class="sc-pVTFL bwKJHy"
+        >
+          <img
+            alt="en"
+            src="IMAGE_MOCK"
+          />
+          en
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <button
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root sc-kDTinF gATzTG css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <span>
+        Save
+      </span>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    class="sc-eCImPb hlVgAE"
+  >
+    <img
+      alt="cookie"
+      class="sc-hKwDye jsDaCH"
+      src="IMAGE_MOCK"
+    />
+    <span
+      class="sc-dkPtRN FxaGp"
+    >
+      This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+    </span>
+    <button
+      class="sc-gsDKAQ jgVlOy"
+      type="button"
+    >
+      Accept
+    </button>
+  </div>
+</div>
 `;

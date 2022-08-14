@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import Button from '@mui/material/Button';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
@@ -61,6 +61,7 @@ const StyledButton = styled(Button)`
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
   useInjectSaga({ key: 'giveawayPage', saga: saga });
+  const intl = useIntl();
 
   const leaveStream = () => {
     const streamProps = {
@@ -166,23 +167,24 @@ const GiveawayPage = (props) => {
 
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
-      <WelcomeDialog
-        passVideo={receiveVideo}
-        ban={props.ban}
-        error={error}
-        variant={0}
-      />
+      <>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        </Helmet>
+        <WelcomeDialog
+          passVideo={receiveVideo}
+          ban={props.ban}
+          error={error}
+          variant={0}
+        />
+      </>
     );
   }
   return (
-    <div>
-      <FormattedMessage {...messages.pageTitle}>
-        {(title) => (
-          <Helmet>
-            <title>{title}</title>
-          </Helmet>
-        )}
-      </FormattedMessage>
+    <>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      </Helmet>
       <TopBar>
         <StreamInfo>
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
@@ -200,7 +202,7 @@ const GiveawayPage = (props) => {
         </TopButtons>
       </TopBar>
       <YoutubeWorker videoId={props.streamInfo.videoId} apiKey={API_KEY} />
-    </div>
+    </>
   );
 };
 
