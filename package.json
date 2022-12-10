@@ -74,7 +74,7 @@
     "connected-react-router": "^6.9.1",
     "cross-env": "^7.0.3",
     "dexie": "^2.0.4",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "fontfaceobserver": "2.1.0",
     "history": "^4.10.1",
     "hoist-non-react-statics": "3.3.0",
