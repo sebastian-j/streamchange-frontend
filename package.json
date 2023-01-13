@@ -179,7 +179,7 @@
     "jest-cli": "^26.6.3",
     "jest-dom": "^4.0.0",
     "jest-styled-components": "^7.0.5",
-    "lint-staged": "8.1.5",
+    "lint-staged": "13.1.0",
     "loader-utils": "^3.2.0",
     "ngrok": "^4.3.1",
     "node-plop": "^0.26.3",
