@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
-import { FormattedMessage } from 'react-intl';
+import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { CompatibilityInfo } from './components/CompatibilityInfo';
@@ -11,9 +10,11 @@ import CookieConsent from './CookieConsent';
 import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import { PhotoBackdrop } from './components/PhotoBackdrop';
+import WavyButton from './components/WavyButton';
 import WelcomeHint from './WelcomeHint';
 
 const WelcomeDialog = (props) => {
+  const intl = useIntl();
   const [videoLink, setVideoLink] = useState('');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
@@ -59,22 +60,19 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-              <FormattedMessage {...messages.videoInputLabel}>
-                {(label) => (
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    name="videoLink"
-                    onChange={handleInputValueChange}
-                    onKeyPress={handleKeyPress}
-                    id="videoLink"
-                    label={label}
-                    type="text"
-                    value={videoLink}
-                    fullWidth
-                  />
-                )}
-              </FormattedMessage>
+              <TextField
+                autoFocus
+                margin="dense"
+                name="videoLink"
+                onChange={handleInputValueChange}
+                onKeyPress={handleKeyPress}
+                id="videoLink"
+                label={intl.formatMessage({...messages.videoInputLabel})}
+                type="text"
+                value={videoLink}
+                variant="standard"
+                fullWidth
+              />
               <div className="text">
                 <span style={{ fontSize: '0.8rem' }}>
                   <FormattedMessage {...messages.example} />
@@ -107,9 +105,7 @@ const WelcomeDialog = (props) => {
             </div>
             <div className="actions">
               {!isLoading && (
-                <Button onClick={sendVideoLink} color="primary">
-                  <FormattedMessage {...messages.saveBtn} />
-                </Button>
+                <WavyButton onClick={sendVideoLink} text={intl.formatMessage({...messages.saveBtn})}/>
               )}
               {isLoading && <CircularProgress />}
             </div>

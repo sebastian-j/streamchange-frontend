@@ -4,85 +4,122 @@ exports[`<AdFrame /> should render and match the snapshot 1`] = `
 <div>
   <styled.div>
     <span>
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers."
         id="streamchange.components.AdFrame.emptyAdPlaceholder"
-        values={Object {}}
       />
     </span>
-    <WithStyles(ForwardRef(Button))
+    <ForwardRef(Button)
       color="primary"
       onClick={[Function]}
     >
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="Show the details"
         id="streamchange.components.AdFrame.showMoreButton"
-        values={Object {}}
       />
-    </WithStyles(ForwardRef(Button))>
+    </ForwardRef(Button)>
   </styled.div>
-  <WithStyles(ForwardRef(Dialog))
+  <ForwardRef(Dialog)
     aria-labelledby="form-dialog-title"
     onClose={[Function]}
     open={false}
   >
-    <WithStyles(ForwardRef(DialogTitle))
+    <ForwardRef(DialogTitle)
       id="form-dialog-title"
     >
-      <FormattedMessage
+      <Memo(MemoizedFormattedMessage)
         defaultMessage="Information for advertisers"
         id="streamchange.components.AdFrame.dialogTitle"
-        values={Object {}}
       />
-    </WithStyles(ForwardRef(DialogTitle))>
-    <WithStyles(ForwardRef(DialogContent))>
-      <WithStyles(ForwardRef(DialogContentText))>
-        <FormattedMessage
+    </ForwardRef(DialogTitle)>
+    <ForwardRef(DialogContent)>
+      <ForwardRef(DialogContentText)>
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="There are three possible forms of ad: Youtube channel (clickable logo, title, few sentences), Youtube video (embedded video with some text), clickable banner."
           id="streamchange.components.AdFrame.dialogFirstLine"
-          values={Object {}}
         />
-      </WithStyles(ForwardRef(DialogContentText))>
-      <WithStyles(ForwardRef(DialogContentText))>
-        <FormattedMessage
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="If you chose full version, your ad will be displayed on every stream that will show streamchange app that day. Bank transfer is a preferred payment method."
           id="streamchange.components.AdFrame.dialogSecondLine"
-          values={Object {}}
         />
-      </WithStyles(ForwardRef(DialogContentText))>
-      <WithStyles(ForwardRef(DialogContentText))>
-        <FormattedMessage
+        <styled.a
+          href="/docs/advertisers-rules"
+          target="_blank"
+        >
+          <Memo(MemoizedFormattedMessage)
+            defaultMessage="Guidelines for advertisers"
+            id="streamchange.components.AdFrame.dialogRulesLink"
+          />
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <g>
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              />
+            </g>
+          </svg>
+        </styled.a>
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Contact:"
           id="streamchange.components.AdFrame.dialogThirdLine"
-          values={Object {}}
         />
-        <WithStyles(ForwardRef(Typography))>
+        <ForwardRef(Typography)>
           Discord: Baf#5501
-        </WithStyles(ForwardRef(Typography))>
+        </ForwardRef(Typography)>
         <styled.a
           href="https://www.facebook.com/BafYT/"
         >
-          https://www.facebook.com/BafYT/
+          Facebook Baf
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <g>
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              />
+            </g>
+          </svg>
         </styled.a>
+      </ForwardRef(DialogContentText)>
+      <ForwardRef(DialogContentText)>
         <styled.a
           href="https://www.instagram.com/grafika3d/"
         >
           Instagram grafika3d
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <g>
+              <path
+                d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+              />
+            </g>
+          </svg>
         </styled.a>
-      </WithStyles(ForwardRef(DialogContentText))>
-    </WithStyles(ForwardRef(DialogContent))>
-    <WithStyles(ForwardRef(DialogActions))>
-      <WithStyles(ForwardRef(Button))
+      </ForwardRef(DialogContentText)>
+    </ForwardRef(DialogContent)>
+    <ForwardRef(DialogActions)>
+      <ForwardRef(Button)
         color="secondary"
         onClick={[Function]}
       >
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Close"
           id="streamchange.components.AdFrame.dialogCloseButton"
-          values={Object {}}
         />
-      </WithStyles(ForwardRef(Button))>
-    </WithStyles(ForwardRef(DialogActions))>
-  </WithStyles(ForwardRef(Dialog))>
+      </ForwardRef(Button)>
+    </ForwardRef(DialogActions)>
+  </ForwardRef(Dialog)>
 </div>
 `;

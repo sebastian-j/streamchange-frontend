@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/Menu';
-import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/Menu';
+import Tooltip from '@mui/material/Tooltip';
 
 import db from '../YoutubeWorker/db';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -14,6 +14,7 @@ import { Counts } from './components/Counts';
 import FilterChips from './FilterChips';
 import { Header } from './components/Header';
 import { HeaderButtons } from './components/HeaderButtons';
+import { SkipListLink } from './components/SkipListLink';
 import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../StyledTextField';
 import { ThemedSvg } from './components/ThemedSvg';
@@ -358,10 +359,14 @@ const UserList = (props: Props) => {
             label={placeholder}
             type="text"
             value={searchQuery}
+            variant="standard"
             fullWidth
           />
         )}
       </FormattedMessage>
+      <SkipListLink href="#purge-user-list-btn">
+        <FormattedMessage { ...messages.skipListLinkText} />
+      </SkipListLink>
       <ul>
         {getUsers().map((item) => (
           <UserItem
@@ -376,8 +381,10 @@ const UserList = (props: Props) => {
           />
         ))}
       </ul>
-      <StyledButton onClick={props.purgeList}>
-        <FormattedMessage {...messages.clearBtn} />
+      <StyledButton id="purge-user-list-btn" onClick={props.purgeList} color="inherit">
+        <span>
+          <FormattedMessage {...messages.clearBtn} />
+        </span>
       </StyledButton>
       <Counts>
         <FormattedMessage

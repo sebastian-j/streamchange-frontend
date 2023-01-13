@@ -7,7 +7,7 @@ exports[`<ColorPicker /> should render and match the snapshot 1`] = `
   <div
     className="color-picker-label"
   />
-  <button
+  <styled.button
     aria-label="toggle picker"
     className="color-picker-button"
     onClick={[Function]}
@@ -17,6 +17,21 @@ exports[`<ColorPicker /> should render and match the snapshot 1`] = `
       }
     }
     type="button"
-  />
+  >
+    <span
+      className="border border-initial"
+    />
+    <svg
+      className="border border-hover"
+      fill="none"
+    >
+      <circle
+        cx="50%"
+        cy="50%"
+        pathLength="1"
+        r="32.5"
+      />
+    </svg>
+  </styled.button>
 </div>
 `;

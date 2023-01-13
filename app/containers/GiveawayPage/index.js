@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { FormattedMessage } from 'react-intl';
+import Button from '@mui/material/Button';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
@@ -60,6 +61,7 @@ const StyledButton = styled(Button)`
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
   useInjectSaga({ key: 'giveawayPage', saga: saga });
+  const intl = useIntl();
 
   const leaveStream = () => {
     const streamProps = {
@@ -165,22 +167,32 @@ const GiveawayPage = (props) => {
 
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
-      <WelcomeDialog
-        passVideo={receiveVideo}
-        ban={props.ban}
-        error={error}
-        variant={0}
-      />
+      <>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        </Helmet>
+        <WelcomeDialog
+          passVideo={receiveVideo}
+          ban={props.ban}
+          error={error}
+          variant={0}
+        />
+      </>
     );
   }
   return (
-    <div>
+    <>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      </Helmet>
       <TopBar>
         <StreamInfo>
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
           <StreamTitle>{props.streamInfo.title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
-            <FormattedMessage {...messages.leaveStreamBtn} />
+            <span>
+              <FormattedMessage {...messages.leaveStreamBtn} />
+            </span>
           </StyledButton>
         </StreamInfo>
         <TopButtons>
@@ -190,7 +202,7 @@ const GiveawayPage = (props) => {
         </TopButtons>
       </TopBar>
       <YoutubeWorker videoId={props.streamInfo.videoId} apiKey={API_KEY} />
-    </div>
+    </>
   );
 };
 

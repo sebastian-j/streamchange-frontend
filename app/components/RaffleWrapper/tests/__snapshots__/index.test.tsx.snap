@@ -3,24 +3,23 @@
 exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root sc-kDTinF cEaVdy MuiFormControl-marginNormal"
+    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF csSHwk css-ufpu9p-MuiFormControl-root"
   >
     <label
-      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+      className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink={true}
       id="animation-select"
     >
-      <span>
-        Animation
-      </span>
+      Animation
     </label>
     <div
-      className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-88nv5c-MuiInputBase-root-MuiInput-root-MuiSelect-root"
       onClick={[Function]}
     >
       <div
+        aria-expanded="false"
         aria-haspopup="listbox"
-        className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+        className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
         onBlur={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
@@ -28,13 +27,12 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
         role="button"
         tabIndex={0}
       >
-        <span>
-          CS:GO case opening
-        </span>
+        CS:GO case opening
       </div>
       <input
         aria-hidden={true}
-        className="MuiSelect-nativeInput"
+        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        disabled={false}
         onAnimationStart={[Function]}
         onChange={[Function]}
         required={false}
@@ -43,7 +41,8 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
       />
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSelect-icon"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
       >
@@ -56,13 +55,15 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
   <div
     className="sc-iCfMLu hMAwuh"
   >
-    <div
-      className="sc-furwcr eBLZaS"
+    <label
+      className="sc-furwcr PHDDM"
+      htmlFor="number-display"
     >
       Animation duration (seconds)
-    </div>
+    </label>
     <button
-      className="sc-pVTFL dVNenI"
+      aria-label="Decrease by one"
+      className="sc-pVTFL jehgPn"
       onClick={[Function]}
       type="button"
     >
@@ -70,11 +71,13 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </button>
     <input
       className="sc-jrQzAO eJQxxo"
+      id="number-display"
       onChange={[Function]}
       value={7}
     />
     <button
-      className="sc-pVTFL jOKNtY"
+      aria-label="Increase by one"
+      className="sc-pVTFL jIQTEr"
       onClick={[Function]}
       type="button"
     >
@@ -82,14 +85,15 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </button>
   </div>
   <button
-    className="sc-iqseJM dYCYFG"
+    className="sc-iqseJM fbNTGH"
     disabled={false}
     onClick={[Function]}
     type="button"
   >
-    <span>
-      Roll it!
-    </span>
+    Roll it!
+    <div
+      className="btn-hover"
+    />
   </button>
 </div>
 `;

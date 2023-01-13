@@ -43,4 +43,8 @@ export default defineMessages({
     id: `${scope}.dialogCloseButton`,
     defaultMessage: 'Close',
   },
+  adDialogRulesLink: {
+    id: `${scope}.dialogRulesLink`,
+    defaultMessage: 'Guidelines for advertisers',
+  }
 });

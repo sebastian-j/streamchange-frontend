@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import IconButton from '@material-ui/core/IconButton';
-import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
+import LinearProgress from '@mui/material/LinearProgress';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
@@ -20,6 +21,7 @@ import { TableFooter } from './components/TableFooter';
 import { HistoryItem } from './types';
 
 const HistoryPage = () => {
+  const intl = useIntl();
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [items, setItems] = useState<HistoryItem[]>([]);
@@ -78,6 +80,9 @@ const HistoryPage = () => {
   if (error) {
     return (
       <div>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        </Helmet>
         <FormattedMessage {...messages.infoError} />
       </div>
     );
@@ -85,6 +90,9 @@ const HistoryPage = () => {
   if (!isLoaded) {
     return (
       <PageWrapper>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        </Helmet>
         <LinearProgress />
         <div
           style={{
@@ -103,6 +111,9 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({...messages.pageTitle})}</title>
+      </Helmet>
       <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
           <div>
@@ -122,20 +133,17 @@ const HistoryPage = () => {
         </ReturnButton>
         <HistoryMenu onClear={getHistory} />
       </PageHeader>
-      <FormattedMessage {...messages.searchLabel}>
-        {(label) => (
-          <StyledTextField
-            id="search"
-            name="search"
-            label={label}
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.target.value)}
-            type="text"
-            margin="normal"
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
+      <StyledTextField
+        id="search"
+        name="search"
+        label={intl.formatMessage({...messages.searchLabel})}
+        value={searchQuery}
+        variant="standard"
+        onChange={(event) => setSearchQuery(event.target.value)}
+        type="text"
+        margin="normal"
+        fullWidth
+      />
       {searchQuery.length > 0 && items.length === 0 && (
         <InformationText>
           <FormattedMessage {...messages.infoNoResults} />
@@ -185,6 +193,7 @@ const HistoryPage = () => {
           </InputLabel>
           <Select
             value={maxResults}
+            variant="standard"
             onChange={(event) => {
               setMaxResults(Number(event.target.value));
             }}

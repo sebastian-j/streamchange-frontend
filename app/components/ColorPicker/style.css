@@ -4,14 +4,6 @@
   margin: 3px;
 }
 
-.color-picker-button {
-  border: 1px gray solid;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  outline: none;
-}
-
 .color-picker-label {
   margin: 5px 10px 0 0;
 }

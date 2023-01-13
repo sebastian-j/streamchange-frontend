@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
+
+import messages from './messages';
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const Label = styled.div`
+const Label = styled.label`
   color: ${(props) => props.theme.staticTextColor};
+  font-family: inherit;
   line-height: 30px;
   margin-right: 5px;
 `;
@@ -28,6 +32,9 @@ const Button = styled.button`
     `
     border-radius: 4px 0 0 4px;
   `}
+  &:focus-visible {
+    background-color: ${(props) => props.theme.color};
+  }
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover};
     color: ${(props) => props.theme.buttonTextColorHover};
@@ -45,6 +52,8 @@ const NumberDisplay = styled.input`
 `;
 
 const NumericInput = (props) => {
+  const intl = useIntl();
+
   const checkValue = (value) => {
     let val = value;
     if (val < props.minValue && val !== '') val = props.minValue;
@@ -72,15 +81,16 @@ const NumericInput = (props) => {
   };
   return (
     <Container>
-      <Label>{props.label}</Label>
-      <Button left="true" onClick={dec} type="button">
+      <Label htmlFor="number-display">{props.label}</Label>
+      <Button aria-label={intl.formatMessage({...messages.decreaseButton})} left="true" onClick={dec} type="button">
         -
       </Button>
       <NumberDisplay
+        id="number-display"
         value={props.value}
         onChange={(event) => checkValue(event.target.value)}
       />
-      <Button onClick={inc} type="button">
+      <Button aria-label={intl.formatMessage({...messages.increaseButton})} onClick={inc} type="button">
         +
       </Button>
     </Container>

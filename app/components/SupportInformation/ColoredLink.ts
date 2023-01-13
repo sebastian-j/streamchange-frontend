@@ -7,7 +7,7 @@ const ColoredLink = styled.a`
   font-size: 14px;
   font-weight: 500;
   height: 20px;
-  padding: 5px 0;
+  margin: 5px 0;
   text-decoration: none;
   text-transform: uppercase;
   span {

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { FormattedMessage } from 'react-intl';
-import { withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import { CloseButton } from './components/CloseButton';
@@ -17,16 +16,6 @@ import { Title } from './components/Title';
 import { UserBar } from './components/UserBar';
 import { UserBarColumn } from './components/UserBarColumn';
 import { deleteQueueItem, updateQueueItem } from '../actions';
-
-const ExtendedTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: 'rgba(225,246,246,0.9)',
-    color: 'rgba(0, 0, 0, 0.87)',
-    maxWidth: '300px',
-    fontSize: theme.typography.pxToRem(15),
-    border: '1px solid #949499',
-  },
-}))(Tooltip);
 
 export const QueueItem = (props) => {
   const [editMode, setEditMode] = useState(false);
@@ -124,7 +113,7 @@ export const QueueItem = (props) => {
 
   return (
     <li>
-      <ExtendedTooltip
+      <Tooltip
         title={
           <>
             <div>
@@ -166,7 +155,7 @@ export const QueueItem = (props) => {
             </CloseButton>
           </div>
         </UserBar>
-      </ExtendedTooltip>
+      </Tooltip>
     </li>
   );
 };

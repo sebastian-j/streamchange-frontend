@@ -8,6 +8,14 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.containers.QueuePage';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.title`,
+    defaultMessage: 'StreamChange Queue',
+  },
+  cancelBtn: {
+    id: 'streamchange.components.SupportInformation.dialogCloseButton',
+    defaultMessage: 'Close',
+  },
   leaveStreamBtn: {
     id: 'streamchange.containers.GiveawayPage.leaveStreamBtn',
     defaultMessage: 'Leave stream',

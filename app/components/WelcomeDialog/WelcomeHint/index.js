@@ -73,7 +73,10 @@ const WelcomeHint = () => {
     <Wrapper>
       <HintPanel>
         <ImageButton onClick={changeHint}>
-          <img src={image} alt="light bulb" />
+          <span className="sr-only">
+            <FormattedMessage {...messages.buttonLabel} />
+          </span>
+          <img src={image} alt="light bulb" aria-hidden="true" />
         </ImageButton>
         <div>
           <DialogTitle>

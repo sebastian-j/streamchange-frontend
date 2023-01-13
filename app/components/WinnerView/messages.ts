@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.components.WinnerView';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'wins the draw',
+  },
   panelTitle: {
     id: `${scope}.title`,
     defaultMessage: 'Winner',

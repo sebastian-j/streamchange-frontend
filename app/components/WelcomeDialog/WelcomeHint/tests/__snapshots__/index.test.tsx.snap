@@ -6,17 +6,25 @@ exports[`<WelcomeHint /> should render and match the snapshot 1`] = `
     <styled.button
       onClick={[Function]}
     >
+      <span
+        className="sr-only"
+      >
+        <Memo(MemoizedFormattedMessage)
+          defaultMessage="Draw another curiosity"
+          id="streamchange.components.WelcomeDialog.WelcomeHint.button.label"
+        />
+      </span>
       <img
         alt="light bulb"
+        aria-hidden="true"
         src="IMAGE_MOCK"
       />
     </styled.button>
     <div>
       <styled.span>
-        <FormattedMessage
+        <Memo(MemoizedFormattedMessage)
           defaultMessage="Did you know..."
           id="streamchange.components.WelcomeDialog.WelcomeHint.title"
-          values={Object {}}
         />
       </styled.span>
       <styled.span>

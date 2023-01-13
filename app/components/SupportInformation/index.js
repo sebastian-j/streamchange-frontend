@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import ColoredLink from './ColoredLink';
@@ -33,6 +33,10 @@ export const SupportInformation = (props) => {
         }
       >
         <ToolbarButton onClick={props.openDialog} type="button">
+          <span className="border border-initial" />
+          <svg className="border border-hover" fill="none">
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
+          </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

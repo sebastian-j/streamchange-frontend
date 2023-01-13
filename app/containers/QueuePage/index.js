@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import { StreamTitle } from './components/StreamTitle';
@@ -20,6 +21,7 @@ const QueuePage = () => {
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const [ban, setBan] = useState(null);
+  const intl = useIntl();
 
   const leaveStream = () => {
     setVideoId('');
@@ -112,7 +114,8 @@ const QueuePage = () => {
       const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
     } else if (videoLink === 'test') {
-      setVideoId(null);
+      setVideoId('test');
+      setTitle('');
       setThumbnailUrl('https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg');
     } else {
       setError('invalidUrl');
@@ -128,22 +131,32 @@ const QueuePage = () => {
 
   if (videoId === '') {
     return (
-      <WelcomeDialog
-        passVideo={receiveVideo}
-        ban={ban}
-        error={error}
-        variant={1}
-      />
+      <>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        </Helmet>
+        <WelcomeDialog
+          passVideo={receiveVideo}
+          ban={ban}
+          error={error}
+          variant={1}
+        />
+      </>
     );
   }
   return (
-    <div>
+    <>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      </Helmet>
       <TopBar>
         <div>
           <img alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
-            <FormattedMessage {...messages.leaveStreamBtn} />
+            <span>
+              <FormattedMessage {...messages.leaveStreamBtn} />
+            </span>
           </StyledButton>
         </div>
         <TopButtons>
@@ -152,7 +165,7 @@ const QueuePage = () => {
         </TopButtons>
       </TopBar>
       <QueueWorker videoId={videoId} />
-    </div>
+    </>
   );
 };
 

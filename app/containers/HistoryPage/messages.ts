@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.containers.History';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.title`,
+    defaultMessage: 'Winner history',
+  },
   dateHeader: {
     id: `${scope}.header.date`,
     defaultMessage: 'Date and time',

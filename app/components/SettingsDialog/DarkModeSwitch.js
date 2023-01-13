@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import { FormattedMessage } from 'react-intl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { useIntl } from 'react-intl';
 
 import messages from './messages';
 import { makeSelectDarkMode } from '../../containers/StyleProvider/selectors';
 import { toggleDarkMode } from '../../containers/StyleProvider/actions';
 
 const DarkModeSwitch = (props) => {
+  const intl = useIntl();
   const [state, setState] = useState(false);
 
   useEffect(() => {
@@ -25,16 +26,12 @@ const DarkModeSwitch = (props) => {
 
   return (
     <div>
-      <FormattedMessage {...messages.darkModeLabel}>
-        {(label) => (
-          <FormControlLabel
-            control={
-              <Switch checked={state} onChange={handleChange} color="primary" />
-            }
-            label={label}
-          />
-        )}
-      </FormattedMessage>
+      <FormControlLabel
+        control={
+          <Switch checked={state} onChange={handleChange} color="primary" />
+        }
+        label={intl.formatMessage({...messages.darkModeLabel})}
+      />
     </div>
   );
 };

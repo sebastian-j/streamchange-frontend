@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import { FormattedMessage, useIntl } from 'react-intl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import messages from './messages';
 import {
@@ -34,14 +34,32 @@ const StartButton = styled.button`
   font-size: 1.2rem;
   margin-top: 10px;
   padding: 10px 0;
+  position: relative;
+  transition: text-shadow .2s linear .3s;
   width: 100%;
+  z-index: 0;
+  .btn-hover {
+    background-color: ${(props) => props.theme.color};
+    clip-path: ellipse(50% 180% at 50% 310%);
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: clip-path 1s cubic-bezier(.215,.61,.355,1);
+    width: 100%;
+    z-index: -1;
+  }
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
+    transition: text-shadow 0s;
+    .btn-hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
   }
 `;
 
 export const RaffleWrapper = (props) => {
+  const intl = useIntl();
   const [noUsers, setNoUsers] = useState(false);
 
   const openDialog = () => {
@@ -73,6 +91,7 @@ export const RaffleWrapper = (props) => {
         <Select
           onChange={(event) => props.changeAnimationType(event.target.value)}
           value={props.animationType}
+          variant="standard"
         >
           <MenuItem value={0}>
             <FormattedMessage {...messages.raffleTypeCS} />
@@ -82,23 +101,20 @@ export const RaffleWrapper = (props) => {
           </MenuItem>
         </Select>
       </StyledFormControl>
-      <FormattedMessage {...messages.animationDuration}>
-        {(label) => (
-          <NumericInput
-            label={label}
-            minValue={1}
-            maxValue={600}
-            value={props.animationDuration}
-            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-          />
-        )}
-      </FormattedMessage>
+      <NumericInput
+        label={intl.formatMessage({...messages.animationDuration})}
+        minValue={1}
+        maxValue={600}
+        value={props.animationDuration}
+        onChange={(ret) => props.changeAnimationDuration(Number(ret))}
+      />
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
         {noUsers ? (
           <FormattedMessage {...messages.noUserSelected} />
         ) : (
           <FormattedMessage {...messages.startBtn} />
         )}
+        <div className="btn-hover" />
       </StartButton>
       {props.isOpen && props.animationType === 0 && (
         <CSGORaffle

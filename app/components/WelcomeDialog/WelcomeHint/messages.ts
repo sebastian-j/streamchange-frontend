@@ -3,6 +3,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.components.WelcomeDialog';
 
 export default defineMessages({
+  buttonLabel: {
+    id: `${scope}.WelcomeHint.button.label`,
+    defaultMessage: 'Draw another curiosity'
+  },
   hintTitle: {
     id: `${scope}.WelcomeHint.title`,
     defaultMessage: 'Did you know...',

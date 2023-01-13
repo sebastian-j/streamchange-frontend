@@ -7,26 +7,28 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
   <h2
     class="sc-gsDKAQ gzLYbA"
   >
-    <span>
-      Queue rules
-    </span>
+    Queue rules
   </h2>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiTextField-root sc-hKwDye fWArNR MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwDye fWArNR css-1z10yd4-MuiFormControl-root-MuiTextField-root"
+    data-mui-internal-clone-element="true"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="false"
+      for="mui-1"
+      id="mui-1-label"
     >
       Command for joining the queue
     </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-ghsjzk-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        id="mui-1"
         name="command"
         type="text"
         value=""
@@ -35,20 +37,24 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
   </div>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiTextField-root sc-hKwDye fWArNR MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwDye fWArNR css-1z10yd4-MuiFormControl-root-MuiTextField-root"
+    data-mui-internal-clone-element="true"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
+      for="mui-3"
+      id="mui-3-label"
     >
       Queue capacity
     </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-ghsjzk-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        id="mui-3"
         name="capacity"
         type="number"
         value="10"
@@ -56,20 +62,23 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiTextField-root sc-hKwDye fWArNR MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwDye fWArNR css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
+      for="mui-5"
+      id="mui-5-label"
     >
       Time without any message to mark as inactive (sec)
     </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-ghsjzk-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        id="mui-5"
         name="timeToIdle"
         type="number"
         value="600"
@@ -77,20 +86,23 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiTextField-root sc-hKwDye fWArNR MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwDye fWArNR css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
+      for="mui-6"
+      id="mui-6-label"
     >
       Time without any message to kick (sec)
     </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-ghsjzk-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        id="mui-6"
         name="timeToKick"
         type="number"
         value="900"
@@ -98,20 +110,23 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiTextField-root sc-hKwDye fWArNR MuiFormControl-marginDense MuiFormControl-fullWidth"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwDye fWArNR css-1z10yd4-MuiFormControl-root-MuiTextField-root"
   >
     <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense Mui-focused Mui-focused"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1c2i806-MuiFormLabel-root-MuiInputLabel-root"
       data-shrink="true"
+      for="mui-7"
+      id="mui-7-label"
     >
       Code for OBS widget with queue
     </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth Mui-focused Mui-focused MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense"
+      class="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-ghsjzk-MuiInputBase-root-MuiInput-root"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+        class="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+        id="mui-7"
         name="widgetCode"
         type="password"
         value=""
@@ -122,45 +137,33 @@ exports[`<QueueRules /> should render and match the snapshot 1`] = `
     style="display: inline-block;"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text sc-fotOHu jklEfd"
+      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root sc-fotOHu jklEfd css-1e6y48t-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
-      <span
-        class="MuiButton-label"
-      >
-        <span>
-          Queue widget for OBS
-        </span>
+      <span>
+        Queue widget for OBS
       </span>
       <span
-        class="MuiTouchRipple-root"
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
   </div>
   <div>
     <div
-      class="sc-ksdxgE hetsrT"
+      class="sc-hBUSln iXsoMr"
     >
       <span>
-        <span>
-          This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
-        </span>
+        This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
       </span>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
+        Show the details
         <span
-          class="MuiButton-label"
-        >
-          <span>
-            Show the details
-          </span>
-        </span>
-        <span
-          class="MuiTouchRipple-root"
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
     </div>

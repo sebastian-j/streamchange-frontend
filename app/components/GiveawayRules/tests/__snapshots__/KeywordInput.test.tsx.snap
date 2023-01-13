@@ -2,17 +2,17 @@
 
 exports[`<KeywordInput /> should render and match the snapshot 1`] = `
 <div
-  aria-describedby={null}
   aria-label="keyword"
-  className="MuiFormControl-root MuiTextField-root sc-bdvvtL gENRTb MuiFormControl-marginDense MuiFormControl-fullWidth"
+  aria-labelledby={null}
+  className="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-bdvvtL gENRTb css-1z10yd4-MuiFormControl-root-MuiTextField-root"
+  data-mui-internal-clone-element={true}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   onTouchEnd={[Function]}
   onTouchStart={[Function]}
-  title={null}
 >
   <label
-    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense"
+    className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
     data-shrink={false}
     htmlFor="keyword"
     id="keyword-label"
@@ -20,13 +20,13 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
     Keyword
   </label>
   <div
-    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd MuiInputBase-marginDense MuiInput-marginDense"
+    className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd css-ghsjzk-MuiInputBase-root-MuiInput-root"
     onClick={[Function]}
   >
     <input
       aria-invalid={false}
       autoFocus={false}
-      className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiInputBase-inputMarginDense MuiInput-inputMarginDense"
+      className="MuiInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
       disabled={false}
       id="keyword"
       name="keyword"
@@ -39,12 +39,13 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
       value=""
     />
     <div
-      className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-marginDense"
+      className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-standard MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
     >
       <button
-        aria-describedby={null}
         aria-label="toggle keyword visibility"
+        aria-labelledby={null}
         className="sc-dkPtRN evjlnr"
+        data-mui-internal-clone-element={true}
         name="showKeyword"
         onBlur={[Function]}
         onClick={[Function]}
@@ -53,7 +54,6 @@ exports[`<KeywordInput /> should render and match the snapshot 1`] = `
         onMouseOver={[Function]}
         onTouchEnd={[Function]}
         onTouchStart={[Function]}
-        title={null}
         type="button"
       >
         <svg

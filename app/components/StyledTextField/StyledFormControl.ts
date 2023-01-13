@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
+import FormControl from '@mui/material/FormControl';
 
 const StyledFormControl = styled(FormControl)`
   width: 100%;
@@ -9,10 +9,11 @@ const StyledFormControl = styled(FormControl)`
   svg {
     color: ${(props) => props.theme.staticTextColor};
   }
-  label span {
+  label {
+    left: -12px;
     color: ${(props) => props.theme.inputLabel};
   }
-  label.Mui-focused span {
+  label.Mui-focused {
     color: ${(props) => props.theme.color};
   }
   .MuiInput-input {

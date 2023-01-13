@@ -11,10 +11,9 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <FormattedMessage
+          <Memo(MemoizedFormattedMessage)
             defaultMessage="Channel name"
             id="streamchange.containers.History.header.name"
-            values={Object {}}
           />
           <ArrowUpIcon
             className=""
@@ -27,10 +26,9 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <FormattedMessage
+          <Memo(MemoizedFormattedMessage)
             defaultMessage="Prize"
             id="streamchange.containers.History.header.prize"
-            values={Object {}}
           />
           <ArrowUpIcon
             className=""
@@ -43,10 +41,9 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <FormattedMessage
+          <Memo(MemoizedFormattedMessage)
             defaultMessage="Message"
             id="streamchange.containers.History.header.message"
-            values={Object {}}
           />
           <ArrowUpIcon
             className=""
@@ -59,10 +56,9 @@ exports[`<HistoryTable /> should render and match the snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <FormattedMessage
+          <Memo(MemoizedFormattedMessage)
             defaultMessage="Date and time"
             id="streamchange.containers.History.header.date"
-            values={Object {}}
           />
           <ArrowUpIcon
             className="active descending"

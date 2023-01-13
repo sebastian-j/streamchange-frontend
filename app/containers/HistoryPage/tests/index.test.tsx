@@ -1,14 +1,17 @@
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 
 import HistoryPage from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<HistoryPage />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<HistoryPage />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const {
+      container: { firstChild },
+    } = render(
+      <IntlProvider locale="en">
+        <HistoryPage />
+      </IntlProvider>);
+    expect(firstChild).toMatchSnapshot();
   });
 });

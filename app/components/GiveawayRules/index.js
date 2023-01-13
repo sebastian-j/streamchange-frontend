@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import messages from './messages';
 import {
@@ -19,6 +19,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 import KeywordInput from './KeywordInput';
+import LotteryLawWarning from './LotteryLawWarning';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
 
@@ -72,8 +73,10 @@ export class GiveawayRules extends React.Component {
             <FormattedMessage {...messages.userTypeLabel} />
           </InputLabel>
           <Select
+            labelId="user-type-select"
             onChange={(event) => this.props.changeReq(event.target.value)}
             value={this.props.requirement}
+            variant="standard"
           >
             <MenuItem value={0}>
               <FormattedMessage {...messages.allViewers} />
@@ -95,12 +98,14 @@ export class GiveawayRules extends React.Component {
               label={label}
               type="text"
               value={this.props.prize}
+              variant="standard"
               fullWidth
             />
           )}
         </FormattedMessage>
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
+        <LotteryLawWarning open={this.props.requirement === 1} />
         <AdFrame />
       </Panel>
     );

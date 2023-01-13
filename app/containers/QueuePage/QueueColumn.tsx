@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 import { StyledButton } from './components/StyledButton';
@@ -31,6 +31,7 @@ const QueueColumn = ({
   queueArray,
   widgetCode,
 }: Props) => {
+  const intl = useIntl();
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const getUsers = () => {
@@ -71,20 +72,17 @@ const QueueColumn = ({
       <PanelTitle>
         <FormattedMessage {...messages.panelTitle} />
       </PanelTitle>
-      <FormattedMessage {...messages.searchPlaceholder}>
-        {(placeholder) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="searchQuery"
-            onChange={handleInputValueChange}
-            label={placeholder}
-            type="text"
-            value={searchQuery}
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
+      <StyledTextField
+        autoFocus
+        margin="dense"
+        name="searchQuery"
+        onChange={handleInputValueChange}
+        label={intl.formatMessage({...messages.searchPlaceholder})}
+        type="text"
+        value={searchQuery}
+        variant="standard"
+        fullWidth
+      />
       <ul>
         {queueArray.map((item: QItem) => (
           <QueueItem
@@ -99,7 +97,9 @@ const QueueColumn = ({
         ))}
       </ul>
       <StyledButton onClick={() => purgeQueue()}>
-        <FormattedMessage {...messages.clearBtn} />
+        <span>
+          <FormattedMessage {...messages.clearBtn} />
+        </span>
       </StyledButton>
     </UserListPanel>
   );

@@ -8,10 +8,9 @@ exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
   <styled.span
     margin={1}
   >
-    <FormattedMessage
+    <Memo(MemoizedFormattedMessage)
       defaultMessage="Advertisement"
       id="streamchange.components.AdFrame.title"
-      values={Object {}}
     />
   </styled.span>
   <a

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 import messages from './messages';
 import {
   makeSelectCapacity,
@@ -28,6 +28,7 @@ import AdFrame from '../../components/AdFrame';
 import QueueWidgetDialog from './QueueWidgetDialog';
 
 export const QueueRules = (props) => {
+  const intl = useIntl();
   const handleInputValueChange = (event) => {
     const { target } = event;
     const { value } = target;
@@ -50,99 +51,84 @@ export const QueueRules = (props) => {
       <PanelTitle>
         <FormattedMessage {...messages.rulesPanelTitle} />
       </PanelTitle>
-      <FormattedMessage {...messages.commandTextFieldLabel}>
-        {(label) => (
-          <Tooltip
-            title={
-              <HintParagraph>
-                <FormattedMessage {...messages.commandTextFieldTooltip} />
-              </HintParagraph>
-            }
-            aria-label="keyword"
-          >
-            <StyledTextField
-              autoFocus
-              margin="dense"
-              name="command"
-              onChange={handleInputValueChange}
-              label={label}
-              type="text"
-              value={props.command}
-              fullWidth
-            />
-          </Tooltip>
-        )}
-      </FormattedMessage>
-      <FormattedMessage {...messages.capacityTextFieldLabel}>
-        {(label) => (
-          <Tooltip
-            title={
-              <div>
-                <HintParagraph>
-                  <FormattedMessage {...messages.capacityTextFieldTooltip1} />
-                </HintParagraph>
-                <HintParagraph>
-                  <FormattedMessage {...messages.capacityTextFieldTooltip2} />
-                </HintParagraph>
-              </div>
-            }
-            aria-label="keyword"
-          >
-            <StyledTextField
-              autoFocus
-              margin="dense"
-              name="capacity"
-              onChange={handleInputValueChange}
-              label={label}
-              type="number"
-              value={props.capacity}
-              fullWidth
-            />
-          </Tooltip>
-        )}
-      </FormattedMessage>
-      <FormattedMessage {...messages.timeToIdleTextField}>
-        {(label) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="timeToIdle"
-            onChange={handleInputValueChange}
-            label={label}
-            type="number"
-            value={Number(props.timeToIdle)}
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
-      <FormattedMessage {...messages.timeToKickTextField}>
-        {(label) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="timeToKick"
-            onChange={handleInputValueChange}
-            label={label}
-            type="number"
-            value={Number(props.timeToKick)}
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
-      <FormattedMessage {...messages.widgetCodeTextField}>
-        {(label) => (
-          <StyledTextField
-            autoFocus
-            margin="dense"
-            name="widgetCode"
-            onChange={handleInputValueChange}
-            label={label}
-            type="password"
-            value={props.widgetCode}
-            fullWidth
-          />
-        )}
-      </FormattedMessage>
+      <Tooltip
+        title={
+          <HintParagraph>
+            <FormattedMessage {...messages.commandTextFieldTooltip} />
+          </HintParagraph>
+        }
+        aria-label="keyword"
+      >
+        <StyledTextField
+          autoFocus
+          margin="dense"
+          name="command"
+          onChange={handleInputValueChange}
+          label={intl.formatMessage({...messages.commandTextFieldLabel})}
+          type="text"
+          value={props.command}
+          variant="standard"
+          fullWidth
+        />
+      </Tooltip>
+      <Tooltip
+        title={
+          <div>
+            <HintParagraph>
+              <FormattedMessage {...messages.capacityTextFieldTooltip1} />
+            </HintParagraph>
+            <HintParagraph>
+              <FormattedMessage {...messages.capacityTextFieldTooltip2} />
+            </HintParagraph>
+          </div>
+        }
+        aria-label="keyword"
+      >
+        <StyledTextField
+          autoFocus
+          margin="dense"
+          name="capacity"
+          onChange={handleInputValueChange}
+          label={intl.formatMessage({...messages.capacityTextFieldLabel})}
+          type="number"
+          value={props.capacity}
+          variant="standard"
+          fullWidth
+        />
+      </Tooltip>
+      <StyledTextField
+        autoFocus
+        margin="dense"
+        name="timeToIdle"
+        onChange={handleInputValueChange}
+        label={intl.formatMessage({...messages.timeToIdleTextField})}
+        type="number"
+        value={Number(props.timeToIdle)}
+        variant="standard"
+        fullWidth
+      />
+      <StyledTextField
+        autoFocus
+        margin="dense"
+        name="timeToKick"
+        onChange={handleInputValueChange}
+        label={intl.formatMessage({...messages.timeToKickTextField})}
+        type="number"
+        value={Number(props.timeToKick)}
+        variant="standard"
+        fullWidth
+      />
+      <StyledTextField
+        autoFocus
+        margin="dense"
+        name="widgetCode"
+        onChange={handleInputValueChange}
+        label={intl.formatMessage({...messages.widgetCodeTextField})}
+        type="password"
+        value={props.widgetCode}
+        variant="standard"
+        fullWidth
+      />
       <QueueWidgetDialog />
       <AdFrame />
     </Panel>
