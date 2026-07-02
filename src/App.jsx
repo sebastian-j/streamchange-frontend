@@ -1,5 +1,5 @@
 
-export default function App() {
+export default function App1() {
 return(
 
         <section className="hero p-4 mb-4">
