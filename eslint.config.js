@@ -22,6 +22,9 @@ export default defineConfig([
       'react-hooks/set-state-in-effect': 'warn',
       'react-hooks/immutability': 'warn',
       'react-refresh/only-export-components': 'warn',
+      'no-unused-vars': 'warn',
+      'no-undef': 'warn',
+      'no-useless-assignment': 'warn',
     },
   },
 ]);
