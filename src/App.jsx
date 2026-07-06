@@ -1,14 +1,36 @@
+import React, { useState, useEffect } from 'react';
+import YoutubeWorker from './components/YoutubeWorker';
+import WelcomeDialog from './components/WelcomeDialog'; 
 
-export default function App1() {
-return(
+export default function App() {
+  const [channelConfig, setChannelConfig] = useState(null);
 
-        <section className="hero p-4 mb-4">
-        <div className="row align-items-center">
-          <div className="col-md-8">
-            <h1 className="h3 mb-2">Znajdź towarzystwo na piwo w Krakowie</h1>
-            <p className="text-muted mb-2">Wybierz lokal na mapie i kliknij "Zorganizuj spotkanie", aby zaprosić innych.</p>
-          </div>
-        </div>
-        </section>
-)
+  useEffect(() => {
+    const savedChannel = localStorage.getItem('gv-channel');
+    const savedPlatform = localStorage.getItem('gv-platform');
+    
+    if (savedChannel && savedPlatform) {
+      setChannelConfig({ channel: savedChannel, platform: savedPlatform });
+    }
+  }, []);
+
+  const handleStartStream = (channelName, platformName) => {
+    localStorage.setItem('gv-channel', channelName);
+    localStorage.setItem('gv-platform', platformName);
+    setChannelConfig({ channel: channelName, platform: platformName });
+  };
+
+  if (!channelConfig) {
+    return (
+      <WelcomeDialog onStart={handleStartStream} />
+    );
+  }
+
+  return (
+    <YoutubeWorker 
+      videoId={channelConfig.channel} 
+      platform={channelConfig.platform} 
+      apiKey="test" 
+    />
+  );
 }
