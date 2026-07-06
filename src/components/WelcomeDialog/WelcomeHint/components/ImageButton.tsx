@@ -12,7 +12,6 @@ const Shake = keyframes`
   }
 `;
 
-
 export const ImageButton = styled.button`
   background: none;
   border: none;
@@ -26,8 +25,8 @@ export const ImageButton = styled.button`
       animation: ${Shake} 0.5s linear;
     }
   }
-  &:focus-visible { 
-    outline: solid rgb(71, 230,  243);
+  &:focus-visible {
+    outline: solid rgb(71, 230, 243);
   }
   @media (orientation: portrait) {
     margin: 0 -20px 0 -10px;

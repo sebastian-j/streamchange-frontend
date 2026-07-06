@@ -84,8 +84,8 @@ const UserList = (props: Props) => {
     if (value.length > 0 && value.length < 140) {
       setItems(
         props.userArray.filter((item) =>
-          item.title.toLowerCase().includes(value.toLowerCase()),
-        ),
+          item.title.toLowerCase().includes(value.toLowerCase())
+        )
       );
     } else if (value.length === 0) {
       setItems([]);
@@ -115,7 +115,7 @@ const UserList = (props: Props) => {
             (filters.moderators && user.isModerator) ||
             (filters.sponsors && user.isSponsor) ||
             (filters.verified && user.isVerified) ||
-            (filters.regulars && !user.isModerator && !user.isSponsor),
+            (filters.regulars && !user.isModerator && !user.isSponsor)
         );
       }
     }
@@ -365,7 +365,7 @@ const UserList = (props: Props) => {
         )}
       </FormattedMessage>
       <SkipListLink href="#purge-user-list-btn">
-        <FormattedMessage { ...messages.skipListLinkText} />
+        <FormattedMessage {...messages.skipListLinkText} />
       </SkipListLink>
       <ul>
         {getUsers().map((item) => (
@@ -381,7 +381,11 @@ const UserList = (props: Props) => {
           />
         ))}
       </ul>
-      <StyledButton id="purge-user-list-btn" onClick={props.purgeList} color="inherit">
+      <StyledButton
+        id="purge-user-list-btn"
+        onClick={props.purgeList}
+        color="inherit"
+      >
         <span>
           <FormattedMessage {...messages.clearBtn} />
         </span>

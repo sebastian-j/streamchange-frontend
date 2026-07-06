@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ const SubStatus = (props) => {
   const checkStatus = () => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${props.id}&forChannelId=${props.streamInfo.ownerId}&fields=items/snippet/publishedAt&key=${props.apiKey}`,
+        `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&channelId=${props.id}&forChannelId=${props.streamInfo.ownerId}&fields=items/snippet/publishedAt&key=${props.apiKey}`
       )
       .then((res) => {
         if (res.data.items.length > 0) {

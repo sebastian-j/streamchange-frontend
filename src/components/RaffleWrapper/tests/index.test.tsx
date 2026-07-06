@@ -22,7 +22,7 @@ describe('<RaffleWrapper />', () => {
           <IntlProvider locale="en">
             <RaffleWrapper onWin={() => 0} />
           </IntlProvider>
-        </Provider>,
+        </Provider>
       )
       .toJSON();
     expect(renderedComponent).toMatchSnapshot();

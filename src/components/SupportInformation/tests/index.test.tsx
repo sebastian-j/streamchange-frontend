@@ -19,7 +19,7 @@ describe('<SupportInformation />', () => {
     } = render(
       <Provider store={store}>
         <SupportInformation />
-      </Provider>,
+      </Provider>
     );
     expect(firstChild).toMatchSnapshot();
   });

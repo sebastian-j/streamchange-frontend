@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -20,7 +20,10 @@ const LotteryLawWarning = ({ open }: Props) => {
   };
 
   const openDocs = () => {
-    window.open('https://www.streamchange.pl/docs/lottery-legal-issues','_blank');
+    window.open(
+      'https://www.streamchange.pl/docs/lottery-legal-issues',
+      '_blank'
+    );
   };
 
   useEffect(() => {

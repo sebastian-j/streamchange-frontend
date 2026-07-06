@@ -9,7 +9,7 @@ describe('SupportInformation Actions', () => {
       const fixture = true;
       const expectedResult = action(
         ActionTypes.CHANGE_DIALOG_VISIBILITY,
-        fixture,
+        fixture
       );
 
       expect(changeDialogVisibility(fixture)).toEqual(expectedResult);

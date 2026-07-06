@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -35,7 +34,7 @@ export const SupportInformation = (props) => {
         <ToolbarButton onClick={props.openDialog} type="button">
           <span className="border border-initial" />
           <svg className="border border-hover" fill="none">
-            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1" />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +106,7 @@ const mapStateToProps = createSelector(
   makeSelectDialogVisibility(),
   (isOpen) => ({
     isOpen,
-  }),
+  })
 );
 
 export function mapDispatchToProps(dispatch) {

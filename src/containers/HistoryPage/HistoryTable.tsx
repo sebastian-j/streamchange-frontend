@@ -40,7 +40,7 @@ const HistoryTable = ({ items }: Props) => {
               <ArrowUpIcon
                 className={clsx(
                   sort === 'displayName' && 'active',
-                  sort === 'displayNameDESC' && ['active', 'descending'],
+                  sort === 'displayNameDESC' && ['active', 'descending']
                 )}
               />
             </TableHeaderButton>
@@ -55,7 +55,7 @@ const HistoryTable = ({ items }: Props) => {
               <ArrowUpIcon
                 className={clsx(
                   sort === 'prize' && 'active',
-                  sort === 'prizeDESC' && ['active', 'descending'],
+                  sort === 'prizeDESC' && ['active', 'descending']
                 )}
               />
             </TableHeaderButton>
@@ -70,7 +70,7 @@ const HistoryTable = ({ items }: Props) => {
               <ArrowUpIcon
                 className={clsx(
                   sort === 'message' && 'active',
-                  sort === 'messageDESC' && ['active', 'descending'],
+                  sort === 'messageDESC' && ['active', 'descending']
                 )}
               />
             </TableHeaderButton>
@@ -85,7 +85,7 @@ const HistoryTable = ({ items }: Props) => {
               <ArrowUpIcon
                 className={clsx(
                   sort === 'createdAt' && 'active',
-                  sort === 'createdAtDESC' && ['active', 'descending'],
+                  sort === 'createdAtDESC' && ['active', 'descending']
                 )}
               />
             </TableHeaderButton>

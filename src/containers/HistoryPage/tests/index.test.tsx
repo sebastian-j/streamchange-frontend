@@ -11,7 +11,8 @@ describe('<HistoryPage />', () => {
     } = render(
       <IntlProvider locale="en">
         <HistoryPage />
-      </IntlProvider>);
+      </IntlProvider>
+    );
     expect(firstChild).toMatchSnapshot();
   });
 });

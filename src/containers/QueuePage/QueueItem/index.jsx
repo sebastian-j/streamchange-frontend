@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
@@ -60,7 +60,7 @@ export const QueueItem = (props) => {
     const lastActiveAt = new Date(props.lastActiveAt);
     setIsActive(
       (now.getTime() - lastActiveAt.getTime()) / 1000 <
-        parseInt(localStorage.getItem('queue-timeToIdle'), 10),
+        parseInt(localStorage.getItem('queue-timeToIdle'), 10)
     );
   };
 

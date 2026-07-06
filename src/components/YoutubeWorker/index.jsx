@@ -42,7 +42,7 @@ const YoutubeWorker = (props) => {
       displayName: author.title,
       message: author.message,
       videoId: props.videoId,
-      platform: props.platform
+      platform: props.platform,
     };
     axios
       .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
@@ -53,7 +53,7 @@ const YoutubeWorker = (props) => {
             .filter(
               (message) =>
                 message.authorId === author.id &&
-                message.displayText === author.message,
+                message.displayText === author.message
             )
             .delete();
         }
@@ -76,7 +76,7 @@ const YoutubeWorker = (props) => {
           imageUrl: author.imageUrl,
           message: `${author.title} changed color to ${author.message.replace(
             '!color ',
-            '',
+            ''
           )}`,
         });
         dispatch(changeColor(author.message.replace('!color ', '')));
@@ -98,7 +98,7 @@ const YoutubeWorker = (props) => {
           imageUrl: author.imageUrl,
           message: `${author.title} changed prize to ${author.message.replace(
             '!prize ',
-            '',
+            ''
           )}`,
         });
         dispatch(changePrize(author.message.replace('!prize ', '')));
@@ -123,51 +123,55 @@ const YoutubeWorker = (props) => {
     const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
 
     ws.onopen = () => {
-      console.log(props.videoId)
-      console.log(props.platform)
-      ws.send(JSON.stringify({
-        channel: props.videoId,
-        platform: props.platform
-      }));
+      console.log(props.videoId);
+      console.log(props.platform);
+      ws.send(
+        JSON.stringify({
+          channel: props.videoId,
+          platform: props.platform,
+        })
+      );
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log("Przyszła wiadomość z backendu:", data);
+      console.log('Przyszła wiadomość z backendu:', data);
       const dbMessage = {
         authorId: data.author,
         displayText: data.message,
         publishedAt: new Date().toISOString(),
       };
-      
+
       const chatViewMessage = {
-        imageUrl: "",
+        imageUrl: '',
         isModerator: data.is_moderator,
         isOwner: data.is_streamer,
         isSponsor: data.subscriber > 0,
         isVerified: data.is_vip,
         title: data.author,
-        ...dbMessage
+        ...dbMessage,
       };
 
       dispatch(addMessage(chatViewMessage));
 
-      if (
-        !(dbMessage.displayText === localStorage.getItem('keyword') &&
-        localStorage.getItem('gv-saveCommands') !== 'true')
-      ) {
+      if (!(
+        dbMessage.displayText === localStorage.getItem('keyword') &&
+        localStorage.getItem('gv-saveCommands') !== 'true'
+      )) {
         db.table('messages').add(dbMessage);
       }
 
       const userListAuthor = {
         id: data.author,
-        imageUrl: "",
+        imageUrl: '',
         title: data.author,
         message: data.message,
         isModerator: data.is_moderator,
         isSponsor: data.subscriber > 0,
         isVerified: data.is_vip,
-        isEligible: data.message.toLowerCase().includes((localStorage.getItem('keyword') || '').toLowerCase()),
+        isEligible: data.message
+          .toLowerCase()
+          .includes((localStorage.getItem('keyword') || '').toLowerCase()),
       };
 
       dispatch(pushUser(userListAuthor));
@@ -178,7 +182,7 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.videoId,props.platform]);
+  }, [props.videoId, props.platform]);
 
   return (
     <ThreeSections>
@@ -199,7 +203,7 @@ const YoutubeWorker = (props) => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   videoId: PropTypes.string,
-  platform: PropTypes.string
+  platform: PropTypes.string,
 };
 
 export default YoutubeWorker;

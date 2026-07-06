@@ -1,4 +1,4 @@
-import {produce} from 'immer';
+import { produce } from 'immer';
 
 import styleProviderReducer from '../reducer';
 import { changeColor, toggleDarkMode } from '../actions';
@@ -25,7 +25,7 @@ describe('styleProviderReducer', () => {
     });
 
     expect(styleProviderReducer(state, changeColor(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -36,7 +36,7 @@ describe('styleProviderReducer', () => {
     });
 
     expect(styleProviderReducer(state, toggleDarkMode(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

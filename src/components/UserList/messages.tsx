@@ -67,5 +67,5 @@ export default defineMessages({
   skipListLinkText: {
     id: `${scope}.skipLink`,
     defaultMessage: 'Skip the viewers list',
-  }
+  },
 });

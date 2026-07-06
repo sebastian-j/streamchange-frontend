@@ -15,7 +15,7 @@ describe('<UserItem />', () => {
         isModerator
         isEligible
         isSponsor={false}
-      />,
+      />
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

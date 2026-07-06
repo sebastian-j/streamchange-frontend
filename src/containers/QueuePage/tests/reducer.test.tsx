@@ -43,7 +43,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, changeCapacity(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -54,7 +54,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, changeQueueCommand(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -83,7 +83,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, changeWidgetCode(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -94,7 +94,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, deleteQueueItem(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -108,7 +108,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, deleteQueueItem(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -144,7 +144,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, getQueueFromIdb(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -218,7 +218,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -240,7 +240,7 @@ describe('queueReducer', () => {
     });
 
     expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

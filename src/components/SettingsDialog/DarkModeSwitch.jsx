@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -30,7 +30,7 @@ const DarkModeSwitch = (props) => {
         control={
           <Switch checked={state} onChange={handleChange} color="primary" />
         }
-        label={intl.formatMessage({...messages.darkModeLabel})}
+        label={intl.formatMessage({ ...messages.darkModeLabel })}
       />
     </div>
   );

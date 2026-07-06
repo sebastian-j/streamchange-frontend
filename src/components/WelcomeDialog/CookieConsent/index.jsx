@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { AcceptButton } from './components/AcceptButton';
@@ -10,7 +10,7 @@ import messages from './messages';
 
 const CookieConsent = () => {
   const [accepted, setAccepted] = useState(
-    localStorage.getItem('cookieConsent') === 'true',
+    localStorage.getItem('cookieConsent') === 'true'
   );
   const handleAcceptClick = () => {
     localStorage.setItem('cookieConsent', 'true');

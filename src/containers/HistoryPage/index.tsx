@@ -34,7 +34,7 @@ const HistoryPage = () => {
     const firstResult = Number(page * maxResults);
     db.table('history')
       .filter((winner) =>
-        winner.displayName.toLowerCase().includes(searchQuery.toLowerCase()),
+        winner.displayName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .reverse()
       .offset(firstResult)
@@ -80,8 +80,8 @@ const HistoryPage = () => {
   if (error) {
     return (
       <div>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <FormattedMessage {...messages.infoError} />
       </div>
@@ -90,8 +90,8 @@ const HistoryPage = () => {
   if (!isLoaded) {
     return (
       <PageWrapper>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <LinearProgress />
         <div
@@ -111,8 +111,8 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
-      <Helmet htmlAttributes={{ lang: intl.locale}}>
-        <title>{intl.formatMessage({...messages.pageTitle})}</title>
+      <Helmet htmlAttributes={{ lang: intl.locale }}>
+        <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
@@ -136,7 +136,7 @@ const HistoryPage = () => {
       <StyledTextField
         id="search"
         name="search"
-        label={intl.formatMessage({...messages.searchLabel})}
+        label={intl.formatMessage({ ...messages.searchLabel })}
         value={searchQuery}
         variant="standard"
         onChange={(event) => setSearchQuery(event.target.value)}

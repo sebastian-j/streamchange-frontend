@@ -7,7 +7,7 @@ export const initialState: ContainerState = {
 
 function supportInfoReducer(
   state: ContainerState = initialState,
-  action: ContainerActions,
+  action: ContainerActions
 ): ContainerState {
   switch (action.type) {
     case ActionTypes.CHANGE_DIALOG_VISIBILITY:

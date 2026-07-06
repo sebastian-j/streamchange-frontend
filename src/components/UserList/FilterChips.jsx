@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -50,7 +49,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.regularsFilter})}
+                label={intl.formatMessage({ ...messages.regularsFilter })}
                 onDelete={() => props.onDelete('regulars')}
               />
             </ListItem>
@@ -67,7 +66,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.moderatorsFilter})}
+                label={intl.formatMessage({ ...messages.moderatorsFilter })}
                 onDelete={() => props.onDelete('moderators')}
               />
             </ListItem>
@@ -94,7 +93,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.sponsorsFilter})}
+                label={intl.formatMessage({ ...messages.sponsorsFilter })}
                 onDelete={() => props.onDelete('sponsors')}
               />
             </ListItem>
@@ -116,7 +115,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.verifiedFilter})}
+                label={intl.formatMessage({ ...messages.verifiedFilter })}
                 onDelete={() => props.onDelete('verified')}
               />
             </ListItem>
@@ -140,7 +139,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.selectedFilter})}
+                label={intl.formatMessage({ ...messages.selectedFilter })}
                 onDelete={() => props.onDelete('participating')}
               />
             </ListItem>
@@ -164,7 +163,7 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.notSelectedFilter})}
+                label={intl.formatMessage({ ...messages.notSelectedFilter })}
                 onDelete={() => props.onDelete('notParticipating')}
               />
             </ListItem>

@@ -24,13 +24,18 @@ describe('giveawayPageReducer', () => {
   });
 
   it('should handle the changeOwnerId action correctly', () => {
-    const fixture = {ownerId: 'id', thumbnailUrl: 'url', title: 'stream', videoId: 'vid'};
+    const fixture = {
+      ownerId: 'id',
+      thumbnailUrl: 'url',
+      title: 'stream',
+      videoId: 'vid',
+    };
     const expectedResult = produce(state, (draft) => {
       draft.stream = fixture;
     });
 
     expect(giveawayPageReducer(state, changeStreamProperties(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

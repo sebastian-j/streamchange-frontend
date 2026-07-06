@@ -16,7 +16,7 @@ export const initialState: ContainerState = {
 /* eslint-disable default-case, no-param-reassign */
 function giveawayRulesReducer(
   state: ContainerState = initialState,
-  action: ContainerActions,
+  action: ContainerActions
 ): ContainerState {
   switch (action.type) {
     case ActionTypes.CHANGE_KEYWORD:

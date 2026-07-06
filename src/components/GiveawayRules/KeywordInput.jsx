@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -44,11 +44,15 @@ const KeywordInput = (props) => {
         name="keyword"
         onChange={handleInputChange}
         id="keyword"
-        label={intl.formatMessage({...messages.keyword})}
+        label={intl.formatMessage({ ...messages.keyword })}
         type={visible ? 'text' : 'password'}
         value={props.keyword}
         variant="standard"
-        helperText={error === 1 ? intl.formatMessage({...messages.repeatedCommandsError}) : ''}
+        helperText={
+          error === 1
+            ? intl.formatMessage({ ...messages.repeatedCommandsError })
+            : ''
+        }
         fullWidth
         inputprops={{
           endAdornment: (

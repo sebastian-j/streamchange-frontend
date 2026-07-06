@@ -61,7 +61,7 @@ const QueueWorker = (props) => {
           imageUrl: author.imageUrl,
           message: `${author.title} changed color to ${author.message.replace(
             '!color ',
-            '',
+            ''
           )}`,
         });
         props.onColorChange(author.message.replace('!color ', ''));
@@ -86,7 +86,7 @@ const QueueWorker = (props) => {
     }
     axios
       .get(
-        `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
+        `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`
       )
       .then((res) => {
         localStorage.setItem('nextPageToken', res.data.tag);
@@ -104,7 +104,7 @@ const QueueWorker = (props) => {
             .includes(localStorage.getItem('queue-command').toLowerCase());
           author.message = author.message.replace(
             localStorage.getItem('queue-command'),
-            '',
+            ''
           );
           if (isEligible) props.pushItem(author);
           else {

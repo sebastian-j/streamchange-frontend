@@ -29,7 +29,7 @@ describe('rafleWrapperReducer', () => {
     });
 
     expect(raffleWrapperReducer(state, changeAnimation(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -40,7 +40,7 @@ describe('rafleWrapperReducer', () => {
     });
 
     expect(
-      raffleWrapperReducer(state, changeAnimationDuration(fixture)),
+      raffleWrapperReducer(state, changeAnimationDuration(fixture))
     ).toEqual(expectedResult);
   });
 
@@ -51,7 +51,7 @@ describe('rafleWrapperReducer', () => {
     });
 
     expect(raffleWrapperReducer(state, changeVisibility(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

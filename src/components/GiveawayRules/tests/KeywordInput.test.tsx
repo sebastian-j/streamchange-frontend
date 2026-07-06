@@ -23,7 +23,7 @@ describe('<KeywordInput />', () => {
           <IntlProvider locale="en">
             <KeywordInput />
           </IntlProvider>
-        </Provider>,
+        </Provider>
       )
       .toJSON();
     expect(renderedComponent).toMatchSnapshot();

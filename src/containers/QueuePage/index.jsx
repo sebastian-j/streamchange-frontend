@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import { Helmet } from 'react-helmet';
@@ -70,7 +70,7 @@ const QueuePage = () => {
   const launchWorker = (vidId) => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`,
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`
       )
       .then((res) => {
         if (res.data.items.length === 0) {
@@ -96,7 +96,7 @@ const QueuePage = () => {
           setVideoId(vidId);
           setTitle('Tytuł nieznany');
           setThumbnailUrl(
-            'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+            'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg'
           );
           sessionStorage.setItem('gv-videoId', vidId);
         }
@@ -132,8 +132,8 @@ const QueuePage = () => {
   if (videoId === '') {
     return (
       <>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <WelcomeDialog
           passVideo={receiveVideo}
@@ -146,8 +146,8 @@ const QueuePage = () => {
   }
   return (
     <>
-      <Helmet htmlAttributes={{ lang: intl.locale}}>
-        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      <Helmet htmlAttributes={{ lang: intl.locale }}>
+        <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <TopBar>
         <div>

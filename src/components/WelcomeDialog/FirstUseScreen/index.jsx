@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
@@ -23,7 +23,7 @@ import messages from './messages';
 
 const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('darkMode') === 'true',
+    localStorage.getItem('darkMode') === 'true'
   );
   const [language, setLanguage] = useState(props.locale);
 

@@ -22,7 +22,7 @@ describe('<QueueColumn />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <QueueColumn />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();
