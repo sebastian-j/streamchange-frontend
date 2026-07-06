@@ -11,7 +11,7 @@ describe('<NotFoundPage />', () => {
     } = render(
       <IntlProvider locale="en">
         <NotFoundPage />
-      </IntlProvider>,
+      </IntlProvider>
     );
     expect(firstChild).toMatchSnapshot();
   });

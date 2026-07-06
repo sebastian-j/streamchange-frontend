@@ -20,7 +20,7 @@ describe('<GiveawayRules />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <GiveawayRules apiKey="key" />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

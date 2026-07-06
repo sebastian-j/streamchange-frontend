@@ -28,7 +28,7 @@ describe('<SubStatus />', () => {
             videoId: 'vid',
           }}
         />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

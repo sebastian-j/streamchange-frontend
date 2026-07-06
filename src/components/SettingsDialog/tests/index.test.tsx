@@ -21,7 +21,7 @@ describe('<SettingsDialog />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <SettingsDialog />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

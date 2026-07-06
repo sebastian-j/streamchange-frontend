@@ -46,5 +46,5 @@ export default defineMessages({
   adDialogRulesLink: {
     id: `${scope}.dialogRulesLink`,
     defaultMessage: 'Guidelines for advertisers',
-  }
+  },
 });

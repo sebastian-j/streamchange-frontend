@@ -21,7 +21,7 @@ describe('<YoutubeWorker />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <YoutubeWorker apiKey="key" videoId="vidId" />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

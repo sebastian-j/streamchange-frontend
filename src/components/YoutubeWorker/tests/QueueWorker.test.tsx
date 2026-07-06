@@ -42,7 +42,7 @@ describe('<QueueWorker />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <QueueWorker videoId="id" />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

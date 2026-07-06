@@ -50,7 +50,7 @@ const FortuneWheelRaffle = (props) => {
 
   useEffect(() => {
     let eligibleUsers = props.userArray.filter(
-      (user) => user.isEligible === true,
+      (user) => user.isEligible === true
     );
     if (props.giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
@@ -58,7 +58,7 @@ const FortuneWheelRaffle = (props) => {
     const shuffled = [];
     for (let i = 0; i < 10; i += 1) {
       shuffled.push(
-        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)],
+        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
       );
     }
     const winnerIndex = Math.floor(Math.random() * 10);
@@ -77,16 +77,19 @@ const FortuneWheelRaffle = (props) => {
         tickSound.play('tick');
         tickSound.loop(true);
       },
-      sId1,
+      sId1
     );
     setTimeout(() => {
       tickSound.stop();
       tickSound.unload();
     }, props.duration * 1000);
     setTimer(
-      setTimeout(() => {
-        props.onWin(shuffled[winnerIndex].id);
-      }, (props.duration + 1) * 1000),
+      setTimeout(
+        () => {
+          props.onWin(shuffled[winnerIndex].id);
+        },
+        (props.duration + 1) * 1000
+      )
     );
   }, []);
 
@@ -117,7 +120,7 @@ const FortuneWheelRaffle = (props) => {
         >
           <img src={users[i].imageUrl} alt={users[i].title} />
           <span>{users[i].title}</span>
-        </WheelItem>,
+        </WheelItem>
       );
     }
   }

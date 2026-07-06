@@ -30,7 +30,7 @@ const DarkModeSwitch = (props) => {
         control={
           <Switch checked={state} onChange={handleChange} color="primary" />
         }
-        label={intl.formatMessage({...messages.darkModeLabel})}
+        label={intl.formatMessage({ ...messages.darkModeLabel })}
       />
     </div>
   );

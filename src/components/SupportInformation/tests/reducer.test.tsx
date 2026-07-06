@@ -18,7 +18,7 @@ describe('supportInfoReducer', () => {
     const expectedResult = { isOpen: fixture };
 
     expect(supportInfoReducer(state, changeDialogVisibility(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

@@ -22,7 +22,7 @@ describe('<LanguageProvider />', () => {
     const { container } = render(
       <LanguageProvider messages={messages} locale="en">
         {children}
-      </LanguageProvider>,
+      </LanguageProvider>
     );
     expect(container.firstChild).not.toBeNull();
   });
@@ -41,7 +41,7 @@ describe('<ConnectedLanguageProvider />', () => {
         <ConnectedLanguageProvider messages={translationMessages}>
           <FormattedMessage {...messages.someMessage} />
         </ConnectedLanguageProvider>
-      </Provider>,
+      </Provider>
     );
     expect(queryByText(messages.someMessage.defaultMessage)).not.toBeNull();
   });

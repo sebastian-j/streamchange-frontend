@@ -57,7 +57,9 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}>
+              <div
+                style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}
+              >
                 <TextField
                   autoFocus
                   margin="dense"
@@ -83,7 +85,13 @@ const WelcomeDialog = (props) => {
               </div>
               <div className="text">
                 {props.error && (
-                  <span style={{ display: 'block', color: '#bd0013', marginTop: '10px' }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      color: '#bd0013',
+                      marginTop: '10px',
+                    }}
+                  >
                     {props.error === 'invalidUrl' && (
                       <FormattedMessage {...messages.invalidUrlError} />
                     )}
@@ -99,7 +107,13 @@ const WelcomeDialog = (props) => {
                   </span>
                 )}
                 {props.ban && (
-                  <span style={{ display: 'block', color: '#bd0013', marginTop: '10px' }}>
+                  <span
+                    style={{
+                      display: 'block',
+                      color: '#bd0013',
+                      marginTop: '10px',
+                    }}
+                  >
                     <FormattedMessage {...messages.banDate} />
                     {` ${props.ban.endsAt} `}
                     <FormattedMessage {...messages.banReason} />
@@ -110,7 +124,10 @@ const WelcomeDialog = (props) => {
             </div>
             <div className="actions">
               {!isLoading && (
-                <WavyButton onClick={handleConnect} text={intl.formatMessage({...messages.saveBtn})}/>
+                <WavyButton
+                  onClick={handleConnect}
+                  text={intl.formatMessage({ ...messages.saveBtn })}
+                />
               )}
               {isLoading && <CircularProgress />}
             </div>

@@ -14,7 +14,7 @@ describe('languageProviderReducer', () => {
       languageProviderReducer(undefined, {
         type: ActionTypes.CHANGE_LOCALE,
         payload: 'de',
-      }),
+      })
     ).toEqual({
       locale: 'de',
     });

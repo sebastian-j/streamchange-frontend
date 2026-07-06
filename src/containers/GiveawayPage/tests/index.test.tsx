@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import GiveawayPage from '../index';
 import configureStore from '../../../configureStore';
 
-
 describe('<GiveawayPage />', () => {
   let store;
   beforeAll(() => {
@@ -30,7 +29,7 @@ describe('<GiveawayPage />', () => {
         <IntlProvider locale="en">
           <GiveawayPage />
         </IntlProvider>
-      </Provider>,
+      </Provider>
     );
     expect(firstChild).toMatchSnapshot();
   });

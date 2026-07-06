@@ -64,7 +64,7 @@ export const QueueRules = (props) => {
           margin="dense"
           name="command"
           onChange={handleInputValueChange}
-          label={intl.formatMessage({...messages.commandTextFieldLabel})}
+          label={intl.formatMessage({ ...messages.commandTextFieldLabel })}
           type="text"
           value={props.command}
           variant="standard"
@@ -89,7 +89,7 @@ export const QueueRules = (props) => {
           margin="dense"
           name="capacity"
           onChange={handleInputValueChange}
-          label={intl.formatMessage({...messages.capacityTextFieldLabel})}
+          label={intl.formatMessage({ ...messages.capacityTextFieldLabel })}
           type="number"
           value={props.capacity}
           variant="standard"
@@ -101,7 +101,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="timeToIdle"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.timeToIdleTextField})}
+        label={intl.formatMessage({ ...messages.timeToIdleTextField })}
         type="number"
         value={Number(props.timeToIdle)}
         variant="standard"
@@ -112,7 +112,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="timeToKick"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.timeToKickTextField})}
+        label={intl.formatMessage({ ...messages.timeToKickTextField })}
         type="number"
         value={Number(props.timeToKick)}
         variant="standard"
@@ -123,7 +123,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="widgetCode"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.widgetCodeTextField})}
+        label={intl.formatMessage({ ...messages.widgetCodeTextField })}
         type="password"
         value={props.widgetCode}
         variant="standard"

@@ -6,7 +6,8 @@ const Svg = styled.svg`
   color: ${(props) => props.theme.staticTextColor};
   opacity: 0;
   pointer-events: none;
-  transition: opacity 300ms ease-out 0ms,
+  transition:
+    opacity 300ms ease-out 0ms,
     transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   &.active {
     opacity: 1;

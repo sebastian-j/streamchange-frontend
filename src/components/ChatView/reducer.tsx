@@ -13,7 +13,7 @@ export const initialState = {
 
 function chatReducer(
   state: ContainerState = initialState,
-  action: ContainerActions,
+  action: ContainerActions
 ): ContainerState {
   switch (action.type) {
     case ActionTypes.ADD_MESSAGE:

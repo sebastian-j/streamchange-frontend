@@ -22,7 +22,7 @@ interface Props {
   onClear: () => void;
 }
 
-const HistoryMenu = ({onClear}: Props) => {
+const HistoryMenu = ({ onClear }: Props) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
@@ -44,7 +44,9 @@ const HistoryMenu = ({onClear}: Props) => {
   };
 
   const clearHistory = () => {
-    db.table('history').clear().then(() => onClear());
+    db.table('history')
+      .clear()
+      .then(() => onClear());
     closeDialog();
   };
 

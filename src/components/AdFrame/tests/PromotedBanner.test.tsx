@@ -13,7 +13,7 @@ describe('<PromotedBanner />', () => {
         imageUrl="url"
         testMargins
         title="test-advertisement"
-      />,
+      />
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

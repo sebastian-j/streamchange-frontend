@@ -21,7 +21,7 @@ const StyledLink = styled(NavLink)`
     stroke: currentColor;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    transition: stroke-dashoffset .5s cubic-bezier(.22,.28,.36,1);
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.22, 0.28, 0.36, 1);
     rect {
       transform-origin: 50% 50%;
       vector-effect: non-scaling-stroke;
@@ -127,12 +127,12 @@ const HistoryWidget = () => {
       <StyledLink onMouseEnter={getHistory} to="/giveaway-history">
         <span className="border border-initial" />
         <svg className="border border-hover" fill="none">
-          <rect width="100%" height="100%" rx="6px" pathLength="1"/>
+          <rect width="100%" height="100%" rx="6px" pathLength="1" />
         </svg>
         <FormattedMessage {...messages.historyLink} />
         {warning && (
           <span role="img" aria-label="warning">
-              ⚠️
+            ⚠️
           </span>
         )}
       </StyledLink>

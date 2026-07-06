@@ -3,7 +3,7 @@
  * UserList reducer
  *
  */
-import {produce} from 'immer';
+import { produce } from 'immer';
 
 import ActionTypes from './constants';
 import {

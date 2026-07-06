@@ -21,7 +21,10 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <IntlProvider locale={DEFAULT_LOCALE} messages={translationMessages[DEFAULT_LOCALE]}>
+    <IntlProvider
+      locale={DEFAULT_LOCALE}
+      messages={translationMessages[DEFAULT_LOCALE]}
+    >
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>

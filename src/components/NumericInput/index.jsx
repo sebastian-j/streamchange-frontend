@@ -82,7 +82,12 @@ const NumericInput = (props) => {
   return (
     <Container>
       <Label htmlFor="number-display">{props.label}</Label>
-      <Button aria-label={intl.formatMessage({...messages.decreaseButton})} left="true" onClick={dec} type="button">
+      <Button
+        aria-label={intl.formatMessage({ ...messages.decreaseButton })}
+        left="true"
+        onClick={dec}
+        type="button"
+      >
         -
       </Button>
       <NumberDisplay
@@ -90,7 +95,11 @@ const NumericInput = (props) => {
         value={props.value}
         onChange={(event) => checkValue(event.target.value)}
       />
-      <Button aria-label={intl.formatMessage({...messages.increaseButton})} onClick={inc} type="button">
+      <Button
+        aria-label={intl.formatMessage({ ...messages.increaseButton })}
+        onClick={inc}
+        type="button"
+      >
         +
       </Button>
     </Container>

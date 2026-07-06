@@ -22,7 +22,7 @@ describe('<UserList />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <UserList />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

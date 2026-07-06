@@ -35,7 +35,7 @@ const StartButton = styled.button`
   margin-top: 10px;
   padding: 10px 0;
   position: relative;
-  transition: text-shadow .2s linear .3s;
+  transition: text-shadow 0.2s linear 0.3s;
   width: 100%;
   z-index: 0;
   .btn-hover {
@@ -45,7 +45,7 @@ const StartButton = styled.button`
     height: 100%;
     position: absolute;
     top: 0;
-    transition: clip-path 1s cubic-bezier(.215,.61,.355,1);
+    transition: clip-path 1s cubic-bezier(0.215, 0.61, 0.355, 1);
     width: 100%;
     z-index: -1;
   }
@@ -64,7 +64,7 @@ export const RaffleWrapper = (props) => {
 
   const openDialog = () => {
     let eligibleUsers = props.userArray.filter(
-      (user) => user.isEligible === true,
+      (user) => user.isEligible === true
     );
     if (props.giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
@@ -102,7 +102,7 @@ export const RaffleWrapper = (props) => {
         </Select>
       </StyledFormControl>
       <NumericInput
-        label={intl.formatMessage({...messages.animationDuration})}
+        label={intl.formatMessage({ ...messages.animationDuration })}
         minValue={1}
         maxValue={600}
         value={props.animationDuration}

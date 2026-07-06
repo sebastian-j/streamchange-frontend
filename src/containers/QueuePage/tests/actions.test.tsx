@@ -52,7 +52,7 @@ describe('QueuePage Actions', () => {
       const fixture = 'code';
       const expectedResult = action(
         ActionTypes.CHANGE_QUEUE_WIDGET_CODE,
-        fixture,
+        fixture
       );
 
       expect(changeWidgetCode(fixture)).toEqual(expectedResult);

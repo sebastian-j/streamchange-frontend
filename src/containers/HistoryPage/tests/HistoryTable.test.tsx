@@ -20,7 +20,7 @@ describe('<HistoryTable />', () => {
             prize: 'trophy',
           },
         ]}
-      />,
+      />
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

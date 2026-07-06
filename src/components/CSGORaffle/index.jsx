@@ -23,7 +23,7 @@ const CSGORaffle = (props) => {
 
   useEffect(() => {
     let eligibleUsers = props.userArray.filter(
-      (user) => user.isEligible === true,
+      (user) => user.isEligible === true
     );
     if (props.giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
@@ -31,7 +31,7 @@ const CSGORaffle = (props) => {
     const shuffled = [];
     for (let i = 0; i < 30 + props.duration * 3; i += 1) {
       shuffled.push(
-        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)],
+        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
       );
     }
     const winnerIndex =
@@ -42,9 +42,12 @@ const CSGORaffle = (props) => {
     setTimeout(() => setScrollSize(scroll), 10);
     setWinner(shuffled[winnerIndex]);
     setTimer(
-      setTimeout(() => {
-        props.onWin(shuffled[winnerIndex].id);
-      }, (props.duration + 1) * 1000),
+      setTimeout(
+        () => {
+          props.onWin(shuffled[winnerIndex].id);
+        },
+        (props.duration + 1) * 1000
+      )
     );
   }, []);
 

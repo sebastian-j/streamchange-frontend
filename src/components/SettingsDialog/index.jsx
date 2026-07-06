@@ -75,7 +75,7 @@ const SettingsDialog = (props) => {
         <ToolbarButton onClick={openDialog} type="button">
           <span className="border border-initial" />
           <svg className="border border-hover" fill="none">
-            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1" />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ const SettingsDialog = (props) => {
           <ColorPicker
             color={themeColor}
             handleChange={(name, value) => changeThemeColor(value)}
-            label={intl.formatMessage({...messages.themeColor})}
+            label={intl.formatMessage({ ...messages.themeColor })}
             name="themeColor"
           />
           <LocaleToggle />
@@ -116,15 +116,13 @@ const SettingsDialog = (props) => {
                 control={
                   <Checkbox
                     checked={saveCommands}
-                    onChange={(event) =>
-                      setSaveCommands(event.target.checked)
-                    }
+                    onChange={(event) => setSaveCommands(event.target.checked)}
                     color="primary"
                     name="saveCommands"
                     type="checkbox"
                   />
                 }
-                label={intl.formatMessage({...messages.saveCommandsLabel})}
+                label={intl.formatMessage({ ...messages.saveCommandsLabel })}
               />
             </Tooltip>
           </div>
@@ -139,22 +137,20 @@ const SettingsDialog = (props) => {
               control={
                 <Checkbox
                   checked={deleteWinner}
-                  onChange={(event) =>
-                    setDeleteWinner(event.target.checked)
-                  }
+                  onChange={(event) => setDeleteWinner(event.target.checked)}
                   color="primary"
                   name="deleteWinner"
                   type="checkbox"
                 />
               }
-              label={intl.formatMessage({...messages.deleteWinnerLabel})}
+              label={intl.formatMessage({ ...messages.deleteWinnerLabel })}
             />
           </Tooltip>
           <TextField
             error={!!error}
             id="abortCommand"
             name="abortCommand"
-            label={intl.formatMessage({...messages.resignationCommand})}
+            label={intl.formatMessage({ ...messages.resignationCommand })}
             value={abortCommand}
             variant="standard"
             onChange={(event) => {

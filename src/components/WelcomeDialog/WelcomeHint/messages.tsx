@@ -5,7 +5,7 @@ export const scope = 'streamchange.components.WelcomeDialog';
 export default defineMessages({
   buttonLabel: {
     id: `${scope}.WelcomeHint.button.label`,
-    defaultMessage: 'Draw another curiosity'
+    defaultMessage: 'Draw another curiosity',
   },
   hintTitle: {
     id: `${scope}.WelcomeHint.title`,
@@ -13,7 +13,7 @@ export default defineMessages({
   },
   holiday1402: {
     id: `${scope}.holidays.14-02`,
-    defaultMessage: 'February 14 - Valetine\'s Day',
+    defaultMessage: "February 14 - Valetine's Day",
   },
   holiday1403: {
     id: `${scope}.holidays.14-03`,
@@ -62,6 +62,6 @@ export default defineMessages({
   },
   holiday3112: {
     id: `${scope}.holiday.31-12`,
-    defaultMessage: 'December 31 - New Year\'s Eve',
+    defaultMessage: "December 31 - New Year's Eve",
   },
 });

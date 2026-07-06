@@ -23,7 +23,7 @@ import messages from './messages';
 
 const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('darkMode') === 'true',
+    localStorage.getItem('darkMode') === 'true'
   );
   const [language, setLanguage] = useState(props.locale);
 

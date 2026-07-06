@@ -15,7 +15,7 @@ describe('<HistoryItem />', () => {
         prize="prize"
         imageUrl="url"
         createdAt="2019-12-24T07:27:56.273Z"
-      />,
+      />
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

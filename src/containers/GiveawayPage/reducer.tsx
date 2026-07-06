@@ -19,7 +19,7 @@ export const initialState: ContainerState = {
 
 const giveawayPageReducer = (
   state: ContainerState = initialState,
-  action: ContainerActions,
+  action: ContainerActions
 ): ContainerState => {
   switch (action.type) {
     case ActionTypes.CHANGE_STREAM_PROPERTIES:

@@ -19,7 +19,7 @@ describe('<CSGORaffle />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <CSGORaffle onClose={() => 0} onWin={() => 0} />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

@@ -19,7 +19,7 @@ describe('<WinnerView />', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <WinnerView apiKey="key" id="id" onClose={() => 0} />
-      </Provider>,
+      </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();

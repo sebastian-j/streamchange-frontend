@@ -80,7 +80,7 @@ const GiveawayPage = (props) => {
   const launchWorker = (vidId) => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`,
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`
       )
       .then((res) => {
         if (res.data.items.length === 0) {
@@ -168,8 +168,8 @@ const GiveawayPage = (props) => {
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
       <>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <WelcomeDialog
           passVideo={receiveVideo}
@@ -182,8 +182,8 @@ const GiveawayPage = (props) => {
   }
   return (
     <>
-      <Helmet htmlAttributes={{ lang: intl.locale}}>
-        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
+      <Helmet htmlAttributes={{ lang: intl.locale }}>
+        <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <TopBar>
         <StreamInfo>

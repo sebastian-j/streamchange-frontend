@@ -21,7 +21,7 @@ describe('<QueueRules />', () => {
         <IntlProvider locale="en">
           <QueueRules />
         </IntlProvider>
-      </Provider>,
+      </Provider>
     );
     expect(firstChild).toMatchSnapshot();
   });

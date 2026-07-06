@@ -25,7 +25,7 @@ describe('giveawayRulesReducer', () => {
     });
 
     expect(giveawayRulesReducer(state, changeKeyword(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -45,7 +45,7 @@ describe('giveawayRulesReducer', () => {
     });
 
     expect(giveawayRulesReducer(state, changePreWinner(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 
@@ -56,7 +56,7 @@ describe('giveawayRulesReducer', () => {
     });
 
     expect(giveawayRulesReducer(state, changePrize(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });

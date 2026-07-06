@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -7,7 +7,7 @@ const Button = styled.button`
   color: #3f51b5;
   cursor: pointer;
   font-weight: 600;
-  letter-spacing: .025em;
+  letter-spacing: 0.025em;
   padding: 6px 8px;
   text-decoration: none;
   text-transform: uppercase;
@@ -16,7 +16,7 @@ const Button = styled.button`
   }
   div {
     display: inline-block;
-    transition: transform .25s ease-in-out;
+    transition: transform 0.25s ease-in-out;
   }
 `;
 
@@ -29,14 +29,30 @@ const WavyButton = ({ onClick, text }: Props) => {
   const [translate, setTranslate] = useState('0');
   const onMouseEnter = () => {
     setTranslate('-25%');
-    setTimeout(() => {
-      setTranslate('0');
-    }, text.length * 50 + 50);
+    setTimeout(
+      () => {
+        setTranslate('0');
+      },
+      text.length * 50 + 50
+    );
   };
   return (
-    <Button onClick={onClick} aria-label={text} onMouseEnter={onMouseEnter} type="button">
+    <Button
+      onClick={onClick}
+      aria-label={text}
+      onMouseEnter={onMouseEnter}
+      type="button"
+    >
       {[...text].map((letter, index) => (
-        <div key={`${letter}`} style={{transitionDelay: `${index*0.05}s`, transform: `translateY(${translate})`}}>{letter}</div>
+        <div
+          key={`${letter}`}
+          style={{
+            transitionDelay: `${index * 0.05}s`,
+            transform: `translateY(${translate})`,
+          }}
+        >
+          {letter}
+        </div>
       ))}
     </Button>
   );

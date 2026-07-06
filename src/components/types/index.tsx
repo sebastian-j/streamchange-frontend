@@ -38,7 +38,7 @@ export interface ApplicationRootState {
   readonly giveawayRules: GiveawayRulesState;
   readonly supportInfo?: SupportInformationState;
   readonly chat?: ChatViewState;
-  readonly userList? : UserListState;
+  readonly userList?: UserListState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 
   // for testing purposes

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import YoutubeWorker from './components/YoutubeWorker';
-import WelcomeDialog from './components/WelcomeDialog'; 
+import WelcomeDialog from './components/WelcomeDialog';
 
 export default function App() {
   const [channelConfig, setChannelConfig] = useState(null);
@@ -8,7 +8,7 @@ export default function App() {
   useEffect(() => {
     const savedChannel = localStorage.getItem('gv-channel');
     const savedPlatform = localStorage.getItem('gv-platform');
-    
+
     if (savedChannel && savedPlatform) {
       setChannelConfig({ channel: savedChannel, platform: savedPlatform });
     }
@@ -21,16 +21,14 @@ export default function App() {
   };
 
   if (!channelConfig) {
-    return (
-      <WelcomeDialog onStart={handleStartStream} />
-    );
+    return <WelcomeDialog onStart={handleStartStream} />;
   }
 
   return (
-    <YoutubeWorker 
-      videoId={channelConfig.channel} 
-      platform={channelConfig.platform} 
-      apiKey="test" 
+    <YoutubeWorker
+      videoId={channelConfig.channel}
+      platform={channelConfig.platform}
+      apiKey="test"
     />
   );
 }

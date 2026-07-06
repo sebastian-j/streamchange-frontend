@@ -19,12 +19,12 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     createReducer(),
     initialState,
-    composeEnhancers(...enhancers),
+    composeEnhancers(...enhancers)
   );
 
   store.runSaga = sagaMiddleware.run;
-  store.injectedReducers = {}; 
-  store.injectedSagas = {}; 
+  store.injectedReducers = {};
+  store.injectedSagas = {};
 
   return store;
 }

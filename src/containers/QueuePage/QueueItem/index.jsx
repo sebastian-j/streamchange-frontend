@@ -60,7 +60,7 @@ export const QueueItem = (props) => {
     const lastActiveAt = new Date(props.lastActiveAt);
     setIsActive(
       (now.getTime() - lastActiveAt.getTime()) / 1000 <
-        parseInt(localStorage.getItem('queue-timeToIdle'), 10),
+        parseInt(localStorage.getItem('queue-timeToIdle'), 10)
     );
   };
 
