@@ -21,7 +21,22 @@ const WelcomeDialog = (props) => {
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState('');
 
+
+  const handleInputChange = (e) => {
+    const val = e.target.value;
+    setText(val);
+    const propsArray = val.split('/');
+    if (propsArray.length === 2) {
+      setChannel(propsArray[1]);
+      setPlatform(propsArray[0].toLowerCase().includes('twitch') ? 'twitch' : 'kick');
+      
+    } if(propsArray.length > 2) {
+      setChannel(propsArray[3]);
+      setPlatform(propsArray[2].toLowerCase().includes('twitch') ? 'twitch' : 'kick');
+    }
+  };
   const handleConnect = () => {
     if (typeof props.onStart === 'function' && channel.trim().length > 0) {
       setIsLoading(true);
@@ -57,32 +72,18 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-              <div
-                style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}
-              >
                 <TextField
                   autoFocus
                   margin="dense"
                   name="channel"
-                  onChange={(e) => setChannel(e.target.value)}
+                  onChange={handleInputChange}
                   onKeyPress={handleKeyPress}
-                  id="channel"
-                  label="Nazwa kanału"
+                  label="Link do kanału"
                   type="text"
-                  value={channel}
+                  value={text}
                   variant="standard"
                   fullWidth
                 />
-                <Select
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value)}
-                  variant="standard"
-                  style={{ minWidth: '100px', marginBottom: '4px' }}
-                >
-                  <MenuItem value="twitch">Twitch</MenuItem>
-                  <MenuItem value="kick">Kick</MenuItem>
-                </Select>
-              </div>
               <div className="text">
                 {props.error && (
                   <span
