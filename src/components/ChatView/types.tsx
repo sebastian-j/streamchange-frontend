@@ -3,12 +3,14 @@ import * as actions from './actions';
 
 interface IChatMessage {
   authorId: string;
+  color: string;
   displayText: string;
   imageUrl: string;
   isModerator: boolean;
-  isOwner: boolean;
-  isSponsor: boolean;
-  isVerified: boolean;
+  isStreamer: boolean;
+  isSubscriber: boolean;
+  isVip: boolean;
+  platform: string;
   publishedAt: string;
   title: string;
 }
