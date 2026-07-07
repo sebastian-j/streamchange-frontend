@@ -1,31 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { FormattedMessage, useIntl } from "react-intl";
 
-import Tooltip from '@mui/material/Tooltip';
-import messages from './messages';
+import Tooltip from "@mui/material/Tooltip";
+import messages from "./messages";
 import {
   makeSelectCapacity,
   makeSelectQueueCommand,
   makeSelectTTI,
   makeSelectTTK,
   makeSelectWidgetCode,
-} from './selectors';
+} from "./selectors";
 import {
   changeCapacity,
   changeQueueCommand,
   changeTTI,
   changeTTK,
   changeWidgetCode,
-} from './actions';
-import Panel from '../../components/Panel';
-import PanelTitle from '../../components/Panel/PanelTitle';
-import HintParagraph from '../../components/Tooltip/HintParagraph';
-import StyledTextField from '../../components/StyledTextField';
-import AdFrame from '../../components/AdFrame';
-import QueueWidgetDialog from './QueueWidgetDialog';
+} from "./actions";
+import Panel from "../../components/Panel";
+import PanelTitle from "../../components/Panel/PanelTitle";
+import HintParagraph from "../../components/Tooltip/HintParagraph";
+import StyledTextField from "../../components/StyledTextField";
+import AdFrame from "../../components/AdFrame";
+import QueueWidgetDialog from "./QueueWidgetDialog";
 
 export const QueueRules = (props) => {
   const intl = useIntl();
@@ -34,12 +34,12 @@ export const QueueRules = (props) => {
     const { value } = target;
     const { name } = target;
 
-    if (value.length < 140 && name === 'command')
+    if (value.length < 140 && name === "command")
       props.changeQueueCommand(value);
-    if (name === 'capacity') props.changeCapacity(parseInt(value, 10));
-    if (name === 'timeToIdle') props.changeTTI(parseInt(value, 10));
-    if (name === 'timeToKick') props.changeTTK(parseInt(value, 10));
-    if (name === 'widgetCode') {
+    if (name === "capacity") props.changeCapacity(parseInt(value, 10));
+    if (name === "timeToIdle") props.changeTTI(parseInt(value, 10));
+    if (name === "timeToKick") props.changeTTK(parseInt(value, 10));
+    if (name === "widgetCode") {
       props.changeWidgetCode(value);
       return;
     }
@@ -64,7 +64,7 @@ export const QueueRules = (props) => {
           margin="dense"
           name="command"
           onChange={handleInputValueChange}
-          label={intl.formatMessage({...messages.commandTextFieldLabel})}
+          label={intl.formatMessage({ ...messages.commandTextFieldLabel })}
           type="text"
           value={props.command}
           variant="standard"
@@ -89,7 +89,7 @@ export const QueueRules = (props) => {
           margin="dense"
           name="capacity"
           onChange={handleInputValueChange}
-          label={intl.formatMessage({...messages.capacityTextFieldLabel})}
+          label={intl.formatMessage({ ...messages.capacityTextFieldLabel })}
           type="number"
           value={props.capacity}
           variant="standard"
@@ -101,7 +101,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="timeToIdle"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.timeToIdleTextField})}
+        label={intl.formatMessage({ ...messages.timeToIdleTextField })}
         type="number"
         value={Number(props.timeToIdle)}
         variant="standard"
@@ -112,7 +112,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="timeToKick"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.timeToKickTextField})}
+        label={intl.formatMessage({ ...messages.timeToKickTextField })}
         type="number"
         value={Number(props.timeToKick)}
         variant="standard"
@@ -123,7 +123,7 @@ export const QueueRules = (props) => {
         margin="dense"
         name="widgetCode"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({...messages.widgetCodeTextField})}
+        label={intl.formatMessage({ ...messages.widgetCodeTextField })}
         type="password"
         value={props.widgetCode}
         variant="standard"

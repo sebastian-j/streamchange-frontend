@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import React from "react";
+import PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
+import { FormattedMessage } from "react-intl";
+import messages from "./messages";
 
 const Slide = keyframes`
   0% {

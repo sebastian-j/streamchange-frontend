@@ -3,69 +3,69 @@
  *
  * This contains all the text for the History container.
  */
-import { defineMessages } from 'react-intl';
+import { defineMessages } from "react-intl";
 
-export const scope = 'streamchange.containers.History';
+export const scope = "streamchange.containers.History";
 
 export default defineMessages({
   pageTitle: {
     id: `${scope}.title`,
-    defaultMessage: 'Winner history',
+    defaultMessage: "Winner history",
   },
   dateHeader: {
     id: `${scope}.header.date`,
-    defaultMessage: 'Date and time',
+    defaultMessage: "Date and time",
   },
   messageHeader: {
     id: `${scope}.header.message`,
-    defaultMessage: 'Message',
+    defaultMessage: "Message",
   },
   nameHeader: {
     id: `${scope}.header.name`,
-    defaultMessage: 'Channel name',
+    defaultMessage: "Channel name",
   },
   prizeHeader: {
     id: `${scope}.header.prize`,
-    defaultMessage: 'Prize',
+    defaultMessage: "Prize",
   },
   infoError: {
     id: `${scope}.info.error`,
-    defaultMessage: 'Cannot load list',
+    defaultMessage: "Cannot load list",
   },
   infoLoading: {
     id: `${scope}.info.loading`,
-    defaultMessage: 'Loading history',
+    defaultMessage: "Loading history",
   },
   infoNoResults: {
     id: `${scope}.info.noResults`,
-    defaultMessage: 'No channel match the search term',
+    defaultMessage: "No channel match the search term",
   },
   resultsPerPage: {
     id: `${scope}.resultsPerPage`,
-    defaultMessage: 'Results per page',
+    defaultMessage: "Results per page",
   },
   returnButton: {
     id: `${scope}.ReturnButton`,
-    defaultMessage: 'Back to giveaway',
+    defaultMessage: "Back to giveaway",
   },
   searchLabel: {
     id: `${scope}.search.label`,
-    defaultMessage: 'Search',
+    defaultMessage: "Search",
   },
   clearHistoryMenuItem: {
     id: `${scope}.HistoryMenu.clearHistory`,
-    defineMessage: 'Clear history',
+    defineMessage: "Clear history",
   },
   clearHistoryCancelButton: {
     id: `${scope}.HistoryMenu.clearHistory.cancelButton`,
-    defineMessage: 'Cancel',
+    defineMessage: "Cancel",
   },
   clearHistoryConfirmButton: {
     id: `${scope}.HistoryMenu.clearHistory.confirmButton`,
-    defineMessage: 'OK',
+    defineMessage: "OK",
   },
   clearHistoryDialogContent: {
     id: `${scope}.HistoryMenu.clearHistory.dialogContentText`,
-    defineMessage: 'Are you sure you want to clear all winner history?',
+    defineMessage: "Are you sure you want to clear all winner history?",
   },
 });

@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
-import { addMessage } from '../ChatView/actions';
-import { changeColor } from '../../containers/StyleProvider/actions';
+import { API_URL, PRIVILEGED_CHANNELS } from "../../config";
+import { addMessage } from "../ChatView/actions";
+import { changeColor } from "../../containers/StyleProvider/actions";
 import {
   deleteQueueItem,
   pushQueueItem,
   updateQueueItem,
-} from '../../containers/QueuePage/actions';
-import ChatView from '../ChatView';
-import QueueColumn from '../../containers/QueuePage/QueueColumn';
-import QueueRules from '../../containers/QueuePage/QueueRules';
-import SuperChat from './SuperChat';
+} from "../../containers/QueuePage/actions";
+import ChatView from "../ChatView";
+import QueueColumn from "../../containers/QueuePage/QueueColumn";
+import QueueRules from "../../containers/QueuePage/QueueRules";
+import SuperChat from "./SuperChat";
 
 const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
@@ -48,23 +48,23 @@ const QueueWorker = (props) => {
 
   const superChatFeatures = (author, chatMessage) => {
     if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.a.isChatOwner) {
-      if (author.message.startsWith('!s ')) {
+      if (author.message.startsWith("!s ")) {
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
-          message: author.message.replace('!s ', ''),
+          message: author.message.replace("!s ", ""),
         });
         setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
-      } else if (author.message.startsWith('!color ')) {
+      } else if (author.message.startsWith("!color ")) {
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
           message: `${author.title} changed color to ${author.message.replace(
-            '!color ',
-            '',
+            "!color ",
+            "",
           )}`,
         });
-        props.onColorChange(author.message.replace('!color ', ''));
+        props.onColorChange(author.message.replace("!color ", ""));
         setTimeout(() => setSuperChat(null), 10000);
       }
     }
@@ -72,24 +72,24 @@ const QueueWorker = (props) => {
 
   const checkResignation = (author) => {
     if (
-      localStorage.getItem('gv-abortCommand') !== null &&
-      author.message === localStorage.getItem('gv-abortCommand')
+      localStorage.getItem("gv-abortCommand") !== null &&
+      author.message === localStorage.getItem("gv-abortCommand")
     ) {
       props.deleteItem(author.id);
     }
   };
 
   const messageProcessor = () => {
-    let nextPageToken = localStorage.getItem('nextPageToken');
+    let nextPageToken = localStorage.getItem("nextPageToken");
     if (nextPageToken === null) {
-      nextPageToken = ' ';
+      nextPageToken = " ";
     }
     axios
       .get(
         `${API_URL}/v4/m?maxResults=200&id=${props.videoId}&pageToken=${nextPageToken}`,
       )
       .then((res) => {
-        localStorage.setItem('nextPageToken', res.data.tag);
+        localStorage.setItem("nextPageToken", res.data.tag);
         for (let i = 0; i < res.data.items.length; i += 1) {
           const author = {
             id: res.data.items[i].a.id,
@@ -101,10 +101,10 @@ const QueueWorker = (props) => {
           };
           const isEligible = res.data.items[i].s.m
             .toLowerCase()
-            .includes(localStorage.getItem('queue-command').toLowerCase());
+            .includes(localStorage.getItem("queue-command").toLowerCase());
           author.message = author.message.replace(
-            localStorage.getItem('queue-command'),
-            '',
+            localStorage.getItem("queue-command"),
+            "",
           );
           if (isEligible) props.pushItem(author);
           else {
@@ -128,7 +128,7 @@ const QueueWorker = (props) => {
   };
 
   useEffect(() => {
-    if (props.videoId !== 'test') messageProcessor();
+    if (props.videoId !== "test") messageProcessor();
     clearTimeout(timer);
   }, []);
 

@@ -3,8 +3,8 @@
  * RaffleWrapper actions
  *
  */
-import { action } from 'typesafe-actions';
-import ActionTypes from './constants';
+import { action } from "typesafe-actions";
+import ActionTypes from "./constants";
 
 export const changeAnimation = (animationType: number) =>
   action(ActionTypes.CHANGE_ANIMATION, animationType);

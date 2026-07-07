@@ -1,38 +1,38 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages } from "react-intl";
 
-export const scope = 'streamchange.components.WelcomeDialog.FirstUseScreen';
+export const scope = "streamchange.components.WelcomeDialog.FirstUseScreen";
 
 export default defineMessages({
   firstUseSaveBtn: {
     id: `${scope}.saveBtn`,
-    defaultMessage: 'Save',
+    defaultMessage: "Save",
   },
   firstUseSelectLang: {
     id: `${scope}.selectLanguage`,
-    defaultMessage: 'Select language',
+    defaultMessage: "Select language",
   },
   firstUseSelectTheme: {
     id: `${scope}.selectTheme`,
-    defaultMessage: 'Select theme',
+    defaultMessage: "Select theme",
   },
   darkTheme: {
     id: `${scope}.theme.dark`,
-    defaultMessage: 'Dark',
+    defaultMessage: "Dark",
   },
   lightTheme: {
     id: `${scope}.theme.light`,
-    defaultMessage: 'Light',
+    defaultMessage: "Light",
   },
   firstUseTitle: {
     id: `${scope}.title`,
-    defaultMessage: 'Welcome to StreamChange',
+    defaultMessage: "Welcome to StreamChange",
   },
   en: {
-    id: 'streamchange.components.SettingsDialog.LocaleToggle.en',
-    defaultMessage: 'en',
+    id: "streamchange.components.SettingsDialog.LocaleToggle.en",
+    defaultMessage: "en",
   },
   pl: {
-    id: 'streamchange.components.SettingsDialog.LocaleToggle.pl',
-    defaultMessage: 'pl',
+    id: "streamchange.components.SettingsDialog.LocaleToggle.pl",
+    defaultMessage: "pl",
   },
 });

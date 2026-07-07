@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 //import { Howl } from 'howler';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
 
-import { makeSelectUserArray } from '../UserList/selectors';
-import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
-import DialogRoot from './DialogRoot';
-import FortuneWheelImg from './assets/fortune-wheel-inner.png';
-import FortuneWheelBorder from './assets/fortune-wheel-outer.png';
-import WheelSound from './assets/FortuneWheelSound.mp3';
-import RaffleDialog from './RaffleDialog';
-import RaffleWinner from './RaffleWinner';
-import WheelItem from './WheelItem';
+import { makeSelectUserArray } from "../UserList/selectors";
+import { makeSelectGiveawayRequirement } from "../GiveawayRules/selectors";
+import DialogRoot from "./DialogRoot";
+import FortuneWheelImg from "./assets/fortune-wheel-inner.png";
+import FortuneWheelBorder from "./assets/fortune-wheel-outer.png";
+import WheelSound from "./assets/FortuneWheelSound.mp3";
+import RaffleDialog from "./RaffleDialog";
+import RaffleWinner from "./RaffleWinner";
+import WheelItem from "./WheelItem";
 
 const WheelImg = styled.img`
   width: 75vh;
@@ -70,11 +70,11 @@ const FortuneWheelRaffle = (props) => {
     setUsers(shuffled);
     setTimeout(() => setScrollSize(scroll), 10);
     setWinner(shuffled[winnerIndex]);
-    const sId1 = tickSound.play('start');
+    const sId1 = tickSound.play("start");
     tickSound.on(
-      'end',
+      "end",
       () => {
-        tickSound.play('tick');
+        tickSound.play("tick");
         tickSound.loop(true);
       },
       sId1,
@@ -84,23 +84,26 @@ const FortuneWheelRaffle = (props) => {
       tickSound.unload();
     }, props.duration * 1000);
     setTimer(
-      setTimeout(() => {
-        props.onWin(shuffled[winnerIndex].id);
-      }, (props.duration + 1) * 1000),
+      setTimeout(
+        () => {
+          props.onWin(shuffled[winnerIndex].id);
+        },
+        (props.duration + 1) * 1000,
+      ),
     );
   }, []);
 
   const positions = [
-    { x: '43%', y: '8%' },
-    { x: '63%', y: '15%' },
-    { x: '75%', y: '32%' },
-    { x: '76%', y: '52%' },
-    { x: '63%', y: '70%' },
-    { x: '43%', y: '77%' },
-    { x: '23%', y: '70%' },
-    { x: '10%', y: '53%' },
-    { x: '10%', y: '32%' },
-    { x: '22%', y: '14%' },
+    { x: "43%", y: "8%" },
+    { x: "63%", y: "15%" },
+    { x: "75%", y: "32%" },
+    { x: "76%", y: "52%" },
+    { x: "63%", y: "70%" },
+    { x: "43%", y: "77%" },
+    { x: "23%", y: "70%" },
+    { x: "10%", y: "53%" },
+    { x: "10%", y: "32%" },
+    { x: "22%", y: "14%" },
   ];
 
   const wheelItems = [];
@@ -132,7 +135,7 @@ const FortuneWheelRaffle = (props) => {
       <RaffleDialog>
         <WheelMovable
           style={{
-            position: 'absolute',
+            position: "absolute",
             transform: `rotate(${scrollSize}deg)`,
             transitionDuration: `${props.duration}s`,
           }}

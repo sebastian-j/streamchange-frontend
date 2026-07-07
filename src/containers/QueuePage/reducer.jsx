@@ -3,22 +3,22 @@
  * QueuePage reducer
  *
  */
-import {produce} from 'immer';
+import { produce } from "immer";
 
-import ActionTypes from './constants';
+import ActionTypes from "./constants";
 import {
   deleteQueueItem,
   postQueueItem,
   updateQueueItem,
-} from './remoteDatabase';
+} from "./remoteDatabase";
 
 export const initialState = {
-  capacity: parseInt(localStorage.getItem('queue-capacity'), 10) || 10,
-  command: localStorage.getItem('queue-command') || '',
+  capacity: parseInt(localStorage.getItem("queue-capacity"), 10) || 10,
+  command: localStorage.getItem("queue-command") || "",
   queueArray: [],
-  timeToIdle: parseInt(localStorage.getItem('queue-timeToIdle'), 10) || 600,
-  timeToKick: parseInt(localStorage.getItem('queue-timeToKick'), 10) || 900,
-  widgetCode: localStorage.getItem('queue-widget-code') || '',
+  timeToIdle: parseInt(localStorage.getItem("queue-timeToIdle"), 10) || 600,
+  timeToKick: parseInt(localStorage.getItem("queue-timeToKick"), 10) || 900,
+  widgetCode: localStorage.getItem("queue-widget-code") || "",
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -39,7 +39,7 @@ const queueReducer = (state = initialState, action) =>
         break;
       case ActionTypes.CHANGE_QUEUE_WIDGET_CODE:
         draft.widgetCode = action.payload;
-        localStorage.setItem('queue-widget-code', action.payload);
+        localStorage.setItem("queue-widget-code", action.payload);
         break;
       case ActionTypes.DELETE_QUEUE_ITEM:
         for (let i = 0; i < draft.queueArray.length; i += 1) {

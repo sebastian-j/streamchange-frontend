@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Typography from '@mui/material/Typography';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
 
-import messages from './messages';
-import ColoredLink from '../SupportInformation/ColoredLink';
-import PromotedBanner from './PromotedBanner';
-import PromotedChannel from './PromotedChannel';
-import PromotedVideo from './PromotedVideo';
+import messages from "./messages";
+import ColoredLink from "../SupportInformation/ColoredLink";
+import PromotedBanner from "./PromotedBanner";
+import PromotedChannel from "./PromotedChannel";
+import PromotedVideo from "./PromotedVideo";
 
 const AdPlaceholder = styled.div`
   border: 1px solid #7b7b7b;
@@ -45,11 +45,11 @@ const AdFrame = () => {
     if (month.length < 2) month = `0${month}`;
     if (day.length < 2) day = `0${day}`;
 
-    return [year, month, day].join('-');
+    return [year, month, day].join("-");
   };
 
   const getPromotedChannels = () => {
-    axios.get('../static/sellers.json').then((res) => {
+    axios.get("../static/sellers.json").then((res) => {
       if (res.data.items) {
         for (let i = 0; i < res.data.items.length; i += 1) {
           if (res.data.items[i].date.includes(getToday()))
@@ -143,7 +143,7 @@ const AdFrame = () => {
       </div>
     );
   }
-  if (promotedContent.kind === 'channel') {
+  if (promotedContent.kind === "channel") {
     return (
       <PromotedChannel
         channelUrl={promotedContent.channelUrl}
@@ -153,7 +153,7 @@ const AdFrame = () => {
       />
     );
   }
-  if (promotedContent.kind === 'image') {
+  if (promotedContent.kind === "image") {
     return (
       <PromotedBanner
         channelUrl={promotedContent.channelUrl}
@@ -162,7 +162,7 @@ const AdFrame = () => {
       />
     );
   }
-  if (promotedContent.kind === 'video') {
+  if (promotedContent.kind === "video") {
     return (
       <PromotedVideo
         description={promotedContent.description}

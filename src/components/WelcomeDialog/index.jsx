@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import { FormattedMessage, useIntl } from 'react-intl';
-import messages from './messages';
-import { CompatibilityInfo } from './components/CompatibilityInfo';
-import CookieConsent from './CookieConsent';
-import DialogWrapper from './components/DialogWrapper';
-import FirstUseScreen from './FirstUseScreen';
-import { PhotoBackdrop } from './components/PhotoBackdrop';
-import WavyButton from './components/WavyButton';
-import WelcomeHint from './WelcomeHint';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { FormattedMessage, useIntl } from "react-intl";
+import messages from "./messages";
+import { CompatibilityInfo } from "./components/CompatibilityInfo";
+import CookieConsent from "./CookieConsent";
+import DialogWrapper from "./components/DialogWrapper";
+import FirstUseScreen from "./FirstUseScreen";
+import { PhotoBackdrop } from "./components/PhotoBackdrop";
+import WavyButton from "./components/WavyButton";
+import WelcomeHint from "./WelcomeHint";
 
 const WelcomeDialog = (props) => {
   const intl = useIntl();
-  const [channel, setChannel] = useState('');
-  const [platform, setPlatform] = useState('twitch');
+  const [channel, setChannel] = useState("");
+  const [platform, setPlatform] = useState("twitch");
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleConnect = () => {
-    if (typeof props.onStart === 'function' && channel.trim().length > 0) {
+    if (typeof props.onStart === "function" && channel.trim().length > 0) {
       setIsLoading(true);
       props.onStart(channel.trim(), platform);
     }
@@ -31,7 +31,7 @@ const WelcomeDialog = (props) => {
 
   useEffect(() => {
     setIsChrome(!!window.chrome);
-    setIsFirstUse(!localStorage.getItem('locale'));
+    setIsFirstUse(!localStorage.getItem("locale"));
   }, []);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const WelcomeDialog = (props) => {
   }, [props.error]);
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !isLoading) {
+    if (e.key === "Enter" && !isLoading) {
       handleConnect();
     }
   };
@@ -57,7 +57,9 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "flex-end" }}
+              >
                 <TextField
                   autoFocus
                   margin="dense"
@@ -75,7 +77,7 @@ const WelcomeDialog = (props) => {
                   value={platform}
                   onChange={(e) => setPlatform(e.target.value)}
                   variant="standard"
-                  style={{ minWidth: '100px', marginBottom: '4px' }}
+                  style={{ minWidth: "100px", marginBottom: "4px" }}
                 >
                   <MenuItem value="twitch">Twitch</MenuItem>
                   <MenuItem value="kick">Kick</MenuItem>
@@ -83,23 +85,35 @@ const WelcomeDialog = (props) => {
               </div>
               <div className="text">
                 {props.error && (
-                  <span style={{ display: 'block', color: '#bd0013', marginTop: '10px' }}>
-                    {props.error === 'invalidUrl' && (
+                  <span
+                    style={{
+                      display: "block",
+                      color: "#bd0013",
+                      marginTop: "10px",
+                    }}
+                  >
+                    {props.error === "invalidUrl" && (
                       <FormattedMessage {...messages.invalidUrlError} />
                     )}
-                    {props.error === 'notStream' && (
+                    {props.error === "notStream" && (
                       <FormattedMessage {...messages.notStreamError} />
                     )}
-                    {props.error === 'notVideo' && (
+                    {props.error === "notVideo" && (
                       <FormattedMessage {...messages.notVideoError} />
                     )}
-                    {props.error === 'quotaExceeded' && (
+                    {props.error === "quotaExceeded" && (
                       <FormattedMessage {...messages.quotaExceededError} />
                     )}
                   </span>
                 )}
                 {props.ban && (
-                  <span style={{ display: 'block', color: '#bd0013', marginTop: '10px' }}>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "#bd0013",
+                      marginTop: "10px",
+                    }}
+                  >
                     <FormattedMessage {...messages.banDate} />
                     {` ${props.ban.endsAt} `}
                     <FormattedMessage {...messages.banReason} />
@@ -110,7 +124,10 @@ const WelcomeDialog = (props) => {
             </div>
             <div className="actions">
               {!isLoading && (
-                <WavyButton onClick={handleConnect} text={intl.formatMessage({...messages.saveBtn})}/>
+                <WavyButton
+                  onClick={handleConnect}
+                  text={intl.formatMessage({ ...messages.saveBtn })}
+                />
               )}
               {isLoading && <CircularProgress />}
             </div>

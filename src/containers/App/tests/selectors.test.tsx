@@ -1,9 +1,9 @@
-import { makeSelectLocation } from 'containers/App/selectors';
+import { makeSelectLocation } from "containers/App/selectors";
 
-describe('makeSelectLocation', () => {
-  it('should select the location', () => {
+describe("makeSelectLocation", () => {
+  it("should select the location", () => {
     const router = {
-      location: { pathname: '/foo' },
+      location: { pathname: "/foo" },
     };
     const mockedState = {
       router,

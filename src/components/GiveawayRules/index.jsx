@@ -1,27 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import React from "react";
+import PropTypes from "prop-types";
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
-import messages from './messages';
+import messages from "./messages";
 import {
   makeSelectGiveawayPrize,
   makeSelectGiveawayRequirement,
-} from './selectors';
-import { changePrize, changeRequirement } from './actions';
-import AdFrame from '../AdFrame';
-import Panel from '../Panel';
-import PanelTitle from '../Panel/PanelTitle';
-import StyledTextField from '../StyledTextField';
-import StyledFormControl from '../StyledTextField/StyledFormControl';
-import KeywordInput from './KeywordInput';
-import LotteryLawWarning from './LotteryLawWarning';
-import RaffleWrapper from '../RaffleWrapper';
-import WinnerView from '../WinnerView';
+} from "./selectors";
+import { changePrize, changeRequirement } from "./actions";
+import AdFrame from "../AdFrame";
+import Panel from "../Panel";
+import PanelTitle from "../Panel/PanelTitle";
+import StyledTextField from "../StyledTextField";
+import StyledFormControl from "../StyledTextField/StyledFormControl";
+import KeywordInput from "./KeywordInput";
+import LotteryLawWarning from "./LotteryLawWarning";
+import RaffleWrapper from "../RaffleWrapper";
+import WinnerView from "../WinnerView";
 
 export class GiveawayRules extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export class GiveawayRules extends React.Component {
 
   handleInputValueChange(event) {
     const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const { name } = target;
 
     if (value.length < 140) {

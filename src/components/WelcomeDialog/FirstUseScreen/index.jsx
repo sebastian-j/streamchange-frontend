@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { createSelector } from 'reselect';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { FormattedMessage } from "react-intl";
+import { createSelector } from "reselect";
+import { connect } from "react-redux";
 
-import { makeSelectLocale } from '../../../containers/LanguageProvider/selectors';
-import { changeLocale } from '../../../containers/LanguageProvider/actions';
-import FlagPL from '../assets/flag-pl.png';
-import FlagUK from '../assets/flag-uk.png';
-import LightModeImg from '../assets/light-mode.png';
-import DarkModeImg from '../assets/dark-mode.png';
-import { Backdrop } from './components/Backdrop';
-import { Box } from './components/Box';
-import CookieConsent from '../CookieConsent';
-import { LangBox } from './components/LangBox';
-import { LangTile } from './components/LangTile';
-import { RadioInput } from './components/RadioInput';
-import { StyledButton } from './components/StyledButton';
-import { Tile } from './components/Tile';
-import { Title } from './components/Title';
-import messages from './messages';
+import { makeSelectLocale } from "../../../containers/LanguageProvider/selectors";
+import { changeLocale } from "../../../containers/LanguageProvider/actions";
+import FlagPL from "../assets/flag-pl.png";
+import FlagUK from "../assets/flag-uk.png";
+import LightModeImg from "../assets/light-mode.png";
+import DarkModeImg from "../assets/dark-mode.png";
+import { Backdrop } from "./components/Backdrop";
+import { Box } from "./components/Box";
+import CookieConsent from "../CookieConsent";
+import { LangBox } from "./components/LangBox";
+import { LangTile } from "./components/LangTile";
+import { RadioInput } from "./components/RadioInput";
+import { StyledButton } from "./components/StyledButton";
+import { Tile } from "./components/Tile";
+import { Title } from "./components/Title";
+import messages from "./messages";
 
 const FirstUseScreen = (props) => {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('darkMode') === 'true',
+    localStorage.getItem("darkMode") === "true",
   );
   const [language, setLanguage] = useState(props.locale);
 
@@ -33,12 +33,12 @@ const FirstUseScreen = (props) => {
   };
 
   const changeTheme = (event) => {
-    setDarkMode(event.target.value === '1');
-    localStorage.setItem('darkMode', (event.target.value === '1').toString());
+    setDarkMode(event.target.value === "1");
+    localStorage.setItem("darkMode", (event.target.value === "1").toString());
   };
 
   const save = () => {
-    localStorage.setItem('locale', language);
+    localStorage.setItem("locale", language);
     window.location.reload();
   };
 
@@ -98,7 +98,7 @@ const FirstUseScreen = (props) => {
             value="pl"
             onChange={() => {}}
             onClick={changeLanguage}
-            checked={language === 'pl'}
+            checked={language === "pl"}
           />
           <LangBox className="box left">
             <LangTile>
@@ -115,7 +115,7 @@ const FirstUseScreen = (props) => {
             value="en"
             onChange={() => {}}
             onClick={changeLanguage}
-            checked={language === 'en'}
+            checked={language === "en"}
           />
           <LangBox className="box right">
             <LangTile>

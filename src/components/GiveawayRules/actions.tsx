@@ -3,9 +3,9 @@
  * GiveawayRules actions
  *
  */
-import { action } from 'typesafe-actions';
-import { User } from '../UserList/types';
-import ActionTypes from './constants';
+import { action } from "typesafe-actions";
+import { User } from "../UserList/types";
+import ActionTypes from "./constants";
 
 export const changeKeyword = (keyword: string) =>
   action(ActionTypes.CHANGE_KEYWORD, keyword);

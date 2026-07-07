@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const SlideDown = keyframes`
   0% {
@@ -30,15 +30,17 @@ const DialogWrapper = styled.div`
   .dialog {
     animation: ${SlideDown} 0.7s ease-out;
     background-color: white;
-    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
-      0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.52);
+    box-shadow:
+      0 11px 15px -7px rgba(0, 0, 0, 0.2),
+      0 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0 9px 46px 8px rgba(0, 0, 0, 0.52);
     border-radius: 4px;
     max-width: 600px;
     z-index: -1;
 
     .title {
       font-size: 1.25rem;
-      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
       font-weight: 500;
       line-height: 1.6;
       letter-spacing: 0.0075em;
@@ -48,7 +50,7 @@ const DialogWrapper = styled.div`
       padding: 8px 24px;
       .text {
         color: rgba(0, 0, 0, 0.54);
-        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         line-height: 1.5;
         margin-bottom: 12px;
       }

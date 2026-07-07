@@ -1,14 +1,14 @@
-import produce from 'immer';
+import produce from "immer";
 
-import raffleWrapperReducer, { initialState } from '../reducer';
+import raffleWrapperReducer, { initialState } from "../reducer";
 import {
   changeAnimation,
   changeAnimationDuration,
   changeVisibility,
-} from '../actions';
+} from "../actions";
 
 /* eslint-disable default-case, no-param-reassign */
-describe('rafleWrapperReducer', () => {
+describe("rafleWrapperReducer", () => {
   let state;
   beforeEach(() => {
     state = {
@@ -18,11 +18,11 @@ describe('rafleWrapperReducer', () => {
     };
   });
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(raffleWrapperReducer(undefined, {} as any)).toEqual(initialState);
   });
 
-  it('should handle the changeAnimation action correctly', () => {
+  it("should handle the changeAnimation action correctly", () => {
     const fixture = 1;
     const expectedResult = produce(state, (draft) => {
       draft.animationType = fixture;
@@ -33,7 +33,7 @@ describe('rafleWrapperReducer', () => {
     );
   });
 
-  it('should handle the changeAnimationDuration action correctly', () => {
+  it("should handle the changeAnimationDuration action correctly", () => {
     const fixture = 16;
     const expectedResult = produce(state, (draft) => {
       draft.animationDuration = fixture;
@@ -44,7 +44,7 @@ describe('rafleWrapperReducer', () => {
     ).toEqual(expectedResult);
   });
 
-  it('should handle the changeVisibility action correctly', () => {
+  it("should handle the changeVisibility action correctly", () => {
     const fixture = true;
     const expectedResult = produce(state, (draft) => {
       draft.isOpen = fixture;

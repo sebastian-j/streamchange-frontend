@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const InformationText = styled.div`
   color: ${(props) => props.theme.staticTextColor};

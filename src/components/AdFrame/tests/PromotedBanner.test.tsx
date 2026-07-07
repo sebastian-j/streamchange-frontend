@@ -1,12 +1,12 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import React from "react";
+import { createRenderer } from "react-test-renderer/shallow";
 
-import PromotedBanner from '../PromotedBanner';
+import PromotedBanner from "../PromotedBanner";
 
 const shallowRenderer = createRenderer();
 
-describe('<PromotedBanner />', () => {
-  it('should render and match the snapshot', () => {
+describe("<PromotedBanner />", () => {
+  it("should render and match the snapshot", () => {
     shallowRenderer.render(
       <PromotedBanner
         channelUrl="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"

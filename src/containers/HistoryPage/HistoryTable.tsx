@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from "react";
+import clsx from "clsx";
+import { FormattedMessage } from "react-intl";
 
-import messages from './messages';
-import ArrowUpIcon from './components/arrowUpIcon';
-import HistoryItem from './HistoryItem';
-import { Table } from './components/Table';
-import { TableHeaderButton } from './components/TableHeaderButton';
-import { Thead } from './components/Thead';
-import { HistoryItem as HItem } from './types';
+import messages from "./messages";
+import ArrowUpIcon from "./components/arrowUpIcon";
+import HistoryItem from "./HistoryItem";
+import { Table } from "./components/Table";
+import { TableHeaderButton } from "./components/TableHeaderButton";
+import { Thead } from "./components/Thead";
+import { HistoryItem as HItem } from "./types";
 
 interface Props {
   items: HItem[];
 }
 
 const HistoryTable = ({ items }: Props) => {
-  const [sort, setSort] = useState<string>('createdAtDESC');
+  const [sort, setSort] = useState<string>("createdAtDESC");
   const handleSortChange = (event) => {
     const { target } = event;
     let value = target.id;
     if (value === sort) {
-      value += 'DESC';
+      value += "DESC";
     }
     setSort(value);
   };
@@ -39,8 +39,8 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.nameHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  sort === 'displayName' && 'active',
-                  sort === 'displayNameDESC' && ['active', 'descending'],
+                  sort === "displayName" && "active",
+                  sort === "displayNameDESC" && ["active", "descending"],
                 )}
               />
             </TableHeaderButton>
@@ -54,8 +54,8 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.prizeHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  sort === 'prize' && 'active',
-                  sort === 'prizeDESC' && ['active', 'descending'],
+                  sort === "prize" && "active",
+                  sort === "prizeDESC" && ["active", "descending"],
                 )}
               />
             </TableHeaderButton>
@@ -69,8 +69,8 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.messageHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  sort === 'message' && 'active',
-                  sort === 'messageDESC' && ['active', 'descending'],
+                  sort === "message" && "active",
+                  sort === "messageDESC" && ["active", "descending"],
                 )}
               />
             </TableHeaderButton>
@@ -84,8 +84,8 @@ const HistoryTable = ({ items }: Props) => {
               <FormattedMessage {...messages.dateHeader} />
               <ArrowUpIcon
                 className={clsx(
-                  sort === 'createdAt' && 'active',
-                  sort === 'createdAtDESC' && ['active', 'descending'],
+                  sort === "createdAt" && "active",
+                  sort === "createdAtDESC" && ["active", "descending"],
                 )}
               />
             </TableHeaderButton>

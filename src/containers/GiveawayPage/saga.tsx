@@ -1,24 +1,24 @@
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import qs from 'qs';
+import { all, call, put, select, takeLatest } from "redux-saga/effects";
+import qs from "qs";
 
-import ActionTypes from './constants';
-import { request } from 'utils/request';
-import { changeBanStatus, loadAuthKey } from './actions';
-import { makeSelectStreamInfo } from './selectors';
-import { Stream } from './types';
-import { API_URL } from '../../config';
+import ActionTypes from "./constants";
+import { request } from "utils/request";
+import { changeBanStatus, loadAuthKey } from "./actions";
+import { makeSelectStreamInfo } from "./selectors";
+import { Stream } from "./types";
+import { API_URL } from "../../config";
 
 /**
  *  Selects streamInfo from store, then adds part to the request
  */
 export function* sendTelemetry() {
   const streamInfo = yield select(makeSelectStreamInfo());
-  streamInfo.part = 'stream';
+  streamInfo.part = "stream";
   const requestURL = `${API_URL}/v4/telemetry`;
   const requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: qs.stringify(streamInfo),
   };
@@ -27,7 +27,7 @@ export function* sendTelemetry() {
     const res = yield call(request, requestURL, requestOptions);
     yield put(loadAuthKey(res.status));
   } catch (err) {
-    yield put(loadAuthKey(''));
+    yield put(loadAuthKey(""));
   }
 }
 
@@ -36,7 +36,7 @@ export function* sendTelemetry() {
  */
 export function* checkBan() {
   const streamInfo: Stream = yield select(makeSelectStreamInfo());
-  const requestURL = '../static/bans.json';
+  const requestURL = "../static/bans.json";
 
   try {
     const { items } = yield call(request, requestURL);

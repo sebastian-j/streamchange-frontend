@@ -1,6 +1,5 @@
-import { ActionType } from 'typesafe-actions';
-import * as actions from './actions';
-
+import { ActionType } from "typesafe-actions";
+import * as actions from "./actions";
 
 interface IChatMessage {
   authorId: string;
@@ -28,6 +27,5 @@ type AppActions = ActionType<typeof actions>;
 type ContainerState = ChatViewState;
 type ContainerActions = AppActions;
 type ChatMessage = IChatMessage;
-
 
 export { ContainerState, ContainerActions, ChatMessage };

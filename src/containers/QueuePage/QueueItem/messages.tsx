@@ -1,26 +1,26 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages } from "react-intl";
 
-export const scope = 'streamchange.containers.QueuePage.QueueItem';
+export const scope = "streamchange.containers.QueuePage.QueueItem";
 
 export default defineMessages({
   addedAtTooltipField: {
     id: `${scope}.addedAt`,
-    defaultMessage: 'Joined at',
+    defaultMessage: "Joined at",
   },
   activeAtTooltipField: {
     id: `${scope}.activeAt`,
-    defaultMessage: 'Last message at',
+    defaultMessage: "Last message at",
   },
   saveBtn: {
     id: `${scope}.save`,
-    defaultMessage: 'Save',
+    defaultMessage: "Save",
   },
   cancelBtn: {
     id: `${scope}.quitEditMode`,
-    defaultMessage: 'Cancel',
+    defaultMessage: "Cancel",
   },
   markActiveBtn: {
     id: `${scope}.markAsActive`,
-    defaultMessage: 'Mark as active',
+    defaultMessage: "Mark as active",
   },
 });

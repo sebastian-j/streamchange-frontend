@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PhotoBackdrop = styled.div`
   background: url(../static/streamchange-cover.webp) no-repeat center center
