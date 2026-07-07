@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 
+import InternalChatBadges from './InternalChatBadges';
+
 const MessageLi = styled.li`
   margin-bottom: 5px;
 `;
@@ -27,9 +29,7 @@ const MessageText = styled.span`
 `;
 
 const InternalChatMessage = (props) => {
-  let userColor = props.message.isSponsor ? 'rgb(43,166,64)' : null;
-  userColor = props.message.isModerator ? 'rgb(94, 132, 241)' : userColor;
-  userColor = props.message.isOwner ? 'rgb(255, 214, 0)' : userColor;
+  const userColor = props.message.color || null;
   const dt = new Date(props.message.publishedAt);
   const convertedDate = `${dt.getHours()}:${
     dt.getMinutes() < 10 ? '0' : ''
@@ -43,6 +43,7 @@ const InternalChatMessage = (props) => {
       >
         <AuthorImage src={props.message.imageUrl} />
       </a>
+      <InternalChatBadges message={props.message} />
       <Tooltip title={convertedDate} aria-label="date">
         <AuthorTitle userColor={userColor}>{props.message.title}</AuthorTitle>
       </Tooltip>

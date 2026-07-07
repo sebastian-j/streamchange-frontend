@@ -62,7 +62,7 @@ const YoutubeWorker = (props) => {
   };
 
   const superChatFeatures = (author, chatMessage) => {
-    if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.isOwner) {
+    if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.isStreamer) {
       if (author.message.startsWith('!s ')) {
         setSuperChat({
           title: author.title,
@@ -143,11 +143,13 @@ const YoutubeWorker = (props) => {
       };
 
       const chatViewMessage = {
+        color: data.color,
+        platform: props.platform,
         imageUrl: '',
         isModerator: data.is_moderator,
-        isOwner: data.is_streamer,
-        isSponsor: data.subscriber > 0,
-        isVerified: data.is_vip,
+        isStreamer: data.is_streamer,
+        isSubscriber: data.subscriber > 0,
+        isVip: data.is_vip,
         title: data.author,
         ...dbMessage,
       };
