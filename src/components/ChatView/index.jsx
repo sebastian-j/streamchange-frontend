@@ -24,7 +24,10 @@ const Header = styled.div`
 
 function ChatView(props) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [chatMode, setChatMode] = useState(1);
+  const [chatMode, setChatMode] = useState(() => {
+    const saved = localStorage.getItem('gv-chatMode');
+    return saved === null ? 1 : Number(saved);
+  });
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,6 +38,7 @@ function ChatView(props) {
   };
 
   const handleMenuItemClick = (index) => {
+    localStorage.setItem('gv-chatMode', String(index));
     setChatMode(index);
     closeMenu();
   };
@@ -94,7 +98,9 @@ function ChatView(props) {
           </MenuItem>
         </MenuList>
       </Header>
-      {chatMode === 0 && <ChatEmbed videoId={props.videoId} />}
+      {chatMode === 0 && (
+        <ChatEmbed videoId={props.videoId} platform={props.platform} />
+      )}
       {chatMode === 1 && <InternalChat />}
     </Panel>
   );
@@ -102,6 +108,7 @@ function ChatView(props) {
 
 ChatView.propTypes = {
   videoId: PropTypes.string,
+  platform: PropTypes.string,
 };
 
 export default ChatView;

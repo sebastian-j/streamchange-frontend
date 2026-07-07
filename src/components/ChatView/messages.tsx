@@ -14,7 +14,7 @@ export default defineMessages({
   },
   embedMode: {
     id: `${scope}.embedMode`,
-    defaultMessage: 'Embedded chat from Youtube',
+    defaultMessage: 'Embedded chat',
   },
   internalMode: {
     id: `${scope}.internalMode`,
