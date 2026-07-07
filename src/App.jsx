@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import YoutubeWorker from './components/YoutubeWorker';
-import WelcomeDialog from './components/WelcomeDialog'; 
+import WelcomeDialog from './components/WelcomeDialog';
 export default function App() {
   const [channelConfig, setChannelConfig] = useState(null);
 

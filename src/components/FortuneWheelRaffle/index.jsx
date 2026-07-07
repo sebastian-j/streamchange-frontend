@@ -77,7 +77,7 @@ const FortuneWheelRaffle = (props) => {
     //     tickSound.play('tick');
     //     tickSound.loop(true);
     //   },
-      //sId1
+    //sId1
     //);
     setTimeout(() => {
       //tickSound.stop();

@@ -23,18 +23,21 @@ const WelcomeDialog = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
 
-
   const handleInputChange = (e) => {
     const val = e.target.value;
     setText(val);
     const propsArray = val.split('/');
     if (propsArray.length === 2) {
       setChannel(propsArray[1]);
-      setPlatform(propsArray[0].toLowerCase().includes('twitch') ? 'twitch' : 'kick');
-      
-    } if(propsArray.length > 2) {
+      setPlatform(
+        propsArray[0].toLowerCase().includes('twitch') ? 'twitch' : 'kick'
+      );
+    }
+    if (propsArray.length > 2) {
       setChannel(propsArray[3]);
-      setPlatform(propsArray[2].toLowerCase().includes('twitch') ? 'twitch' : 'kick');
+      setPlatform(
+        propsArray[2].toLowerCase().includes('twitch') ? 'twitch' : 'kick'
+      );
     }
   };
   const handleConnect = () => {
@@ -72,18 +75,18 @@ const WelcomeDialog = (props) => {
               <FormattedMessage {...messages.dialogTitle} />
             </div>
             <div className="content">
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  name="channel"
-                  onChange={handleInputChange}
-                  onKeyPress={handleKeyPress}
-                  label="Link do kanału"
-                  type="text"
-                  value={text}
-                  variant="standard"
-                  fullWidth
-                />
+              <TextField
+                autoFocus
+                margin="dense"
+                name="channel"
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                label="Link do kanału"
+                type="text"
+                value={text}
+                variant="standard"
+                fullWidth
+              />
               <div className="text">
                 {props.error && (
                   <span
