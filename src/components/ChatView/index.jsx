@@ -99,7 +99,7 @@ function ChatView(props) {
         </MenuList>
       </Header>
       {chatMode === 0 && (
-        <ChatEmbed videoId={props.videoId} platform={props.platform} />
+        <ChatEmbed channel={props.channel} platform={props.platform} />
       )}
       {chatMode === 1 && <InternalChat />}
     </Panel>
@@ -107,7 +107,7 @@ function ChatView(props) {
 }
 
 ChatView.propTypes = {
-  videoId: PropTypes.string,
+  channel: PropTypes.string,
   platform: PropTypes.string,
 };
 

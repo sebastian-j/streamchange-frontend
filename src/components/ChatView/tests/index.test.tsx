@@ -6,8 +6,14 @@ import ChatEmbed from '../ChatEmbed';
 const shallowRenderer = createRenderer();
 
 describe('<ChatEmbed />', () => {
-  it('should render and match the snapshot', () => {
-    shallowRenderer.render(<ChatEmbed videoId="id" />);
+  it('should render Twitch chat and match the snapshot', () => {
+    shallowRenderer.render(<ChatEmbed channel="id" platform="twitch" />);
+    const renderedOutput = shallowRenderer.getRenderOutput();
+    expect(renderedOutput).toMatchSnapshot();
+  });
+
+  it('should render Kick chat and match the snapshot', () => {
+    shallowRenderer.render(<ChatEmbed channel="id" platform="kick" />);
     const renderedOutput = shallowRenderer.getRenderOutput();
     expect(renderedOutput).toMatchSnapshot();
   });
