@@ -7,20 +7,20 @@
  *
  */
 
-import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import GiveawayPage from "../GiveawayPage/Loadable";
-import HistoryPage from "../HistoryPage/Loadable";
-import QueuePage from "../QueuePage/Loadable";
-import NotFoundPage from "../NotFoundPage/Loadable";
+import GiveawayPage from '../GiveawayPage/Loadable';
+import HistoryPage from '../HistoryPage/Loadable';
+import QueuePage from '../QueuePage/Loadable';
+import NotFoundPage from '../NotFoundPage/Loadable';
 
-import GlobalStyle from "../../global-styles";
+import GlobalStyle from '../../global-styles';
 
 export default function App() {
   useEffect(() => {
-    if (!localStorage.getItem("gv-abortCommand")) {
-      localStorage.setItem("gv-abortCommand", "!rezygnuje");
+    if (!localStorage.getItem('gv-abortCommand')) {
+      localStorage.setItem('gv-abortCommand', '!rezygnuje');
     }
   }, []);
   return (

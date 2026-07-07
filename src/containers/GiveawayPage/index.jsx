@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
-import styled from "styled-components";
-import { Helmet } from "react-helmet";
-import { createStructuredSelector } from "reselect";
-import { connect } from "react-redux";
-import Button from "@mui/material/Button";
-import { FormattedMessage, useIntl } from "react-intl";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import Button from '@mui/material/Button';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import messages from "./messages";
-import { makeSelectBanStatus, makeSelectStreamInfo } from "./selectors";
-import { changeStreamProperties, sendTelemetryData } from "./actions";
-import { useInjectSaga } from "utils/injectSaga";
-import saga from "./saga";
-import HistoryWidget from "./HistoryWidget";
-import WelcomeDialog from "../../components/WelcomeDialog";
-import YoutubeWorker from "../../components/YoutubeWorker";
-import SettingsDialog from "../../components/SettingsDialog";
-import SupportInformation from "../../components/SupportInformation";
-import { API_KEY } from "../../config";
+import messages from './messages';
+import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
+import { changeStreamProperties, sendTelemetryData } from './actions';
+import { useInjectSaga } from 'utils/injectSaga';
+import saga from './saga';
+import HistoryWidget from './HistoryWidget';
+import WelcomeDialog from '../../components/WelcomeDialog';
+import YoutubeWorker from '../../components/YoutubeWorker';
+import SettingsDialog from '../../components/SettingsDialog';
+import SupportInformation from '../../components/SupportInformation';
+import { API_KEY } from '../../config';
 
 const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -60,20 +60,20 @@ const StyledButton = styled(Button)`
 
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
-  useInjectSaga({ key: "giveawayPage", saga: saga });
+  useInjectSaga({ key: 'giveawayPage', saga: saga });
   const intl = useIntl();
 
   const leaveStream = () => {
     const streamProps = {
-      ownerId: "",
-      thumbnailUrl: "",
-      title: "",
-      videoId: "",
+      ownerId: '',
+      thumbnailUrl: '',
+      title: '',
+      videoId: '',
     };
     props.changeStreamProperties(streamProps);
-    sessionStorage.removeItem("gv-videoId");
-    sessionStorage.removeItem("gv-title");
-    sessionStorage.removeItem("gv-thumbnailUrl");
+    sessionStorage.removeItem('gv-videoId');
+    sessionStorage.removeItem('gv-title');
+    sessionStorage.removeItem('gv-thumbnailUrl');
     window.location.reload();
   };
 
@@ -84,9 +84,9 @@ const GiveawayPage = (props) => {
       )
       .then((res) => {
         if (res.data.items.length === 0) {
-          setError("notVideo");
-        } else if (res.data.items[0].snippet.liveBroadcastContent === "none") {
-          setError("notStream");
+          setError('notVideo');
+        } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
+          setError('notStream');
         } else {
           const stream = res.data.items[0];
           const streamProps = {
@@ -97,58 +97,58 @@ const GiveawayPage = (props) => {
           };
           props.changeStreamProperties(streamProps);
           props.sendTelemetryData(streamProps);
-          sessionStorage.setItem("gv-videoId", vidId);
-          sessionStorage.setItem("gv-title", streamProps.title);
-          sessionStorage.setItem("gv-thumbnailUrl", streamProps.thumbnailUrl);
-          sessionStorage.setItem("gv-ownerId", streamProps.ownerId);
+          sessionStorage.setItem('gv-videoId', vidId);
+          sessionStorage.setItem('gv-title', streamProps.title);
+          sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
+          sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
         }
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.error) {
-          if (err.response.data.error.errors[0].reason.includes("Exceeded")) {
-            setError("quotaExceeded");
+          if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
+            setError('quotaExceeded');
           }
         } else {
           const streamProps = {
-            ownerId: "",
+            ownerId: '',
             thumbnailUrl:
-              "https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg",
-            title: "Tytuł nieznany",
+              'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+            title: 'Tytuł nieznany',
             videoId: vidId,
           };
           props.changeStreamProperties(streamProps);
-          sessionStorage.setItem("gv-videoId", vidId);
+          sessionStorage.setItem('gv-videoId', vidId);
         }
       });
   };
 
   const receiveVideo = (videoLink) => {
-    if (videoLink.includes("v=")) {
-      const vidId = videoLink.split("v=")[1].split("&")[0].split("/")[0];
+    if (videoLink.includes('v=')) {
+      const vidId = videoLink.split('v=')[1].split('&')[0].split('/')[0];
       launchWorker(vidId);
-    } else if (videoLink.includes("video/")) {
-      const vidId = videoLink.split("video/")[1].split("/")[0];
+    } else if (videoLink.includes('video/')) {
+      const vidId = videoLink.split('video/')[1].split('/')[0];
       launchWorker(vidId);
-    } else if (videoLink.includes("u.be/")) {
-      const vidId = videoLink.split("be/")[1].split("?")[0];
+    } else if (videoLink.includes('u.be/')) {
+      const vidId = videoLink.split('be/')[1].split('?')[0];
       launchWorker(vidId);
-    } else if (videoLink === "test") {
+    } else if (videoLink === 'test') {
       props.changeStreamProperties({
-        ownerId: "",
-        thumbnailUrl: "https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg",
-        title: "",
-        videoId: "test",
+        ownerId: '',
+        thumbnailUrl: 'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+        title: '',
+        videoId: 'test',
       });
     } else {
-      setError("invalidUrl");
+      setError('invalidUrl');
     }
   };
 
   useEffect(() => {
-    const id = sessionStorage.getItem("gv-videoId");
-    const storedTitle = sessionStorage.getItem("gv-title");
-    const storedThumbnail = sessionStorage.getItem("gv-thumbnailUrl");
-    const storedOwnerId = sessionStorage.getItem("gv-ownerId");
+    const id = sessionStorage.getItem('gv-videoId');
+    const storedTitle = sessionStorage.getItem('gv-title');
+    const storedThumbnail = sessionStorage.getItem('gv-thumbnailUrl');
+    const storedOwnerId = sessionStorage.getItem('gv-ownerId');
     if (
       id !== null &&
       storedTitle !== null &&
@@ -165,11 +165,11 @@ const GiveawayPage = (props) => {
     }
   }, []);
 
-  if (props.streamInfo.videoId === "" || props.ban !== null) {
+  if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
       <>
-        <Helmet htmlAttributes={{ lang: intl.locale }}>
-          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale}}>
+          <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
         </Helmet>
         <WelcomeDialog
           passVideo={receiveVideo}
@@ -182,8 +182,8 @@ const GiveawayPage = (props) => {
   }
   return (
     <>
-      <Helmet htmlAttributes={{ lang: intl.locale }}>
-        <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
+      <Helmet htmlAttributes={{ lang: intl.locale}}>
+        <title>{intl.formatMessage({ ...messages.pageTitle})}</title>
       </Helmet>
       <TopBar>
         <StreamInfo>

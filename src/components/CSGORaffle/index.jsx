@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import {
   makeSelectGiveawayPreWinner,
   makeSelectGiveawayRequirement,
-} from "../GiveawayRules/selectors";
-import { makeSelectUserArray } from "../UserList/selectors";
-import "./style.css";
+} from '../GiveawayRules/selectors';
+import { makeSelectUserArray } from '../UserList/selectors';
+import './style.css';
 
 const CSGORaffle = (props) => {
   const [users, setUsers] = useState([]);
@@ -42,12 +42,9 @@ const CSGORaffle = (props) => {
     setTimeout(() => setScrollSize(scroll), 10);
     setWinner(shuffled[winnerIndex]);
     setTimer(
-      setTimeout(
-        () => {
-          props.onWin(shuffled[winnerIndex].id);
-        },
-        (props.duration + 1) * 1000,
-      ),
+      setTimeout(() => {
+        props.onWin(shuffled[winnerIndex].id);
+      }, (props.duration + 1) * 1000),
     );
   }, []);
 

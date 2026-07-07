@@ -3,9 +3,9 @@
  * QueuePage actions
  *
  */
-import { action } from "typesafe-actions";
-import ActionTypes from "./constants";
-import { QueueItem } from "./types";
+import { action } from 'typesafe-actions';
+import ActionTypes from './constants';
+import { QueueItem } from './types';
 
 export const changeQueueCommand = (command: string) =>
   action(ActionTypes.CHANGE_QUEUE_COMMAND, command);

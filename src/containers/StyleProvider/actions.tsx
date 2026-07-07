@@ -3,8 +3,8 @@
  * StyleProvider actions
  *
  */
-import { action } from "typesafe-actions";
-import ActionTypes from "./constants";
+import { action } from 'typesafe-actions';
+import ActionTypes from './constants';
 
 export const changeColor = (color: string) =>
   action(ActionTypes.CHANGE_COLOR, color);

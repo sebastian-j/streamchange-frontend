@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { connect } from "react-redux";
-import { FormattedMessage, useIntl } from "react-intl";
-import { createStructuredSelector } from "reselect";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
 
-import { StyledButton } from "./components/StyledButton";
-import StyledTextField from "../../components/StyledTextField";
-import QueueItem from "./QueueItem";
-import PanelTitle from "../../components/Panel/PanelTitle";
-import { UserListPanel } from "../../components/Panel/UserListPanel";
-import messages from "./messages";
-import { makeSelectQueueArray, makeSelectWidgetCode } from "./selectors";
+import { StyledButton } from './components/StyledButton';
+import StyledTextField from '../../components/StyledTextField';
+import QueueItem from './QueueItem';
+import PanelTitle from '../../components/Panel/PanelTitle';
+import { UserListPanel } from '../../components/Panel/UserListPanel';
+import messages from './messages';
+import { makeSelectQueueArray, makeSelectWidgetCode } from './selectors';
 import {
   getQueueFromIdb as actionGet,
   purgeQueue as actionPurge,
-} from "./actions";
-import { QueueItem as QItem } from "./types";
-import { API_URL } from "../../config";
+} from './actions';
+import { QueueItem as QItem } from './types';
+import { API_URL } from '../../config';
 
 interface Props {
   getQueueFromIdb: (items: QItem[]) => void;
@@ -32,7 +32,7 @@ const QueueColumn = ({
   widgetCode,
 }: Props) => {
   const intl = useIntl();
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const getUsers = () => {
     const config = {
@@ -56,7 +56,7 @@ const QueueColumn = ({
 
   const handleInputValueChange = (event) => {
     const { target } = event;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
 
     if (value.length < 140) {
       setSearchQuery(value);
@@ -77,7 +77,7 @@ const QueueColumn = ({
         margin="dense"
         name="searchQuery"
         onChange={handleInputValueChange}
-        label={intl.formatMessage({ ...messages.searchPlaceholder })}
+        label={intl.formatMessage({...messages.searchPlaceholder})}
         type="text"
         value={searchQuery}
         variant="standard"

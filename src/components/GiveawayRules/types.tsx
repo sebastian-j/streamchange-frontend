@@ -1,6 +1,6 @@
-import { ActionType } from "typesafe-actions";
-import * as actions from "./actions";
-import { User } from "../UserList/types";
+import { ActionType } from 'typesafe-actions';
+import * as actions from './actions';
+import { User } from '../UserList/types';
 
 /* --- STATE --- */
 

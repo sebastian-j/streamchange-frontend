@@ -1,27 +1,28 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { IntlProvider } from "react-intl";
-import { Provider } from "react-redux";
+import React from 'react';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 
-import GiveawayPage from "../index";
-import configureStore from "../../../configureStore";
+import GiveawayPage from '../index';
+import configureStore from '../../../configureStore';
 
-describe("<GiveawayPage />", () => {
+
+describe('<GiveawayPage />', () => {
   let store;
   beforeAll(() => {
     store = configureStore({
-      authKey: "",
+      authKey: '',
       ban: null,
       stream: {
-        ownerId: "",
-        thumbnailUrl: "",
-        title: "",
-        videoId: "",
+        ownerId: '',
+        thumbnailUrl: '',
+        title: '',
+        videoId: '',
       },
     });
   });
 
-  it("should render and match the snapshot", () => {
+  it('should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(

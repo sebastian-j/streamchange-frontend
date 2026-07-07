@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { FormattedMessage, useIntl } from "react-intl";
-import { connect } from "react-redux";
-import { createSelector } from "reselect";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
 
-import messages from "./messages";
-import ColorPicker from "../ColorPicker";
-import DarkModeSwitch from "./DarkModeSwitch";
-import LocaleToggle from "./LocaleToggle";
-import HintParagraph from "../Tooltip/HintParagraph";
-import ToolbarButton from "../SupportInformation/ToolbarButton";
-import { makeSelectColor } from "../../containers/StyleProvider/selectors";
-import { changeColor } from "../../containers/StyleProvider/actions";
+import messages from './messages';
+import ColorPicker from '../ColorPicker';
+import DarkModeSwitch from './DarkModeSwitch';
+import LocaleToggle from './LocaleToggle';
+import HintParagraph from '../Tooltip/HintParagraph';
+import ToolbarButton from '../SupportInformation/ToolbarButton';
+import { makeSelectColor } from '../../containers/StyleProvider/selectors';
+import { changeColor } from '../../containers/StyleProvider/actions';
 
 const SettingsDialog = (props) => {
   const intl = useIntl();
@@ -28,7 +28,7 @@ const SettingsDialog = (props) => {
   const [themeColor, setThemeColor] = useState(props.themeColor);
   const [saveCommands, setSaveCommands] = useState(false);
   const [deleteWinner, setDeleteWinner] = useState(false);
-  const [abortCommand, setAbortCommand] = useState("");
+  const [abortCommand, setAbortCommand] = useState('');
   const [error, setError] = useState(null);
 
   const openDialog = () => {
@@ -45,26 +45,26 @@ const SettingsDialog = (props) => {
 
   const saveSettings = () => {
     props.onColorChange(themeColor);
-    if (localStorage.getItem("keyword") === abortCommand) {
-      setError("Komendy na rezygnację i dołączenie muszą być różne.");
+    if (localStorage.getItem('keyword') === abortCommand) {
+      setError('Komendy na rezygnację i dołączenie muszą być różne.');
       return;
     }
-    localStorage.setItem("themeColor", themeColor);
-    localStorage.setItem("gv-saveCommands", String(saveCommands));
-    localStorage.setItem("gv-deleteWinner", String(deleteWinner));
-    localStorage.setItem("gv-abortCommand", String(abortCommand));
+    localStorage.setItem('themeColor', themeColor);
+    localStorage.setItem('gv-saveCommands', String(saveCommands));
+    localStorage.setItem('gv-deleteWinner', String(deleteWinner));
+    localStorage.setItem('gv-abortCommand', String(abortCommand));
     closeDialog();
   };
 
   useEffect(() => {
-    setSaveCommands(localStorage.getItem("gv-saveCommands") === "true");
-    setDeleteWinner(localStorage.getItem("gv-deleteWinner") === "true");
-    setAbortCommand(localStorage.getItem("gv-abortCommand"));
-    setThemeColor(localStorage.getItem("themeColor") || "#0094ff");
+    setSaveCommands(localStorage.getItem('gv-saveCommands') === 'true');
+    setDeleteWinner(localStorage.getItem('gv-deleteWinner') === 'true');
+    setAbortCommand(localStorage.getItem('gv-abortCommand'));
+    setThemeColor(localStorage.getItem('themeColor') || '#0094ff');
   }, []);
 
   return (
-    <div style={{ display: "inline-block" }}>
+    <div style={{ display: 'inline-block' }}>
       <Tooltip
         title={
           <HintParagraph>
@@ -75,7 +75,7 @@ const SettingsDialog = (props) => {
         <ToolbarButton onClick={openDialog} type="button">
           <span className="border border-initial" />
           <svg className="border border-hover" fill="none">
-            <circle cx="50%" cy="50%" r="32.5" pathLength="1" />
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ const SettingsDialog = (props) => {
           <ColorPicker
             color={themeColor}
             handleChange={(name, value) => changeThemeColor(value)}
-            label={intl.formatMessage({ ...messages.themeColor })}
+            label={intl.formatMessage({...messages.themeColor})}
             name="themeColor"
           />
           <LocaleToggle />
@@ -116,13 +116,15 @@ const SettingsDialog = (props) => {
                 control={
                   <Checkbox
                     checked={saveCommands}
-                    onChange={(event) => setSaveCommands(event.target.checked)}
+                    onChange={(event) =>
+                      setSaveCommands(event.target.checked)
+                    }
                     color="primary"
                     name="saveCommands"
                     type="checkbox"
                   />
                 }
-                label={intl.formatMessage({ ...messages.saveCommandsLabel })}
+                label={intl.formatMessage({...messages.saveCommandsLabel})}
               />
             </Tooltip>
           </div>
@@ -137,20 +139,22 @@ const SettingsDialog = (props) => {
               control={
                 <Checkbox
                   checked={deleteWinner}
-                  onChange={(event) => setDeleteWinner(event.target.checked)}
+                  onChange={(event) =>
+                    setDeleteWinner(event.target.checked)
+                  }
                   color="primary"
                   name="deleteWinner"
                   type="checkbox"
                 />
               }
-              label={intl.formatMessage({ ...messages.deleteWinnerLabel })}
+              label={intl.formatMessage({...messages.deleteWinnerLabel})}
             />
           </Tooltip>
           <TextField
             error={!!error}
             id="abortCommand"
             name="abortCommand"
-            label={intl.formatMessage({ ...messages.resignationCommand })}
+            label={intl.formatMessage({...messages.resignationCommand})}
             value={abortCommand}
             variant="standard"
             onChange={(event) => {

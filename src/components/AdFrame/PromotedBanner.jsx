@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { FormattedMessage } from "react-intl";
-import messages from "./messages";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const AdTitle = styled.span`
   color: #7b7b7b;
@@ -32,7 +32,7 @@ const Shield = styled.div`
 
 const PromotedBanner = (props) => {
   const [imgHeight, setImgHeight] = useState(0);
-  const isVideo = props.imageUrl.substr(props.imageUrl.length - 3) === "mp4";
+  const isVideo = props.imageUrl.substr(props.imageUrl.length - 3) === 'mp4';
 
   const onImgLoad = ({ target: img }) => {
     setImgHeight(img.offsetHeight);

@@ -1,9 +1,9 @@
-import db from "../YoutubeWorker/db";
+import db from '../YoutubeWorker/db';
 
 export function changeUsersEligibility(isEligible) {
-  db.table("users")
-    .where("id")
-    .notEqual("id")
+  db.table('users')
+    .where('id')
+    .notEqual('id')
     .modify({
       isEligible,
     })
@@ -12,17 +12,17 @@ export function changeUsersEligibility(isEligible) {
 
 export function insertOrUpdateItem(item) {
   db.users
-    .where("id")
+    .where('id')
     .equals(item.id)
     .first()
     .then((user) => {
       if (user === undefined) {
-        db.table("users")
+        db.table('users')
           .add(item)
           .then(() => {});
       } else {
-        db.table("users")
-          .where("id")
+        db.table('users')
+          .where('id')
           .equals(item.id)
           .modify({
             message: item.isEligible ? item.message : user.message,
@@ -40,12 +40,12 @@ export function purgeUsersTable() {
 
 export function toggleEligibleIDB(id) {
   db.users
-    .where("id")
+    .where('id')
     .equals(id)
     .first()
     .then((user) => {
-      db.table("users")
-        .where("id")
+      db.table('users')
+        .where('id')
         .equals(id)
         .modify({
           isEligible: !user.isEligible,

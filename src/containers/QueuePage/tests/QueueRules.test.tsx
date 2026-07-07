@@ -1,19 +1,19 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { IntlProvider } from "react-intl";
-import { Provider } from "react-redux";
+import React from 'react';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 
-import QueueRules from "../QueueRules";
-import configureStore from "../../../configureStore";
+import QueueRules from '../QueueRules';
+import configureStore from '../../../configureStore';
 
-describe("<QueueRules />", () => {
+describe('<QueueRules />', () => {
   let store;
 
   beforeAll(() => {
     store = configureStore({});
   });
 
-  it("should render and match the snapshot", () => {
+  it('should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(

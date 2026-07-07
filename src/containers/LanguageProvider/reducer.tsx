@@ -3,13 +3,13 @@
  * LanguageProvider reducer
  *
  */
-import ActionTypes from "./constants";
-import { ContainerState, ContainerActions } from "./types";
-import { DEFAULT_LOCALE } from "../../i18n";
+import ActionTypes from './constants';
+import { ContainerState, ContainerActions } from './types';
+import { DEFAULT_LOCALE } from '../../i18n';
 
 export const initialState: ContainerState = {
-  locale: localStorage.getItem("locale")
-    ? String(localStorage.getItem("locale"))
+  locale: localStorage.getItem('locale')
+    ? String(localStorage.getItem('locale'))
     : DEFAULT_LOCALE,
 };
 

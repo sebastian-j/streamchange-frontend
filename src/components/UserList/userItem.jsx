@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { UserButton } from "./components/UserButton";
-import YoutubeLogo from "./YoutubeLogo";
+import React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { UserButton } from './components/UserButton';
+import YoutubeLogo from './YoutubeLogo';
 
 const UserItem = (props) => {
   const toggleEligible = () => {
@@ -12,7 +12,7 @@ const UserItem = (props) => {
   return (
     <li>
       <UserButton
-        className={clsx(props.isEligible && "isEligible")}
+        className={clsx(props.isEligible && 'isEligible')}
         onClick={toggleEligible}
         type="button"
       >

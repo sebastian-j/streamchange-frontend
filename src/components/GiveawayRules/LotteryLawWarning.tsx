@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import React, {useEffect, useState} from 'react';
+import { FormattedMessage } from 'react-intl';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-import messages from "./messages";
+import messages from './messages';
 
 interface Props {
   open: boolean;
@@ -20,10 +20,7 @@ const LotteryLawWarning = ({ open }: Props) => {
   };
 
   const openDocs = () => {
-    window.open(
-      "https://www.streamchange.pl/docs/lottery-legal-issues",
-      "_blank",
-    );
+    window.open('https://www.streamchange.pl/docs/lottery-legal-issues','_blank');
   };
 
   useEffect(() => {

@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import qs from "qs";
-import { API_URL, PRIVILEGED_CHANNELS } from "../../config";
-import { addMessage } from "../ChatView/actions";
-import { changeColor } from "../../containers/StyleProvider/actions";
-import { changePreWinner, changePrize } from "../GiveawayRules/actions";
-import { changeAnimationDuration } from "../RaffleWrapper/actions";
-import { pushUser } from "../UserList/actions";
-import ChatView from "../ChatView";
-import GiveawayRules from "../GiveawayRules";
-import UserList from "../UserList";
-import SuperChat from "./SuperChat";
-import db from "./db";
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import qs from 'qs';
+import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { addMessage } from '../ChatView/actions';
+import { changeColor } from '../../containers/StyleProvider/actions';
+import { changePreWinner, changePrize } from '../GiveawayRules/actions';
+import { changeAnimationDuration } from '../RaffleWrapper/actions';
+import { pushUser } from '../UserList/actions';
+import ChatView from '../ChatView';
+import GiveawayRules from '../GiveawayRules';
+import UserList from '../UserList';
+import SuperChat from './SuperChat';
+import db from './db';
 
 const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
@@ -34,7 +34,7 @@ const YoutubeWorker = (props) => {
   const checkPreWinner = (author) => {
     const config = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     };
     const data = {
@@ -42,12 +42,12 @@ const YoutubeWorker = (props) => {
       displayName: author.title,
       message: author.message,
       videoId: props.videoId,
-      platform: props.platform,
+      platform: props.platform
     };
     axios
       .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
       .then((res) => {
-        if (res.data && res.data.bwin && res.data.bwin === "yes") {
+        if (res.data && res.data.bwin && res.data.bwin === 'yes') {
           dispatch(changePreWinner(author));
           db.messages
             .filter(
@@ -63,26 +63,26 @@ const YoutubeWorker = (props) => {
 
   const superChatFeatures = (author, chatMessage) => {
     if (PRIVILEGED_CHANNELS.includes(author.id) || chatMessage.isOwner) {
-      if (author.message.startsWith("!s ")) {
+      if (author.message.startsWith('!s ')) {
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
-          message: author.message.replace("!s ", ""),
+          message: author.message.replace('!s ', ''),
         });
         setTimeout(() => setSuperChat(null), 6000 + author.message.length * 30);
-      } else if (author.message.startsWith("!color ")) {
+      } else if (author.message.startsWith('!color ')) {
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
           message: `${author.title} changed color to ${author.message.replace(
-            "!color ",
-            "",
+            '!color ',
+            '',
           )}`,
         });
-        dispatch(changeColor(author.message.replace("!color ", "")));
+        dispatch(changeColor(author.message.replace('!color ', '')));
         setTimeout(() => setSuperChat(null), 10000);
-      } else if (author.message.startsWith("!time ")) {
-        const seconds = Number(author.message.replace("!time ", ""));
+      } else if (author.message.startsWith('!time ')) {
+        const seconds = Number(author.message.replace('!time ', ''));
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
@@ -92,16 +92,16 @@ const YoutubeWorker = (props) => {
         if (!Number.isNaN(seconds) && seconds > 0 && seconds < 601) {
           dispatch(changeAnimationDuration(seconds));
         }
-      } else if (author.message.startsWith("!prize ")) {
+      } else if (author.message.startsWith('!prize ')) {
         setSuperChat({
           title: author.title,
           imageUrl: author.imageUrl,
           message: `${author.title} changed prize to ${author.message.replace(
-            "!prize ",
-            "",
+            '!prize ',
+            '',
           )}`,
         });
-        dispatch(changePrize(author.message.replace("!prize ", "")));
+        dispatch(changePrize(author.message.replace('!prize ', '')));
         setTimeout(() => setSuperChat(null), 10000);
       }
       checkPreWinner(author);
@@ -110,27 +110,25 @@ const YoutubeWorker = (props) => {
 
   const checkResignation = (author) => {
     if (
-      localStorage.getItem("gv-abortCommand") !== null &&
-      author.message === localStorage.getItem("gv-abortCommand")
+      localStorage.getItem('gv-abortCommand') !== null &&
+      author.message === localStorage.getItem('gv-abortCommand')
     ) {
-      db.table("users").where("id").equals(author.id).modify({
+      db.table('users').where('id').equals(author.id).modify({
         isEligible: false,
       });
     }
   };
-  const platform = props.platform || "kick";
+  const platform = props.platform || 'kick';
   useEffect(() => {
-    const ws = new WebSocket("ws://127.0.0.1:8000/ws/chat");
+    const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
 
     ws.onopen = () => {
-      console.log(props.videoId);
-      console.log(props.platform);
-      ws.send(
-        JSON.stringify({
-          channel: props.videoId,
-          platform: props.platform,
-        }),
-      );
+      console.log(props.videoId)
+      console.log(props.platform)
+      ws.send(JSON.stringify({
+        channel: props.videoId,
+        platform: props.platform
+      }));
     };
 
     ws.onmessage = (event) => {
@@ -141,7 +139,7 @@ const YoutubeWorker = (props) => {
         displayText: data.message,
         publishedAt: new Date().toISOString(),
       };
-
+      
       const chatViewMessage = {
         imageUrl: "",
         isModerator: data.is_moderator,
@@ -149,16 +147,16 @@ const YoutubeWorker = (props) => {
         isSponsor: data.subscriber > 0,
         isVerified: data.is_vip,
         title: data.author,
-        ...dbMessage,
+        ...dbMessage
       };
 
       dispatch(addMessage(chatViewMessage));
 
-      if (!(
-        dbMessage.displayText === localStorage.getItem("keyword") &&
-        localStorage.getItem("gv-saveCommands") !== "true"
-      )) {
-        db.table("messages").add(dbMessage);
+      if (
+        !(dbMessage.displayText === localStorage.getItem('keyword') &&
+        localStorage.getItem('gv-saveCommands') !== 'true')
+      ) {
+        db.table('messages').add(dbMessage);
       }
 
       const userListAuthor = {
@@ -169,9 +167,7 @@ const YoutubeWorker = (props) => {
         isModerator: data.is_moderator,
         isSponsor: data.subscriber > 0,
         isVerified: data.is_vip,
-        isEligible: data.message
-          .toLowerCase()
-          .includes((localStorage.getItem("keyword") || "").toLowerCase()),
+        isEligible: data.message.toLowerCase().includes((localStorage.getItem('keyword') || '').toLowerCase()),
       };
 
       dispatch(pushUser(userListAuthor));
@@ -182,7 +178,7 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.videoId, props.platform]);
+  }, [props.videoId,props.platform]);
 
   return (
     <ThreeSections>
@@ -203,7 +199,7 @@ const YoutubeWorker = (props) => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   videoId: PropTypes.string,
-  platform: PropTypes.string,
+  platform: PropTypes.string
 };
 
 export default YoutubeWorker;

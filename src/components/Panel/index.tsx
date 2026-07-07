@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Panel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};

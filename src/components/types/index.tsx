@@ -1,15 +1,15 @@
-import { Reducer, Store } from "redux";
-import { Saga } from "redux-saga";
+import { Reducer, Store } from 'redux';
+import { Saga } from 'redux-saga';
 
-import { ContainerState as LanguageProviderState } from "../../../app/containers/LanguageProvider/types";
-import { ContainerState as GiveawayState } from "../../../app/containers/GiveawayPage/types";
-import { ContainerState as StyleProviderState } from "../../containers/StyleProvider/types";
-import { ContainerState as QueueState } from "../../../app/containers/QueuePage/types";
-import { ContainerState as ChatViewState } from "../../components/ChatView/types";
-import { ContainerState as RaffleWrapperState } from "../../components/RaffleWrapper/types";
-import { ContainerState as GiveawayRulesState } from "../../components/GiveawayRules/types";
-import { ContainerState as SupportInformationState } from "../../../app/components/SupportInformation/types";
-import { ContainerState as UserListState } from "../../components/UserList/types";
+import { ContainerState as LanguageProviderState } from '../../../app/containers/LanguageProvider/types';
+import { ContainerState as GiveawayState } from '../../../app/containers/GiveawayPage/types';
+import { ContainerState as StyleProviderState } from '../../containers/StyleProvider/types';
+import { ContainerState as QueueState } from '../../../app/containers/QueuePage/types';
+import { ContainerState as ChatViewState } from '../../components/ChatView/types';
+import { ContainerState as RaffleWrapperState } from '../../components/RaffleWrapper/types';
+import { ContainerState as GiveawayRulesState } from '../../components/GiveawayRules/types';
+import { ContainerState as SupportInformationState } from '../../../app/components/SupportInformation/types';
+import { ContainerState as UserListState } from '../../components/UserList/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 export interface InjectedStore extends Store {
@@ -38,7 +38,7 @@ export interface ApplicationRootState {
   readonly giveawayRules: GiveawayRulesState;
   readonly supportInfo?: SupportInformationState;
   readonly chat?: ChatViewState;
-  readonly userList?: UserListState;
+  readonly userList? : UserListState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 
   // for testing purposes

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import FormControl from "@mui/material/FormControl";
+import styled from 'styled-components';
+import FormControl from '@mui/material/FormControl';
 
 const StyledFormControl = styled(FormControl)`
   width: 100%;

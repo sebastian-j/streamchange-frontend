@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import TextField from "@mui/material/TextField";
+import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
 
 const StyledTextField = styled(TextField)`
   /* stylelint-disable property-no-vendor-prefix */
   input {
     color: ${(props) => props.theme.staticTextColor};
   }
-  input[type="number"] {
+  input[type='number'] {
     -moz-appearance: textfield;
   }
   input::-webkit-outer-spin-button,

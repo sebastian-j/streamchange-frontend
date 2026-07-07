@@ -1,12 +1,12 @@
-import React from "react";
-import { createRenderer } from "react-test-renderer/shallow";
+import React from 'react';
+import { createRenderer } from 'react-test-renderer/shallow';
 
-import UserItem from "../userItem";
+import UserItem from '../userItem';
 
 const shallowRenderer = createRenderer();
 
-describe("<UserItem />", () => {
-  it("should render and match the snapshot", () => {
+describe('<UserItem />', () => {
+  it('should render and match the snapshot', () => {
     shallowRenderer.render(
       <UserItem
         channelId="id"

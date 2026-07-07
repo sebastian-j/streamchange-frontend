@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Cell = styled.td`
   border-bottom: 1px solid #5e5e5e;
   border-spacing: 0;
   border-collapse: collapse;
   color: ${(props) => props.theme.staticTextColor};
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   &.image {
     max-width: 100px;
   }

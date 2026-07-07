@@ -1,24 +1,24 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { FormattedMessage } from "react-intl";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-import { API_URL } from "../../config";
-import { StyledButton } from "./components/StyledButton";
-import { UrlContainer } from "./components/UrlContainer";
-import { makeSelectWidgetCode } from "./selectors";
-import messages from "./messages";
+import { API_URL } from '../../config';
+import { StyledButton } from './components/StyledButton';
+import { UrlContainer } from './components/UrlContainer';
+import { makeSelectWidgetCode } from './selectors';
+import messages from './messages';
 
 export const QueueWidgetDialog = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [widgetUrl, setWidgetUrl] = useState("");
+  const [widgetUrl, setWidgetUrl] = useState('');
   const urlInput = useRef(null);
 
   const openDialog = () => {
@@ -31,7 +31,7 @@ export const QueueWidgetDialog = (props) => {
 
   const copyUrl = () => {
     urlInput.current.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const QueueWidgetDialog = (props) => {
   }, []);
 
   return (
-    <div style={{ display: "inline-block" }}>
+    <div style={{ display: 'inline-block' }}>
       <StyledButton onClick={openDialog} type="button">
         <span>
           <FormattedMessage {...messages.widgetDialogTitle} />

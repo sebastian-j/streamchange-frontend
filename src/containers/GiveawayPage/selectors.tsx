@@ -1,6 +1,6 @@
-import { createSelector } from "reselect";
-import { ApplicationRootState } from "types";
-import { initialState } from "./reducer";
+import { createSelector } from 'reselect';
+import { ApplicationRootState } from 'types';
+import { initialState } from './reducer';
 
 /**
  * Direct selector to the GiveawayPage state domain

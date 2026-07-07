@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ToolbarButton = styled.button`
   background: transparent;
@@ -14,9 +14,9 @@ const ToolbarButton = styled.button`
     stroke: currentColor;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    transition: stroke-dashoffset 0.25s cubic-bezier(0.22, 0.28, 0.36, 1);
+    transition: stroke-dashoffset .25s cubic-bezier(.22,.28,.36,1);
     circle {
-      r: calc(50% - 0.5px);
+      r: calc(50% - .5px);
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
       vector-effect: non-scaling-stroke;

@@ -3,12 +3,12 @@
  * StyleProvider reducer
  *
  */
-import ActionTypes from "./constants";
-import { ContainerState, ContainerActions } from "./types";
+import ActionTypes from './constants';
+import { ContainerState, ContainerActions } from './types';
 
 export const initialState: ContainerState = {
-  color: localStorage.getItem("themeColor") || "#0094ff",
-  isDarkMode: localStorage.getItem("darkMode") === "true",
+  color: localStorage.getItem('themeColor') || '#0094ff',
+  isDarkMode: localStorage.getItem('darkMode') === 'true',
 };
 
 /* eslint-disable default-case, no-param-reassign */

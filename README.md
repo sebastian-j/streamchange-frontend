@@ -54,6 +54,6 @@ Upload the contents of `build` to your web server to see your work live! Compile
 
 ## Pages
 
-- **/giveaway** - main app. After pasting correct stream URL, app switches into three-column view.
-- **/giveaway-history** - shows table with winners previous raffles
-- **/queue** - less popular app for organizing stream viewers in queue. Streamer can set keyword for joining the queue, queue capacity, inactivity time limit to kick from the queue and get a URL to queue preview for OBS or Xsplit.
+* **/giveaway** - main app. After pasting correct stream URL, app switches into three-column view.
+* **/giveaway-history** - shows table with winners previous raffles
+* **/queue** - less popular app for organizing stream viewers in queue. Streamer can set keyword for joining the queue, queue capacity, inactivity time limit to kick from the queue and get a URL to queue preview for OBS or Xsplit.

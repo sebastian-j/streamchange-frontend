@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Cell } from "./components/Cell";
-import { Row } from "./components/Row";
-import RelativeDate from "../../components/RelativeDate";
+import { Cell } from './components/Cell';
+import { Row } from './components/Row';
+import RelativeDate from '../../components/RelativeDate';
 
 const HistoryItem = (props) => (
   <Row>

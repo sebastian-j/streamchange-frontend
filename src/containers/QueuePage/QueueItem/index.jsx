@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import clsx from "clsx";
-import { FormattedMessage } from "react-intl";
-import Tooltip from "@mui/material/Tooltip";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import clsx from 'clsx';
+import { FormattedMessage } from 'react-intl';
+import Tooltip from '@mui/material/Tooltip';
 
-import messages from "./messages";
-import { CloseButton } from "./components/CloseButton";
-import { Description } from "./components/Description";
-import { DescriptionBox } from "./components/DescriptionBox";
-import { EditModeButton } from "./components/EditModeButton";
-import { FlexSpacer } from "./components/FlexSpacer";
-import { Logo } from "./components/Logo";
-import { Title } from "./components/Title";
-import { UserBar } from "./components/UserBar";
-import { UserBarColumn } from "./components/UserBarColumn";
-import { deleteQueueItem, updateQueueItem } from "../actions";
+import messages from './messages';
+import { CloseButton } from './components/CloseButton';
+import { Description } from './components/Description';
+import { DescriptionBox } from './components/DescriptionBox';
+import { EditModeButton } from './components/EditModeButton';
+import { FlexSpacer } from './components/FlexSpacer';
+import { Logo } from './components/Logo';
+import { Title } from './components/Title';
+import { UserBar } from './components/UserBar';
+import { UserBarColumn } from './components/UserBarColumn';
+import { deleteQueueItem, updateQueueItem } from '../actions';
 
 export const QueueItem = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState(props.message);
   const [isActive, setIsActive] = useState(true);
   const convertDate = (dt) =>
-    `${dt.getHours()}:${dt.getMinutes() < 10 ? "0" : ""}${dt.getMinutes()}:${
-      dt.getSeconds() < 10 ? "0" : ""
+    `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''}${dt.getMinutes()}:${
+      dt.getSeconds() < 10 ? '0' : ''
     }${dt.getSeconds()}`;
 
   const addedAt = new Date(props.addedAt);
@@ -50,7 +50,7 @@ export const QueueItem = (props) => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       updateDescription();
     }
   };
@@ -60,7 +60,7 @@ export const QueueItem = (props) => {
     const lastActiveAt = new Date(props.lastActiveAt);
     setIsActive(
       (now.getTime() - lastActiveAt.getTime()) / 1000 <
-        parseInt(localStorage.getItem("queue-timeToIdle"), 10),
+        parseInt(localStorage.getItem('queue-timeToIdle'), 10),
     );
   };
 
@@ -84,7 +84,7 @@ export const QueueItem = (props) => {
               <Logo alt="logo" src={props.imageUrl} edit={editMode} />
             </a>
             <UserBarColumn className="fullWidth">
-              <Title className={clsx(isActive && "active")}>
+              <Title className={clsx(isActive && 'active')}>
                 {props.title}
               </Title>
               <DescriptionBox
@@ -117,11 +117,11 @@ export const QueueItem = (props) => {
         title={
           <>
             <div>
-              <FormattedMessage {...messages.addedAtTooltipField} />{" "}
+              <FormattedMessage {...messages.addedAtTooltipField} />{' '}
               {convertDate(addedAt)}
             </div>
             <div>
-              <FormattedMessage {...messages.activeAtTooltipField} />{" "}
+              <FormattedMessage {...messages.activeAtTooltipField} />{' '}
               {convertDate(new Date(props.lastActiveAt))}
             </div>
           </>
@@ -140,10 +140,10 @@ export const QueueItem = (props) => {
               <Logo alt="logo" src={props.imageUrl} />
             </a>
             <UserBarColumn>
-              <Title className={clsx(isActive && "active")}>
+              <Title className={clsx(isActive && 'active')}>
                 {props.title}
               </Title>
-              <Description className={clsx(isActive && "active")}>
+              <Description className={clsx(isActive && 'active')}>
                 {props.message}
               </Description>
             </UserBarColumn>

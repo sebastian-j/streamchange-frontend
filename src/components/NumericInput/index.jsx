@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useIntl } from "react-intl";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
-import messages from "./messages";
+import messages from './messages';
 
 const Container = styled.div`
   display: flex;
@@ -56,9 +56,9 @@ const NumericInput = (props) => {
 
   const checkValue = (value) => {
     let val = value;
-    if (val < props.minValue && val !== "") val = props.minValue;
+    if (val < props.minValue && val !== '') val = props.minValue;
     if (val > props.maxValue) val = props.maxValue;
-    if (Number.isNaN(Number(val)) && val !== "") val = props.value;
+    if (Number.isNaN(Number(val)) && val !== '') val = props.value;
     props.onChange(val);
   };
   const inc = () => {
@@ -82,12 +82,7 @@ const NumericInput = (props) => {
   return (
     <Container>
       <Label htmlFor="number-display">{props.label}</Label>
-      <Button
-        aria-label={intl.formatMessage({ ...messages.decreaseButton })}
-        left="true"
-        onClick={dec}
-        type="button"
-      >
+      <Button aria-label={intl.formatMessage({...messages.decreaseButton})} left="true" onClick={dec} type="button">
         -
       </Button>
       <NumberDisplay
@@ -95,11 +90,7 @@ const NumericInput = (props) => {
         value={props.value}
         onChange={(event) => checkValue(event.target.value)}
       />
-      <Button
-        aria-label={intl.formatMessage({ ...messages.increaseButton })}
-        onClick={inc}
-        type="button"
-      >
+      <Button aria-label={intl.formatMessage({...messages.increaseButton})} onClick={inc} type="button">
         +
       </Button>
     </Container>

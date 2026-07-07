@@ -1,15 +1,15 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { createRenderer } from "react-test-renderer/shallow";
-import configureStore from "redux-mock-store";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createRenderer } from 'react-test-renderer/shallow';
+import configureStore from 'redux-mock-store';
 
-import YoutubeWorker from "../index";
-import { API_URL } from "../../../config";
+import YoutubeWorker from '../index';
+import { API_URL } from '../../../config';
 
 const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
-describe("<YoutubeWorker />", () => {
+describe('<YoutubeWorker />', () => {
   let store;
   beforeEach(() => {
     store = mockStore({
@@ -17,7 +17,7 @@ describe("<YoutubeWorker />", () => {
       userArray: [],
     });
   });
-  it("should match the snapshot", () => {
+  it('should match the snapshot', () => {
     shallowRenderer.render(
       <Provider store={store}>
         <YoutubeWorker apiKey="key" videoId="vidId" />
@@ -28,9 +28,9 @@ describe("<YoutubeWorker />", () => {
   });
 });
 
-describe("API_URL", () => {
+describe('API_URL', () => {
   it('should contain "api"', () => {
-    const isCorrect = API_URL.includes("api");
+    const isCorrect = API_URL.includes('api');
     expect(isCorrect).toEqual(true);
   });
 });

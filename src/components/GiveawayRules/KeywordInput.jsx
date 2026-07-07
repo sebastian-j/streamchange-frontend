@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { FormattedMessage, useIntl } from "react-intl";
-import InputAdornment from "@mui/material/InputAdornment";
-import Tooltip from "@mui/material/Tooltip";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { FormattedMessage, useIntl } from 'react-intl';
+import InputAdornment from '@mui/material/InputAdornment';
+import Tooltip from '@mui/material/Tooltip';
 
-import messages from "./messages";
-import { changeKeyword } from "./actions";
-import { makeSelectGiveawayKeyword } from "./selectors";
-import StyledTextField from "../StyledTextField";
-import HintParagraph from "../Tooltip/HintParagraph";
-import ToggleVisibilityBtn from "./ToggleVisibilityButton";
+import messages from './messages';
+import { changeKeyword } from './actions';
+import { makeSelectGiveawayKeyword } from './selectors';
+import StyledTextField from '../StyledTextField';
+import HintParagraph from '../Tooltip/HintParagraph';
+import ToggleVisibilityBtn from './ToggleVisibilityButton';
 
 const KeywordInput = (props) => {
   const intl = useIntl();
@@ -19,7 +19,7 @@ const KeywordInput = (props) => {
   const [error, setError] = useState(0);
 
   const handleInputChange = (event) => {
-    if (event.target.value.includes(localStorage.getItem("gv-abortCommand"))) {
+    if (event.target.value.includes(localStorage.getItem('gv-abortCommand'))) {
       setError(1);
       return;
     }
@@ -44,15 +44,11 @@ const KeywordInput = (props) => {
         name="keyword"
         onChange={handleInputChange}
         id="keyword"
-        label={intl.formatMessage({ ...messages.keyword })}
-        type={visible ? "text" : "password"}
+        label={intl.formatMessage({...messages.keyword})}
+        type={visible ? 'text' : 'password'}
         value={props.keyword}
         variant="standard"
-        helperText={
-          error === 1
-            ? intl.formatMessage({ ...messages.repeatedCommandsError })
-            : ""
-        }
+        helperText={error === 1 ? intl.formatMessage({...messages.repeatedCommandsError}) : ''}
         fullWidth
         inputprops={{
           endAdornment: (

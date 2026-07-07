@@ -1,27 +1,27 @@
-import React from "react";
-import axios from "axios";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import qs from "qs";
-import { Helmet } from "react-helmet";
-import { FormattedMessage } from "react-intl";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import Tooltip from "@mui/material/Tooltip";
+import React from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import qs from 'qs';
+import { Helmet } from 'react-helmet';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import Tooltip from '@mui/material/Tooltip';
 
-import messages from "./messages";
-import { changePreWinner } from "../GiveawayRules/actions";
-import { changeVisibility } from "../RaffleWrapper/actions";
-import db from "../YoutubeWorker/db";
-import { API_URL } from "../../config";
-import PanelTitle from "../Panel/PanelTitle";
-import StyledTextField from "../StyledTextField";
-import HintParagraph from "../Tooltip/HintParagraph";
-import MessageItem from "./MessageItem";
-import SubStatus from "./SubStatus";
-import Timer from "./Timer";
-import { makeSelectGiveawayPreWinner } from "../GiveawayRules/selectors";
-import { makeSelectStreamInfo } from "../../containers/GiveawayPage/selectors";
+import messages from './messages';
+import { changePreWinner } from '../GiveawayRules/actions';
+import { changeVisibility } from '../RaffleWrapper/actions';
+import db from '../YoutubeWorker/db';
+import { API_URL } from '../../config';
+import PanelTitle from '../Panel/PanelTitle';
+import StyledTextField from '../StyledTextField';
+import HintParagraph from '../Tooltip/HintParagraph';
+import MessageItem from './MessageItem';
+import SubStatus from './SubStatus';
+import Timer from './Timer';
+import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
+import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 
 const WinnerPanel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -102,7 +102,7 @@ export class WinnerView extends React.Component {
   }
 
   getMessages() {
-    db.table("messages")
+    db.table('messages')
       .filter((message) => message.authorId === this.props.id)
       .toArray()
       .then((items) => {
@@ -120,12 +120,12 @@ export class WinnerView extends React.Component {
       prize: this.state.prize,
       createdAt: d.toISOString(),
     };
-    if (localStorage.getItem("gv-deleteWinner") === "true") {
-      db.table("users").where("id").equals(winner.channelId).modify({
+    if (localStorage.getItem('gv-deleteWinner') === 'true') {
+      db.table('users').where('id').equals(winner.channelId).modify({
         isEligible: false,
       });
     }
-    db.table("history")
+    db.table('history')
       .add(winner)
       .finally(() => {
         this.props.onClose();
@@ -149,15 +149,15 @@ export class WinnerView extends React.Component {
   telemetry() {
     const config = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     };
     const telemetryData = {
-      id: sessionStorage.getItem("gv-videoId"),
+      id: sessionStorage.getItem('gv-videoId'),
       ownerId: this.props.streamInfo.ownerId,
       prize: this.state.prize,
       winnerId: this.props.id,
-      part: "winner",
+      part: 'winner',
       message: this.props.preWinner ? this.props.preWinner.message : null,
     };
     axios
@@ -170,7 +170,7 @@ export class WinnerView extends React.Component {
 
   componentDidMount() {
     const userId = this.props.id;
-    db.table("users")
+    db.table('users')
       .filter((user) => user.id === userId)
       .toArray()
       .then((items) => {

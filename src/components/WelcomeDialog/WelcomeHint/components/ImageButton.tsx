@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const Shake = keyframes`
   10% {
@@ -11,6 +11,7 @@ const Shake = keyframes`
     transform: rotate(0);
   }
 `;
+
 
 export const ImageButton = styled.button`
   background: none;
@@ -25,8 +26,8 @@ export const ImageButton = styled.button`
       animation: ${Shake} 0.5s linear;
     }
   }
-  &:focus-visible {
-    outline: solid rgb(71, 230, 243);
+  &:focus-visible { 
+    outline: solid rgb(71, 230,  243);
   }
   @media (orientation: portrait) {
     margin: 0 -20px 0 -10px;

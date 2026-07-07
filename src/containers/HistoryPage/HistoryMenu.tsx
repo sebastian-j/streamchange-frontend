@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { FormattedMessage } from "react-intl";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/Menu";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/Menu';
 
-import messages from "./messages";
-import db from "../../components/YoutubeWorker/db";
+import messages from './messages';
+import db from '../../components/YoutubeWorker/db';
 
 const ThemedSvg = styled.svg`
   color: ${(props) => props.theme.staticTextColor};
@@ -22,7 +22,7 @@ interface Props {
   onClear: () => void;
 }
 
-const HistoryMenu = ({ onClear }: Props) => {
+const HistoryMenu = ({onClear}: Props) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
@@ -44,9 +44,7 @@ const HistoryMenu = ({ onClear }: Props) => {
   };
 
   const clearHistory = () => {
-    db.table("history")
-      .clear()
-      .then(() => onClear());
+    db.table('history').clear().then(() => onClear());
     closeDialog();
   };
 
