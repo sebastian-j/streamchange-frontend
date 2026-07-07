@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { FormattedMessage, useIntl } from 'react-intl';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FormattedMessage, useIntl } from "react-intl";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
 
-import messages from './messages';
+import messages from "./messages";
 
 const Title = styled.span`
   color: ${(props) => props.theme.staticTextColor};
@@ -50,8 +50,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.regularsFilter})}
-                onDelete={() => props.onDelete('regulars')}
+                label={intl.formatMessage({ ...messages.regularsFilter })}
+                onDelete={() => props.onDelete("regulars")}
               />
             </ListItem>
           )}
@@ -67,8 +67,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.moderatorsFilter})}
-                onDelete={() => props.onDelete('moderators')}
+                label={intl.formatMessage({ ...messages.moderatorsFilter })}
+                onDelete={() => props.onDelete("moderators")}
               />
             </ListItem>
           )}
@@ -94,8 +94,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.sponsorsFilter})}
-                onDelete={() => props.onDelete('sponsors')}
+                label={intl.formatMessage({ ...messages.sponsorsFilter })}
+                onDelete={() => props.onDelete("sponsors")}
               />
             </ListItem>
           )}
@@ -116,8 +116,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.verifiedFilter})}
-                onDelete={() => props.onDelete('verified')}
+                label={intl.formatMessage({ ...messages.verifiedFilter })}
+                onDelete={() => props.onDelete("verified")}
               />
             </ListItem>
           )}
@@ -140,8 +140,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.selectedFilter})}
-                onDelete={() => props.onDelete('participating')}
+                label={intl.formatMessage({ ...messages.selectedFilter })}
+                onDelete={() => props.onDelete("participating")}
               />
             </ListItem>
           )}
@@ -164,8 +164,8 @@ const FilterChips = (props) => {
                     </svg>
                   </Avatar>
                 }
-                label={intl.formatMessage({...messages.notSelectedFilter})}
-                onDelete={() => props.onDelete('notParticipating')}
+                label={intl.formatMessage({ ...messages.notSelectedFilter })}
+                onDelete={() => props.onDelete("notParticipating")}
               />
             </ListItem>
           )}

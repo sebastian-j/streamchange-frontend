@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, FormattedDate } from 'react-intl';
-import messages from './messages';
+import React from "react";
+import PropTypes from "prop-types";
+import { FormattedMessage, FormattedDate } from "react-intl";
+import messages from "./messages";
 
 function RelativeDate(props) {
   const dt = new Date(props.ISO8601Date);
   const now = new Date();
-  let convertedDate = '';
+  let convertedDate = "";
   if (
     dt.getFullYear() === now.getFullYear() &&
     dt.getMonth() === now.getMonth() &&
@@ -16,7 +16,7 @@ function RelativeDate(props) {
       <span className={props.className}>
         <FormattedMessage {...messages.beforeYesterday} />
         {` ${dt.getHours()}:${
-          dt.getMinutes() < 10 ? '0' : ''
+          dt.getMinutes() < 10 ? "0" : ""
         }${dt.getMinutes()}`}
       </span>
     );
@@ -30,7 +30,7 @@ function RelativeDate(props) {
       <span className={props.className}>
         <FormattedMessage {...messages.yesterday} />
         {` ${dt.getHours()}:${
-          dt.getMinutes() < 10 ? '0' : ''
+          dt.getMinutes() < 10 ? "0" : ""
         }${dt.getMinutes()}`}
       </span>
     );
@@ -94,7 +94,7 @@ function RelativeDate(props) {
       <span className={props.className}>
         <FormattedMessage {...messages.today} />
         {` ${dt.getHours()}:${
-          dt.getMinutes() < 10 ? '0' : ''
+          dt.getMinutes() < 10 ? "0" : ""
         }${dt.getMinutes()}`}
       </span>
     );
@@ -107,7 +107,7 @@ function RelativeDate(props) {
     );
   }
   convertedDate = ` ${dt.getHours()}:${
-    dt.getMinutes() < 10 ? '0' : ''
+    dt.getMinutes() < 10 ? "0" : ""
   }${dt.getMinutes()}`;
   return (
     <span className={props.className}>
@@ -128,7 +128,7 @@ RelativeDate.propTypes = {
 };
 
 RelativeDate.defaultProps = {
-  className: 'relativeDate',
+  className: "relativeDate",
 };
 
 export default RelativeDate;

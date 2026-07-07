@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const MessageLi = styled.li`
   margin-bottom: 5px;
@@ -17,8 +17,8 @@ const MessageText = styled.span`
 function MessageItem(props) {
   const dt = new Date(props.date);
   const convertedDate = `${dt.getHours()}:${
-    dt.getMinutes() < 10 ? '0' : ''
-  }${dt.getMinutes()}:${dt.getSeconds() < 10 ? '0' : ''}${dt.getSeconds()}`;
+    dt.getMinutes() < 10 ? "0" : ""
+  }${dt.getMinutes()}:${dt.getSeconds() < 10 ? "0" : ""}${dt.getSeconds()}`;
   return (
     <MessageLi>
       <MessageDate>{convertedDate}</MessageDate>

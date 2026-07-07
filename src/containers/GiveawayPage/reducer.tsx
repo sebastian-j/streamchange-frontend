@@ -3,17 +3,17 @@
  * GiveawayPage reducer
  *
  */
-import ActionTypes from './constants';
-import { ContainerActions, ContainerState } from './types';
+import ActionTypes from "./constants";
+import { ContainerActions, ContainerState } from "./types";
 
 export const initialState: ContainerState = {
-  authKey: '',
+  authKey: "",
   ban: null,
   stream: {
-    ownerId: '',
-    thumbnailUrl: '',
-    title: '',
-    videoId: '',
+    ownerId: "",
+    thumbnailUrl: "",
+    title: "",
+    videoId: "",
   },
 };
 

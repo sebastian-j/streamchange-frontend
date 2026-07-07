@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const RaffleDialog = styled.div`
   background: linear-gradient(to right, #0f161d 0%, #131b24 51%, #0f161d 100%);

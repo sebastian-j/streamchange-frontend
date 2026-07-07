@@ -3,69 +3,69 @@
  *
  * This contains all the text for the UserList component.
  */
-import { defineMessages } from 'react-intl';
+import { defineMessages } from "react-intl";
 
-export const scope = 'streamchange.components.UserList';
+export const scope = "streamchange.components.UserList";
 
 export default defineMessages({
   panelTitle: {
     id: `${scope}.title`,
-    defaultMessage: 'Users',
+    defaultMessage: "Users",
   },
   searchPlaceholder: {
     id: `${scope}.search.placeholder`,
-    defaultMessage: 'Search',
+    defaultMessage: "Search",
   },
   clearBtn: {
     id: `${scope}.clearBtn`,
-    defaultMessage: 'Clear all',
+    defaultMessage: "Clear all",
   },
   counter: {
     id: `${scope}.counter`,
-    defaultMessage: '{selected} out of {all} are participating',
+    defaultMessage: "{selected} out of {all} are participating",
   },
   selectUsers: {
     id: `${scope}.selectAllMenuItem`,
-    defaultMessage: 'Select all',
+    defaultMessage: "Select all",
   },
   deselectUsers: {
     id: `${scope}.deselectAllMenuItem`,
-    defaultMessage: 'Deselect all',
+    defaultMessage: "Deselect all",
   },
   filtersTooltip: {
     id: `${scope}.filtersTooltip`,
-    defaultMessage: 'Filters',
+    defaultMessage: "Filters",
   },
   sponsorsFilter: {
     id: `${scope}.filters.sponsors`,
-    defaultMessage: 'Sponsors',
+    defaultMessage: "Sponsors",
   },
   moderatorsFilter: {
     id: `${scope}.filters.moderators`,
-    defaultMessage: 'Moderators',
+    defaultMessage: "Moderators",
   },
   verifiedFilter: {
     id: `${scope}.filters.verified`,
-    defaultMessage: 'Verified',
+    defaultMessage: "Verified",
   },
   regularsFilter: {
     id: `${scope}.filters.regulars`,
-    defaultMessage: 'Regular viewers',
+    defaultMessage: "Regular viewers",
   },
   selectedFilter: {
     id: `${scope}.filters.selected`,
-    defaultMessage: 'Participating',
+    defaultMessage: "Participating",
   },
   notSelectedFilter: {
     id: `${scope}.filters.notSelected`,
-    defaultMessage: 'Not participating',
+    defaultMessage: "Not participating",
   },
   channelLinkTitle: {
     id: `${scope}.YoutubeLogo.title`,
-    defaultMessage: 'Show the channel page',
+    defaultMessage: "Show the channel page",
   },
   skipListLinkText: {
     id: `${scope}.skipLink`,
-    defaultMessage: 'Skip the viewers list',
-  }
+    defaultMessage: "Skip the viewers list",
+  },
 });

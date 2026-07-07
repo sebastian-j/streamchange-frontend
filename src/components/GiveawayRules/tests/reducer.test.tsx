@@ -1,25 +1,25 @@
-import produce from 'immer';
+import produce from "immer";
 
-import giveawayRulesReducer, { initialState } from '../reducer';
-import { changeKeyword, changePreWinner, changePrize } from '../actions';
+import giveawayRulesReducer, { initialState } from "../reducer";
+import { changeKeyword, changePreWinner, changePrize } from "../actions";
 
 /* eslint-disable default-case, no-param-reassign */
-describe('giveawayRulesReducer', () => {
+describe("giveawayRulesReducer", () => {
   let state;
   beforeEach(() => {
     state = {
-      keyword: 'join',
-      preWinner: { id: 'id' },
-      prize: 'trophy',
+      keyword: "join",
+      preWinner: { id: "id" },
+      prize: "trophy",
     };
   });
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(giveawayRulesReducer(undefined, {} as any)).toEqual(initialState);
   });
 
-  it('should handle the changeKeyword action correctly', () => {
-    const fixture = 'join the raffle';
+  it("should handle the changeKeyword action correctly", () => {
+    const fixture = "join the raffle";
     const expectedResult = produce(state, (draft) => {
       draft.keyword = fixture;
     });
@@ -29,16 +29,16 @@ describe('giveawayRulesReducer', () => {
     );
   });
 
-  it('should handle the changePreWinner action correctly', () => {
+  it("should handle the changePreWinner action correctly", () => {
     const fixture = {
-      id: 'id2',
-      imageUrl: 'url',
+      id: "id2",
+      imageUrl: "url",
       isEligible: true,
       isModerator: false,
       isSponsor: false,
       isVerified: false,
-      message: 'test',
-      title: 'user',
+      message: "test",
+      title: "user",
     };
     const expectedResult = produce(state, (draft) => {
       draft.preWinner = fixture;
@@ -49,8 +49,8 @@ describe('giveawayRulesReducer', () => {
     );
   });
 
-  it('should handle the changePrize action correctly', () => {
-    const fixture = 'cash';
+  it("should handle the changePrize action correctly", () => {
+    const fixture = "cash";
     const expectedResult = produce(state, (draft) => {
       draft.prize = fixture;
     });

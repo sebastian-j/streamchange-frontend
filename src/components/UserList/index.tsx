@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/Menu';
-import Tooltip from '@mui/material/Tooltip';
+import React, { useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/Menu";
+import Tooltip from "@mui/material/Tooltip";
 
-import db from '../YoutubeWorker/db';
-import { useInjectReducer } from '../../utils/injectReducer';
-import { Counts } from './components/Counts';
-import FilterChips from './FilterChips';
-import { Header } from './components/Header';
-import { HeaderButtons } from './components/HeaderButtons';
-import { SkipListLink } from './components/SkipListLink';
-import { StyledButton } from './components/StyledButton';
-import StyledTextField from '../StyledTextField';
-import { ThemedSvg } from './components/ThemedSvg';
-import UserItem from './userItem';
-import { UserListPanel } from '../Panel/UserListPanel';
-import PanelTitle from '../Panel/PanelTitle';
-import { makeSelectUserArray } from './selectors';
-import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
+import db from "../YoutubeWorker/db";
+import { useInjectReducer } from "../../utils/injectReducer";
+import { Counts } from "./components/Counts";
+import FilterChips from "./FilterChips";
+import { Header } from "./components/Header";
+import { HeaderButtons } from "./components/HeaderButtons";
+import { SkipListLink } from "./components/SkipListLink";
+import { StyledButton } from "./components/StyledButton";
+import StyledTextField from "../StyledTextField";
+import { ThemedSvg } from "./components/ThemedSvg";
+import UserItem from "./userItem";
+import { UserListPanel } from "../Panel/UserListPanel";
+import PanelTitle from "../Panel/PanelTitle";
+import { makeSelectUserArray } from "./selectors";
+import { makeSelectGiveawayRequirement } from "../GiveawayRules/selectors";
 import {
   deselectAllUsers,
   getListFromIdb,
   purgeList,
   selectAllUsers,
   toggleEligibility,
-} from './actions';
-import messages from './messages';
-import reducer from './reducer';
-import { FilteringOptions, User } from './types';
+} from "./actions";
+import messages from "./messages";
+import reducer from "./reducer";
+import { FilteringOptions, User } from "./types";
 
 interface Props {
   deselectAllUsers: () => void;
@@ -45,10 +45,10 @@ interface Props {
 }
 
 const UserList = (props: Props) => {
-  useInjectReducer({ key: 'userList', reducer });
+  useInjectReducer({ key: "userList", reducer });
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [filtersAnchorEl, setFiltersAnchorEl] = useState<Element | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [items, setItems] = useState<Array<User>>([]);
   const [filters, setFilters] = useState<FilteringOptions>({
     moderators: false,
@@ -79,7 +79,7 @@ const UserList = (props: Props) => {
 
   const handleInputValueChange = (event) => {
     const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     setSearchQuery(value);
     if (value.length > 0 && value.length < 140) {
       setItems(
@@ -126,7 +126,7 @@ const UserList = (props: Props) => {
 
   useEffect(() => {
     if (props.userArray.length === 0) {
-      db.table('users')
+      db.table("users")
         .toArray()
         .then((arr) => {
           props.getList(arr);
@@ -365,7 +365,7 @@ const UserList = (props: Props) => {
         )}
       </FormattedMessage>
       <SkipListLink href="#purge-user-list-btn">
-        <FormattedMessage { ...messages.skipListLinkText} />
+        <FormattedMessage {...messages.skipListLinkText} />
       </SkipListLink>
       <ul>
         {getUsers().map((item) => (
@@ -381,7 +381,11 @@ const UserList = (props: Props) => {
           />
         ))}
       </ul>
-      <StyledButton id="purge-user-list-btn" onClick={props.purgeList} color="inherit">
+      <StyledButton
+        id="purge-user-list-btn"
+        onClick={props.purgeList}
+        color="inherit"
+      >
         <span>
           <FormattedMessage {...messages.clearBtn} />
         </span>

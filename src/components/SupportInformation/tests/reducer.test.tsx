@@ -1,7 +1,7 @@
-import supportInfoReducer, { initialState } from '../reducer';
-import { changeDialogVisibility } from '../actions';
+import supportInfoReducer, { initialState } from "../reducer";
+import { changeDialogVisibility } from "../actions";
 
-describe('supportInfoReducer', () => {
+describe("supportInfoReducer", () => {
   let state;
   beforeEach(() => {
     state = {
@@ -9,11 +9,11 @@ describe('supportInfoReducer', () => {
     };
   });
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(supportInfoReducer(undefined, {} as any)).toEqual(initialState);
   });
 
-  it('should handle the changeDialogVisibility action correctly', () => {
+  it("should handle the changeDialogVisibility action correctly", () => {
     const fixture = true;
     const expectedResult = { isOpen: fixture };
 

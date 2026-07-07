@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const ChatFrame = styled.iframe`
   border: none;
@@ -9,7 +9,7 @@ const ChatFrame = styled.iframe`
 `;
 
 function ChatEmbed(props) {
-  if (props.videoId === 'test') return <div />;
+  if (props.videoId === "test") return <div />;
   return (
     <ChatFrame
       className="chat-frame"

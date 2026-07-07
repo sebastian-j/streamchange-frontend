@@ -1,23 +1,23 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import React from "react";
+import { createRenderer } from "react-test-renderer/shallow";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
 
-import SettingsDialog from '../index';
+import SettingsDialog from "../index";
 
 const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
-describe('<SettingsDialog />', () => {
+describe("<SettingsDialog />", () => {
   let store;
 
   beforeAll(() => {
     store = mockStore({
-      themeColor: '#ffffff',
+      themeColor: "#ffffff",
     });
   });
 
-  it('should render and match the snapshot', () => {
+  it("should render and match the snapshot", () => {
     shallowRenderer.render(
       <Provider store={store}>
         <SettingsDialog />

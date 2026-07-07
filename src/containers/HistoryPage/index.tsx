@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import LinearProgress from '@mui/material/LinearProgress';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import IconButton from '@mui/material/IconButton';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import LinearProgress from "@mui/material/LinearProgress";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import IconButton from "@mui/material/IconButton";
+import { FormattedMessage, useIntl } from "react-intl";
 
-import messages from './messages';
-import db from '../../components/YoutubeWorker/db';
-import StyledTextField from '../../components/StyledTextField';
-import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
-import HistoryMenu from './HistoryMenu';
-import HistoryTable from './HistoryTable';
-import { InformationText } from './components/InformationText';
-import { PageHeader } from './components/PageHeader';
-import { PageWrapper } from './components/PageWrapper';
-import { ReturnButton } from './components/ReturnButton';
-import { TableFooter } from './components/TableFooter';
-import { HistoryItem } from './types';
+import messages from "./messages";
+import db from "../../components/YoutubeWorker/db";
+import StyledTextField from "../../components/StyledTextField";
+import StyledFormControl from "../../components/StyledTextField/StyledFormControl";
+import HistoryMenu from "./HistoryMenu";
+import HistoryTable from "./HistoryTable";
+import { InformationText } from "./components/InformationText";
+import { PageHeader } from "./components/PageHeader";
+import { PageWrapper } from "./components/PageWrapper";
+import { ReturnButton } from "./components/ReturnButton";
+import { TableFooter } from "./components/TableFooter";
+import { HistoryItem } from "./types";
 
 const HistoryPage = () => {
   const intl = useIntl();
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [items, setItems] = useState<HistoryItem[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [maxResults, setMaxResults] = useState<number>(20);
   const [page, setPage] = useState<number>(0);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
   const getHistory = () => {
     const firstResult = Number(page * maxResults);
-    db.table('history')
+    db.table("history")
       .filter((winner) =>
         winner.displayName.toLowerCase().includes(searchQuery.toLowerCase()),
       )
@@ -80,8 +80,8 @@ const HistoryPage = () => {
   if (error) {
     return (
       <div>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <FormattedMessage {...messages.infoError} />
       </div>
@@ -90,18 +90,18 @@ const HistoryPage = () => {
   if (!isLoaded) {
     return (
       <PageWrapper>
-        <Helmet htmlAttributes={{ lang: intl.locale}}>
-          <title>{intl.formatMessage({...messages.pageTitle})}</title>
+        <Helmet htmlAttributes={{ lang: intl.locale }}>
+          <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <LinearProgress />
         <div
           style={{
-            fontSize: '2vw',
-            position: 'absolute',
-            left: '55%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
+            fontSize: "2vw",
+            position: "absolute",
+            left: "55%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
           }}
         >
           <FormattedMessage {...messages.infoLoading} />
@@ -111,8 +111,8 @@ const HistoryPage = () => {
   }
   return (
     <PageWrapper>
-      <Helmet htmlAttributes={{ lang: intl.locale}}>
-        <title>{intl.formatMessage({...messages.pageTitle})}</title>
+      <Helmet htmlAttributes={{ lang: intl.locale }}>
+        <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <PageHeader>
         <ReturnButton to="/giveaway" activeClassName="active">
@@ -136,7 +136,7 @@ const HistoryPage = () => {
       <StyledTextField
         id="search"
         name="search"
-        label={intl.formatMessage({...messages.searchLabel})}
+        label={intl.formatMessage({ ...messages.searchLabel })}
         value={searchQuery}
         variant="standard"
         onChange={(event) => setSearchQuery(event.target.value)}
@@ -198,8 +198,8 @@ const HistoryPage = () => {
               setMaxResults(Number(event.target.value));
             }}
             inputProps={{
-              name: 'maxResults',
-              id: 'maxResults',
+              name: "maxResults",
+              id: "maxResults",
             }}
           >
             <MenuItem value={10}>10</MenuItem>

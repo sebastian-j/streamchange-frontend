@@ -3,15 +3,15 @@
  * UserList reducer
  *
  */
-import {produce} from 'immer';
+import { produce } from "immer";
 
-import ActionTypes from './constants';
+import ActionTypes from "./constants";
 import {
   changeUsersEligibility,
   insertOrUpdateItem,
   purgeUsersTable,
   toggleEligibleIDB,
-} from './model';
+} from "./model";
 
 export const initialState = {
   userArray: [],

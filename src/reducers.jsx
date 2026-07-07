@@ -2,16 +2,16 @@
  * Combine all reducers in this file and export the combined reducers.
  */
 
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 //import { connectRouter } from 'connected-react-router';
 
-import history from './utils/history';
-import giveawayRulesReducer from './components/GiveawayRules/reducer';
-import giveawayPageReducer from './containers/GiveawayPage/reducer';
-import languageProviderReducer from './containers/LanguageProvider/reducer';
-import styleProviderReducer from '../src/containers/StyleProvider/reducer';
-import raffleWrapperReducer from '../src/components/RaffleWrapper/reducer';
-import queueReducer from './containers/QueuePage/reducer';
+import history from "./utils/history";
+import giveawayRulesReducer from "./components/GiveawayRules/reducer";
+import giveawayPageReducer from "./containers/GiveawayPage/reducer";
+import languageProviderReducer from "./containers/LanguageProvider/reducer";
+import styleProviderReducer from "../src/containers/StyleProvider/reducer";
+import raffleWrapperReducer from "../src/components/RaffleWrapper/reducer";
+import queueReducer from "./containers/QueuePage/reducer";
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers

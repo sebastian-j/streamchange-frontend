@@ -1,12 +1,12 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import React from "react";
+import { createRenderer } from "react-test-renderer/shallow";
 
-import HistoryItem from '../HistoryItem';
+import HistoryItem from "../HistoryItem";
 
 const shallowRenderer = createRenderer();
 
-describe('<HistoryItem />', () => {
-  it('should render and match the snapshot', () => {
+describe("<HistoryItem />", () => {
+  it("should render and match the snapshot", () => {
     shallowRenderer.render(
       <HistoryItem
         channelId="id"

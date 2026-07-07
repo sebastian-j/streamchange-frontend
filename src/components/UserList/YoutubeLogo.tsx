@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useIntl } from 'react-intl';
+import React from "react";
+import styled from "styled-components";
+import { useIntl } from "react-intl";
 
-import messages from './messages';
+import messages from "./messages";
 
 const A = styled.a`
   color: inherit;

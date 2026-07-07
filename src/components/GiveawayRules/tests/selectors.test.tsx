@@ -3,11 +3,11 @@ import {
   makeSelectGiveawayKeyword,
   makeSelectGiveawayPreWinner,
   makeSelectGiveawayPrize,
-} from '../selectors';
-import { initialState } from '../reducer';
+} from "../selectors";
+import { initialState } from "../reducer";
 
-describe('GiveawayRules selectors', () => {
-  it('should select the global state', () => {
+describe("GiveawayRules selectors", () => {
+  it("should select the global state", () => {
     const globalState = {};
     const mockedState: any = {
       giveawayRules: globalState,
@@ -15,14 +15,14 @@ describe('GiveawayRules selectors', () => {
     expect(selectRules(mockedState)).toEqual(globalState);
   });
 
-  it('should select the GiveawayRules initial state', () => {
+  it("should select the GiveawayRules initial state", () => {
     const mockedState: any = {};
     expect(selectRules(mockedState)).toEqual(initialState);
   });
 
-  it('should select the keyword', () => {
+  it("should select the keyword", () => {
     const keywordSelector = makeSelectGiveawayKeyword();
-    const keyword = 'join';
+    const keyword = "join";
     const mockedState: any = {
       giveawayRules: {
         keyword,
@@ -31,9 +31,9 @@ describe('GiveawayRules selectors', () => {
     expect(keywordSelector(mockedState)).toEqual(keyword);
   });
 
-  it('should select preWinner', () => {
+  it("should select preWinner", () => {
     const winnerSelector = makeSelectGiveawayPreWinner();
-    const preWinner = { id: 'id' };
+    const preWinner = { id: "id" };
     const mockedState: any = {
       giveawayRules: {
         preWinner,
@@ -42,9 +42,9 @@ describe('GiveawayRules selectors', () => {
     expect(winnerSelector(mockedState)).toEqual(preWinner);
   });
 
-  it('should select the prize', () => {
+  it("should select the prize", () => {
     const prizeSelector = makeSelectGiveawayPrize();
-    const prize = 'trophy';
+    const prize = "trophy";
     const mockedState: any = {
       giveawayRules: {
         prize,

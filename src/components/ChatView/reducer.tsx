@@ -4,8 +4,8 @@
  *
  */
 
-import ActionTypes from './constants';
-import { ContainerActions, ContainerState } from './types';
+import ActionTypes from "./constants";
+import { ContainerActions, ContainerState } from "./types";
 
 export const initialState = {
   messages: [],

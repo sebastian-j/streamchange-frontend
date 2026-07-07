@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
+import { FormattedMessage, useIntl } from "react-intl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
-import messages from './messages';
+import messages from "./messages";
 import {
   makeSelectAnimation,
   makeSelectDuration,
   makeSelectVisibility,
-} from './selectors';
+} from "./selectors";
 import {
   changeAnimation,
   changeAnimationDuration,
   changeVisibility,
-} from './actions';
-import { makeSelectUserArray } from '../UserList/selectors';
-import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
-import CSGORaffle from '../CSGORaffle';
-import FortuneWheelRaffle from '../FortuneWheelRaffle';
-import NumericInput from '../NumericInput';
-import StyledFormControl from '../StyledTextField/StyledFormControl';
+} from "./actions";
+import { makeSelectUserArray } from "../UserList/selectors";
+import { makeSelectGiveawayRequirement } from "../GiveawayRules/selectors";
+import CSGORaffle from "../CSGORaffle";
+import FortuneWheelRaffle from "../FortuneWheelRaffle";
+import NumericInput from "../NumericInput";
+import StyledFormControl from "../StyledTextField/StyledFormControl";
 
 const StartButton = styled.button`
   background-color: ${(props) => props.theme.buttonBackground};
@@ -35,7 +35,7 @@ const StartButton = styled.button`
   margin-top: 10px;
   padding: 10px 0;
   position: relative;
-  transition: text-shadow .2s linear .3s;
+  transition: text-shadow 0.2s linear 0.3s;
   width: 100%;
   z-index: 0;
   .btn-hover {
@@ -45,7 +45,7 @@ const StartButton = styled.button`
     height: 100%;
     position: absolute;
     top: 0;
-    transition: clip-path 1s cubic-bezier(.215,.61,.355,1);
+    transition: clip-path 1s cubic-bezier(0.215, 0.61, 0.355, 1);
     width: 100%;
     z-index: -1;
   }
@@ -102,7 +102,7 @@ export const RaffleWrapper = (props) => {
         </Select>
       </StyledFormControl>
       <NumericInput
-        label={intl.formatMessage({...messages.animationDuration})}
+        label={intl.formatMessage({ ...messages.animationDuration })}
         minValue={1}
         maxValue={600}
         value={props.animationDuration}

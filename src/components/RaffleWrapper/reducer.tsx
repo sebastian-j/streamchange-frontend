@@ -3,12 +3,12 @@
  * RaffleWrapper reducer
  *
  */
-import ActionTypes from './constants';
-import { ContainerState, ContainerActions } from './types';
+import ActionTypes from "./constants";
+import { ContainerState, ContainerActions } from "./types";
 
 export const initialState: ContainerState = {
   animationType: 0,
-  animationDuration: Number(localStorage.getItem('gv-animationDuration')) || 7,
+  animationDuration: Number(localStorage.getItem("gv-animationDuration")) || 7,
   isOpen: false,
 };
 
@@ -25,7 +25,7 @@ function raffleWrapperReducer(
         isOpen: state.isOpen,
       };
     case ActionTypes.CHANGE_DURATION:
-      localStorage.setItem('gv-animationDuration', String(action.payload));
+      localStorage.setItem("gv-animationDuration", String(action.payload));
       return {
         animationType: state.animationType,
         animationDuration: action.payload,

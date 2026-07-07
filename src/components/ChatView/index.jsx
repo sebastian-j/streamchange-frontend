@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/Menu';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/Menu";
+import { FormattedMessage } from "react-intl";
 
-import ChatEmbed from './ChatEmbed';
-import InternalChat from './InternalChat';
-import Panel from '../Panel';
-import PanelTitle from '../Panel/PanelTitle';
-import messages from './messages';
+import ChatEmbed from "./ChatEmbed";
+import InternalChat from "./InternalChat";
+import Panel from "../Panel";
+import PanelTitle from "../Panel/PanelTitle";
+import messages from "./messages";
 
 const ThemedSvg = styled.svg`
   color: ${(props) => props.theme.staticTextColor};

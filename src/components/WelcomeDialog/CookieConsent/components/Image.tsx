@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Image = styled.img`
   margin: 1% 10px 1% 10px;

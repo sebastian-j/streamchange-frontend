@@ -1,12 +1,12 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import React from "react";
+import { createRenderer } from "react-test-renderer/shallow";
 
-import MessageItem from '../MessageItem';
+import MessageItem from "../MessageItem";
 
 const shallowRenderer = createRenderer();
 
-describe('<MessageItem />', () => {
-  it('should render and match the snapshot', () => {
+describe("<MessageItem />", () => {
+  it("should render and match the snapshot", () => {
     shallowRenderer.render(
       <MessageItem date="2019-12-24T07:27:56.27" text="text" />,
     );

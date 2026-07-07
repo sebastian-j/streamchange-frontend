@@ -1,10 +1,10 @@
-import { ActionType } from 'typesafe-actions';
-import * as actions from './actions';
+import { ActionType } from "typesafe-actions";
+import * as actions from "./actions";
 
 interface IBan {
-  channelId: string,
-  description: string,
-  endsAt: string,
+  channelId: string;
+  description: string;
+  endsAt: string;
 }
 
 interface IStream {

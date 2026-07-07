@@ -3,13 +3,13 @@
  * GiveawayRules reducer
  *
  */
-import ActionTypes from './constants';
-import { ContainerActions, ContainerState } from './types';
+import ActionTypes from "./constants";
+import { ContainerActions, ContainerState } from "./types";
 
 export const initialState: ContainerState = {
-  keyword: localStorage.getItem('keyword') || '',
+  keyword: localStorage.getItem("keyword") || "",
   preWinner: null,
-  prize: localStorage.getItem('gv-prize') || '',
+  prize: localStorage.getItem("gv-prize") || "",
   requirement: 0,
 };
 
@@ -20,7 +20,7 @@ function giveawayRulesReducer(
 ): ContainerState {
   switch (action.type) {
     case ActionTypes.CHANGE_KEYWORD:
-      localStorage.setItem('keyword', action.payload);
+      localStorage.setItem("keyword", action.payload);
       return {
         keyword: action.payload,
         preWinner: state.preWinner,
@@ -35,7 +35,7 @@ function giveawayRulesReducer(
         requirement: state.requirement,
       };
     case ActionTypes.CHANGE_PRIZE:
-      localStorage.setItem('gv-prize', action.payload);
+      localStorage.setItem("gv-prize", action.payload);
       return {
         keyword: state.keyword,
         preWinner: state.preWinner,

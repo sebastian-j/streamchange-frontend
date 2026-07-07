@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-import { useInjectReducer } from '../../utils/injectReducer';
-import InternalChatMessage from './InternalChatMessage';
-import { makeSelectMessages } from './selectors';
-import reducer from './reducer';
+import { useInjectReducer } from "../../utils/injectReducer";
+import InternalChatMessage from "./InternalChatMessage";
+import { makeSelectMessages } from "./selectors";
+import reducer from "./reducer";
 
 const ItemScroller = styled.ol`
   height: 92%;
@@ -23,10 +23,10 @@ const ScrollerEnd = styled.div`
 
 export const InternalChat = (props) => {
   let messagesEndRef = useRef(null);
-  useInjectReducer({ key: 'chat', reducer });
+  useInjectReducer({ key: "chat", reducer });
 
   const scrollToBottom = () => {
-    messagesEndRef.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {

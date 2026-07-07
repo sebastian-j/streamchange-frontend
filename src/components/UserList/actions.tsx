@@ -4,9 +4,9 @@
  *
  */
 
-import { action } from 'typesafe-actions';
-import ActionTypes from './constants';
-import { User } from './types';
+import { action } from "typesafe-actions";
+import ActionTypes from "./constants";
+import { User } from "./types";
 
 export const selectAllUsers = () => action(ActionTypes.SELECT_ALL);
 

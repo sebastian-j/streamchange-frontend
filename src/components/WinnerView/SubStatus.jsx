@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
 
-import messages from './messages';
-import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
-import RelativeDate from '../RelativeDate';
+import messages from "./messages";
+import { makeSelectStreamInfo } from "../../containers/GiveawayPage/selectors";
+import RelativeDate from "../RelativeDate";
 
 const Subscribed = styled.span`
   color: ${(props) => props.theme.subStatusPositive};
@@ -42,21 +42,21 @@ const SubStatus = (props) => {
       )
       .then((res) => {
         if (res.data.items.length > 0) {
-          setStatus('true');
+          setStatus("true");
           setSubscriberFrom(res.data.items[0].snippet.publishedAt);
         } else {
-          setStatus('false');
+          setStatus("false");
         }
       })
       .catch((err) => {
         if (
           err.response &&
           err.response.data &&
-          err.response.data.error.errors[0].reason === 'subscriptionForbidden'
+          err.response.data.error.errors[0].reason === "subscriptionForbidden"
         ) {
-          setStatus('private');
+          setStatus("private");
         } else {
-          setStatus('error');
+          setStatus("error");
         }
       });
   };
@@ -67,7 +67,7 @@ const SubStatus = (props) => {
   if (!status) {
     return <PrivateSubs>...</PrivateSubs>;
   }
-  if (status === 'true') {
+  if (status === "true") {
     return (
       <Subscribed>
         <FormattedMessage {...messages.subscriberFrom} />
@@ -75,14 +75,14 @@ const SubStatus = (props) => {
       </Subscribed>
     );
   }
-  if (status === 'false') {
+  if (status === "false") {
     return (
       <NotSubscribed>
         <FormattedMessage {...messages.notSubscribed} />
       </NotSubscribed>
     );
   }
-  if (status === 'private') {
+  if (status === "private") {
     return (
       <PrivateSubs>
         <FormattedMessage {...messages.subscriberPrivate} />

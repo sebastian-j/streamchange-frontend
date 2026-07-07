@@ -1,19 +1,19 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { IntlProvider } from "react-intl";
 
-import WelcomeDialog from '../index';
-import configureStore from '../../../configureStore';
+import WelcomeDialog from "../index";
+import configureStore from "../../../configureStore";
 
-describe('<WelcomeDialog />', () => {
+describe("<WelcomeDialog />", () => {
   let store;
 
   beforeAll(() => {
     store = configureStore({});
   });
 
-  it('should render and match the snapshot', () => {
+  it("should render and match the snapshot", () => {
     const {
       container: { firstChild },
     } = render(
@@ -21,7 +21,7 @@ describe('<WelcomeDialog />', () => {
         <IntlProvider locale="en">
           <WelcomeDialog passVideo={() => 0} />
         </IntlProvider>
-      </Provider>
+      </Provider>,
     );
     expect(firstChild).toMatchSnapshot();
   });

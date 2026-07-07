@@ -1,30 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Tooltip from '@mui/material/Tooltip';
+import React from "react";
+import PropTypes from "prop-types";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import { createSelector } from "reselect";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Tooltip from "@mui/material/Tooltip";
 
-import messages from './messages';
-import ColoredLink from './ColoredLink';
-import HintParagraph from '../Tooltip/HintParagraph';
-import ToolbarButton from './ToolbarButton';
-import { useInjectReducer } from '../../utils/injectReducer';
-import { makeSelectDialogVisibility } from './selectors';
-import reducer from './reducer';
-import { changeDialogVisibility } from './actions';
+import messages from "./messages";
+import ColoredLink from "./ColoredLink";
+import HintParagraph from "../Tooltip/HintParagraph";
+import ToolbarButton from "./ToolbarButton";
+import { useInjectReducer } from "../../utils/injectReducer";
+import { makeSelectDialogVisibility } from "./selectors";
+import reducer from "./reducer";
+import { changeDialogVisibility } from "./actions";
 
 export const SupportInformation = (props) => {
-  useInjectReducer({ key: 'supportInfo', reducer });
+  useInjectReducer({ key: "supportInfo", reducer });
 
   return (
-    <div style={{ display: 'inline-block' }}>
+    <div style={{ display: "inline-block" }}>
       <Tooltip
         title={
           <HintParagraph>
@@ -35,7 +35,7 @@ export const SupportInformation = (props) => {
         <ToolbarButton onClick={props.openDialog} type="button">
           <span className="border border-initial" />
           <svg className="border border-hover" fill="none">
-            <circle cx="50%" cy="50%" r="32.5" pathLength="1"/>
+            <circle cx="50%" cy="50%" r="32.5" pathLength="1" />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"

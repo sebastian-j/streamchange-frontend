@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const HintParagraph = styled.span`
   font-size: 0.9rem;
