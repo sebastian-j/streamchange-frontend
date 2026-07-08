@@ -7,4 +7,7 @@ db.version(1).stores({
   messages: '++id, authorId',
   history: '++id, channelId',
 });
+db.version(2).stores({
+  users: 'id, imageUrl, title, message, isModerator, isSubscriber, isEligible',
+});
 export default db;

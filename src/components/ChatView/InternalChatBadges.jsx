@@ -17,7 +17,7 @@ const BadgeImg = styled.img`
   vertical-align: middle;
 `;
 
-const BADGE_SETS = {
+export const BADGE_SETS = {
   kick: {
     broadcaster: kickBroadcaster,
     moderator: kickModerator,

@@ -36,17 +36,17 @@ export default defineMessages({
     id: `${scope}.filtersTooltip`,
     defaultMessage: 'Filters',
   },
-  sponsorsFilter: {
-    id: `${scope}.filters.sponsors`,
-    defaultMessage: 'Sponsors',
+  subscribersFilter: {
+    id: `${scope}.filters.subscribers`,
+    defaultMessage: 'Subscribers',
   },
   moderatorsFilter: {
     id: `${scope}.filters.moderators`,
     defaultMessage: 'Moderators',
   },
-  verifiedFilter: {
-    id: `${scope}.filters.verified`,
-    defaultMessage: 'Verified',
+  vipFilter: {
+    id: `${scope}.filters.vip`,
+    defaultMessage: 'VIP',
   },
   regularsFilter: {
     id: `${scope}.filters.regulars`,
@@ -59,10 +59,6 @@ export default defineMessages({
   notSelectedFilter: {
     id: `${scope}.filters.notSelected`,
     defaultMessage: 'Not participating',
-  },
-  channelLinkTitle: {
-    id: `${scope}.YoutubeLogo.title`,
-    defaultMessage: 'Show the channel page',
   },
   skipListLinkText: {
     id: `${scope}.skipLink`,

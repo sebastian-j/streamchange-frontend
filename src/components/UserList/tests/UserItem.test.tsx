@@ -14,7 +14,7 @@ describe('<UserItem />', () => {
         handleToggleUser={() => 0}
         isModerator
         isEligible
-        isSponsor={false}
+        isSubscriber={false}
       />
     );
     const renderedOutput = shallowRenderer.getRenderOutput();

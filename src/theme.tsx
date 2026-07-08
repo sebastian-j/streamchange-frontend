@@ -18,7 +18,7 @@ export const lightTheme = {
   inputLabelFocused: '#303f9f',
 };
 
-export const darkTheme: Theme = {
+export const darkTheme: ThemeColors = {
   welcomeBackground: '#000000CB',
   bodyBackground: '#282828',
   panelBackground: '#1f1f1f',
@@ -38,4 +38,8 @@ export const darkTheme: Theme = {
   inputLabelFocused: '#0086e6',
 };
 
-export type Theme = typeof lightTheme;
+type ThemeColors = typeof lightTheme;
+
+// `color` is the user-configurable accent color, injected at runtime by
+// StyleProvider on top of the light/dark palette above.
+export type Theme = ThemeColors & { color: string };

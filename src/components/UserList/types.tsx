@@ -3,8 +3,8 @@ import * as actions from './actions';
 
 interface IFilteringOptions {
   moderators: boolean;
-  sponsors: boolean;
-  verified: boolean;
+  subscribers: boolean;
+  vip: boolean;
   regulars: boolean;
   participating: boolean;
   notParticipating: boolean;
@@ -12,12 +12,15 @@ interface IFilteringOptions {
 
 interface IUser {
   id: string;
+  color?: string;
   imageUrl: string;
   isEligible: boolean;
   isModerator: boolean;
-  isSponsor: boolean | string;
-  isVerified: boolean;
+  isStreamer?: boolean;
+  isSubscriber: boolean;
+  isVip: boolean;
   message: string;
+  platform?: string;
   title: string;
 }
 

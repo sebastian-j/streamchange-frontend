@@ -160,17 +160,20 @@ const YoutubeWorker = (props) => {
         db.table('messages').add(dbMessage);
       }
 
+      const keyword = (localStorage.getItem('keyword') || '').toLowerCase();
       const userListAuthor = {
         id: data.author,
+        color: data.color,
+        platform: props.platform,
         imageUrl: '',
         title: data.author,
         message: data.message,
         isModerator: data.is_moderator,
-        isSponsor: data.subscriber > 0,
-        isVerified: data.is_vip,
-        isEligible: data.message
-          .toLowerCase()
-          .includes((localStorage.getItem('keyword') || '').toLowerCase()),
+        isStreamer: data.is_streamer,
+        isSubscriber: data.subscriber > 0,
+        isVip: data.is_vip,
+        isEligible:
+          keyword !== '' && data.message.toLowerCase().includes(keyword),
       };
 
       dispatch(pushUser(userListAuthor));
@@ -185,7 +188,7 @@ const YoutubeWorker = (props) => {
 
   return (
     <ThreeSections>
-      <UserList />
+      <UserList platform={props.platform} />
       <GiveawayRules apiKey={props.apiKey} />
       <ChatView channel={props.channel} platform={props.platform} />
       {superChat && (
