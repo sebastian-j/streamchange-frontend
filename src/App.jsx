@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <YoutubeWorker
-      videoId={channelConfig.channel}
+      channel={channelConfig.channel}
       platform={channelConfig.platform}
       apiKey="test"
     />

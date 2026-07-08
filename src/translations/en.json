@@ -8,7 +8,7 @@
   "streamchange.components.AdFrame.dialogTitle": "Information for advertisers",
   "streamchange.components.AdFrame.showMoreButton": "Show the details",
   "streamchange.components.AdFrame.title": "Advertisement",
-  "streamchange.components.ChatView.embedMode": "Embedded chat from Youtube",
+  "streamchange.components.ChatView.embedMode": "Embedded chat",
   "streamchange.components.ChatView.internalMode": "Internal StreamChange chat",
   "streamchange.components.ChatView.title": "Chat",
   "streamchange.components.GiveawayRules.KeywordInput.error.repeatedCommands": "Keyword should not contain resignation command.",

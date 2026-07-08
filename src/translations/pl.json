@@ -8,7 +8,7 @@
   "streamchange.components.AdFrame.dialogTitle": "Informacje dla reklamodawców",
   "streamchange.components.AdFrame.showMoreButton": "Więcej informacji",
   "streamchange.components.AdFrame.title": "Reklama",
-  "streamchange.components.ChatView.embedMode": "Okno czatu z Youtube",
+  "streamchange.components.ChatView.embedMode": "Wbudowane okno czatu",
   "streamchange.components.ChatView.internalMode": "Wewnętrzny czat Streamchange",
   "streamchange.components.ChatView.title": "Czat",
   "streamchange.components.GiveawayRules.KeywordInput.error.repeatedCommands": "Słowo kluczowe nie może zawierać komendy rezygnacji.",

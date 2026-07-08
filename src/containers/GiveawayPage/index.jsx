@@ -201,7 +201,7 @@ const GiveawayPage = (props) => {
           <SettingsDialog />
         </TopButtons>
       </TopBar>
-      <YoutubeWorker videoId={props.streamInfo.videoId} apiKey={API_KEY} />
+      <YoutubeWorker channel={props.streamInfo.videoId} apiKey={API_KEY} />
     </>
   );
 };

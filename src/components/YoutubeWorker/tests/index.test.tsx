@@ -20,7 +20,7 @@ describe('<YoutubeWorker />', () => {
   it('should match the snapshot', () => {
     shallowRenderer.render(
       <Provider store={store}>
-        <YoutubeWorker apiKey="key" videoId="vidId" />
+        <YoutubeWorker apiKey="key" channel="vidId" />
       </Provider>
     );
     const renderedOutput = shallowRenderer.getRenderOutput();

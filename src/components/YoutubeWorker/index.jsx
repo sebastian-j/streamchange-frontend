@@ -41,7 +41,7 @@ const YoutubeWorker = (props) => {
       channelId: author.id,
       displayName: author.title,
       message: author.message,
-      videoId: props.videoId,
+      videoId: props.channel,
       platform: props.platform,
     };
     axios
@@ -118,16 +118,13 @@ const YoutubeWorker = (props) => {
       });
     }
   };
-  const platform = props.platform || 'kick';
   useEffect(() => {
     const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
 
     ws.onopen = () => {
-      console.log(props.videoId);
-      console.log(props.platform);
       ws.send(
         JSON.stringify({
-          channel: props.videoId,
+          channel: props.channel,
           platform: props.platform,
         })
       );
@@ -184,13 +181,13 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.videoId, props.platform]);
+  }, [props.channel, props.platform]);
 
   return (
     <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} />
-      <ChatView videoId={props.videoId} />
+      <ChatView channel={props.channel} platform={props.platform} />
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}
@@ -204,7 +201,7 @@ const YoutubeWorker = (props) => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
-  videoId: PropTypes.string,
+  channel: PropTypes.string,
   platform: PropTypes.string,
 };
 

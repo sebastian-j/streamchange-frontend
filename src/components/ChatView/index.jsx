@@ -22,9 +22,17 @@ const Header = styled.div`
   justify-content: space-between;
 `;
 
+const CHAT_MODES = Object.freeze({
+  EMBEDDED: 0,
+  INTERNAL: 1,
+});
+
 function ChatView(props) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [chatMode, setChatMode] = useState(1);
+  const [chatMode, setChatMode] = useState(() => {
+    const saved = localStorage.getItem('gv-chatMode');
+    return saved === null ? CHAT_MODES.INTERNAL : Number(saved);
+  });
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,6 +43,7 @@ function ChatView(props) {
   };
 
   const handleMenuItemClick = (index) => {
+    localStorage.setItem('gv-chatMode', String(index));
     setChatMode(index);
     closeMenu();
   };
@@ -62,9 +71,9 @@ function ChatView(props) {
           open={!!anchorEl}
           onClose={closeMenu}
         >
-          <MenuItem onClick={() => handleMenuItemClick(0)}>
+          <MenuItem onClick={() => handleMenuItemClick(CHAT_MODES.EMBEDDED)}>
             <ListItemIcon>
-              {chatMode === 0 && (
+              {chatMode === CHAT_MODES.EMBEDDED && (
                 <svg
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -77,9 +86,9 @@ function ChatView(props) {
             </ListItemIcon>
             <FormattedMessage {...messages.embedMode} />
           </MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick(1)}>
+          <MenuItem onClick={() => handleMenuItemClick(CHAT_MODES.INTERNAL)}>
             <ListItemIcon>
-              {chatMode === 1 && (
+              {chatMode === CHAT_MODES.INTERNAL && (
                 <svg
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -94,14 +103,17 @@ function ChatView(props) {
           </MenuItem>
         </MenuList>
       </Header>
-      {chatMode === 0 && <ChatEmbed videoId={props.videoId} />}
-      {chatMode === 1 && <InternalChat />}
+      {chatMode === CHAT_MODES.EMBEDDED && (
+        <ChatEmbed channel={props.channel} platform={props.platform} />
+      )}
+      {chatMode === CHAT_MODES.INTERNAL && <InternalChat />}
     </Panel>
   );
 }
 
 ChatView.propTypes = {
-  videoId: PropTypes.string,
+  channel: PropTypes.string,
+  platform: PropTypes.string,
 };
 
 export default ChatView;

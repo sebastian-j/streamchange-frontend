@@ -8,18 +8,32 @@ const ChatFrame = styled.iframe`
 `;
 
 function ChatEmbed(props) {
-  if (props.videoId === 'test') return <div />;
+  if (props.channel === 'test') return <div />;
+
+  const channel = encodeURIComponent(props.channel);
+
+  if (props.platform === 'twitch') {
+    return (
+      <ChatFrame
+        className="chat-frame"
+        title="Twitch Chat"
+        src={`https://www.twitch.tv/embed/${channel}/chat?parent=${window.location.hostname}&darkpopout`}
+      />
+    );
+  }
+
   return (
     <ChatFrame
       className="chat-frame"
-      title="Youtube Chat"
-      src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${window.location.hostname}`}
+      title="Kick Chat"
+      src={`https://chat.kick.cx/embed/${channel}?readonly=true`}
     />
   );
 }
 
 ChatEmbed.propTypes = {
-  videoId: PropTypes.string,
+  channel: PropTypes.string,
+  platform: PropTypes.string,
 };
 
 export default ChatEmbed;
