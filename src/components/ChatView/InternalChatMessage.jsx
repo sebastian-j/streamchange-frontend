@@ -37,12 +37,6 @@ const InternalChatMessage = (props) => {
 
   return (
     <MessageLi>
-      <a
-        href={`https://www.youtube.com/channel/${props.message.authorId}`}
-        target="_blank"
-      >
-        <AuthorImage src={props.message.imageUrl} />
-      </a>
       <InternalChatBadges message={props.message} />
       <Tooltip title={convertedDate} aria-label="date">
         <AuthorTitle userColor={userColor}>{props.message.title}</AuthorTitle>
