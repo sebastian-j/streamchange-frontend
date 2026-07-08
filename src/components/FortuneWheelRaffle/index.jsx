@@ -44,8 +44,8 @@ const FortuneWheelRaffle = (props) => {
   const closeImmediately = () => {
     props.onClose();
     clearTimeout(timer);
-    tickSound.stop();
-    tickSound.unload();
+    //tickSound.stop();
+    //tickSound.unload();
   };
 
   useEffect(() => {
@@ -70,18 +70,18 @@ const FortuneWheelRaffle = (props) => {
     setUsers(shuffled);
     setTimeout(() => setScrollSize(scroll), 10);
     setWinner(shuffled[winnerIndex]);
-    const sId1 = tickSound.play('start');
-    tickSound.on(
-      'end',
-      () => {
-        tickSound.play('tick');
-        tickSound.loop(true);
-      },
-      sId1
-    );
+    //const sId1 = tickSound.play('start');
+    // tickSound.on(
+    //   'end',
+    //   () => {
+    //     tickSound.play('tick');
+    //     tickSound.loop(true);
+    //   },
+    //sId1
+    //);
     setTimeout(() => {
-      tickSound.stop();
-      tickSound.unload();
+      //tickSound.stop();
+      //tickSound.unload();
     }, props.duration * 1000);
     setTimer(
       setTimeout(
