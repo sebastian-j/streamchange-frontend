@@ -381,10 +381,7 @@ const UserList = (props: Props) => {
             color={item.color}
             platform={item.platform}
             title={item.title}
-            isModerator={item.isModerator}
-            isStreamer={item.isStreamer}
-            isSubscriber={item.isSubscriber}
-            isVip={item.isVip}
+            badges={item.badges}
             isEligible={item.isEligible}
             handleToggleUser={props.toggleEligibility}
           />
