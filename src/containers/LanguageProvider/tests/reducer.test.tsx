@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import languageProviderReducer from '../reducer';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
-/* eslint-disable default-case, no-param-reassign */
+import ActionTypes from '../constants';
+import languageProviderReducer from '../reducer';
+
+ 
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {
     expect(languageProviderReducer(undefined, {} as any)).toEqual({

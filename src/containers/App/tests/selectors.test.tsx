@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { makeSelectLocation } from 'containers/App/selectors';
+import { describe, expect, it } from 'vitest';
 
 describe('makeSelectLocation', () => {
   it('should select the location', () => {

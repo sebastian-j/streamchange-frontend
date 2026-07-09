@@ -1,10 +1,10 @@
 import { produce } from 'immer';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import giveawayPageReducer, { initialState } from '../reducer';
 import { changeStreamProperties } from '../actions';
+import giveawayPageReducer, { initialState } from '../reducer';
 
-/* eslint-disable default-case, no-param-reassign */
+ 
 describe('giveawayPageReducer', () => {
   let state;
   beforeEach(() => {

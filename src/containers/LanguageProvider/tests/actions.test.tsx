@@ -1,8 +1,8 @@
 import { action } from 'typesafe-actions';
-import { describe, it, expect } from 'vitest';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
 import { changeLocale } from '../actions';
+import ActionTypes from '../constants';
 
 describe('LanguageProvider actions', () => {
   describe('Change Local Action', () => {

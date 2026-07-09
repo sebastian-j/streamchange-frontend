@@ -1,8 +1,8 @@
-import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import RaffleWrapper from '../index';
 

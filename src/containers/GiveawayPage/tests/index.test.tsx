@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { describe, it, expect, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
-import GiveawayPage from '../index';
 import configureStore from '../../../configureStore';
+import GiveawayPage from '../index';
 
 describe('<GiveawayPage />', () => {
   let store: ReturnType<typeof configureStore>;

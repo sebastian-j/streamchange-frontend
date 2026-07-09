@@ -1,10 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import queueReducer, { initialState } from '../reducer';
-import { QueueItem } from '../types';
 import {
-  changeQueueCommand,
   changeCapacity,
+  changeQueueCommand,
   changeTTI,
   changeTTK,
   changeWidgetCode,
@@ -14,6 +12,8 @@ import {
   pushQueueItem,
   updateQueueItem,
 } from '../actions';
+import queueReducer, { initialState } from '../reducer';
+import { QueueItem } from '../types';
 
 type QueueState = ReturnType<typeof queueReducer>;
 

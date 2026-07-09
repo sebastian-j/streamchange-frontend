@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { selectSupportInfo, makeSelectDialogVisibility } from '../selectors';
 import { initialState } from '../reducer';
+import { makeSelectDialogVisibility, selectSupportInfo } from '../selectors';
 
 describe('SupportInformation selectors', () => {
   it('should select the global state', () => {

@@ -1,15 +1,15 @@
-import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 import {
   deleteQueueItem,
   pushQueueItem,
   updateQueueItem,
 } from '../../../containers/QueuePage/actions';
 import { changeColor } from '../../../containers/StyleProvider/actions';
+import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 
 const mockStore = configureStore([]);
 

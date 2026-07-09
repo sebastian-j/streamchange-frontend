@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { selectStyle, makeSelectColor, makeSelectDarkMode } from '../selectors';
+import { describe, expect, it } from 'vitest';
+
 import { initialState } from '../reducer';
+import { makeSelectColor, makeSelectDarkMode, selectStyle } from '../selectors';
 
 describe('selectStyle', () => {
   it('should select the StyleProvider state', () => {

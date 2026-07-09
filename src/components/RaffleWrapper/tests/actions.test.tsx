@@ -1,11 +1,12 @@
 import { action } from 'typesafe-actions';
-import { describe, it, expect } from 'vitest';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
+
 import {
   changeAnimation,
   changeAnimationDuration,
   changeVisibility,
 } from '../actions';
+import ActionTypes from '../constants';
 
 describe('RaffleWrapper Actions', () => {
   describe('changeAnimation', () => {

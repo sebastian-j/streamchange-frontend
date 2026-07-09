@@ -1,6 +1,6 @@
-import { IntlProvider } from 'react-intl';
 import { render } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it } from 'vitest';
 
 import NumericInput from '../index';
 

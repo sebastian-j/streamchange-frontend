@@ -1,10 +1,10 @@
 import { produce } from 'immer';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import styleProviderReducer from '../reducer';
 import { changeColor, toggleDarkMode } from '../actions';
+import styleProviderReducer from '../reducer';
 
-/* eslint-disable default-case, no-param-reassign */
+ 
 describe('styleProviderReducer', () => {
   let state;
   beforeEach(() => {

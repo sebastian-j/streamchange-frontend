@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { describe, it, expect, beforeAll, vi } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 
-import SupportInformation, { mapDispatchToProps } from '../index';
-import { changeDialogVisibility } from '../actions';
 import configureStore from '../../../configureStore';
+import { changeDialogVisibility } from '../actions';
+import SupportInformation, { mapDispatchToProps } from '../index';
 
 describe('<SupportInformation />', () => {
   let store: ReturnType<typeof configureStore>;

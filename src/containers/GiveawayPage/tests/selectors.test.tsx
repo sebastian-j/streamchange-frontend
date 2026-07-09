@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { selectGiveawayPage, makeSelectStreamInfo } from '../selectors';
+import { describe, expect, it } from 'vitest';
+
 import { initialState } from '../reducer';
+import { makeSelectStreamInfo, selectGiveawayPage } from '../selectors';
 
 describe('GiveawayPage selectors', () => {
   it('should select the global state', () => {

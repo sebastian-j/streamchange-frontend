@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import NotFoundPage from '../index';
 

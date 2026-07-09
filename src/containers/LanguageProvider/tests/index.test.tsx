@@ -1,12 +1,11 @@
 import { render } from '@testing-library/react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import { Provider } from 'react-redux';
-import { describe, it, expect, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
-import ConnectedLanguageProvider, { LanguageProvider } from '../index';
 import configureStore from '../../../configureStore';
-
 import { translationMessages } from '../../../i18n';
+import ConnectedLanguageProvider, { LanguageProvider } from '../index';
 
 const messages = defineMessages({
   someMessage: {

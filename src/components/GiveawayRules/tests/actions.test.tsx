@@ -1,8 +1,8 @@
 import { action } from 'typesafe-actions';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import ActionTypes from '../constants';
 import { changeKeyword, changePreWinner, changePrize } from '../actions';
+import ActionTypes from '../constants';
 
 describe('GiveawayRules Actions', () => {
   describe('changeKeyword', () => {

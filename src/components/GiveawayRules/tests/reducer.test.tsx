@@ -1,10 +1,10 @@
 import { produce } from 'immer';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import giveawayRulesReducer, { initialState } from '../reducer';
 import { changeKeyword, changePreWinner, changePrize } from '../actions';
+import giveawayRulesReducer, { initialState } from '../reducer';
 
-/* eslint-disable default-case, no-param-reassign */
+ 
 describe('giveawayRulesReducer', () => {
   let state;
   beforeEach(() => {
