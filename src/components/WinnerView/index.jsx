@@ -220,7 +220,7 @@ export class WinnerView extends React.Component {
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
             <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
             <ChannelLink
-              href={`https://www.youtube.com/channel/${this.props.id}`}
+              href={`https://www.twitch.tv/${this.props.id}`}
               target="_blank"
             >
               <FormattedMessage {...messages.openChannel} />

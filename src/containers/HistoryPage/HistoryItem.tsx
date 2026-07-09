@@ -9,7 +9,7 @@ const HistoryItem = (props) => (
   <Row>
     <Cell className="image">
       <a
-        href={`https://www.youtube.com/channel/${props.channelId}`}
+        href={`https://www.twitch.tv/${props.channelId}`}
         target="_blank"
       >
         <img alt="Logo" src={props.imageUrl} height="45px" />
