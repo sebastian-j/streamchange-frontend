@@ -9,7 +9,7 @@ import { API_URL } from '../../../config';
 const mockStore = configureStore([]);
 
 describe('<YoutubeWorker />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       isOpen: false,

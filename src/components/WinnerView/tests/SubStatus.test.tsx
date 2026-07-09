@@ -8,7 +8,7 @@ import SubStatus from '../SubStatus';
 const mockStore = configureStore([]);
 
 describe('<SubStatus />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       ownerId: 'id',

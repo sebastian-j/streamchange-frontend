@@ -8,7 +8,7 @@ import UserList from '../index';
 const mockStore = configureStore([]);
 
 describe('<UserList />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       userArray: [

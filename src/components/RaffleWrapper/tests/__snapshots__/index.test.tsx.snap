@@ -1,0 +1,88 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-kDTkih iVMwHf css-15nqhxc-MuiFormControl-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      id="animation-select"
+    >
+      Animation
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl MuiSelect-root css-1x351wq-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-unhb03-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+        role="combobox"
+        tabindex="0"
+      >
+        CS:GO case opening
+      </div>
+      <input
+        aria-hidden="true"
+        aria-invalid="false"
+        class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
+        id="_r_1_"
+        tabindex="-1"
+        value="0"
+      />
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-ug7h84-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="sc-iCfMpq MvPUZ"
+  >
+    <label
+      class="sc-furwwf onsZr"
+      for="number-display"
+    >
+      Animation duration (seconds)
+    </label>
+    <button
+      aria-label="Decrease by one"
+      class="sc-pVTZz fXcXIt"
+      left="true"
+      type="button"
+    >
+      -
+    </button>
+    <input
+      class="sc-jrQAHW glRBvd"
+      id="number-display"
+      value="7"
+    />
+    <button
+      aria-label="Increase by one"
+      class="sc-pVTZz fgoFnF"
+      type="button"
+    >
+      +
+    </button>
+  </div>
+  <button
+    class="sc-iqshrI eOkIdy"
+    type="button"
+  >
+    Roll it!
+    <div
+      class="btn-hover"
+    />
+  </button>
+</div>
+`;

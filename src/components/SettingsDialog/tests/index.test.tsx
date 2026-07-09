@@ -8,7 +8,7 @@ import SettingsDialog from '../index';
 const mockStore = configureStore([]);
 
 describe('<SettingsDialog />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
 
   beforeAll(() => {
     store = mockStore({

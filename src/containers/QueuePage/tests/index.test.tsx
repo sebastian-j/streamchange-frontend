@@ -7,7 +7,7 @@ import QueuePage from '../index';
 import configureStore from '../../../configureStore';
 
 describe('<QueuePage />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

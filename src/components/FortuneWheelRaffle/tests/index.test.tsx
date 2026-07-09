@@ -8,7 +8,7 @@ import FortuneWheelRaffle from '../index';
 const mockStore = configureStore([]);
 
 describe('<FortuneWheelRaffle />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       requirement: 0,

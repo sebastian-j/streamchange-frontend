@@ -9,22 +9,20 @@ import RaffleWrapper from '../index';
 const mockStore = configureStore([]);
 
 describe('<RaffleWrapper />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       isOpen: false,
     });
   });
   it('should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
+    const { container } = render(
         <Provider store={store}>
           <IntlProvider locale="en">
             <RaffleWrapper onWin={() => 0} />
           </IntlProvider>
         </Provider>
       )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

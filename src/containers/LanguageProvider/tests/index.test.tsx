@@ -29,7 +29,7 @@ describe('<LanguageProvider />', () => {
 });
 
 describe('<ConnectedLanguageProvider />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

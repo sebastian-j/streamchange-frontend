@@ -14,7 +14,7 @@ import { changeColor } from '../../../containers/StyleProvider/actions';
 const mockStore = configureStore([]);
 
 describe('<QueueWorker />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       queueArray: [

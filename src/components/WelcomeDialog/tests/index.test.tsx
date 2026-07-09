@@ -7,7 +7,7 @@ import WelcomeDialog from '../index';
 import configureStore from '../../../configureStore';
 
 describe('<WelcomeDialog />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

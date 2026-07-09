@@ -7,7 +7,7 @@ import GiveawayPage from '../index';
 import configureStore from '../../../configureStore';
 
 describe('<GiveawayPage />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
   beforeAll(() => {
     store = configureStore({
       authKey: '',

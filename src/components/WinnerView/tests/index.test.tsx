@@ -8,7 +8,7 @@ import WinnerView from '../index';
 const mockStore = configureStore([]);
 
 describe('<WinnerView />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       isOpen: false,

@@ -8,7 +8,7 @@ import GiveawayRules from '../index';
 const mockStore = configureStore([]);
 
 describe('<GiveawayRules />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       keyword: 'Keyword',

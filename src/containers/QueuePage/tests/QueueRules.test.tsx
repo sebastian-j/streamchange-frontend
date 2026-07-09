@@ -7,7 +7,7 @@ import QueueRules from '../QueueRules';
 import configureStore from '../../../configureStore';
 
 describe('<QueueRules />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

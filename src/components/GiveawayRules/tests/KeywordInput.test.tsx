@@ -9,7 +9,7 @@ import KeywordInput from '../KeywordInput';
 const mockStore = configureStore([]);
 
 describe('<KeywordInput />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       keyword: 'Keyword',

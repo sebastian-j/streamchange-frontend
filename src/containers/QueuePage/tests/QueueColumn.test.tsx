@@ -1,14 +1,23 @@
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
+import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import QueueColumn from '../QueueColumn';
 
-const mockStore = configureStore([]);
+type QueueItem = {
+  id: string;
+  title: string;
+};
+
+type RootState = {
+  queueArray: QueueItem[];
+};
+
+const mockStore = configureStore<RootState>([]);
 
 describe('<QueueColumn />', () => {
-  let store;
+  let store: MockStoreEnhanced<RootState, {}>;
   beforeEach(() => {
     store = mockStore({
       queueArray: [
