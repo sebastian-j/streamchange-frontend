@@ -38,6 +38,7 @@ interface Props {
   deselectAllUsers: () => void;
   getList: (arr: User[]) => void;
   giveawayReq: number;
+  platform?: string;
   purgeList: () => void;
   selectAllUsers: () => void;
   toggleEligibility: (id: string) => void;
@@ -52,8 +53,8 @@ const UserList = (props: Props) => {
   const [items, setItems] = useState<Array<User>>([]);
   const [filters, setFilters] = useState<FilteringOptions>({
     moderators: false,
-    sponsors: false,
-    verified: false,
+    subscribers: false,
+    vip: false,
     regulars: false,
     participating: false,
     notParticipating: false,
@@ -97,7 +98,7 @@ const UserList = (props: Props) => {
   const getUsers = (): Array<User> => {
     let ret: Array<User> = items.length === 0 ? props.userArray : items;
     if (props.giveawayReq === 1)
-      ret = ret.filter((user) => user.isSponsor !== false);
+      ret = ret.filter((user) => user.isSubscriber !== false);
     if (isFiltering()) {
       if (filters.participating && !filters.notParticipating) {
         ret = ret.filter((user) => user.isEligible);
@@ -107,15 +108,19 @@ const UserList = (props: Props) => {
       if (
         filters.moderators ||
         filters.regulars ||
-        filters.sponsors ||
-        filters.verified
+        filters.subscribers ||
+        filters.vip
       ) {
         ret = ret.filter(
           (user) =>
             (filters.moderators && user.isModerator) ||
-            (filters.sponsors && user.isSponsor) ||
-            (filters.verified && user.isVerified) ||
-            (filters.regulars && !user.isModerator && !user.isSponsor)
+            (filters.subscribers && user.isSubscriber) ||
+            (filters.vip && user.isVip) ||
+            (filters.regulars &&
+              !user.isModerator &&
+              !user.isSubscriber &&
+              !user.isVip &&
+              !user.isStreamer)
         );
       }
     }
@@ -254,12 +259,12 @@ const UserList = (props: Props) => {
             onClick={() =>
               setFilters((prevState) => ({
                 ...prevState,
-                sponsors: !prevState.sponsors,
+                subscribers: !prevState.subscribers,
               }))
             }
           >
             <ListItemIcon>
-              {filters.sponsors && (
+              {filters.subscribers && (
                 <svg
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -270,18 +275,18 @@ const UserList = (props: Props) => {
                 </svg>
               )}
             </ListItemIcon>
-            <FormattedMessage {...messages.sponsorsFilter} />
+            <FormattedMessage {...messages.subscribersFilter} />
           </MenuItem>
           <MenuItem
             onClick={() =>
               setFilters((prevState) => ({
                 ...prevState,
-                verified: !prevState.verified,
+                vip: !prevState.vip,
               }))
             }
           >
             <ListItemIcon>
-              {filters.verified && (
+              {filters.vip && (
                 <svg
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -292,7 +297,7 @@ const UserList = (props: Props) => {
                 </svg>
               )}
             </ListItemIcon>
-            <FormattedMessage {...messages.verifiedFilter} />
+            <FormattedMessage {...messages.vipFilter} />
           </MenuItem>
           <MenuItem
             onClick={() =>
@@ -342,6 +347,7 @@ const UserList = (props: Props) => {
       </Header>
       <FilterChips
         filters={filters}
+        platform={props.platform}
         onDelete={(key) =>
           setFilters((prevState) => ({
             ...prevState,
@@ -372,10 +378,13 @@ const UserList = (props: Props) => {
           <UserItem
             key={item.id}
             channelId={item.id}
+            color={item.color}
+            platform={item.platform}
             title={item.title}
             isModerator={item.isModerator}
-            isSponsor={item.isSponsor}
-            isVerified={item.isVerified}
+            isStreamer={item.isStreamer}
+            isSubscriber={item.isSubscriber}
+            isVip={item.isVip}
             isEligible={item.isEligible}
             handleToggleUser={props.toggleEligibility}
           />

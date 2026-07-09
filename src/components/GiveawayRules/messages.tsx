@@ -16,9 +16,9 @@ export default defineMessages({
     id: `${scope}.forAll`,
     defaultMessage: 'All viewers',
   },
-  sponsors: {
-    id: `${scope}.forSponsors`,
-    defaultMessage: 'Sponsors only',
+  subscribers: {
+    id: `${scope}.forSubscribers`,
+    defaultMessage: 'Subscribers only',
   },
   userTypeLabel: {
     id: `${scope}.userTypeLabel`,

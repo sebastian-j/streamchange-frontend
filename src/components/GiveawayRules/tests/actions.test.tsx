@@ -19,7 +19,7 @@ describe('GiveawayRules Actions', () => {
         imageUrl: 'url',
         isEligible: true,
         isModerator: false,
-        isSponsor: false,
+        isSubscriber: false,
         isVerified: false,
         message: 'test',
         title: 'user',

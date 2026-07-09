@@ -67,7 +67,9 @@ export const RaffleWrapper = (props) => {
       (user) => user.isEligible === true
     );
     if (props.giveawayReq === 1) {
-      eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
+      eligibleUsers = eligibleUsers.filter(
+        (user) => user.isSubscriber !== false
+      );
     }
     if (eligibleUsers.length > 0) {
       props.openRaffle();

@@ -26,7 +26,9 @@ const CSGORaffle = (props) => {
       (user) => user.isEligible === true
     );
     if (props.giveawayReq === 1) {
-      eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
+      eligibleUsers = eligibleUsers.filter(
+        (user) => user.isSubscriber !== false
+      );
     }
     const shuffled = [];
     for (let i = 0; i < 30 + props.duration * 3; i += 1) {

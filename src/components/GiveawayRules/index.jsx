@@ -82,7 +82,7 @@ export class GiveawayRules extends React.Component {
               <FormattedMessage {...messages.allViewers} />
             </MenuItem>
             <MenuItem value={1}>
-              <FormattedMessage {...messages.sponsors} />
+              <FormattedMessage {...messages.subscribers} />
             </MenuItem>
           </Select>
         </StyledFormControl>
