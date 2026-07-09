@@ -33,13 +33,16 @@ const QueueWorker = (props) => {
   const [superChat, setSuperChat] = useState(null);
 
   const saveMessage = (msg) => {
+    const badges = [];
+    if (msg.a.isChatOwner) badges.push('broadcaster');
+    if (msg.a.isChatModerator) badges.push('moderator');
+    if (msg.a.isVerified) badges.push('certified');
+
     const chatViewMessage = {
       authorId: msg.a.id,
       displayText: msg.s.m,
       imageUrl: msg.a.img,
-      isModerator: msg.a.isChatModerator,
-      isOwner: msg.a.isChatOwner,
-      isVerified: msg.a.isVerified,
+      badges,
       publishedAt: msg.s.publishedAt,
       title: msg.a.n,
     };

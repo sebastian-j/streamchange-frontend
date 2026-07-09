@@ -10,10 +10,7 @@ const UserItem = (props) => {
 
   const badgeMessage = {
     platform: props.platform,
-    isStreamer: props.isStreamer,
-    isModerator: props.isModerator,
-    isVip: props.isVip,
-    isSubscriber: props.isSubscriber,
+    badges: props.badges,
   };
 
   return (
@@ -36,10 +33,7 @@ UserItem.propTypes = {
   color: PropTypes.string,
   platform: PropTypes.string,
   title: PropTypes.string.isRequired,
-  isModerator: PropTypes.bool,
-  isStreamer: PropTypes.bool,
-  isSubscriber: PropTypes.bool,
-  isVip: PropTypes.bool,
+  badges: PropTypes.arrayOf(PropTypes.string),
   isEligible: PropTypes.bool,
   handleToggleUser: PropTypes.func.isRequired,
 };
