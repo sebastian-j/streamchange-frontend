@@ -17,15 +17,13 @@ describe('<KeywordInput />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
+    const { container} = render(
         <Provider store={store}>
           <IntlProvider locale="en">
             <KeywordInput />
           </IntlProvider>
         </Provider>
-      )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+      );
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

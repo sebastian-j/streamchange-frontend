@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { produce } from 'immer';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import giveawayPageReducer, { initialState } from '../reducer';

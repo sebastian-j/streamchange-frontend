@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<KeywordInput /> > should render and match the snapshot 1`] = `
+<div
+  aria-label="keyword"
+  class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-bdvvNz ezwuBH css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  data-mui-internal-clone-element="true"
+  inputprops="[object Object]"
+>
+  <label
+    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard css-2hy7sk-MuiFormLabel-root-MuiInputLabel-root"
+    data-shrink="false"
+    for="keyword"
+    id="keyword-label"
+  >
+    Keyword
+  </label>
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+  >
+    <input
+      aria-invalid="false"
+      class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+      id="keyword"
+      name="keyword"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

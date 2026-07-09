@@ -9,5 +9,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
+    reporters: ['default', 'github-actions'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text-summary', 'lcov', 'cobertura'],
+      reportsDirectory: './coverage',
+    },
   },
 });
