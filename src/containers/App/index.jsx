@@ -8,7 +8,7 @@
  */
 
 import { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import GiveawayPage from '../GiveawayPage/Loadable';
 import HistoryPage from '../HistoryPage/Loadable';
@@ -23,14 +23,16 @@ export default function App() {
       localStorage.setItem('gv-abortCommand', '!rezygnuje');
     }
   }, []);
+
   return (
     <div>
-      <Switch>
-        <Route exact path="/giveaway" component={GiveawayPage} />
-        <Route exact path="/giveaway-history" component={HistoryPage} />
-        <Route exact path="/queue" component={QueuePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Navigate to="/giveaway" replace />} />
+        <Route path="/giveaway" element={<GiveawayPage />} />
+        <Route path="/giveaway-history" element={<HistoryPage />} />
+        <Route path="/queue" element={<QueuePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       <GlobalStyle />
     </div>
   );

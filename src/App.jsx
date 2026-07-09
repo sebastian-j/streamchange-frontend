@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import YoutubeWorker from './components/YoutubeWorker';
 import WelcomeDialog from './components/WelcomeDialog';
+import GiveawayPage from './containers/GiveawayPage';
 export default function App() {
   const [channelConfig, setChannelConfig] = useState(null);
 
@@ -24,10 +25,12 @@ export default function App() {
   }
 
   return (
-    <YoutubeWorker
-      channel={channelConfig.channel}
-      platform={channelConfig.platform}
-      apiKey="test"
-    />
+    <>
+      <YoutubeWorker
+        channel={channelConfig.channel}
+        platform={channelConfig.platform}
+        apiKey="test"
+      />
+    </>
   );
 }

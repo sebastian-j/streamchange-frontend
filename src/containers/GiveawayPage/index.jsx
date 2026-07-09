@@ -11,7 +11,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import messages from './messages';
 import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
 import { changeStreamProperties, sendTelemetryData } from './actions';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from '../../utils/injectSaga';
 import saga from './saga';
 import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
@@ -69,97 +69,101 @@ const GiveawayPage = (props) => {
       thumbnailUrl: '',
       title: '',
       videoId: '',
+      platform: '',
     };
     props.changeStreamProperties(streamProps);
     sessionStorage.removeItem('gv-videoId');
     sessionStorage.removeItem('gv-title');
     sessionStorage.removeItem('gv-thumbnailUrl');
+    sessionStorage.removeItem('gv-ownerId');
+    localStorage.removeItem('gv-channel');
+    localStorage.removeItem('gv-platform');
     window.location.reload();
   };
 
-  const launchWorker = (vidId) => {
-    axios
-      .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${vidId}&key=${API_KEY}`
-      )
-      .then((res) => {
-        if (res.data.items.length === 0) {
-          setError('notVideo');
-        } else if (res.data.items[0].snippet.liveBroadcastContent === 'none') {
-          setError('notStream');
-        } else {
-          const stream = res.data.items[0];
-          const streamProps = {
-            ownerId: stream.snippet.channelId,
-            thumbnailUrl: stream.snippet.thumbnails.medium.url,
-            title: stream.snippet.title,
-            videoId: vidId,
-          };
-          props.changeStreamProperties(streamProps);
-          props.sendTelemetryData(streamProps);
-          sessionStorage.setItem('gv-videoId', vidId);
-          sessionStorage.setItem('gv-title', streamProps.title);
-          sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
-          sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
-        }
-      })
-      .catch((err) => {
-        if (err.response && err.response.data && err.response.data.error) {
-          if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
-            setError('quotaExceeded');
-          }
-        } else {
-          const streamProps = {
-            ownerId: '',
-            thumbnailUrl:
-              'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
-            title: 'Tytuł nieznany',
-            videoId: vidId,
-          };
-          props.changeStreamProperties(streamProps);
-          sessionStorage.setItem('gv-videoId', vidId);
-        }
-      });
-  };
+  const handleStartStream = (channelName, platformName) => {
+    localStorage.setItem('gv-channel', channelName);
+    localStorage.setItem('gv-platform', platformName);
 
-  const receiveVideo = (videoLink) => {
-    if (videoLink.includes('v=')) {
-      const vidId = videoLink.split('v=')[1].split('&')[0].split('/')[0];
-      launchWorker(vidId);
-    } else if (videoLink.includes('video/')) {
-      const vidId = videoLink.split('video/')[1].split('/')[0];
-      launchWorker(vidId);
-    } else if (videoLink.includes('u.be/')) {
-      const vidId = videoLink.split('be/')[1].split('?')[0];
-      launchWorker(vidId);
-    } else if (videoLink === 'test') {
-      props.changeStreamProperties({
-        ownerId: '',
-        thumbnailUrl: 'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
-        title: '',
-        videoId: 'test',
-      });
+    if (platformName === 'youtube') {
+      axios
+        .get(
+          `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${channelName}&key=${API_KEY}`
+        )
+        .then((res) => {
+          if (res.data.items.length === 0) {
+            setError('notVideo');
+          } else if (
+            res.data.items[0].snippet.liveBroadcastContent === 'none'
+          ) {
+            setError('notStream');
+          } else {
+            const stream = res.data.items[0];
+            const streamProps = {
+              ownerId: stream.snippet.channelId,
+              thumbnailUrl: stream.snippet.thumbnails.medium.url,
+              title: stream.snippet.title,
+              videoId: channelName,
+              platform: platformName,
+            };
+            props.changeStreamProperties(streamProps);
+            props.sendTelemetryData(streamProps);
+            sessionStorage.setItem('gv-videoId', channelName);
+            sessionStorage.setItem('gv-title', streamProps.title);
+            sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
+            sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
+          }
+        })
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.error) {
+            if (err.response.data.error.errors[0].reason.includes('Exceeded')) {
+              setError('quotaExceeded');
+            }
+          } else {
+            const streamProps = {
+              ownerId: channelName,
+              thumbnailUrl:
+                'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
+              title: 'Tytuł nieznany',
+              videoId: channelName,
+              platform: platformName,
+            };
+            props.changeStreamProperties(streamProps);
+            sessionStorage.setItem('gv-videoId', channelName);
+          }
+        });
     } else {
-      setError('invalidUrl');
+      const streamProps = {
+        ownerId: channelName,
+        thumbnailUrl:
+          'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg',
+        title: channelName,
+        videoId: channelName,
+        platform: platformName,
+      };
+      props.changeStreamProperties(streamProps);
+      props.sendTelemetryData(streamProps);
     }
   };
 
   useEffect(() => {
-    const id = sessionStorage.getItem('gv-videoId');
-    const storedTitle = sessionStorage.getItem('gv-title');
-    const storedThumbnail = sessionStorage.getItem('gv-thumbnailUrl');
-    const storedOwnerId = sessionStorage.getItem('gv-ownerId');
-    if (
-      id !== null &&
-      storedTitle !== null &&
-      storedThumbnail !== null &&
-      storedOwnerId !== null
-    ) {
+    const channel =
+      localStorage.getItem('gv-channel') ||
+      sessionStorage.getItem('gv-videoId');
+    const platform = localStorage.getItem('gv-platform') || 'youtube';
+    const storedTitle = sessionStorage.getItem('gv-title') || channel;
+    const storedThumbnail =
+      sessionStorage.getItem('gv-thumbnailUrl') ||
+      'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg';
+    const storedOwnerId = sessionStorage.getItem('gv-ownerId') || channel;
+
+    if (channel) {
       const streamProps = {
         ownerId: storedOwnerId,
         thumbnailUrl: storedThumbnail,
         title: storedTitle,
-        videoId: id,
+        videoId: channel,
+        platform: platform,
       };
       props.changeStreamProperties(streamProps);
     }
@@ -172,7 +176,7 @@ const GiveawayPage = (props) => {
           <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <WelcomeDialog
-          passVideo={receiveVideo}
+          onStart={handleStartStream}
           ban={props.ban}
           error={error}
           variant={0}
@@ -201,7 +205,11 @@ const GiveawayPage = (props) => {
           <SettingsDialog />
         </TopButtons>
       </TopBar>
-      <YoutubeWorker channel={props.streamInfo.videoId} apiKey={API_KEY} />
+      <YoutubeWorker
+        channel={props.streamInfo.videoId}
+        platform={props.streamInfo.platform}
+        apiKey={API_KEY}
+      />
     </>
   );
 };

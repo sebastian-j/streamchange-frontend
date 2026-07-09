@@ -2,7 +2,7 @@ import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 import qs from 'qs';
 
 import ActionTypes from './constants';
-import { request } from 'utils/request';
+import { request } from '../../utils/request';
 import { changeBanStatus, loadAuthKey } from './actions';
 import { makeSelectStreamInfo } from './selectors';
 import { Stream } from './types';

@@ -5,8 +5,9 @@ import { translationMessages, DEFAULT_LOCALE } from './i18n';
 import LanguageProvider from './containers/LanguageProvider';
 import StyleProvider from './containers/StyleProvider';
 import configureStore from './configureStore';
-import App from './App';
+import App from './containers/App/index.jsx';
 import 'sanitize.css/sanitize.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore({});
 const container = document.getElementById('app');
@@ -15,7 +16,9 @@ root.render(
   <Provider store={store}>
     <LanguageProvider messages={translationMessages}>
       <StyleProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </StyleProvider>
     </LanguageProvider>
   </Provider>
