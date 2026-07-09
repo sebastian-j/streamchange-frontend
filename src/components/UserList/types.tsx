@@ -12,6 +12,7 @@ interface IFilteringOptions {
 
 interface IUser {
   id: string;
+  badges: string[];
   color?: string;
   imageUrl: string;
   isEligible: boolean;

@@ -133,6 +133,7 @@ const YoutubeWorker = (props) => {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log('Przyszła wiadomość z backendu:', data);
+      const badges = data.badges || [];
       const dbMessage = {
         authorId: data.author,
         displayText: data.message,
@@ -143,10 +144,9 @@ const YoutubeWorker = (props) => {
         color: data.color,
         platform: props.platform,
         imageUrl: '',
-        isModerator: data.is_moderator,
-        isStreamer: data.is_streamer,
+        badges,
+        isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
-        isVip: data.is_vip,
         title: data.author,
         ...dbMessage,
       };
@@ -168,10 +168,11 @@ const YoutubeWorker = (props) => {
         imageUrl: '',
         title: data.author,
         message: data.message,
-        isModerator: data.is_moderator,
-        isStreamer: data.is_streamer,
+        badges,
+        isModerator: badges.includes('moderator'),
+        isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
-        isVip: data.is_vip,
+        isVip: badges.includes('vip'),
         isEligible:
           keyword !== '' && data.message.toLowerCase().includes(keyword),
       };
