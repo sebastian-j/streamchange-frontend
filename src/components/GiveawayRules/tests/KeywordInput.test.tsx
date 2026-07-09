@@ -1,7 +1,6 @@
-import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 

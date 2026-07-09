@@ -1,13 +1,11 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import YoutubeWorker from '../index';
 import { API_URL } from '../../../config';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<YoutubeWorker />', () => {
@@ -19,13 +17,12 @@ describe('<YoutubeWorker />', () => {
     });
   });
   it('should match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <YoutubeWorker apiKey="key" channel="vidId" />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
 

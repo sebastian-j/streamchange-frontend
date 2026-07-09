@@ -1,12 +1,10 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import SubStatus from '../SubStatus';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<SubStatus />', () => {
@@ -17,7 +15,7 @@ describe('<SubStatus />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <SubStatus
           apiKey="key"
@@ -31,7 +29,6 @@ describe('<SubStatus />', () => {
         />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,12 +1,10 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeAll } from 'vitest';
 
 import SettingsDialog from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<SettingsDialog />', () => {
@@ -19,12 +17,11 @@ describe('<SettingsDialog />', () => {
   });
 
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <SettingsDialog />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

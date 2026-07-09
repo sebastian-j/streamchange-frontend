@@ -1,15 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
 import AdFrame from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<AdFrame />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<AdFrame />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<AdFrame />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

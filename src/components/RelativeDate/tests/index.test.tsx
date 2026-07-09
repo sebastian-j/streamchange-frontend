@@ -1,17 +1,13 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
 import RelativeDate from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<RelativeDate />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <RelativeDate ISO8601Date="2019-12-24T07:27:56.27-00:00" />
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

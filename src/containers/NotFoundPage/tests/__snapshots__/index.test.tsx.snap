@@ -5,9 +5,3 @@ exports[`<NotFoundPage /> > should render and match the snapshot 1`] = `
   This is the NotFoundPage container!
 </h1>
 `;
-
-exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
-<h1>
-  This is the NotFoundPage container!
-</h1>
-`;

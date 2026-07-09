@@ -1,12 +1,10 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import FortuneWheelRaffle from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<FortuneWheelRaffle />', () => {
@@ -21,12 +19,11 @@ describe('<FortuneWheelRaffle />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <FortuneWheelRaffle onClose={() => 0} onWin={() => 0} />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

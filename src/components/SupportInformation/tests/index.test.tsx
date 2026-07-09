@@ -1,14 +1,13 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { describe, it, expect, beforeAll, jest } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 
 import SupportInformation, { mapDispatchToProps } from '../index';
 import { changeDialogVisibility } from '../actions';
 import configureStore from '../../../configureStore';
 
 describe('<SupportInformation />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});
@@ -28,13 +27,13 @@ describe('<SupportInformation />', () => {
   describe('mapDispatchToProps', () => {
     describe('closeDialog', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.closeDialog).toBeDefined();
       });
 
       it('should dispatch changeDialogVisibility when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         result.closeDialog();
         expect(dispatch).toHaveBeenCalledWith(changeDialogVisibility(false));
@@ -43,13 +42,13 @@ describe('<SupportInformation />', () => {
 
     describe('openDialog', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.openDialog).toBeDefined();
       });
 
       it('should dispatch changeDialogVisibility when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         result.openDialog();
         expect(dispatch).toHaveBeenCalledWith(changeDialogVisibility(true));

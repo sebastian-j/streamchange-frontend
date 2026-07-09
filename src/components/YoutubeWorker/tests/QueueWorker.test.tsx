@@ -1,8 +1,7 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
-import { describe, it, expect, beforeEach, jest } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 import {
@@ -12,7 +11,6 @@ import {
 } from '../../../containers/QueuePage/actions';
 import { changeColor } from '../../../containers/StyleProvider/actions';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<QueueWorker />', () => {
@@ -40,25 +38,24 @@ describe('<QueueWorker />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <QueueWorker videoId="id" />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   describe('mapDispatchToProps', () => {
     describe('deleteItem', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.deleteItem).toBeDefined();
       });
 
       it('should dispatch deleteQueueItem when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         const id = 'id';
         result.deleteItem(id);
@@ -68,13 +65,13 @@ describe('<QueueWorker />', () => {
 
     describe('onColorChange', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.onColorChange).toBeDefined();
       });
 
       it('should dispatch changeColor when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         const col = '#00ff00';
         result.onColorChange(col);
@@ -84,13 +81,13 @@ describe('<QueueWorker />', () => {
 
     describe('pushItem', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.pushItem).toBeDefined();
       });
 
       it('should dispatch pushQueueItem when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         const item = {
           id: 'id',
@@ -107,13 +104,13 @@ describe('<QueueWorker />', () => {
 
     describe('updateItem', () => {
       it('should be injected', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         expect(result.updateItem).toBeDefined();
       });
 
       it('should dispatch updateQueueItem when called', () => {
-        const dispatch = jest.fn();
+        const dispatch = vi.fn();
         const result = mapDispatchToProps(dispatch);
         const item = { id: 'id' };
         result.updateItem(item);

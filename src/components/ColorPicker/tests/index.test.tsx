@@ -1,15 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
 import ColorPicker from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<ColorPicker />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<ColorPicker />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<ColorPicker />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

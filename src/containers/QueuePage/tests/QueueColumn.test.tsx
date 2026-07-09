@@ -1,12 +1,10 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import QueueColumn from '../QueueColumn';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<QueueColumn />', () => {
@@ -20,12 +18,11 @@ describe('<QueueColumn />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <QueueColumn />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,12 +1,10 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import WinnerView from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<WinnerView />', () => {
@@ -17,12 +15,11 @@ describe('<WinnerView />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <WinnerView apiKey="key" id="id" onClose={() => 0} />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
