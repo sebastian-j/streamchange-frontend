@@ -8,11 +8,8 @@ import { darkTheme, lightTheme } from '../../theme';
 export function StyleProvider(props) {
   const themeType = props.isDarkMode ? darkTheme : lightTheme;
   const theme = { ...themeType, color: props.color };
-  return (
-    <ThemeProvider theme={theme}>
-      {React.Children.only(props.children)}
-    </ThemeProvider>
-  );
+
+  return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
 }
 
 StyleProvider.propTypes = {
