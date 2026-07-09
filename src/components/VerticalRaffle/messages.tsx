@@ -8,8 +8,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'streamchange.components.VerticalRaffle';
 
 export default defineMessages({
-  closeBtn: {
-    id: `${scope}.closeBtn`,
-    defaultMessage: 'Close',
+  continueBtn: {
+    id: `${scope}.continueBtn`,
+    defaultMessage: 'Continue',
   },
 });

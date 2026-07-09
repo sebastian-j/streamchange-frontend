@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
@@ -80,10 +80,17 @@ export const RaffleWrapper = (props) => {
     }
   };
 
-  const winnerHandler = (event) => {
-    props.closeRaffle();
-    props.onWin(event);
-  };
+  // Stable reference so VerticalRaffle's memo comparator (which skips
+  // re-renders from unrelated userArray updates) isn't defeated by a new
+  // onWin function on every RaffleWrapper render.
+  const { closeRaffle, onWin } = props;
+  const winnerHandler = useCallback(
+    (event) => {
+      closeRaffle();
+      onWin(event);
+    },
+    [closeRaffle, onWin]
+  );
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -14,41 +14,78 @@ import InternalChatBadges from '../ChatView/InternalChatBadges';
 import tickSoundSrc from '../../assets/tick3.mp3';
 import './style.css';
 
-const CELL_HEIGHT = 64;
+const CELL_HEIGHT = 77;
 const BOX_HEIGHT = CELL_HEIGHT * 5;
-const TICK_POOL_SIZE = 6;
-// Inverse of the CSS roller's ease-out curve: maps distance progress to
-// time progress, so ticks are dense while the strip is fast and spread
-// out as it decelerates.
-const tickTimeProgress = (p) => 1 - (1 - p) ** (1 / 5);
+const NEEDLE_Y = BOX_HEIGHT / 2;
+const MIN_TICK_GAP_MS = 70;
+
+const makeCubicBezier = (x1, y1, x2, y2) => {
+  const ax = 3 * x1 - 3 * x2 + 1;
+  const bx = 3 * x2 - 6 * x1;
+  const cx = 3 * x1;
+  const ay = 3 * y1 - 3 * y2 + 1;
+  const by = 3 * y2 - 6 * y1;
+  const cy = 3 * y1;
+
+  const sampleX = (t) => ((ax * t + bx) * t + cx) * t;
+  const sampleY = (t) => ((ay * t + by) * t + cy) * t;
+  const sampleDerivativeX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+
+  const solveT = (x) => {
+    let t = x;
+    for (let i = 0; i < 8; i += 1) {
+      const dx = sampleX(t) - x;
+      if (Math.abs(dx) < 1e-6) return t;
+      const d = sampleDerivativeX(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= dx / d;
+    }
+    let lo = 0;
+    let hi = 1;
+    t = x;
+    for (let i = 0; i < 20; i += 1) {
+      const dx = sampleX(t) - x;
+      if (Math.abs(dx) < 1e-6) return t;
+      if (dx > 0) hi = t;
+      else lo = t;
+      t = (lo + hi) / 2;
+    }
+    return t;
+  };
+
+  return (x) => {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    return sampleY(solveT(x));
+  };
+};
+
+const rollerEase = makeCubicBezier(0.18, 0.17, 0.02, 1);
 
 const VerticalRaffle = (props) => {
   const [users, setUsers] = useState([]);
-  const [scrollSize, setScrollSize] = useState(0);
   const [winner, setWinner] = useState(null);
   const [finished, setFinished] = useState(false);
   const [timer, setTimer] = useState(null);
-  const audioPool = useRef(null);
-  const poolIndex = useRef(0);
-  const tickTimeouts = useRef([]);
+  const movableRef = useRef(null);
+  const audioCtx = useRef(null);
+  const tickBuffer = useRef(null);
+  const rafId = useRef(null);
 
   const playTick = () => {
-    if (!audioPool.current) return;
-    const audio = audioPool.current[poolIndex.current];
-    poolIndex.current = (poolIndex.current + 1) % TICK_POOL_SIZE;
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-  };
-
-  const clearTicks = () => {
-    tickTimeouts.current.forEach((id) => clearTimeout(id));
-    tickTimeouts.current = [];
+    const ctx = audioCtx.current;
+    const buffer = tickBuffer.current;
+    if (!ctx || !buffer) return;
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(ctx.destination);
+    source.start();
   };
 
   const closeImmediately = () => {
     props.onClose();
     clearTimeout(timer);
-    clearTicks();
+    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
   };
 
   const confirmWinner = () => {
@@ -58,10 +95,19 @@ const VerticalRaffle = (props) => {
   };
 
   useEffect(() => {
-    audioPool.current = Array.from(
-      { length: TICK_POOL_SIZE },
-      () => new Audio(tickSoundSrc)
-    );
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextCtor) {
+      const ctx = new AudioContextCtor();
+      audioCtx.current = ctx;
+      ctx.resume().catch(() => {});
+      fetch(tickSoundSrc)
+        .then((response) => response.arrayBuffer())
+        .then((data) => ctx.decodeAudioData(data))
+        .then((buffer) => {
+          tickBuffer.current = buffer;
+        })
+        .catch(() => {});
+    }
 
     let eligibleUsers = props.userArray.filter(
       (user) => user.isEligible === true
@@ -78,7 +124,6 @@ const VerticalRaffle = (props) => {
     const winnerIndex =
       Math.floor(Math.random() * 10) + 10 + props.duration * 3;
     if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
-    // Center the winner cell under the needle, with a slight random offset
     const scroll = -(
       winnerIndex * CELL_HEIGHT -
       (BOX_HEIGHT - CELL_HEIGHT) / 2 +
@@ -86,15 +131,43 @@ const VerticalRaffle = (props) => {
       20
     );
     setUsers(shuffled);
-    setTimeout(() => setScrollSize(scroll), 10);
     setWinner(shuffled[winnerIndex]);
 
     const durationMs = props.duration * 1000;
-    const totalTicks = Math.round(Math.abs(scroll) / CELL_HEIGHT);
-    for (let i = 1; i <= totalTicks; i += 1) {
-      const tickTime = durationMs * tickTimeProgress(i / totalTicks);
-      tickTimeouts.current.push(setTimeout(playTick, tickTime));
-    }
+    let startTime = null;
+    let lastLinesCrossed = null;
+    let lastTickAt = -Infinity;
+
+    const step = (now) => {
+      if (startTime === null) startTime = now;
+      const p = Math.min((now - startTime) / durationMs, 1);
+      const eased = rollerEase(p);
+      const currentY = scroll * eased;
+
+      if (movableRef.current) {
+        movableRef.current.style.transform = `translateY(${currentY}px)`;
+      }
+
+      const linesCrossed = Math.floor(
+        (Math.abs(currentY) + NEEDLE_Y) / CELL_HEIGHT
+      );
+      if (lastLinesCrossed === null) lastLinesCrossed = linesCrossed;
+      if (
+        linesCrossed > lastLinesCrossed &&
+        now - lastTickAt >= MIN_TICK_GAP_MS
+      ) {
+        playTick();
+        lastTickAt = now;
+      }
+      lastLinesCrossed = linesCrossed;
+
+      if (p < 1) {
+        rafId.current = requestAnimationFrame(step);
+      } else {
+        rafId.current = null;
+      }
+    };
+    rafId.current = requestAnimationFrame(step);
 
     setTimer(
       setTimeout(
@@ -105,7 +178,13 @@ const VerticalRaffle = (props) => {
       )
     );
 
-    return () => clearTicks();
+    return () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+      if (audioCtx.current) {
+        audioCtx.current.close().catch(() => {});
+        audioCtx.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -129,13 +208,7 @@ const VerticalRaffle = (props) => {
       <div className="vraffle-dialog">
         <div className="vroller-box">
           <div className="vroller-needle" />
-          <div
-            className="vroller-movable"
-            style={{
-              transform: `translateY(${scrollSize}px)`,
-              transitionDuration: `${props.duration}s`,
-            }}
-          >
+          <div className="vroller-movable" ref={movableRef}>
             {users.map((item, index) => (
               <div className="vroller-cell" key={index}>
                 <InternalChatBadges message={item} />
@@ -162,7 +235,7 @@ const VerticalRaffle = (props) => {
               onClick={confirmWinner}
               type="button"
             >
-              <FormattedMessage {...messages.closeBtn} />
+              <FormattedMessage {...messages.continueBtn} />
             </button>
           </div>
         )}
@@ -189,4 +262,9 @@ const mapStateToProps = createStructuredSelector({
   userArray: makeSelectUserArray(),
 });
 
-export default connect(mapStateToProps, null)(VerticalRaffle);
+const areEqual = (prevProps, nextProps) =>
+  prevProps.duration === nextProps.duration &&
+  prevProps.onClose === nextProps.onClose &&
+  prevProps.onWin === nextProps.onWin;
+
+export default connect(mapStateToProps, null)(memo(VerticalRaffle, areEqual));
