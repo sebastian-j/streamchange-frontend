@@ -19,6 +19,7 @@ import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
 import { API_KEY } from '../../config';
+import { purgeList } from '../../components/UserList/actions';
 
 const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
@@ -64,6 +65,8 @@ const GiveawayPage = (props) => {
   const intl = useIntl();
 
   const leaveStream = () => {
+    props.clearUserList();
+
     const streamProps = {
       ownerId: '',
       thumbnailUrl: '',
@@ -230,6 +233,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     changeStreamProperties: (st) => dispatch(changeStreamProperties(st)),
     sendTelemetryData: (st) => dispatch(sendTelemetryData(st)),
+    clearUserList: () => dispatch(purgeList()),
     dispatch,
   };
 }
