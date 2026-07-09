@@ -1,4 +1,159 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-jrQAHW jPxcfh"
+>
+  <span
+    class="sc-hBUSFb bTTMMO"
+  >
+    Welcome to StreamChange
+  </span>
+  <div>
+    <span
+      class="sc-hBUSFb bTTMMO"
+    >
+      Select theme
+    </span>
+    <label
+      for="themeLight"
+    >
+      <input
+        checked=""
+        class="sc-eggEi iKKlIN"
+        id="themeLight"
+        name="theme"
+        type="radio"
+        value="0"
+      />
+      <div
+        class="sc-kDTkih hhQilx box left"
+      >
+        <img
+          alt="light"
+          src="/src/components/WelcomeDialog/assets/light-mode.png"
+        />
+        <span
+          class="sc-ksdwMQ htuyC"
+        >
+          Light
+        </span>
+      </div>
+    </label>
+    <label
+      for="themeDark"
+    >
+      <input
+        class="sc-eggEi iKKlIN"
+        id="themeDark"
+        name="theme"
+        type="radio"
+        value="1"
+      />
+      <div
+        class="sc-kDTkih hhQilx box right"
+      >
+        <img
+          alt="dark"
+          src="/src/components/WelcomeDialog/assets/dark-mode.png"
+        />
+        <span
+          class="sc-ksdwMQ htuyC"
+        >
+          Dark
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <span
+      class="sc-hBUSFb bTTMMO"
+    >
+      Select language
+    </span>
+    <label
+      for="pl"
+    >
+      <input
+        class="sc-eggEi iKKlIN"
+        id="pl"
+        name="language"
+        type="radio"
+        value="pl"
+      />
+      <div
+        class="sc-iqshrI eZKxWU box left"
+      >
+        <span
+          class="sc-crHjuH flVow"
+        >
+          <img
+            alt="pl"
+            src="/src/components/WelcomeDialog/assets/flag-pl.png"
+          />
+          pl
+        </span>
+      </div>
+    </label>
+    <label
+      for="en"
+    >
+      <input
+        checked=""
+        class="sc-eggEi iKKlIN"
+        id="en"
+        name="language"
+        type="radio"
+        value="en"
+      />
+      <div
+        class="sc-iqshrI eZKxWU box right"
+      >
+        <span
+          class="sc-crHjuH flVow"
+        >
+          <img
+            alt="en"
+            src="/src/components/WelcomeDialog/assets/flag-uk.png"
+          />
+          en
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-bqiQet iFOPat css-1uent87-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <span>
+        Save
+      </span>
+    </button>
+  </div>
+  <div
+    class="sc-furwwf jSOWnb"
+  >
+    <img
+      alt="cookie"
+      class="sc-iCfMpq cSHMdT"
+      src="/src/components/WelcomeDialog/assets/cookies.webp"
+    />
+    <span
+      class="sc-gKckfV jpTkkW"
+    >
+      This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+    </span>
+    <button
+      class="sc-jRQzZg jtGxbv"
+      type="button"
+    >
+      Accept
+    </button>
+  </div>
+</div>
+`;
 
 exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
 <div

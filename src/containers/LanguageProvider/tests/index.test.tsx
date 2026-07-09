@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import { Provider } from 'react-redux';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, beforeAll } from 'vitest';
 
 import ConnectedLanguageProvider, { LanguageProvider } from '../index';
 import configureStore from '../../../configureStore';

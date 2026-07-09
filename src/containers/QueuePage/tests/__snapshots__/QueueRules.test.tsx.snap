@@ -1,4 +1,169 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<QueueRules /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-bdvvNz fDFifg"
+>
+  <h2
+    class="sc-gsDLFA jFkgMX"
+  >
+    Queue rules
+  </h2>
+  <div
+    aria-label="keyword"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwAaq grUsSA css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    data-mui-internal-clone-element="true"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard css-2hy7sk-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for="_r_1_"
+      id="_r_1_-label"
+    >
+      Command for joining the queue
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_1_"
+        name="command"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    aria-label="keyword"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwAaq grUsSA css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    data-mui-internal-clone-element="true"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_3_"
+      id="_r_3_-label"
+    >
+      Queue capacity
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_3_"
+        name="capacity"
+        type="number"
+        value="10"
+      />
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwAaq grUsSA css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_4_"
+      id="_r_4_-label"
+    >
+      Time without any message to mark as inactive (sec)
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_4_"
+        name="timeToIdle"
+        type="number"
+        value="600"
+      />
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwAaq grUsSA css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_5_"
+      id="_r_5_-label"
+    >
+      Time without any message to kick (sec)
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_5_"
+        name="timeToKick"
+        type="number"
+        value="900"
+      />
+    </div>
+  </div>
+  <div
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hKwAaq grUsSA css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_6_"
+      id="_r_6_-label"
+    >
+      Code for OBS widget with queue
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_6_"
+        name="widgetCode"
+        type="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    style="display: inline-block;"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-fotPOC kXLbts css-1uent87-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <span>
+        Queue widget for OBS
+      </span>
+    </button>
+  </div>
+  <div>
+    <div
+      class="sc-hBUSFb keqCkt"
+    >
+      <span>
+        This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
+      </span>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-1uent87-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Show the details
+      </button>
+    </div>
+  </div>
+</div>
+`;
 
 exports[`<QueueRules /> should render and match the snapshot 1`] = `
 <div

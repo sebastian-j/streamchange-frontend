@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 import RaffleWrapper from '../index';
 

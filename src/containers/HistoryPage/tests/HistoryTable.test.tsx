@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 
 import HistoryTable from '../HistoryTable';
 

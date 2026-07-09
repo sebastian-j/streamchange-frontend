@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 import styleProviderReducer from '../reducer';
 import { changeColor, toggleDarkMode } from '../actions';

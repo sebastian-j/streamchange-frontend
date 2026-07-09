@@ -1,4 +1,159 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<WelcomeDialog /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-gKckfV fwEemy"
+>
+  <span
+    class="sc-crHjuH nCFEE"
+  >
+    Welcome to StreamChange
+  </span>
+  <div>
+    <span
+      class="sc-crHjuH nCFEE"
+    >
+      Select theme
+    </span>
+    <label
+      for="themeLight"
+    >
+      <input
+        checked=""
+        class="sc-jrQAHW iACRCb"
+        id="themeLight"
+        name="theme"
+        type="radio"
+        value="0"
+      />
+      <div
+        class="sc-iCfMpq bEqoKs box left"
+      >
+        <img
+          alt="light"
+          src="/src/components/WelcomeDialog/assets/light-mode.png"
+        />
+        <span
+          class="sc-iqshrI bAcoat"
+        >
+          Light
+        </span>
+      </div>
+    </label>
+    <label
+      for="themeDark"
+    >
+      <input
+        class="sc-jrQAHW iACRCb"
+        id="themeDark"
+        name="theme"
+        type="radio"
+        value="1"
+      />
+      <div
+        class="sc-iCfMpq bEqoKs box right"
+      >
+        <img
+          alt="dark"
+          src="/src/components/WelcomeDialog/assets/dark-mode.png"
+        />
+        <span
+          class="sc-iqshrI bAcoat"
+        >
+          Dark
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <span
+      class="sc-crHjuH nCFEE"
+    >
+      Select language
+    </span>
+    <label
+      for="pl"
+    >
+      <input
+        class="sc-jrQAHW iACRCb"
+        id="pl"
+        name="language"
+        type="radio"
+        value="pl"
+      />
+      <div
+        class="sc-furwwf dKHZtv box left"
+      >
+        <span
+          class="sc-pVTZz bQqrdw"
+        >
+          <img
+            alt="pl"
+            src="/src/components/WelcomeDialog/assets/flag-pl.png"
+          />
+          pl
+        </span>
+      </div>
+    </label>
+    <label
+      for="en"
+    >
+      <input
+        checked=""
+        class="sc-jrQAHW iACRCb"
+        id="en"
+        name="language"
+        type="radio"
+        value="en"
+      />
+      <div
+        class="sc-furwwf dKHZtv box right"
+      >
+        <span
+          class="sc-pVTZz bQqrdw"
+        >
+          <img
+            alt="en"
+            src="/src/components/WelcomeDialog/assets/flag-uk.png"
+          />
+          en
+        </span>
+      </div>
+    </label>
+  </div>
+  <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-kDTkih fdEEBS css-1uent87-MuiButtonBase-root-MuiButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <span>
+        Save
+      </span>
+    </button>
+  </div>
+  <div
+    class="sc-eCIkhf DxTFm"
+  >
+    <img
+      alt="cookie"
+      class="sc-hKwAaq ehA-dny"
+      src="/src/components/WelcomeDialog/assets/cookies.webp"
+    />
+    <span
+      class="sc-dkPvMp exLYmO"
+    >
+      This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
+    </span>
+    <button
+      class="sc-gsDLFA cigRla"
+      type="button"
+    >
+      Accept
+    </button>
+  </div>
+</div>
+`;
 
 exports[`<WelcomeDialog /> should render and match the snapshot 1`] = `
 <div

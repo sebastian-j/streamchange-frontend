@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { makeSelectLocation } from 'containers/App/selectors';
 
 describe('makeSelectLocation', () => {

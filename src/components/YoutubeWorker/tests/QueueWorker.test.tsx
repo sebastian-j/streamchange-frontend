@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createRenderer } from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
-import { describe, it, expect, beforeEach, jest } from '@jest/globals';
+import { describe, it, expect, beforeEach, jest } from 'vitest';
 
 import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 import {

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { describe, it, expect, beforeAll } from '@jest/globals';
+import { describe, it, expect, beforeAll } from 'vitest';
 
 import QueueRules from '../QueueRules';
 import configureStore from '../../../configureStore';

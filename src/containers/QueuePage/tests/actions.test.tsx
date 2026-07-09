@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import ActionTypes from '../constants';
 
 import {

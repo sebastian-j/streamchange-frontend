@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "jest --coverage --logHeapUsage"
+    "test": "vitest run"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -49,23 +49,21 @@
     "@babel/core": "^7.29.7",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@types/react-test-renderer": "^19.1.0",
     "@vitejs/plugin-react": "^6.0.3",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.6.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.7.0",
-    "jest": "^30.4.2",
-    "jest-environment-jsdom": "^30.4.1",
+    "jsdom": "^29.1.1",
     "prettier": "^3.9.4",
-    "react-test-renderer": "^19.2.7",
-    "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "vitest": "^4.1.10"
   }
 }

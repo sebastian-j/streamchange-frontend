@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { selectGiveawayPage, makeSelectStreamInfo } from '../selectors';
 import { initialState } from '../reducer';
 
