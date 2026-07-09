@@ -1,3 +1,5 @@
+import { describe, it, expect } from '@jest/globals';
+
 import { selectSupportInfo, makeSelectDialogVisibility } from '../selectors';
 import { initialState } from '../reducer';
 

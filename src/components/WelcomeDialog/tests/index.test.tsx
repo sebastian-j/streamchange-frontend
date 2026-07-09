@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { describe, it, expect, beforeAll } from '@jest/globals';
 
 import WelcomeDialog from '../index';
 import configureStore from '../../../configureStore';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { createRenderer } from 'react-test-renderer/shallow';
+import { describe, it, expect } from '@jest/globals';
 
 import NumericInput from '../index';
 

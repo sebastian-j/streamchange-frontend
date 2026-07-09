@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { describe, it, expect, beforeAll } from '@jest/globals';
 
 import SupportInformation, { mapDispatchToProps } from '../index';
 import { changeDialogVisibility } from '../actions';

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { describe, it, expect } from '@jest/globals';
 import { StyleProvider } from '../index';
 
 describe('<StyleProvider />', () => {

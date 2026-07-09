@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createRenderer } from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
+import { describe, it, expect, beforeEach } from '@jest/globals';
 
 import GiveawayRules from '../index';
 

@@ -1,6 +1,7 @@
 import { action } from 'typesafe-actions';
-import ActionTypes from '../constants';
+import { describe, it, expect } from '@jest/globals';
 
+import ActionTypes from '../constants';
 import { changeDialogVisibility } from '../actions';
 
 describe('SupportInformation Actions', () => {
