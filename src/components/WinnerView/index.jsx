@@ -186,15 +186,16 @@ export class WinnerView extends React.Component {
     this.props.changePreWinner(null);
     clearInterval(this.state.interval);
   }
-  TextReplace = (channelId) => {
-    let channelIDKick = channelId.replace('_', '-');
+  textReplace = (channelId) => {
+    let channelIDKick = channelId.replaceAll('_', '-');
     return channelIDKick;
   };
-  platformchoose() {
+  platformChoose() {
     if (this.state.user.platform === 'twitch') {
       return (
         <ChannelLink
           href={`https://www.twitch.tv/${this.props.id}`}
+          rel="noopener noreferrer"
           target="_blank"
         >
           <FormattedMessage {...messages.openChannel} />
@@ -204,6 +205,7 @@ export class WinnerView extends React.Component {
     return (
       <ChannelLink
         href={`https://kick.com/${this.TextReplace(this.props.id)}`}
+        rel="noopener noreferrer"
         target="_blank"
       >
         <FormattedMessage {...messages.openChannel} />

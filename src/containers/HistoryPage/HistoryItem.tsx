@@ -5,15 +5,15 @@ import { Cell } from './components/Cell';
 import { Row } from './components/Row';
 import RelativeDate from '../../components/RelativeDate';
 
-const TextReplace = (channelId) => {
-  let channelIDKick = channelId.replace('_', '-');
+const textReplace = (channelId) => {
+  let channelIDKick = channelId.replaceAll('_', '-');
   return channelIDKick;
 };
 const HistoryItem = (props) => {
   const channelUrl =
     props.platform === 'twitch'
       ? `https://www.twitch.tv/${props.channelId}`
-      : `https://kick.com/${TextReplace(props.channelId)}`;
+      : `https://kick.com/${textReplace(props.channelId)}`;
 
   return (
     <Row>
