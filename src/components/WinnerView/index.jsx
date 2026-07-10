@@ -34,56 +34,124 @@ const WinnerPanel = styled.div`
 `;
 
 const WinnerHeading = styled.div`
+  align-items: center;
+  background: ${(props) =>
+    `color-mix(in srgb, ${props.theme.color} 8%, transparent)`};
+  border: 1px solid
+    ${(props) => `color-mix(in srgb, ${props.theme.color} 22%, transparent)`};
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  gap: 18px;
+  margin: 8px 0 12px;
+  padding: 18px 20px;
   > img {
-    height: 70px;
-    width: 70px;
-    margin-right: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px
+      ${(props) => `color-mix(in srgb, ${props.theme.color} 40%, transparent)`};
+    flex-shrink: 0;
+    height: 76px;
+    object-fit: cover;
+    width: 76px;
+  }
+  > span {
+    align-self: flex-start;
   }
   .info {
     display: flex;
     flex-direction: column;
+    gap: 6px;
+    min-width: 0;
   }
+  .nickRow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    img {
+      height: 22px;
+    }
+  }
+`;
+
+const AvatarFallback = styled.div`
+  align-items: center;
+  background: ${(props) =>
+    `color-mix(in srgb, ${props.userColor || props.theme.color} 25%, transparent)`};
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px
+    ${(props) => `color-mix(in srgb, ${props.theme.color} 40%, transparent)`};
+  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  display: flex;
+  flex-shrink: 0;
+  font-size: 34px;
+  font-weight: 700;
+  height: 76px;
+  justify-content: center;
+  user-select: none;
+  width: 76px;
 `;
 
 const WinnerTitle = styled.span`
   color: ${(props) => props.userColor || props.theme.staticTextColor};
-  font-size: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 `;
 
 const SubscriptionMonths = styled.span`
   color: ${(props) => props.theme.subStatusPositive};
-  font-weight: bold;
+  font-weight: 600;
   font-size: 0.9rem;
-  padding-bottom: 3px;
 `;
 
 const ChannelLink = styled.a`
+  align-self: flex-start;
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
+  border-radius: 999px;
   color: ${(props) => props.theme.buttonTextColor};
-  border-radius: 4px;
-  padding: 3px 5px;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 6px 16px;
   text-decoration: none;
+  transition: background-color 120ms ease-out;
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    background-color: ${(props) => props.theme.color};
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
   }
 `;
 
 const Button = styled.button`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
-  color: ${(props) => props.theme.buttonTextColor};
   border-radius: 4px;
+  color: ${(props) => props.theme.buttonTextColor};
+  cursor: pointer;
   margin-top: 20px;
+  overflow: hidden;
   padding: 8px 5px;
+  position: relative;
   text-decoration: none;
+  transition: text-shadow 0.2s linear 0.3s;
+  z-index: 0;
+  .btn-hover {
+    background-color: ${(props) => props.theme.color};
+    clip-path: ellipse(50% 180% at 50% 310%);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: clip-path 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+    width: 100%;
+    z-index: -1;
+  }
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
+    transition: text-shadow 0s;
+    .btn-hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
   }
 `;
 
@@ -205,6 +273,7 @@ export class WinnerView extends React.Component {
           </span>
           <Button onClick={this.props.onClose} type="button">
             <FormattedMessage {...messages.exitBtn} />
+            <div className="btn-hover" />
           </Button>
         </WinnerPanel>
       );
@@ -222,9 +291,15 @@ export class WinnerView extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <WinnerHeading>
-          <img alt="logo" src={this.state.user.imageUrl} />
+          {this.state.user.imageUrl ? (
+            <img alt="logo" src={this.state.user.imageUrl} />
+          ) : (
+            <AvatarFallback userColor={this.state.user.color}>
+              {this.state.user.title.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          )}
           <div className="info">
-            <div>
+            <div className="nickRow">
               <InternalChatBadges
                 message={{
                   platform: this.state.user.platform,
@@ -280,10 +355,12 @@ export class WinnerView extends React.Component {
         >
           <Button onClick={this.instantReplay} type="button">
             <FormattedMessage {...messages.replayBtn} />
+            <div className="btn-hover" />
           </Button>
         </Tooltip>
         <Button onClick={this.saveAndExit} type="button">
           <FormattedMessage {...messages.saveBtn} />
+          <div className="btn-hover" />
         </Button>
       </WinnerPanel>
     );
