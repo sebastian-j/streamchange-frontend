@@ -28,6 +28,33 @@ const MessageText = styled.span`
   color: ${(props) => props.theme.staticTextColor};
 `;
 
+const EmoteImg = styled.img`
+  height: 24px;
+  vertical-align: middle;
+  margin: 0 2px;
+`;
+
+const renderMessageBody = (message) => {
+  if (Array.isArray(message.fragments) && message.fragments.length > 0) {
+    return message.fragments.map((fragment, index) =>
+      fragment.type === 'emote' && fragment.url ? (
+        <EmoteImg
+          key={index}
+          src={fragment.url}
+          alt={fragment.code}
+          title={fragment.code}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span key={index}>{fragment.text || fragment.code}</span>
+      )
+    );
+  }
+
+  return message.displayText;
+};
+
 const InternalChatMessage = (props) => {
   const userColor = props.message.color || null;
   const dt = new Date(props.message.publishedAt);
@@ -41,7 +68,7 @@ const InternalChatMessage = (props) => {
       <Tooltip title={convertedDate} aria-label="date">
         <AuthorTitle userColor={userColor}>{props.message.title}</AuthorTitle>
       </Tooltip>
-      <MessageText>{props.message.displayText}</MessageText>
+      <MessageText>{renderMessageBody(props.message)}</MessageText>
     </MessageLi>
   );
 };
