@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import coverImage from '../assets/background.svg';
 
 export const PhotoBackdrop = styled.div`
-  background: url(../static/streamchange-cover.webp) no-repeat center center
-    fixed;
-  background-size: cover;
   position: fixed;
-  height: 100vh;
+  top: 0;
+  left: 0;
   width: 100vw;
+  height: 100vh;
+  
+  background-image: url(${coverImage});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; 
+
 `;
