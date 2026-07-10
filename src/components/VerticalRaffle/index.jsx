@@ -27,7 +27,7 @@ import {
 } from '../GiveawayRules/selectors';
 import { makeSelectUserArray } from '../UserList/selectors';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
-import tickSoundSrc from '../../assets/tick3.mp3';
+import tickSoundSrc from '../../assets/tick.mp3';
 import './style.css';
 
 const CELL_HEIGHT = 77;
