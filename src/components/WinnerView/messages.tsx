@@ -45,6 +45,11 @@ export default defineMessages({
     defaultMessage:
       "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
   },
+  subscriptionMonths: {
+    id: `${scope}.subscriptionMonths`,
+    defaultMessage:
+      'Subscriber for {months} {months, plural, one {month} other {months}}',
+  },
   notSubscribed: {
     id: `${scope}.SubStatus.notSubscribed`,
     defaultMessage: 'Not subscribed',

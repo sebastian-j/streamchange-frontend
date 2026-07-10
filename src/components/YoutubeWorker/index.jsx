@@ -172,6 +172,7 @@ const YoutubeWorker = (props) => {
         isModerator: badges.includes('moderator'),
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
+        subscriptionMonths: data.subscriber || 0,
         isVip: badges.includes('vip'),
         isEligible:
           keyword !== '' && data.message.toLowerCase().includes(keyword),

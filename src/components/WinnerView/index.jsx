@@ -18,7 +18,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
 import MessageItem from './MessageItem';
-import SubStatus from './SubStatus';
+import InternalChatBadges from '../ChatView/InternalChatBadges';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
@@ -49,8 +49,15 @@ const WinnerHeading = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${(props) => props.theme.staticTextColor};
+  color: ${(props) => props.userColor || props.theme.staticTextColor};
   font-size: 20px;
+`;
+
+const SubscriptionMonths = styled.span`
+  color: ${(props) => props.theme.subStatusPositive};
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding-bottom: 3px;
 `;
 
 const ChannelLink = styled.a`
@@ -217,8 +224,25 @@ export class WinnerView extends React.Component {
         <WinnerHeading>
           <img alt="logo" src={this.state.user.imageUrl} />
           <div className="info">
-            <WinnerTitle>{this.state.user.title}</WinnerTitle>
-            <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
+            <div>
+              <InternalChatBadges
+                message={{
+                  platform: this.state.user.platform,
+                  badges: this.state.user.badges,
+                }}
+              />
+              <WinnerTitle userColor={this.state.user.color}>
+                {this.state.user.title}
+              </WinnerTitle>
+            </div>
+            {this.state.user.subscriptionMonths > 0 && (
+              <SubscriptionMonths>
+                <FormattedMessage
+                  {...messages.subscriptionMonths}
+                  values={{ months: this.state.user.subscriptionMonths }}
+                />
+              </SubscriptionMonths>
+            )}
             <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
@@ -267,7 +291,6 @@ export class WinnerView extends React.Component {
 }
 
 WinnerView.propTypes = {
-  apiKey: PropTypes.string.isRequired,
   changePreWinner: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   preWinner: PropTypes.object,
