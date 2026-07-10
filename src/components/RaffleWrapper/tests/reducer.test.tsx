@@ -8,7 +8,6 @@ import {
 } from '../actions';
 import raffleWrapperReducer, { initialState } from '../reducer';
 
- 
 describe('rafleWrapperReducer', () => {
   let state;
   beforeEach(() => {

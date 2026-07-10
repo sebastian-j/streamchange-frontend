@@ -1,4 +1,4 @@
-import { makeSelectLocation } from 'containers/App/selectors';
+import { makeSelectLocation } from '../selectors';
 import { describe, expect, it } from 'vitest';
 
 describe('makeSelectLocation', () => {

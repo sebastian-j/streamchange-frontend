@@ -17,13 +17,13 @@ describe('<KeywordInput />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    const { container} = render(
-        <Provider store={store}>
-          <IntlProvider locale="en">
-            <KeywordInput />
-          </IntlProvider>
-        </Provider>
-      );
+    const { container } = render(
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <KeywordInput />
+        </IntlProvider>
+      </Provider>
+    );
     expect(container.firstChild).toMatchSnapshot();
   });
 });

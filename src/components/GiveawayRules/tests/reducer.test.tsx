@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { changeKeyword, changePreWinner, changePrize } from '../actions';
 import giveawayRulesReducer, { initialState } from '../reducer';
 
- 
 describe('giveawayRulesReducer', () => {
   let state;
   beforeEach(() => {
@@ -34,10 +33,12 @@ describe('giveawayRulesReducer', () => {
     const fixture = {
       id: 'id2',
       imageUrl: 'url',
+      badges: [],
       isEligible: true,
       isModerator: false,
       isSubscriber: false,
       isVerified: false,
+      isVip: false,
       message: 'test',
       title: 'user',
     };

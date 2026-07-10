@@ -11,7 +11,7 @@ export default defineConfig([
   {
     files: ['**/*.{js,jsx}'],
     plugins: {
-      "@typescript-eslint": typescript
+      '@typescript-eslint': typescript,
     },
     extends: [
       js.configs.recommended,

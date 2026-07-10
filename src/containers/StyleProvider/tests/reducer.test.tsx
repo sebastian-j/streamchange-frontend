@@ -1,27 +1,33 @@
-import { produce } from 'immer';
+import { Draft, produce } from 'immer';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { changeColor, toggleDarkMode } from '../actions';
 import styleProviderReducer from '../reducer';
 
- 
+interface StyleProviderState {
+  color: string;
+  isDarkMode: boolean;
+}
+
+const initialState: StyleProviderState = {
+  color: '#0094ff',
+  isDarkMode: false,
+};
+
 describe('styleProviderReducer', () => {
-  let state;
+  let state: StyleProviderState;
+
   beforeEach(() => {
-    state = {
-      color: '#0094ff',
-      isDarkMode: false,
-    };
+    state = { ...initialState };
   });
 
   it('should return the initial state', () => {
-    const expectedResult = state;
-    expect(styleProviderReducer(undefined, {} as any)).toEqual(expectedResult);
+    expect(styleProviderReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle the changeColor action correctly', () => {
     const fixture = '#fffbdd';
-    const expectedResult = produce(state, (draft) => {
+    const expectedResult = produce(initialState, (draft: Draft<StyleProviderState>) => {
       draft.color = fixture;
     });
 
@@ -32,7 +38,7 @@ describe('styleProviderReducer', () => {
 
   it('should handle the toggleDarkMode action correctly', () => {
     const fixture = true;
-    const expectedResult = produce(state, (draft) => {
+    const expectedResult = produce(initialState, (draft: Draft<StyleProviderState>) => {
       draft.isDarkMode = fixture;
     });
 

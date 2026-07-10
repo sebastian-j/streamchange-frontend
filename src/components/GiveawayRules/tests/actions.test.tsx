@@ -18,10 +18,12 @@ describe('GiveawayRules Actions', () => {
       const fixture = {
         id: 'id2',
         imageUrl: 'url',
+        badges: ['moderator'],
         isEligible: true,
-        isModerator: false,
+        isModerator: true,
         isSubscriber: false,
         isVerified: false,
+        isVip: false,
         message: 'test',
         title: 'user',
       };

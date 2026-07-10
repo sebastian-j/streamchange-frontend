@@ -17,12 +17,12 @@ describe('<RaffleWrapper />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-        <Provider store={store}>
-          <IntlProvider locale="en">
-            <RaffleWrapper onWin={() => 0} />
-          </IntlProvider>
-        </Provider>
-      )
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <RaffleWrapper onWin={() => 0} />
+        </IntlProvider>
+      </Provider>
+    );
     expect(container.firstChild).toMatchSnapshot();
   });
 });
