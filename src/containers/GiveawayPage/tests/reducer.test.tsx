@@ -1,11 +1,15 @@
-import produce from 'immer';
+import { Draft, produce } from 'immer';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import giveawayPageReducer, { initialState } from '../reducer';
 import { changeStreamProperties } from '../actions';
+import giveawayPageReducer, { initialState } from '../reducer';
 
-/* eslint-disable default-case, no-param-reassign */
+type GiveawayPageState = typeof initialState;
+type StreamProperties = GiveawayPageState['stream'];
+type GiveawayPageAction = Parameters<typeof giveawayPageReducer>[1];
+
 describe('giveawayPageReducer', () => {
-  let state;
+  let state: GiveawayPageState;
   beforeEach(() => {
     state = {
       authKey: '',
@@ -20,17 +24,19 @@ describe('giveawayPageReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(giveawayPageReducer(undefined, {} as any)).toEqual(initialState);
+    expect(giveawayPageReducer(undefined, {} as GiveawayPageAction)).toEqual(
+      initialState
+    );
   });
 
   it('should handle the changeOwnerId action correctly', () => {
-    const fixture = {
+    const fixture: StreamProperties = {
       ownerId: 'id',
       thumbnailUrl: 'url',
       title: 'stream',
       videoId: 'vid',
     };
-    const expectedResult = produce(state, (draft) => {
+    const expectedResult = produce(state, (draft: Draft<GiveawayPageState>) => {
       draft.stream = fixture;
     });
 

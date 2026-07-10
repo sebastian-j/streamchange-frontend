@@ -1,13 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import HistoryTable from '../HistoryTable';
 
-const shallowRenderer = createRenderer();
-
 describe('<HistoryTable />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <HistoryTable
         items={[
           {
@@ -22,7 +20,6 @@ describe('<HistoryTable />', () => {
         ]}
       />
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,13 +1,13 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import { beforeAll, describe, expect, it } from 'vitest';
 
-import WelcomeDialog from '../index';
 import configureStore from '../../../configureStore';
+import WelcomeDialog from '../index';
 
 describe('<WelcomeDialog />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

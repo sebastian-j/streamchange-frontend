@@ -1,7 +1,8 @@
 import { action } from 'typesafe-actions';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
 import { changeKeyword, changePreWinner, changePrize } from '../actions';
+import ActionTypes from '../constants';
 
 describe('GiveawayRules Actions', () => {
   describe('changeKeyword', () => {
@@ -17,10 +18,12 @@ describe('GiveawayRules Actions', () => {
       const fixture = {
         id: 'id2',
         imageUrl: 'url',
+        badges: ['moderator'],
         isEligible: true,
-        isModerator: false,
+        isModerator: true,
         isSubscriber: false,
         isVerified: false,
+        isVip: false,
         message: 'test',
         title: 'user',
       };
