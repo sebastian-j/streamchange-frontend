@@ -37,7 +37,7 @@ const EmoteImg = styled.img`
 const renderMessageBody = (message) => {
   if (Array.isArray(message.fragments) && message.fragments.length > 0) {
     return message.fragments.map((fragment, index) =>
-      fragment.type === 'emote' ? (
+      fragment.type === 'emote' && fragment.url ? (
         <EmoteImg
           key={index}
           src={fragment.url}
@@ -47,7 +47,7 @@ const renderMessageBody = (message) => {
           decoding="async"
         />
       ) : (
-        <span key={index}>{fragment.text}</span>
+        <span key={index}>{fragment.text || fragment.code}</span>
       )
     );
   }
