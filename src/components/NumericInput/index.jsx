@@ -50,37 +50,44 @@ const NumberDisplay = styled.input`
   padding: 0 10px;
 `;
 
-const NumericInput = (props) => {
+const NumericInput = ({
+  label,
+  onChange,
+  value = 0,
+  minValue = null,
+  maxValue = null,
+  step = 1,
+}) => {
   const intl = useIntl();
 
-  const checkValue = (value) => {
-    let val = value;
-    if (val < props.minValue && val !== '') val = props.minValue;
-    if (val > props.maxValue) val = props.maxValue;
-    if (Number.isNaN(Number(val)) && val !== '') val = props.value;
-    props.onChange(val);
+  const checkValue = (newValue) => {
+    let val = newValue;
+    if (val < minValue && val !== '') val = minValue;
+    if (val > maxValue) val = maxValue;
+    if (Number.isNaN(Number(val)) && val !== '') val = value;
+    onChange(val);
   };
   const inc = () => {
-    let val = props.value;
-    if (props.maxValue === null || val + props.step < props.maxValue) {
-      val = props.value + props.step;
+    let val = value;
+    if (maxValue === null || val + step < maxValue) {
+      val = value + step;
     } else {
-      val = props.maxValue;
+      val = maxValue;
     }
-    if (val !== props.value) checkValue(Number(val));
+    if (val !== value) checkValue(Number(val));
   };
   const dec = () => {
-    let val = props.value;
-    if (props.minValue === null || val - props.step > props.minValue) {
-      val = props.value - props.step;
+    let val = value;
+    if (minValue === null || val - step > minValue) {
+      val = value - step;
     } else {
-      val = props.minValue;
+      val = minValue;
     }
-    if (val !== props.value) checkValue(Number(val));
+    if (val !== value) checkValue(Number(val));
   };
   return (
     <Container>
-      <Label htmlFor="number-display">{props.label}</Label>
+      <Label htmlFor="number-display">{label}</Label>
       <Button
         aria-label={intl.formatMessage({ ...messages.decreaseButton })}
         left="true"
@@ -91,7 +98,7 @@ const NumericInput = (props) => {
       </Button>
       <NumberDisplay
         id="number-display"
-        value={props.value}
+        value={value}
         onChange={(event) => checkValue(event.target.value)}
       />
       <Button
@@ -113,11 +120,4 @@ NumericInput.propTypes = {
   maxValue: PropTypes.number,
   step: PropTypes.number,
 };
-NumericInput.defaultProps = {
-  value: 0,
-  minValue: null,
-  maxValue: null,
-  step: 1,
-};
-
 export default NumericInput;
