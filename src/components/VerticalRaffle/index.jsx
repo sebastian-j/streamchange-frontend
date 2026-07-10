@@ -1,3 +1,19 @@
+/**
+ * VerticalRaffle
+ *
+ * Full-screen giveaway animation: a vertical roller of nicknames scrolls past
+ * a fixed needle and slows down until the winner stops under it.
+ *
+ * How it works:
+ * - On mount, random eligible users fill the roller and the winner
+ *   (preWinner if set) is planted at a known index.
+ * - The scroll runs as a CSS transition, so the browser animates it on the
+ *   compositor thread and it stays smooth even when the main thread is busy.
+ * - A small rAF loop mirrors the same easing curve in JS, but only to play
+ *   tick sounds when cell borders cross the needle.
+ * - After the roller stops, the winner's name and a confirm button appear.
+ *   Escape or clicking the backdrop closes without picking a winner.
+ */
 import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -18,7 +34,9 @@ const CELL_HEIGHT = 77;
 const BOX_HEIGHT = CELL_HEIGHT * 5;
 const NEEDLE_Y = BOX_HEIGHT / 2;
 const MIN_TICK_GAP_MS = 70;
+const MAX_WINNER_OFFSET = 33;
 
+// JS copy of the CSS cubic-bezier() function, used only to time tick sounds
 const makeCubicBezier = (x1, y1, x2, y2) => {
   const ax = 3 * x1 - 3 * x2 + 1;
   const bx = 3 * x2 - 6 * x1;
@@ -60,7 +78,9 @@ const makeCubicBezier = (x1, y1, x2, y2) => {
   };
 };
 
-const rollerEase = makeCubicBezier(0.18, 0.17, 0.02, 1);
+// one curve shared by the CSS transition (visuals) and the JS ease (sounds)
+const ROLLER_BEZIER = [0.18, 0.17, 0.02, 1];
+const rollerEase = makeCubicBezier(...ROLLER_BEZIER);
 
 const VerticalRaffle = (props) => {
   const [users, setUsers] = useState([]);
@@ -115,6 +135,7 @@ const VerticalRaffle = (props) => {
     if (props.giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter((user) => user.isSponsor !== false);
     }
+    // fill the roller with random users, then plant the winner at winnerIndex
     const shuffled = [];
     for (let i = 0; i < 30 + props.duration * 3; i += 1) {
       shuffled.push(
@@ -127,13 +148,25 @@ const VerticalRaffle = (props) => {
     const scroll = -(
       winnerIndex * CELL_HEIGHT -
       (BOX_HEIGHT - CELL_HEIGHT) / 2 +
-      Math.floor(Math.random() * 40) -
-      20
+      Math.floor(Math.random() * (2 * MAX_WINNER_OFFSET + 1)) -
+      MAX_WINNER_OFFSET
     );
     setUsers(shuffled);
     setWinner(shuffled[winnerIndex]);
 
     const durationMs = props.duration * 1000;
+
+    // animate via CSS transition - runs off the main thread, so it always stays smooth
+    const movable = movableRef.current;
+    if (movable) {
+      movable.style.transition = 'none';
+      movable.style.transform = 'translateY(0px)';
+      movable.getBoundingClientRect(); // force reflow so the transition starts at 0
+      movable.style.transition = `transform ${durationMs}ms cubic-bezier(${ROLLER_BEZIER.join(', ')})`;
+      movable.style.transform = `translateY(${scroll}px)`;
+    }
+
+    // rAF loop only follows the animation's progress to play the tick sounds
     let startTime = null;
     let lastLinesCrossed = null;
     let lastTickAt = -Infinity;
@@ -141,12 +174,7 @@ const VerticalRaffle = (props) => {
     const step = (now) => {
       if (startTime === null) startTime = now;
       const p = Math.min((now - startTime) / durationMs, 1);
-      const eased = rollerEase(p);
-      const currentY = scroll * eased;
-
-      if (movableRef.current) {
-        movableRef.current.style.transform = `translateY(${currentY}px)`;
-      }
+      const currentY = scroll * rollerEase(p);
 
       const linesCrossed = Math.floor(
         (Math.abs(currentY) + NEEDLE_Y) / CELL_HEIGHT
@@ -185,7 +213,7 @@ const VerticalRaffle = (props) => {
         audioCtx.current = null;
       }
     };
-  }, []);
+  }, [props.duration, props.giveawayReq, props.preWinner, props.userArray]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
