@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
+
+import { makeSelectDarkMode } from '../../containers/StyleProvider/selectors';
 
 const ChatFrame = styled.iframe`
   border: none;
@@ -7,17 +11,18 @@ const ChatFrame = styled.iframe`
   width: 100%;
 `;
 
-function ChatEmbed(props) {
+export function ChatEmbed(props) {
   if (props.channel === 'test') return <div />;
 
   const channel = encodeURIComponent(props.channel);
 
   if (props.platform === 'twitch') {
+    const theme = props.isDarkMode ? '&darkpopout' : '';
     return (
       <ChatFrame
         className="chat-frame"
         title="Twitch Chat"
-        src={`https://www.twitch.tv/embed/${channel}/chat?parent=${window.location.hostname}&darkpopout`}
+        src={`https://www.twitch.tv/embed/${channel}/chat?parent=${window.location.hostname}${theme}`}
       />
     );
   }
@@ -26,7 +31,7 @@ function ChatEmbed(props) {
     <ChatFrame
       className="chat-frame"
       title="Kick Chat"
-      src={`https://chat.kick.cx/embed/${channel}?readonly=true`}
+      src={`https://chat.kick.cx/embed/${channel}`}
     />
   );
 }
@@ -34,6 +39,11 @@ function ChatEmbed(props) {
 ChatEmbed.propTypes = {
   channel: PropTypes.string,
   platform: PropTypes.string,
+  isDarkMode: PropTypes.bool,
 };
 
-export default ChatEmbed;
+const mapStateToProps = createStructuredSelector({
+  isDarkMode: makeSelectDarkMode(),
+});
+
+export default connect(mapStateToProps)(ChatEmbed);
