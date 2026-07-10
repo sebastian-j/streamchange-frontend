@@ -187,9 +187,9 @@ export class WinnerView extends React.Component {
     clearInterval(this.state.interval);
   }
   TextReplace = (channelId) => {
-  let channelIDKick = channelId.replace('_', '-');
-  return channelIDKick;
-};
+    let channelIDKick = channelId.replace('_', '-');
+    return channelIDKick;
+  };
   platformchoose() {
     if (this.state.user.platform === 'twitch') {
       return (

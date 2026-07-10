@@ -10,9 +10,10 @@ const TextReplace = (channelId) => {
   return channelIDKick;
 };
 const HistoryItem = (props) => {
-  const channelUrl = props.platform === 'twitch' 
-    ? `https://www.twitch.tv/${props.channelId}`
-    : `https://kick.com/${TextReplace(props.channelId)}`;
+  const channelUrl =
+    props.platform === 'twitch'
+      ? `https://www.twitch.tv/${props.channelId}`
+      : `https://kick.com/${TextReplace(props.channelId)}`;
 
   return (
     <Row>
