@@ -27,9 +27,12 @@ describe('styleProviderReducer', () => {
 
   it('should handle the changeColor action correctly', () => {
     const fixture = '#fffbdd';
-    const expectedResult = produce(initialState, (draft: Draft<StyleProviderState>) => {
-      draft.color = fixture;
-    });
+    const expectedResult = produce(
+      initialState,
+      (draft: Draft<StyleProviderState>) => {
+        draft.color = fixture;
+      }
+    );
 
     expect(styleProviderReducer(state, changeColor(fixture))).toEqual(
       expectedResult
@@ -38,9 +41,12 @@ describe('styleProviderReducer', () => {
 
   it('should handle the toggleDarkMode action correctly', () => {
     const fixture = true;
-    const expectedResult = produce(initialState, (draft: Draft<StyleProviderState>) => {
-      draft.isDarkMode = fixture;
-    });
+    const expectedResult = produce(
+      initialState,
+      (draft: Draft<StyleProviderState>) => {
+        draft.isDarkMode = fixture;
+      }
+    );
 
     expect(styleProviderReducer(state, toggleDarkMode(fixture))).toEqual(
       expectedResult

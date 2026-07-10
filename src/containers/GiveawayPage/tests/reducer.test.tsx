@@ -24,7 +24,9 @@ describe('giveawayPageReducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(giveawayPageReducer(undefined, {} as GiveawayPageAction)).toEqual(initialState);
+    expect(giveawayPageReducer(undefined, {} as GiveawayPageAction)).toEqual(
+      initialState
+    );
   });
 
   it('should handle the changeOwnerId action correctly', () => {
