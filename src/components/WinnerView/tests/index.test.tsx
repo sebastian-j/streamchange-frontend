@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -17,7 +18,9 @@ describe('<WinnerView />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <WinnerView apiKey="key" id="id" onClose={() => 0} />
+        <IntlProvider locale="en">
+          <WinnerView apiKey="key" id="id" onClose={() => 0} />
+        </IntlProvider>
       </Provider>
     );
     expect(container.firstChild).toMatchSnapshot();

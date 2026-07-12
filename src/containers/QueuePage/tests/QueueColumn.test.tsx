@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { beforeEach, describe, expect, it } from 'vitest';
 
@@ -29,7 +30,9 @@ describe('<QueueColumn />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <QueueColumn />
+        <IntlProvider locale="en">
+          <QueueColumn />
+        </IntlProvider>
       </Provider>
     );
     expect(container.firstChild).toMatchSnapshot();

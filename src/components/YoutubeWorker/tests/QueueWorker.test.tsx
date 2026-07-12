@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -12,6 +13,8 @@ import { changeColor } from '../../../containers/StyleProvider/actions';
 import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 
 const mockStore = configureStore([]);
+
+vi.mock('axios');
 
 describe('<QueueWorker />', () => {
   let store: ReturnType<typeof mockStore>;
@@ -40,7 +43,9 @@ describe('<QueueWorker />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <QueueWorker videoId="id" />
+        <IntlProvider locale="en">
+          <QueueWorker videoId="id" />
+        </IntlProvider>
       </Provider>
     );
     expect(container.firstChild).toMatchSnapshot();
