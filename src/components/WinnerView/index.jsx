@@ -30,29 +30,22 @@ const WinnerPanel = styled.div`
   flex-basis: 0;
   flex-grow: 1;
   margin: 15px;
+  min-width: 0;
   padding: 15px;
 `;
 
 const WinnerHeading = styled.div`
   align-items: center;
-  background: ${(props) =>
-    `color-mix(in srgb, ${props.theme.color} 8%, transparent)`};
-  border: 1px solid
-    ${(props) => `color-mix(in srgb, ${props.theme.color} 22%, transparent)`};
-  border-radius: 12px;
   display: flex;
   flex-direction: row;
-  gap: 18px;
-  margin: 8px 0 12px;
-  padding: 18px 20px;
+  gap: 10px;
+  padding: 10px;
   > img {
     border-radius: 50%;
-    box-shadow: 0 0 0 3px
-      ${(props) => `color-mix(in srgb, ${props.theme.color} 40%, transparent)`};
     flex-shrink: 0;
-    height: 76px;
+    height: 70px;
     object-fit: cover;
-    width: 76px;
+    width: 70px;
   }
   > span {
     align-self: flex-start;
@@ -75,50 +68,46 @@ const WinnerHeading = styled.div`
 
 const AvatarFallback = styled.div`
   align-items: center;
-  background: ${(props) =>
-    `color-mix(in srgb, ${props.userColor || props.theme.color} 25%, transparent)`};
+  background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  box-shadow: 0 0 0 3px
-    ${(props) => `color-mix(in srgb, ${props.theme.color} 40%, transparent)`};
   color: ${(props) => props.userColor || props.theme.staticTextColor};
   display: flex;
   flex-shrink: 0;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 700;
-  height: 76px;
+  height: 70px;
   justify-content: center;
   user-select: none;
-  width: 76px;
+  width: 70px;
 `;
 
 const WinnerTitle = styled.span`
   color: ${(props) => props.userColor || props.theme.staticTextColor};
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
   overflow-wrap: anywhere;
 `;
 
 const SubscriptionMonths = styled.span`
-  color: ${(props) => props.theme.subStatusPositive};
-  font-weight: 600;
+  color: ${(props) => props.theme.staticTextColor};
   font-size: 0.9rem;
+  font-weight: 500;
 `;
 
 const ChannelLink = styled.a`
   align-self: flex-start;
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
-  border-radius: 999px;
+  border-radius: 4px;
   color: ${(props) => props.theme.buttonTextColor};
   font-size: 0.9rem;
   margin-top: 4px;
-  padding: 6px 16px;
+  padding: 3px 8px;
   text-decoration: none;
-  transition: background-color 120ms ease-out;
   &:hover {
-    background-color: ${(props) => props.theme.color};
-    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
+    background-color: ${(props) => props.theme.buttonBackgroundHover};
+    color: ${(props) => props.theme.buttonTextColorHover};
   }
 `;
 

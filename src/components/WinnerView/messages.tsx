@@ -50,20 +50,4 @@ export default defineMessages({
     defaultMessage:
       'Subscriber for {months} {months, plural, one {month} other {months}}',
   },
-  notSubscribed: {
-    id: `${scope}.SubStatus.notSubscribed`,
-    defaultMessage: 'Not subscribed',
-  },
-  subscriberPrivate: {
-    id: `${scope}.SubStatus.privateSub`,
-    defaultMessage: 'Subscription list private',
-  },
-  subscriberFrom: {
-    id: `${scope}.SubStatus.subscriberFrom`,
-    defaultMessage: 'Subscriber from',
-  },
-  subscriberUnknown: {
-    id: `${scope}.SubStatus.unknownSubscriber`,
-    defaultMessage: 'Subscription status unknown',
-  },
 });
