@@ -1,27 +1,46 @@
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import WinnerView from '../index';
+import { WinnerView } from '../index';
 
-const mockStore = configureStore([]);
+const tableMock = {
+  filter: vi.fn().mockReturnThis(),
+  toArray: vi.fn().mockResolvedValue([]),
+  where: vi.fn().mockReturnThis(),
+  equals: vi.fn().mockReturnThis(),
+  modify: vi.fn().mockResolvedValue(undefined),
+  add: vi.fn().mockResolvedValue(undefined),
+};
+
+vi.mock('../../YoutubeWorker/db', () => ({
+  default: {
+    table: vi.fn(() => tableMock),
+  },
+}));
 
 describe('<WinnerView />', () => {
-  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
-    store = mockStore({
-      isOpen: false,
-    });
+    vi.clearAllMocks();
   });
   it('should render and match the snapshot', () => {
+    const onClose = vi.fn();
+    const onRepeat = vi.fn();
+    const changePreWinner = vi.fn();
+
     const { container } = render(
-      <Provider store={store}>
-        <IntlProvider locale="en">
-          <WinnerView apiKey="key" id="id" onClose={() => 0} />
-        </IntlProvider>
-      </Provider>
+      <IntlProvider locale="en">
+        <WinnerView
+        apiKey="key"
+        id="id"
+        prize="Test prize"
+        preWinner={null}
+        streamInfo={{ ownerId: 'owner-id' }}
+        onClose={onClose}
+        onRepeat={onRepeat}
+        changePreWinner={changePreWinner}
+      />
+      </IntlProvider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });

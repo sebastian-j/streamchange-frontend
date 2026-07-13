@@ -24,7 +24,6 @@ jobs:
 
       - name: Run unit tests
         run: npm run test
-        continue-on-error: true
 
       - name: Build
         run: npm run build
