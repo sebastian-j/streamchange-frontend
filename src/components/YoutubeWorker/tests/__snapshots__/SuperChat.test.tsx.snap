@@ -1,17 +1,24 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<SuperChat /> should render and match the snapshot 1`] = `
-<styled.div>
-  <styled.div>
-    <styled.img
+exports[`<SuperChat /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-bdvvNz jfyHmP"
+>
+  <div
+    class="sc-gsDLFA eVvLkj"
+  >
+    <img
       alt="logo"
+      class="sc-dkPvMp irXFLd"
       src="url"
     />
      
     title
-  </styled.div>
-  <styled.span>
+  </div>
+  <span
+    class="sc-hKwAaq qZbOf"
+  >
     message
-  </styled.span>
-</styled.div>
+  </span>
+</div>
 `;

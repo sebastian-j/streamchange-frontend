@@ -148,6 +148,7 @@ const YoutubeWorker = (props) => {
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
         title: data.author,
+        fragments: data.fragments || null,
         ...dbMessage,
       };
 

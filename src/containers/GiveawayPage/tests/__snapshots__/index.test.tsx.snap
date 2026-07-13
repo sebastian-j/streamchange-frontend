@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
+exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-jrQzAO kRluvY"
+  class="sc-jrQAHW jPxcfh"
 >
   <span
-    class="sc-hBUSln gasaX"
+    class="sc-hBUSFb bTTMMO"
   >
     Welcome to StreamChange
   </span>
   <div>
     <span
-      class="sc-hBUSln gasaX"
+      class="sc-hBUSFb bTTMMO"
     >
       Select theme
     </span>
@@ -20,21 +20,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-egiyK dHVmLx"
+        class="sc-eggEi iKKlIN"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="sc-kDTinF iBZAcK box left"
+        class="sc-kDTkih hhQilx box left"
       >
         <img
           alt="light"
-          src="IMAGE_MOCK"
+          src="/src/components/WelcomeDialog/assets/light-mode.png"
         />
         <span
-          class="sc-ksdxgE dwWHTf"
+          class="sc-ksdwMQ htuyC"
         >
           Light
         </span>
@@ -44,21 +44,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="sc-egiyK dHVmLx"
+        class="sc-eggEi iKKlIN"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="sc-kDTinF iBZAcK box right"
+        class="sc-kDTkih hhQilx box right"
       >
         <img
           alt="dark"
-          src="IMAGE_MOCK"
+          src="/src/components/WelcomeDialog/assets/dark-mode.png"
         />
         <span
-          class="sc-ksdxgE dwWHTf"
+          class="sc-ksdwMQ htuyC"
         >
           Dark
         </span>
@@ -67,7 +67,7 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="sc-hBUSln gasaX"
+      class="sc-hBUSFb bTTMMO"
     >
       Select language
     </span>
@@ -75,21 +75,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="sc-egiyK dHVmLx"
+        class="sc-eggEi iKKlIN"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="sc-iqseJM hcrhBp box left"
+        class="sc-iqshrI eZKxWU box left"
       >
         <span
-          class="sc-crHmcD etoWxl"
+          class="sc-crHjuH flVow"
         >
           <img
             alt="pl"
-            src="IMAGE_MOCK"
+            src="/src/components/WelcomeDialog/assets/flag-pl.png"
           />
           pl
         </span>
@@ -100,21 +100,21 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-egiyK dHVmLx"
+        class="sc-eggEi iKKlIN"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="sc-iqseJM hcrhBp box right"
+        class="sc-iqshrI eZKxWU box right"
       >
         <span
-          class="sc-crHmcD etoWxl"
+          class="sc-crHjuH flVow"
         >
           <img
             alt="en"
-            src="IMAGE_MOCK"
+            src="/src/components/WelcomeDialog/assets/flag-uk.png"
           />
           en
         </span>
@@ -123,33 +123,30 @@ exports[`<GiveawayPage /> should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root sc-bqiRlB gNEjRC css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-bqiQet iFOPat css-1uent87-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
       <span>
         Save
       </span>
-      <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
     </button>
   </div>
   <div
-    class="sc-furwcr dCipSX"
+    class="sc-furwwf jSOWnb"
   >
     <img
       alt="cookie"
-      class="sc-iCfMLu gLHhKf"
-      src="IMAGE_MOCK"
+      class="sc-iCfMpq cSHMdT"
+      src="/src/components/WelcomeDialog/assets/cookies.webp"
     />
     <span
-      class="sc-gKclnd dnVwcj"
+      class="sc-gKckfV jpTkkW"
     >
       This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
     </span>
     <button
-      class="sc-jRQBWg hvQnvK"
+      class="sc-jRQzZg jtGxbv"
       type="button"
     >
       Accept

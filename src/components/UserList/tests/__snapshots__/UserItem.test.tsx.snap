@@ -1,27 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<UserItem /> should render and match the snapshot 1`] = `
+exports[`<UserItem /> > should render and match the snapshot 1`] = `
 <li>
-  <styled.button
-    className="isEligible"
-    onClick={[Function]}
+  <button
+    class="sc-gsDLFA bBFgOR isEligible"
     type="button"
-    userColor={undefined}
   >
-    <InternalChatBadges
-      message={
-        Object {
-          "isModerator": true,
-          "isStreamer": undefined,
-          "isSubscriber": false,
-          "isVip": undefined,
-          "platform": undefined,
-        }
-      }
-    />
     <span>
       name
     </span>
-  </styled.button>
+  </button>
 </li>
 `;

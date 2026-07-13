@@ -1,12 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<MessageItem /> should render and match the snapshot 1`] = `
-<styled.li>
-  <styled.span>
+exports[`<MessageItem /> > should render and match the snapshot 1`] = `
+<li
+  class="sc-bdvvNz hFJTnh"
+>
+  <span
+    class="sc-gsDLFA hYMDLl"
+  >
     7:27:56
-  </styled.span>
-  <styled.span>
+  </span>
+  <span
+    class="sc-dkPvMp dmwASX"
+  >
     text
-  </styled.span>
-</styled.li>
+  </span>
+</li>
 `;

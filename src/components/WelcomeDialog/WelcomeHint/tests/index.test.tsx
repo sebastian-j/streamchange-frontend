@@ -1,14 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import WelcomeHint from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<WelcomeHint />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<WelcomeHint />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<WelcomeHint />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
