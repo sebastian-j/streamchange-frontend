@@ -160,12 +160,10 @@ const YoutubeWorker = (props) => {
         return;
       }
 
-      if (
-        !(
-          dbMessage.displayText === localStorage.getItem('keyword') &&
-          localStorage.getItem('gv-saveCommands') !== 'true'
-        )
-      ) {
+      if (!(
+        dbMessage.displayText === localStorage.getItem('keyword') &&
+        localStorage.getItem('gv-saveCommands') !== 'true'
+      )) {
         db.table('messages').add(dbMessage);
       }
 
