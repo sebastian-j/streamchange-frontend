@@ -15,8 +15,6 @@ import queueReducer from './containers/QueuePage/reducer';
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
-
-
   return combineReducers({
     language: languageProviderReducer,
     theme: styleProviderReducer,
