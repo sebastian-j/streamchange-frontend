@@ -40,7 +40,7 @@ export const QueueWidgetDialog = (props) => {
         setWidgetUrl(res.data.url);
       }
     });
-  }, []);
+  }, [props.widgetCode]);
 
   return (
     <div style={{ display: 'inline-block' }}>

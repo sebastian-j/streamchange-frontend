@@ -22,11 +22,11 @@ const ScrollerEnd = styled.div`
 `;
 
 export const InternalChat = (props) => {
-  let messagesEndRef = useRef(null);
+  const messagesEndRef = useRef(null);
   useInjectReducer({ key: 'chat', reducer });
 
   const scrollToBottom = () => {
-    messagesEndRef.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -38,11 +38,7 @@ export const InternalChat = (props) => {
       {props.messages.map((message) => (
         <InternalChatMessage key={message.publishedAt} message={message} />
       ))}
-      <ScrollerEnd
-        ref={(el) => {
-          messagesEndRef = el;
-        }}
-      />
+      <ScrollerEnd ref={messagesEndRef} />
     </ItemScroller>
   );
 };

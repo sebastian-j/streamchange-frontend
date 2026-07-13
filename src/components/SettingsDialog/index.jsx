@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -25,10 +25,18 @@ import { changeColor } from '../../containers/StyleProvider/actions';
 const SettingsDialog = (props) => {
   const intl = useIntl();
   const [isOpen, setIsOpen] = useState(false);
-  const [themeColor, setThemeColor] = useState(props.themeColor);
-  const [saveCommands, setSaveCommands] = useState(false);
-  const [deleteWinner, setDeleteWinner] = useState(false);
-  const [abortCommand, setAbortCommand] = useState('');
+  const [themeColor, setThemeColor] = useState(
+    () => localStorage.getItem('themeColor') || '#0094ff'
+  );
+  const [saveCommands, setSaveCommands] = useState(
+    () => localStorage.getItem('gv-saveCommands') === 'true'
+  );
+  const [deleteWinner, setDeleteWinner] = useState(
+    () => localStorage.getItem('gv-deleteWinner') === 'true'
+  );
+  const [abortCommand, setAbortCommand] = useState(() =>
+    localStorage.getItem('gv-abortCommand')
+  );
   const [error, setError] = useState(null);
 
   const openDialog = () => {
@@ -55,13 +63,6 @@ const SettingsDialog = (props) => {
     localStorage.setItem('gv-abortCommand', String(abortCommand));
     closeDialog();
   };
-
-  useEffect(() => {
-    setSaveCommands(localStorage.getItem('gv-saveCommands') === 'true');
-    setDeleteWinner(localStorage.getItem('gv-deleteWinner') === 'true');
-    setAbortCommand(localStorage.getItem('gv-abortCommand'));
-    setThemeColor(localStorage.getItem('themeColor') || '#0094ff');
-  }, []);
 
   return (
     <div style={{ display: 'inline-block' }}>

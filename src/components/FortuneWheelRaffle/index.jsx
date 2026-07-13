@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 //import { Howl } from 'howler';
@@ -10,7 +10,6 @@ import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import DialogRoot from './DialogRoot';
 import FortuneWheelImg from './assets/fortune-wheel-inner.png';
 import FortuneWheelBorder from './assets/fortune-wheel-outer.png';
-import WheelSound from './assets/FortuneWheelSound.mp3';
 import RaffleDialog from './RaffleDialog';
 import RaffleWinner from './RaffleWinner';
 import WheelItem from './WheelItem';
@@ -27,28 +26,7 @@ const WheelBorder = styled.img`
 `;
 
 const FortuneWheelRaffle = (props) => {
-  const [users, setUsers] = useState([]);
-  const [scrollSize, setScrollSize] = useState(0);
-  const [winner, setWinner] = useState(null);
-  const [timer, setTimer] = useState(null);
-  // const [tickSound] = useState(
-  //    new Howl({
-  //     src: [WheelSound],
-  //     sprite: {
-  //       start: [0, 5750],
-  //       tick: [5750, 500],
-  //     },
-  //   }),
-  // );
-
-  const closeImmediately = () => {
-    props.onClose();
-    clearTimeout(timer);
-    //tickSound.stop();
-    //tickSound.unload();
-  };
-
-  useEffect(() => {
+  const [{ users, winner, scroll }] = useState(() => {
     let eligibleUsers = props.userArray.filter(
       (user) => user.isEligible === true
     );
@@ -64,14 +42,37 @@ const FortuneWheelRaffle = (props) => {
       );
     }
     const winnerIndex = Math.floor(Math.random() * 10);
-    const scroll = -(
-      winnerIndex * 36 +
-      Math.floor(Math.random() * 15) +
-      Math.ceil(props.duration / 2) * 360
-    );
-    setUsers(shuffled);
-    setTimeout(() => setScrollSize(scroll), 10);
-    setWinner(shuffled[winnerIndex]);
+    return {
+      users: shuffled,
+      winner: shuffled[winnerIndex],
+      scroll: -(
+        winnerIndex * 36 +
+        Math.floor(Math.random() * 15) +
+        Math.ceil(props.duration / 2) * 360
+      ),
+    };
+  });
+  const [scrollSize, setScrollSize] = useState(0);
+  const timerRef = useRef(null);
+  // const [tickSound] = useState(
+  //    new Howl({
+  //     src: [WheelSound],
+  //     sprite: {
+  //       start: [0, 5750],
+  //       tick: [5750, 500],
+  //     },
+  //   }),
+  // );
+
+  const closeImmediately = () => {
+    props.onClose();
+    clearTimeout(timerRef.current);
+    //tickSound.stop();
+    //tickSound.unload();
+  };
+
+  useEffect(() => {
+    const scrollTimeout = setTimeout(() => setScrollSize(scroll), 10);
     //const sId1 = tickSound.play('start');
     // tickSound.on(
     //   'end',
@@ -81,19 +82,21 @@ const FortuneWheelRaffle = (props) => {
     //   },
     //sId1
     //);
-    setTimeout(() => {
+    const tickTimeout = setTimeout(() => {
       //tickSound.stop();
       //tickSound.unload();
     }, props.duration * 1000);
-    setTimer(
-      setTimeout(
-        () => {
-          props.onWin(shuffled[winnerIndex].id);
-        },
-        (props.duration + 1) * 1000
-      )
+    timerRef.current = setTimeout(
+      () => {
+        props.onWin(winner.id);
+      },
+      (props.duration + 1) * 1000
     );
-  }, []);
+    return () => {
+      clearTimeout(scrollTimeout);
+      clearTimeout(tickTimeout);
+    };
+  }, [scroll, winner, props]);
 
   const positions = [
     { x: '43%', y: '8%' },

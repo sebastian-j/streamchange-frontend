@@ -186,7 +186,8 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.channel, props.platform]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.channel, props.platform, dispatch]);
 
   return (
     <ThreeSections>
