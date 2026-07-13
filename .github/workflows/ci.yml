@@ -6,6 +6,8 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Warsaw
     steps:
       - uses: actions/checkout@v4
 
