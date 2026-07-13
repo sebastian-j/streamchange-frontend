@@ -230,7 +230,12 @@ export class WinnerView extends React.Component {
         </WinnerHeading>
         <MessageList>
           {this.state.messages.map((item) => (
-            <MessageItem date={item.publishedAt} text={item.displayText} />
+            <MessageItem
+              key={item.id}
+              date={item.publishedAt}
+              text={item.displayText}
+              fragments={item.fragments}
+            />
           ))}
         </MessageList>
         <FormattedMessage {...messages.prize}>

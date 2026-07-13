@@ -13,6 +13,33 @@ const MessageText = styled.span`
   color: ${(props) => props.theme.staticTextColor};
 `;
 
+const EmoteImg = styled.img`
+  height: 24px;
+  vertical-align: middle;
+  margin: 0 2px;
+`;
+
+const renderMessageBody = (fragments, text) => {
+  if (Array.isArray(fragments) && fragments.length > 0) {
+    return fragments.map((fragment, index) =>
+      fragment.type === 'emote' && fragment.url ? (
+        <EmoteImg
+          key={index}
+          src={fragment.url}
+          alt={fragment.code}
+          title={fragment.code}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span key={index}>{fragment.text || fragment.code}</span>
+      )
+    );
+  }
+
+  return text;
+};
+
 function MessageItem(props) {
   const dt = new Date(props.date);
   const convertedDate = `${dt.getHours()}:${
@@ -21,7 +48,9 @@ function MessageItem(props) {
   return (
     <MessageLi>
       <MessageDate>{convertedDate}</MessageDate>
-      <MessageText>{props.text}</MessageText>
+      <MessageText>
+        {renderMessageBody(props.fragments, props.text)}
+      </MessageText>
     </MessageLi>
   );
 }
@@ -29,6 +58,7 @@ function MessageItem(props) {
 MessageItem.propTypes = {
   date: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  fragments: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default MessageItem;

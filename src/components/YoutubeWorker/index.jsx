@@ -138,9 +138,11 @@ const YoutubeWorker = (props) => {
         authorId: data.author,
         displayText: data.message,
         publishedAt: new Date().toISOString(),
+        fragments: data.fragments || null,
       };
 
       const chatViewMessage = {
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
@@ -148,7 +150,6 @@ const YoutubeWorker = (props) => {
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
         title: data.author,
-        fragments: data.fragments || null,
         ...dbMessage,
       };
 
@@ -164,6 +165,7 @@ const YoutubeWorker = (props) => {
       const keyword = (localStorage.getItem('keyword') || '').toLowerCase();
       const userListAuthor = {
         id: data.author,
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
