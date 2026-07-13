@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+
+import { render, screen } from '@testing-library/react';
+import axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import axios from 'axios';
 
 import AdFrame from '../index';
 

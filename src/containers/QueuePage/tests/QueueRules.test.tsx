@@ -1,9 +1,10 @@
-import React from 'react';
 import '@testing-library/jest-dom/vitest';
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { fireEvent, render, type RenderResult } from '@testing-library/react';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import configureStore from '../../../configureStore';
 import ConnectedQueueRules, { mapDispatchToProps } from '../QueueRules';

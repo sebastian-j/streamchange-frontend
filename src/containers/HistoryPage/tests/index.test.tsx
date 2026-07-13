@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+
+import { render, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

@@ -1,18 +1,18 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
-
-import { addMessage } from '../../ChatView/actions';
-import { changeColor } from '../../../containers/StyleProvider/actions';
 import {
   deleteQueueItem,
   pushQueueItem,
   updateQueueItem,
 } from '../../../containers/QueuePage/actions';
+import { changeColor } from '../../../containers/StyleProvider/actions';
+import { addMessage } from '../../ChatView/actions';
+import QueueWorker, { mapDispatchToProps } from '../QueueWorker';
 
 const { axiosGetMock } = vi.hoisted(() => ({
   axiosGetMock: vi.fn(),
@@ -109,25 +109,25 @@ const renderQueueWorker = (
   };
 
   const store = mockStore({
-      queueArray: [
-        {
-          id: 'id',
-          addedAt: '2019-12-24T07:27:56.27-00:00',
-          imageUrl: 'url',
-          lastActiveAt: '2019-12-24T08:27:56.27-00:00',
-          message: 'text',
-          title: 'item1',
-        },
-        {
-          id: 'id2',
-          addedAt: '2019-12-24T09:27:56.27-00:00',
-          imageUrl: 'url2',
-          lastActiveAt: '2019-12-24T10:27:56.27-00:00',
-          message: 'text',
-          title: 'item2',
-        },
-      ],
-    });
+    queueArray: [
+      {
+        id: 'id',
+        addedAt: '2019-12-24T07:27:56.27-00:00',
+        imageUrl: 'url',
+        lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+        message: 'text',
+        title: 'item1',
+      },
+      {
+        id: 'id2',
+        addedAt: '2019-12-24T09:27:56.27-00:00',
+        imageUrl: 'url2',
+        lastActiveAt: '2019-12-24T10:27:56.27-00:00',
+        message: 'text',
+        title: 'item2',
+      },
+    ],
+  });
 
   return render(
     <Provider store={store}>

@@ -31,15 +31,15 @@ describe('<WinnerView />', () => {
     const { container } = render(
       <IntlProvider locale="en">
         <WinnerView
-        apiKey="key"
-        id="id"
-        prize="Test prize"
-        preWinner={null}
-        streamInfo={{ ownerId: 'owner-id' }}
-        onClose={onClose}
-        onRepeat={onRepeat}
-        changePreWinner={changePreWinner}
-      />
+          apiKey="key"
+          id="id"
+          prize="Test prize"
+          preWinner={null}
+          streamInfo={{ ownerId: 'owner-id' }}
+          onClose={onClose}
+          onRepeat={onRepeat}
+          changePreWinner={changePreWinner}
+        />
       </IntlProvider>
     );
     expect(container.firstChild).toMatchSnapshot();

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { beforeEach, describe, expect, it } from 'vitest';
 

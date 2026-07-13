@@ -28,31 +28,31 @@ describe('<UserList />', () => {
     });
     store = mockStore({
       userArray: [
-      {
-        id: 'id1',
-        title: 'Alice',
-        color: '#ffffff',
-        platform: 'twitch',
-        badges: [],
-        isEligible: true,
-        isModerator: false,
-        isSubscriber: true,
-        isVip: false,
-        isStreamer: false,
-      },
-      {
-        id: 'id2',
-        title: 'Bob',
-        color: '#000000',
-        platform: 'twitch',
-        badges: [],
-        isEligible: false,
-        isModerator: true,
-        isSubscriber: false,
-        isVip: false,
-        isStreamer: false,
-      },
-    ]
+        {
+          id: 'id1',
+          title: 'Alice',
+          color: '#ffffff',
+          platform: 'twitch',
+          badges: [],
+          isEligible: true,
+          isModerator: false,
+          isSubscriber: true,
+          isVip: false,
+          isStreamer: false,
+        },
+        {
+          id: 'id2',
+          title: 'Bob',
+          color: '#000000',
+          platform: 'twitch',
+          badges: [],
+          isEligible: false,
+          isModerator: true,
+          isSubscriber: false,
+          isVip: false,
+          isStreamer: false,
+        },
+      ],
     });
   });
   it('should render and match the snapshot', () => {

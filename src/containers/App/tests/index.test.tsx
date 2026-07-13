@@ -1,6 +1,7 @@
+import '@testing-library/jest-dom/vitest';
+
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom/vitest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import App from '../index';
@@ -29,7 +30,7 @@ const renderApp = (initialEntries = ['/']) =>
   render(
     <MemoryRouter initialEntries={initialEntries}>
       <App />
-    </MemoryRouter>,
+    </MemoryRouter>
   );
 
 describe('App', () => {
