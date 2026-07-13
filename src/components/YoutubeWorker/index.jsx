@@ -134,6 +134,7 @@ const YoutubeWorker = (props) => {
       const data = JSON.parse(event.data);
       console.log('Przyszła wiadomość z backendu:', data);
       const badges = data.badges || [];
+      const isBot = badges.includes('bot');
       const dbMessage = {
         authorId: data.author,
         displayText: data.message,
@@ -154,6 +155,10 @@ const YoutubeWorker = (props) => {
       };
 
       dispatch(addMessage(chatViewMessage));
+
+      if (isBot) {
+        return;
+      }
 
       if (!(
         dbMessage.displayText === localStorage.getItem('keyword') &&
