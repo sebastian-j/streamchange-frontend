@@ -77,7 +77,7 @@ vi.mock('axios', () => ({
 }));
 
 const renderWinnerView = (
-  props: Partial<React.ComponentProps<typeof WinnerView>> = {},
+  props: Partial<React.ComponentProps<typeof WinnerView>> = {}
 ) => {
   const defaultProps = {
     apiKey: 'api-key',
@@ -93,14 +93,14 @@ const renderWinnerView = (
   };
   let store: MockStoreEnhanced<unknown, {}>;
   store = mockStore({
-      isOpen: false,
-    });
+    isOpen: false,
+  });
   return render(
     <IntlProvider locale="en">
       <Provider store={store}>
         <WinnerView {...defaultProps} {...props} />
       </Provider>
-    </IntlProvider>,
+    </IntlProvider>
   );
 };
 
@@ -201,7 +201,9 @@ describe('<WinnerView />', () => {
 
     expect(await screen.findByText('Test winner')).toBeInTheDocument();
     expect(await screen.findByText('First winner message')).toBeInTheDocument();
-    expect(await screen.findByText('Second winner message')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Second winner message')
+    ).toBeInTheDocument();
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledTimes(1);
@@ -214,7 +216,7 @@ describe('<WinnerView />', () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-      },
+      }
     );
   });
 
@@ -305,7 +307,7 @@ describe('<WinnerView />', () => {
         message: 'Winner message',
         prize: 'Test prize',
         createdAt: expect.any(String),
-      }),
+      })
     );
 
     expect(onClose).toHaveBeenCalledTimes(1);
