@@ -94,7 +94,7 @@ const WelcomeDialog = (props) => {
                 name="channel"
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                label="Link do kanału"
+                label={intl.formatMessage({ ...messages.videoInputLabel })}
                 type="text"
                 value={text}
                 variant="standard"

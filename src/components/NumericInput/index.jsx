@@ -26,8 +26,8 @@ const Button = styled.button`
   width: 30px;
   text-decoration: none;
   outline: none;
-  ${({ left }) =>
-    left &&
+  ${({ $left }) =>
+    $left &&
     `
     border-radius: 4px 0 0 4px;
   `}
@@ -90,7 +90,7 @@ const NumericInput = ({
       <Label htmlFor="number-display">{label}</Label>
       <Button
         aria-label={intl.formatMessage({ ...messages.decreaseButton })}
-        left="true"
+        $left="true"
         onClick={dec}
         type="button"
       >

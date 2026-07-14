@@ -70,7 +70,7 @@ const AvatarFallback = styled.div`
   align-items: center;
   background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   display: flex;
   flex-shrink: 0;
   font-size: 32px;
@@ -82,7 +82,7 @@ const AvatarFallback = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
@@ -310,7 +310,7 @@ export class WinnerView extends React.Component {
           {this.state.user.imageUrl ? (
             <img alt="logo" src={this.state.user.imageUrl} />
           ) : (
-            <AvatarFallback userColor={this.state.user.color}>
+            <AvatarFallback $userColor={this.state.user.color}>
               {this.state.user.title.charAt(0).toUpperCase()}
             </AvatarFallback>
           )}
@@ -322,7 +322,7 @@ export class WinnerView extends React.Component {
                   badges: this.state.user.badges,
                 }}
               />
-              <WinnerTitle userColor={this.state.user.color}>
+              <WinnerTitle $userColor={this.state.user.color}>
                 {this.state.user.title}
               </WinnerTitle>
             </div>

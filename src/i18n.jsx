@@ -1,7 +1,7 @@
 import enTranslationMessages from './translations/en.json';
 import plTranslationMessages from './translations/pl.json';
 
-export const DEFAULT_LOCALE = 'en';
+export const DEFAULT_LOCALE = 'pl';
 
 export const appLocales = ['en', 'pl'];
 
