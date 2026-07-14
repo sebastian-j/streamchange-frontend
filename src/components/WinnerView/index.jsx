@@ -334,7 +334,7 @@ export class WinnerView extends React.Component {
                 />
               </SubscriptionMonths>
             )}
-           {this.platformChoose()}
+            {this.platformChoose()}
           </div>
           <Timer />
         </WinnerHeading>
