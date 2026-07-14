@@ -204,7 +204,7 @@ export class WinnerView extends React.Component {
     }
     return (
       <ChannelLink
-        href={`https://kick.com/${this.TextReplace(this.props.id)}`}
+        href={`https://kick.com/${this.textReplace(this.props.id)}`}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -246,7 +246,7 @@ export class WinnerView extends React.Component {
           <div className="info">
             <WinnerTitle>{this.state.user.title}</WinnerTitle>
             <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
-            {this.platformchoose()}
+            {this.platformChoose()}
           </div>
           <Timer />
         </WinnerHeading>
