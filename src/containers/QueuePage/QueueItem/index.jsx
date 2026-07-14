@@ -84,7 +84,7 @@ export const QueueItem = (props) => {
         <UserBar>
           <div>
             <a
-              href={`https://www.youtube.com/channel/${props.channelId}`}
+              href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
               <Logo alt="logo" src={props.imageUrl} edit={editMode} />
@@ -140,7 +140,7 @@ export const QueueItem = (props) => {
         >
           <div>
             <a
-              href={`https://www.youtube.com/channel/${props.channelId}`}
+              href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
               <Logo alt="logo" src={props.imageUrl} />
