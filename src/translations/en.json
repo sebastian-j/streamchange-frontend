@@ -88,6 +88,7 @@
   "streamchange.components.WelcomeDialog.FirstUseScreen.theme.light": "Light",
   "streamchange.components.WelcomeDialog.FirstUseScreen.title": "Welcome to StreamChange",
   "streamchange.components.WelcomeDialog.compatibilityInfo": "App works only in Google Chrome",
+  "streamchange.components.WelcomeDialog.error.invalidChannelUrl": "Invalid link. Paste a link in the format twitch.tv/channel or kick.com/channel.",
   "streamchange.components.WelcomeDialog.error.invalidUrl": "This is not a URL to live stream or a YouTube video.",
   "streamchange.components.WelcomeDialog.error.notStream": "This is url for video. Paste live stream url.",
   "streamchange.components.WelcomeDialog.error.notVideo": "There is no such live stream. Invalid url.",

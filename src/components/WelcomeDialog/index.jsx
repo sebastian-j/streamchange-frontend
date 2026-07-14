@@ -14,40 +14,49 @@ import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WavyButton from './components/WavyButton';
 import WelcomeHint from './WelcomeHint';
 
+const CHANNEL_URL_REGEX =
+  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
+
+const parseChannelInput = (value) => {
+  const trimmed = value.trim();
+  if (trimmed.toLowerCase() === 'test') {
+    return { channel: 'test', platform: 'twitch' };
+  }
+  const match = trimmed.match(CHANNEL_URL_REGEX);
+  if (!match) {
+    return null;
+  }
+  const [, domain, channelName] = match;
+  return {
+    channel: channelName,
+    platform: domain.toLowerCase().includes('twitch') ? 'twitch' : 'kick',
+  };
+};
+
 const WelcomeDialog = (props) => {
   const intl = useIntl();
-  const [channel, setChannel] = useState('');
-  const [platform, setPlatform] = useState('twitch');
   const [isChrome, setIsChrome] = useState(true);
   const [isFirstUse, setIsFirstUse] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
+  const [isLinkInvalid, setIsLinkInvalid] = useState(false);
 
   const handleInputChange = (e) => {
-    const val = e.target.value;
-    setText(val);
-    if (val.trim().toLowerCase() === 'test') {
-      setChannel('test');
-      return;
-    }
-    const propsArray = val.split('/');
-    if (propsArray.length === 2) {
-      setChannel(propsArray[1]);
-      setPlatform(
-        propsArray[0].toLowerCase().includes('twitch') ? 'twitch' : 'kick'
-      );
-    }
-    if (propsArray.length > 2) {
-      setChannel(propsArray[3]);
-      setPlatform(
-        propsArray[2].toLowerCase().includes('twitch') ? 'twitch' : 'kick'
-      );
+    setText(e.target.value);
+    if (isLinkInvalid) {
+      setIsLinkInvalid(false);
     }
   };
   const handleConnect = () => {
-    if (typeof props.onStart === 'function' && channel.trim().length > 0) {
+    const parsed = parseChannelInput(text);
+    if (!parsed) {
+      setIsLinkInvalid(true);
+      return;
+    }
+    setIsLinkInvalid(false);
+    if (typeof props.onStart === 'function') {
       setIsLoading(true);
-      props.onStart(channel.trim(), platform);
+      props.onStart(parsed.channel, parsed.platform);
     }
   };
 
@@ -92,7 +101,18 @@ const WelcomeDialog = (props) => {
                 fullWidth
               />
               <div className="text">
-                {props.error && (
+                {isLinkInvalid && (
+                  <span
+                    style={{
+                      display: 'block',
+                      color: '#bd0013',
+                      marginTop: '10px',
+                    }}
+                  >
+                    <FormattedMessage {...messages.invalidChannelUrlError} />
+                  </span>
+                )}
+                {!isLinkInvalid && props.error && (
                   <span
                     style={{
                       display: 'block',

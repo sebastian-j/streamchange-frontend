@@ -88,6 +88,7 @@
   "streamchange.components.WelcomeDialog.FirstUseScreen.theme.light": "Jasny",
   "streamchange.components.WelcomeDialog.FirstUseScreen.title": "Witaj w StreamChange",
   "streamchange.components.WelcomeDialog.compatibilityInfo": "Aplikacja działa wyłącznie w Google Chrome",
+  "streamchange.components.WelcomeDialog.error.invalidChannelUrl": "Nieprawidłowy link. Wklej link w formacie twitch.tv/nazwa lub kick.com/nazwa.",
   "streamchange.components.WelcomeDialog.error.invalidUrl": "To nie jest link do live streama ani filmu na Youtube.",
   "streamchange.components.WelcomeDialog.error.notStream": "To jest link do zwykłego filmu. Wklej link do streama",
   "streamchange.components.WelcomeDialog.error.notVideo": "Nie ma takiego streama. Link jest błędny.",
