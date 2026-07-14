@@ -1,20 +1,16 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import ChatEmbed from '../ChatEmbed';
 
-const shallowRenderer = createRenderer();
-
 describe('<ChatEmbed />', () => {
   it('should render Twitch chat and match the snapshot', () => {
-    shallowRenderer.render(<ChatEmbed channel="id" platform="twitch" />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<ChatEmbed channel="id" platform="twitch" />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render Kick chat and match the snapshot', () => {
-    shallowRenderer.render(<ChatEmbed channel="id" platform="kick" />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<ChatEmbed channel="id" platform="kick" />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

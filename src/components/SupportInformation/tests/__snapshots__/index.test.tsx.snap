@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<SupportInformation /> should render and match the snapshot 1`] = `
+exports[`<SupportInformation /> > should render and match the snapshot 1`] = `
 <div
   style="display: inline-block;"
 >
   <button
-    class="sc-dkPtRN hLygKB"
+    class="sc-dkPvMp kiBMBt"
     data-mui-internal-clone-element="true"
     type="button"
   >

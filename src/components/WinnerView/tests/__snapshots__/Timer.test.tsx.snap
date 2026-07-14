@@ -1,7 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<Timer /> should render and match the snapshot 1`] = `
-<styled.span>
-  
-</styled.span>
+exports[`<Timer /> > should render and match the snapshot 1`] = `
+<span
+  class="sc-bdvvNz hxXNUJ"
+>
+  0:00
+</span>
 `;

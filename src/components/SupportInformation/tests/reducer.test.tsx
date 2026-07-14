@@ -1,5 +1,7 @@
-import supportInfoReducer, { initialState } from '../reducer';
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { changeDialogVisibility } from '../actions';
+import supportInfoReducer, { initialState } from '../reducer';
 
 describe('supportInfoReducer', () => {
   let state;

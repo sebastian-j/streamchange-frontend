@@ -1,41 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<SubStatus /> should render and match the snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Object {
-        "addNestedSub": [Function],
-        "getListeners": [Function],
-        "handleChangeWrapper": [Function],
-        "isSubscribed": [Function],
-        "notifyNestedSubs": [Function],
-        "onStateChange": [Function],
-        "trySubscribe": [Function],
-        "tryUnsubscribe": [Function],
-      },
-    }
-  }
+exports[`<SubStatus /> > should render and match the snapshot 1`] = `
+<span
+  class="sc-dkPvMp fVGfzu"
 >
-  <Memo(Connect(SubStatus))
-    apiKey="key"
-    id="id"
-    streamInfo={
-      Object {
-        "ownerId": "owner",
-        "thumbnailUrl": "url",
-        "title": "stream",
-        "videoId": "vid",
-      }
-    }
-  />
-</Context.Provider>
+  ...
+</span>
 `;

@@ -1,13 +1,13 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
+import { beforeAll, describe, expect, it } from 'vitest';
 
-import QueueRules from '../QueueRules';
 import configureStore from '../../../configureStore';
+import QueueRules from '../QueueRules';
 
 describe('<QueueRules />', () => {
-  let store;
+  let store: ReturnType<typeof configureStore>;
 
   beforeAll(() => {
     store = configureStore({});

@@ -119,6 +119,8 @@ const YoutubeWorker = (props) => {
     }
   };
   useEffect(() => {
+    if (props.channel === 'test') return undefined;
+
     const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
 
     ws.onopen = () => {
@@ -134,13 +136,16 @@ const YoutubeWorker = (props) => {
       const data = JSON.parse(event.data);
       console.log('Przyszła wiadomość z backendu:', data);
       const badges = data.badges || [];
+      const isBot = badges.includes('bot');
       const dbMessage = {
         authorId: data.author,
         displayText: data.message,
         publishedAt: new Date().toISOString(),
+        fragments: data.fragments || null,
       };
 
       const chatViewMessage = {
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
@@ -153,6 +158,10 @@ const YoutubeWorker = (props) => {
 
       dispatch(addMessage(chatViewMessage));
 
+      if (isBot) {
+        return;
+      }
+
       if (!(
         dbMessage.displayText === localStorage.getItem('keyword') &&
         localStorage.getItem('gv-saveCommands') !== 'true'
@@ -163,6 +172,7 @@ const YoutubeWorker = (props) => {
       const keyword = (localStorage.getItem('keyword') || '').toLowerCase();
       const userListAuthor = {
         id: data.author,
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
@@ -172,6 +182,7 @@ const YoutubeWorker = (props) => {
         isModerator: badges.includes('moderator'),
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
+        subscriptionMonths: data.subscriber,
         isVip: badges.includes('vip'),
         isEligible:
           keyword !== '' && data.message.toLowerCase().includes(keyword),

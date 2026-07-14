@@ -1,9 +1,9 @@
 import { action } from 'typesafe-actions';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
 import {
-  changeQueueCommand,
   changeCapacity,
+  changeQueueCommand,
   changeTTI,
   changeTTK,
   changeWidgetCode,
@@ -13,6 +13,7 @@ import {
   pushQueueItem,
   updateQueueItem,
 } from '../actions';
+import ActionTypes from '../constants';
 
 describe('QueuePage Actions', () => {
   describe('changeQueueCommand', () => {
