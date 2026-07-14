@@ -1,14 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import ToolbarButton from '../ToolbarButton';
 
-const shallowRenderer = createRenderer();
-
 describe('<ToolbarButton />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<ToolbarButton />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<ToolbarButton />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

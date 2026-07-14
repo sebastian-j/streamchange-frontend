@@ -26,6 +26,10 @@ const WelcomeDialog = (props) => {
   const handleInputChange = (e) => {
     const val = e.target.value;
     setText(val);
+    if (val.trim().toLowerCase() === 'test') {
+      setChannel('test');
+      return;
+    }
     const propsArray = val.split('/');
     if (propsArray.length === 2) {
       setChannel(propsArray[1]);

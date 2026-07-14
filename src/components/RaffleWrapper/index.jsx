@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
@@ -23,6 +23,7 @@ import { makeSelectUserArray } from '../UserList/selectors';
 import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
+import VerticalRaffle from '../VerticalRaffle';
 import NumericInput from '../NumericInput';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
@@ -79,10 +80,17 @@ export const RaffleWrapper = (props) => {
     }
   };
 
-  const winnerHandler = (event) => {
-    props.closeRaffle();
-    props.onWin(event);
-  };
+  // Stable reference so VerticalRaffle's memo comparator (which skips
+  // re-renders from unrelated userArray updates) isn't defeated by a new
+  // onWin function on every RaffleWrapper render.
+  const { closeRaffle, onWin } = props;
+  const winnerHandler = useCallback(
+    (event) => {
+      closeRaffle();
+      onWin(event);
+    },
+    [closeRaffle, onWin]
+  );
 
   return (
     <div>
@@ -100,6 +108,9 @@ export const RaffleWrapper = (props) => {
           </MenuItem>
           <MenuItem value={1}>
             <FormattedMessage {...messages.raffleTypeWheel} />
+          </MenuItem>
+          <MenuItem value={2}>
+            <FormattedMessage {...messages.raffleTypeVertical} />
           </MenuItem>
         </Select>
       </StyledFormControl>
@@ -127,6 +138,13 @@ export const RaffleWrapper = (props) => {
       )}
       {props.isOpen && props.animationType === 1 && (
         <FortuneWheelRaffle
+          duration={props.animationDuration}
+          onClose={props.closeRaffle}
+          onWin={winnerHandler}
+        />
+      )}
+      {props.isOpen && props.animationType === 2 && (
+        <VerticalRaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}

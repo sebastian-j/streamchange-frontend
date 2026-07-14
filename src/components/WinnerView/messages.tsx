@@ -45,20 +45,9 @@ export default defineMessages({
     defaultMessage:
       "Repeats the draw immediately using the same settings. Current winner won't be saved in history.",
   },
-  notSubscribed: {
-    id: `${scope}.SubStatus.notSubscribed`,
-    defaultMessage: 'Not subscribed',
-  },
-  subscriberPrivate: {
-    id: `${scope}.SubStatus.privateSub`,
-    defaultMessage: 'Subscription list private',
-  },
-  subscriberFrom: {
-    id: `${scope}.SubStatus.subscriberFrom`,
-    defaultMessage: 'Subscriber from',
-  },
-  subscriberUnknown: {
-    id: `${scope}.SubStatus.unknownSubscriber`,
-    defaultMessage: 'Subscription status unknown',
+  subscriptionMonths: {
+    id: `${scope}.subscriptionMonths`,
+    defaultMessage:
+      'Subscriber for {months} {months, plural, one {month} other {months}}',
   },
 });

@@ -1,10 +1,12 @@
+import { describe, expect, it } from 'vitest';
+
+import { initialState } from '../reducer';
 import {
-  selectRules,
   makeSelectGiveawayKeyword,
   makeSelectGiveawayPreWinner,
   makeSelectGiveawayPrize,
+  selectRules,
 } from '../selectors';
-import { initialState } from '../reducer';
 
 describe('GiveawayRules selectors', () => {
   it('should select the global state', () => {

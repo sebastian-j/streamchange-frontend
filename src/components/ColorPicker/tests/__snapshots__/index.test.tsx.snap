@@ -1,28 +1,22 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<ColorPicker /> should render and match the snapshot 1`] = `
+exports[`<ColorPicker /> > should render and match the snapshot 1`] = `
 <div
-  className="color-picker-wrapper"
+  class="color-picker-wrapper"
 >
   <div
-    className="color-picker-label"
+    class="color-picker-label"
   />
-  <styled.button
+  <button
     aria-label="toggle picker"
-    className="color-picker-button"
-    onClick={[Function]}
-    style={
-      Object {
-        "backgroundColor": undefined,
-      }
-    }
+    class="sc-bdvvNz cRfdsN color-picker-button"
     type="button"
   >
     <span
-      className="border border-initial"
+      class="border border-initial"
     />
     <svg
-      className="border border-hover"
+      class="border border-hover"
       fill="none"
     >
       <circle
@@ -32,6 +26,6 @@ exports[`<ColorPicker /> should render and match the snapshot 1`] = `
         r="32.5"
       />
     </svg>
-  </styled.button>
+  </button>
 </div>
 `;

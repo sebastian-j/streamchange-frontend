@@ -1,47 +1,40 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
+exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    className="MuiFormControl-root MuiFormControl-marginNormal sc-kDTinF csSHwk css-ufpu9p-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-kDTkih iVMwHf css-15nqhxc-MuiFormControl-root"
   >
     <label
-      className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
-      data-shrink={true}
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
       id="animation-select"
     >
       Animation
     </label>
     <div
-      className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-88nv5c-MuiInputBase-root-MuiInput-root-MuiSelect-root"
-      onClick={[Function]}
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl MuiSelect-root css-1x351wq-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-expanded="false"
         aria-haspopup="listbox"
-        className="MuiSelect-select MuiSelect-standard MuiInput-input MuiInputBase-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onMouseDown={[Function]}
-        role="button"
-        tabIndex={0}
+        class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-unhb03-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiInput-input"
+        role="combobox"
+        tabindex="0"
       >
         CS:GO case opening
       </div>
       <input
-        aria-hidden={true}
-        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
-        disabled={false}
-        onAnimationStart={[Function]}
-        onChange={[Function]}
-        required={false}
-        tabIndex={-1}
-        value={0}
+        aria-hidden="true"
+        aria-invalid="false"
+        class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
+        id="_r_1_"
+        tabindex="-1"
+        value="0"
       />
       <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconStandard css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon"
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon css-ug7h84-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon"
         data-testid="ArrowDropDownIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -53,46 +46,42 @@ exports[`<RaffleWrapper /> should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-iCfMLu hMAwuh"
+    class="sc-iCfMpq MvPUZ"
   >
     <label
-      className="sc-furwcr PHDDM"
-      htmlFor="number-display"
+      class="sc-furwwf onsZr"
+      for="number-display"
     >
       Animation duration (seconds)
     </label>
     <button
       aria-label="Decrease by one"
-      className="sc-pVTFL jehgPn"
-      onClick={[Function]}
+      class="sc-pVTZz fXcXIt"
+      left="true"
       type="button"
     >
       -
     </button>
     <input
-      className="sc-jrQzAO eJQxxo"
+      class="sc-jrQAHW glRBvd"
       id="number-display"
-      onChange={[Function]}
-      value={7}
+      value="7"
     />
     <button
       aria-label="Increase by one"
-      className="sc-pVTFL jIQTEr"
-      onClick={[Function]}
+      class="sc-pVTZz fgoFnF"
       type="button"
     >
       +
     </button>
   </div>
   <button
-    className="sc-iqseJM fbNTGH"
-    disabled={false}
-    onClick={[Function]}
+    class="sc-iqshrI eOkIdy"
     type="button"
   >
     Roll it!
     <div
-      className="btn-hover"
+      class="btn-hover"
     />
   </button>
 </div>

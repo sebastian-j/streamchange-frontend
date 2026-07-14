@@ -1,19 +1,16 @@
-import React from 'react';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { describe, expect, it } from 'vitest';
 
 import NumericInput from '../index';
 
-const shallowRenderer = createRenderer();
-
 describe('<NumericInput />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <IntlProvider locale="en">
         <NumericInput onChange={() => 0} />
       </IntlProvider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
