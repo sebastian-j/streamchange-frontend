@@ -98,6 +98,7 @@ const HistoryTable = ({ items }: Props) => {
             key={item.createdAt}
             channelId={item.channelId}
             imageUrl={item.imageUrl}
+            platform={item.platform}
             displayName={item.displayName}
             prize={item.prize}
             message={item.message}

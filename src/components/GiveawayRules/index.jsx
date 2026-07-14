@@ -14,6 +14,7 @@ import {
 } from './selectors';
 import { changePrize, changeRequirement } from './actions';
 import AdFrame from '../AdFrame';
+//import StreamInfo from '../StreamInfo';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';

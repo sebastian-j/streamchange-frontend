@@ -182,6 +182,7 @@ export class WinnerView extends React.Component {
       imageUrl: this.state.user.imageUrl,
       message: this.state.user.message,
       prize: this.state.prize,
+      platform: this.state.user.platform,
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {
@@ -249,6 +250,32 @@ export class WinnerView extends React.Component {
     this.props.changePreWinner(null);
     clearInterval(this.state.interval);
   }
+  textReplace = (channelId) => {
+    let channelIDKick = channelId.replaceAll('_', '-');
+    return channelIDKick;
+  };
+  platformChoose() {
+    if (this.state.user.platform === 'twitch') {
+      return (
+        <ChannelLink
+          href={`https://www.twitch.tv/${this.props.id}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <FormattedMessage {...messages.openChannel} />
+        </ChannelLink>
+      );
+    }
+    return (
+      <ChannelLink
+        href={`https://kick.com/${this.textReplace(this.props.id)}`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <FormattedMessage {...messages.openChannel} />
+      </ChannelLink>
+    );
+  }
 
   render() {
     if (!this.state.user) {
@@ -307,12 +334,7 @@ export class WinnerView extends React.Component {
                 />
               </SubscriptionMonths>
             )}
-            <ChannelLink
-              href={`https://www.youtube.com/channel/${this.props.id}`}
-              target="_blank"
-            >
-              <FormattedMessage {...messages.openChannel} />
-            </ChannelLink>
+            {this.platformChoose()}
           </div>
           <Timer />
         </WinnerHeading>
