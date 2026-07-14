@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import qs from 'qs';
-import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { API_URL, PRIVILEGED_CHANNELS, WS_URL } from '../../config';
 import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
@@ -121,7 +121,7 @@ const YoutubeWorker = (props) => {
   useEffect(() => {
     if (props.channel === 'test') return undefined;
 
-    const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
+    const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
       ws.send(
