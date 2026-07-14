@@ -95,22 +95,6 @@ const SubscriptionMonths = styled.span`
   font-weight: 500;
 `;
 
-const ChannelLink = styled.a`
-  align-self: flex-start;
-  background: ${(props) => props.theme.buttonBackground};
-  border: 1px solid ${(props) => props.theme.color};
-  border-radius: 4px;
-  color: ${(props) => props.theme.buttonTextColor};
-  font-size: 0.9rem;
-  margin-top: 4px;
-  padding: 3px 8px;
-  text-decoration: none;
-  &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
-  }
-`;
-
 const Button = styled.button`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
@@ -142,6 +126,13 @@ const Button = styled.button`
       clip-path: ellipse(120% 180% at 50% 60%);
     }
   }
+`;
+
+const ChannelLink = styled(Button)`
+  align-self: flex-start;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 3px 8px;
 `;
 
 const MessageList = styled.ul`
@@ -258,21 +249,25 @@ export class WinnerView extends React.Component {
     if (this.state.user.platform === 'twitch') {
       return (
         <ChannelLink
+          as="a"
           href={`https://www.twitch.tv/${this.props.id}`}
           rel="noopener noreferrer"
           target="_blank"
         >
           <FormattedMessage {...messages.openChannel} />
+          <div className="btn-hover" />
         </ChannelLink>
       );
     }
     return (
       <ChannelLink
+        as="a"
         href={`https://kick.com/${this.textReplace(this.props.id)}`}
         rel="noopener noreferrer"
         target="_blank"
       >
         <FormattedMessage {...messages.openChannel} />
+        <div className="btn-hover" />
       </ChannelLink>
     );
   }
