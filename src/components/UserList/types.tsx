@@ -20,6 +20,7 @@ interface IUser {
   isStreamer?: boolean;
   isSubscriber: boolean;
   isVip: boolean;
+  subscriptionMonths?: number;
   message: string;
   platform?: string;
   title: string;

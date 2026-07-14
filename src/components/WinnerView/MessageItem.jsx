@@ -11,6 +11,7 @@ const MessageDate = styled.span`
 `;
 const MessageText = styled.span`
   color: ${(props) => props.theme.staticTextColor};
+  overflow-wrap: anywhere;
 `;
 
 const EmoteImg = styled.img`

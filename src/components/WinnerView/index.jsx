@@ -18,7 +18,7 @@ import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
 import MessageItem from './MessageItem';
-import SubStatus from './SubStatus';
+import InternalChatBadges from '../ChatView/InternalChatBadges';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
 import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
@@ -30,35 +30,80 @@ const WinnerPanel = styled.div`
   flex-basis: 0;
   flex-grow: 1;
   margin: 15px;
+  min-width: 0;
   padding: 15px;
 `;
 
 const WinnerHeading = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
+  gap: 10px;
   padding: 10px;
   > img {
+    border-radius: 50%;
+    flex-shrink: 0;
     height: 70px;
+    object-fit: cover;
     width: 70px;
-    margin-right: 10px;
+  }
+  > span {
+    align-self: flex-start;
   }
   .info {
     display: flex;
     flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .nickRow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    img {
+      height: 22px;
+    }
   }
 `;
 
+const AvatarFallback = styled.div`
+  align-items: center;
+  background: ${(props) => props.theme.iconButtonBackground};
+  border-radius: 50%;
+  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  display: flex;
+  flex-shrink: 0;
+  font-size: 32px;
+  font-weight: 700;
+  height: 70px;
+  justify-content: center;
+  user-select: none;
+  width: 70px;
+`;
+
 const WinnerTitle = styled.span`
-  color: ${(props) => props.theme.staticTextColor};
+  color: ${(props) => props.userColor || props.theme.staticTextColor};
   font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+`;
+
+const SubscriptionMonths = styled.span`
+  color: ${(props) => props.theme.staticTextColor};
+  font-size: 0.9rem;
+  font-weight: 500;
 `;
 
 const ChannelLink = styled.a`
+  align-self: flex-start;
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
-  color: ${(props) => props.theme.buttonTextColor};
   border-radius: 4px;
-  padding: 3px 5px;
+  color: ${(props) => props.theme.buttonTextColor};
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 3px 8px;
   text-decoration: none;
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover};
@@ -69,14 +114,33 @@ const ChannelLink = styled.a`
 const Button = styled.button`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
-  color: ${(props) => props.theme.buttonTextColor};
   border-radius: 4px;
+  color: ${(props) => props.theme.buttonTextColor};
+  cursor: pointer;
   margin-top: 20px;
+  overflow: hidden;
   padding: 8px 5px;
+  position: relative;
   text-decoration: none;
+  transition: text-shadow 0.2s linear 0.3s;
+  z-index: 0;
+  .btn-hover {
+    background-color: ${(props) => props.theme.color};
+    clip-path: ellipse(50% 180% at 50% 310%);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: clip-path 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+    width: 100%;
+    z-index: -1;
+  }
   &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
+    text-shadow: 0 0 5px ${(props) => props.theme.startButtonShadowColor};
+    transition: text-shadow 0s;
+    .btn-hover {
+      clip-path: ellipse(120% 180% at 50% 60%);
+    }
   }
 `;
 
@@ -198,6 +262,7 @@ export class WinnerView extends React.Component {
           </span>
           <Button onClick={this.props.onClose} type="button">
             <FormattedMessage {...messages.exitBtn} />
+            <div className="btn-hover" />
           </Button>
         </WinnerPanel>
       );
@@ -215,10 +280,33 @@ export class WinnerView extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <WinnerHeading>
-          <img alt="logo" src={this.state.user.imageUrl} />
+          {this.state.user.imageUrl ? (
+            <img alt="logo" src={this.state.user.imageUrl} />
+          ) : (
+            <AvatarFallback userColor={this.state.user.color}>
+              {this.state.user.title.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          )}
           <div className="info">
-            <WinnerTitle>{this.state.user.title}</WinnerTitle>
-            <SubStatus apiKey={this.props.apiKey} id={this.props.id} />
+            <div className="nickRow">
+              <InternalChatBadges
+                message={{
+                  platform: this.state.user.platform,
+                  badges: this.state.user.badges,
+                }}
+              />
+              <WinnerTitle userColor={this.state.user.color}>
+                {this.state.user.title}
+              </WinnerTitle>
+            </div>
+            {this.state.user.subscriptionMonths > 0 && (
+              <SubscriptionMonths>
+                <FormattedMessage
+                  {...messages.subscriptionMonths}
+                  values={{ months: this.state.user.subscriptionMonths }}
+                />
+              </SubscriptionMonths>
+            )}
             <ChannelLink
               href={`https://www.youtube.com/channel/${this.props.id}`}
               target="_blank"
@@ -261,10 +349,12 @@ export class WinnerView extends React.Component {
         >
           <Button onClick={this.instantReplay} type="button">
             <FormattedMessage {...messages.replayBtn} />
+            <div className="btn-hover" />
           </Button>
         </Tooltip>
         <Button onClick={this.saveAndExit} type="button">
           <FormattedMessage {...messages.saveBtn} />
+          <div className="btn-hover" />
         </Button>
       </WinnerPanel>
     );
@@ -272,7 +362,6 @@ export class WinnerView extends React.Component {
 }
 
 WinnerView.propTypes = {
-  apiKey: PropTypes.string.isRequired,
   changePreWinner: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   preWinner: PropTypes.object,
