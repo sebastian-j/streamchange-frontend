@@ -16,7 +16,7 @@
   "streamchange.components.GiveawayRules.KeywordInput.tooltip": "A viewer have to send this command in a chat message to join a draw",
   "streamchange.components.GiveawayRules.KeywordInput.visibility": "Toggle keyword visibility",
   "streamchange.components.GiveawayRules.LotteryLawWarning.close": "I understand",
-  "streamchange.components.GiveawayRules.LotteryLawWarning.content": "When organizing a lottery for your channel members, be sure to follow Youtube membership policy and the Gambling Act. You can read how to run a legal lottery in the Streamchange documentation.",
+  "streamchange.components.GiveawayRules.LotteryLawWarning.content": "When organizing a lottery for your subscribers, be sure to follow the Gambling Act. You can read how to run a legal lottery in the Streamchange documentation.",
   "streamchange.components.GiveawayRules.LotteryLawWarning.openDocs": "Open the documentation",
   "streamchange.components.GiveawayRules.LotteryLawWarning.title": "Remember to obey the law",
   "streamchange.components.GiveawayRules.forAll": "All viewers",

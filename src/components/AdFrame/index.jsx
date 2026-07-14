@@ -79,6 +79,7 @@ const AdFrame = () => {
         <Dialog
           open={isOpen}
           onClose={closeDialog}
+          disableRestoreFocus
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">

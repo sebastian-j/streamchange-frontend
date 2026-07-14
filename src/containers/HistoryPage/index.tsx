@@ -115,7 +115,7 @@ const HistoryPage = () => {
         <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <PageHeader>
-        <ReturnButton to="/giveaway" activeClassName="active">
+        <ReturnButton to="/giveaway">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
