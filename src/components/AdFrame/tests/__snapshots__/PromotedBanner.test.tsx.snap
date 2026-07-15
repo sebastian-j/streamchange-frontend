@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<PromotedBanner /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-gsDLFA hxxyns"
+  margin="1"
+  offset="0"
+>
+  <span
+    class="sc-bdvvNz jneRgd"
+    margin="1"
+  >
+    Advertisement
+  </span>
+  <a
+    href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
+    target="_blank"
+  >
+    <div>
+      <img
+        alt="test-advertisement"
+        class="sc-dkPvMp fHOuXL"
+        src="url"
+      />
+    </div>
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
+    />
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
+    />
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
+    />
+  </a>
+</div>
+`;

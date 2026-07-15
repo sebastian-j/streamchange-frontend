@@ -147,7 +147,7 @@ const FortuneWheelRaffle = (props) => {
         </WheelMovable>
         <WheelBorder src={FortuneWheelBorder} />
         <RaffleWinner style={{ animationDelay: `${props.duration + 0.1}s` }}>
-          {winner !== null && winner.title}
+          {winner?.title}
         </RaffleWinner>
       </RaffleDialog>
     </DialogRoot>

@@ -13,8 +13,20 @@ describe('<FortuneWheelRaffle />', () => {
     store = mockStore({
       requirement: 0,
       userArray: [
-        { id: 'id1', title: 'user1' },
-        { id: 'id2', title: 'user2' },
+        {
+          id: 'id1',
+          title: 'user1',
+          imageUrl: 'user1.png',
+          isEligible: true,
+          isSubscriber: true,
+        },
+        {
+          id: 'id2',
+          title: 'user2',
+          imageUrl: 'user2.png',
+          isEligible: true,
+          isSubscriber: true,
+        },
       ],
     });
   });
