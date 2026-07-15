@@ -9,7 +9,6 @@ const InfoContainer = styled.div`
   flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 10px;
-  /* Kolor tekstu pobierany z theme aplikacji */
   color: ${(props) => props.theme.staticTextColor};
   padding: 10px;
 `;
