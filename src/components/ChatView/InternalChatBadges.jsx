@@ -47,7 +47,7 @@ export const BADGE_SETS = {
 };
 
 // Badges are rendered left-to-right in this order, like on Twitch/Kick
-const BADGE_ORDER = [
+export const BADGE_ORDER = [
   { key: 'broadcaster', label: 'Broadcaster' },
   { key: 'moderator', label: 'Moderator' },
   { key: 'vip', label: 'VIP' },
