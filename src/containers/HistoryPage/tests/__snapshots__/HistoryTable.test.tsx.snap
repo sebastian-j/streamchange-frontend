@@ -115,7 +115,8 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         class="sc-gsDLFA fcoBPh image"
       >
         <a
-          href="https://www.youtube.com/channel/id"
+          href="https://kick.com/id"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <img

@@ -8,7 +8,8 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
     class="sc-bdvvNz hA-dPCc image"
   >
     <a
-      href="https://www.youtube.com/channel/id"
+      href="https://kick.com/id"
+      rel="noopener noreferrer"
       target="_blank"
     >
       <img
