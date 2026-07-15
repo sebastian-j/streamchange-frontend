@@ -45,7 +45,7 @@ const StreamInfo = (props) => {
 
     const update = () => setUptime(calculateUptime(streamData.started_at));
     update();
-    const interval = setInterval(update, 1000); 
+    const interval = setInterval(update, 1000);
 
     return () => clearInterval(interval);
   }, [streamData]);
