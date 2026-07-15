@@ -188,6 +188,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       />
     </button>
   </div>
+  <div />
   <div
     data-testid="ad-frame"
   />
