@@ -42,10 +42,10 @@ const StreamInfo = (props) => {
   }, [props.channel, props.platform]);
   useEffect(() => {
     if (!streamData || !streamData.started_at) return;
-    setUptime(calculateUptime(streamData.started_at));
-    const interval = setInterval(() => {
-      setUptime(calculateUptime(streamData.started_at));
-    }, 1000);
+
+    const update = () => setUptime(calculateUptime(streamData.started_at));
+    update();
+    const interval = setInterval(update, 1000); 
 
     return () => clearInterval(interval);
   }, [streamData]);
