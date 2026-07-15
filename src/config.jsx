@@ -6,3 +6,5 @@ export const API_URL = 'https://www.googleapis.com/youtube/v3';
 export const PRIVILEGED_CHANNELS = ['ID1', 'ID2'];
 // Type hints that will display on welcome screen
 export const HINTS = ['hint1', 'hint2'];
+// Backend API URL
+export const BACKEND_URL = 'http://127.0.0.1:8000';

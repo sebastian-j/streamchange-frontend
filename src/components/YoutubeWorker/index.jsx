@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import qs from 'qs';
-import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { API_URL, PRIVILEGED_CHANNELS, BACKEND_URL } from '../../config';
 import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
@@ -119,7 +119,7 @@ const YoutubeWorker = (props) => {
     }
   };
   useEffect(() => {
-    const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
+    const ws = new WebSocket(`${BACKEND_URL.replace('http', 'ws')}/ws/chat`);
 
     ws.onopen = () => {
       ws.send(
@@ -128,6 +128,15 @@ const YoutubeWorker = (props) => {
           platform: props.platform,
         })
       );
+    };
+
+    ws.onclose = (event) => {
+      if (event.code === 4003) {
+        console.warn('Kanał zablokowany:', event.reason);
+        if (typeof props.onBlacklisted === 'function') {
+          props.onBlacklisted(event.reason);
+        }
+      }
     };
 
     ws.onmessage = (event) => {
@@ -214,6 +223,7 @@ const YoutubeWorker = (props) => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   channel: PropTypes.string,
+  onBlacklisted: PropTypes.func,
   platform: PropTypes.string,
 };
 
