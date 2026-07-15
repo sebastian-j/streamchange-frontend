@@ -9,7 +9,6 @@ interface IBan {
 
 interface IStream {
   ownerId: string;
-  thumbnailUrl: string;
   title: string;
   videoId: string;
 }

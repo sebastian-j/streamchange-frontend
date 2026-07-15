@@ -30,7 +30,7 @@ const TopBar = styled.div`
   }
 `;
 
-const StreamInfo = styled.div`
+const StreamInfoWrapper = styled.div`
   height: 5vh;
 `;
 
@@ -69,7 +69,6 @@ const GiveawayPage = (props) => {
 
     const streamProps = {
       ownerId: '',
-      thumbnailUrl: '',
       title: '',
       videoId: '',
       platform: '',
@@ -77,7 +76,6 @@ const GiveawayPage = (props) => {
     props.changeStreamProperties(streamProps);
     sessionStorage.removeItem('gv-videoId');
     sessionStorage.removeItem('gv-title');
-    sessionStorage.removeItem('gv-thumbnailUrl');
     sessionStorage.removeItem('gv-ownerId');
     localStorage.removeItem('gv-channel');
     localStorage.removeItem('gv-platform');
@@ -104,7 +102,6 @@ const GiveawayPage = (props) => {
             const stream = res.data.items[0];
             const streamProps = {
               ownerId: stream.snippet.channelId,
-              thumbnailUrl: stream.snippet.thumbnails.medium.url,
               title: stream.snippet.title,
               videoId: channelName,
               platform: platformName,
@@ -113,7 +110,6 @@ const GiveawayPage = (props) => {
             props.sendTelemetryData(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
             sessionStorage.setItem('gv-title', streamProps.title);
-            sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
             sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
           }
         })
@@ -125,8 +121,6 @@ const GiveawayPage = (props) => {
           } else {
             const streamProps = {
               ownerId: channelName,
-              thumbnailUrl:
-                'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg',
               title: 'Tytuł nieznany',
               videoId: channelName,
               platform: platformName,
@@ -138,8 +132,6 @@ const GiveawayPage = (props) => {
     } else {
       const streamProps = {
         ownerId: channelName,
-        thumbnailUrl:
-          'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg',
         title: channelName,
         videoId: channelName,
         platform: platformName,
@@ -155,15 +147,11 @@ const GiveawayPage = (props) => {
       sessionStorage.getItem('gv-videoId');
     const platform = localStorage.getItem('gv-platform') || 'youtube';
     const storedTitle = sessionStorage.getItem('gv-title') || channel;
-    const storedThumbnail =
-      sessionStorage.getItem('gv-thumbnailUrl') ||
-      'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg';
     const storedOwnerId = sessionStorage.getItem('gv-ownerId') || channel;
 
     if (channel) {
       const streamProps = {
         ownerId: storedOwnerId,
-        thumbnailUrl: storedThumbnail,
         title: storedTitle,
         videoId: channel,
         platform: platform,
@@ -171,7 +159,6 @@ const GiveawayPage = (props) => {
       props.changeStreamProperties(streamProps);
     }
   }, []);
-
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
       <>
@@ -193,21 +180,21 @@ const GiveawayPage = (props) => {
         <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <TopBar>
-        <StreamInfo>
-          <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
-          <StreamTitle>{props.streamInfo.title}</StreamTitle>
+        <StreamInfoWrapper>
           <StyledButton onClick={leaveStream}>
             <span>
               <FormattedMessage {...messages.leaveStreamBtn} />
             </span>
           </StyledButton>
-        </StreamInfo>
+        </StreamInfoWrapper>
+
         <TopButtons>
           <HistoryWidget />
           <SupportInformation />
           <SettingsDialog />
         </TopButtons>
       </TopBar>
+
       <YoutubeWorker
         channel={props.streamInfo.videoId}
         platform={props.streamInfo.platform}
@@ -216,7 +203,6 @@ const GiveawayPage = (props) => {
     </>
   );
 };
-
 GiveawayPage.propTypes = {
   ban: PropTypes.object,
   changeStreamProperties: PropTypes.func.isRequired,

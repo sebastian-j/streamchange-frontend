@@ -16,7 +16,6 @@ describe('giveawayPageReducer', () => {
       ban: null,
       stream: {
         ownerId: '',
-        thumbnailUrl: '',
         title: '',
         videoId: '',
       },
@@ -32,7 +31,6 @@ describe('giveawayPageReducer', () => {
   it('should handle the changeOwnerId action correctly', () => {
     const fixture: StreamProperties = {
       ownerId: 'id',
-      thumbnailUrl: 'url',
       title: 'stream',
       videoId: 'vid',
     };

@@ -10,7 +10,6 @@ describe('GiveawayPage selectors', () => {
       ban: null,
       stream: {
         ownerId: '',
-        thumbnailUrl: '',
         title: '',
         videoId: '',
       },
@@ -30,7 +29,6 @@ describe('GiveawayPage selectors', () => {
     const infoSelector = makeSelectStreamInfo();
     const stream = {
       ownerId: '',
-      thumbnailUrl: '',
       title: '',
       videoId: '',
     };

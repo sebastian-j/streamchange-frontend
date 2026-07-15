@@ -11,7 +11,6 @@ export const initialState: ContainerState = {
   ban: null,
   stream: {
     ownerId: '',
-    thumbnailUrl: '',
     title: '',
     videoId: '',
   },

@@ -14,7 +14,6 @@ describe('<GiveawayPage />', () => {
       ban: null,
       stream: {
         ownerId: '',
-        thumbnailUrl: '',
         title: '',
         videoId: '',
       },

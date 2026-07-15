@@ -14,7 +14,6 @@ import {
 } from './selectors';
 import { changePrize, changeRequirement } from './actions';
 import AdFrame from '../AdFrame';
-//import StreamInfo from '../StreamInfo';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -23,6 +22,7 @@ import KeywordInput from './KeywordInput';
 import LotteryLawWarning from './LotteryLawWarning';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
+import StreamInfo from './StreamInfo/StreamInfo';
 
 export class GiveawayRules extends React.Component {
   constructor(props) {
@@ -106,6 +106,10 @@ export class GiveawayRules extends React.Component {
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
         <LotteryLawWarning open={this.props.requirement === 1} />
+        <StreamInfo
+          channel={this.props.channel}
+          platform={this.props.platform}
+        />
         <AdFrame />
       </Panel>
     );
