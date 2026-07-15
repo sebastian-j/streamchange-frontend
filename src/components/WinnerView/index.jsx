@@ -210,12 +210,8 @@ export class WinnerView extends React.Component {
   fetchAvatar(user) {
     this.clearAvatarRequest();
 
-    const platform =
-      user.platform || localStorage.getItem('gv-platform') || '';
-    if (
-      !user.userId ||
-      (platform !== 'twitch' && platform !== 'kick')
-    ) {
+    const platform = user.platform || localStorage.getItem('gv-platform') || '';
+    if (!user.userId || (platform !== 'twitch' && platform !== 'kick')) {
       this.setState({ avatarLoading: false, avatarUrl: null });
       return;
     }

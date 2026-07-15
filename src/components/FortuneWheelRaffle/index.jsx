@@ -6,7 +6,10 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 import { makeSelectUserArray } from '../UserList/selectors';
-import { makeSelectGiveawayRequirement, makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
+import {
+  makeSelectGiveawayRequirement,
+  makeSelectGiveawayPreWinner,
+} from '../GiveawayRules/selectors';
 import DialogRoot from './DialogRoot';
 import FortuneWheelImg from './assets/fortune-wheel-inner.png';
 import FortuneWheelBorder from './assets/fortune-wheel-outer.png';
