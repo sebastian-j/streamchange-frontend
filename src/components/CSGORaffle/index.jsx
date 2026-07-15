@@ -39,14 +39,15 @@ const CSGORaffle = (props) => {
     const winnerIndex =
       Math.floor(Math.random() * 10) + 10 + props.duration * 3;
     if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
+    const selectedWinner = shuffled[winnerIndex];
     const scroll = -(winnerIndex * 150 + Math.floor(Math.random() * 65) - 290);
     setUsers(shuffled);
     setTimeout(() => setScrollSize(scroll), 10);
-    setWinner(shuffled[winnerIndex]);
+    setWinner(selectedWinner);
     setTimer(
       setTimeout(
         () => {
-          props.onWin(shuffled[winnerIndex].id);
+          props.onWin(selectedWinner.id);
         },
         (props.duration + 1) * 1000
       )

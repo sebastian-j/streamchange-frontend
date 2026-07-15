@@ -13,7 +13,7 @@ import messages from './messages';
 import { changePreWinner } from '../GiveawayRules/actions';
 import { changeVisibility } from '../RaffleWrapper/actions';
 import db from '../YoutubeWorker/db';
-import { API_URL } from '../../config';
+import { API_URL, BACKEND_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
@@ -21,6 +21,7 @@ import MessageItem from './MessageItem';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
+import { makeSelectUserArray } from '../UserList/selectors';
 import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 
 const WinnerPanel = styled.div`
@@ -79,6 +80,30 @@ const AvatarFallback = styled.div`
   justify-content: center;
   user-select: none;
   width: 70px;
+`;
+
+const AvatarSkeleton = styled.div`
+  background: linear-gradient(
+    90deg,
+    ${(props) => props.theme.iconButtonBackground} 0%,
+    ${(props) => props.theme.panelBackground} 50%,
+    ${(props) => props.theme.iconButtonBackground} 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 70px;
+  width: 70px;
+  animation: avatar-skeleton-shimmer 1.4s ease-in-out infinite;
+
+  @keyframes avatar-skeleton-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
 `;
 
 const WinnerTitle = styled.span`
@@ -155,14 +180,100 @@ export class WinnerView extends React.Component {
     super(props);
     this.state = {
       user: null,
+      avatarUrl: null,
+      avatarLoading: false,
       messages: [],
       interval: null,
       prize: this.props.prize,
     };
+    this.avatarAbortController = null;
+    this.avatarTimeoutId = null;
     this.getMessages = this.getMessages.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
     this.instantReplay = this.instantReplay.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
+    this.fetchAvatar = this.fetchAvatar.bind(this);
+    this.clearAvatarRequest = this.clearAvatarRequest.bind(this);
+  }
+
+  clearAvatarRequest() {
+    if (this.avatarAbortController) {
+      this.avatarAbortController.abort();
+      this.avatarAbortController = null;
+    }
+    if (this.avatarTimeoutId) {
+      clearTimeout(this.avatarTimeoutId);
+      this.avatarTimeoutId = null;
+    }
+  }
+
+  fetchAvatar(user) {
+    this.clearAvatarRequest();
+
+    const platform =
+      user.platform || localStorage.getItem('gv-platform') || '';
+    if (
+      !user.userId ||
+      (platform !== 'twitch' && platform !== 'kick')
+    ) {
+      this.setState({ avatarLoading: false, avatarUrl: null });
+      return;
+    }
+
+    const abortController = new AbortController();
+    this.avatarAbortController = abortController;
+
+    this.setState({ avatarLoading: true, avatarUrl: null });
+
+    this.avatarTimeoutId = setTimeout(() => {
+      if (!abortController.signal.aborted) {
+        abortController.abort();
+        this.setState({ avatarLoading: false });
+      }
+    }, 3000);
+
+    axios
+      .get(`${BACKEND_URL}/api/avatar`, {
+        params: { user_id: user.userId, platform },
+        signal: abortController.signal,
+      })
+      .then((res) => {
+        if (abortController.signal.aborted) {
+          return;
+        }
+        clearTimeout(this.avatarTimeoutId);
+        this.avatarTimeoutId = null;
+        if (res.data?.url) {
+          this.setState({ avatarUrl: res.data.url, avatarLoading: false });
+        } else {
+          this.setState({ avatarLoading: false });
+        }
+      })
+      .catch((err) => {
+        if (abortController.signal.aborted || err.code === 'ERR_CANCELED') {
+          return;
+        }
+        clearTimeout(this.avatarTimeoutId);
+        this.avatarTimeoutId = null;
+        this.setState({ avatarLoading: false });
+      });
+  }
+
+  resolveUser(idbUser) {
+    const fromRedux = this.props.userArray.find(
+      (user) => user.id === this.props.id
+    );
+
+    return {
+      ...idbUser,
+      ...fromRedux,
+      platform:
+        fromRedux?.platform ||
+        idbUser?.platform ||
+        localStorage.getItem('gv-platform') ||
+        '',
+      userId: fromRedux?.userId || idbUser?.userId || null,
+    };
   }
 
   getMessages() {
@@ -179,7 +290,7 @@ export class WinnerView extends React.Component {
     const winner = {
       channelId: this.state.user.id,
       displayName: this.state.user.title,
-      imageUrl: this.state.user.imageUrl,
+      imageUrl: this.state.avatarUrl || '',
       message: this.state.user.message,
       prize: this.state.prize,
       platform: this.state.user.platform,
@@ -239,14 +350,39 @@ export class WinnerView extends React.Component {
       .filter((user) => user.id === userId)
       .toArray()
       .then((items) => {
-        this.setState({ user: items[0] });
+        const user = this.resolveUser(items[0]);
+        if (!user?.id) {
+          return;
+        }
+        this.setState({ user });
+        this.fetchAvatar(user);
       });
     this.getMessages();
     this.telemetry();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.state.user) {
+      return;
+    }
+
+    const prevEntry = prevProps.userArray.find(
+      (user) => user.id === this.props.id
+    );
+    const currentEntry = this.props.userArray.find(
+      (user) => user.id === this.props.id
+    );
+    const gotUserId = !prevEntry?.userId && currentEntry?.userId;
+
+    if (gotUserId && !this.state.avatarUrl && !this.state.avatarLoading) {
+      const user = this.resolveUser(this.state.user);
+      this.setState({ user }, () => this.fetchAvatar(user));
+    }
+  }
+
   componentWillUnmount() {
+    this.clearAvatarRequest();
     this.props.changePreWinner(null);
     clearInterval(this.state.interval);
   }
@@ -307,8 +443,10 @@ export class WinnerView extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <WinnerHeading>
-          {this.state.user.imageUrl ? (
-            <img alt="logo" src={this.state.user.imageUrl} />
+          {this.state.avatarUrl ? (
+            <img alt={this.state.user.title} src={this.state.avatarUrl} />
+          ) : this.state.avatarLoading ? (
+            <AvatarSkeleton aria-hidden="true" />
           ) : (
             <AvatarFallback userColor={this.state.user.color}>
               {this.state.user.title.charAt(0).toUpperCase()}
@@ -388,6 +526,7 @@ WinnerView.propTypes = {
   id: PropTypes.string.isRequired,
   preWinner: PropTypes.object,
   prize: PropTypes.string,
+  userArray: PropTypes.array,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
   streamInfo: PropTypes.object,
@@ -396,6 +535,7 @@ WinnerView.propTypes = {
 const mapStateToProps = createStructuredSelector({
   preWinner: makeSelectGiveawayPreWinner(),
   streamInfo: makeSelectStreamInfo(),
+  userArray: makeSelectUserArray(),
 });
 
 export function mapDispatchToProps(dispatch) {
