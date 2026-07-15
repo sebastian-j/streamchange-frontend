@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { fetchStreamInfo } from './StreamInfows.jsx';
 import messages from './messages';
+import propTypes from 'prop-types';
 const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -108,7 +108,6 @@ const StreamInfo = (props) => {
       )}
     </div>
   );
-  return <div />;
 };
 
 export default StreamInfo;
