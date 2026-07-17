@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -17,9 +18,11 @@ describe('<GiveawayRules />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <Provider store={store}>
-        <GiveawayRules apiKey="key" />
-      </Provider>
+      <IntlProvider locale="en" messages={{}}>
+        <Provider store={store}>
+          <GiveawayRules apiKey="key" />
+        </Provider>
+      </IntlProvider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });

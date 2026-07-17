@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<QueueColumn /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-iqshrI buOajB"
+>
+  <h2
+    class="sc-kDTkih bBulnp"
+  >
+    Queue
+  </h2>
+  <div
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-gsDLFA gaBXGe css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_0_"
+      id="_r_0_-label"
+    >
+      Search
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_0_"
+        name="searchQuery"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <ul />
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-bdvvNz lcsMgv css-1uent87-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="button"
+  >
+    <span>
+      Clear all
+    </span>
+  </button>
+</div>
+`;

@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -39,9 +40,11 @@ describe('<QueueWorker />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <Provider store={store}>
-        <QueueWorker videoId="id" />
-      </Provider>
+      <IntlProvider locale="en" messages={{}}>
+        <Provider store={store}>
+          <QueueWorker videoId="id" />
+        </Provider>
+      </IntlProvider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });
