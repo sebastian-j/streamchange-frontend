@@ -24,6 +24,7 @@ interface IUser {
   message: string;
   platform?: string;
   title: string;
+  userId?: string;
 }
 
 /* --- STATE --- */

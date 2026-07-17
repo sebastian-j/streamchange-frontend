@@ -27,6 +27,12 @@ export function insertOrUpdateItem(item) {
           .modify({
             message: item.isEligible ? item.message : user.message,
             isEligible: user.isEligible === true ? true : item.isEligible,
+            userId: item.userId || user.userId,
+            platform: item.platform || user.platform,
+            color: item.color || user.color,
+            badges: item.badges || user.badges,
+            subscriptionMonths:
+              item.subscriptionMonths ?? user.subscriptionMonths,
           })
           .then(() => {});
       }
