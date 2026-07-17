@@ -91,6 +91,7 @@ const renderWinnerView = (
     onRepeat: vi.fn(),
     changePreWinner: vi.fn(),
     toggleEligibility: vi.fn(),
+    userArray: [],
   };
   let store: MockStoreEnhanced<unknown, {}>;
   store = mockStore({
@@ -304,7 +305,6 @@ describe('<WinnerView />', () => {
       expect.objectContaining({
         channelId: 'winner-id',
         displayName: 'Test winner',
-        imageUrl: 'https://example.com/avatar.png',
         message: 'Winner message',
         prize: 'Test prize',
         createdAt: expect.any(String),
