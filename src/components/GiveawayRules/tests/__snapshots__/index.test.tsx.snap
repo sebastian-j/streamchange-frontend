@@ -2,7 +2,7 @@
 
 exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bdvvNz fDFifg"
+  class="sc-bdvvNz byoWSG"
 >
   <h2
     class="sc-gsDLFA jFkgMX"
@@ -160,7 +160,6 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       <button
         aria-label="Decrease by one"
         class="sc-ksdwMQ dWIjjQ"
-        left="true"
         type="button"
       >
         -

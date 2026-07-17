@@ -49,6 +49,7 @@ export const SupportInformation = (props) => {
       <Dialog
         open={props.isOpen}
         onClose={props.closeDialog}
+        disableRestoreFocus
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">

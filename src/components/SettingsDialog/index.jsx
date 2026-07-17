@@ -90,6 +90,7 @@ const SettingsDialog = (props) => {
       <Dialog
         open={isOpen}
         onClose={closeDialog}
+        disableRestoreFocus
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">

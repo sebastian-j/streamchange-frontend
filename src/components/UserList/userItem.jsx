@@ -17,7 +17,7 @@ const UserItem = (props) => {
     <li>
       <UserButton
         className={clsx(props.isEligible && 'isEligible')}
-        userColor={props.color}
+        $userColor={props.color}
         onClick={toggleEligible}
         type="button"
       >

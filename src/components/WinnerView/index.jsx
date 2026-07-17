@@ -70,7 +70,7 @@ const AvatarFallback = styled.div`
   align-items: center;
   background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   display: flex;
   flex-shrink: 0;
   font-size: 32px;
@@ -82,7 +82,7 @@ const AvatarFallback = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
@@ -93,22 +93,6 @@ const SubscriptionMonths = styled.span`
   color: ${(props) => props.theme.staticTextColor};
   font-size: 0.9rem;
   font-weight: 500;
-`;
-
-const ChannelLink = styled.a`
-  align-self: flex-start;
-  background: ${(props) => props.theme.buttonBackground};
-  border: 1px solid ${(props) => props.theme.color};
-  border-radius: 4px;
-  color: ${(props) => props.theme.buttonTextColor};
-  font-size: 0.9rem;
-  margin-top: 4px;
-  padding: 3px 8px;
-  text-decoration: none;
-  &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
-  }
 `;
 
 const Button = styled.button`
@@ -142,6 +126,13 @@ const Button = styled.button`
       clip-path: ellipse(120% 180% at 50% 60%);
     }
   }
+`;
+
+const ChannelLink = styled(Button)`
+  align-self: flex-start;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 3px 8px;
 `;
 
 const MessageList = styled.ul`
@@ -258,21 +249,25 @@ export class WinnerView extends React.Component {
     if (this.state.user.platform === 'twitch') {
       return (
         <ChannelLink
+          as="a"
           href={`https://www.twitch.tv/${this.props.id}`}
           rel="noopener noreferrer"
           target="_blank"
         >
           <FormattedMessage {...messages.openChannel} />
+          <div className="btn-hover" />
         </ChannelLink>
       );
     }
     return (
       <ChannelLink
+        as="a"
         href={`https://kick.com/${this.textReplace(this.props.id)}`}
         rel="noopener noreferrer"
         target="_blank"
       >
         <FormattedMessage {...messages.openChannel} />
+        <div className="btn-hover" />
       </ChannelLink>
     );
   }
@@ -310,7 +305,7 @@ export class WinnerView extends React.Component {
           {this.state.user.imageUrl ? (
             <img alt="logo" src={this.state.user.imageUrl} />
           ) : (
-            <AvatarFallback userColor={this.state.user.color}>
+            <AvatarFallback $userColor={this.state.user.color}>
               {this.state.user.title.charAt(0).toUpperCase()}
             </AvatarFallback>
           )}
@@ -322,7 +317,7 @@ export class WinnerView extends React.Component {
                   badges: this.state.user.badges,
                 }}
               />
-              <WinnerTitle userColor={this.state.user.color}>
+              <WinnerTitle $userColor={this.state.user.color}>
                 {this.state.user.title}
               </WinnerTitle>
             </div>
