@@ -76,8 +76,8 @@ const CSGORaffle = (props) => {
                 {users.map((item) => (
                   <td key={Math.round(Math.random() * 10000000)}>
                     <div className="roller-cell">
-                      <img src={item.imageUrl} alt="logo" />
-                      <span className="roller-label">{item.title}</span>
+                      <img src={item?.imageUrl} alt="logo" />
+                      <span className="roller-label">{item?.title}</span>
                     </div>
                   </td>
                 ))}
@@ -89,7 +89,7 @@ const CSGORaffle = (props) => {
           className="raffle-winner"
           style={{ animationDelay: `${props.duration + 0.1}s` }}
         >
-          {winner !== null && winner.title}
+          {winner?.title}
         </span>
       </div>
     </div>

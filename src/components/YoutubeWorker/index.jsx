@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import qs from 'qs';
-import { API_URL, PRIVILEGED_CHANNELS, BACKEND_URL } from '../../config';
+import { API_URL, PRIVILEGED_CHANNELS, WS_URL } from '../../config';
 import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
@@ -119,7 +119,9 @@ const YoutubeWorker = (props) => {
     }
   };
   useEffect(() => {
-    const ws = new WebSocket(`${BACKEND_URL.replace('http', 'ws')}/ws/chat`);
+    if (props.channel === 'test') return undefined;
+
+    const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
       ws.send(
@@ -189,6 +191,7 @@ const YoutubeWorker = (props) => {
         isModerator: badges.includes('moderator'),
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
+        subscriptionMonths: data.subscriber,
         isVip: badges.includes('vip'),
         isEligible:
           keyword !== '' && data.message.toLowerCase().includes(keyword),

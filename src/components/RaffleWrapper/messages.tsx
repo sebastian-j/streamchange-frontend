@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.raffleType.fortuneWheel`,
     defaultMessage: 'Fortune wheel',
   },
+  raffleTypeVertical: {
+    id: `${scope}.raffleType.vertical`,
+    defaultMessage: 'Vertical roll',
+  },
 });

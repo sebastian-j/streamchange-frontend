@@ -19,6 +19,7 @@ exports[`<NumericInput /> > should render and match the snapshot 1`] = `
   <input
     class="sc-hKwAaq cxGXvX"
     id="number-display"
+    value="0"
   />
   <button
     aria-label="Increase by one"

@@ -8,3 +8,6 @@ export const PRIVILEGED_CHANNELS = ['ID1', 'ID2'];
 export const HINTS = ['hint1', 'hint2'];
 // Backend API URL
 export const BACKEND_URL = 'http://127.0.0.1:8000';
+// WebSocket endpoint for live chat, set VITE_WS_URL to override
+export const WS_URL =
+  import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8000/ws/chat';

@@ -3,6 +3,7 @@ interface IHistoryItem {
   channelId: string;
   createdAt: string;
   displayName: string;
+  platform: string;
   imageUrl: string;
   message: string;
   prize: string;

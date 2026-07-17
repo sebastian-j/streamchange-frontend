@@ -32,6 +32,11 @@ export default defineMessages({
     id: `${scope}.error.invalidUrl`,
     defaultMessage: 'This is not a URL to live stream or a YouTube video.',
   },
+  invalidChannelUrlError: {
+    id: `${scope}.error.invalidChannelUrl`,
+    defaultMessage:
+      'Invalid link. Paste a link in the format twitch.tv/channel or kick.com/channel.',
+  },
   notVideoError: {
     id: `${scope}.error.notVideo`,
     defaultMessage: 'There is no such live stream. Invalid url.',
