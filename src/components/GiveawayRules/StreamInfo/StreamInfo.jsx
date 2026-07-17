@@ -22,12 +22,12 @@ const StreamInfo = (props) => {
     const start = new Date(startedAt);
     const now = new Date();
     const diff = now - start;
-
-    const hours = Math.floor(diff / (1000 * 60 * 60));
+    let hours = Math.floor(diff / (1000 * 60 * 60));
     let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((diff % (1000 * 60)) / 1000);
     if (minutes.toString().length < 2) minutes = `0${minutes}`;
     if (seconds.toString().length < 2) seconds = `0${seconds}`;
+        if (props.platform==='kick'){hours=hours-2}
     return `${hours}:${minutes}:${seconds}`;
   };
   useEffect(() => {
