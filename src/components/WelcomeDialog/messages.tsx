@@ -59,6 +59,6 @@ export default defineMessages({
   },
   blacklistedError: {
     id: `${scope}.error.blacklisted`,
-    defaultMessage: 'This channel is not supported.',
+    defaultMessage: 'This channel is blacklisted.',
   },
 });
