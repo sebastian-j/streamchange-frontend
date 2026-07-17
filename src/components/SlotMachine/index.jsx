@@ -1,0 +1,118 @@
+import { useEffect, useState, useRef, memo } from 'react';
+import styled from 'styled-components';
+import slotMachineImg from './assets/SlotsMachineOuter.svg';
+import lemon from './assets/symbols/lemon.svg';
+import bell from './assets/symbols/bell.svg';
+import cherry from './assets/symbols/cherry.svg';
+import clover from './assets/symbols/clover.svg';
+import diamond from './assets/symbols/diamond.svg';
+import seven from './assets/symbols/seven.svg';
+import treasure from './assets/symbols/treasure.svg';
+import WheelItem from './WheelItem';
+import './rolling.css';
+
+const Container = styled.div`
+  position: absolute;
+  width: 75vh;
+  height: 75vh;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+`;
+
+const SlotMachineImg = styled.img`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+`;
+
+const SlotSymbol = memo(({ src }) => (
+  <img src={src} style={{ width: '100%', height: '150px', display: 'block' }} />
+));
+
+const SlotsRaffle = (props) => {
+  const positions = [
+    { x: '15%', y: '30%' },
+    { x: '44%', y: '30%' },
+    { x: '73%', y: '30%' },
+  ];
+
+  const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
+  const generateLongList = () => 
+    Array.from({ length: 31 }, () => ({
+      id: Math.random().toString(36).substr(2, 9),
+      src: imageFiles[Math.floor(Math.random() * imageFiles.length)]
+    }));
+
+  const [reels, setReels] = useState([
+    { setA: generateLongList(), setB: generateLongList() }, 
+    { setA: generateLongList(), setB: generateLongList() }, 
+    { setA: generateLongList(), setB: generateLongList() }  
+  ]);
+
+  const containerRefs = useRef([]);
+
+  useEffect(() => {
+  const container = containerRefs.current[0];
+  if (!container) return;
+
+  const durationSeconds = parseFloat(window.getComputedStyle(container).animationDuration);
+  const intervalTime = (durationSeconds * 1000) / 2;
+
+  const interval = setInterval(() => {
+    setReels(prev => {
+      const next = [...prev];
+      
+      containerRefs.current.forEach((el, reelIndex) => {
+        if (!el) return;
+        
+        const style = window.getComputedStyle(el);
+        const matrix = new DOMMatrix(style.transform);
+        const translateY = matrix.m42; 
+        const newSet = generateLongList();
+        if (translateY < -2250) {
+          next[reelIndex] = { ...next[reelIndex], setA: newSet };
+        } else {
+          next[reelIndex] = { ...next[reelIndex], setB: newSet };
+        }
+      });
+      return next;
+    });
+  }, intervalTime);
+
+  return () => clearInterval(interval);
+}, []);
+
+  return (
+    <Container>
+      <SlotMachineImg src={slotMachineImg} />
+      {positions.map((pos, reelIndex) => (
+        <WheelItem 
+          key={reelIndex}        
+          style={{ position: 'absolute', left: pos.x, top: pos.y, zIndex: 2, overflow: 'hidden', height: '150px', width: '80px' }}
+        >
+          <div 
+            className="symbol-container"
+            ref={(el) => (containerRefs.current[reelIndex] = el)}
+          >
+            <div className="set-wrapper set-a">
+              {reels[reelIndex].setA.map((item) => (
+                <SlotSymbol key={item.id} src={item.src} />
+              ))}
+            </div>
+            <div className="set-wrapper set-b">
+              {reels[reelIndex].setB.map((item) => (
+                <SlotSymbol key={item.id} src={item.src} />
+              ))}
+            </div>
+          </div>
+        </WheelItem>
+      ))}
+    </Container>
+  );
+};
+export { SlotsRaffle };

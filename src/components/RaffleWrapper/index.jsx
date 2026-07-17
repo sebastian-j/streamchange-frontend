@@ -24,6 +24,7 @@ import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import VerticalRaffle from '../VerticalRaffle';
+import {SlotsRaffle} from '../SlotMachine/index.jsx';
 import NumericInput from '../NumericInput';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
@@ -112,6 +113,9 @@ export const RaffleWrapper = (props) => {
           <MenuItem value={2}>
             <FormattedMessage {...messages.raffleTypeVertical} />
           </MenuItem>
+          <MenuItem value={3}>
+            <FormattedMessage {...messages.raffleTypeSlots} />
+          </MenuItem>
         </Select>
       </StyledFormControl>
       <NumericInput
@@ -145,6 +149,13 @@ export const RaffleWrapper = (props) => {
       )}
       {props.isOpen && props.animationType === 2 && (
         <VerticalRaffle
+          duration={props.animationDuration}
+          onClose={props.closeRaffle}
+          onWin={winnerHandler}
+        />
+      )}
+       {props.isOpen && props.animationType === 3 && (
+        <SlotsRaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}

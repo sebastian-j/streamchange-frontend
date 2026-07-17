@@ -1,0 +1,23 @@
+.symbol-container {
+  position: relative;
+  height: 13500px; 
+  width: 80px;
+  animation: roll 30s linear infinite;
+  will-change: transform;
+}
+
+.set-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.set-b {
+  top: 4500px;
+}
+
+@keyframes roll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-9000px); }
+}
