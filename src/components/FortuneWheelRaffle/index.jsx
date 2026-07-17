@@ -6,7 +6,10 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 import { makeSelectUserArray } from '../UserList/selectors';
-import { makeSelectGiveawayRequirement } from '../GiveawayRules/selectors';
+import {
+  makeSelectGiveawayRequirement,
+  makeSelectGiveawayPreWinner,
+} from '../GiveawayRules/selectors';
 import DialogRoot from './DialogRoot';
 import FortuneWheelImg from './assets/fortune-wheel-inner.png';
 import FortuneWheelBorder from './assets/fortune-wheel-outer.png';
@@ -64,6 +67,8 @@ const FortuneWheelRaffle = (props) => {
       );
     }
     const winnerIndex = Math.floor(Math.random() * 10);
+    if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
+    const selectedWinner = shuffled[winnerIndex];
     const scroll = -(
       winnerIndex * 36 +
       Math.floor(Math.random() * 15) +
@@ -71,7 +76,7 @@ const FortuneWheelRaffle = (props) => {
     );
     setUsers(shuffled);
     setTimeout(() => setScrollSize(scroll), 10);
-    setWinner(shuffled[winnerIndex]);
+    setWinner(selectedWinner);
     //const sId1 = tickSound.play('start');
     // tickSound.on(
     //   'end',
@@ -88,7 +93,7 @@ const FortuneWheelRaffle = (props) => {
     setTimer(
       setTimeout(
         () => {
-          props.onWin(shuffled[winnerIndex].id);
+          props.onWin(selectedWinner.id);
         },
         (props.duration + 1) * 1000
       )
@@ -159,6 +164,7 @@ FortuneWheelRaffle.propTypes = {
   giveawayReq: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
+  preWinner: PropTypes.object,
   userArray: PropTypes.array,
 };
 FortuneWheelRaffle.defaultProps = {
@@ -167,6 +173,7 @@ FortuneWheelRaffle.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   giveawayReq: makeSelectGiveawayRequirement(),
+  preWinner: makeSelectGiveawayPreWinner(),
   userArray: makeSelectUserArray(),
 });
 

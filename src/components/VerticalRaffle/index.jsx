@@ -145,6 +145,7 @@ const VerticalRaffle = (props) => {
     const winnerIndex =
       Math.floor(Math.random() * 10) + 10 + props.duration * 3;
     if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
+    const selectedWinner = shuffled[winnerIndex];
     const scroll = -(
       winnerIndex * CELL_HEIGHT -
       (BOX_HEIGHT - CELL_HEIGHT) / 2 +
@@ -152,7 +153,7 @@ const VerticalRaffle = (props) => {
       MAX_WINNER_OFFSET
     );
     setUsers(shuffled);
-    setWinner(shuffled[winnerIndex]);
+    setWinner(selectedWinner);
 
     const durationMs = props.duration * 1000;
 
