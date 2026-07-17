@@ -2,11 +2,15 @@ import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import GiveawayRules from '../index';
 
 const mockStore = configureStore([]);
+
+vi.mock('../../AdFrame', () => ({
+  default: () => <div data-testid="ad-frame" />,
+}));
 
 describe('<GiveawayRules />', () => {
   let store: ReturnType<typeof mockStore>;
@@ -18,11 +22,11 @@ describe('<GiveawayRules />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
-        <Provider store={store}>
+      <Provider store={store}>
+        <IntlProvider locale="en">
           <GiveawayRules apiKey="key" />
-        </Provider>
-      </IntlProvider>
+        </IntlProvider>
+      </Provider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });

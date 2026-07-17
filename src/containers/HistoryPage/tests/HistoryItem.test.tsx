@@ -7,7 +7,7 @@ import HistoryItem from '../HistoryItem';
 describe('<HistoryItem />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
+      <IntlProvider locale="en">
         <HistoryItem
           channelId="id"
           displayName="abc"

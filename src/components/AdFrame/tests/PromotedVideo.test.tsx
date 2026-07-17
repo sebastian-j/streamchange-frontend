@@ -7,7 +7,7 @@ import PromotedVideo from '../PromotedVideo';
 describe('<PromotedVideo />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
+      <IntlProvider locale="en">
         <PromotedVideo videoId="jNQXAC9IVRw" />
       </IntlProvider>
     );

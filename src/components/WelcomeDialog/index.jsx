@@ -132,6 +132,13 @@ const WelcomeDialog = (props) => {
                     {props.error === 'quotaExceeded' && (
                       <FormattedMessage {...messages.quotaExceededError} />
                     )}
+                    {props.error && props.error.startsWith('blacklisted:') && (
+                      <>
+                        <FormattedMessage {...messages.blacklistedError} />
+                        <br />
+                        {props.error.replace('blacklisted:', '')}
+                      </>
+                    )}
                   </span>
                 )}
                 {props.ban && (

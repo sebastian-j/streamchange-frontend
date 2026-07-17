@@ -7,7 +7,7 @@ import HistoryTable from '../HistoryTable';
 describe('<HistoryTable />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
+      <IntlProvider locale="en">
         <HistoryTable
           items={[
             {

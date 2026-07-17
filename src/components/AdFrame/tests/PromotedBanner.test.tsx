@@ -7,7 +7,7 @@ import PromotedBanner from '../PromotedBanner';
 describe('<PromotedBanner />', () => {
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
+      <IntlProvider locale="en">
         <PromotedBanner
           channelUrl="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
           imageUrl="url"

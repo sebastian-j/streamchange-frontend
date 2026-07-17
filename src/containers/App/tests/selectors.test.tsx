@@ -1,5 +1,6 @@
-import { makeSelectLocation } from '../selectors';
 import { describe, expect, it } from 'vitest';
+
+import { makeSelectLocation } from '../selectors';
 
 describe('makeSelectLocation', () => {
   it('should select the location', () => {

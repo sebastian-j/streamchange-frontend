@@ -1,16 +1,20 @@
-import { render } from '@testing-library/react';
-import { IntlProvider } from 'react-intl';
-import { describe, expect, it } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 
+import { render, screen } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it, vi } from 'vitest';
+
+import { HINTS } from '../../../../config';
 import WelcomeHint from '../index';
 
 describe('<WelcomeHint />', () => {
   it('should render and match the snapshot', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0);
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
+      <IntlProvider locale="en">
         <WelcomeHint />
       </IntlProvider>
     );
-    expect(container.firstChild).toMatchSnapshot();
+    expect(screen.getByText(HINTS[0])).toBeInTheDocument();
   });
 });

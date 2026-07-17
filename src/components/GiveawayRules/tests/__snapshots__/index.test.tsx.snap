@@ -2,15 +2,15 @@
 
 exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-eggEi iGIoFF"
+  class="sc-bdvvNz byoWSG"
 >
   <h2
-    class="sc-bqiQet iXcVvu"
+    class="sc-gsDLFA jFkgMX"
   >
     Giveaway rules
   </h2>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-hBUSFb kyhktK css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-hKwAaq fMqCDP css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -54,7 +54,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-ksdwMQ bqqSga css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkPvMp fuzDfh css-xanwcj-MuiFormControl-root-MuiTextField-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
@@ -79,7 +79,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-ksdwMQ bqqSga css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkPvMp fuzDfh css-xanwcj-MuiFormControl-root-MuiTextField-root"
     data-mui-internal-clone-element="true"
     inputprops="[object Object]"
   >
@@ -106,7 +106,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal sc-hBUSFb kyhktK css-15nqhxc-MuiFormControl-root"
+      class="MuiFormControl-root MuiFormControl-marginNormal sc-hKwAaq fMqCDP css-15nqhxc-MuiFormControl-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -149,36 +149,36 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-iwjgNJ eItnta"
+      class="sc-eggEi eKVwDU"
     >
       <label
-        class="sc-cxpTYp hgtQXO"
+        class="sc-bqiQet cRVASa"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-llYVCM jgcYoG"
+        class="sc-ksdwMQ dWIjjQ"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-iJKPnr gQBZeK"
+        class="sc-hBUSFb iUtQRm"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-llYVCM cwERHC"
+        class="sc-ksdwMQ iyNXUU"
         type="button"
       >
         +
       </button>
     </div>
     <button
-      class="sc-giYhsS dBUNLF"
+      class="sc-fotPOC BSyjz"
       type="button"
     >
       Roll it!
@@ -187,21 +187,8 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       />
     </button>
   </div>
-  <div>
-    <div
-      class="sc-crHjuH gRkRQf"
-    >
-      <span>
-        This is a place for your advertisement. Prices starts from 10 PLN per day. Your ad will reach thousands of viewers.
-      </span>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-1uent87-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
-      >
-        Show the details
-      </button>
-    </div>
-  </div>
+  <div
+    data-testid="ad-frame"
+  />
 </div>
 `;

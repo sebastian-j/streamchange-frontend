@@ -29,11 +29,11 @@ describe('<QueueColumn />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale="en" messages={{}}>
-        <Provider store={store}>
+      <Provider store={store}>
+        <IntlProvider locale="en">
           <QueueColumn />
-        </Provider>
-      </IntlProvider>
+        </IntlProvider>
+      </Provider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });
