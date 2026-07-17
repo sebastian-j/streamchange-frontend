@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import messages from './messages';
 import { changePreWinner } from '../GiveawayRules/actions';
 import { changeVisibility } from '../RaffleWrapper/actions';
+import { toggleEligibility } from '../UserList/actions';
 import db from '../YoutubeWorker/db';
 import { API_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
@@ -101,6 +102,7 @@ const Button = styled.button`
   border-radius: 4px;
   color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
+  flex-shrink: 0;
   margin-top: 20px;
   overflow: hidden;
   padding: 8px 5px;
@@ -177,9 +179,7 @@ export class WinnerView extends React.Component {
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {
-      db.table('users').where('id').equals(winner.channelId).modify({
-        isEligible: false,
-      });
+      this.props.toggleEligibility(winner.channelId);
     }
     db.table('history')
       .add(winner)
@@ -386,6 +386,7 @@ WinnerView.propTypes = {
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
   streamInfo: PropTypes.object,
+  toggleEligibility: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -397,6 +398,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     changePreWinner: (w) => dispatch(changePreWinner(w)),
     onRepeat: () => dispatch(changeVisibility(true)),
+    toggleEligibility: (id) => dispatch(toggleEligibility(id)),
     dispatch,
   };
 }

@@ -5,7 +5,7 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
   class="sc-gsDLFA kkbbTT"
 >
   <td
-    class="sc-bdvvNz hA-dPCc image"
+    class="sc-bdvvNz gOmdtT image"
   >
     <a
       href="https://kick.com/id"
@@ -20,28 +20,28 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
     </a>
   </td>
   <td
-    class="sc-bdvvNz hA-dPCc textLeft"
+    class="sc-bdvvNz gOmdtT textLeft"
   >
     <span>
       abc
     </span>
   </td>
   <td
-    class="sc-bdvvNz hA-dPCc text"
+    class="sc-bdvvNz gOmdtT text"
   >
     <span>
       prize
     </span>
   </td>
   <td
-    class="sc-bdvvNz hA-dPCc text"
+    class="sc-bdvvNz gOmdtT text"
   >
     <span>
       abc
     </span>
   </td>
   <td
-    class="sc-bdvvNz hA-dPCc text"
+    class="sc-bdvvNz gOmdtT text"
   >
     <span>
       December 24, 2019

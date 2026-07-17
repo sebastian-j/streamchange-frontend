@@ -90,6 +90,7 @@ const renderWinnerView = (
     onClose: vi.fn(),
     onRepeat: vi.fn(),
     changePreWinner: vi.fn(),
+    toggleEligibility: vi.fn(),
   };
   let store: MockStoreEnhanced<unknown, {}>;
   store = mockStore({
@@ -316,6 +317,8 @@ describe('<WinnerView />', () => {
   it('marks the winner as ineligible when delete winner option is enabled', async () => {
     localStorage.setItem('gv-deleteWinner', 'true');
 
+    const toggleEligibility = vi.fn();
+
     mocks.usersTable.toArray.mockResolvedValue([
       {
         id: 'winner-id',
@@ -325,7 +328,7 @@ describe('<WinnerView />', () => {
       },
     ]);
 
-    renderWinnerView();
+    renderWinnerView({ toggleEligibility });
 
     await screen.findByText('Test winner');
 
@@ -335,13 +338,9 @@ describe('<WinnerView />', () => {
     fireEvent.click(saveButton);
 
     await waitFor(() => {
-      expect(mocks.usersTable.modify).toHaveBeenCalledTimes(1);
+      expect(toggleEligibility).toHaveBeenCalledTimes(1);
     });
 
-    expect(mocks.usersTable.where).toHaveBeenCalledWith('id');
-    expect(mocks.usersTable.equals).toHaveBeenCalledWith('winner-id');
-    expect(mocks.usersTable.modify).toHaveBeenCalledWith({
-      isEligible: false,
-    });
+    expect(toggleEligibility).toHaveBeenCalledWith('winner-id');
   });
 });

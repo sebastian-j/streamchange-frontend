@@ -11,7 +11,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       <td />
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eCIkhf bJeZiM"
           id="displayName"
           type="button"
         >
@@ -35,7 +35,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eCIkhf bJeZiM"
           id="prize"
           type="button"
         >
@@ -59,7 +59,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eCIkhf bJeZiM"
           id="message"
           type="button"
         >
@@ -83,13 +83,13 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eCIkhf bJeZiM"
           id="createdAt"
           type="button"
         >
           Date and time
           <svg
-            class="sc-bdvvNz gCchtE active descending"
+            class="sc-bdvvNz gCchtE"
             height="24"
             viewBox="0 0 24 24"
             width="24"
@@ -112,7 +112,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       class="sc-dkPvMp ivXbmo"
     >
       <td
-        class="sc-gsDLFA fcoBPh image"
+        class="sc-gsDLFA lpefwi image"
       >
         <a
           href="https://kick.com/id"
@@ -127,28 +127,28 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         </a>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh textLeft"
+        class="sc-gsDLFA lpefwi textLeft"
       >
         <span>
           name
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsDLFA lpefwi text"
       >
         <span>
           trophy
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsDLFA lpefwi text"
       >
         <span>
           test message
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsDLFA lpefwi text"
       >
         <span>
           December 24, 2019
