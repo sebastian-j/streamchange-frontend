@@ -10,6 +10,7 @@ exports[`<ColorPicker /> > should render and match the snapshot 1`] = `
   <button
     aria-label="toggle picker"
     class="sc-bdvvNz cRfdsN color-picker-button"
+    style="background-color: rgb(0, 0, 0);"
     type="button"
   >
     <span
