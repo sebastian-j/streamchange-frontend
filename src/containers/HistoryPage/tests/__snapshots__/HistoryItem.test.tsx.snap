@@ -1,0 +1,52 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
+<tr
+  class="sc-gsDLFA kkbbTT"
+>
+  <td
+    class="sc-bdvvNz gOmdtT image"
+  >
+    <a
+      href="https://kick.com/id"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="Logo"
+        height="45px"
+        src="url"
+      />
+    </a>
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT textLeft"
+  >
+    <span>
+      abc
+    </span>
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
+  >
+    <span>
+      prize
+    </span>
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
+  >
+    <span>
+      abc
+    </span>
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
+  >
+    <span>
+      December 24, 2019
+       8:27
+    </span>
+  </td>
+</tr>
+`;

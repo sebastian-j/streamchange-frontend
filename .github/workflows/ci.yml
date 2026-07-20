@@ -6,6 +6,8 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Warsaw
     steps:
       - uses: actions/checkout@v4
 
@@ -21,6 +23,9 @@ jobs:
 
       - name: Format check
         run: npm run format:check
+
+      - name: Run unit tests
+        run: npm run test
 
       - name: Build
         run: npm run build

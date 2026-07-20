@@ -12,8 +12,9 @@ import Tooltip from '@mui/material/Tooltip';
 import messages from './messages';
 import { changePreWinner } from '../GiveawayRules/actions';
 import { changeVisibility } from '../RaffleWrapper/actions';
+import { toggleEligibility } from '../UserList/actions';
 import db from '../YoutubeWorker/db';
-import { API_URL } from '../../config';
+import { API_URL, BACKEND_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
@@ -21,6 +22,7 @@ import MessageItem from './MessageItem';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import Timer from './Timer';
 import { makeSelectGiveawayPreWinner } from '../GiveawayRules/selectors';
+import { makeSelectUserArray } from '../UserList/selectors';
 import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 
 const WinnerPanel = styled.div`
@@ -70,7 +72,7 @@ const AvatarFallback = styled.div`
   align-items: center;
   background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   display: flex;
   flex-shrink: 0;
   font-size: 32px;
@@ -81,8 +83,32 @@ const AvatarFallback = styled.div`
   width: 70px;
 `;
 
+const AvatarSkeleton = styled.div`
+  background: linear-gradient(
+    90deg,
+    ${(props) => props.theme.iconButtonBackground} 0%,
+    ${(props) => props.theme.panelBackground} 50%,
+    ${(props) => props.theme.iconButtonBackground} 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 70px;
+  width: 70px;
+  animation: avatar-skeleton-shimmer 1.4s ease-in-out infinite;
+
+  @keyframes avatar-skeleton-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+`;
+
 const WinnerTitle = styled.span`
-  color: ${(props) => props.userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor || props.theme.staticTextColor};
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
@@ -95,28 +121,13 @@ const SubscriptionMonths = styled.span`
   font-weight: 500;
 `;
 
-const ChannelLink = styled.a`
-  align-self: flex-start;
-  background: ${(props) => props.theme.buttonBackground};
-  border: 1px solid ${(props) => props.theme.color};
-  border-radius: 4px;
-  color: ${(props) => props.theme.buttonTextColor};
-  font-size: 0.9rem;
-  margin-top: 4px;
-  padding: 3px 8px;
-  text-decoration: none;
-  &:hover {
-    background-color: ${(props) => props.theme.buttonBackgroundHover};
-    color: ${(props) => props.theme.buttonTextColorHover};
-  }
-`;
-
 const Button = styled.button`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
   border-radius: 4px;
   color: ${(props) => props.theme.buttonTextColor};
   cursor: pointer;
+  flex-shrink: 0;
   margin-top: 20px;
   overflow: hidden;
   padding: 8px 5px;
@@ -144,6 +155,13 @@ const Button = styled.button`
   }
 `;
 
+const ChannelLink = styled(Button)`
+  align-self: flex-start;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 3px 8px;
+`;
+
 const MessageList = styled.ul`
   overflow-y: auto;
   list-style: none;
@@ -155,14 +173,96 @@ export class WinnerView extends React.Component {
     super(props);
     this.state = {
       user: null,
+      avatarUrl: null,
+      avatarLoading: false,
       messages: [],
       interval: null,
       prize: this.props.prize,
     };
+    this.avatarAbortController = null;
+    this.avatarTimeoutId = null;
     this.getMessages = this.getMessages.bind(this);
     this.saveAndExit = this.saveAndExit.bind(this);
     this.instantReplay = this.instantReplay.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
+    this.fetchAvatar = this.fetchAvatar.bind(this);
+    this.clearAvatarRequest = this.clearAvatarRequest.bind(this);
+  }
+
+  clearAvatarRequest() {
+    if (this.avatarAbortController) {
+      this.avatarAbortController.abort();
+      this.avatarAbortController = null;
+    }
+    if (this.avatarTimeoutId) {
+      clearTimeout(this.avatarTimeoutId);
+      this.avatarTimeoutId = null;
+    }
+  }
+
+  fetchAvatar(user) {
+    this.clearAvatarRequest();
+
+    const platform = user.platform || localStorage.getItem('gv-platform') || '';
+    if (!user.userId || (platform !== 'twitch' && platform !== 'kick')) {
+      this.setState({ avatarLoading: false, avatarUrl: null });
+      return;
+    }
+
+    const abortController = new AbortController();
+    this.avatarAbortController = abortController;
+
+    this.setState({ avatarLoading: true, avatarUrl: null });
+
+    this.avatarTimeoutId = setTimeout(() => {
+      if (!abortController.signal.aborted) {
+        abortController.abort();
+        this.setState({ avatarLoading: false });
+      }
+    }, 3000);
+
+    axios
+      .get(`${BACKEND_URL}/api/avatar`, {
+        params: { user_id: user.userId, platform },
+        signal: abortController.signal,
+      })
+      .then((res) => {
+        if (abortController.signal.aborted) {
+          return;
+        }
+        clearTimeout(this.avatarTimeoutId);
+        this.avatarTimeoutId = null;
+        if (res.data?.url) {
+          this.setState({ avatarUrl: res.data.url, avatarLoading: false });
+        } else {
+          this.setState({ avatarLoading: false });
+        }
+      })
+      .catch((err) => {
+        if (abortController.signal.aborted || err.code === 'ERR_CANCELED') {
+          return;
+        }
+        clearTimeout(this.avatarTimeoutId);
+        this.avatarTimeoutId = null;
+        this.setState({ avatarLoading: false });
+      });
+  }
+
+  resolveUser(idbUser) {
+    const fromRedux = this.props.userArray.find(
+      (user) => user.id === this.props.id
+    );
+
+    return {
+      ...idbUser,
+      ...fromRedux,
+      platform:
+        fromRedux?.platform ||
+        idbUser?.platform ||
+        localStorage.getItem('gv-platform') ||
+        '',
+      userId: fromRedux?.userId || idbUser?.userId || null,
+    };
   }
 
   getMessages() {
@@ -179,16 +279,14 @@ export class WinnerView extends React.Component {
     const winner = {
       channelId: this.state.user.id,
       displayName: this.state.user.title,
-      imageUrl: this.state.user.imageUrl,
+      imageUrl: this.state.avatarUrl || '',
       message: this.state.user.message,
       prize: this.state.prize,
       platform: this.state.user.platform,
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {
-      db.table('users').where('id').equals(winner.channelId).modify({
-        isEligible: false,
-      });
+      this.props.toggleEligibility(winner.channelId);
     }
     db.table('history')
       .add(winner)
@@ -239,14 +337,39 @@ export class WinnerView extends React.Component {
       .filter((user) => user.id === userId)
       .toArray()
       .then((items) => {
-        this.setState({ user: items[0] });
+        const user = this.resolveUser(items[0]);
+        if (!user?.id) {
+          return;
+        }
+        this.setState({ user });
+        this.fetchAvatar(user);
       });
     this.getMessages();
     this.telemetry();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.state.user) {
+      return;
+    }
+
+    const prevEntry = prevProps.userArray.find(
+      (user) => user.id === this.props.id
+    );
+    const currentEntry = this.props.userArray.find(
+      (user) => user.id === this.props.id
+    );
+    const gotUserId = !prevEntry?.userId && currentEntry?.userId;
+
+    if (gotUserId && !this.state.avatarUrl && !this.state.avatarLoading) {
+      const user = this.resolveUser(this.state.user);
+      this.setState({ user }, () => this.fetchAvatar(user));
+    }
+  }
+
   componentWillUnmount() {
+    this.clearAvatarRequest();
     this.props.changePreWinner(null);
     clearInterval(this.state.interval);
   }
@@ -258,21 +381,25 @@ export class WinnerView extends React.Component {
     if (this.state.user.platform === 'twitch') {
       return (
         <ChannelLink
+          as="a"
           href={`https://www.twitch.tv/${this.props.id}`}
           rel="noopener noreferrer"
           target="_blank"
         >
           <FormattedMessage {...messages.openChannel} />
+          <div className="btn-hover" />
         </ChannelLink>
       );
     }
     return (
       <ChannelLink
+        as="a"
         href={`https://kick.com/${this.textReplace(this.props.id)}`}
         rel="noopener noreferrer"
         target="_blank"
       >
         <FormattedMessage {...messages.openChannel} />
+        <div className="btn-hover" />
       </ChannelLink>
     );
   }
@@ -307,10 +434,12 @@ export class WinnerView extends React.Component {
           <FormattedMessage {...messages.panelTitle} />
         </PanelTitle>
         <WinnerHeading>
-          {this.state.user.imageUrl ? (
-            <img alt="logo" src={this.state.user.imageUrl} />
+          {this.state.avatarUrl ? (
+            <img alt={this.state.user.title} src={this.state.avatarUrl} />
+          ) : this.state.avatarLoading ? (
+            <AvatarSkeleton aria-hidden="true" />
           ) : (
-            <AvatarFallback userColor={this.state.user.color}>
+            <AvatarFallback $userColor={this.state.user.color}>
               {this.state.user.title.charAt(0).toUpperCase()}
             </AvatarFallback>
           )}
@@ -322,7 +451,7 @@ export class WinnerView extends React.Component {
                   badges: this.state.user.badges,
                 }}
               />
-              <WinnerTitle userColor={this.state.user.color}>
+              <WinnerTitle $userColor={this.state.user.color}>
                 {this.state.user.title}
               </WinnerTitle>
             </div>
@@ -388,20 +517,24 @@ WinnerView.propTypes = {
   id: PropTypes.string.isRequired,
   preWinner: PropTypes.object,
   prize: PropTypes.string,
+  userArray: PropTypes.array,
   onClose: PropTypes.func.isRequired,
   onRepeat: PropTypes.func.isRequired,
   streamInfo: PropTypes.object,
+  toggleEligibility: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   preWinner: makeSelectGiveawayPreWinner(),
   streamInfo: makeSelectStreamInfo(),
+  userArray: makeSelectUserArray(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     changePreWinner: (w) => dispatch(changePreWinner(w)),
     onRepeat: () => dispatch(changeVisibility(true)),
+    toggleEligibility: (id) => dispatch(toggleEligibility(id)),
     dispatch,
   };
 }

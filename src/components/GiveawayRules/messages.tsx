@@ -48,7 +48,7 @@ export default defineMessages({
   lawContent: {
     id: `${scope}.LotteryLawWarning.content`,
     defaultMessage:
-      'When organizing a lottery for your channel members, be sure to follow Youtube membership policy and the Gambling Act. You can read how to run a legal lottery in the Streamchange documentation.',
+      'When organizing a lottery for your subscribers, be sure to follow the Gambling Act. You can read how to run a legal lottery in the Streamchange documentation.',
   },
   lawOpenDocs: {
     id: `${scope}.LotteryLawWarning.openDocs`,

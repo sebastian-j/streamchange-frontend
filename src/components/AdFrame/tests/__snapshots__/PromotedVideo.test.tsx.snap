@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<PromotedVideo /> > should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-gsDLFA hsXcGK"
+  >
+    <span
+      class="sc-bdvvNz ksfVUI"
+    >
+      Advertisement
+    </span>
+    <div
+      class="sc-dkPvMp bmetsq"
+    >
+      <iframe
+        frameborder="0"
+        height="170"
+        id="ytplayer"
+        src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0origin=https://www.streamchange.pl"
+        title="video"
+        width="500"
+      />
+      <div />
+    </div>
+  </div>
+</div>
+`;

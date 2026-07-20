@@ -16,7 +16,7 @@ const AuthorImage = styled.img`
 
 const AuthorTitle = styled.span`
   color: ${(props) =>
-    props.userColor ? props.userColor : props.theme.secondaryTextColor};
+    props.$userColor ? props.$userColor : props.theme.secondaryTextColor};
   font-family: Roboto, sans-serif;
   font-weight: 500;
   margin-right: 5px;
@@ -26,6 +26,7 @@ const AuthorTitle = styled.span`
 `;
 const MessageText = styled.span`
   color: ${(props) => props.theme.staticTextColor};
+  overflow-wrap: anywhere;
 `;
 
 const EmoteImg = styled.img`
@@ -66,7 +67,7 @@ const InternalChatMessage = (props) => {
     <MessageLi>
       <InternalChatBadges message={props.message} />
       <Tooltip title={convertedDate} aria-label="date">
-        <AuthorTitle userColor={userColor}>{props.message.title}</AuthorTitle>
+        <AuthorTitle $userColor={userColor}>{props.message.title}</AuthorTitle>
       </Tooltip>
       <MessageText>{renderMessageBody(props.message)}</MessageText>
     </MessageLi>

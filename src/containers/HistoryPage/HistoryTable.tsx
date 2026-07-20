@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,17 +12,18 @@ import { HistoryItem as HItem } from './types';
 
 interface Props {
   items: HItem[];
+  sort: string;
+  onSortChange: (value: string) => void;
 }
 
-const HistoryTable = ({ items }: Props) => {
-  const [sort, setSort] = useState<string>('createdAtDESC');
+const HistoryTable = ({ items, sort, onSortChange }: Props) => {
   const handleSortChange = (event) => {
     const { target } = event;
     let value = target.id;
     if (value === sort) {
       value += 'DESC';
     }
-    setSort(value);
+    onSortChange(value);
   };
 
   return (

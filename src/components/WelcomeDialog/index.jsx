@@ -94,7 +94,7 @@ const WelcomeDialog = (props) => {
                 name="channel"
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                label="Link do kanału"
+                label={intl.formatMessage({ ...messages.videoInputLabel })}
                 type="text"
                 value={text}
                 variant="standard"
@@ -131,6 +131,13 @@ const WelcomeDialog = (props) => {
                     )}
                     {props.error === 'quotaExceeded' && (
                       <FormattedMessage {...messages.quotaExceededError} />
+                    )}
+                    {props.error && props.error.startsWith('blacklisted:') && (
+                      <>
+                        <FormattedMessage {...messages.blacklistedError} />
+                        <br />
+                        {props.error.replace('blacklisted:', '')}
+                      </>
                     )}
                   </span>
                 )}
