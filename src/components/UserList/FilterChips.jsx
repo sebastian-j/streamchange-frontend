@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 
-import { BADGE_SETS } from '../ChatView/InternalChatBadges';
+import { BADGE_SETS } from '../ChatView/badgeSets';
 import messages from './messages';
 
 const Title = styled.span`
