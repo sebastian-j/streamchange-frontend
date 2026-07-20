@@ -8,12 +8,12 @@
  * - d3-shape (pie/arc) only computes the segment geometry; React renders
  *   the SVG paths and labels itself, once, before the spin starts.
  * - The spin runs as a CSS transition on the wheel container, so the
- *   browser animates it on the compositor thread and it stays smooth even
+ *   browser animates it on the compositor thread, and it stays smooth even
  *   when the main thread is busy.
  * - Up to MAX_WHEEL_SEGMENTS unique eligible users are sampled onto the
  *   wheel and the winner (preWinner if set) is planted at a known segment.
  * - Labels are fitted per segment before mount: font scales down with the
- *   segment angle and long nicknames are ellipsized via canvas measureText.
+ *   segment angle and long nicknames are ellipsis via canvas measureText.
  * - After the wheel stops, the winner's name and a confirm button appear.
  *   Escape or clicking the backdrop closes without picking a winner.
  * - A small rAF loop mirrors the same easing curve in JS, but only to play
@@ -152,7 +152,7 @@ const rollerEase = makeCubicBezier(...ROLLER_BEZIER);
 
 const BADGE_GAP = 4;
 
-// shrink the font to fit maxWidth, then ellipsize what still overflows
+// shrink the font to fit maxWidth, then ellipsis what still overflows
 const fitLabel = (measure, title, maxWidth, baseSize) => {
   let fontSize = baseSize;
   let width = measure(title, fontSize);
