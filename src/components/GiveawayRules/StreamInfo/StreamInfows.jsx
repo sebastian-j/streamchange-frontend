@@ -5,7 +5,7 @@ export const fetchStreamInfo = async (channel, platform) => {
   });
 
   const response = await fetch(
-    `http://localhost:8000/api/stream-info?${params.toString()}`
+    import.meta.env.API_FETCH+`?${params.toString()}`
   );
 
   if (!response.ok) {
