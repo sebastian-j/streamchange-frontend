@@ -16,6 +16,10 @@
  *   segment angle and long nicknames are ellipsized via canvas measureText.
  * - After the wheel stops, the winner's name and a confirm button appear.
  *   Escape or clicking the backdrop closes without picking a winner.
+ * - A small rAF loop mirrors the same easing curve in JS, but only to play
+ *   a tick sound whenever a segment boundary crosses the needle. The first
+ *   ticks walk down TICK_SOUNDS from the highest pitch to the lowest, then
+ *   the lowest one repeats for the rest of the spin.
  */
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -31,6 +35,19 @@ import {
   makeSelectGiveawayRequirement,
 } from '../GiveawayRules/selectors';
 import { makeSelectUserArray } from '../UserList/selectors';
+import tickSound1 from './assets/FortuneWheelSound1.mp3';
+import tickSound2 from './assets/FortuneWheelSound2.mp3';
+import tickSound3 from './assets/FortuneWheelSound3.mp3';
+import tickSound4 from './assets/FortuneWheelSound4.mp3';
+import tickSound5 from './assets/FortuneWheelSound5.mp3';
+import tickSound6 from './assets/FortuneWheelSound6.mp3';
+import tickSound7 from './assets/FortuneWheelSound7.mp3';
+import tickSound8 from './assets/FortuneWheelSound8.mp3';
+import tickSound9 from './assets/FortuneWheelSound9.mp3';
+import tickSound10 from './assets/FortuneWheelSound10.mp3';
+import tickSound11 from './assets/FortuneWheelSound11.mp3';
+import tickSound12 from './assets/FortuneWheelSound12.mp3';
+import tickSound13 from './assets/FortuneWheelSound13.mp3';
 import './style.css';
 
 const MAX_WHEEL_SEGMENTS = 20;
@@ -63,7 +80,72 @@ const segmentColor = (index, count) => {
   return SEGMENT_COLORS[i];
 };
 
+const MIN_TICK_GAP_MS = 70;
+
+// ordered from the highest pitch to the lowest: each tick steps one sound
+// down the scale, and once the last one is reached it carries the rest of
+// the spin on its own
+const TICK_SOUNDS = [
+  tickSound1,
+  tickSound2,
+  tickSound3,
+  tickSound4,
+  tickSound5,
+  tickSound6,
+  tickSound7,
+  tickSound8,
+  tickSound9,
+  tickSound10,
+  tickSound11,
+  tickSound12,
+  tickSound13,
+];
+
+// JS copy of the CSS cubic-bezier() function, used only to time tick sounds
+const makeCubicBezier = (x1, y1, x2, y2) => {
+  const ax = 3 * x1 - 3 * x2 + 1;
+  const bx = 3 * x2 - 6 * x1;
+  const cx = 3 * x1;
+  const ay = 3 * y1 - 3 * y2 + 1;
+  const by = 3 * y2 - 6 * y1;
+  const cy = 3 * y1;
+
+  const sampleX = (t) => ((ax * t + bx) * t + cx) * t;
+  const sampleY = (t) => ((ay * t + by) * t + cy) * t;
+  const sampleDerivativeX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+
+  const solveT = (x) => {
+    let t = x;
+    for (let i = 0; i < 8; i += 1) {
+      const dx = sampleX(t) - x;
+      if (Math.abs(dx) < 1e-6) return t;
+      const d = sampleDerivativeX(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= dx / d;
+    }
+    let lo = 0;
+    let hi = 1;
+    t = x;
+    for (let i = 0; i < 20; i += 1) {
+      const dx = sampleX(t) - x;
+      if (Math.abs(dx) < 1e-6) return t;
+      if (dx > 0) hi = t;
+      else lo = t;
+      t = (lo + hi) / 2;
+    }
+    return t;
+  };
+
+  return (x) => {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    return sampleY(solveT(x));
+  };
+};
+
+// one curve shared by the CSS transition (visuals) and the JS ease (sounds)
 const ROLLER_BEZIER = [0.18, 0.17, 0.02, 1];
+const rollerEase = makeCubicBezier(...ROLLER_BEZIER);
 
 const BADGE_GAP = 4;
 
@@ -111,10 +193,24 @@ const FortuneWheelRaffle = (props) => {
   const [finished, setFinished] = useState(false);
   const [timer, setTimer] = useState(null);
   const movableRef = useRef(null);
+  const audioCtx = useRef(null);
+  const tickBuffers = useRef([]);
+  const rafId = useRef(null);
+
+  const playTick = (index) => {
+    const ctx = audioCtx.current;
+    const buffer = tickBuffers.current[Math.min(index, TICK_SOUNDS.length - 1)];
+    if (!ctx || !buffer) return;
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(ctx.destination);
+    source.start();
+  };
 
   const closeImmediately = () => {
     props.onClose();
     clearTimeout(timer);
+    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
   };
 
   const confirmWinner = () => {
@@ -163,6 +259,24 @@ const FortuneWheelRaffle = (props) => {
   }, [users]);
 
   useEffect(() => {
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextCtor) {
+      const ctx = new AudioContextCtor();
+      audioCtx.current = ctx;
+      ctx.resume().catch(() => {});
+      Promise.all(
+        TICK_SOUNDS.map((src) =>
+          fetch(src)
+            .then((response) => response.arrayBuffer())
+            .then((data) => ctx.decodeAudioData(data))
+        )
+      )
+        .then((buffers) => {
+          tickBuffers.current = buffers;
+        })
+        .catch(() => {});
+    }
+
     let eligibleUsers = props.userArray.filter(
       (user) => user.isEligible === true
     );
@@ -215,6 +329,39 @@ const FortuneWheelRaffle = (props) => {
       movable.style.transform = `rotate(${rotation}deg)`;
     }
 
+    // rAF loop only follows the animation's progress to play the tick sounds
+    let startTime = null;
+    let lastSegmentsCrossed = null;
+    let lastTickAt = -Infinity;
+    let ticksPlayed = 0;
+
+    const step = (now) => {
+      if (startTime === null) startTime = now;
+      const p = Math.min((now - startTime) / durationMs, 1);
+      const currentRotation = rotation * rollerEase(p);
+
+      const segmentsCrossed = Math.floor(
+        Math.abs(currentRotation) / segmentDeg
+      );
+      if (lastSegmentsCrossed === null) lastSegmentsCrossed = segmentsCrossed;
+      if (
+        segmentsCrossed > lastSegmentsCrossed &&
+        now - lastTickAt >= MIN_TICK_GAP_MS
+      ) {
+        playTick(ticksPlayed);
+        ticksPlayed += 1;
+        lastTickAt = now;
+      }
+      lastSegmentsCrossed = segmentsCrossed;
+
+      if (p < 1) {
+        rafId.current = requestAnimationFrame(step);
+      } else {
+        rafId.current = null;
+      }
+    };
+    rafId.current = requestAnimationFrame(step);
+
     setTimer(
       setTimeout(
         () => {
@@ -223,7 +370,14 @@ const FortuneWheelRaffle = (props) => {
         (props.duration + 1) * 1000
       )
     );
-    return undefined;
+
+    return () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+      if (audioCtx.current) {
+        audioCtx.current.close().catch(() => {});
+        audioCtx.current = null;
+      }
+    };
   }, [props.duration, props.giveawayReq, props.preWinner, props.userArray]);
 
   useEffect(() => {
