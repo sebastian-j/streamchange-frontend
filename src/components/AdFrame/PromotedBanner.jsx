@@ -45,9 +45,11 @@ const PromotedBanner = (props) => {
   return (
     <PromotedContentWrapper
       offset={imgHeight}
+      // eslint-disable-next-line react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection
       margin={props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
     >
       <AdTitle
+        // eslint-disable-next-line react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection
         margin={props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
       >
         <FormattedMessage {...messages.title} />
@@ -70,6 +72,7 @@ const PromotedBanner = (props) => {
             </video>
           )}
         </div>
+        {/* eslint-disable react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection */}
         <Shield
           margin={
             props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100
@@ -85,6 +88,7 @@ const PromotedBanner = (props) => {
             props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100
           }
         />
+        {/* eslint-enable react-hooks/purity */}
       </a>
     </PromotedContentWrapper>
   );

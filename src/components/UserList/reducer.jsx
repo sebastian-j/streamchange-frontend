@@ -17,7 +17,6 @@ export const initialState = {
   userArray: [],
 };
 
-/* eslint-disable default-case, no-param-reassign */
 const userListReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

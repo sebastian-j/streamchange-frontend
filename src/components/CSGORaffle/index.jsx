@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,17 +11,7 @@ import { makeSelectUserArray } from '../UserList/selectors';
 import './style.css';
 
 const CSGORaffle = (props) => {
-  const [users, setUsers] = useState([]);
-  const [scrollSize, setScrollSize] = useState(0);
-  const [winner, setWinner] = useState(null);
-  const [timer, setTimer] = useState(null);
-
-  const closeImmediately = () => {
-    props.onClose();
-    clearTimeout(timer);
-  };
-
-  useEffect(() => {
+  const [{ users, winner, scroll }] = useState(() => {
     let eligibleUsers = props.userArray.filter(
       (user) => user.isEligible === true
     );
@@ -31,28 +21,40 @@ const CSGORaffle = (props) => {
       );
     }
     const shuffled = [];
-    for (let i = 0; i < 30 + props.duration * 3; i += 1) {
-      shuffled.push(
-        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
-      );
+    if (eligibleUsers.length > 0) {
+      for (let i = 0; i < 30 + props.duration * 3; i += 1) {
+        shuffled.push(
+          eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
+        );
+      }
     }
     const winnerIndex =
       Math.floor(Math.random() * 10) + 10 + props.duration * 3;
     if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
-    const selectedWinner = shuffled[winnerIndex];
-    const scroll = -(winnerIndex * 150 + Math.floor(Math.random() * 65) - 290);
-    setUsers(shuffled);
-    setTimeout(() => setScrollSize(scroll), 10);
-    setWinner(selectedWinner);
-    setTimer(
-      setTimeout(
-        () => {
-          props.onWin(selectedWinner.id);
-        },
-        (props.duration + 1) * 1000
-      )
+    return {
+      users: shuffled,
+      winner: shuffled[winnerIndex],
+      scroll: -(winnerIndex * 150 + Math.floor(Math.random() * 65) - 290),
+    };
+  });
+  const [scrollSize, setScrollSize] = useState(0);
+  const timerRef = useRef(null);
+
+  const closeImmediately = () => {
+    props.onClose();
+    clearTimeout(timerRef.current);
+  };
+
+  useEffect(() => {
+    const scrollTimeout = setTimeout(() => setScrollSize(scroll), 10);
+    timerRef.current = setTimeout(
+      () => {
+        props.onWin(winner.id);
+      },
+      (props.duration + 1) * 1000
     );
-  }, []);
+    return () => clearTimeout(scrollTimeout);
+  }, [scroll, winner, props]);
 
   return (
     <div className="dialog-root">
@@ -74,8 +76,8 @@ const CSGORaffle = (props) => {
                   transitionDuration: `${props.duration}s`,
                 }}
               >
-                {users.map((item) => (
-                  <td key={Math.round(Math.random() * 10000000)}>
+                {users.map((item, index) => (
+                  <td key={`${index}-${item.id}`}>
                     <div className="roller-cell">
                       <img src={item?.imageUrl} alt="logo" />
                       <span className="roller-label">{item?.title}</span>
