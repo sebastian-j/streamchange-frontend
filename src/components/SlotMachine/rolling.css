@@ -1,23 +1,41 @@
 .symbol-container {
   position: relative;
-  height: 13500px; 
+  height: 13500px;
   width: 80px;
   animation: roll 30s linear infinite;
+  transition: transform 0.5s ease-out;
   will-change: transform;
 }
 
-.set-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.set-b {
-  top: 4500px;
+.symbol-container.is-rolling {
+  animation: SingleRoll 10s linear forwards !important;
+  transition: transform 10s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 
 @keyframes roll {
   from { transform: translateY(0); }
   to { transform: translateY(-9000px); }
+}
+@keyframes SingleRoll {
+  0% { transform: translateY(0); }
+  5% { transform: translateY(-1800px); }
+  10% { transform: translateY(-3200px); }
+  15% { transform: translateY(-4200px); }
+  20% { transform: translateY(-5050px); }
+  25% { transform: translateY(-5800px); }
+  30% { transform: translateY(-6275px); }
+  35% { transform: translateY(-6725px); }
+  40% { transform: translateY(-7150px); }
+  45% { transform: translateY(-7550px); }
+  50% { transform: translateY(-7925px); }
+  55% { transform: translateY(-8175px); }
+  60% { transform: translateY(-8500px); }
+  65% { transform: translateY(-8650px); }
+  70% { transform: translateY(-8725px); }
+  75% { transform: translateY(-8800px); }
+  80% { transform: translateY(-8850px); }
+  85% { transform: translateY(-8900px); }
+  90% { transform: translateY(-8950px); }
+  95% { transform: translateY(-9000px); }
+  100% { transform: translateY(-9000px); }
 }

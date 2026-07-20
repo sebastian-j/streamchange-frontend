@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, memo } from 'react';
 import styled from 'styled-components';
 import slotMachineImg from './assets/SlotsMachineOuter.svg';
+import lever from './assets/lever1.svg';
 import lemon from './assets/symbols/lemon.svg';
 import bell from './assets/symbols/bell.svg';
 import cherry from './assets/symbols/cherry.svg';
@@ -10,6 +11,7 @@ import seven from './assets/symbols/seven.svg';
 import treasure from './assets/symbols/treasure.svg';
 import WheelItem from './WheelItem';
 import './rolling.css';
+import './leverpull.css'
 
 const Container = styled.div`
   position: absolute;
@@ -29,30 +31,65 @@ const SlotMachineImg = styled.img`
   left: 0;
   z-index: 1;
 `;
+const Leverimg = styled.img`
+  width: 40%;
+  height: 40%;
+  position: absolute;
+  top: 58%;
+  left: 30%;
+  z-index: 5;
+`;
 
+const SlotsRaffle = (props) => {
+  const [isPulled, setIsPulled] = useState(false);
+  const [isRolling, setIsRolling] = useState(false);
+ const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
+ const generateLongList = () => 
+    Array.from({ length: 31 }, () => ({
+      id: Math.random().toString(36).substr(2, 9),
+      src: imageFiles[Math.floor(Math.random() * imageFiles.length)]
+    }));
+    const [reels, setReels] = useState([
+    { setA: generateLongList(), setB: generateLongList() }, 
+    { setA: generateLongList(), setB: generateLongList() }, 
+    { setA: generateLongList(), setB: generateLongList() }  
+  ]);
+
+const startSlotMachine = () => {
+  setIsRolling(true); // To automatycznie doda klasę 'is-rolling' w JSX
+
+  setTimeout(() => {
+    // 1. Podmień wyniki
+    const newResults = [
+        { setA: generateLongList(), setB: generateLongList() },
+        { setA: generateLongList(), setB: generateLongList() },
+        { setA: generateLongList(), setB: generateLongList() }
+    ];
+    setReels(newResults);
+
+    // 2. Wyłącz animację szybkiego kręcenia
+    setIsRolling(false); 
+  }, 10000);
+};
 const SlotSymbol = memo(({ src }) => (
   <img src={src} style={{ width: '100%', height: '150px', display: 'block' }} />
 ));
+  const handleLeverClick = () => {
+  if (isPulled || isRolling) return; 
 
-const SlotsRaffle = (props) => {
+  setIsPulled(true);
+  setIsRolling(true);
+  
+  startSlotMachine(); 
+  
+  setTimeout(() => setIsPulled(false), 500);
+};
   const positions = [
     { x: '15%', y: '30%' },
     { x: '44%', y: '30%' },
     { x: '73%', y: '30%' },
   ];
 
-  const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
-  const generateLongList = () => 
-    Array.from({ length: 31 }, () => ({
-      id: Math.random().toString(36).substr(2, 9),
-      src: imageFiles[Math.floor(Math.random() * imageFiles.length)]
-    }));
-
-  const [reels, setReels] = useState([
-    { setA: generateLongList(), setB: generateLongList() }, 
-    { setA: generateLongList(), setB: generateLongList() }, 
-    { setA: generateLongList(), setB: generateLongList() }  
-  ]);
 
   const containerRefs = useRef([]);
 
@@ -90,15 +127,21 @@ const SlotsRaffle = (props) => {
   return (
     <Container>
       <SlotMachineImg src={slotMachineImg} />
+      <Leverimg 
+        src={lever} 
+        className={`lever ${isPulled ? 'lever-pulled' : ''}`}
+        onClick={handleLeverClick}
+        alt="Dźwignia"
+      />
       {positions.map((pos, reelIndex) => (
         <WheelItem 
           key={reelIndex}        
           style={{ position: 'absolute', left: pos.x, top: pos.y, zIndex: 2, overflow: 'hidden', height: '150px', width: '80px' }}
         >
-          <div 
-            className="symbol-container"
-            ref={(el) => (containerRefs.current[reelIndex] = el)}
-          >
+ <div 
+  className={`symbol-container ${isRolling ? 'is-rolling' : ''}`}
+  ref={(el) => (containerRefs.current[reelIndex] = el)}
+>
             <div className="set-wrapper set-a">
               {reels[reelIndex].setA.map((item) => (
                 <SlotSymbol key={item.id} src={item.src} />
