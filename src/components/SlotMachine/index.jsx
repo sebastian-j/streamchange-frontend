@@ -56,18 +56,15 @@ const SlotsRaffle = (props) => {
   ]);
 
 const startSlotMachine = () => {
-  setIsRolling(true); // To automatycznie doda klasę 'is-rolling' w JSX
+  setIsRolling(true);
 
   setTimeout(() => {
-    // 1. Podmień wyniki
     const newResults = [
         { setA: generateLongList(), setB: generateLongList() },
         { setA: generateLongList(), setB: generateLongList() },
         { setA: generateLongList(), setB: generateLongList() }
     ];
     setReels(newResults);
-
-    // 2. Wyłącz animację szybkiego kręcenia
     setIsRolling(false); 
   }, 10000);
 };
