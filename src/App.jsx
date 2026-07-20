@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import YoutubeWorker from './components/YoutubeWorker';
 import WelcomeDialog from './components/WelcomeDialog';
-import GiveawayPage from './containers/GiveawayPage';
 export default function App() {
-  const [channelConfig, setChannelConfig] = useState(null);
-
-  useEffect(() => {
+  const [channelConfig, setChannelConfig] = useState(() => {
     const savedChannel = localStorage.getItem('gv-channel');
     const savedPlatform = localStorage.getItem('gv-platform');
 
-    if (savedChannel && savedPlatform) {
-      setChannelConfig({ channel: savedChannel, platform: savedPlatform });
-    }
-  }, []);
+    return savedChannel && savedPlatform
+      ? { channel: savedChannel, platform: savedPlatform }
+      : null;
+  });
 
   const handleStartStream = (channelName, platformName) => {
     localStorage.setItem('gv-channel', channelName);

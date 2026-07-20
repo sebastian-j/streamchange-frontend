@@ -36,19 +36,19 @@ const AdFrame = () => {
     setIsOpen(false);
   };
 
-  const getToday = () => {
-    const d = new Date();
-    let month = `${d.getMonth() + 1}`;
-    let day = `${d.getDate()}`;
-    const year = d.getFullYear();
+  useEffect(() => {
+    const getToday = () => {
+      const d = new Date();
+      let month = `${d.getMonth() + 1}`;
+      let day = `${d.getDate()}`;
+      const year = d.getFullYear();
 
-    if (month.length < 2) month = `0${month}`;
-    if (day.length < 2) day = `0${day}`;
+      if (month.length < 2) month = `0${month}`;
+      if (day.length < 2) day = `0${day}`;
 
-    return [year, month, day].join('-');
-  };
+      return [year, month, day].join('-');
+    };
 
-  const getPromotedChannels = () => {
     axios.get('../static/sellers.json').then((res) => {
       if (res.data.items) {
         for (let i = 0; i < res.data.items.length; i += 1) {
@@ -59,10 +59,6 @@ const AdFrame = () => {
         setPromotedContent(null);
       }
     });
-  };
-
-  useEffect(() => {
-    getPromotedChannels();
   }, []);
 
   if (promotedContent === null) {
@@ -79,6 +75,7 @@ const AdFrame = () => {
         <Dialog
           open={isOpen}
           onClose={closeDialog}
+          disableRestoreFocus
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">

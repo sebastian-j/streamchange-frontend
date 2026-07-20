@@ -6,6 +6,9 @@ export const API_URL = 'https://www.googleapis.com/youtube/v3';
 export const PRIVILEGED_CHANNELS = ['ID1', 'ID2'];
 // Type hints that will display on welcome screen
 export const HINTS = ['hint1', 'hint2'];
+// Backend API URL
+export const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
 // WebSocket endpoint for live chat, set VITE_WS_URL to override
 export const WS_URL =
   import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8000/ws/chat';

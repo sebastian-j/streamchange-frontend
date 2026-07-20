@@ -13,4 +13,7 @@ export default defineMessages({
   viewers: {
     id: 'streamchange.components.StreamInfo.viewers',
   },
+    LOS: {
+    id: `streamchange.components.StreamInfo.LOS`,
+  },
 });

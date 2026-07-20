@@ -1,11 +1,11 @@
+import {BACKEND_URL} from '../../../config';
 export const fetchStreamInfo = async (channel, platform) => {
   const params = new URLSearchParams({
     channel: channel,
     platform: platform,
   });
-
   const response = await fetch(
-    import.meta.env.API_FETCH+`?${params.toString()}`
+ BACKEND_URL+`/api/stream-info?${params.toString()}`
   );
 
   if (!response.ok) {
