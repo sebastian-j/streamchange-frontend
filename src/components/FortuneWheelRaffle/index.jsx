@@ -51,18 +51,20 @@ import tickSound13 from './assets/FortuneWheelSound13.mp3';
 import './style.css';
 
 const MAX_WHEEL_SEGMENTS = 20;
-// all sizes below are SVG viewBox units; the wheel scales with the dialog
 const WHEEL_RADIUS = 300;
+
 const VIEWBOX = `-${WHEEL_RADIUS} -${WHEEL_RADIUS} ${WHEEL_RADIUS * 2} ${WHEEL_RADIUS * 2}`;
+const RIM_WIDTH = 6;
+const SEGMENT_STROKE = 3;
+const SEGMENT_RADIUS = WHEEL_RADIUS - RIM_WIDTH - SEGMENT_STROKE / 2;
+const RIM_RADIUS = WHEEL_RADIUS - RIM_WIDTH / 2;
 const HUB_RADIUS = 40;
 const LABEL_INNER_RADIUS = 70;
-const LABEL_OUTER_RADIUS = WHEEL_RADIUS - 15;
-// labels sit centered on the middle of the slice, along its radial axis
+const LABEL_OUTER_RADIUS = SEGMENT_RADIUS - 15;
 const LABEL_RADIUS = (LABEL_INNER_RADIUS + LABEL_OUTER_RADIUS) / 2;
+
 const MAX_FONT_SIZE = 22;
 const MIN_FONT_SIZE = 13;
-// distinct muted colours; each fill carries its own label colour so text
-// stays readable on both light and dark segments
 const SEGMENT_COLORS = [
   { fill: '#c4523f', labelFill: '#ffffff' },
   { fill: '#d8a233', labelFill: '#232b36' },
@@ -75,7 +77,6 @@ const SEGMENT_COLORS = [
 ];
 const segmentColor = (index, count) => {
   let i = index % SEGMENT_COLORS.length;
-  // keep the last segment from matching the first one it touches
   if (index === count - 1 && i === 0) i = 3;
   return SEGMENT_COLORS[i];
 };
@@ -143,8 +144,10 @@ const makeCubicBezier = (x1, y1, x2, y2) => {
   };
 };
 
-// one curve shared by the CSS transition (visuals) and the JS ease (sounds)
-const ROLLER_BEZIER = [0.18, 0.17, 0.02, 1];
+// one curve shared by the CSS transition (visuals) and the JS ease (sounds).
+// It leaves the start at full speed (steep initial slope) and spends the rest
+// of the spin coasting down to a stop.
+const ROLLER_BEZIER = [0.1, 0.55, 0.15, 1];
 const rollerEase = makeCubicBezier(...ROLLER_BEZIER);
 
 const BADGE_GAP = 4;
@@ -223,7 +226,7 @@ const FortuneWheelRaffle = (props) => {
   const segments = useMemo(() => {
     if (users.length === 0) return [];
     const slices = pie().value(1).sort(null)(users);
-    const arcGen = arc().innerRadius(0).outerRadius(WHEEL_RADIUS);
+    const arcGen = arc().innerRadius(0).outerRadius(SEGMENT_RADIUS);
     const measure = makeTextMeasurer();
     const segmentAngle = (2 * Math.PI) / users.length;
     // the label may not be taller than the slice is wide at its midpoint
@@ -419,7 +422,7 @@ const FortuneWheelRaffle = (props) => {
                     d={segment.path}
                     fill={segment.fill}
                     stroke="#ffffff"
-                    strokeWidth="3"
+                    strokeWidth={SEGMENT_STROKE}
                   />
                   <g
                     transform={`rotate(${segment.labelRotate}) translate(${LABEL_RADIUS}, 0)`}
@@ -451,6 +454,12 @@ const FortuneWheelRaffle = (props) => {
                 </g>
               ))}
               <circle
+                r={RIM_RADIUS}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth={RIM_WIDTH}
+              />
+              <circle
                 className="fwheel-hub"
                 r={HUB_RADIUS}
                 fill="url(#fwheel-hub-shine)"
@@ -459,7 +468,6 @@ const FortuneWheelRaffle = (props) => {
               />
             </svg>
           </div>
-          <div className="fwheel-ring" />
           <div className="fwheel-needle" />
         </div>
         {finished && winner !== null && (
