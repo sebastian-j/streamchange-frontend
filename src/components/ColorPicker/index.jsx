@@ -45,7 +45,7 @@ const PickerButton = styled.button`
 `;
 
 const ColorPicker = (props) => {
-  const [color, setColor] = useState(props.color);
+  const [color, setColor] = useState(props.color || '#000000');
   const [pickerVisible, setPickerVisible] = useState(false);
 
   const colorString =

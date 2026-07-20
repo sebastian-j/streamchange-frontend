@@ -21,10 +21,12 @@ const CSGORaffle = (props) => {
       );
     }
     const shuffled = [];
-    for (let i = 0; i < 30 + props.duration * 3; i += 1) {
-      shuffled.push(
-        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
-      );
+    if (eligibleUsers.length > 0) {
+      for (let i = 0; i < 30 + props.duration * 3; i += 1) {
+        shuffled.push(
+          eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
+        );
+      }
     }
     const winnerIndex =
       Math.floor(Math.random() * 10) + 10 + props.duration * 3;

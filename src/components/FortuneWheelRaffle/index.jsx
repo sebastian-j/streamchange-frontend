@@ -39,10 +39,12 @@ const FortuneWheelRaffle = (props) => {
       );
     }
     const shuffled = [];
-    for (let i = 0; i < 10; i += 1) {
-      shuffled.push(
-        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
-      );
+    if (eligibleUsers.length > 0) {
+      for (let i = 0; i < 10; i += 1) {
+        shuffled.push(
+          eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
+        );
+      }
     }
     const winnerIndex = Math.floor(Math.random() * 10);
     if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
