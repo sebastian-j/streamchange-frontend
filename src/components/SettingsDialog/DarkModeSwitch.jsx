@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -12,11 +12,9 @@ import { toggleDarkMode } from '../../containers/StyleProvider/actions';
 
 const DarkModeSwitch = (props) => {
   const intl = useIntl();
-  const [state, setState] = useState(false);
-
-  useEffect(() => {
-    setState(localStorage.getItem('darkMode') === 'true');
-  }, []);
+  const [state, setState] = useState(
+    () => localStorage.getItem('darkMode') === 'true'
+  );
 
   const handleChange = (event) => {
     setState(event.target.checked);

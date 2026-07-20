@@ -4,8 +4,6 @@
 
 import { combineReducers } from 'redux';
 //import { connectRouter } from 'connected-react-router';
-
-import history from './utils/history';
 import giveawayRulesReducer from './components/GiveawayRules/reducer';
 import giveawayPageReducer from './containers/GiveawayPage/reducer';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
@@ -17,7 +15,7 @@ import queueReducer from './containers/QueuePage/reducer';
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
-  const rootReducer = combineReducers({
+  return combineReducers({
     language: languageProviderReducer,
     theme: styleProviderReducer,
     raffleWrapper: raffleWrapperReducer,
@@ -27,6 +25,4 @@ export default function createReducer(injectedReducers = {}) {
     //router: connectRouter(history),
     ...injectedReducers,
   });
-
-  return rootReducer;
 }

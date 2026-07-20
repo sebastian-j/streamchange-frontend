@@ -164,6 +164,7 @@ const GiveawayPage = (props) => {
     }
   };
 
+  const { changeStreamProperties } = props;
   useEffect(() => {
     const channel =
       localStorage.getItem('gv-channel') ||
@@ -183,9 +184,9 @@ const GiveawayPage = (props) => {
         videoId: channel,
         platform: platform,
       };
-      props.changeStreamProperties(streamProps);
+      changeStreamProperties(streamProps);
     }
-  }, []);
+  }, [changeStreamProperties]);
 
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (

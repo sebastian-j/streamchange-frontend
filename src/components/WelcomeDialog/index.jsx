@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import { FormattedMessage, useIntl } from 'react-intl';
 import messages from './messages';
 import { CompatibilityInfo } from './components/CompatibilityInfo';
@@ -35,11 +33,17 @@ const parseChannelInput = (value) => {
 
 const WelcomeDialog = (props) => {
   const intl = useIntl();
-  const [isChrome, setIsChrome] = useState(true);
-  const [isFirstUse, setIsFirstUse] = useState(false);
+  const [isChrome] = useState(() => !!window.chrome);
+  const [isFirstUse] = useState(() => !localStorage.getItem('locale'));
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
   const [isLinkInvalid, setIsLinkInvalid] = useState(false);
+  const [prevError, setPrevError] = useState(props.error);
+
+  if (props.error !== prevError) {
+    setPrevError(props.error);
+    if (props.error) setIsLoading(false);
+  }
 
   const handleInputChange = (e) => {
     setText(e.target.value);
@@ -59,15 +63,6 @@ const WelcomeDialog = (props) => {
       props.onStart(parsed.channel, parsed.platform);
     }
   };
-
-  useEffect(() => {
-    setIsChrome(!!window.chrome);
-    setIsFirstUse(!localStorage.getItem('locale'));
-  }, []);
-
-  useEffect(() => {
-    if (props.error) setIsLoading(false);
-  }, [props.error]);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !isLoading) {
