@@ -8,18 +8,7 @@ import { initialState } from './reducer';
 const selectGiveawayPage = (state: ApplicationRootState) =>
   state.giveawayPage || initialState;
 
-const makeSelectAuthKey = () =>
-  createSelector(selectGiveawayPage, (state) => state.authKey);
-
-const makeSelectBanStatus = () =>
-  createSelector(selectGiveawayPage, (state) => state.ban);
-
 const makeSelectStreamInfo = () =>
   createSelector(selectGiveawayPage, (state) => state.stream);
 
-export {
-  selectGiveawayPage,
-  makeSelectAuthKey,
-  makeSelectBanStatus,
-  makeSelectStreamInfo,
-};
+export { selectGiveawayPage, makeSelectStreamInfo };

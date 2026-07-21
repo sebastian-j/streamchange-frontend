@@ -45,14 +45,6 @@ export default defineMessages({
     id: `${scope}.error.quotaExceeded`,
     defaultMessage: 'The quota limit has been exceeded.',
   },
-  banDate: {
-    id: `${scope}.banDate`,
-    defaultMessage: 'Banned to',
-  },
-  banReason: {
-    id: `${scope}.banReason`,
-    defaultMessage: 'Reason:',
-  },
   blacklistedError: {
     id: `${scope}.error.blacklisted`,
     defaultMessage: 'This channel is blacklisted.',
