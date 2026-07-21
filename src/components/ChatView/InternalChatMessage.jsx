@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 
 import InternalChatBadges from './InternalChatBadges';
+import { getSafeColor } from '../../utils/colors';
 
 const MessageLi = styled.li`
   margin-bottom: 5px;
@@ -10,7 +11,7 @@ const MessageLi = styled.li`
 
 const AuthorTitle = styled.span`
   color: ${(props) =>
-    props.$userColor ? props.$userColor : props.theme.secondaryTextColor};
+    props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.secondaryTextColor};
   font-family: Roboto, sans-serif;
   font-weight: 500;
   margin-right: 5px;
@@ -50,9 +51,8 @@ const renderMessageBody = (message) => {
 const InternalChatMessage = (props) => {
   const userColor = props.message.color || null;
   const dt = new Date(props.message.publishedAt);
-  const convertedDate = `${dt.getHours()}:${
-    dt.getMinutes() < 10 ? '0' : ''
-  }${dt.getMinutes()}:${dt.getSeconds() < 10 ? '0' : ''}${dt.getSeconds()}`;
+  const convertedDate = `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''
+    }${dt.getMinutes()}:${dt.getSeconds() < 10 ? '0' : ''}${dt.getSeconds()}`;
 
   return (
     <MessageLi>

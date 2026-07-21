@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Tooltip from '@mui/material/Tooltip';
-
+import { getSafeColor } from '../../utils/colors';
 import messages from './messages';
 import { changePreWinner } from '../GiveawayRules/actions';
 import { changeVisibility } from '../RaffleWrapper/actions';
@@ -72,7 +72,7 @@ const AvatarFallback = styled.div`
   align-items: center;
   background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  color: ${(props) => props.$userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor};
   display: flex;
   flex-shrink: 0;
   font-size: 32px;
@@ -108,7 +108,7 @@ const AvatarSkeleton = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${(props) => props.$userColor || props.theme.staticTextColor};
+  color: ${(props) => props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor};
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
