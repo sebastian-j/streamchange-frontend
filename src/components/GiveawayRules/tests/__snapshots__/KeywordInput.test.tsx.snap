@@ -3,7 +3,7 @@
 exports[`<KeywordInput /> > should render and match the snapshot 1`] = `
 <div
   aria-label="keyword"
-  class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-bdvvNz ezwuBH css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-bcHNtg daTBce css-xanwcj-MuiFormControl-root-MuiTextField-root"
   data-mui-internal-clone-element="true"
   inputprops="[object Object]"
 >

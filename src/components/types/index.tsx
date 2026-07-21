@@ -1,5 +1,4 @@
 import { Reducer, Store } from 'redux';
-import { Saga } from 'redux-saga';
 
 import { ContainerState as LanguageProviderState } from '../../../app/containers/LanguageProvider/types';
 import { ContainerState as GiveawayState } from '../../../app/containers/GiveawayPage/types';
@@ -14,18 +13,11 @@ import { ContainerState as UserListState } from '../../components/UserList/types
 
 export interface InjectedStore extends Store {
   injectedReducers: any;
-  injectedSagas: any;
-  runSaga(saga: Saga<any[]> | undefined, args: any | undefined): any;
 }
 
 export interface InjectReducerParams {
   key: keyof ApplicationRootState;
   reducer: Reducer<any, any>;
-}
-
-export interface InjectSagaParams {
-  key: keyof ApplicationRootState;
-  saga: Saga;
 }
 
 // Your root reducer type, which is your redux state types also

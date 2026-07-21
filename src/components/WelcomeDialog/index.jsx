@@ -136,20 +136,6 @@ const WelcomeDialog = (props) => {
                     )}
                   </span>
                 )}
-                {props.ban && (
-                  <span
-                    style={{
-                      display: 'block',
-                      color: '#bd0013',
-                      marginTop: '10px',
-                    }}
-                  >
-                    <FormattedMessage {...messages.banDate} />
-                    {` ${props.ban.endsAt} `}
-                    <FormattedMessage {...messages.banReason} />
-                    {props.ban.description}
-                  </span>
-                )}
               </div>
             </div>
             <div className="actions">
@@ -179,7 +165,6 @@ const WelcomeDialog = (props) => {
 };
 
 WelcomeDialog.propTypes = {
-  ban: PropTypes.object,
   error: PropTypes.string,
   onStart: PropTypes.func,
   variant: PropTypes.number,

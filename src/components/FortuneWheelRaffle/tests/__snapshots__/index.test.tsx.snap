@@ -2,7 +2,7 @@
 
 exports[`<FortuneWheelRaffle /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bdvvNz icgXGJ"
+  class="sc-bcHNtg bKAayY"
 >
   <button
     aria-label="stop the wheel immediately"
@@ -10,23 +10,23 @@ exports[`<FortuneWheelRaffle /> > should render and match the snapshot 1`] = `
     type="button"
   />
   <div
-    class="sc-gsDLFA gLaJlf"
+    class="sc-gsMGyr bTWryi"
   >
     <div
-      class="sc-jRQzZg cMsEHq"
+      class="sc-jTkVfb gvUOGQ"
       style="position: absolute; transform: rotate(0deg); transition-duration: 7s;"
     >
       <img
-        class="sc-eCIkhf kFSwoG"
+        class="sc-eDgbZQ kPcsNo"
         src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-inner.png"
       />
     </div>
     <img
-      class="sc-gKckfV dlYLKJ"
+      class="sc-gLfMdy hDSKXz"
       src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-outer.png"
     />
     <span
-      class="sc-dkPvMp eaLQvY"
+      class="sc-dkHxwO dMMEyI"
       style="animation-delay: 7.1s;"
     />
   </div>
