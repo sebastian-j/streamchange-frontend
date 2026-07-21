@@ -2,21 +2,21 @@
 
 exports[`<SuperChat /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bdvvNz jfyHmP"
+  class="sc-bcHNtg ezxDnu"
 >
   <div
-    class="sc-gsDLFA eVvLkj"
+    class="sc-gsMGyr bbefay"
   >
     <img
       alt="logo"
-      class="sc-dkPvMp irXFLd"
+      class="sc-dkHxwO dlPtfp"
       src="url"
     />
      
     title
   </div>
   <span
-    class="sc-hKwAaq qZbOf"
+    class="sc-hLllbt jkLUtP"
   >
     message
   </span>

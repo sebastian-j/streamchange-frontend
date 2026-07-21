@@ -78,8 +78,6 @@
   "streamchange.components.UserList.clearBtn": "Clear all",
   "streamchange.components.UserList.counter": "{selected} out of {all} are participating",
   "streamchange.components.UserList.title": "Viewers",
-  "streamchange.components.WelcomeDialog.banDate": "Banned to",
-  "streamchange.components.WelcomeDialog.banReason": "Reason:",
   "streamchange.components.WelcomeDialog.error.blacklisted": "This channel is blacklisted. Reason:",
   "streamchange.components.WelcomeDialog.CookieConsent.acceptButton": "Accept",
   "streamchange.components.WelcomeDialog.CookieConsent.info": "This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.",
