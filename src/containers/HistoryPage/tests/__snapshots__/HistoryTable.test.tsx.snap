@@ -89,7 +89,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         >
           Date and time
           <svg
-            class="sc-bcHNtg kFJBxV"
+            class="sc-bcHNtg kFJBxV active descending"
             height="24"
             viewBox="0 0 24 24"
             width="24"

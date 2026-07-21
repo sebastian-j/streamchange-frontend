@@ -14,6 +14,18 @@ import twitchSubscriber from './assets/badges/twitch/twitch_subscriber_badge.svg
 import twitchFounder from './assets/badges/twitch/twitch_founder_badge.svg';
 import twitchCertified from './assets/badges/twitch/twitch_verified_badge.svg';
 
+// Badges are rendered left-to-right in this order, like on Twitch/Kick
+export const BADGE_ORDER = [
+  { key: 'broadcaster', label: 'Broadcaster' },
+  { key: 'moderator', label: 'Moderator' },
+  { key: 'vip', label: 'VIP' },
+  { key: 'founder', label: 'Founder' },
+  { key: 'subscriber', label: 'Subscriber' },
+  { key: 'certified', label: 'Certified' },
+  { key: 'og', label: 'OG' },
+  { key: 'bot', label: 'Bot' },
+];
+
 // Maps the canonical badge names sent by the backend to the platform icons.
 // The "certified" rank (Twitch partner / Kick verified) reuses the verified svg.
 export const BADGE_SETS = {

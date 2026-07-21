@@ -51,7 +51,7 @@ const NumberDisplay = styled.input`
 `;
 
 const NumericInput = ({
-  label,
+  label = '',
   onChange,
   value = 0,
   minValue = null,

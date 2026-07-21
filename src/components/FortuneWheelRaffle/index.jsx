@@ -1,12 +1,12 @@
-import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import { makeSelectUserArray } from '../UserList/selectors';
-import {
-  makeSelectGiveawayRequirement,
-  makeSelectGiveawayPreWinner,
-} from '../GiveawayRules/selectors';
 import FortuneWheelRaffle from './FortuneWheelRaffleComponent';
+import {
+  makeSelectGiveawayPreWinner,
+  makeSelectGiveawayRequirement,
+} from '../GiveawayRules/selectors';
+import { makeSelectUserArray } from '../UserList/selectors';
 
 const mapStateToProps = createStructuredSelector({
   giveawayReq: makeSelectGiveawayRequirement(),
