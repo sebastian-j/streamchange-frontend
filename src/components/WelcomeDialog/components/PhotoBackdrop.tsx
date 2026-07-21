@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import coverImage from '../assets/background.svg';
+import coverImage from '../assets/background.png';
 
 export const PhotoBackdrop = styled.div`
   position: fixed;
