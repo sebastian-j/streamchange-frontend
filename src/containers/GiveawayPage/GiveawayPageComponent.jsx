@@ -7,8 +7,6 @@ import Button from '@mui/material/Button';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
-import { useInjectSaga } from '../../utils/injectSaga';
-import saga from './saga';
 import HistoryWidget from './HistoryWidget';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
@@ -56,7 +54,6 @@ const StyledButton = styled(Button)`
 
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
-  useInjectSaga({ key: 'giveawayPage', saga: saga });
   const intl = useIntl();
 
   const leaveStream = () => {
@@ -120,7 +117,6 @@ const GiveawayPage = (props) => {
               platform: platformName,
             };
             props.changeStreamProperties(streamProps);
-            props.sendTelemetryData(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
             sessionStorage.setItem('gv-title', streamProps.title);
             sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
@@ -155,7 +151,6 @@ const GiveawayPage = (props) => {
         platform: platformName,
       };
       props.changeStreamProperties(streamProps);
-      props.sendTelemetryData(streamProps);
     }
   };
 
@@ -183,18 +178,13 @@ const GiveawayPage = (props) => {
     }
   }, [changeStreamProperties]);
 
-  if (props.streamInfo.videoId === '' || props.ban !== null) {
+  if (props.streamInfo.videoId === '') {
     return (
       <>
         <Helmet htmlAttributes={{ lang: intl.locale }}>
           <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
-        <WelcomeDialog
-          onStart={handleStartStream}
-          ban={props.ban}
-          error={error}
-          variant={0}
-        />
+        <WelcomeDialog onStart={handleStartStream} error={error} variant={0} />
       </>
     );
   }
@@ -246,9 +236,7 @@ const GiveawayPage = (props) => {
 };
 
 GiveawayPage.propTypes = {
-  ban: PropTypes.object,
   changeStreamProperties: PropTypes.func.isRequired,
-  sendTelemetryData: PropTypes.func,
   streamInfo: PropTypes.object.isRequired,
 };
 

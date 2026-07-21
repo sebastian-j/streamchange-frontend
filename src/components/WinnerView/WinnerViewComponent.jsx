@@ -6,6 +6,7 @@ import qs from 'qs';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
+import { getSafeColor } from '../../utils/colors';
 
 import messages from './messages';
 import db from '../YoutubeWorker/db';
@@ -64,7 +65,7 @@ const AvatarFallback = styled.div`
   align-items: center;
   background: ${(props) => props.theme.iconButtonBackground};
   border-radius: 50%;
-  color: ${(props) => props.$userColor || props.theme.staticTextColor};
+  color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
   display: flex;
   flex-shrink: 0;
   font-size: 32px;
@@ -100,7 +101,7 @@ const AvatarSkeleton = styled.div`
 `;
 
 const WinnerTitle = styled.span`
-  color: ${(props) => props.$userColor || props.theme.staticTextColor};
+  color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
   font-size: 20px;
   font-weight: 700;
   line-height: 1.2;
