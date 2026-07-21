@@ -104,9 +104,9 @@ export const RaffleWrapper = (props) => {
           value={props.animationType}
           variant="standard"
         >
-          <MenuItem value={0}>
+          {/* <MenuItem value={0}>
             <FormattedMessage {...messages.raffleTypeCS} />
-          </MenuItem>
+          </MenuItem>  */}
           <MenuItem value={1}>
             <FormattedMessage {...messages.raffleTypeWheel} />
           </MenuItem>

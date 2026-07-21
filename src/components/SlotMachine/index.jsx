@@ -1,5 +1,10 @@
 import { useEffect, useState, useRef, memo } from 'react';
 import styled from 'styled-components';
+import {
+  makeSelectGiveawayPreWinner,
+  makeSelectGiveawayRequirement,
+} from '../GiveawayRules/selectors';
+import { makeSelectUserArray } from '../UserList/selectors';
 import slotMachineImg from './assets/SlotsMachineOuter.svg';
 import lever from './assets/lever1.svg';
 import lemon from './assets/symbols/lemon.svg';
@@ -43,25 +48,65 @@ const Leverimg = styled.img`
 const SlotsRaffle = (props) => {
   const [isPulled, setIsPulled] = useState(false);
   const [isRolling, setIsRolling] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [winner, setWinner] = useState([]); 
  const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
+
+ useEffect(() => {
+    let eligibleUsers = props.userArray.filter(
+      (user) => user.isEligible === true
+    );
+    if (props.giveawayReq === 1) {
+      eligibleUsers = eligibleUsers.filter(
+        (user) => user.isSubscriber !== false
+      );
+    }
+    const shuffled = [];
+    for (let i = 0; i < 30 + props.duration * 3; i += 1) {
+      shuffled.push(
+        eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
+      );
+    }
+    const winnerIndex =
+      Math.floor(Math.random() * 10) + 10 + props.duration * 3;
+    if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
+    setUsers(shuffled);
+    setWinner(shuffled[winnerIndex]);
+    setTimer(
+      setTimeout(
+        () => {
+          props.onWin(shuffled[winnerIndex].id);
+        },
+        (props.duration + 1) * 1000
+      )
+    );
+  }, []);
+
  const generateLongList = () => 
     Array.from({ length: 31 }, () => ({
       id: Math.random().toString(36).substr(2, 9),
       src: imageFiles[Math.floor(Math.random() * imageFiles.length)]
     }));
+ const generateUserList = () =>
+      Array.from({ length: 31 }, () => ({
+      id: Math.random().toString(36).substr(2, 9),
+      src: users[Math.floor(Math.random() * users.length)]
+    }));
     const [reels, setReels] = useState([
     { setA: generateLongList(), setB: generateLongList() }, 
-    { setA: generateLongList(), setB: generateLongList() }, 
+    { setA: generateUserList(), setB: generateUserList() }, 
     { setA: generateLongList(), setB: generateLongList() }  
   ]);
-
+  const closeImmediately = () => {
+    props.onClose();
+  };
 const startSlotMachine = () => {
   setIsRolling(true);
 
   setTimeout(() => {
     const newResults = [
         { setA: generateLongList(), setB: generateLongList() },
-        { setA: generateLongList(), setB: generateLongList() },
+        { setA: generateUserList(), setB: generateUserList() }, 
         { setA: generateLongList(), setB: generateLongList() }
     ];
     setReels(newResults);
@@ -122,6 +167,13 @@ const SlotSymbol = memo(({ src }) => (
 }, []);
 
   return (
+    <div className="dialog-root">
+      <button
+        aria-label="stop the raffle immediately"
+        className="dialog-backdrop"
+        onClick={closeImmediately}
+        type="button"
+      />
     <Container>
       <SlotMachineImg src={slotMachineImg} />
       <Leverimg 
@@ -153,6 +205,12 @@ const SlotSymbol = memo(({ src }) => (
         </WheelItem>
       ))}
     </Container>
+    </div>
   );
 };
-export { SlotsRaffle };
+const mapStateToProps = createStructuredSelector({
+  giveawayReq: makeSelectGiveawayRequirement(),
+  preWinner: makeSelectGiveawayPreWinner(),
+  userArray: makeSelectUserArray(),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SlotsRaffle);
