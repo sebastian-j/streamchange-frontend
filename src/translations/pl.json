@@ -27,6 +27,7 @@
   "streamchange.components.NumericInput.decrease": "Zmniejsz o jeden",
   "streamchange.components.NumericInput.increase": "Zwiększ o jeden",
   "streamchange.components.RaffleWrapper.animationDuration": "Czas trwania animacji (sekundy)",
+  "streamchange.components.FortuneWheelRaffle.continueBtn": "Przejdź dalej",
   "streamchange.components.RaffleWrapper.noUserSelected": "Nie zaznaczono żadnego użytkownika",
   "streamchange.components.RaffleWrapper.raffleType": "Animacja losowania",
   "streamchange.components.RaffleWrapper.raffleType.CS": "Skrzynka z CS GO",

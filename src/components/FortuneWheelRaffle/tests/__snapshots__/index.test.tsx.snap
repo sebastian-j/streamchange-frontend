@@ -2,33 +2,62 @@
 
 exports[`<FortuneWheelRaffle /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bcHNtg bKAayY"
+  class="fwheel-root"
 >
   <button
     aria-label="stop the wheel immediately"
-    class="dialog-backdrop"
+    class="fwheel-backdrop"
     type="button"
   />
   <div
-    class="sc-gsMGyr bTWryi"
+    class="fwheel-dialog"
   >
     <div
-      class="sc-jTkVfb gvUOGQ"
-      style="position: absolute; transform: rotate(0deg); transition-duration: 7s;"
+      class="fwheel-box"
     >
-      <img
-        class="sc-eDgbZQ kPcsNo"
-        src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-inner.png"
+      <div
+        class="fwheel-movable"
+      >
+        <svg
+          class="fwheel-svg"
+          viewBox="-300 -300 600 600"
+        >
+          <defs>
+            <radialgradient
+              cx="0.4"
+              cy="0.35"
+              id="fwheel-hub-shine"
+              r="0.9"
+            >
+              <stop
+                offset="0%"
+                stop-color="#ffffff"
+              />
+              <stop
+                offset="100%"
+                stop-color="#d2d6db"
+              />
+            </radialgradient>
+          </defs>
+          <circle
+            fill="none"
+            r="297"
+            stroke="#ffffff"
+            stroke-width="6"
+          />
+          <circle
+            class="fwheel-hub"
+            fill="url(#fwheel-hub-shine)"
+            r="40"
+            stroke="#c3c8ce"
+            stroke-width="1.5"
+          />
+        </svg>
+      </div>
+      <div
+        class="fwheel-needle"
       />
     </div>
-    <img
-      class="sc-gLfMdy hDSKXz"
-      src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-outer.png"
-    />
-    <span
-      class="sc-dkHxwO dMMEyI"
-      style="animation-delay: 7.1s;"
-    />
   </div>
 </div>
 `;
