@@ -14,4 +14,12 @@ const mapStateToProps = createStructuredSelector({
   userArray: makeSelectUserArray(),
 });
 
-export default connect(mapStateToProps, null)(FortuneWheelRaffle);
+const areEqual = (prevProps, nextProps) =>
+  prevProps.duration === nextProps.duration &&
+  prevProps.onClose === nextProps.onClose &&
+  prevProps.onWin === nextProps.onWin;
+
+export default connect(
+  mapStateToProps,
+  null
+)(memo(FortuneWheelRaffle, areEqual));
