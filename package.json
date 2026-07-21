@@ -39,7 +39,6 @@
     "react-redux": "^9.3.0",
     "react-router-dom": "^7.18.1",
     "redux": "^5.0.1",
-    "redux-saga": "^1.5.0",
     "reselect": "^5.2.0",
     "sanitize.css": "^13.0.0",
     "styled-components": "^6.4.3",

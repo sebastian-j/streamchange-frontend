@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import qs from 'qs';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -13,14 +12,13 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import QueueWorker from '../../components/YoutubeWorker/QueueWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
-import { API_KEY, API_URL } from '../../config';
+import { API_KEY } from '../../config';
 
 const QueuePage = () => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
-  const [ban, setBan] = useState(null);
   const intl = useIntl();
 
   const leaveStream = () => {
@@ -29,42 +27,6 @@ const QueuePage = () => {
     setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
-  };
-
-  const telemetry = (vidId, stream) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-    const telemetryData = {
-      videoId: vidId,
-      channelId: stream.snippet.channelId,
-      part: 'stream',
-      title: stream.snippet.title,
-      thumbnailUrl: stream.snippet.thumbnails.medium.url,
-    };
-    axios
-      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
-      .then(() => {})
-      .catch(() => {});
-  };
-
-  const checkBan = (channelId) => {
-    axios.get('../static/bans.json').then((res) => {
-      if (res.data) {
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          if (
-            res.data.items[i].channelId.includes(channelId) &&
-            new Date(res.data.items[i].endsAt) > new Date()
-          ) {
-            setVideoId('');
-            setBan(res.data.items[i]);
-            return;
-          }
-        }
-      }
-    });
   };
 
   const launchWorker = (vidId) => {
@@ -83,8 +45,6 @@ const QueuePage = () => {
           setTitle(stream.snippet.title);
           setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
-          checkBan(stream.snippet.channelId);
-          telemetry(vidId, stream);
         }
       })
       .catch((err) => {
@@ -127,7 +87,6 @@ const QueuePage = () => {
     if (id !== null) {
       launchWorker(id);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (videoId === '') {
@@ -136,12 +95,7 @@ const QueuePage = () => {
         <Helmet htmlAttributes={{ lang: intl.locale }}>
           <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
-        <WelcomeDialog
-          passVideo={receiveVideo}
-          ban={ban}
-          error={error}
-          variant={1}
-        />
+        <WelcomeDialog passVideo={receiveVideo} error={error} variant={1} />
       </>
     );
   }
