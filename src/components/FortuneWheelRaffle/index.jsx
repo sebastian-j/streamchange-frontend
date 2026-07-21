@@ -7,6 +7,7 @@ import {
   makeSelectGiveawayRequirement,
 } from '../GiveawayRules/selectors';
 import { makeSelectUserArray } from '../UserList/selectors';
+import { memo } from 'react';
 
 const mapStateToProps = createStructuredSelector({
   giveawayReq: makeSelectGiveawayRequirement(),
