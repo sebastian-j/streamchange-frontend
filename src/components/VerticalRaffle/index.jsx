@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { getSafeColor } from '../../utils/colors';
 
 import messages from './messages';
 import {
@@ -243,7 +244,7 @@ const VerticalRaffle = (props) => {
                 <InternalChatBadges message={item} />
                 <span
                   className="vroller-nickname"
-                  style={item.color ? { color: item.color } : undefined}
+                  style={item.color ? { color: getSafeColor(item.color, '#000000') } : undefined}
                 >
                   {item.title}
                 </span>
@@ -255,7 +256,7 @@ const VerticalRaffle = (props) => {
           <div className="vraffle-winner">
             <span
               className="vraffle-winner-name"
-              style={winner.color ? { color: winner.color } : undefined}
+              style={winner.color ? { color: getSafeColor(winner.color, '#131b24') } : undefined}
             >
               {winner.title}
             </span>
