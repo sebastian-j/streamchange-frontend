@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { StyleProvider } from '../index';
+import { StyleProvider } from '../StyleProviderComponent';
 
 describe('<StyleProvider />', () => {
   it('should render its children', () => {
