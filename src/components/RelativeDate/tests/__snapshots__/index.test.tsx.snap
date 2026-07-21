@@ -1,15 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<RelativeDate /> should render and match the snapshot 1`] = `
-<span
-  className="relativeDate"
->
-  <FormattedDate
-    day="2-digit"
-    month="long"
-    value={2019-12-24T07:27:56.270Z}
-    year="numeric"
-  />
+exports[`<RelativeDate /> > should render and match the snapshot 1`] = `
+<span>
+  December 24, 2019
    8:27
 </span>
 `;

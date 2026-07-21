@@ -1,14 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import Timer from '../Timer';
 
-const shallowRenderer = createRenderer();
-
 describe('<Timer />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<Timer />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(<Timer />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

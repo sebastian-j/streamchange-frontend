@@ -18,7 +18,7 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
-import { API_KEY } from '../../config';
+import { API_KEY, BACKEND_URL } from '../../config';
 import { purgeList } from '../../components/UserList/actions';
 
 const TopBar = styled.div`
@@ -84,7 +84,22 @@ const GiveawayPage = (props) => {
     window.location.reload();
   };
 
-  const handleStartStream = (channelName, platformName) => {
+  const handleStartStream = async (channelName, platformName) => {
+    setError(null);
+
+    try {
+      const blacklistRes = await axios.get(
+        `${BACKEND_URL}/api/check-blacklist`,
+        { params: { channel: channelName, platform: platformName } }
+      );
+      if (blacklistRes.data.blacklisted) {
+        setError(`blacklisted:${blacklistRes.data.reason}`);
+        return;
+      }
+    } catch (err) {
+      console.warn('Nie udało się sprawdzić blacklisty:', err);
+    }
+
     localStorage.setItem('gv-channel', channelName);
     localStorage.setItem('gv-platform', platformName);
 
@@ -149,6 +164,7 @@ const GiveawayPage = (props) => {
     }
   };
 
+  const { changeStreamProperties } = props;
   useEffect(() => {
     const channel =
       localStorage.getItem('gv-channel') ||
@@ -168,9 +184,9 @@ const GiveawayPage = (props) => {
         videoId: channel,
         platform: platform,
       };
-      props.changeStreamProperties(streamProps);
+      changeStreamProperties(streamProps);
     }
-  }, []);
+  }, [changeStreamProperties]);
 
   if (props.streamInfo.videoId === '' || props.ban !== null) {
     return (
@@ -212,6 +228,23 @@ const GiveawayPage = (props) => {
         channel={props.streamInfo.videoId}
         platform={props.streamInfo.platform}
         apiKey={API_KEY}
+        onBlacklisted={(reason) => {
+          setError(`blacklisted:${reason}`);
+          const streamProps = {
+            ownerId: '',
+            thumbnailUrl: '',
+            title: '',
+            videoId: '',
+            platform: '',
+          };
+          props.changeStreamProperties(streamProps);
+          sessionStorage.removeItem('gv-videoId');
+          sessionStorage.removeItem('gv-title');
+          sessionStorage.removeItem('gv-thumbnailUrl');
+          sessionStorage.removeItem('gv-ownerId');
+          localStorage.removeItem('gv-channel');
+          localStorage.removeItem('gv-platform');
+        }}
       />
     </>
   );

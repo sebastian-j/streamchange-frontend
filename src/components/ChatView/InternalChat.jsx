@@ -22,27 +22,38 @@ const ScrollerEnd = styled.div`
 `;
 
 export const InternalChat = (props) => {
-  let messagesEndRef = useRef(null);
+  const messagesEndRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const isFirstRender = useRef(true);
   useInjectReducer({ key: 'chat', reducer });
 
   const scrollToBottom = () => {
-    messagesEndRef.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      scrollToBottom();
+      return;
+    }
+
+    const scroller = scrollerRef.current;
+    const isNearBottom =
+      scroller &&
+      scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < 100;
+
+    if (isNearBottom) {
+      scrollToBottom();
+    }
   }, [props.messages]);
 
   return (
-    <ItemScroller>
+    <ItemScroller ref={scrollerRef}>
       {props.messages.map((message) => (
         <InternalChatMessage key={message.publishedAt} message={message} />
       ))}
-      <ScrollerEnd
-        ref={(el) => {
-          messagesEndRef = el;
-        }}
-      />
+      <ScrollerEnd ref={messagesEndRef} />
     </ItemScroller>
   );
 };

@@ -40,7 +40,7 @@ export const QueueWidgetDialog = (props) => {
         setWidgetUrl(res.data.url);
       }
     });
-  }, []);
+  }, [props.widgetCode]);
 
   return (
     <div style={{ display: 'inline-block' }}>
@@ -52,6 +52,7 @@ export const QueueWidgetDialog = (props) => {
       <Dialog
         open={isOpen}
         onClose={closeDialog}
+        disableRestoreFocus
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">

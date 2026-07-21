@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CannabisImg from '../assets/cannabis.webp';
@@ -22,48 +22,45 @@ import { Wrapper } from './components/Wrapper';
 import messages from './messages';
 import { HINTS } from '../../../config';
 
+const holidaysDates = [
+  [/14-02/, ValentineImg, 'holiday1402'],
+  [/14-03/, PiImg, 'holiday1403'],
+  [/20-04/, CannabisImg, 'holiday2004'],
+  [/17-05/, RainbowFlagImg, 'holiday1705'],
+  [/\d-06/, RainbowFlagImg, 'holidayJune'],
+  [/26-08/, DogImg, 'holiday2608'],
+  [/23-09/, FallImg, 'holiday2309'],
+  [/01-10/, VeganImg, 'holiday0110'],
+  [/11-10/, RainbowFlagImg, 'holiday1110'],
+  [/31-10/, HalloweenImg, 'holiday3110'],
+  [/06-12/, SantaClausImg, 'holiday0612'],
+  [/(?:25|26)-12/, ChristmasImg, 'holiday2512'],
+  [/31-12/, FireworksImg, 'holiday3112'],
+];
+
+const getToday = () => {
+  const d = new Date();
+  let day = `${d.getDate()}`;
+  let month = `${d.getMonth() + 1}`;
+
+  if (month.length < 2) month = `0${month}`;
+  if (day.length < 2) day = `0${day}`;
+
+  return [day, month].join('-');
+};
+
+const getTodaysHoliday = () => {
+  const today = getToday();
+  return holidaysDates.find(([regex]) => regex.test(today)) || null;
+};
+
 const WelcomeHint = () => {
-  const [hint, setHint] = useState('');
-  const [image, setImage] = useState(LightBulbImg);
-  const [holiday, setHoliday] = useState(null);
-
-  const holidaysDates = [
-    [/14-02/, ValentineImg, 'holiday1402'],
-    [/14-03/, PiImg, 'holiday1403'],
-    [/20-04/, CannabisImg, 'holiday2004'],
-    [/17-05/, RainbowFlagImg, 'holiday1705'],
-    [/\d-06/, RainbowFlagImg, 'holidayJune'],
-    [/26-08/, DogImg, 'holiday2608'],
-    [/23-09/, FallImg, 'holiday2309'],
-    [/01-10/, VeganImg, 'holiday0110'],
-    [/11-10/, RainbowFlagImg, 'holiday1110'],
-    [/31-10/, HalloweenImg, 'holiday3110'],
-    [/06-12/, SantaClausImg, 'holiday0612'],
-    [/(?:25|26)-12/, ChristmasImg, 'holiday2512'],
-    [/31-12/, FireworksImg, 'holiday3112'],
-  ];
-
-  const getToday = () => {
-    const d = new Date();
-    let day = `${d.getDate()}`;
-    let month = `${d.getMonth() + 1}`;
-
-    if (month.length < 2) month = `0${month}`;
-    if (day.length < 2) day = `0${day}`;
-
-    return [day, month].join('-');
-  };
-
-  useEffect(() => {
-    setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);
-    for (let i = 0; i < holidaysDates.length; i += 1) {
-      if (holidaysDates[i][0].test(getToday())) {
-        setImage(holidaysDates[i][1]);
-        setHoliday(holidaysDates[i][2]);
-        break;
-      }
-    }
-  }, []);
+  const [hint, setHint] = useState(
+    () => HINTS[Math.floor(Math.random() * HINTS.length)]
+  );
+  const [todaysHoliday] = useState(getTodaysHoliday);
+  const [image] = useState(() => todaysHoliday?.[1] ?? LightBulbImg);
+  const [holiday] = useState(() => todaysHoliday?.[2] ?? null);
 
   const changeHint = () => {
     setHint(HINTS[Math.floor(Math.random() * HINTS.length)]);

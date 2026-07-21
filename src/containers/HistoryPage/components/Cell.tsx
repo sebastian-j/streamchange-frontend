@@ -17,6 +17,6 @@ export const Cell = styled.td`
   &.text {
     font-size: 0.875rem;
     padding: 14px 30px 14px 16px;
-    text-align: right;
+    text-align: left;
   }
 `;

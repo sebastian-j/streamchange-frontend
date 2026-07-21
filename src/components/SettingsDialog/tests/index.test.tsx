@@ -1,15 +1,15 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import SettingsDialog from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<SettingsDialog />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
 
   beforeAll(() => {
     store = mockStore({
@@ -18,12 +18,13 @@ describe('<SettingsDialog />', () => {
   });
 
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
-        <SettingsDialog />
+        <IntlProvider locale="en">
+          <SettingsDialog />
+        </IntlProvider>
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

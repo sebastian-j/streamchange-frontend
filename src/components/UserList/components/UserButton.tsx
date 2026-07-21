@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const UserButton = styled.button<{ userColor?: string }>`
+export const UserButton = styled.button<{ $userColor?: string }>`
   background: none;
   border: none;
   border-radius: 6px;
-  color: ${(props) => props.userColor || props.theme.inactiveUser};
+  color: ${(props) => props.$userColor || props.theme.inactiveUser};
   cursor: pointer;
   display: flex;
   align-items: center;

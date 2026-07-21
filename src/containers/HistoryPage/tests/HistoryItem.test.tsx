@@ -1,23 +1,23 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it } from 'vitest';
 
 import HistoryItem from '../HistoryItem';
 
-const shallowRenderer = createRenderer();
-
 describe('<HistoryItem />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
-      <HistoryItem
-        channelId="id"
-        displayName="abc"
-        message="abc"
-        prize="prize"
-        imageUrl="url"
-        createdAt="2019-12-24T07:27:56.273Z"
-      />
+    const { container } = render(
+      <IntlProvider locale="en">
+        <HistoryItem
+          channelId="id"
+          displayName="abc"
+          message="abc"
+          prize="prize"
+          imageUrl="url"
+          createdAt="2019-12-24T07:27:56.273Z"
+        />
+      </IntlProvider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

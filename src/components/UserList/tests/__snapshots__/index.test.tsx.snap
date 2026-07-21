@@ -1,30 +1,119 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<UserList /> should render and match the snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Object {
-        "addNestedSub": [Function],
-        "getListeners": [Function],
-        "handleChangeWrapper": [Function],
-        "isSubscribed": [Function],
-        "notifyNestedSubs": [Function],
-        "onStateChange": [Function],
-        "trySubscribe": [Function],
-        "tryUnsubscribe": [Function],
-      },
-    }
-  }
+exports[`<UserList /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-kDTkih gfcUcE"
 >
-  <Memo(Connect(UserList)) />
-</Context.Provider>
+  <div
+    class="sc-eCIkhf jdTSHz"
+  >
+    <h2
+      class="sc-iqshrI kfRcto"
+    >
+      Users
+    </h2>
+    <div
+      class="sc-jRQzZg iZsKkT"
+    >
+      <button
+        aria-label="Options"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1ysp02-MuiButtonBase-root-MuiIconButton-root"
+        data-mui-internal-clone-element="true"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="sc-pVTZz fmnft"
+          height="18px"
+          viewBox="0 0 24 24"
+          width="18px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <path
+              d="M0,0h24 M24,24H0"
+              fill="none"
+            />
+            <path
+              d="M4.25,5.61C6.27,8.2,10,13,10,13v6c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1v-6c0,0,3.72-4.8,5.74-7.39 C20.25,4.95,19.78,4,18.95,4H5.04C4.21,4,3.74,4.95,4.25,5.61z"
+            />
+            <path
+              d="M0,0h24v24H0V0z"
+              fill="none"
+            />
+          </g>
+        </svg>
+      </button>
+      <button
+        aria-label="Options"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1ysp02-MuiButtonBase-root-MuiIconButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="sc-pVTZz fmnft"
+          height="18px"
+          viewBox="0 0 24 24"
+          width="18px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path
+            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div />
+  <div
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-furwwf ivGnkW css-xanwcj-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="_r_3_"
+      id="_r_3_-label"
+    >
+      Search
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-1ob4rtt-MuiInputBase-root-MuiInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input css-1yrc8ca-MuiInputBase-input-MuiInput-input"
+        id="_r_3_"
+        name="search"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <a
+    class="sc-gKckfV jzgXMK"
+    href="#purge-user-list-btn"
+  >
+    Skip the viewers list
+  </a>
+  <ul />
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit sc-iCfMpq ilTuHl css-plnrbk-MuiButtonBase-root-MuiButton-root"
+    id="purge-user-list-btn"
+    tabindex="0"
+    type="button"
+  >
+    <span>
+      Clear all
+    </span>
+  </button>
+  <span
+    class="sc-bdvvNz jccOWk"
+  >
+    0 out of 0 are participating
+  </span>
+</div>
 `;

@@ -1,14 +1,20 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import '@testing-library/jest-dom/vitest';
 
+import { render, screen } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it, vi } from 'vitest';
+
+import { HINTS } from '../../../../config';
 import WelcomeHint from '../index';
-
-const shallowRenderer = createRenderer();
 
 describe('<WelcomeHint />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<WelcomeHint />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    vi.spyOn(Math, 'random').mockReturnValue(0);
+    const { container } = render(
+      <IntlProvider locale="en">
+        <WelcomeHint />
+      </IntlProvider>
+    );
+    expect(screen.getByText(HINTS[0])).toBeInTheDocument();
   });
 });

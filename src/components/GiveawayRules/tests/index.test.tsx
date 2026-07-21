@@ -1,15 +1,19 @@
-import React from 'react';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import GiveawayRules from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
+vi.mock('../../AdFrame', () => ({
+  default: () => <div data-testid="ad-frame" />,
+}));
+
 describe('<GiveawayRules />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       keyword: 'Keyword',
@@ -17,12 +21,13 @@ describe('<GiveawayRules />', () => {
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
-        <GiveawayRules apiKey="key" />
+        <IntlProvider locale="en">
+          <GiveawayRules apiKey="key" />
+        </IntlProvider>
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

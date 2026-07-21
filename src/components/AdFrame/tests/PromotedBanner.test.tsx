@@ -1,21 +1,21 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it } from 'vitest';
 
 import PromotedBanner from '../PromotedBanner';
 
-const shallowRenderer = createRenderer();
-
 describe('<PromotedBanner />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
-      <PromotedBanner
-        channelUrl="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
-        imageUrl="url"
-        testMargins
-        title="test-advertisement"
-      />
+    const { container } = render(
+      <IntlProvider locale="en">
+        <PromotedBanner
+          channelUrl="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
+          imageUrl="url"
+          testMargins
+          title="test-advertisement"
+        />
+      </IntlProvider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

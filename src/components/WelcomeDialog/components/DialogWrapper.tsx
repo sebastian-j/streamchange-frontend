@@ -18,6 +18,9 @@ const DialogWrapper = styled.div`
   position: absolute;
   top: 55%;
   left: 30%;
+  width: 35vw;
+  min-width: 320px;
+  max-width: 600px;
   transform: translate(-50%, -50%);
 
   @media (orientation: portrait) {

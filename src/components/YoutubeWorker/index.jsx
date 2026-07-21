@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import qs from 'qs';
-import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
+import { API_URL, PRIVILEGED_CHANNELS, WS_URL } from '../../config';
 import { addMessage } from '../ChatView/actions';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { changePreWinner, changePrize } from '../GiveawayRules/actions';
@@ -119,7 +119,9 @@ const YoutubeWorker = (props) => {
     }
   };
   useEffect(() => {
-    const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat');
+    if (props.channel === 'test') return undefined;
+
+    const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
       ws.send(
@@ -130,17 +132,29 @@ const YoutubeWorker = (props) => {
       );
     };
 
+    ws.onclose = (event) => {
+      if (event.code === 4003) {
+        console.warn('Kanał zablokowany:', event.reason);
+        if (typeof props.onBlacklisted === 'function') {
+          props.onBlacklisted(event.reason);
+        }
+      }
+    };
+
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log('Przyszła wiadomość z backendu:', data);
       const badges = data.badges || [];
+      const isBot = badges.includes('bot');
       const dbMessage = {
         authorId: data.author,
         displayText: data.message,
         publishedAt: new Date().toISOString(),
+        fragments: data.fragments || null,
       };
 
       const chatViewMessage = {
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
@@ -148,11 +162,14 @@ const YoutubeWorker = (props) => {
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
         title: data.author,
-        fragments: data.fragments || null,
         ...dbMessage,
       };
 
       dispatch(addMessage(chatViewMessage));
+
+      if (isBot) {
+        return;
+      }
 
       if (!(
         dbMessage.displayText === localStorage.getItem('keyword') &&
@@ -164,6 +181,7 @@ const YoutubeWorker = (props) => {
       const keyword = (localStorage.getItem('keyword') || '').toLowerCase();
       const userListAuthor = {
         id: data.author,
+        userId: data.user_id,
         color: data.color,
         platform: props.platform,
         imageUrl: '',
@@ -173,6 +191,7 @@ const YoutubeWorker = (props) => {
         isModerator: badges.includes('moderator'),
         isStreamer: badges.includes('broadcaster'),
         isSubscriber: data.subscriber > 0,
+        subscriptionMonths: data.subscriber,
         isVip: badges.includes('vip'),
         isEligible:
           keyword !== '' && data.message.toLowerCase().includes(keyword),
@@ -186,7 +205,8 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.channel, props.platform]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.channel, props.platform, dispatch]);
 
   return (
     <ThreeSections>
@@ -207,6 +227,7 @@ const YoutubeWorker = (props) => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   channel: PropTypes.string,
+  onBlacklisted: PropTypes.func,
   platform: PropTypes.string,
 };
 

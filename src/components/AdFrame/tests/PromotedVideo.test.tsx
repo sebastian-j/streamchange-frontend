@@ -1,14 +1,16 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { describe, expect, it } from 'vitest';
 
 import PromotedVideo from '../PromotedVideo';
 
-const shallowRenderer = createRenderer();
-
 describe('<PromotedVideo />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(<PromotedVideo videoId="jNQXAC9IVRw" />);
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    const { container } = render(
+      <IntlProvider locale="en">
+        <PromotedVideo videoId="jNQXAC9IVRw" />
+      </IntlProvider>
+    );
+    expect(container).toMatchSnapshot();
   });
 });

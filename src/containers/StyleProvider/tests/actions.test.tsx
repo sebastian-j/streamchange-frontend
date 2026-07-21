@@ -1,7 +1,8 @@
 import { action } from 'typesafe-actions';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
 import { changeColor, toggleDarkMode } from '../actions';
+import ActionTypes from '../constants';
 
 describe('StyleProvider Actions', () => {
   describe('changeColor', () => {

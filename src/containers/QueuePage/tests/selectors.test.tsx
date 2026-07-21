@@ -1,13 +1,15 @@
+import { describe, expect, it } from 'vitest';
+
+import { initialState } from '../reducer';
 import {
-  selectQueue,
   makeSelectCapacity,
   makeSelectQueueArray,
   makeSelectQueueCommand,
-  makeSelectWidgetCode,
   makeSelectTTI,
   makeSelectTTK,
+  makeSelectWidgetCode,
+  selectQueue,
 } from '../selectors';
-import { initialState } from '../reducer';
 
 describe('QueuePage selectors', () => {
   it('should select the global state', () => {

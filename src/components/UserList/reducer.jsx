@@ -17,7 +17,6 @@ export const initialState = {
   userArray: [],
 };
 
-/* eslint-disable default-case, no-param-reassign */
 const userListReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
@@ -42,6 +41,11 @@ const userListReducer = (state = initialState, action) =>
               : draft.userArray[i].message;
             draft.userArray[i].isEligible =
               draft.userArray[i].isEligible || action.payload.isEligible;
+            draft.userArray[i].userId =
+              action.payload.userId || draft.userArray[i].userId;
+            draft.userArray[i].platform =
+              action.payload.platform || draft.userArray[i].platform;
+            insertOrUpdateItem(action.payload);
             return;
           }
         }
@@ -61,6 +65,7 @@ const userListReducer = (state = initialState, action) =>
           }
         }
         toggleEligibleIDB(action.payload);
+        break;
     }
   });
 

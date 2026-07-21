@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
@@ -20,7 +20,21 @@ import { deleteQueueItem, updateQueueItem } from '../actions';
 export const QueueItem = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState(props.message);
-  const [isActive, setIsActive] = useState(true);
+  const [prevMessage, setPrevMessage] = useState(props.message);
+  const [isActive, setIsActive] = useState(() => {
+    const now = new Date();
+    const lastActiveAt = new Date(props.lastActiveAt);
+    return (
+      (now.getTime() - lastActiveAt.getTime()) / 1000 <
+      parseInt(localStorage.getItem('queue-timeToIdle'), 10)
+    );
+  });
+
+  if (props.message !== prevMessage) {
+    setPrevMessage(props.message);
+    setEditedDescription(props.message);
+  }
+
   const convertDate = (dt) =>
     `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''}${dt.getMinutes()}:${
       dt.getSeconds() < 10 ? '0' : ''
@@ -64,21 +78,13 @@ export const QueueItem = (props) => {
     );
   };
 
-  useEffect(() => {
-    refresh();
-  }, []);
-
-  useEffect(() => {
-    setEditedDescription(props.message);
-  }, [props.message]);
-
   if (editMode)
     return (
       <li>
         <UserBar>
           <div>
             <a
-              href={`https://www.youtube.com/channel/${props.channelId}`}
+              href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
               <Logo alt="logo" src={props.imageUrl} edit={editMode} />
@@ -134,7 +140,7 @@ export const QueueItem = (props) => {
         >
           <div>
             <a
-              href={`https://www.youtube.com/channel/${props.channelId}`}
+              href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
               <Logo alt="logo" src={props.imageUrl} />

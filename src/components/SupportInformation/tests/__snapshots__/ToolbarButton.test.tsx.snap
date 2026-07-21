@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<ToolbarButton /> should render and match the snapshot 1`] = `
+exports[`<ToolbarButton /> > should render and match the snapshot 1`] = `
 <button
-  className="sc-bdvvtL dUTvwA"
+  class="sc-bdvvNz eMUSfL"
 />
 `;

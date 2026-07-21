@@ -1,16 +1,13 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import SuperChat from '../SuperChat';
 
-const shallowRenderer = createRenderer();
-
 describe('<SuperChat />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <SuperChat imageUrl="url" title="title" message="message" />
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
