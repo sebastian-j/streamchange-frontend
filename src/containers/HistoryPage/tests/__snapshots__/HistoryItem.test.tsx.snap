@@ -1,12 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<HistoryItem /> should render and match the snapshot 1`] = `
-<styled.tr>
-  <styled.td
-    className="image"
+exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
+<tr
+  class="sc-gsDLFA kkbbTT"
+>
+  <td
+    class="sc-bdvvNz gOmdtT image"
   >
     <a
-      href="https://www.youtube.com/channel/id"
+      href="https://kick.com/id"
+      rel="noopener noreferrer"
       target="_blank"
     >
       <img
@@ -15,35 +18,35 @@ exports[`<HistoryItem /> should render and match the snapshot 1`] = `
         src="url"
       />
     </a>
-  </styled.td>
-  <styled.td
-    className="textLeft"
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT textLeft"
   >
     <span>
       abc
     </span>
-  </styled.td>
-  <styled.td
-    className="text"
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
   >
     <span>
       prize
     </span>
-  </styled.td>
-  <styled.td
-    className="text"
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
   >
     <span>
       abc
     </span>
-  </styled.td>
-  <styled.td
-    className="text"
+  </td>
+  <td
+    class="sc-bdvvNz gOmdtT text"
   >
-    <RelativeDate
-      ISO8601Date="2019-12-24T07:27:56.273Z"
-      className="relativeDate"
-    />
-  </styled.td>
-</styled.tr>
+    <span>
+      December 24, 2019
+       8:27
+    </span>
+  </td>
+</tr>
 `;

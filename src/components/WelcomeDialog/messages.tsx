@@ -16,10 +16,6 @@ export default defineMessages({
     id: `${scope}.videoInput.label`,
     defaultMessage: 'Paste stream url',
   },
-  example: {
-    id: `${scope}.example`,
-    defaultMessage: 'Example: https://www.youtube.com/watch?v=CBUBY45me_A',
-  },
   saveBtn: {
     id: `${scope}.saveBtn`,
     defaultMessage: 'OK',
@@ -30,7 +26,12 @@ export default defineMessages({
   },
   invalidUrlError: {
     id: `${scope}.error.invalidUrl`,
-    defaultMessage: 'This is not a URL to live stream or a YouTube video.',
+    defaultMessage: 'This is not a URL to live stream.',
+  },
+  invalidChannelUrlError: {
+    id: `${scope}.error.invalidChannelUrl`,
+    defaultMessage:
+      'Invalid link. Paste a link in the format twitch.tv/channel or kick.com/channel.',
   },
   notVideoError: {
     id: `${scope}.error.notVideo`,
@@ -51,5 +52,9 @@ export default defineMessages({
   banReason: {
     id: `${scope}.banReason`,
     defaultMessage: 'Reason:',
+  },
+  blacklistedError: {
+    id: `${scope}.error.blacklisted`,
+    defaultMessage: 'This channel is blacklisted.',
   },
 });

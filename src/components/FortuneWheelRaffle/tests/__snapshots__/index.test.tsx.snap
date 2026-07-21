@@ -1,33 +1,34 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<FortuneWheelRaffle /> should render and match the snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Object {
-        "addNestedSub": [Function],
-        "getListeners": [Function],
-        "handleChangeWrapper": [Function],
-        "isSubscribed": [Function],
-        "notifyNestedSubs": [Function],
-        "onStateChange": [Function],
-        "trySubscribe": [Function],
-        "tryUnsubscribe": [Function],
-      },
-    }
-  }
+exports[`<FortuneWheelRaffle /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-bdvvNz icgXGJ"
 >
-  <Memo(Connect(FortuneWheelRaffle))
-    onClose={[Function]}
-    onWin={[Function]}
+  <button
+    aria-label="stop the wheel immediately"
+    class="dialog-backdrop"
+    type="button"
   />
-</Context.Provider>
+  <div
+    class="sc-gsDLFA gLaJlf"
+  >
+    <div
+      class="sc-jRQzZg cMsEHq"
+      style="position: absolute; transform: rotate(0deg); transition-duration: 7s;"
+    >
+      <img
+        class="sc-eCIkhf kFSwoG"
+        src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-inner.png"
+      />
+    </div>
+    <img
+      class="sc-gKckfV dlYLKJ"
+      src="/src/components/FortuneWheelRaffle/assets/fortune-wheel-outer.png"
+    />
+    <span
+      class="sc-dkPvMp eaLQvY"
+      style="animation-delay: 7.1s;"
+    />
+  </div>
+</div>
 `;

@@ -1,13 +1,13 @@
-import produce from 'immer';
+import { produce } from 'immer';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import raffleWrapperReducer, { initialState } from '../reducer';
 import {
   changeAnimation,
   changeAnimationDuration,
   changeVisibility,
 } from '../actions';
+import raffleWrapperReducer, { initialState } from '../reducer';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('rafleWrapperReducer', () => {
   let state;
   beforeEach(() => {

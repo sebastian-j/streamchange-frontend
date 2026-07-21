@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
+exports[`<NotFoundPage /> > should render and match the snapshot 1`] = `
 <h1>
   This is the NotFoundPage container!
 </h1>

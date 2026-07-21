@@ -1,7 +1,8 @@
 import { action } from 'typesafe-actions';
-import ActionTypes from '../constants';
+import { describe, expect, it } from 'vitest';
 
 import { changeStreamProperties } from '../actions';
+import ActionTypes from '../constants';
 
 describe('GiveawayPage Actions', () => {
   describe('changeOwnerId', () => {

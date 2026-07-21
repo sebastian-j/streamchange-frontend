@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<ColoredLink /> should render and match the snapshot 1`] = `
+exports[`<ColoredLink /> > should render and match the snapshot 1`] = `
 <a
-  className="sc-bdvvtL cJBQlX"
+  class="sc-bdvvNz cypQhQ"
 />
 `;

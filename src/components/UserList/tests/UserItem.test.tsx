@@ -1,13 +1,11 @@
-import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import UserItem from '../userItem';
 
-const shallowRenderer = createRenderer();
-
 describe('<UserItem />', () => {
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <UserItem
         channelId="id"
         title="name"
@@ -17,7 +15,6 @@ describe('<UserItem />', () => {
         isSubscriber={false}
       />
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

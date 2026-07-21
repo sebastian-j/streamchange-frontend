@@ -1,81 +1,161 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<HistoryTable /> should render and match the snapshot 1`] = `
-<styled.table>
-  <styled.thead>
+exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
+<table
+  class="sc-hKwAaq hXtKnu"
+>
+  <thead
+    class="sc-jRQzZg PIKSn"
+  >
     <tr>
       <td />
       <td>
-        <styled.button
+        <button
+          class="sc-eCIkhf bJeZiM"
           id="displayName"
-          onClick={[Function]}
           type="button"
         >
-          <Memo(MemoizedFormattedMessage)
-            defaultMessage="Channel name"
-            id="streamchange.containers.History.header.name"
-          />
-          <ArrowUpIcon
-            className=""
-          />
-        </styled.button>
+          Channel name
+          <svg
+            class="sc-bdvvNz gCchtE"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+            <path
+              d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+            />
+          </svg>
+        </button>
       </td>
       <td>
-        <styled.button
+        <button
+          class="sc-eCIkhf bJeZiM"
           id="prize"
-          onClick={[Function]}
           type="button"
         >
-          <Memo(MemoizedFormattedMessage)
-            defaultMessage="Prize"
-            id="streamchange.containers.History.header.prize"
-          />
-          <ArrowUpIcon
-            className=""
-          />
-        </styled.button>
+          Prize
+          <svg
+            class="sc-bdvvNz gCchtE"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+            <path
+              d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+            />
+          </svg>
+        </button>
       </td>
       <td>
-        <styled.button
+        <button
+          class="sc-eCIkhf bJeZiM"
           id="message"
-          onClick={[Function]}
           type="button"
         >
-          <Memo(MemoizedFormattedMessage)
-            defaultMessage="Message"
-            id="streamchange.containers.History.header.message"
-          />
-          <ArrowUpIcon
-            className=""
-          />
-        </styled.button>
+          Message
+          <svg
+            class="sc-bdvvNz gCchtE"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+            <path
+              d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+            />
+          </svg>
+        </button>
       </td>
       <td>
-        <styled.button
+        <button
+          class="sc-eCIkhf bJeZiM"
           id="createdAt"
-          onClick={[Function]}
           type="button"
         >
-          <Memo(MemoizedFormattedMessage)
-            defaultMessage="Date and time"
-            id="streamchange.containers.History.header.date"
-          />
-          <ArrowUpIcon
-            className="active descending"
-          />
-        </styled.button>
+          Date and time
+          <svg
+            class="sc-bdvvNz gCchtE"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+            <path
+              d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+            />
+          </svg>
+        </button>
       </td>
     </tr>
-  </styled.thead>
+  </thead>
   <tbody>
-    <HistoryItem
-      channelId="id"
-      createdAt="2019-12-24T07:27:56.273Z"
-      displayName="name"
-      imageUrl="url"
-      message="test message"
-      prize="trophy"
-    />
+    <tr
+      class="sc-dkPvMp ivXbmo"
+    >
+      <td
+        class="sc-gsDLFA lpefwi image"
+      >
+        <a
+          href="https://kick.com/id"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="Logo"
+            height="45px"
+            src="url"
+          />
+        </a>
+      </td>
+      <td
+        class="sc-gsDLFA lpefwi textLeft"
+      >
+        <span>
+          name
+        </span>
+      </td>
+      <td
+        class="sc-gsDLFA lpefwi text"
+      >
+        <span>
+          trophy
+        </span>
+      </td>
+      <td
+        class="sc-gsDLFA lpefwi text"
+      >
+        <span>
+          test message
+        </span>
+      </td>
+      <td
+        class="sc-gsDLFA lpefwi text"
+      >
+        <span>
+          December 24, 2019
+           8:27
+        </span>
+      </td>
+    </tr>
   </tbody>
-</styled.table>
+</table>
 `;

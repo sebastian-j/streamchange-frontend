@@ -1,33 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<YoutubeWorker /> should match the snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Object {
-        "addNestedSub": [Function],
-        "getListeners": [Function],
-        "handleChangeWrapper": [Function],
-        "isSubscribed": [Function],
-        "notifyNestedSubs": [Function],
-        "onStateChange": [Function],
-        "trySubscribe": [Function],
-        "tryUnsubscribe": [Function],
-      },
-    }
-  }
+exports[`<YoutubeWorker /> > should match the snapshot 1`] = `
+<div
+  class="sc-bdvvNz drjCyB"
 >
-  <Memo(Connect(YoutubeWorker))
-    apiKey="key"
-    videoId="vidId"
+  <div
+    data-testid="user-list"
   />
-</Context.Provider>
+  <div
+    data-testid="giveaway-rules"
+  />
+  <div
+    data-testid="chat-view"
+  />
+</div>
 `;

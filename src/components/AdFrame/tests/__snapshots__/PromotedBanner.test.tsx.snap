@@ -1,38 +1,40 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<PromotedBanner /> should render and match the snapshot 1`] = `
-<styled.div
-  margin={1}
-  offset={0}
+exports[`<PromotedBanner /> > should render and match the snapshot 1`] = `
+<div
+  class="sc-gsDLFA hxxyns"
+  margin="1"
+  offset="0"
 >
-  <styled.span
-    margin={1}
+  <span
+    class="sc-bdvvNz jneRgd"
+    margin="1"
   >
-    <Memo(MemoizedFormattedMessage)
-      defaultMessage="Advertisement"
-      id="streamchange.components.AdFrame.title"
-    />
-  </styled.span>
+    Advertisement
+  </span>
   <a
     href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
     target="_blank"
   >
     <div>
-      <styled.img
+      <img
         alt="test-advertisement"
-        onLoad={[Function]}
+        class="sc-dkPvMp fHOuXL"
         src="url"
       />
     </div>
-    <styled.div
-      margin={1}
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
     />
-    <styled.div
-      margin={1}
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
     />
-    <styled.div
-      margin={1}
+    <div
+      class="sc-hKwAaq Zpgva"
+      margin="1"
     />
   </a>
-</styled.div>
+</div>
 `;

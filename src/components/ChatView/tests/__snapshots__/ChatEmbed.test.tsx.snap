@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<ChatEmbed /> > should render Kick chat and match the snapshot 1`] = `
+<iframe
+  class="sc-bdvvNz ccqkSD chat-frame"
+  src="https://chat.kick.cx/embed/id"
+  title="Kick Chat"
+/>
+`;
+
+exports[`<ChatEmbed /> > should render Twitch chat and match the snapshot 1`] = `
+<iframe
+  class="sc-bdvvNz ccqkSD chat-frame"
+  src="https://www.twitch.tv/embed/id/chat?parent=localhost"
+  title="Twitch Chat"
+/>
+`;

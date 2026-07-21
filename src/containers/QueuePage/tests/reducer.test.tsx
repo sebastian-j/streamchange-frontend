@@ -1,10 +1,8 @@
-import produce from 'immer';
+import { describe, expect, it } from 'vitest';
 
-import queueReducer, { initialState } from '../reducer';
-import { QueueItem } from '../types';
 import {
-  changeQueueCommand,
   changeCapacity,
+  changeQueueCommand,
   changeTTI,
   changeTTK,
   changeWidgetCode,
@@ -14,106 +12,95 @@ import {
   pushQueueItem,
   updateQueueItem,
 } from '../actions';
+import queueReducer, { initialState } from '../reducer';
+import { QueueItem } from '../types';
 
-/* eslint-disable default-case, no-param-reassign */
+type QueueState = ReturnType<typeof queueReducer>;
+
+const createState = (): QueueState => ({
+  ...initialState,
+  capacity: 10,
+  command: 'join',
+  queueArray: [
+    { id: 'id', title: 'item1' },
+    { id: 'id2', title: 'item2' },
+  ] as never[],
+  timeToIdle: 300,
+  timeToKick: 600,
+  widgetCode: 'code',
+});
+
 describe('queueReducer', () => {
-  let state;
-  beforeEach(() => {
-    state = {
-      capacity: 10,
-      command: 'join',
-      queueArray: [
-        { id: 'id', title: 'item1' },
-        { id: 'id2', title: 'item2' },
-      ],
-      timeToIdle: 300,
-      timeToKick: 600,
-      widgetCode: 'code',
-    };
-  });
-
   it('should return the initial state', () => {
-    expect(queueReducer(undefined, {} as any)).toEqual(initialState);
-  });
-
-  it('should handle the changeCapacity action correctly', () => {
-    const fixture = 15;
-    const expectedResult = produce(state, (draft) => {
-      draft.capacity = fixture;
-    });
-
-    expect(queueReducer(state, changeCapacity(fixture))).toEqual(
-      expectedResult
+    expect(queueReducer(undefined, { type: '@@INIT' } as any)).toEqual(
+      initialState
     );
   });
 
-  it('should handle the changeQueueCommand action correctly', () => {
-    const fixture = 'giveaway';
-    const expectedResult = produce(state, (draft) => {
-      draft.command = fixture;
-    });
+  it('should handle changeCapacity action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, changeQueueCommand(fixture))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, changeCapacity(15))).toEqual({
+      ...state,
+      capacity: 15,
+    });
   });
 
-  it('should handle the changeTTI action correctly', () => {
-    const fixture = 400;
-    const expectedResult = produce(state, (draft) => {
-      draft.timeToIdle = fixture;
-    });
+  it('should handle changeQueueCommand action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, changeTTI(fixture))).toEqual(expectedResult);
+    expect(queueReducer(state, changeQueueCommand('giveaway'))).toEqual({
+      ...state,
+      command: 'giveaway',
+    });
   });
 
-  it('should handle the changeTTK action correctly', () => {
-    const fixture = 800;
-    const expectedResult = produce(state, (draft) => {
-      draft.timeToKick = fixture;
-    });
+  it('should handle changeTTI action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, changeTTK(fixture))).toEqual(expectedResult);
+    expect(queueReducer(state, changeTTI(400))).toEqual({
+      ...state,
+      timeToIdle: 400,
+    });
   });
 
-  it('should handle the changeWidgetCode action correctly', () => {
-    const fixture = 'test password';
-    const expectedResult = produce(state, (draft) => {
-      draft.widgetCode = fixture;
-    });
+  it('should handle changeTTK action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, changeWidgetCode(fixture))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, changeTTK(800))).toEqual({
+      ...state,
+      timeToKick: 800,
+    });
   });
 
-  it('should handle the deleteQueueItem action correctly and delete queue item with the given id', () => {
-    const fixture = 'id';
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = [{ id: 'id2', title: 'item2' }];
-    });
+  it('should handle changeWidgetCode action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, deleteQueueItem(fixture))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, changeWidgetCode('test password'))).toEqual({
+      ...state,
+      widgetCode: 'test password',
+    });
   });
 
-  it('should handle the deleteQueueItem action correctly and do not delete any item, when incorrect id was given', () => {
-    const fixture = 'not-id';
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = [
-        { id: 'id', title: 'item1' },
-        { id: 'id2', title: 'item2' },
-      ];
-    });
+  it('should delete queue item with the given id', () => {
+    const state = createState();
 
-    expect(queueReducer(state, deleteQueueItem(fixture))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, deleteQueueItem('id'))).toEqual({
+      ...state,
+      queueArray: [{ id: 'id2', title: 'item2' }],
+    });
   });
 
-  it('should handle the getQueueFromIdb action correctly', () => {
-    const fixture: QueueItem[] = [
+  it('should not delete any item when incorrect id was given', () => {
+    const state = createState();
+
+    expect(queueReducer(state, deleteQueueItem('not-id'))).toEqual(state);
+  });
+
+  it('should handle getQueueFromIdb action correctly', () => {
+    const state = createState();
+
+    const queueFromIdb: QueueItem[] = [
       {
         id: 'id',
         addedAt: '2019-12-23T07:27:56.27-00:00',
@@ -139,26 +126,26 @@ describe('queueReducer', () => {
         title: 'item3',
       },
     ];
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
 
-    expect(queueReducer(state, getQueueFromIdb(fixture))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, getQueueFromIdb(queueFromIdb))).toEqual({
+      ...state,
+      queueArray: queueFromIdb,
+    });
   });
 
-  it('should handle the purgeQueue action correctly', () => {
-    const fixture = [];
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
+  it('should handle purgeQueue action correctly', () => {
+    const state = createState();
 
-    expect(queueReducer(state, purgeQueue())).toEqual(expectedResult);
+    expect(queueReducer(state, purgeQueue())).toEqual({
+      ...state,
+      queueArray: [],
+    });
   });
 
   it('should add item to the queue', () => {
-    const newItem = {
+    const state = createState();
+
+    const newItem: QueueItem = {
       id: 'id3',
       addedAt: '2019-12-24T07:27:56.27-00:00',
       imageUrl: 'url',
@@ -166,26 +153,17 @@ describe('queueReducer', () => {
       message: 'text',
       title: 'item3',
     };
-    const fixture = state.queueArray.map((a) => ({ ...a }));
-    fixture.push(newItem);
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
 
-    expect(queueReducer(state, pushQueueItem(newItem))).toEqual(expectedResult);
+    expect(queueReducer(state, pushQueueItem(newItem))).toEqual({
+      ...state,
+      queueArray: [...state.queueArray, newItem],
+    });
   });
 
-  it('should not add second item with the same id to the queue, instead should update existing item', () => {
-    const fixture = [
-      { id: 'id', title: 'item1' },
-      {
-        id: 'id2',
-        lastActiveAt: '2019-12-24T08:27:56.27-00:00',
-        message: 'text',
-        title: 'item2',
-      },
-    ];
-    const newItem = {
+  it('should not add second item with the same id, but should update existing item', () => {
+    const state = createState();
+
+    const newItem: QueueItem = {
       id: 'id2',
       addedAt: '2019-12-24T07:27:56.27-00:00',
       imageUrl: 'url',
@@ -193,54 +171,60 @@ describe('queueReducer', () => {
       message: 'text',
       title: 'item3',
     };
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
 
-    expect(queueReducer(state, pushQueueItem(newItem))).toEqual(expectedResult);
+    expect(queueReducer(state, pushQueueItem(newItem))).toEqual({
+      ...state,
+      queueArray: [
+        { id: 'id', title: 'item1' },
+        {
+          id: 'id2',
+          title: 'item2',
+          lastActiveAt: '2019-12-24T08:27:56.27-00:00',
+          message: 'text',
+        },
+      ],
+    });
   });
 
-  it('should handle the updateQueueItem action correctly and update message', () => {
-    const fixture = [
-      { id: 'id', title: 'item1' },
-      {
-        id: 'id2',
-        title: 'item2',
-        message: 'abc',
-      },
-    ];
-    const updatedItem = {
+  it('should handle updateQueueItem action correctly and update message', () => {
+    const state = createState();
+
+    const updatedItem: Partial<QueueItem> & Pick<QueueItem, 'id'> = {
       id: 'id2',
       message: 'abc',
     };
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
 
-    expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual({
+      ...state,
+      queueArray: [
+        { id: 'id', title: 'item1' },
+        {
+          id: 'id2',
+          title: 'item2',
+          message: 'abc',
+        },
+      ],
+    });
   });
 
-  it('should handle the updateQueueItem action correctly and update last activity date', () => {
-    const fixture = [
-      { id: 'id', title: 'item1' },
-      {
-        id: 'id2',
-        title: 'item2',
-        lastActiveAt: '2021-02-13T21:37:00.000Z',
-      },
-    ];
-    const updatedItem = {
+  it('should handle updateQueueItem action correctly and update last activity date', () => {
+    const state = createState();
+
+    const updatedItem: Partial<QueueItem> & Pick<QueueItem, 'id'> = {
       id: 'id2',
       lastActiveAt: '2021-02-13T21:37:00.000Z',
     };
-    const expectedResult = produce(state, (draft) => {
-      draft.queueArray = fixture;
-    });
 
-    expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual(
-      expectedResult
-    );
+    expect(queueReducer(state, updateQueueItem(updatedItem))).toEqual({
+      ...state,
+      queueArray: [
+        { id: 'id', title: 'item1' },
+        {
+          id: 'id2',
+          title: 'item2',
+          lastActiveAt: '2021-02-13T21:37:00.000Z',
+        },
+      ],
+    });
   });
 });

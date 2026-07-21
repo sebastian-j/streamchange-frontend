@@ -1,31 +1,41 @@
-import React from 'react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createRenderer } from 'react-test-renderer/shallow';
 import configureStore from 'redux-mock-store';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import FortuneWheelRaffle from '../index';
 
-const shallowRenderer = createRenderer();
 const mockStore = configureStore([]);
 
 describe('<FortuneWheelRaffle />', () => {
-  let store;
+  let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     store = mockStore({
       requirement: 0,
       userArray: [
-        { id: 'id1', title: 'user1' },
-        { id: 'id2', title: 'user2' },
+        {
+          id: 'id1',
+          title: 'user1',
+          imageUrl: 'user1.png',
+          isEligible: true,
+          isSubscriber: true,
+        },
+        {
+          id: 'id2',
+          title: 'user2',
+          imageUrl: 'user2.png',
+          isEligible: true,
+          isSubscriber: true,
+        },
       ],
     });
   });
   it('should render and match the snapshot', () => {
-    shallowRenderer.render(
+    const { container } = render(
       <Provider store={store}>
         <FortuneWheelRaffle onClose={() => 0} onWin={() => 0} />
       </Provider>
     );
-    const renderedOutput = shallowRenderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
