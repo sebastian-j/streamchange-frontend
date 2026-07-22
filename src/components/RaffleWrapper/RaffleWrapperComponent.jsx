@@ -89,14 +89,16 @@ const RaffleWrapper = (props) => {
           value={props.animationType}
           variant="standard"
         >
+          {/* CS:GO case opening temporarily unavailable
           <MenuItem value={0}>
             <FormattedMessage {...messages.raffleTypeCS} />
           </MenuItem>
-          <MenuItem value={1}>
-            <FormattedMessage {...messages.raffleTypeWheel} />
-          </MenuItem>
+          */}
           <MenuItem value={2}>
             <FormattedMessage {...messages.raffleTypeVertical} />
+          </MenuItem>
+          <MenuItem value={1}>
+            <FormattedMessage {...messages.raffleTypeWheel} />
           </MenuItem>
         </Select>
       </StyledFormControl>
