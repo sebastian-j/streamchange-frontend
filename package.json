@@ -71,5 +71,9 @@
     "typescript": "^6.0.3",
     "vite": "^8.1.1",
     "vitest": "^4.1.10"
+  },
+  "optionalDependencies": {
+    "@emnapi/core": "*",
+    "@emnapi/runtime": "*"
   }
 }
