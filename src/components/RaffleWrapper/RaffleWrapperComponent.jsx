@@ -11,6 +11,7 @@ import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import VerticalRaffle from '../VerticalRaffle';
 import NumericInput from '../NumericInput';
+import RaffleInfoDialog from '../RaffleInfoDialog';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
 const StartButton = styled.button`
@@ -102,6 +103,7 @@ const RaffleWrapper = (props) => {
           </MenuItem>
         </Select>
       </StyledFormControl>
+      <RaffleInfoDialog />
       <NumericInput
         label={intl.formatMessage({ ...messages.animationDuration })}
         minValue={1}
