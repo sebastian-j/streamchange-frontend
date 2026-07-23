@@ -7,7 +7,7 @@ import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { IntlProvider } from 'react-intl';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { WinnerView } from '../index';
+import { WinnerView } from '../WinnerViewComponent';
 
 const mocks = vi.hoisted(() => {
   const usersTable = {

@@ -50,7 +50,6 @@ const UserList = (props: Props) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const [filtersAnchorEl, setFiltersAnchorEl] = useState<Element | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [items, setItems] = useState<Array<User>>([]);
   const [filters, setFilters] = useState<FilteringOptions>({
     moderators: false,
     subscribers: false,
@@ -107,19 +106,14 @@ const UserList = (props: Props) => {
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     setSearchQuery(value);
-    if (value.length > 0 && value.length < 140) {
-      setItems(
-        props.userArray.filter((item) =>
-          item.title.toLowerCase().includes(value.toLowerCase())
-        )
-      );
-    } else if (value.length === 0) {
-      setItems([]);
-    }
   };
 
   const filteredUsers = useMemo(() => {
-    let ret: Array<User> = items.length === 0 ? props.userArray : items;
+    let ret: Array<User> = props.userArray;
+    if (searchQuery.length > 0 && searchQuery.length < 140) {
+      const query = searchQuery.toLowerCase();
+      ret = ret.filter((item) => item.title.toLowerCase().includes(query));
+    }
     if (props.giveawayReq === 1) {
       ret = ret.filter((user) => user.isSubscriber !== false);
     }
@@ -150,7 +144,7 @@ const UserList = (props: Props) => {
       }
     }
     return ret;
-  }, [items, props.userArray, props.giveawayReq, filters]);
+  }, [props.userArray, searchQuery, props.giveawayReq, filters]);
 
   const selectedCount = useMemo(
     () => filteredUsers.filter((item) => item.isEligible).length,

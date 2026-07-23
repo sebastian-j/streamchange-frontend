@@ -21,7 +21,7 @@ export const UserButton = styled.button<{ $userColor?: string }>`
     background-color: ${(props) => props.theme.iconButtonBackground};
   }
   &.isEligible {
-    -webkit-text-stroke: 0.35px black;
+    -webkit-text-stroke: 0.35px ${(props) => props.theme.staticTextColor};
     background-color: ${(props) =>
       `color-mix(in srgb, ${props.theme.color} 18%, transparent)`};
   }
