@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
 export const Row = styled.tr`
-  height: 50px;
+  transition: background-color 120ms ease-out;
+  &:hover {
+    background-color: ${(props) => props.theme.iconButtonBackground};
+  }
 `;

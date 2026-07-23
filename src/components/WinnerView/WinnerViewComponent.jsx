@@ -276,6 +276,7 @@ export class WinnerView extends React.Component {
       message: this.state.user.message,
       prize: this.state.prize,
       platform: this.state.user.platform,
+      color: this.state.user.color,
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {

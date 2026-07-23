@@ -7,6 +7,7 @@ import ArrowUpIcon from './components/arrowUpIcon';
 import HistoryItem from './HistoryItem';
 import { Table } from './components/Table';
 import { TableHeaderButton } from './components/TableHeaderButton';
+import { TableWrapper } from './components/TableWrapper';
 import { Thead } from './components/Thead';
 import { HistoryItem as HItem } from './types';
 
@@ -27,87 +28,89 @@ const HistoryTable = ({ items, sort, onSortChange }: Props) => {
   };
 
   return (
-    <Table>
-      <Thead>
-        <tr>
-          <td />
-          <td>
-            <TableHeaderButton
-              id="displayName"
-              onClick={handleSortChange}
-              type="button"
-            >
-              <FormattedMessage {...messages.nameHeader} />
-              <ArrowUpIcon
-                className={clsx(
-                  sort === 'displayName' && 'active',
-                  sort === 'displayNameDESC' && ['active', 'descending']
-                )}
-              />
-            </TableHeaderButton>
-          </td>
-          <td>
-            <TableHeaderButton
-              id="prize"
-              onClick={handleSortChange}
-              type="button"
-            >
-              <FormattedMessage {...messages.prizeHeader} />
-              <ArrowUpIcon
-                className={clsx(
-                  sort === 'prize' && 'active',
-                  sort === 'prizeDESC' && ['active', 'descending']
-                )}
-              />
-            </TableHeaderButton>
-          </td>
-          <td>
-            <TableHeaderButton
-              id="message"
-              onClick={handleSortChange}
-              type="button"
-            >
-              <FormattedMessage {...messages.messageHeader} />
-              <ArrowUpIcon
-                className={clsx(
-                  sort === 'message' && 'active',
-                  sort === 'messageDESC' && ['active', 'descending']
-                )}
-              />
-            </TableHeaderButton>
-          </td>
-          <td>
-            <TableHeaderButton
-              id="createdAt"
-              onClick={handleSortChange}
-              type="button"
-            >
-              <FormattedMessage {...messages.dateHeader} />
-              <ArrowUpIcon
-                className={clsx(
-                  sort === 'createdAt' && 'active',
-                  sort === 'createdAtDESC' && ['active', 'descending']
-                )}
-              />
-            </TableHeaderButton>
-          </td>
-        </tr>
-      </Thead>
-      <tbody>
-        {items.map((item) => (
-          <HistoryItem
-            key={item.createdAt}
-            channelId={item.channelId}
-            imageUrl={item.imageUrl}
-            platform={item.platform}
-            displayName={item.displayName}
-            prize={item.prize}
-            message={item.message}
-            createdAt={item.createdAt}
-          />
-        ))}
-      </tbody>
-    </Table>
+    <TableWrapper>
+      <Table>
+        <Thead>
+          <tr>
+            <td>
+              <TableHeaderButton
+                id="displayName"
+                onClick={handleSortChange}
+                type="button"
+              >
+                <FormattedMessage {...messages.nameHeader} />
+                <ArrowUpIcon
+                  className={clsx(
+                    sort === 'displayName' && 'active',
+                    sort === 'displayNameDESC' && ['active', 'descending']
+                  )}
+                />
+              </TableHeaderButton>
+            </td>
+            <td>
+              <TableHeaderButton
+                id="prize"
+                onClick={handleSortChange}
+                type="button"
+              >
+                <FormattedMessage {...messages.prizeHeader} />
+                <ArrowUpIcon
+                  className={clsx(
+                    sort === 'prize' && 'active',
+                    sort === 'prizeDESC' && ['active', 'descending']
+                  )}
+                />
+              </TableHeaderButton>
+            </td>
+            <td>
+              <TableHeaderButton
+                id="message"
+                onClick={handleSortChange}
+                type="button"
+              >
+                <FormattedMessage {...messages.messageHeader} />
+                <ArrowUpIcon
+                  className={clsx(
+                    sort === 'message' && 'active',
+                    sort === 'messageDESC' && ['active', 'descending']
+                  )}
+                />
+              </TableHeaderButton>
+            </td>
+            <td>
+              <TableHeaderButton
+                id="createdAt"
+                onClick={handleSortChange}
+                type="button"
+              >
+                <FormattedMessage {...messages.dateHeader} />
+                <ArrowUpIcon
+                  className={clsx(
+                    sort === 'createdAt' && 'active',
+                    sort === 'createdAtDESC' && ['active', 'descending']
+                  )}
+                />
+              </TableHeaderButton>
+            </td>
+          </tr>
+        </Thead>
+        <tbody>
+          {items.map((item) => (
+            <HistoryItem
+              key={item.createdAt}
+              channelId={item.channelId}
+              imageUrl={item.imageUrl}
+              platform={item.platform}
+              displayName={item.displayName}
+              color={item.color}
+              prize={item.prize}
+              message={item.message}
+              createdAt={item.createdAt}
+            />
+          ))}
+        </tbody>
+      </Table>
+    </TableWrapper>
   );
 };
 

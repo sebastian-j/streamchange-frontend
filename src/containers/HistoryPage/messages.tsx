@@ -12,6 +12,10 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Winner history',
   },
+  pageDescription: {
+    id: `${scope}.pageDescription`,
+    defaultMessage: 'Browse and search through every winner drawn so far.',
+  },
   dateHeader: {
     id: `${scope}.header.date`,
     defaultMessage: 'Date and time',
@@ -40,9 +44,30 @@ export default defineMessages({
     id: `${scope}.info.noResults`,
     defaultMessage: 'No channel match the search term',
   },
+  infoEmpty: {
+    id: `${scope}.info.empty`,
+    defaultMessage: "You don't have any winner history yet.",
+  },
   resultsPerPage: {
     id: `${scope}.resultsPerPage`,
     defaultMessage: 'Results per page',
+  },
+  resultsSummary: {
+    id: `${scope}.resultsSummary`,
+    defaultMessage:
+      'Showing {from}-{to} of {total} {total, plural, one {result} other {results}}',
+  },
+  pageIndicator: {
+    id: `${scope}.pageIndicator`,
+    defaultMessage: 'Page {page} of {totalPages}',
+  },
+  prevPageLabel: {
+    id: `${scope}.prevPageLabel`,
+    defaultMessage: 'Previous page',
+  },
+  nextPageLabel: {
+    id: `${scope}.nextPageLabel`,
+    defaultMessage: 'Next page',
   },
   returnButton: {
     id: `${scope}.ReturnButton`,
@@ -54,18 +79,18 @@ export default defineMessages({
   },
   clearHistoryMenuItem: {
     id: `${scope}.HistoryMenu.clearHistory`,
-    defineMessage: 'Clear history',
+    defaultMessage: 'Clear history',
   },
   clearHistoryCancelButton: {
     id: `${scope}.HistoryMenu.clearHistory.cancelButton`,
-    defineMessage: 'Cancel',
+    defaultMessage: 'Cancel',
   },
   clearHistoryConfirmButton: {
     id: `${scope}.HistoryMenu.clearHistory.confirmButton`,
-    defineMessage: 'OK',
+    defaultMessage: 'OK',
   },
   clearHistoryDialogContent: {
     id: `${scope}.HistoryMenu.clearHistory.dialogContentText`,
-    defineMessage: 'Are you sure you want to clear all winner history?',
+    defaultMessage: 'Are you sure you want to clear all winner history?',
   },
 });

@@ -1,13 +1,21 @@
 import styled from 'styled-components';
 
 export const TableHeaderButton = styled.button`
+  align-items: center;
   background: none;
   border: none;
   color: ${(props) => props.theme.staticTextColor};
-  padding: 14px 10px 14px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 4px;
   outline: none;
-  width: 100%;
+  padding: 10px 12px;
   text-align: left;
+  transition: background-color 120ms ease-out;
+  width: 100%;
+  &:hover {
+    background-color: ${(props) => props.theme.iconButtonBackground};
+  }
   span {
     pointer-events: none;
   }

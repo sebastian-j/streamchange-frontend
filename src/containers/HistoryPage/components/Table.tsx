@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Table = styled.table`
-  display: table;
-  overflow-y: auto;
-  min-width: 1052px;
+  border-collapse: collapse;
+  min-width: 680px;
   width: 100%;
 `;
