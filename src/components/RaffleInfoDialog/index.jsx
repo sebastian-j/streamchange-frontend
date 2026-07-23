@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,40 +10,30 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 
+import messages from './messages';
 import reelPreview from './assets/reel.webp';
 import wheelPreview from './assets/wheel.webp';
+
 const METHODS = [
   {
-    label: 'Maszyna losująca',
-    tagline: 'Pionowy bęben w stylu Slotsowym',
+    label: messages.tabReel,
+    tagline: messages.reelTagline,
+    description: messages.reelDescription,
     preview: reelPreview,
-    paragraphs: [
-      <>
-        Nazwy uczestników przewijają się <strong>pionowo</strong> jak bębny w
-        slocie i stopniowo zwalniają. <br />
-        Rolka zatrzymuje się na jednym uczestniku - to on zostaje zwycięzcą. Im
-        dłuższy czas animacji, tym dłużej trwa zwalnianie. Sprawdza się, gdy
-        chcesz budować napięcie liniowo, aż do finałowego „stopu".
-      </>,
-    ],
   },
   {
-    label: 'Koło fortuny',
-    tagline: 'Obrotowe koło z wycinkami dla uczestników',
+    label: messages.tabWheel,
+    tagline: messages.wheelTagline,
+    description: messages.wheelDescription,
     preview: wheelPreview,
-    paragraphs: [
-      <>
-        Przed rozpoczęciem losowania system wybiera spośród wszystkich
-        uczestników maksymalnie <strong>30 osób</strong>, które umieszcza na
-        kole fortuny. Uczestnicy są rozłożeni jako wycinki koła.
-        <br /> Koło rozpędza się, a następnie hamuje, aż wskaźnik zatrzyma się
-        na jednym z pól. Pole wskazane przez strzałkę wyłania zwycięzcę. Czas
-        animacji decyduje, jak długo koło się kręci przed zatrzymaniem. Dobre,
-        gdy chcesz efektowne, obrotowe losowanie w stylu koła fortuny.
-      </>,
-    ],
   },
 ];
+
+// react-intl rich-text tags used inside the description messages.
+const richValues = {
+  b: (chunks) => <strong>{chunks}</strong>,
+  br: () => <br />,
+};
 
 const HelpIcon = styled.svg`
   fill: ${(props) => props.theme.color};
@@ -98,6 +89,7 @@ const TriggerButton = styled(Button)`
 const paperSx = { borderRadius: 0 };
 
 const RaffleInfoDialog = () => {
+  const intl = useIntl();
   const [isOpen, setIsOpen] = useState(false);
   const [tab, setTab] = useState(0);
 
@@ -105,6 +97,7 @@ const RaffleInfoDialog = () => {
   const closeDialog = () => setIsOpen(false);
 
   const method = METHODS[tab];
+  const methodLabel = intl.formatMessage(method.label);
 
   return (
     <>
@@ -117,7 +110,7 @@ const RaffleInfoDialog = () => {
           </HelpIcon>
         }
       >
-        Jak działają metody losowania?
+        <FormattedMessage {...messages.trigger} />
       </TriggerButton>
       <Dialog
         open={isOpen}
@@ -131,7 +124,7 @@ const RaffleInfoDialog = () => {
           id="raffle-info-title"
           sx={{ px: 5, pt: 4, pb: 2, fontSize: '1.6rem', fontWeight: 700 }}
         >
-          Jak wyglądają metody losowania?
+          <FormattedMessage {...messages.dialogTitle} />
         </DialogTitle>
         <DialogContent dividers sx={{ px: 5, py: 4 }}>
           <StyledTabs
@@ -142,7 +135,7 @@ const RaffleInfoDialog = () => {
             sx={{ mb: 4, '& .MuiTab-root': { fontSize: '1rem', py: 2 } }}
           >
             {METHODS.map((m) => (
-              <Tab key={m.label} label={m.label} />
+              <Tab key={m.label.id} label={intl.formatMessage(m.label)} />
             ))}
           </StyledTabs>
           <Box
@@ -156,10 +149,15 @@ const RaffleInfoDialog = () => {
             <Box sx={{ flex: '1 1 55%', minWidth: 0 }}>
               <PreviewBox>
                 {method.preview ? (
-                  <img src={method.preview} alt={`Podgląd: ${method.label}`} />
+                  <img
+                    src={method.preview}
+                    alt={intl.formatMessage(messages.previewAlt, {
+                      method: methodLabel,
+                    })}
+                  />
                 ) : (
                   <Typography variant="body1" color="text.secondary">
-                    Podgląd wkrótce
+                    <FormattedMessage {...messages.previewSoon} />
                   </Typography>
                 )}
               </PreviewBox>
@@ -168,30 +166,25 @@ const RaffleInfoDialog = () => {
               sx={{ flex: '1 1 45%', display: 'flex', flexDirection: 'column' }}
             >
               <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                {method.label}
+                {methodLabel}
               </Typography>
               <Typography variant="subtitle2" color="text.secondary">
-                {method.tagline}
+                <FormattedMessage {...method.tagline} />
               </Typography>
               <AccentBar />
-              <Box sx={{ mt: 3 }}>
-                {method.paragraphs.map((text, index) => (
-                  <Typography
-                    key={index}
-                    variant="body1"
-                    paragraph
-                    sx={{ lineHeight: 1.7, textAlign: 'justify' }}
-                  >
-                    {text}
-                  </Typography>
-                ))}
-              </Box>
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{ mt: 3, lineHeight: 1.7, textAlign: 'justify' }}
+              >
+                <FormattedMessage {...method.description} values={richValues} />
+              </Typography>
               <Button
                 onClick={closeDialog}
                 color="inherit"
                 sx={{ mt: 'auto', alignSelf: 'flex-end' }}
               >
-                Zamknij
+                <FormattedMessage {...messages.closeBtn} />
               </Button>
             </Box>
           </Box>

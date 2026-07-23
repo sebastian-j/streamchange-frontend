@@ -63,7 +63,7 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
         />
       </svg>
     </span>
-    Jak działają metody losowania?
+    How do the raffle methods work?
   </button>
   <div
     class="sc-gsMGyr jxmkhD"
