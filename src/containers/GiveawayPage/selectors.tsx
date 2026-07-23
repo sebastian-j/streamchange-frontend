@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { ApplicationRootState } from 'types';
+import { ApplicationRootState } from '../../components/types';
 import { initialState } from './reducer';
 
 /**
@@ -8,18 +8,7 @@ import { initialState } from './reducer';
 const selectGiveawayPage = (state: ApplicationRootState) =>
   state.giveawayPage || initialState;
 
-const makeSelectAuthKey = () =>
-  createSelector(selectGiveawayPage, (state) => state.authKey);
-
-const makeSelectBanStatus = () =>
-  createSelector(selectGiveawayPage, (state) => state.ban);
-
 const makeSelectStreamInfo = () =>
   createSelector(selectGiveawayPage, (state) => state.stream);
 
-export {
-  selectGiveawayPage,
-  makeSelectAuthKey,
-  makeSelectBanStatus,
-  makeSelectStreamInfo,
-};
+export { selectGiveawayPage, makeSelectStreamInfo };

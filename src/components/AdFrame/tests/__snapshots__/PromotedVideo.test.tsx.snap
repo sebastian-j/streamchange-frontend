@@ -3,15 +3,15 @@
 exports[`<PromotedVideo /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    class="sc-gsDLFA hsXcGK"
+    class="sc-gsMGyr kkdnbj"
   >
     <span
-      class="sc-bdvvNz ksfVUI"
+      class="sc-bcHNtg cLSDZF"
     >
       Advertisement
     </span>
     <div
-      class="sc-dkPvMp bmetsq"
+      class="sc-dkHxwO jKThJq"
     >
       <iframe
         frameborder="0"
