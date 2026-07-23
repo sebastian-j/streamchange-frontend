@@ -6,4 +6,6 @@ class ResizeObserverMock {
   disconnect() {}
 }
 
-globalThis.ResizeObserver = globalThis.ResizeObserver || (ResizeObserverMock as unknown as typeof ResizeObserver);
+globalThis.ResizeObserver =
+  globalThis.ResizeObserver ||
+  (ResizeObserverMock as unknown as typeof ResizeObserver);
