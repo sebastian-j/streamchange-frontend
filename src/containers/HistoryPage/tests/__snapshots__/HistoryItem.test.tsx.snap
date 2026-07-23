@@ -5,7 +5,7 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
   class="sc-jTkVfb blbFHO"
 >
   <td
-    class="sc-dkHxwO cLfdOD identity"
+    class="sc-dkHxwO iIMYlR identity"
   >
     <a
       class="sc-hLllbt jnHasg"
@@ -26,21 +26,21 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
     </a>
   </td>
   <td
-    class="sc-dkHxwO cLfdOD text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       prize
     </span>
   </td>
   <td
-    class="sc-dkHxwO cLfdOD text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       abc
     </span>
   </td>
   <td
-    class="sc-dkHxwO cLfdOD text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       December 24, 2019

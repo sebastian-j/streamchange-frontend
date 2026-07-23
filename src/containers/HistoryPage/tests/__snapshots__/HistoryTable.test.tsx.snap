@@ -8,7 +8,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
     class="sc-iBIXdp cuqFvX"
   >
     <thead
-      class="sc-jqMYKt bpVVfC"
+      class="sc-jqMYKt hbKpgs"
     >
       <tr>
         <td>
@@ -114,7 +114,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         class="sc-gLfMdy gZVWCM"
       >
         <td
-          class="sc-hLllbt iOxwzK identity"
+          class="sc-hLllbt XGmoA identity"
         >
           <a
             class="sc-eDgbZQ dIsYlx"
@@ -135,21 +135,21 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
           </a>
         </td>
         <td
-          class="sc-hLllbt iOxwzK text"
+          class="sc-hLllbt XGmoA text"
         >
           <span>
             trophy
           </span>
         </td>
         <td
-          class="sc-hLllbt iOxwzK text"
+          class="sc-hLllbt XGmoA text"
         >
           <span>
             test message
           </span>
         </td>
         <td
-          class="sc-hLllbt iOxwzK text"
+          class="sc-hLllbt XGmoA text"
         >
           <span>
             December 24, 2019
