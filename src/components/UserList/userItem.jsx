@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
@@ -38,4 +39,4 @@ UserItem.propTypes = {
   handleToggleUser: PropTypes.func.isRequired,
 };
 
-export default UserItem;
+export default memo(UserItem);

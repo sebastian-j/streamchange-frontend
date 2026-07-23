@@ -9,9 +9,11 @@ export const UserListPanel = styled.div`
   margin: 15px;
   padding: 15px;
   > ul {
-    overflow-y: scroll;
+    overflow-y: auto;
     list-style: none;
     padding: 0;
+    flex-grow: 1;
+    min-height: 0;
   }
   @media (orientation: portrait) {
     margin: 5px;

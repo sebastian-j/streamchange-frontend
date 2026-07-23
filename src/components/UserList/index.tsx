@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -59,8 +59,33 @@ const UserList = (props: Props) => {
     participating: false,
     notParticipating: false,
   });
-  let selectedCount = 0;
-  let allCount = 0;
+
+  const listRef = useRef<HTMLUListElement>(null);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(400);
+
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return undefined;
+
+    const handleScroll = () => {
+      setScrollTop(el.scrollTop);
+    };
+
+    const handleResize = () => {
+      setContainerHeight(el.clientHeight || 400);
+    };
+
+    handleResize();
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(el);
+
+    return () => {
+      el.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
+  }, []);
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -93,13 +118,13 @@ const UserList = (props: Props) => {
     }
   };
 
-  const isFiltering = () => Object.values(filters).some((x) => x);
-
-  const getUsers = (): Array<User> => {
+  const filteredUsers = useMemo(() => {
     let ret: Array<User> = items.length === 0 ? props.userArray : items;
-    if (props.giveawayReq === 1)
+    if (props.giveawayReq === 1) {
       ret = ret.filter((user) => user.isSubscriber !== false);
-    if (isFiltering()) {
+    }
+    const isFilteringActive = Object.values(filters).some((x) => x);
+    if (isFilteringActive) {
       if (filters.participating && !filters.notParticipating) {
         ret = ret.filter((user) => user.isEligible);
       } else if (!filters.participating && filters.notParticipating) {
@@ -124,10 +149,32 @@ const UserList = (props: Props) => {
         );
       }
     }
-    selectedCount = ret.filter((item) => item.isEligible).length;
-    allCount = ret.length;
     return ret;
-  };
+  }, [items, props.userArray, props.giveawayReq, filters]);
+
+  const selectedCount = useMemo(
+    () => filteredUsers.filter((item) => item.isEligible).length,
+    [filteredUsers]
+  );
+  const allCount = filteredUsers.length;
+
+  const ITEM_HEIGHT = 38;
+  const OVERSCAN = 10;
+  const totalItems = filteredUsers.length;
+  const totalHeight = totalItems * ITEM_HEIGHT;
+  const startIndex = Math.max(
+    0,
+    Math.floor(scrollTop / ITEM_HEIGHT) - OVERSCAN
+  );
+  const endIndex = Math.min(
+    totalItems,
+    Math.ceil((scrollTop + containerHeight) / ITEM_HEIGHT) + OVERSCAN
+  );
+
+  const visibleUsers = useMemo(
+    () => filteredUsers.slice(startIndex, endIndex),
+    [filteredUsers, startIndex, endIndex]
+  );
 
   useEffect(() => {
     if (props.userArray.length === 0) {
@@ -373,19 +420,36 @@ const UserList = (props: Props) => {
       <SkipListLink href="#purge-user-list-btn">
         <FormattedMessage {...messages.skipListLinkText} />
       </SkipListLink>
-      <ul>
-        {getUsers().map((item) => (
-          <UserItem
-            key={item.id}
-            channelId={item.id}
-            color={item.color}
-            platform={item.platform}
-            title={item.title}
-            badges={item.badges}
-            isEligible={item.isEligible}
-            handleToggleUser={props.toggleEligibility}
-          />
-        ))}
+      <ul ref={listRef} style={{ position: 'relative' }}>
+        <div
+          style={{
+            height: totalHeight,
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: startIndex * ITEM_HEIGHT,
+              left: 0,
+              right: 0,
+            }}
+          >
+            {visibleUsers.map((item) => (
+              <UserItem
+                key={item.id}
+                channelId={item.id}
+                color={item.color}
+                platform={item.platform}
+                title={item.title}
+                badges={item.badges}
+                isEligible={item.isEligible}
+                handleToggleUser={props.toggleEligibility}
+              />
+            ))}
+          </div>
+        </div>
       </ul>
       <StyledButton
         id="purge-user-list-btn"
