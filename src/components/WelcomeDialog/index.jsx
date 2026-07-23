@@ -162,7 +162,7 @@ const WelcomeDialog = (props) => {
               {isLoading && <CircularProgress />}
             </div>
           </div>
-          <WelcomeHint />
+          {/*<WelcomeHint />*/}
         </DialogWrapper>
         <CookieConsent />
       </PhotoBackdrop>

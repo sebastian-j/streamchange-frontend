@@ -16,8 +16,8 @@ const DialogWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 55%;
-  left: 30%;
+  top: 67%;
+  left: 51%;
   width: 35vw;
   min-width: 320px;
   max-width: 600px;
