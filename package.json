@@ -73,7 +73,7 @@
     "vitest": "^4.1.10"
   },
   "optionalDependencies": {
-    "@emnapi/core": "*",
-    "@emnapi/runtime": "*"
+    "@emnapi/core": "1.11.2",
+    "@emnapi/runtime": "1.11.2"
   }
 }
