@@ -77,12 +77,15 @@ const UserList = (props: Props) => {
 
     handleResize();
     el.addEventListener('scroll', handleScroll, { passive: true });
-    const observer = new ResizeObserver(handleResize);
-    observer.observe(el);
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      observer = new ResizeObserver(handleResize);
+      observer.observe(el);
+    }
 
     return () => {
       el.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
+      observer?.disconnect();
     };
   }, []);
 
