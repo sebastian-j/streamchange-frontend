@@ -9,12 +9,15 @@ describe('<HistoryTable />', () => {
     const { container } = render(
       <IntlProvider locale="en">
         <HistoryTable
+          sort="createdAtDESC"
+          onSortChange={() => {}}
           items={[
             {
               id: 1,
               channelId: 'id',
               createdAt: '2019-12-24T07:27:56.273Z',
               displayName: 'name',
+              platform: 'kick',
               imageUrl: 'url',
               message: 'test message',
               prize: 'trophy',

@@ -2,22 +2,22 @@
 
 exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
 <table
-  class="sc-hKwAaq hXtKnu"
+  class="sc-hLllbt bQniGO"
 >
   <thead
-    class="sc-jRQzZg PIKSn"
+    class="sc-jTkVfb cRBpmt"
   >
     <tr>
       <td />
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eDgbZQ ckZVzW"
           id="displayName"
           type="button"
         >
           Channel name
           <svg
-            class="sc-bdvvNz gCchtE"
+            class="sc-bcHNtg kFJBxV"
             height="24"
             viewBox="0 0 24 24"
             width="24"
@@ -35,13 +35,13 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eDgbZQ ckZVzW"
           id="prize"
           type="button"
         >
           Prize
           <svg
-            class="sc-bdvvNz gCchtE"
+            class="sc-bcHNtg kFJBxV"
             height="24"
             viewBox="0 0 24 24"
             width="24"
@@ -59,13 +59,13 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eDgbZQ ckZVzW"
           id="message"
           type="button"
         >
           Message
           <svg
-            class="sc-bdvvNz gCchtE"
+            class="sc-bcHNtg kFJBxV"
             height="24"
             viewBox="0 0 24 24"
             width="24"
@@ -83,13 +83,13 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
       </td>
       <td>
         <button
-          class="sc-eCIkhf gOnSaB"
+          class="sc-eDgbZQ ckZVzW"
           id="createdAt"
           type="button"
         >
           Date and time
           <svg
-            class="sc-bdvvNz gCchtE active descending"
+            class="sc-bcHNtg kFJBxV active descending"
             height="24"
             viewBox="0 0 24 24"
             width="24"
@@ -109,10 +109,10 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
   </thead>
   <tbody>
     <tr
-      class="sc-dkPvMp ivXbmo"
+      class="sc-dkHxwO jGaqtE"
     >
       <td
-        class="sc-gsDLFA fcoBPh image"
+        class="sc-gsMGyr hFKyaz image"
       >
         <a
           href="https://kick.com/id"
@@ -127,28 +127,28 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         </a>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh textLeft"
+        class="sc-gsMGyr hFKyaz textLeft"
       >
         <span>
           name
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsMGyr hFKyaz text"
       >
         <span>
           trophy
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsMGyr hFKyaz text"
       >
         <span>
           test message
         </span>
       </td>
       <td
-        class="sc-gsDLFA fcoBPh text"
+        class="sc-gsMGyr hFKyaz text"
       >
         <span>
           December 24, 2019

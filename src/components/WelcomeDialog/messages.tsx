@@ -16,10 +16,6 @@ export default defineMessages({
     id: `${scope}.videoInput.label`,
     defaultMessage: 'Paste stream url',
   },
-  example: {
-    id: `${scope}.example`,
-    defaultMessage: 'Example: https://www.youtube.com/watch?v=CBUBY45me_A',
-  },
   saveBtn: {
     id: `${scope}.saveBtn`,
     defaultMessage: 'OK',
@@ -30,7 +26,7 @@ export default defineMessages({
   },
   invalidUrlError: {
     id: `${scope}.error.invalidUrl`,
-    defaultMessage: 'This is not a URL to live stream or a YouTube video.',
+    defaultMessage: 'This is not a URL to live stream.',
   },
   invalidChannelUrlError: {
     id: `${scope}.error.invalidChannelUrl`,
@@ -49,12 +45,8 @@ export default defineMessages({
     id: `${scope}.error.quotaExceeded`,
     defaultMessage: 'The quota limit has been exceeded.',
   },
-  banDate: {
-    id: `${scope}.banDate`,
-    defaultMessage: 'Banned to',
-  },
-  banReason: {
-    id: `${scope}.banReason`,
-    defaultMessage: 'Reason:',
+  blacklistedError: {
+    id: `${scope}.error.blacklisted`,
+    defaultMessage: 'This channel is blacklisted.',
   },
 });

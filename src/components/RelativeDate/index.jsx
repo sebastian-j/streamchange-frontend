@@ -5,7 +5,6 @@ import messages from './messages';
 function RelativeDate(props) {
   const dt = new Date(props.ISO8601Date);
   const now = new Date();
-  let convertedDate = '';
   if (
     dt.getFullYear() === now.getFullYear() &&
     dt.getMonth() === now.getMonth() &&
@@ -105,7 +104,7 @@ function RelativeDate(props) {
       </span>
     );
   }
-  convertedDate = ` ${dt.getHours()}:${
+  const convertedDate = ` ${dt.getHours()}:${
     dt.getMinutes() < 10 ? '0' : ''
   }${dt.getMinutes()}`;
   return (

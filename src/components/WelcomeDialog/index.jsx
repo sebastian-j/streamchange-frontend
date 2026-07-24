@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import { FormattedMessage, useIntl } from 'react-intl';
 import messages from './messages';
 import { CompatibilityInfo } from './components/CompatibilityInfo';
@@ -12,7 +10,7 @@ import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WavyButton from './components/WavyButton';
-import WelcomeHint from './WelcomeHint';
+//import WelcomeHint from './WelcomeHint';
 
 const CHANNEL_URL_REGEX =
   /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
@@ -35,11 +33,17 @@ const parseChannelInput = (value) => {
 
 const WelcomeDialog = (props) => {
   const intl = useIntl();
-  const [isChrome, setIsChrome] = useState(true);
-  const [isFirstUse, setIsFirstUse] = useState(false);
+  const [isChrome] = useState(() => !!window.chrome);
+  const [isFirstUse] = useState(() => !localStorage.getItem('locale'));
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
   const [isLinkInvalid, setIsLinkInvalid] = useState(false);
+  const [prevError, setPrevError] = useState(props.error);
+
+  if (props.error !== prevError) {
+    setPrevError(props.error);
+    if (props.error) setIsLoading(false);
+  }
 
   const handleInputChange = (e) => {
     setText(e.target.value);
@@ -59,15 +63,6 @@ const WelcomeDialog = (props) => {
       props.onStart(parsed.channel, parsed.platform);
     }
   };
-
-  useEffect(() => {
-    setIsChrome(!!window.chrome);
-    setIsFirstUse(!localStorage.getItem('locale'));
-  }, []);
-
-  useEffect(() => {
-    if (props.error) setIsLoading(false);
-  }, [props.error]);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !isLoading) {
@@ -94,7 +89,7 @@ const WelcomeDialog = (props) => {
                 name="channel"
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                label="Link do kanału"
+                label={intl.formatMessage({ ...messages.videoInputLabel })}
                 type="text"
                 value={text}
                 variant="standard"
@@ -132,20 +127,13 @@ const WelcomeDialog = (props) => {
                     {props.error === 'quotaExceeded' && (
                       <FormattedMessage {...messages.quotaExceededError} />
                     )}
-                  </span>
-                )}
-                {props.ban && (
-                  <span
-                    style={{
-                      display: 'block',
-                      color: '#bd0013',
-                      marginTop: '10px',
-                    }}
-                  >
-                    <FormattedMessage {...messages.banDate} />
-                    {` ${props.ban.endsAt} `}
-                    <FormattedMessage {...messages.banReason} />
-                    {props.ban.description}
+                    {props.error && props.error.startsWith('blacklisted:') && (
+                      <>
+                        <FormattedMessage {...messages.blacklistedError} />
+                        <br />
+                        {props.error.replace('blacklisted:', '')}
+                      </>
+                    )}
                   </span>
                 )}
               </div>
@@ -160,7 +148,7 @@ const WelcomeDialog = (props) => {
               {isLoading && <CircularProgress />}
             </div>
           </div>
-          <WelcomeHint />
+          {/*<WelcomeHint />*/}
         </DialogWrapper>
         <CookieConsent />
       </PhotoBackdrop>
@@ -177,7 +165,6 @@ const WelcomeDialog = (props) => {
 };
 
 WelcomeDialog.propTypes = {
-  ban: PropTypes.object,
   error: PropTypes.string,
   onStart: PropTypes.func,
   variant: PropTypes.number,

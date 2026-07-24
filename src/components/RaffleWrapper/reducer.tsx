@@ -7,7 +7,7 @@ import ActionTypes from './constants';
 import { ContainerState, ContainerActions } from './types';
 
 export const initialState: ContainerState = {
-  animationType: 0,
+  animationType: 2,
   animationDuration: Number(localStorage.getItem('gv-animationDuration')) || 7,
   isOpen: false,
 };

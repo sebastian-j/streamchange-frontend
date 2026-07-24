@@ -34,6 +34,7 @@ const LotteryLawWarning = ({ open }: Props) => {
     <Dialog
       open={isOpenDialog}
       onClose={closeDialog}
+      disableRestoreFocus
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">

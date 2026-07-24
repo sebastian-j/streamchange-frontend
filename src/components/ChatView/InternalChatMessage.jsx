@@ -3,29 +3,24 @@ import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 
 import InternalChatBadges from './InternalChatBadges';
+import { getSafeColor } from '../../utils/colors';
 
 const MessageLi = styled.li`
   margin-bottom: 5px;
 `;
 
-const AuthorImage = styled.img`
-  border-radius: 50%;
-  height: 26px;
-  margin-right: 5px;
-`;
-
 const AuthorTitle = styled.span`
   color: ${(props) =>
-    props.userColor ? props.userColor : props.theme.secondaryTextColor};
+    props.$userColor
+      ? getSafeColor(props.$userColor, props.theme.panelBackground)
+      : props.theme.secondaryTextColor};
   font-family: Roboto, sans-serif;
   font-weight: 500;
   margin-right: 5px;
-  .moderator {
-    color: rgb(94, 132, 241);
-  }
 `;
 const MessageText = styled.span`
   color: ${(props) => props.theme.staticTextColor};
+  overflow-wrap: anywhere;
 `;
 
 const EmoteImg = styled.img`
@@ -66,7 +61,7 @@ const InternalChatMessage = (props) => {
     <MessageLi>
       <InternalChatBadges message={props.message} />
       <Tooltip title={convertedDate} aria-label="date">
-        <AuthorTitle userColor={userColor}>{props.message.title}</AuthorTitle>
+        <AuthorTitle $userColor={userColor}>{props.message.title}</AuthorTitle>
       </Tooltip>
       <MessageText>{renderMessageBody(props.message)}</MessageText>
     </MessageLi>

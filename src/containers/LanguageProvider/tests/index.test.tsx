@@ -5,7 +5,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 
 import configureStore from '../../../configureStore';
 import { translationMessages } from '../../../i18n';
-import ConnectedLanguageProvider, { LanguageProvider } from '../index';
+import ConnectedLanguageProvider from '../index';
+import { LanguageProvider } from '../LanguageProviderComponent';
 
 const messages = defineMessages({
   someMessage: {

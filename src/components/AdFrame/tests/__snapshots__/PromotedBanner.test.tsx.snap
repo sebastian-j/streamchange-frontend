@@ -2,12 +2,12 @@
 
 exports[`<PromotedBanner /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-gsDLFA hxxyns"
+  class="sc-gsMGyr fAVdnl"
   margin="1"
   offset="0"
 >
   <span
-    class="sc-bdvvNz jneRgd"
+    class="sc-bcHNtg dLHkvg"
     margin="1"
   >
     Advertisement
@@ -19,20 +19,20 @@ exports[`<PromotedBanner /> > should render and match the snapshot 1`] = `
     <div>
       <img
         alt="test-advertisement"
-        class="sc-dkPvMp fHOuXL"
+        class="sc-dkHxwO eBZPof"
         src="url"
       />
     </div>
     <div
-      class="sc-hKwAaq Zpgva"
+      class="sc-hLllbt dlulrq"
       margin="1"
     />
     <div
-      class="sc-hKwAaq Zpgva"
+      class="sc-hLllbt dlulrq"
       margin="1"
     />
     <div
-      class="sc-hKwAaq Zpgva"
+      class="sc-hLllbt dlulrq"
       margin="1"
     />
   </a>

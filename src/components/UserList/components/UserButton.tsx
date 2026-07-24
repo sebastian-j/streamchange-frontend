@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { getSafeColor } from '../../../utils/colors';
 
-export const UserButton = styled.button<{ userColor?: string }>`
+export const UserButton = styled.button<{ $userColor?: string }>`
   background: none;
   border: none;
   border-radius: 6px;
-  color: ${(props) => props.userColor || props.theme.inactiveUser};
+  color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.inactiveUser)};
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -20,7 +21,7 @@ export const UserButton = styled.button<{ userColor?: string }>`
     background-color: ${(props) => props.theme.iconButtonBackground};
   }
   &.isEligible {
-    -webkit-text-stroke: 0.35px black;
+    -webkit-text-stroke: 0.35px ${(props) => props.theme.staticTextColor};
     background-color: ${(props) =>
       `color-mix(in srgb, ${props.theme.color} 18%, transparent)`};
   }

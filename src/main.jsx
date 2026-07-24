@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { translationMessages, DEFAULT_LOCALE } from './i18n';
+import { translationMessages } from './i18n';
 import LanguageProvider from './containers/LanguageProvider';
 import StyleProvider from './containers/StyleProvider';
 import configureStore from './configureStore';
