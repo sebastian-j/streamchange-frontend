@@ -1,26 +1,12 @@
-import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import styled from 'styled-components';
-import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import Button from '@mui/material/Button';
-import { FormattedMessage, useIntl } from 'react-intl';
 
-import messages from './messages';
-import { makeSelectBanStatus, makeSelectStreamInfo } from './selectors';
-import { changeStreamProperties, sendTelemetryData } from './actions';
-import { useInjectSaga } from '../../utils/injectSaga';
-import saga from './saga';
-import HistoryWidget from './HistoryWidget';
-import WelcomeDialog from '../../components/WelcomeDialog';
-import YoutubeWorker from '../../components/YoutubeWorker';
-import SettingsDialog from '../../components/SettingsDialog';
-import SupportInformation from '../../components/SupportInformation';
-import { API_KEY, BACKEND_URL } from '../../config';
+import GiveawayPage from './GiveawayPageComponent';
+import { makeSelectStreamInfo } from './selectors';
+import { changeStreamProperties } from './actions';
 import { purgeList } from '../../components/UserList/actions';
 
+<<<<<<< HEAD
 const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
   display: flex;
@@ -235,15 +221,15 @@ GiveawayPage.propTypes = {
   streamInfo: PropTypes.object.isRequired,
 };
 
+=======
+>>>>>>> 26c03d25033f2016b4e0c6970905ded37534f0dd
 const mapStateToProps = createStructuredSelector({
-  ban: makeSelectBanStatus(),
   streamInfo: makeSelectStreamInfo(),
 });
 
-export function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     changeStreamProperties: (st) => dispatch(changeStreamProperties(st)),
-    sendTelemetryData: (st) => dispatch(sendTelemetryData(st)),
     clearUserList: () => dispatch(purgeList()),
     dispatch,
   };

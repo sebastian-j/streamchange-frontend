@@ -12,8 +12,6 @@ describe('giveawayPageReducer', () => {
   let state: GiveawayPageState;
   beforeEach(() => {
     state = {
-      authKey: '',
-      ban: null,
       stream: {
         ownerId: '',
         title: '',

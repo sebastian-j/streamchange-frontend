@@ -6,8 +6,6 @@ import { makeSelectStreamInfo, selectGiveawayPage } from '../selectors';
 describe('GiveawayPage selectors', () => {
   it('should select the global state', () => {
     const globalState = {
-      authKey: '',
-      ban: null,
       stream: {
         ownerId: '',
         title: '',

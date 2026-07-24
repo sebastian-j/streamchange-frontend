@@ -1,18 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 
-import messages from './messages';
 import {
   makeSelectGiveawayPrize,
   makeSelectGiveawayRequirement,
 } from './selectors';
 import { changePrize, changeRequirement } from './actions';
+<<<<<<< HEAD
 import AdFrame from '../AdFrame';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
@@ -123,13 +117,16 @@ GiveawayRules.propTypes = {
   prize: PropTypes.string,
   requirement: PropTypes.number,
 };
+=======
+import GiveawayRules from './GiveawayRulesComponent';
+>>>>>>> 26c03d25033f2016b4e0c6970905ded37534f0dd
 
 const mapStateToProps = createStructuredSelector({
   prize: makeSelectGiveawayPrize(),
   requirement: makeSelectGiveawayRequirement(),
 });
 
-export function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     changePrize: (a) => dispatch(changePrize(a)),
     changeReq: (r) => dispatch(changeRequirement(r)),

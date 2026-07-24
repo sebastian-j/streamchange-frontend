@@ -10,8 +10,6 @@ describe('<GiveawayPage />', () => {
   let store: ReturnType<typeof configureStore>;
   beforeAll(() => {
     store = configureStore({
-      authKey: '',
-      ban: null,
       stream: {
         ownerId: '',
         title: '',

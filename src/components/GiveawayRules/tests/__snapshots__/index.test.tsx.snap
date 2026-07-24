@@ -2,15 +2,15 @@
 
 exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bdvvNz byoWSG"
+  class="sc-bcHNtg iQtnTD"
 >
   <h2
-    class="sc-gsDLFA jFkgMX"
+    class="sc-gsMGyr eckTKa"
   >
     Giveaway rules
   </h2>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-hKwAaq fMqCDP css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-hLllbt eNyqa-D css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -54,7 +54,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkPvMp fuzDfh css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkHxwO coJnB css-xanwcj-MuiFormControl-root-MuiTextField-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
@@ -79,7 +79,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkPvMp fuzDfh css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkHxwO coJnB css-xanwcj-MuiFormControl-root-MuiTextField-root"
     data-mui-internal-clone-element="true"
     inputprops="[object Object]"
   >
@@ -106,7 +106,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal sc-hKwAaq fMqCDP css-15nqhxc-MuiFormControl-root"
+      class="MuiFormControl-root MuiFormControl-marginNormal sc-hLllbt eNyqa-D css-15nqhxc-MuiFormControl-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -125,7 +125,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
           role="combobox"
           tabindex="0"
         >
-          CS:GO case opening
+          Reel
         </div>
         <input
           aria-hidden="true"
@@ -133,7 +133,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
           class="MuiSelect-nativeInput css-j0riat-MuiSelect-nativeInput"
           id="_r_6_"
           tabindex="-1"
-          value="0"
+          value="2"
         />
         <svg
           aria-hidden="true"
@@ -149,36 +149,36 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-eggEi eKVwDU"
+      class="sc-iBIXdp gtOfsA"
     >
       <label
-        class="sc-bqiQet cRVASa"
+        class="sc-ftDObM dkqHAJ"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-ksdwMQ dWIjjQ"
+        class="sc-pilFg cGmQws"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-hBUSFb iUtQRm"
+        class="sc-jqMYKt iHrWmN"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-ksdwMQ iyNXUU"
+        class="sc-pilFg bKBZTE"
         type="button"
       >
         +
       </button>
     </div>
     <button
-      class="sc-fotPOC BSyjz"
+      class="sc-kDLlSG fJZvhu"
       type="button"
     >
       Roll it!

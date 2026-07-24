@@ -2,7 +2,7 @@
 
 exports[`<Timer /> > should render and match the snapshot 1`] = `
 <span
-  class="sc-bdvvNz hxXNUJ"
+  class="sc-bcHNtg kEWSHw"
 >
   0:00
 </span>

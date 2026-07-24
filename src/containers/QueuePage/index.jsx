@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import qs from 'qs';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -13,13 +12,12 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import QueueWorker from '../../components/YoutubeWorker/QueueWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
-import { API_KEY, API_URL } from '../../config';
+import { API_KEY } from '../../config';
 
 const QueuePage = () => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [error, setError] = useState(null);
-  const [ban, setBan] = useState(null);
   const intl = useIntl();
 
   const leaveStream = () => {
@@ -29,6 +27,7 @@ const QueuePage = () => {
     window.location.reload();
   };
 
+<<<<<<< HEAD
   const telemetry = (vidId, stream) => {
     const config = {
       headers: {
@@ -64,6 +63,8 @@ const QueuePage = () => {
     });
   };
 
+=======
+>>>>>>> 26c03d25033f2016b4e0c6970905ded37534f0dd
   const launchWorker = (vidId) => {
     axios
       .get(
@@ -79,8 +80,6 @@ const QueuePage = () => {
           setVideoId(vidId);
           setTitle(stream.snippet.title);
           sessionStorage.setItem('gv-videoId', vidId);
-          checkBan(stream.snippet.channelId);
-          telemetry(vidId, stream);
         }
       })
       .catch((err) => {
@@ -119,7 +118,6 @@ const QueuePage = () => {
     if (id !== null) {
       launchWorker(id);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (videoId === '') {
@@ -128,12 +126,7 @@ const QueuePage = () => {
         <Helmet htmlAttributes={{ lang: intl.locale }}>
           <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
-        <WelcomeDialog
-          passVideo={receiveVideo}
-          ban={ban}
-          error={error}
-          variant={1}
-        />
+        <WelcomeDialog passVideo={receiveVideo} error={error} variant={1} />
       </>
     );
   }

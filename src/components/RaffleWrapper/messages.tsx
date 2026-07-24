@@ -34,6 +34,6 @@ export default defineMessages({
   },
   raffleTypeVertical: {
     id: `${scope}.raffleType.vertical`,
-    defaultMessage: 'Vertical roll',
+    defaultMessage: 'Reel',
   },
 });
