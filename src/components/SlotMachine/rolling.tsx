@@ -1,11 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import type {
-  LibrarySoundName,
-  UiSoundName,
-  GameSoundName,
-  NotificationSoundName,
-  AudioPermissionStatus,
-} from 'react-sounds';
 const roll = keyframes`
   from { transform: translateY(0); }
   to { transform: translateY(-9300px); }
