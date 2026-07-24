@@ -10,7 +10,7 @@ import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WavyButton from './components/WavyButton';
-import WelcomeHint from './WelcomeHint';
+//import WelcomeHint from './WelcomeHint';
 
 const CHANNEL_URL_REGEX =
   /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
@@ -148,7 +148,7 @@ const WelcomeDialog = (props) => {
               {isLoading && <CircularProgress />}
             </div>
           </div>
-          <WelcomeHint />
+          {/*<WelcomeHint />*/}
         </DialogWrapper>
         <CookieConsent />
       </PhotoBackdrop>
