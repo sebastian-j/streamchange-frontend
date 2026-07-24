@@ -21,7 +21,6 @@ export const initialState = {
   widgetCode: localStorage.getItem('queue-widget-code') || '',
 };
 
-/* eslint-disable default-case, no-param-reassign */
 const queueReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

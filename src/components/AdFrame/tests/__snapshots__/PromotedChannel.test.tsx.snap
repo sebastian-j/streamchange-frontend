@@ -3,28 +3,28 @@
 exports[`<PromotedChannel /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    class="sc-gsDLFA hsXcGK"
+    class="sc-gsMGyr kkdnbj"
   >
     <span
-      class="sc-bdvvNz ksfVUI"
+      class="sc-bcHNtg cLSDZF"
     >
       Advertisement
     </span>
     <div
-      class="sc-dkPvMp bmetsq"
+      class="sc-dkHxwO jKThJq"
     >
       <a
         href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
         target="_blank"
       >
         <img
-          class="sc-hKwAaq cXRweN"
+          class="sc-hLllbt fhMHuN"
           src="https://yt3.ggpht.com/ytc/AAUvwnjMKD2nkjne8W3-jn2yCf-lOdD2P1wTJ0Q_G9X72w=s88-c-k-c0x00ffffff-no-rj"
         />
       </a>
       <div>
         <a
-          class="sc-eCIkhf jWufjT"
+          class="sc-eDgbZQ jDQFqJ"
           href="https://www.youtube.com/channel/UC3GumCi7taJQ0wWbKK-hR2w"
           target="_blank"
         />

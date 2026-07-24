@@ -2,18 +2,18 @@
 
 exports[`<UserList /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-kDTkih gfcUcE"
+  class="sc-kDLlSG jNTeQJ"
 >
   <div
-    class="sc-eCIkhf jdTSHz"
+    class="sc-hLllbt fKATMk"
   >
     <h2
-      class="sc-iqshrI kfRcto"
+      class="sc-ipUpyX eSDiKy"
     >
       Users
     </h2>
     <div
-      class="sc-jRQzZg iZsKkT"
+      class="sc-eDgbZQ ekihoR"
     >
       <button
         aria-label="Options"
@@ -23,7 +23,7 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
         type="button"
       >
         <svg
-          class="sc-pVTZz fmnft"
+          class="sc-ftDObM hCRvfq"
           height="18px"
           viewBox="0 0 24 24"
           width="18px"
@@ -51,7 +51,7 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
         type="button"
       >
         <svg
-          class="sc-pVTZz fmnft"
+          class="sc-ftDObM hCRvfq"
           height="18px"
           viewBox="0 0 24 24"
           width="18px"
@@ -70,7 +70,7 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
   </div>
   <div />
   <div
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-furwwf ivGnkW css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-iBIXdp bDpSJk css-xanwcj-MuiFormControl-root-MuiTextField-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
@@ -94,14 +94,14 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <a
-    class="sc-gKckfV jzgXMK"
+    class="sc-jTkVfb coIFZS"
     href="#purge-user-list-btn"
   >
     Skip the viewers list
   </a>
   <ul />
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit sc-iCfMpq ilTuHl css-plnrbk-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit sc-gLfMdy hpRPnr css-plnrbk-MuiButtonBase-root-MuiButton-root"
     id="purge-user-list-btn"
     tabindex="0"
     type="button"
@@ -111,7 +111,7 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
     </span>
   </button>
   <span
-    class="sc-bdvvNz jccOWk"
+    class="sc-bcHNtg deUXRF"
   >
     0 out of 0 are participating
   </span>

@@ -132,6 +132,15 @@ const YoutubeWorker = (props) => {
       );
     };
 
+    ws.onclose = (event) => {
+      if (event.code === 4003) {
+        console.warn('Kanał zablokowany:', event.reason);
+        if (typeof props.onBlacklisted === 'function') {
+          props.onBlacklisted(event.reason);
+        }
+      }
+    };
+
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log('Przyszła wiadomość z backendu:', data);
@@ -196,7 +205,8 @@ const YoutubeWorker = (props) => {
     return () => {
       ws.close();
     };
-  }, [props.channel, props.platform]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.channel, props.platform, dispatch]);
 
   return (
     <ThreeSections>
@@ -217,6 +227,7 @@ const YoutubeWorker = (props) => {
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   channel: PropTypes.string,
+  onBlacklisted: PropTypes.func,
   platform: PropTypes.string,
 };
 

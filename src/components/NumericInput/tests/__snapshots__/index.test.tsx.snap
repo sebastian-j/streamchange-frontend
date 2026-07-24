@@ -2,28 +2,27 @@
 
 exports[`<NumericInput /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bdvvNz HMcLL"
+  class="sc-bcHNtg wNMdS"
 >
   <label
-    class="sc-gsDLFA kvcsFL"
+    class="sc-gsMGyr fxFsfu"
     for="number-display"
   />
   <button
     aria-label="Decrease by one"
-    class="sc-dkPvMp kMpXUf"
-    left="true"
+    class="sc-dkHxwO ljUzqj"
     type="button"
   >
     -
   </button>
   <input
-    class="sc-hKwAaq cxGXvX"
+    class="sc-hLllbt dHOWlz"
     id="number-display"
     value="0"
   />
   <button
     aria-label="Increase by one"
-    class="sc-dkPvMp fLKweL"
+    class="sc-dkHxwO fAUUYz"
     type="button"
   >
     +

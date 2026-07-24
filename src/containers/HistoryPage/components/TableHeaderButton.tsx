@@ -7,6 +7,7 @@ export const TableHeaderButton = styled.button`
   padding: 14px 10px 14px 16px;
   outline: none;
   width: 100%;
+  text-align: left;
   span {
     pointer-events: none;
   }

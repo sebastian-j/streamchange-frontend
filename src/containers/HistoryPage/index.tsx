@@ -29,6 +29,23 @@ const HistoryPage = () => {
   const [maxResults, setMaxResults] = useState<number>(20);
   const [page, setPage] = useState<number>(0);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const [sort, setSort] = useState<string>('createdAtDESC');
+
+  const sortItems = (unsorted: HistoryItem[]) => {
+    const isDescending = sort.endsWith('DESC');
+    const field = (
+      isDescending ? sort.slice(0, -4) : sort
+    ) as keyof HistoryItem;
+    const sorted = [...unsorted].sort((a, b) => {
+      if (field === 'createdAt') {
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+      }
+      return String(a[field]).localeCompare(String(b[field]));
+    });
+    return isDescending ? sorted.reverse() : sorted;
+  };
 
   const getHistory = () => {
     const firstResult = Number(page * maxResults);
@@ -36,17 +53,14 @@ const HistoryPage = () => {
       .filter((winner) =>
         winner.displayName.toLowerCase().includes(searchQuery.toLowerCase())
       )
-      .reverse()
-      .offset(firstResult)
-      .limit(maxResults)
       .toArray()
       .then((it: HistoryItem[]) => {
+        const sorted = sortItems(it);
+        const paged = sorted.slice(firstResult, firstResult + maxResults);
         setIsLoaded(true);
         setError(false);
-        setItems(it);
-        if (maxResults > it.length) {
-          setIsLastPage(true);
-        } else setIsLastPage(false);
+        setItems(paged);
+        setIsLastPage(firstResult + maxResults >= sorted.length);
       })
       .catch(() => {
         setIsLoaded(true);
@@ -73,6 +87,9 @@ const HistoryPage = () => {
   useEffect(() => {
     getHistory();
   }, [searchQuery]);
+  useEffect(() => {
+    getHistory();
+  }, [sort]);
   useEffect(() => {
     getHistory();
   }, []);
@@ -115,7 +132,7 @@ const HistoryPage = () => {
         <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <PageHeader>
-        <ReturnButton to="/giveaway" activeClassName="active">
+        <ReturnButton to="/giveaway">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +166,13 @@ const HistoryPage = () => {
           <FormattedMessage {...messages.infoNoResults} />
         </InformationText>
       )}
-      {items.length > 0 && <HistoryTable items={items} />}
+      {items.length > 0 && (
+        <HistoryTable
+          items={items}
+          sort={sort}
+          onSortChange={(value) => setSort(value)}
+        />
+      )}
       <TableFooter>
         {!isLastPage && (
           <IconButton
