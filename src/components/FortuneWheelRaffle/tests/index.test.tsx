@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -32,9 +33,11 @@ describe('<FortuneWheelRaffle />', () => {
   });
   it('should render and match the snapshot', () => {
     const { container } = render(
-      <Provider store={store}>
-        <FortuneWheelRaffle onClose={() => 0} onWin={() => 0} />
-      </Provider>
+      <IntlProvider locale="en">
+        <Provider store={store}>
+          <FortuneWheelRaffle onClose={() => 0} onWin={() => 0} />
+        </Provider>
+      </IntlProvider>
     );
     expect(container.firstChild).toMatchSnapshot();
   });
