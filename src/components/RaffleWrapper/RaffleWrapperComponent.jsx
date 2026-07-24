@@ -10,6 +10,7 @@ import messages from './messages';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import VerticalRaffle from '../VerticalRaffle';
+import SlotMachine from '../SlotMachine';
 import NumericInput from '../NumericInput';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
@@ -94,6 +95,9 @@ const RaffleWrapper = (props) => {
             <FormattedMessage {...messages.raffleTypeCS} />
           </MenuItem>
           */}
+          <MenuItem value={3}>
+            <FormattedMessage {...messages.raffleTypeSlots} />
+          </MenuItem>
           <MenuItem value={2}>
             <FormattedMessage {...messages.raffleTypeVertical} />
           </MenuItem>
@@ -133,6 +137,13 @@ const RaffleWrapper = (props) => {
       )}
       {props.isOpen && props.animationType === 2 && (
         <VerticalRaffle
+          duration={props.animationDuration}
+          onClose={props.closeRaffle}
+          onWin={winnerHandler}
+        />
+      )}
+      {props.isOpen && props.animationType === 3 && (
+        <SlotMachine
           duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}

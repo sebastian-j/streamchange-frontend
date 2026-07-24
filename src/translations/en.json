@@ -34,6 +34,7 @@
   "streamchange.components.RaffleWrapper.raffleType.fortuneWheel": "Fortune wheel",
   "streamchange.components.RaffleWrapper.raffleType.vertical": "Reel",
   "streamchange.components.VerticalRaffle.continueBtn": "Continue",
+  "streamchange.components.RaffleWrapper.raffleType.slots": "Slots Machine",
   "streamchange.components.RaffleWrapper.startBtn": "Roll it!",
   "streamchange.components.RelativeDate.beforeYesterday": "Two days ago",
   "streamchange.components.RelativeDate.fewMinutesAgo": "{value} minutes ago",

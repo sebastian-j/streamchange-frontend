@@ -38,6 +38,5 @@ export default defineMessages({
   },
   raffleTypeSlots: {
     id: `${scope}.raffleType.slots`,
-    defaultMessage: 'Slot machine',
   },
 });

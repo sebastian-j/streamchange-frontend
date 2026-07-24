@@ -149,36 +149,36 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-iBIXdp gtOfsA"
+      class="sc-ipUpyX htxzTT"
     >
       <label
-        class="sc-ftDObM dkqHAJ"
+        class="sc-csfbns iureti"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-pilFg cGmQws"
+        class="sc-eoeTJ bbnpyF"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-jqMYKt iHrWmN"
+        class="sc-brmsbW dqumDy"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-pilFg bKBZTE"
+        class="sc-eoeTJ cGwgOx"
         type="button"
       >
         +
       </button>
     </div>
     <button
-      class="sc-kDLlSG fJZvhu"
+      class="sc-ksRfhj kRzmlj"
       type="button"
     >
       Roll it!

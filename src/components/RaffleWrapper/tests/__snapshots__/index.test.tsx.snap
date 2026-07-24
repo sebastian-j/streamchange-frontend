@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-jTkVfb kCMDFS css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-jqMYKt crLagN css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -46,36 +46,36 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="sc-gsMGyr jxmkhD"
+    class="sc-gLfMdy faWxeH"
   >
     <label
-      class="sc-dkHxwO cuuTAs"
+      class="sc-iBIXdp byTXbF"
       for="number-display"
     >
       Animation duration (seconds)
     </label>
     <button
       aria-label="Decrease by one"
-      class="sc-hLllbt iepMqS"
+      class="sc-ftDObM ezCMne"
       type="button"
     >
       -
     </button>
     <input
-      class="sc-eDgbZQ cBvtlC"
+      class="sc-pilFg hJxqhh"
       id="number-display"
       value="7"
     />
     <button
       aria-label="Increase by one"
-      class="sc-hLllbt eKnUty"
+      class="sc-ftDObM nLIdu"
       type="button"
     >
       +
     </button>
   </div>
   <button
-    class="sc-gLfMdy dygoVk"
+    class="sc-kDLlSG fJZvhu"
     type="button"
   >
     Roll it!

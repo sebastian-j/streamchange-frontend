@@ -34,6 +34,7 @@
   "streamchange.components.RaffleWrapper.raffleType.fortuneWheel": "Koło fortuny",
   "streamchange.components.RaffleWrapper.raffleType.vertical": "Maszyna losująca",
   "streamchange.components.VerticalRaffle.continueBtn": "Przejdź dalej",
+  "streamchange.components.RaffleWrapper.raffleType.slots": "Automat do gier",
   "streamchange.components.RaffleWrapper.startBtn": "Losuj",
   "streamchange.components.RelativeDate.beforeYesterday": "Przedwczoraj",
   "streamchange.components.RelativeDate.fewMinutesAgo": "{value} minuty temu",
