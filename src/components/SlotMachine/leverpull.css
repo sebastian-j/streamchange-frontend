@@ -4,11 +4,11 @@
 }
 
 .lever {
-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-origin: 50% 100%; 
+  transform-origin: 50% 100%;
 }
 
 .lever-pulled {
-  transform: rotateX(-60deg); 
+  transform: rotateX(-60deg);
 }

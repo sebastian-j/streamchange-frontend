@@ -36,7 +36,7 @@ export default defineMessages({
     id: `${scope}.raffleType.vertical`,
     defaultMessage: 'Vertical roll',
   },
-    raffleTypeSlots: {
+  raffleTypeSlots: {
     id: `${scope}.raffleType.slots`,
     defaultMessage: 'Slot machine',
   },

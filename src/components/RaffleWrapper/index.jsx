@@ -106,7 +106,7 @@ export const RaffleWrapper = (props) => {
         >
           <MenuItem value={0}>
             <FormattedMessage {...messages.raffleTypeCS} />
-          </MenuItem> 
+          </MenuItem>
           <MenuItem value={1}>
             <FormattedMessage {...messages.raffleTypeWheel} />
           </MenuItem>
@@ -154,7 +154,7 @@ export const RaffleWrapper = (props) => {
           onWin={winnerHandler}
         />
       )}
-       {props.isOpen && props.animationType === 3 && (
+      {props.isOpen && props.animationType === 3 && (
         <SlotsRaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}

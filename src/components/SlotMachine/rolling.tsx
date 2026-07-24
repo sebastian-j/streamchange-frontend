@@ -1,22 +1,17 @@
-.symbol-container {
-  position: relative;
-  height: 13500px;
-  width: 240px;
-  animation: roll 30s linear infinite;
-  transition: transform 0.5s ease-out;
-  will-change: transform;
-}
-
-.symbol-container.is-rolling {
-  animation: SingleRoll 10s linear forwards !important;
-  transition: transform 10s cubic-bezier(0.2, 0.8, 0.3, 1);
-}
-
-@keyframes roll {
+import styled, { keyframes } from 'styled-components';
+import type {
+  LibrarySoundName,
+  UiSoundName,
+  GameSoundName,
+  NotificationSoundName,
+  AudioPermissionStatus,
+} from 'react-sounds';
+const roll = keyframes`
   from { transform: translateY(0); }
-  to { transform: translateY(-9000px); }
-}
-@keyframes SingleRoll {
+  to { transform: translateY(-9300px); }
+`;
+
+const SingleRoll = keyframes`
   0% { transform: translateY(0); }
   5% { transform: translateY(-1800px); }
   10% { transform: translateY(-3300px); }
@@ -38,4 +33,20 @@
   90% { transform: translateY(-9050px); }
   95% { transform: translateY(-9100px); }
   100% { transform: translateY(-9100px); }
-}
+`;
+
+const SymbolContainer = styled.div`
+  position: relative;
+  height: 13500px;
+  width: 240px;
+  animation: ${roll} 60s linear infinite;
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+
+  &.is-rolling {
+    animation: ${SingleRoll} 10s linear forwards !important;
+    transition: transform 10s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+`;
+
+export default SymbolContainer;
