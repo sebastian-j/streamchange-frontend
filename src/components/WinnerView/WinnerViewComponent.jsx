@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
 import { getSafeColor } from '../../utils/colors';
+import { AvatarFallback } from '../AvatarFallback';
 
 import messages from './messages';
 import db from '../YoutubeWorker/db';
@@ -59,21 +60,6 @@ const WinnerHeading = styled.div`
       height: 22px;
     }
   }
-`;
-
-const AvatarFallback = styled.div`
-  align-items: center;
-  background: ${(props) => props.theme.iconButtonBackground};
-  border-radius: 50%;
-  color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
-  display: flex;
-  flex-shrink: 0;
-  font-size: 32px;
-  font-weight: 700;
-  height: 70px;
-  justify-content: center;
-  user-select: none;
-  width: 70px;
 `;
 
 const AvatarSkeleton = styled.div`
@@ -433,7 +419,7 @@ export class WinnerView extends React.Component {
           ) : this.state.avatarLoading ? (
             <AvatarSkeleton aria-hidden="true" />
           ) : (
-            <AvatarFallback $userColor={this.state.user.color}>
+            <AvatarFallback $userColor={this.state.user.color} $size="large">
               {this.state.user.title.charAt(0).toUpperCase()}
             </AvatarFallback>
           )}

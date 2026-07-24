@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Avatar } from './components/Avatar';
-import { AvatarFallback } from './components/AvatarFallback';
+import { AvatarFallback } from '../../components/AvatarFallback';
 import { Cell } from './components/Cell';
 import { ChannelLink } from './components/ChannelLink';
 import { ChannelName } from './components/ChannelName';

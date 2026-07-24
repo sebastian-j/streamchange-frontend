@@ -6,6 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
+import { AvatarFallback } from '../../components/AvatarFallback';
 
 const StyledLink = styled(NavLink)`
   align-items: center;
@@ -115,7 +116,13 @@ const HistoryWidget = () => {
               {winners.map((item) => (
                 <tr key={item.createdAt}>
                   <Td>
-                    <img src={item.imageUrl} alt="Logo" width="32px" />
+                    {item.imageUrl ? (
+                      <img src={item.imageUrl} alt="Logo" width="32px" />
+                    ) : (
+                      <AvatarFallback $userColor={item.color} $size="tiny">
+                        {item.displayName.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    )}
                   </Td>
                   <Td>{item.displayName}</Td>
                   <Td>{item.prize}</Td>
