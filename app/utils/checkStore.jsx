@@ -4,7 +4,7 @@ import invariant from 'invariant';
 /**
  * Validate the shape of redux store
  */
-export default function checkStore() {
+export default function checkStore(store) {
   const shape = {
     dispatch: isFunction,
     subscribe: isFunction,
