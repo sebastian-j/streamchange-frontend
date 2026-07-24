@@ -40,8 +40,7 @@ export function insertOrUpdateItem(item) {
 }
 
 export function purgeUsersTable() {
-  db.messages.clear();
-  db.users.clear();
+  return Promise.all([db.messages.clear(), db.users.clear()]);
 }
 
 export function toggleEligibleIDB(id) {
