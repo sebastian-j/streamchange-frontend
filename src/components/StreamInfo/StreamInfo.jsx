@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { fetchStreamInfo } from './StreamInfows.jsx';
-import messages from './messages';
+import { fetchStreamInfo } from './StreamInfoPost.jsx';
+import messages from './messages.js';
 const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

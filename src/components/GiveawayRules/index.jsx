@@ -22,7 +22,7 @@ import KeywordInput from './KeywordInput';
 import LotteryLawWarning from './LotteryLawWarning';
 import RaffleWrapper from '../RaffleWrapper';
 import WinnerView from '../WinnerView';
-import StreamInfo from './StreamInfo/StreamInfo';
+import StreamInfo from '../StreamInfo/StreamInfo';
 
 export class GiveawayRules extends React.Component {
   constructor(props) {

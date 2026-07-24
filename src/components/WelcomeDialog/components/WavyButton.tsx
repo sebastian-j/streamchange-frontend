@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import streamInfoPost from '../../StreamInfo/StreamInfoPost'
 
 const Button = styled.button`
   background-color: transparent;

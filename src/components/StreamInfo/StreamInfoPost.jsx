@@ -1,5 +1,5 @@
-import {BACKEND_URL} from '../../../config';
-export const fetchStreamInfo = async (channel, platform) => {
+import {BACKEND_URL} from '../../config';
+export const streamInfoPost = async (channel, platform) => {
   const params = new URLSearchParams({
     channel: channel,
     platform: platform,
