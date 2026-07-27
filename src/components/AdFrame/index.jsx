@@ -19,9 +19,8 @@ import PromotedVideo from './PromotedVideo';
 const AdPlaceholder = styled.div`
   border: 1px solid #7b7b7b;
   color: #7b7b7b;
+  margin-top: auto;
   padding: 14px;
-  position: relative;
-  top: 28vh;
 `;
 
 const AdFrame = () => {
@@ -63,7 +62,7 @@ const AdFrame = () => {
 
   if (promotedContent === null) {
     return (
-      <div>
+      <>
         <AdPlaceholder>
           <span>
             <FormattedMessage {...messages.emptyAdText} />
@@ -137,7 +136,7 @@ const AdFrame = () => {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </>
     );
   }
   if (promotedContent.kind === 'channel') {

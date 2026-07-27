@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const Panel = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
+  display: flex;
+  flex-direction: column;
   flex-basis: 0;
   flex-grow: 1;
   min-width: 0;
