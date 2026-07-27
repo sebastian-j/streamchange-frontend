@@ -11,17 +11,21 @@
  *   compositor thread and it stays smooth even when the main thread is busy.
  * - A small rAF loop mirrors the same easing curve in JS, but only to play
  *   tick sounds when cell borders cross the needle.
- * - After the roller stops, the winner's name and a confirm button appear.
+ * - After the roller stops, the winner's name and a confirm button appear,
+ *   together with the celebration: flash, shockwave, shake, confetti and the
+ *   win sound.
  *   Escape or clicking the backdrop closes without picking a winner.
  */
 import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import confetti from 'canvas-confetti';
 import { getSafeColor } from '../../utils/colors';
 
 import messages from './messages';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import tickSoundSrc from '../../assets/tick.mp3';
+import winSoundSrc from './assets/win.mp3';
 import './style.css';
 
 const CELL_HEIGHT = 77;
@@ -29,6 +33,8 @@ const BOX_HEIGHT = CELL_HEIGHT * 5;
 const NEEDLE_Y = BOX_HEIGHT / 2;
 const MIN_TICK_GAP_MS = 70;
 const MAX_WINNER_OFFSET = 33;
+// beat of silence after the roller stops, before the winner reveal fires
+const WINNER_REVEAL_DELAY_MS = 600;
 
 // JS copy of the CSS cubic-bezier() function, used only to time tick sounds
 const makeCubicBezier = (x1, y1, x2, y2) => {
@@ -76,6 +82,74 @@ const makeCubicBezier = (x1, y1, x2, y2) => {
 const ROLLER_BEZIER = [0.18, 0.17, 0.02, 1];
 const rollerEase = makeCubicBezier(...ROLLER_BEZIER);
 
+const CONFETTI_COLORS = ['#ffce0a', '#ffffff', '#ff8a00', '#ffe680', '#00d5ff'];
+// side cannons fire this many volleys, each one weaker than the last
+const CONFETTI_VOLLEYS = [
+  { delay: 250, count: 120 },
+  { delay: 900, count: 90 },
+  { delay: 1600, count: 60 },
+];
+
+/**
+ * Full-screen celebration: one big center cannon, then a few volleys from
+ * side cannons firing inward from the bottom corners.
+ * Returns a stop function that cancels everything still in flight.
+ */
+const fireCelebration = () => {
+  const base = {
+    colors: CONFETTI_COLORS,
+    zIndex: 9999,
+    disableForReducedMotion: true,
+  };
+
+  confetti({
+    ...base,
+    particleCount: 220,
+    spread: 140,
+    startVelocity: 55,
+    scalar: 1.3,
+    origin: { x: 0.5, y: 0.65 },
+  });
+
+  const timers = CONFETTI_VOLLEYS.map(({ delay, count }) =>
+    setTimeout(() => {
+      confetti({
+        ...base,
+        particleCount: count,
+        angle: 60,
+        spread: 70,
+        startVelocity: 65,
+        scalar: 1.1,
+        origin: { x: 0, y: 0.8 },
+      });
+      confetti({
+        ...base,
+        particleCount: count,
+        angle: 120,
+        spread: 70,
+        startVelocity: 65,
+        scalar: 1.1,
+        origin: { x: 1, y: 0.8 },
+      });
+    }, delay)
+  );
+
+  return () => {
+    timers.forEach(clearTimeout);
+    confetti.reset();
+  };
+};
+
+// decode an mp3 into the given ref up front, so playback is instant later on
+const loadSound = (ctx, src, target) =>
+  fetch(src)
+    .then((response) => response.arrayBuffer())
+    .then((data) => ctx.decodeAudioData(data))
+    .then((buffer) => {
+      target.current = buffer;
+    })
+    .catch(() => {});
+
 const VerticalRaffle = (props) => {
   const [{ users, winner, scroll }] = useState(() => {
     let eligibleUsers = props.userArray.filter(
@@ -106,16 +180,18 @@ const VerticalRaffle = (props) => {
     };
   });
   const [finished, setFinished] = useState(false);
+  const won = finished && winner !== null;
   const timerRef = useRef(null);
   const movableRef = useRef(null);
   const audioCtx = useRef(null);
   const tickBuffer = useRef(null);
+  const winBuffer = useRef(null);
   const rafId = useRef(null);
 
-  const playTick = () => {
+  const playSample = (bufferRef) => {
     const ctx = audioCtx.current;
-    const buffer = tickBuffer.current;
-    if (!ctx || !buffer) return;
+    const buffer = bufferRef.current;
+    if (!ctx || !buffer || ctx.state === 'closed') return;
     const source = ctx.createBufferSource();
     source.buffer = buffer;
     source.connect(ctx.destination);
@@ -129,7 +205,7 @@ const VerticalRaffle = (props) => {
   };
 
   const closeImmediately = () => {
-    if (finished && winner !== null) {
+    if (won) {
       confirmWinner();
       return;
     }
@@ -144,13 +220,8 @@ const VerticalRaffle = (props) => {
       const ctx = new AudioContextCtor();
       audioCtx.current = ctx;
       ctx.resume().catch(() => {});
-      fetch(tickSoundSrc)
-        .then((response) => response.arrayBuffer())
-        .then((data) => ctx.decodeAudioData(data))
-        .then((buffer) => {
-          tickBuffer.current = buffer;
-        })
-        .catch(() => {});
+      loadSound(ctx, tickSoundSrc, tickBuffer);
+      loadSound(ctx, winSoundSrc, winBuffer);
     }
 
     const durationMs = props.duration * 1000;
@@ -183,7 +254,7 @@ const VerticalRaffle = (props) => {
         linesCrossed > lastLinesCrossed &&
         now - lastTickAt >= MIN_TICK_GAP_MS
       ) {
-        playTick();
+        playSample(tickBuffer);
         lastTickAt = now;
       }
       lastLinesCrossed = linesCrossed;
@@ -196,12 +267,9 @@ const VerticalRaffle = (props) => {
     };
     rafId.current = requestAnimationFrame(step);
 
-    timerRef.current = setTimeout(
-      () => {
-        setFinished(true);
-      },
-      (props.duration + 1) * 1000
-    );
+    timerRef.current = setTimeout(() => {
+      setFinished(true);
+    }, durationMs + WINNER_REVEAL_DELAY_MS);
 
     return () => {
       if (rafId.current !== null) cancelAnimationFrame(rafId.current);
@@ -211,6 +279,12 @@ const VerticalRaffle = (props) => {
       }
     };
   }, [props.duration, scroll]);
+
+  useEffect(() => {
+    if (!won) return undefined;
+    playSample(winBuffer);
+    return fireCelebration();
+  }, [won]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -223,13 +297,15 @@ const VerticalRaffle = (props) => {
   });
 
   return (
-    <div className="vraffle-root">
+    <div className={`vraffle-root${won ? ' vraffle-root--win' : ''}`}>
       <button
         aria-label="stop the raffle immediately"
         className="vraffle-backdrop"
         onClick={closeImmediately}
         type="button"
       />
+      {won && <div className="vraffle-flash" aria-hidden="true" />}
+      {won && <div className="vraffle-shockwave" aria-hidden="true" />}
       <div className="vraffle-dialog">
         <div className="vroller-box">
           <div className="vroller-needle" />
@@ -252,9 +328,7 @@ const VerticalRaffle = (props) => {
           </div>
         </div>
         <div
-          className={`vraffle-winner${
-            finished && winner !== null ? ' vraffle-winner--visible' : ''
-          }`}
+          className={`vraffle-winner${won ? ' vraffle-winner--visible' : ''}`}
         >
           <span
             className="vraffle-winner-name"
@@ -269,7 +343,7 @@ const VerticalRaffle = (props) => {
           <button
             className="vraffle-close-btn"
             onClick={confirmWinner}
-            tabIndex={finished && winner !== null ? 0 : -1}
+            tabIndex={won ? 0 : -1}
             type="button"
           >
             <FormattedMessage {...messages.continueBtn} />

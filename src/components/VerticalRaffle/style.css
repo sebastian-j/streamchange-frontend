@@ -115,6 +115,139 @@
   text-align: center;
 }
 
+/* ---- the win moment: flash, shockwave, shake, then a pulsing name ---- */
+
+/* the name lands with a pop, then keeps breathing a warm glow */
+.vraffle-winner--visible .vraffle-winner-name {
+  animation:
+    vwinner-pop 0.7s cubic-bezier(0.16, 1.4, 0.3, 1) both,
+    vwinner-glow 2.2s 0.7s ease-in-out infinite;
+}
+
+@keyframes vwinner-pop {
+  0% {
+    transform: scale(0.3);
+    text-shadow: none;
+  }
+  60% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 24px rgba(255, 206, 10, 0.75);
+  }
+}
+
+@keyframes vwinner-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 18px rgba(255, 206, 10, 0.55);
+  }
+  50% {
+    text-shadow:
+      0 0 34px rgba(255, 206, 10, 0.95),
+      0 0 60px rgba(255, 138, 0, 0.5);
+  }
+}
+
+/* the whole dialog takes the hit and rattles itself back into place */
+.vraffle-root--win .vraffle-dialog {
+  animation: vwin-shake 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes vwin-shake {
+  0% {
+    transform: scale(1) translate(0, 0) rotate(0deg);
+  }
+  8% {
+    transform: scale(1.07) translate(0, -8px) rotate(0deg);
+  }
+  18% {
+    transform: scale(1.03) translate(-12px, 5px) rotate(-1.4deg);
+  }
+  30% {
+    transform: scale(1.02) translate(11px, -4px) rotate(1.2deg);
+  }
+  42% {
+    transform: translate(-8px, 4px) rotate(-0.9deg);
+  }
+  54% {
+    transform: translate(7px, -3px) rotate(0.7deg);
+  }
+  66% {
+    transform: translate(-5px, 2px) rotate(-0.4deg);
+  }
+  80% {
+    transform: translate(3px, -1px) rotate(0.2deg);
+  }
+  100% {
+    transform: scale(1) translate(0, 0) rotate(0deg);
+  }
+}
+
+/* one frame of white blowing out the screen, gone before you can read it */
+.vraffle-flash {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  pointer-events: none;
+  z-index: 10;
+  animation: vwin-flash 0.5s ease-out forwards;
+}
+
+@keyframes vwin-flash {
+  0% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* a ring of light punching outwards from the middle of the screen */
+.vraffle-shockwave {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border: 14px solid #ffce0a;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9;
+  animation: vwin-shockwave 0.9s cubic-bezier(0.15, 0.72, 0.3, 1) forwards;
+}
+
+@keyframes vwin-shockwave {
+  0% {
+    transform: scale(0.1);
+    opacity: 0.9;
+    border-width: 14px;
+  }
+  100% {
+    transform: scale(11);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vraffle-winner--visible .vraffle-winner-name,
+  .vraffle-root--win .vraffle-dialog,
+  .vraffle-flash,
+  .vraffle-shockwave {
+    animation: none;
+  }
+  .vraffle-flash,
+  .vraffle-shockwave {
+    display: none;
+  }
+}
+
 .vraffle-close-btn {
   background-color: transparent;
   border: 1px solid #ffce0a;
