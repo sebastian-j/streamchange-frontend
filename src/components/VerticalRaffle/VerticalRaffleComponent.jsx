@@ -96,6 +96,9 @@ const SHOCKWAVE_DELAYS = [0, 0.16, 0.32];
 const FIREWORK_INTERVAL_MS = 300;
 const FIREWORK_DURATION_MS = 3000;
 
+const EMBER_INTERVAL_MS = 140;
+const EMBER_DURATION_MS = 5000;
+
 /**
  * Full-screen celebration: a center cannon, volleys from the bottom corners,
  * and shells bursting overhead for a few seconds after.
@@ -162,9 +165,32 @@ const fireCelebration = () => {
     });
   }, FIREWORK_INTERVAL_MS);
 
+  // embers: negative gravity turns confetti into sparks drifting up off the
+  // bottom edge. Quiet on its own, but it keeps the screen alive underneath
+  // the loud effects instead of letting it go dead between bursts
+  const embersEnd = Date.now() + EMBER_DURATION_MS;
+  const embers = setInterval(() => {
+    if (Date.now() > embersEnd) {
+      clearInterval(embers);
+      return;
+    }
+    confetti({
+      ...base,
+      particleCount: 3,
+      spread: 55,
+      startVelocity: 14,
+      gravity: -0.32,
+      decay: 0.96,
+      ticks: 260,
+      scalar: 0.7,
+      origin: { x: Math.random(), y: 1.05 },
+    });
+  }, EMBER_INTERVAL_MS);
+
   return () => {
     timers.forEach(clearTimeout);
     clearInterval(fireworks);
+    clearInterval(embers);
     confetti.reset();
   };
 };
