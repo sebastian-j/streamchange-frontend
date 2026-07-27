@@ -80,20 +80,7 @@ const SlotSymbol = memo(({ item }) => {
   const hasBadges = u.badges && Object.keys(u.badges).length > 0;
 
   return (
-    <div
-      className="vroller-cell"
-      style={{
-        width: '100%',
-        height: '150px',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '4px',
-        overflow: 'hidden',
-        padding: '0 5px',
-      }}
-    >
+    <div className="vroller-cell">
       {hasBadges && (
         <span className="vroller-badge">
           <span className="vroller-badge-inner">
@@ -107,17 +94,9 @@ const SlotSymbol = memo(({ item }) => {
           u.color
             ? {
                 color: u.color,
-                fontWeight: 'bold',
-                fontSize: '24px',
-                textAlign: 'center',
-                wordBreak: 'break-word',
               }
             : {
                 color: '#0f0e0e',
-                fontWeight: 'bold',
-                fontSize: '24px',
-                textAlign: 'center',
-                wordBreak: 'break-word',
               }
         }
       >
@@ -162,30 +141,32 @@ const SlotsRaffleComponent = (props) => {
   }, [props.userArray, props.giveawayReq]);
 
   const generateLongList = useCallback(
-    () =>
-      Array.from({ length: 31 }, () => ({
-        id: Math.random().toString(36).substring(2, 9),
+    (prefix = 'fruit') =>
+      Array.from({ length: 31 }, (_, index) => ({
+        id: `${prefix}-slot-${index}`,
         type: 'fruit',
         src: imageFiles[Math.floor(Math.random() * imageFiles.length)],
       })),
     []
   );
 
-  const generateUserList = useCallback(() => {
-    const sourceUsers =
-      eligibleUsers.length > 0 ? eligibleUsers : props.userArray || [];
-    return Array.from({ length: 31 }, () => {
-      const randomUser =
-        sourceUsers.length > 0
-          ? sourceUsers[Math.floor(Math.random() * sourceUsers.length)]
-          : null;
-      return {
-        id: Math.random().toString(36).substring(2, 9),
-        type: 'user',
-        user: randomUser,
-      };
-    });
-  }, [eligibleUsers, props.userArray]);
+  const generateUserList = useCallback(
+    (prefix = 'user') => {
+      const sourceUsers = eligibleUsers;
+      return Array.from({ length: 31 }, (_, index) => {
+        const randomUser =
+          sourceUsers.length > 0
+            ? sourceUsers[Math.floor(Math.random() * sourceUsers.length)]
+            : null;
+        return {
+          id: `${prefix}-slot-${index}`, //
+          type: 'user',
+          user: randomUser,
+        };
+      });
+    },
+    [eligibleUsers]
+  );
 
   const generateFixedUserList = (winningUser) => {
     const winningIndex = 61;
@@ -211,24 +192,23 @@ const SlotsRaffleComponent = (props) => {
     });
   };
 
-  const generateWinningFruitList = () => {
+  const generateWinningFruitList = (prefix = 'win-fruit') => {
     const winningIndex = 61;
     return Array.from({ length: 62 }, (_, index) => {
       if (index === winningIndex) {
         return {
-          id: `win-seven-${index}`,
+          id: `${prefix}-win-seven-${index}`,
           type: 'fruit',
           src: seven,
         };
       }
       return {
-        id: Math.random().toString(36).substring(2, 9),
+        id: `${prefix}-slot-${index}`,
         type: 'fruit',
         src: imageFiles[Math.floor(Math.random() * imageFiles.length)],
       };
     });
   };
-
   const [reels, setReels] = useState(() => {
     const list0A = generateLongList();
     const list1A = generateUserList();
@@ -261,8 +241,7 @@ const SlotsRaffleComponent = (props) => {
   };
 
   const startSlotMachine = () => {
-    const sourceUsers =
-      eligibleUsers.length > 0 ? eligibleUsers : props.userArray || [];
+    const sourceUsers = eligibleUsers;
     if (sourceUsers.length === 0) return;
 
     const selectedWinner =
@@ -426,7 +405,7 @@ const SlotsRaffleComponent = (props) => {
   }, [playToggleOff, playToggleOn, isRolling]);
 
   return (
-    <div className="dialog-root">
+    <div className="dialog-root" role="dialog">
       <button
         aria-label="stop the raffle immediately"
         className="dialog-backdrop"
@@ -514,7 +493,6 @@ const SlotsRaffleComponent = (props) => {
 };
 
 SlotsRaffleComponent.propTypes = {
-  duration: PropTypes.number,
   giveawayReq: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
@@ -523,7 +501,6 @@ SlotsRaffleComponent.propTypes = {
 };
 
 const areEqual = (prevProps, nextProps) =>
-  prevProps.duration === nextProps.duration &&
   prevProps.onClose === nextProps.onClose &&
   prevProps.onWin === nextProps.onWin;
 
