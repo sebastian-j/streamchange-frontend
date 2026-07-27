@@ -41,6 +41,11 @@ const DialogWrapper = styled.div`
     min-width: 600px;
     z-index: -1;
 
+    @media (orientation: portrait) {
+      min-width: 0;
+      width: 100%;
+    }
+
     .title {
       font-size: 1.25rem;
       font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
