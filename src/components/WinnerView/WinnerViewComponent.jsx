@@ -472,6 +472,7 @@ export class WinnerView extends React.Component {
           )}
         </FormattedMessage>
         <Tooltip
+          disableInteractive
           title={
             <HintParagraph>
               <FormattedMessage {...messages.replayBtnTooltip} />

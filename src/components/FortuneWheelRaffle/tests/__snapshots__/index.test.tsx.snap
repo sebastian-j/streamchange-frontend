@@ -58,6 +58,22 @@ exports[`<FortuneWheelRaffle /> > should render and match the snapshot 1`] = `
         class="fwheel-needle"
       />
     </div>
+    <div
+      class="fwheel-winner"
+    >
+      <span
+        class="fwheel-winner-name"
+      >
+         
+      </span>
+      <button
+        class="fwheel-close-btn"
+        tabindex="-1"
+        type="button"
+      >
+        Continue
+      </button>
+    </div>
   </div>
 </div>
 `;
