@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef, memo, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { playSound, useSound } from 'react-sounds';
+import { playSound, useSound, setSoundEnabled } from 'react-sounds';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import slotMachineImg from './assets/SlotsMachineOuter.svg';
 import lever from './assets/lever1.svg';
+import speakerOn from './assets/SpeakerOn.svg';
+import speakerOff from './assets/SpeakerOff.svg';
 import lemon from './assets/symbols/lemon.svg';
 import bell from './assets/symbols/bell.svg';
 import cherry from './assets/symbols/cherry.svg';
@@ -19,7 +21,6 @@ import './leverpull.css';
 import './style.css';
 
 const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
-
 const Container = styled.div`
   position: absolute;
   width: 75vh;
@@ -37,6 +38,14 @@ const SlotMachineImg = styled.img`
   top: -15%;
   left: -15%;
   z-index: 1;
+`;
+const Speaker = styled.img`
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  top: 95%;
+  left: 93.5%;
+  z-index: 10;
 `;
 
 const Leverimg = styled.img`
@@ -80,7 +89,7 @@ const SlotSymbol = memo(({ item }) => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: hasBadges ? '8px' : '0px',
+        gap: '4px',
         overflow: 'hidden',
         padding: '0 5px',
       }}
@@ -126,10 +135,22 @@ const SlotsRaffleComponent = (props) => {
   const [winnerShow, setWinnerShow] = useState(false);
   const [timer, setTimer] = useState(null);
   const [winner, setWinner] = useState(null);
-
+  const [soundOn, setSoundOn] = useState(true);
   const { play: playToggleOff } = useSound('ui/toggle_off');
   const { play: playToggleOn } = useSound('ui/toggle_on');
+  useEffect(() => {
+    setSoundEnabled(true);
+  }, []);
 
+  const turnSpeakerOff = () => {
+    setSoundEnabled(false);
+    setSoundOn(false);
+  };
+
+  const turnSpeakerOn = () => {
+    setSoundEnabled(true);
+    setSoundOn(true);
+  };
   const eligibleUsers = useMemo(() => {
     let users = (props.userArray || []).filter(
       (user) => user.isEligible === true
@@ -143,7 +164,7 @@ const SlotsRaffleComponent = (props) => {
   const generateLongList = useCallback(
     () =>
       Array.from({ length: 31 }, () => ({
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 9),
         type: 'fruit',
         src: imageFiles[Math.floor(Math.random() * imageFiles.length)],
       })),
@@ -159,7 +180,7 @@ const SlotsRaffleComponent = (props) => {
           ? sourceUsers[Math.floor(Math.random() * sourceUsers.length)]
           : null;
       return {
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 9),
         type: 'user',
         user: randomUser,
       };
@@ -183,7 +204,7 @@ const SlotsRaffleComponent = (props) => {
           ? sourceUsers[Math.floor(Math.random() * sourceUsers.length)]
           : null;
       return {
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 9),
         type: 'user',
         user: randomUser,
       };
@@ -201,7 +222,7 @@ const SlotsRaffleComponent = (props) => {
         };
       }
       return {
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 9),
         type: 'fruit',
         src: imageFiles[Math.floor(Math.random() * imageFiles.length)],
       };
@@ -222,8 +243,18 @@ const SlotsRaffleComponent = (props) => {
 
   const closeImmediately = () => {
     props.onClose();
+    setSoundEnabled(false);
     clearTimeout(timer);
   };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeImmediately();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  });
 
   const winnerView = () => {
     setWinnerShow(true);
@@ -240,12 +271,21 @@ const SlotsRaffleComponent = (props) => {
     setWinner(selectedWinner);
 
     const fixedUserList = generateFixedUserList(selectedWinner);
-    const fixedFruitList = generateWinningFruitList();
+    const fixedFruitListLeft = generateWinningFruitList();
+    const fixedFruitListRight = generateWinningFruitList();
 
     setReels([
-      { setA: fixedFruitList, setB: fixedFruitList, setA2: fixedFruitList },
+      {
+        setA: fixedFruitListLeft,
+        setB: fixedFruitListLeft,
+        setA2: fixedFruitListLeft,
+      },
       { setA: fixedUserList, setB: fixedUserList, setA2: fixedUserList },
-      { setA: fixedFruitList, setB: fixedFruitList, setA2: fixedFruitList },
+      {
+        setA: fixedFruitListRight,
+        setB: fixedFruitListRight,
+        setA2: fixedFruitListRight,
+      },
     ]);
 
     setIsRolling(true);
@@ -294,9 +334,9 @@ const SlotsRaffleComponent = (props) => {
   };
 
   const positions = [
-    { x: '-5%', y: '18%' },
-    { x: '30%', y: '18%' },
-    { x: '67%', y: '18%' },
+    { x: '-4vh', y: '13.5vh' },
+    { x: '22vh', y: '13.5vh' },
+    { x: '50vh', y: '13.5vh' },
   ];
 
   const containerRefs = useRef([]);
@@ -397,14 +437,17 @@ const SlotsRaffleComponent = (props) => {
         <SlotMachineImg
           src={slotMachineImg}
           className={`SlotMachineimg ${winnerShow ? 'winnerShow' : ''}`}
-          alt="maszyna"
         />
         <Leverimg
           src={lever}
           className={`lever ${isPulled ? 'lever-pulled' : ''}`}
           onClick={handleLeverClick}
-          alt="Dźwignia"
         />
+        {soundOn ? (
+          <Speaker src={speakerOn} onClick={turnSpeakerOff} />
+        ) : (
+          <Speaker src={speakerOff} onClick={turnSpeakerOn} />
+        )}
         {winnerShow && (
           <div className="stars-container">
             <div className="star-particle" />
@@ -436,8 +479,8 @@ const SlotsRaffleComponent = (props) => {
               top: pos.y,
               zIndex: 2,
               overflow: 'hidden',
-              height: '250px',
-              width: '250px',
+              height: '25vh',
+              width: '25vh',
             }}
           >
             <SymbolContainer

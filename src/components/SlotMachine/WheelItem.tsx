@@ -45,7 +45,6 @@ const WheelItem = styled.div`
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    filter: drop-shadow(0px 0px 4px rgb(255, 255, 55));
   }
 
   .vroller-badge-inner {
@@ -59,6 +58,8 @@ const WheelItem = styled.div`
   .vroller-badge-inner svg {
     width: 20px !important;
     height: 20px !important;
+    filter: none !important;
+    animation: none !important;
     object-fit: contain;
   }
   .vroller-nickname {
@@ -70,7 +71,6 @@ const WheelItem = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    filter: drop-shadow(0px 0px 3px rgb(255, 255, 55));
   }
 `;
 export default WheelItem;

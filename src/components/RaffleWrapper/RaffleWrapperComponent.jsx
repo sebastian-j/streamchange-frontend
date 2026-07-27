@@ -106,13 +106,15 @@ const RaffleWrapper = (props) => {
           </MenuItem>
         </Select>
       </StyledFormControl>
-      <NumericInput
-        label={intl.formatMessage({ ...messages.animationDuration })}
-        minValue={1}
-        maxValue={600}
-        value={props.animationDuration}
-        onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-      />
+      {props.animationType !== 3 && (
+        <NumericInput
+          label={intl.formatMessage({ ...messages.animationDuration })}
+          minValue={1}
+          maxValue={600}
+          value={props.animationDuration}
+          onChange={(ret) => props.changeAnimationDuration(Number(ret))}
+        />
+      )}
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
         {noUsers ? (
           <FormattedMessage {...messages.noUserSelected} />
