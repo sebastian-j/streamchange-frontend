@@ -29,6 +29,8 @@
   padding: 36px;
   width: 504px;
   position: relative;
+  /* above the rays and shockwaves, below the flash */
+  z-index: 9;
 }
 
 .vroller-box {
@@ -150,9 +152,26 @@
   }
 }
 
-/* the whole dialog takes the hit and rattles itself back into place */
+/* the whole dialog takes the hit, rattles itself back into place, and then
+   sits there breathing light so it never goes visually flat */
 .vraffle-root--win .vraffle-dialog {
-  animation: vwin-shake 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation:
+    vwin-shake 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both,
+    vwin-dialog-glow 2.4s 0.4s ease-in-out infinite;
+}
+
+@keyframes vwin-dialog-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 30px rgba(255, 206, 10, 0.35),
+      0 0 0 1px rgba(255, 206, 10, 0.4) inset;
+  }
+  50% {
+    box-shadow:
+      0 0 70px rgba(255, 206, 10, 0.75),
+      0 0 0 2px rgba(255, 206, 10, 0.85) inset;
+  }
 }
 
 @keyframes vwin-shake {
@@ -207,7 +226,8 @@
   }
 }
 
-/* a ring of light punching outwards from the middle of the screen */
+/* rings of light punching outwards, staggered by an inline animation-delay.
+   "both" fill keeps the delayed ones invisible until their turn comes. */
 .vraffle-shockwave {
   position: fixed;
   top: 50%;
@@ -218,8 +238,8 @@
   border: 14px solid #ffce0a;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9;
-  animation: vwin-shockwave 0.9s cubic-bezier(0.15, 0.72, 0.3, 1) forwards;
+  z-index: 8;
+  animation: vwin-shockwave 0.9s cubic-bezier(0.15, 0.72, 0.3, 1) both;
 }
 
 @keyframes vwin-shockwave {
@@ -235,16 +255,93 @@
   }
 }
 
+/* searchlights raking the room: a spoked conic gradient, slowly turning.
+   Sized in vmax so the spokes reach the corners on any aspect ratio. */
+.vraffle-rays {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 250vmax;
+  height: 250vmax;
+  margin: -125vmax 0 0 -125vmax;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 206, 10, 0.16) 0deg 5deg,
+    transparent 5deg 20deg
+  );
+  pointer-events: none;
+  z-index: 7;
+  will-change: transform;
+  animation:
+    vwin-rays-fade 1.4s ease-out both,
+    vwin-rays-spin 22s linear infinite;
+}
+
+@keyframes vwin-rays-fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes vwin-rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vraffle-winner--visible .vraffle-winner-name,
   .vraffle-root--win .vraffle-dialog,
   .vraffle-flash,
-  .vraffle-shockwave {
+  .vraffle-shockwave,
+  .vraffle-rays,
+  .vraffle-winner--visible .vraffle-close-btn::after {
     animation: none;
   }
   .vraffle-flash,
-  .vraffle-shockwave {
+  .vraffle-shockwave,
+  .vraffle-rays,
+  .vraffle-winner--visible .vraffle-close-btn::after {
     display: none;
+  }
+}
+
+/* a gleam sweeping across the button, to pull the eye to the thing to click.
+   The winner name cannot take this treatment - background-clip: text would
+   fight the chat colour that gets set on it inline. */
+.vraffle-winner--visible .vraffle-close-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.vraffle-winner--visible .vraffle-close-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 206, 10, 0.55),
+    transparent
+  );
+  animation: vwin-btn-gleam 2.6s 1s ease-in-out infinite;
+}
+
+@keyframes vwin-btn-gleam {
+  0% {
+    left: -50%;
+  }
+  55%,
+  100% {
+    left: 130%;
   }
 }
 

@@ -34,7 +34,7 @@ const NEEDLE_Y = BOX_HEIGHT / 2;
 const MIN_TICK_GAP_MS = 70;
 const MAX_WINNER_OFFSET = 33;
 // beat of silence after the roller stops, before the winner reveal fires
-const WINNER_REVEAL_DELAY_MS = 600;
+const WINNER_REVEAL_DELAY_MS = 400;
 
 // JS copy of the CSS cubic-bezier() function, used only to time tick sounds
 const makeCubicBezier = (x1, y1, x2, y2) => {
@@ -90,9 +90,15 @@ const CONFETTI_VOLLEYS = [
   { delay: 1600, count: 60 },
 ];
 
+// three rings chasing each other outwards instead of one lonely pulse
+const SHOCKWAVE_DELAYS = [0, 0.16, 0.32];
+
+const FIREWORK_INTERVAL_MS = 300;
+const FIREWORK_DURATION_MS = 3000;
+
 /**
- * Full-screen celebration: one big center cannon, then a few volleys from
- * side cannons firing inward from the bottom corners.
+ * Full-screen celebration: a center cannon, volleys from the bottom corners,
+ * and shells bursting overhead for a few seconds after.
  * Returns a stop function that cancels everything still in flight.
  */
 const fireCelebration = () => {
@@ -134,8 +140,31 @@ const fireCelebration = () => {
     }, delay)
   );
 
+  // fireworks: a full 360 spread with heavy decay reads as a shell bursting,
+  // where the flat spread of the cannons above reads as confetti being thrown
+  const fireworksEnd = Date.now() + FIREWORK_DURATION_MS;
+  const fireworks = setInterval(() => {
+    if (Date.now() > fireworksEnd) {
+      clearInterval(fireworks);
+      return;
+    }
+    confetti({
+      ...base,
+      particleCount: 70,
+      spread: 360,
+      startVelocity: 26,
+      decay: 0.91,
+      gravity: 0.7,
+      ticks: 160,
+      scalar: 1.1,
+      shapes: ['star', 'circle'],
+      origin: { x: 0.12 + Math.random() * 0.76, y: 0.1 + Math.random() * 0.35 },
+    });
+  }, FIREWORK_INTERVAL_MS);
+
   return () => {
     timers.forEach(clearTimeout);
+    clearInterval(fireworks);
     confetti.reset();
   };
 };
@@ -304,8 +333,20 @@ const VerticalRaffle = (props) => {
         onClick={closeImmediately}
         type="button"
       />
-      {won && <div className="vraffle-flash" aria-hidden="true" />}
-      {won && <div className="vraffle-shockwave" aria-hidden="true" />}
+      {won && (
+        <>
+          <div className="vraffle-rays" aria-hidden="true" />
+          <div className="vraffle-flash" aria-hidden="true" />
+          {SHOCKWAVE_DELAYS.map((delay) => (
+            <div
+              aria-hidden="true"
+              className="vraffle-shockwave"
+              key={delay}
+              style={{ animationDelay: `${delay}s` }}
+            />
+          ))}
+        </>
+      )}
       <div className="vraffle-dialog">
         <div className="vroller-box">
           <div className="vroller-needle" />
