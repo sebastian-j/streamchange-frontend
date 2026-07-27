@@ -25,10 +25,6 @@ const ThreeSections = styled.div`
   display: flex;
   flex-direction: row;
   height: 95vh;
-  @media (orientation: portrait) {
-    flex-direction: column;
-    height: auto;
-  }
 `;
 
 const YoutubeWorker = (props) => {
