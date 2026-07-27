@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { fetchStreamInfo } from './StreamInfoPost.jsx';
 import messages from './messages.js';
+
 const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -10,9 +10,11 @@ const InfoContainer = styled.div`
   margin-bottom: 10px;
   color: ${(props) => props.theme.staticTextColor};
   padding: 10px;
+  font-weight: bold;
 `;
+
 const StreamInfo = (props) => {
-  const [streamData, setStreamData] = useState(null);
+  const { streamData, platform } = props;
   const [uptime, setUptime] = useState('---');
 
   const calculateUptime = (startedAt) => {
@@ -24,23 +26,17 @@ const StreamInfo = (props) => {
     let hours = Math.floor(diff / (1000 * 60 * 60));
     let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
     if (minutes.toString().length < 2) minutes = `0${minutes}`;
     if (seconds.toString().length < 2) seconds = `0${seconds}`;
-        if (props.platform==='kick'){hours=hours-2}
+    if (platform === 'kick') {
+      hours = hours - 2;
+    }
     return `${hours}:${minutes}:${seconds}`;
   };
-  const hasValidProps = !!(props.channel && props.platform);
-  const platformChooser = (props.platform=='twitch');
-  useEffect(() => {
-    if (!hasValidProps) return;
-    const fetchData = async () => {
-      const data = await fetchStreamInfo(props.channel, props.platform);
-      setStreamData(data);
-    };
-    if (props.channel && props.platform) {
-      fetchData();
-    }
-  }, [props.channel, props.platform]);
+
+  const isTwitch = platform === 'twitch';
+
   useEffect(() => {
     if (!streamData || !streamData.started_at) return;
 
@@ -49,11 +45,11 @@ const StreamInfo = (props) => {
     const interval = setInterval(update, 1000);
 
     return () => clearInterval(interval);
-  }, [streamData]);
+  }, [streamData, platform]);
 
   return (
     <div>
-      {hasValidProps && streamData ? (
+      {streamData ? (
         <InfoContainer>
           <p>
             <FormattedMessage
@@ -71,38 +67,21 @@ const StreamInfo = (props) => {
             }}
           >
             <span>
-              <FormattedMessage
-                {...messages.uptime}
-                values={{ uptime: uptime }}
-              />
+              <FormattedMessage {...messages.uptime} values={{ uptime }} />
             </span>
-            {platformChooser ?(
-              <span
-               style={{
-                color: '#9370DB',
+            <span
+              style={{
+                color: isTwitch ? '#9370DB' : '#7CFC00',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-              }}>
+              }}
+            >
               <FormattedMessage
                 {...messages.game}
                 values={{ game: streamData.game_name }}
               />
             </span>
-            ) : (
-              <span
-               style={{
-                color: '#7CFC00',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px',
-              }}>
-              <FormattedMessage
-                {...messages.game}
-                values={{ game: streamData.game_name }}
-              />
-            </span>
-             )}
             <span
               style={{
                 color: 'red',
@@ -127,7 +106,7 @@ const StreamInfo = (props) => {
             </span>
           </div>
         </InfoContainer>
-        ) : (
+      ) : (
         <FormattedMessage {...messages.LOS} />
       )}
     </div>

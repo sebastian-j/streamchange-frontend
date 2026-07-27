@@ -27,44 +27,6 @@ const QueuePage = () => {
     window.location.reload();
   };
 
-<<<<<<< HEAD
-  const telemetry = (vidId, stream) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-    const telemetryData = {
-      videoId: vidId,
-      channelId: stream.snippet.channelId,
-      part: 'stream',
-      title: stream.snippet.title,
-    };
-    axios
-      .post(`${API_URL}/v4/telemetry`, qs.stringify(telemetryData), config)
-      .then(() => {})
-      .catch(() => {});
-  };
-
-  const checkBan = (channelId) => {
-    axios.get('../static/bans.json').then((res) => {
-      if (res.data) {
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          if (
-            res.data.items[i].channelId.includes(channelId) &&
-            new Date(res.data.items[i].endsAt) > new Date()
-          ) {
-            setVideoId('');
-            setBan(res.data.items[i]);
-            return;
-          }
-        }
-      }
-    });
-  };
-
-=======
->>>>>>> 26c03d25033f2016b4e0c6970905ded37534f0dd
   const launchWorker = (vidId) => {
     axios
       .get(

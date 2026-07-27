@@ -10,7 +10,7 @@ import DialogWrapper from './components/DialogWrapper';
 import FirstUseScreen from './FirstUseScreen';
 import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WavyButton from './components/WavyButton';
-//import WelcomeHint from './WelcomeHint';
+import { streamInfoPost } from '../StreamInfo/StreamInfoPost';
 
 const CHANNEL_URL_REGEX =
   /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
@@ -38,6 +38,7 @@ const WelcomeDialog = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
   const [isLinkInvalid, setIsLinkInvalid] = useState(false);
+  const [customError, setCustomError] = useState(null);
   const [prevError, setPrevError] = useState(props.error);
 
   if (props.error !== prevError) {
@@ -47,20 +48,29 @@ const WelcomeDialog = (props) => {
 
   const handleInputChange = (e) => {
     setText(e.target.value);
-    if (isLinkInvalid) {
-      setIsLinkInvalid(false);
-    }
+    if (isLinkInvalid) setIsLinkInvalid(false);
+    if (customError) setCustomError(null);
   };
-  const handleConnect = () => {
+
+  const handleConnect = async () => {
     const parsed = parseChannelInput(text);
     if (!parsed) {
       setIsLinkInvalid(true);
       return;
     }
+
     setIsLinkInvalid(false);
-    if (typeof props.onStart === 'function') {
-      setIsLoading(true);
-      props.onStart(parsed.channel, parsed.platform);
+    setCustomError(null);
+    setIsLoading(true);
+
+    try {
+      const streamData = await streamInfoPost(parsed.channel, parsed.platform);
+      if (typeof props.onStart === 'function') {
+        props.onStart(parsed.channel, parsed.platform, streamData);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setCustomError(err.message || 'notStream');
     }
   };
 
@@ -73,6 +83,8 @@ const WelcomeDialog = (props) => {
   if (isFirstUse) {
     return <FirstUseScreen />;
   }
+
+  const displayError = customError || props.error;
 
   if (isChrome || props.variant === 1) {
     return (
@@ -107,7 +119,7 @@ const WelcomeDialog = (props) => {
                     <FormattedMessage {...messages.invalidChannelUrlError} />
                   </span>
                 )}
-                {!isLinkInvalid && props.error && (
+                {!isLinkInvalid && displayError && (
                   <span
                     style={{
                       display: 'block',
@@ -115,25 +127,26 @@ const WelcomeDialog = (props) => {
                       marginTop: '10px',
                     }}
                   >
-                    {props.error === 'invalidUrl' && (
+                    {displayError === 'invalidUrl' && (
                       <FormattedMessage {...messages.invalidUrlError} />
                     )}
-                    {props.error === 'notStream' && (
+                    {displayError === 'notStream' && (
                       <FormattedMessage {...messages.notStreamError} />
                     )}
-                    {props.error === 'notVideo' && (
+                    {displayError === 'notVideo' && (
                       <FormattedMessage {...messages.notVideoError} />
                     )}
-                    {props.error === 'quotaExceeded' && (
+                    {displayError === 'quotaExceeded' && (
                       <FormattedMessage {...messages.quotaExceededError} />
                     )}
-                    {props.error && props.error.startsWith('blacklisted:') && (
-                      <>
-                        <FormattedMessage {...messages.blacklistedError} />
-                        <br />
-                        {props.error.replace('blacklisted:', '')}
-                      </>
-                    )}
+                    {displayError &&
+                      displayError.startsWith('blacklisted:') && (
+                        <>
+                          <FormattedMessage {...messages.blacklistedError} />
+                          <br />
+                          {displayError.replace('blacklisted:', '')}
+                        </>
+                      )}
                   </span>
                 )}
               </div>
@@ -148,7 +161,6 @@ const WelcomeDialog = (props) => {
               {isLoading && <CircularProgress />}
             </div>
           </div>
-          {/*<WelcomeHint />*/}
         </DialogWrapper>
         <CookieConsent />
       </PhotoBackdrop>

@@ -1,16 +1,30 @@
-import {BACKEND_URL} from '../../config';
-export const streamInfoPost = async (channel, platform) => {
-  const params = new URLSearchParams({
-    channel: channel,
-    platform: platform,
-  });
-  const response = await fetch(
- BACKEND_URL+`/api/stream-info?${params.toString()}`
-  );
+import { BACKEND_URL } from '../../config';
 
-  if (!response.ok) {
-    throw new Error(`Błąd HTTP: ${response.status}`);
+export const streamInfoPost = async (channel, platform) => {
+  if (!channel || !platform) {
+    throw new Error('invalidUrl');
   }
 
-  return await response.json();
+  const response = await fetch(`${BACKEND_URL}/api/stream-info`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      channel: channel.trim(),
+      platform: platform.trim(),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('notStream');
+  }
+
+  const data = await response.json();
+
+  if (!data || !data.is_live) {
+    throw new Error('notStream');
+  }
+
+  return data;
 };

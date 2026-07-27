@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import streamInfoPost from '../../StreamInfo/StreamInfoPost'
 
 const Button = styled.button`
   background-color: transparent;
@@ -28,6 +27,7 @@ interface Props {
 
 const WavyButton = ({ onClick, text }: Props) => {
   const [translate, setTranslate] = useState('0');
+
   const onMouseEnter = () => {
     setTranslate('-25%');
     setTimeout(
@@ -37,6 +37,7 @@ const WavyButton = ({ onClick, text }: Props) => {
       text.length * 50 + 50
     );
   };
+
   return (
     <Button
       onClick={onClick}
@@ -46,7 +47,7 @@ const WavyButton = ({ onClick, text }: Props) => {
     >
       {[...text].map((letter, index) => (
         <div
-          key={`${letter}`}
+          key={`${letter}-${index}`}
           style={{
             transitionDelay: `${index * 0.05}s`,
             transform: `translateY(${translate})`,
