@@ -8,9 +8,9 @@ const InfoContainer = styled.div`
   flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 10px;
-  color: ${(props) => props.theme.staticTextColor};
   padding: 10px;
-  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
 `;
 
 const StreamInfo = (props) => {
@@ -51,12 +51,10 @@ const StreamInfo = (props) => {
     <div>
       {streamData ? (
         <InfoContainer>
-          <p>
-            <FormattedMessage
-              {...messages.title}
-              values={{ title: streamData.title }}
-            />
-          </p>
+          <FormattedMessage
+            {...messages.title}
+            values={{ title: streamData.title }}
+          />
           <div
             style={{
               display: 'flex',

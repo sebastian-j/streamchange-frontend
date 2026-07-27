@@ -76,7 +76,7 @@ const GiveawayPage = (props) => {
     window.location.reload();
   };
 
- const handleStartStream = async (channelName, platformName, streamData) => {
+  const handleStartStream = async (channelName, platformName, streamData) => {
     setError(null);
     try {
       const blacklistRes = await axios.get(
@@ -173,7 +173,9 @@ const GiveawayPage = (props) => {
       'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg';
     const storedOwnerId = sessionStorage.getItem('gv-ownerId') || channel;
     const savedStreamData = sessionStorage.getItem('gv-streamData');
-    const parsedStreamData = savedStreamData ? JSON.parse(savedStreamData) : null;
+    const parsedStreamData = savedStreamData
+      ? JSON.parse(savedStreamData)
+      : null;
 
     if (channel) {
       const streamProps = {
@@ -182,7 +184,7 @@ const GiveawayPage = (props) => {
         title: storedTitle,
         videoId: channel,
         platform,
-        streamData: parsedStreamData, 
+        streamData: parsedStreamData,
       };
       changeStreamProperties(streamProps);
     }

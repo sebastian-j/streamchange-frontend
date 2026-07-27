@@ -2,15 +2,15 @@
 
 exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-bcHNtg iQtnTD"
+  class="sc-gsMGyr hoBMfm"
 >
   <h2
-    class="sc-gsMGyr eckTKa"
+    class="sc-dkHxwO hPCwfo"
   >
     Giveaway rules
   </h2>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-hLllbt eNyqa-D css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-eDgbZQ fCpQLC css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -54,7 +54,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkHxwO coJnB css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hLllbt cqcowI css-xanwcj-MuiFormControl-root-MuiTextField-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
@@ -79,7 +79,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-dkHxwO coJnB css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hLllbt cqcowI css-xanwcj-MuiFormControl-root-MuiTextField-root"
     data-mui-internal-clone-element="true"
     inputprops="[object Object]"
   >
@@ -106,7 +106,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal sc-hLllbt eNyqa-D css-15nqhxc-MuiFormControl-root"
+      class="MuiFormControl-root MuiFormControl-marginNormal sc-eDgbZQ fCpQLC css-15nqhxc-MuiFormControl-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -149,36 +149,36 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-iBIXdp gtOfsA"
+      class="sc-ftDObM guwTcs"
     >
       <label
-        class="sc-ftDObM dkqHAJ"
+        class="sc-pilFg gePtpD"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-pilFg cGmQws"
+        class="sc-jqMYKt bdBxFs"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-jqMYKt iHrWmN"
+        class="sc-kDLlSG eGEOMe"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-pilFg bKBZTE"
+        class="sc-jqMYKt fvMWHI"
         type="button"
       >
         +
       </button>
     </div>
     <button
-      class="sc-kDLlSG fJZvhu"
+      class="sc-ipUpyX cDeJwo"
       type="button"
     >
       Roll it!
@@ -187,7 +187,9 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       />
     </button>
   </div>
-  <div />
+  <div>
+    streamchange.components.StreamInfo.LOS
+  </div>
   <div
     data-testid="ad-frame"
   />
