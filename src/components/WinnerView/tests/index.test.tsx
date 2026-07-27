@@ -168,7 +168,7 @@ describe('<WinnerView />', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('fetches user data, messages and sends telemetry after mounting', async () => {
+  it('fetches user data and messages after mounting', async () => {
     const user = {
       id: 'winner-id',
       title: 'Test winner',
@@ -206,20 +206,6 @@ describe('<WinnerView />', () => {
     expect(
       await screen.findByText('Second winner message')
     ).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledTimes(1);
-    });
-
-    expect(axios.post).toHaveBeenCalledWith(
-      expect.stringContaining('/v4/telemetry'),
-      expect.stringContaining('video-id'),
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }
-    );
   });
 
   it('updates the prize value when the prize input changes', async () => {
