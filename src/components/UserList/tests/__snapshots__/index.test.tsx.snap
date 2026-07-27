@@ -2,13 +2,13 @@
 
 exports[`<UserList /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-kDLlSG jNTeQJ"
+  class="sc-eoeTJ TqgRS"
 >
   <div
     class="sc-hLllbt fKATMk"
   >
     <h2
-      class="sc-ipUpyX eSDiKy"
+      class="sc-brmsbW kQgGXA"
     >
       Users
     </h2>
@@ -99,7 +99,15 @@ exports[`<UserList /> > should render and match the snapshot 1`] = `
   >
     Skip the viewers list
   </a>
-  <ul />
+  <div
+    class="sc-kDLlSG cllbzH"
+    role="list"
+  >
+    <div
+      class="sc-ipUpyX bnhHyw"
+      style="height: 0px;"
+    />
+  </div>
   <button
     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorInherit sc-gLfMdy hpRPnr css-plnrbk-MuiButtonBase-root-MuiButton-root"
     id="purge-user-list-btn"

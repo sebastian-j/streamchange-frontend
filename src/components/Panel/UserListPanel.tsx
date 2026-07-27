@@ -6,11 +6,16 @@ export const UserListPanel = styled.div`
   flex-direction: column;
   flex-basis: 0;
   flex-grow: 1;
+  min-height: 0;
   margin: 15px;
+  overflow: hidden;
   padding: 15px;
   > ul {
-    overflow-y: scroll;
+    flex: 1 1 auto;
     list-style: none;
+    margin: 0;
+    min-height: 0;
+    overflow-y: auto;
     padding: 0;
   }
   @media (orientation: portrait) {
