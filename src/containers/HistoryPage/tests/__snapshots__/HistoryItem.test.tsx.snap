@@ -2,46 +2,45 @@
 
 exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
 <tr
-  class="sc-gsMGyr kwvbVm"
+  class="sc-jTkVfb blbFHO"
 >
   <td
-    class="sc-bcHNtg kBSNca image"
+    class="sc-dkHxwO iIMYlR identity"
   >
     <a
+      class="sc-hLllbt jnHasg"
       href="https://kick.com/id"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="Logo"
-        height="45px"
+        alt="abc"
+        class="sc-bcHNtg gZoOUc"
         src="url"
       />
+      <span
+        class="sc-eDgbZQ dBTEgo"
+      >
+        abc
+      </span>
     </a>
   </td>
   <td
-    class="sc-bcHNtg kBSNca textLeft"
-  >
-    <span>
-      abc
-    </span>
-  </td>
-  <td
-    class="sc-bcHNtg kBSNca text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       prize
     </span>
   </td>
   <td
-    class="sc-bcHNtg kBSNca text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       abc
     </span>
   </td>
   <td
-    class="sc-bcHNtg kBSNca text"
+    class="sc-dkHxwO iIMYlR text"
   >
     <span>
       December 24, 2019

@@ -2,16 +2,16 @@
 
 exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-jqMYKt cZEWxF"
+  class="sc-kDLlSG jkjrHC"
 >
   <span
-    class="sc-hBhkkI bIguGK"
+    class="sc-fnqnQZ iJMiVh"
   >
     Welcome to StreamChange
   </span>
   <div>
     <span
-      class="sc-hBhkkI bIguGK"
+      class="sc-fnqnQZ iJMiVh"
     >
       Select theme
     </span>
@@ -20,21 +20,21 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-eoeTJ dTpCUO"
+        class="sc-brmsbW gELxuk"
         id="themeLight"
         name="theme"
         type="radio"
         value="0"
       />
       <div
-        class="sc-kDLlSG dzOOCU box left"
+        class="sc-ipUpyX jDjEje box left"
       >
         <img
           alt="light"
           src="/src/components/WelcomeDialog/assets/light-mode.png"
         />
         <span
-          class="sc-ksRfhj kHTmKY"
+          class="sc-hBhkkI UrQKx"
         >
           Light
         </span>
@@ -44,21 +44,21 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
       for="themeDark"
     >
       <input
-        class="sc-eoeTJ dTpCUO"
+        class="sc-brmsbW gELxuk"
         id="themeDark"
         name="theme"
         type="radio"
         value="1"
       />
       <div
-        class="sc-kDLlSG dzOOCU box right"
+        class="sc-ipUpyX jDjEje box right"
       >
         <img
           alt="dark"
           src="/src/components/WelcomeDialog/assets/dark-mode.png"
         />
         <span
-          class="sc-ksRfhj kHTmKY"
+          class="sc-hBhkkI UrQKx"
         >
           Dark
         </span>
@@ -67,7 +67,7 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <span
-      class="sc-hBhkkI bIguGK"
+      class="sc-fnqnQZ iJMiVh"
     >
       Select language
     </span>
@@ -75,17 +75,17 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
       for="pl"
     >
       <input
-        class="sc-eoeTJ dTpCUO"
+        class="sc-brmsbW gELxuk"
         id="pl"
         name="language"
         type="radio"
         value="pl"
       />
       <div
-        class="sc-ipUpyX fAvkHO box left"
+        class="sc-csfbns bZfkRm box left"
       >
         <span
-          class="sc-csfbns YNlFI"
+          class="sc-eoeTJ dElyfI"
         >
           <img
             alt="pl"
@@ -100,17 +100,17 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
     >
       <input
         checked=""
-        class="sc-eoeTJ dTpCUO"
+        class="sc-brmsbW gELxuk"
         id="en"
         name="language"
         type="radio"
         value="en"
       />
       <div
-        class="sc-ipUpyX fAvkHO box right"
+        class="sc-csfbns bZfkRm box right"
       >
         <span
-          class="sc-csfbns YNlFI"
+          class="sc-eoeTJ dElyfI"
         >
           <img
             alt="en"
@@ -123,7 +123,7 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-brmsbW iuMMrr css-1uent87-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary sc-ksRfhj bXXCOq css-1uent87-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -133,20 +133,20 @@ exports[`<GiveawayPage /> > should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="sc-ftDObM jSbYLV"
+    class="sc-pilFg gOmzWH"
   >
     <img
       alt="cookie"
-      class="sc-iBIXdp gQNeqG"
+      class="sc-ftDObM fGFbIa"
       src="/src/components/WelcomeDialog/assets/cookies.webp"
     />
     <span
-      class="sc-gLfMdy dGeAvY"
+      class="sc-iBIXdp cFfsgT"
     >
       This site uses only necessary functional cookies. There is no tracking or personalized ads based on cookies.
     </span>
     <button
-      class="sc-jTkVfb cndYSN"
+      class="sc-gLfMdy jgzZuT"
       type="button"
     >
       Accept
