@@ -7,7 +7,8 @@ import InternalChatMessage from './InternalChatMessage';
 import reducer from './reducer';
 
 const ItemScroller = styled.ol`
-  height: 92%;
+  flex: 1;
+  min-height: 0;
   list-style: none;
   overflow-anchor: none;
   overflow-y: scroll;

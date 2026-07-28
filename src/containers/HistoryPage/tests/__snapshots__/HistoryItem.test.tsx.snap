@@ -2,13 +2,13 @@
 
 exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
 <tr
-  class="sc-jTkVfb blbFHO"
+  class="sc-gLfMdy gZVWCM"
 >
   <td
-    class="sc-dkHxwO iIMYlR identity"
+    class="sc-hLllbt XGmoA identity"
   >
     <a
-      class="sc-hLllbt jnHasg"
+      class="sc-eDgbZQ dIsYlx"
       href="https://kick.com/id"
       rel="noopener noreferrer"
       target="_blank"
@@ -19,28 +19,28 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
         src="url"
       />
       <span
-        class="sc-eDgbZQ dBTEgo"
+        class="sc-jTkVfb jlffps"
       >
         abc
       </span>
     </a>
   </td>
   <td
-    class="sc-dkHxwO iIMYlR text"
+    class="sc-hLllbt XGmoA text"
   >
     <span>
       prize
     </span>
   </td>
   <td
-    class="sc-dkHxwO iIMYlR text"
+    class="sc-hLllbt XGmoA text"
   >
     <span>
       abc
     </span>
   </td>
   <td
-    class="sc-dkHxwO iIMYlR text"
+    class="sc-hLllbt XGmoA text"
   >
     <span>
       December 24, 2019
