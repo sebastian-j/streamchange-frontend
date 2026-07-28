@@ -22,7 +22,10 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
-import { AvatarFallback, AvatarSkeleton } from '../../components/AvatarFallback';
+import {
+  AvatarFallback,
+  AvatarSkeleton,
+} from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
 
 const PageContainer = styled.div`
@@ -307,10 +310,19 @@ const GiveawayPage = (props) => {
             <AvatarSkeleton $size="tiny" />
           ) : (
             <AvatarFallback $size="tiny">
-              {(props.streamInfo?.streamData?.channel_name || props.streamInfo.videoId || '?').charAt(0).toUpperCase()}
+              {(
+                props.streamInfo?.streamData?.channel_name ||
+                props.streamInfo.videoId ||
+                '?'
+              )
+                .charAt(0)
+                .toUpperCase()}
             </AvatarFallback>
           )}
-          <ChannelName>{props.streamInfo?.streamData?.channel_name || props.streamInfo.videoId}</ChannelName>
+          <ChannelName>
+            {props.streamInfo?.streamData?.channel_name ||
+              props.streamInfo.videoId}
+          </ChannelName>
           {!isMobile && (
             <StyledButton onClick={leaveStream}>
               <span>

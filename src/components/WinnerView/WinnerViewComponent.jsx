@@ -62,8 +62,6 @@ const WinnerHeading = styled.div`
   }
 `;
 
-
-
 const WinnerTitle = styled.span`
   color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
   font-size: 20px;
