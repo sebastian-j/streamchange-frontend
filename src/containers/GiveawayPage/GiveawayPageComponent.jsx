@@ -19,9 +19,7 @@ import { changeDialogVisibility } from '../../components/SupportInformation/acti
 import HistoryWidget from './HistoryWidget';
 import { purgeUsersTable } from '../../components/UserList/model';
 import WelcomeDialog from '../../components/WelcomeDialog';
-import YoutubeWorker, {
-  MOBILE_BREAKPOINT,
-} from '../../components/YoutubeWorker';
+import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
 import { API_KEY, BACKEND_URL } from '../../config';
@@ -30,7 +28,7 @@ const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   justify-content: space-between;
-  @media ${MOBILE_BREAKPOINT} {
+  @media (orientation: portrait) {
     align-items: center;
     gap: 4px;
     padding: 2px 4px;
@@ -39,7 +37,7 @@ const TopBar = styled.div`
 
 const StreamInfo = styled.div`
   height: 5vh;
-  @media ${MOBILE_BREAKPOINT} {
+  @media (orientation: portrait) {
     align-items: center;
     display: flex;
     flex: 1 1 auto;
@@ -56,7 +54,7 @@ const StreamImg = styled.img`
 const StreamTitle = styled.span`
   color: ${(props) => props.theme.staticTextColor};
   margin-left: 10px;
-  @media ${MOBILE_BREAKPOINT} {
+  @media (orientation: portrait) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -94,7 +92,7 @@ const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+  const isMobile = useMediaQuery('(orientation: portrait)');
   const dispatch = useDispatch();
   const intl = useIntl();
 

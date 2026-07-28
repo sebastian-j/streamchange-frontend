@@ -18,8 +18,6 @@ import MobileWorkerLayout from './MobileWorkerLayout';
 import SuperChat from './SuperChat';
 import db from './db';
 
-export const MOBILE_BREAKPOINT = '(max-width: 768px)';
-
 const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
@@ -30,7 +28,7 @@ const ThreeSections = styled.div`
 const YoutubeWorker = (props) => {
   const dispatch = useDispatch();
   const [superChat, setSuperChat] = useState(null);
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+  const isMobile = useMediaQuery('(orientation: portrait)');
 
   const checkPreWinner = (author) => {
     const config = {

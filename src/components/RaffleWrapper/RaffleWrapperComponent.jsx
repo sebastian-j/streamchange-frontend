@@ -15,8 +15,6 @@ import NumericInput from '../NumericInput';
 import RaffleInfoDialog from '../RaffleInfoDialog';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
-const MOBILE_BREAKPOINT = '(max-width: 768px)';
-
 const StartButton = styled.button`
   background-color: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
@@ -50,14 +48,14 @@ const StartButton = styled.button`
 `;
 
 const AnimationDurationSlot = styled.div`
-  @media ${MOBILE_BREAKPOINT} {
+  @media (orientation: portrait) {
     margin-top: 20px;
   }
 `;
 
 const RaffleWrapper = (props) => {
   const intl = useIntl();
-  const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
+  const isMobile = useMediaQuery('(orientation: portrait)');
   const [noUsers, setNoUsers] = useState(false);
 
   // Mobile only supports the vertical raffle, so the picker is hidden there
