@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { getSafeColor } from '../../utils/colors';
 
-type Size = 'tiny' | 'small' | 'large';
+export type Size = 'tiny' | 'small' | 'large';
 
 const DIMENSIONS: Record<Size, { diameter: string; fontSize: string }> = {
   tiny: { diameter: '32px', fontSize: '14px' },
@@ -25,4 +25,24 @@ export const AvatarFallback = styled.div<{ $userColor?: string; $size?: Size }>`
   justify-content: center;
   user-select: none;
   width: ${(props) => DIMENSIONS[props.$size ?? 'small'].diameter};
+`;
+
+const shimmer = keyframes`
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+`;
+
+export const AvatarSkeleton = styled.div<{ $size?: Size }>`
+  background: linear-gradient(
+    90deg,
+    ${(props) => props.theme.iconButtonBackground} 0%,
+    ${(props) => props.theme.panelBackground} 50%,
+    ${(props) => props.theme.iconButtonBackground} 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: ${(props) => DIMENSIONS[props.$size ?? 'small'].diameter};
+  width: ${(props) => DIMENSIONS[props.$size ?? 'small'].diameter};
+  animation: ${shimmer} 1.4s ease-in-out infinite;
 `;

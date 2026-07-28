@@ -22,12 +22,28 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
+import {
+  AvatarFallback,
+  AvatarSkeleton,
+} from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  @media (orientation: portrait) {
+    height: auto;
+    overflow-y: auto;
+  }
+`;
 
 const TopBar = styled.div`
   background-color: ${(props) => props.theme.panelBackground};
   display: flex;
   justify-content: space-between;
+  flex-shrink: 0;
   @media (orientation: portrait) {
     align-items: center;
     gap: 4px;
@@ -35,11 +51,12 @@ const TopBar = styled.div`
   }
 `;
 
-const StreamInfo = styled.div`
-  height: 5vh;
+const StreamInfoBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
   @media (orientation: portrait) {
-    align-items: center;
-    display: flex;
     flex: 1 1 auto;
     height: 40px;
     min-width: 0;
@@ -47,17 +64,23 @@ const StreamInfo = styled.div`
   }
 `;
 
-const StreamImg = styled.img`
-  height: 100%;
+const StreamAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 `;
 
-const StreamTitle = styled.span`
+const ChannelName = styled.span`
   color: ${(props) => props.theme.staticTextColor};
-  margin-left: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
   @media (orientation: portrait) {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
   }
 `;
 
@@ -90,6 +113,10 @@ const MenuIcon = () => (
 
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(() =>
+    sessionStorage.getItem('gv-avatarUrl')
+  );
+  const [avatarLoading, setAvatarLoading] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const isMobile = useMediaQuery('(orientation: portrait)');
@@ -114,6 +141,7 @@ const GiveawayPage = (props) => {
     sessionStorage.removeItem('gv-title');
     sessionStorage.removeItem('gv-thumbnailUrl');
     sessionStorage.removeItem('gv-ownerId');
+    sessionStorage.removeItem('gv-avatarUrl');
     localStorage.removeItem('gv-channel');
     localStorage.removeItem('gv-platform');
     window.location.reload();
@@ -201,6 +229,27 @@ const GiveawayPage = (props) => {
       if (streamData) {
         sessionStorage.setItem('gv-streamData', JSON.stringify(streamData));
       }
+
+      if (streamData?.user_id) {
+        fetchAvatar(streamData.user_id, platformName);
+      }
+    }
+  };
+
+  const fetchAvatar = async (userId, platform) => {
+    setAvatarLoading(true);
+    try {
+      const res = await axios.get(`${BACKEND_URL}/api/avatar`, {
+        params: { user_id: userId, platform },
+      });
+      if (res.data?.url) {
+        setAvatarUrl(res.data.url);
+        sessionStorage.setItem('gv-avatarUrl', res.data.url);
+      }
+    } catch (err) {
+      console.warn('Nie udało się pobrać avatara:', err);
+    } finally {
+      setAvatarLoading(false);
     }
   };
 
@@ -219,6 +268,7 @@ const GiveawayPage = (props) => {
     const parsedStreamData = savedStreamData
       ? JSON.parse(savedStreamData)
       : null;
+    const storedAvatar = sessionStorage.getItem('gv-avatarUrl');
 
     if (channel) {
       const streamProps = {
@@ -230,6 +280,10 @@ const GiveawayPage = (props) => {
         streamData: parsedStreamData,
       };
       changeStreamProperties(streamProps);
+
+      if (!storedAvatar && parsedStreamData?.user_id) {
+        fetchAvatar(parsedStreamData.user_id, platform);
+      }
     }
   }, [changeStreamProperties]);
 
@@ -244,14 +298,31 @@ const GiveawayPage = (props) => {
     );
   }
   return (
-    <>
+    <PageContainer>
       <Helmet htmlAttributes={{ lang: intl.locale }}>
         <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
       </Helmet>
       <TopBar>
-        <StreamInfo>
-          <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
-          <StreamTitle>{props.streamInfo.title}</StreamTitle>
+        <StreamInfoBar>
+          {avatarUrl ? (
+            <StreamAvatar alt="Profile" src={avatarUrl} />
+          ) : avatarLoading ? (
+            <AvatarSkeleton $size="small" />
+          ) : (
+            <AvatarFallback $size="small">
+              {(
+                props.streamInfo?.streamData?.channel_name ||
+                props.streamInfo.videoId ||
+                '?'
+              )
+                .charAt(0)
+                .toUpperCase()}
+            </AvatarFallback>
+          )}
+          <ChannelName>
+            {props.streamInfo?.streamData?.channel_name ||
+              props.streamInfo.videoId}
+          </ChannelName>
           {!isMobile && (
             <StyledButton onClick={leaveStream}>
               <span>
@@ -259,7 +330,7 @@ const GiveawayPage = (props) => {
               </span>
             </StyledButton>
           )}
-        </StreamInfo>
+        </StreamInfoBar>
         <TopButtons>
           {isMobile ? (
             <>
@@ -340,7 +411,7 @@ const GiveawayPage = (props) => {
           localStorage.removeItem('gv-platform');
         }}
       />
-    </>
+    </PageContainer>
   );
 };
 

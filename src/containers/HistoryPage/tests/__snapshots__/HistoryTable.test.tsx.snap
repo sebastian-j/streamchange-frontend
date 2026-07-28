@@ -2,18 +2,18 @@
 
 exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-pilFg cznCVr"
+  class="sc-jqMYKt gFWkFn"
 >
   <table
-    class="sc-iBIXdp cuqFvX"
+    class="sc-ftDObM gCfeOD"
   >
     <thead
-      class="sc-jqMYKt hbKpgs"
+      class="sc-kDLlSG cVCukj"
     >
       <tr>
         <td>
           <button
-            class="sc-ftDObM ipyxwX"
+            class="sc-pilFg hpMLx"
             id="displayName"
             type="button"
           >
@@ -37,7 +37,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         </td>
         <td>
           <button
-            class="sc-ftDObM ipyxwX"
+            class="sc-pilFg hpMLx"
             id="prize"
             type="button"
           >
@@ -61,7 +61,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         </td>
         <td>
           <button
-            class="sc-ftDObM ipyxwX"
+            class="sc-pilFg hpMLx"
             id="message"
             type="button"
           >
@@ -85,7 +85,7 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
         </td>
         <td>
           <button
-            class="sc-ftDObM ipyxwX"
+            class="sc-pilFg hpMLx"
             id="createdAt"
             type="button"
           >
@@ -111,13 +111,13 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
     </thead>
     <tbody>
       <tr
-        class="sc-gLfMdy gZVWCM"
+        class="sc-iBIXdp TMBKf"
       >
         <td
-          class="sc-hLllbt XGmoA identity"
+          class="sc-eDgbZQ NycJt identity"
         >
           <a
-            class="sc-eDgbZQ dIsYlx"
+            class="sc-jTkVfb IoRwt"
             href="https://kick.com/id"
             rel="noopener noreferrer"
             target="_blank"
@@ -128,28 +128,28 @@ exports[`<HistoryTable /> > should render and match the snapshot 1`] = `
               src="url"
             />
             <span
-              class="sc-jTkVfb jlffps"
+              class="sc-gLfMdy fiCFae"
             >
               name
             </span>
           </a>
         </td>
         <td
-          class="sc-hLllbt XGmoA text"
+          class="sc-eDgbZQ NycJt text"
         >
           <span>
             trophy
           </span>
         </td>
         <td
-          class="sc-hLllbt XGmoA text"
+          class="sc-eDgbZQ NycJt text"
         >
           <span>
             test message
           </span>
         </td>
         <td
-          class="sc-hLllbt XGmoA text"
+          class="sc-eDgbZQ NycJt text"
         >
           <span>
             December 24, 2019
