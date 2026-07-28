@@ -17,6 +17,28 @@
   perspective-origin: 50% 50%;
 }
 
+/* the dialog is portaled straight to <body> so it can sit above the confetti
+   canvas (zIndex: 9999 in the JS) without dragging the backdrop and rays up
+   with it - those stay under the confetti so it doesn't get dimmed */
+.vraffle-dialog-portal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.vraffle-dialog-portal .vraffle-dialog {
+  pointer-events: auto;
+}
+
 .vraffle-backdrop {
   animation: vshow-winner 0.7s linear;
   background-color: rgba(0, 0, 0, 0.6);
@@ -181,8 +203,10 @@
 }
 
 /* the whole dialog takes the hit, rattles itself back into place, and then
-   sits there breathing light so it never goes visually flat */
-.vraffle-root--win .vraffle-dialog {
+   sits there breathing light so it never goes visually flat. Own modifier
+   class rather than "vraffle-root--win .vraffle-dialog" - the dialog is
+   portaled to <body>, so it's no longer a DOM descendant of the root. */
+.vraffle-dialog--win {
   animation:
     vwin-shake 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97) both,
     vwin-dialog-glow 2.4s 0.4s ease-in-out infinite;
@@ -231,17 +255,17 @@
   }
 }
 
-/* Depth separation: the roller drops away from the camera and goes dim while
-   the name comes forward, so the eye has somewhere to land once the spinning
-   stops. This is the whole reason for the 3D - not the spectacle, the focus. */
-.vraffle-root--win .vroller-box {
+/* Depth separation: the roller drops away from the camera, so the eye has
+   somewhere to land once the spinning stops. This is the whole reason for
+   the 3D - not the spectacle, the focus. Own modifier class - same portal
+   reason as .vraffle-dialog--win above. */
+.vroller-box--win {
   animation: vwin-box-recede 1.1s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes vwin-box-recede {
   to {
     transform: perspective(900px) translateZ(-150px);
-    filter: brightness(0.5) saturate(0.65);
   }
 }
 
@@ -260,7 +284,7 @@
 
 @keyframes vwin-flash {
   0% {
-    opacity: 0.85;
+    opacity: 0.4;
   }
   100% {
     opacity: 0;
@@ -349,7 +373,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vraffle-winner--visible .vraffle-winner-name,
-  .vraffle-root--win .vraffle-dialog,
+  .vraffle-dialog--win,
   .vraffle-flash,
   .vraffle-shockwave,
   .vraffle-rays,
@@ -358,7 +382,7 @@
     display: none;
   }
 
-  .vraffle-root--win .vroller-box {
+  .vroller-box--win {
     animation: none;
   }
 }

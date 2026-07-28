@@ -17,6 +17,7 @@
  *   Escape or clicking the backdrop closes without picking a winner.
  */
 import { memo, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import confetti from 'canvas-confetti';
@@ -243,13 +244,20 @@ const VerticalRaffle = (props) => {
   const winBuffer = useRef(null);
   const rafId = useRef(null);
 
-  const playSample = (bufferRef) => {
+  const playSample = (bufferRef, volume = 1) => {
     const ctx = audioCtx.current;
     const buffer = bufferRef.current;
     if (!ctx || !buffer || ctx.state === 'closed') return;
     const source = ctx.createBufferSource();
     source.buffer = buffer;
-    source.connect(ctx.destination);
+    if (volume === 1) {
+      source.connect(ctx.destination);
+    } else {
+      const gain = ctx.createGain();
+      gain.gain.value = volume;
+      source.connect(gain);
+      gain.connect(ctx.destination);
+    }
     source.start();
   };
 
@@ -337,7 +345,7 @@ const VerticalRaffle = (props) => {
 
   useEffect(() => {
     if (!won) return undefined;
-    playSample(winBuffer);
+    playSample(winBuffer, 0.8);
     return fireCelebration();
   }, [won]);
 
@@ -351,73 +359,82 @@ const VerticalRaffle = (props) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
+  // the dialog is portaled to <body> so its z-index can clear the confetti
+  // canvas without dragging the backdrop and rays up with it - see style.css
   return (
-    <div className={`vraffle-root${won ? ' vraffle-root--win' : ''}`}>
-      <button
-        aria-label="stop the raffle immediately"
-        className="vraffle-backdrop"
-        onClick={closeImmediately}
-        type="button"
-      />
-      {won && (
-        <>
-          <div className="vraffle-rays" aria-hidden="true" />
-          <div className="vraffle-flash" aria-hidden="true" />
-          {SHOCKWAVE_DELAYS.map((delay) => (
-            <div
-              aria-hidden="true"
-              className="vraffle-shockwave"
-              key={delay}
-              style={{ animationDelay: `${delay}s` }}
-            />
-          ))}
-        </>
-      )}
-      <div className="vraffle-dialog">
-        <div className="vroller-box">
-          <div className="vroller-needle" />
-          <div className="vroller-movable" ref={movableRef}>
-            {users.map((item, index) => (
-              <div className="vroller-cell" key={index}>
-                <InternalChatBadges message={item} />
-                <span
-                  className="vroller-nickname"
-                  style={
-                    item.color
-                      ? { color: getSafeColor(item.color, '#000000') }
-                      : undefined
-                  }
-                >
-                  {item.title}
-                </span>
-              </div>
+    <>
+      <div className={`vraffle-root${won ? ' vraffle-root--win' : ''}`}>
+        <button
+          aria-label="stop the raffle immediately"
+          className="vraffle-backdrop"
+          onClick={closeImmediately}
+          type="button"
+        />
+        {won && (
+          <>
+            <div className="vraffle-rays" aria-hidden="true" />
+            <div className="vraffle-flash" aria-hidden="true" />
+            {SHOCKWAVE_DELAYS.map((delay) => (
+              <div
+                aria-hidden="true"
+                className="vraffle-shockwave"
+                key={delay}
+                style={{ animationDelay: `${delay}s` }}
+              />
             ))}
-          </div>
-        </div>
-        <div
-          className={`vraffle-winner${won ? ' vraffle-winner--visible' : ''}`}
-        >
-          <span
-            className="vraffle-winner-name"
-            style={
-              winner?.color
-                ? { color: getSafeColor(winner.color, '#131b24') }
-                : undefined
-            }
-          >
-            {winner ? winner.title : ' '}
-          </span>
-          <button
-            className="vraffle-close-btn"
-            onClick={confirmWinner}
-            tabIndex={won ? 0 : -1}
-            type="button"
-          >
-            <FormattedMessage {...messages.continueBtn} />
-          </button>
-        </div>
+          </>
+        )}
       </div>
-    </div>
+      {createPortal(
+        <div className="vraffle-dialog-portal">
+          <div className={`vraffle-dialog${won ? ' vraffle-dialog--win' : ''}`}>
+            <div className={`vroller-box${won ? ' vroller-box--win' : ''}`}>
+              <div className="vroller-needle" />
+              <div className="vroller-movable" ref={movableRef}>
+                {users.map((item, index) => (
+                  <div className="vroller-cell" key={index}>
+                    <InternalChatBadges message={item} />
+                    <span
+                      className="vroller-nickname"
+                      style={
+                        item.color
+                          ? { color: getSafeColor(item.color, '#000000') }
+                          : undefined
+                      }
+                    >
+                      {item.title}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div
+              className={`vraffle-winner${won ? ' vraffle-winner--visible' : ''}`}
+            >
+              <span
+                className="vraffle-winner-name"
+                style={
+                  winner?.color
+                    ? { color: getSafeColor(winner.color, '#131b24') }
+                    : undefined
+                }
+              >
+                {winner ? winner.title : ' '}
+              </span>
+              <button
+                className="vraffle-close-btn"
+                onClick={confirmWinner}
+                tabIndex={won ? 0 : -1}
+                type="button"
+              >
+                <FormattedMessage {...messages.continueBtn} />
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 };
 
