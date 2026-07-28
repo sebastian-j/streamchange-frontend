@@ -93,7 +93,7 @@ const BULBS = Array.from({ length: BULB_COUNT }, (unused, index) => {
     color: SEGMENT_COLORS[index % SEGMENT_COLORS.length].fill,
     delay: `${(index % BULB_PHASES) * 0.14}s`,
   };
-// index 0 sits at 12 o'clock, right under the pointer - drop it
+  // index 0 sits at 12 o'clock, right under the pointer - drop it
 }).filter((unused, index) => index !== 0);
 
 // same colors as the wheel segments, so the celebration reads as "this wheel
