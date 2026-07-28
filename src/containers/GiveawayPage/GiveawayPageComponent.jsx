@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
+import supportMessages from '../../components/SupportInformation/messages';
+import settingsMessages from '../../components/SettingsDialog/messages';
+import { changeDialogVisibility } from '../../components/SupportInformation/actions';
 import HistoryWidget from './HistoryWidget';
 import { purgeUsersTable } from '../../components/UserList/model';
 import WelcomeDialog from '../../components/WelcomeDialog';
@@ -20,12 +29,22 @@ const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   @media (orientation: portrait) {
-    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 4px;
   }
 `;
 
 const StreamInfo = styled.div`
   height: 5vh;
+  @media (orientation: portrait) {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    height: 40px;
+    min-width: 0;
+    overflow: hidden;
+  }
 `;
 
 const StreamImg = styled.img`
@@ -35,16 +54,17 @@ const StreamImg = styled.img`
 const StreamTitle = styled.span`
   color: ${(props) => props.theme.staticTextColor};
   margin-left: 10px;
+  @media (orientation: portrait) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 const TopButtons = styled.div`
   align-items: center;
   display: flex;
-  @media (orientation: portrait) {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px 10px 4px 10px;
-  }
+  flex-shrink: 0;
 `;
 
 const StyledButton = styled(Button)`
@@ -53,9 +73,30 @@ const StyledButton = styled(Button)`
   }
 `;
 
+/*
+ * On mobile the toolbar actions live in the hamburger menu. The dialogs stay
+ * mounted (their triggers are hidden) because MUI renders them in a portal, so
+ * the menu can open them through props/Redux.
+ */
+const HiddenTriggers = styled.div`
+  display: none;
+`;
+
+const MenuIcon = () => (
+  <svg viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor">
+    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+  </svg>
+);
+
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
+  const [menuAnchor, setMenuAnchor] = useState(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const isMobile = useMediaQuery('(orientation: portrait)');
+  const dispatch = useDispatch();
   const intl = useIntl();
+
+  const closeMenu = () => setMenuAnchor(null);
 
   const leaveStream = async () => {
     props.clearUserList();
@@ -210,17 +251,71 @@ const GiveawayPage = (props) => {
       <TopBar>
         <StreamInfo>
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
-          <StreamTitle>{props.streamInfo.videoId}</StreamTitle>
-          <StyledButton onClick={leaveStream}>
-            <span>
-              <FormattedMessage {...messages.leaveStreamBtn} />
-            </span>
-          </StyledButton>
+          <StreamTitle>{props.streamInfo.title}</StreamTitle>
+          {!isMobile && (
+            <StyledButton onClick={leaveStream}>
+              <span>
+                <FormattedMessage {...messages.leaveStreamBtn} />
+              </span>
+            </StyledButton>
+          )}
         </StreamInfo>
         <TopButtons>
-          <HistoryWidget />
-          <SupportInformation />
-          <SettingsDialog />
+          {isMobile ? (
+            <>
+              <IconButton
+                aria-label="menu"
+                onClick={(event) => setMenuAnchor(event.currentTarget)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                anchorEl={menuAnchor}
+                open={Boolean(menuAnchor)}
+                onClose={closeMenu}
+              >
+                <MenuItem
+                  component={NavLink}
+                  to="/giveaway-history"
+                  onClick={closeMenu}
+                >
+                  <FormattedMessage {...messages.historyLink} />
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    closeMenu();
+                    dispatch(changeDialogVisibility(true));
+                  }}
+                >
+                  <FormattedMessage {...supportMessages.toolbarButtonTooltip} />
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    closeMenu();
+                    setIsSettingsOpen(true);
+                  }}
+                >
+                  <FormattedMessage {...settingsMessages.dialogTitle} />
+                </MenuItem>
+                <MenuItem onClick={leaveStream}>
+                  <FormattedMessage {...messages.leaveStreamBtn} />
+                </MenuItem>
+              </Menu>
+              <HiddenTriggers>
+                <SupportInformation />
+                <SettingsDialog
+                  open={isSettingsOpen}
+                  onClose={() => setIsSettingsOpen(false)}
+                />
+              </HiddenTriggers>
+            </>
+          ) : (
+            <>
+              <HistoryWidget />
+              <SupportInformation />
+              <SettingsDialog />
+            </>
+          )}
         </TopButtons>
       </TopBar>
       <YoutubeWorker
