@@ -4,10 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
 import messages from './messages';
 import AdFrame from '../AdFrame';
-//import StreamInfo from '../StreamInfo';
+import StreamInfo from '../StreamInfo/StreamInfo';
 import Panel from '../Panel';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';
@@ -99,6 +98,10 @@ class GiveawayRules extends React.Component {
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
         <LotteryLawWarning open={this.props.requirement === 1} />
+        <StreamInfo
+          streamData={this.props.streamInfo?.streamData}
+          platform={this.props.streamInfo?.platform}
+        />
         <AdFrame />
       </Panel>
     );

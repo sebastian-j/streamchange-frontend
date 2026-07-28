@@ -9,7 +9,6 @@ import { ContainerActions, ContainerState } from './types';
 export const initialState: ContainerState = {
   stream: {
     ownerId: '',
-    thumbnailUrl: '',
     title: '',
     videoId: '',
   },

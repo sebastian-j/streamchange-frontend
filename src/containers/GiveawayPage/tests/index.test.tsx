@@ -12,7 +12,6 @@ describe('<GiveawayPage />', () => {
     store = configureStore({
       stream: {
         ownerId: '',
-        thumbnailUrl: '',
         title: '',
         videoId: '',
       },

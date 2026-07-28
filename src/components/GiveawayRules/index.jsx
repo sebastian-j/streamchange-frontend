@@ -6,11 +6,13 @@ import {
   makeSelectGiveawayRequirement,
 } from './selectors';
 import { changePrize, changeRequirement } from './actions';
+import { makeSelectStreamInfo } from '../../containers/GiveawayPage/selectors';
 import GiveawayRules from './GiveawayRulesComponent';
 
 const mapStateToProps = createStructuredSelector({
   prize: makeSelectGiveawayPrize(),
   requirement: makeSelectGiveawayRequirement(),
+  streamInfo: makeSelectStreamInfo(),
 });
 
 function mapDispatchToProps(dispatch) {
