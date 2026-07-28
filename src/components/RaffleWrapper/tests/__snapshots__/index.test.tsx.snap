@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-jqMYKt crLagN css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-ksRfhj dUfRvT css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -46,7 +46,7 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-pilFg WMNjw css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-brmsbW gRlnH css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
@@ -54,7 +54,7 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
       class="MuiButton-icon MuiButton-startIcon css-t70kls-MuiButton-startIcon"
     >
       <svg
-        class="sc-jTkVfb ajzfk"
+        class="sc-kDLlSG eIUZYk"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -66,32 +66,32 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     How do the raffle methods work?
   </button>
   <div
-    class="sc-ipUpyX fEPCjK"
+    class="sc-fnqnQZ fuzChT"
   >
     <div
-      class="sc-gsMGyr jxmkhD"
+      class="sc-iBIXdp gtOfsA"
     >
       <label
-        class="sc-dkHxwO cuuTAs"
+        class="sc-ftDObM dkqHAJ"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-hLllbt iepMqS"
+        class="sc-pilFg cGmQws"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-eDgbZQ cBvtlC"
+        class="sc-jqMYKt iHrWmN"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-hLllbt eKnUty"
+        class="sc-pilFg bKBZTE"
         type="button"
       >
         +
@@ -99,7 +99,7 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <button
-    class="sc-kDLlSG fJZvhu"
+    class="sc-hBhkkI hfnpyq"
     type="button"
   >
     Roll it!

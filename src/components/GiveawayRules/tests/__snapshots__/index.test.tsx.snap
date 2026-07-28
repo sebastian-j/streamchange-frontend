@@ -149,7 +149,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-ksRfhj dduPSa css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-dHPFqY kmYpOS css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -157,7 +157,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         class="MuiButton-icon MuiButton-startIcon css-t70kls-MuiButton-startIcon"
       >
         <svg
-          class="sc-ipUpyX iXhNgC"
+          class="sc-fnqnQZ dtfzlz"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -169,32 +169,32 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       How do the raffle methods work?
     </button>
     <div
-      class="sc-fnqnQZ fuzChT"
+      class="sc-dmsmPq iZYOat"
     >
       <div
-        class="sc-ftDObM guwTcs"
+        class="sc-eoeTJ ccZOxH"
       >
         <label
-          class="sc-pilFg gePtpD"
+          class="sc-brmsbW jnGeCM"
           for="number-display"
         >
           Animation duration (seconds)
         </label>
         <button
           aria-label="Decrease by one"
-          class="sc-jqMYKt bdBxFs"
+          class="sc-ksRfhj gTNbPm"
           type="button"
         >
           -
         </button>
         <input
-          class="sc-kDLlSG eGEOMe"
+          class="sc-hBhkkI bEPDRa"
           id="number-display"
           value="7"
         />
         <button
           aria-label="Increase by one"
-          class="sc-jqMYKt fvMWHI"
+          class="sc-ksRfhj lhGgfe"
           type="button"
         >
           +
@@ -202,7 +202,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <button
-      class="sc-hBhkkI hfnpyq"
+      class="sc-hIjUsD hVbkQ"
       type="button"
     >
       Roll it!
