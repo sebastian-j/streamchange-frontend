@@ -15,8 +15,9 @@ const WheelItem = styled.div`
   position: absolute;
 
   img {
-    height: 11vh;
-    display: block;
+    height: max(150px, 11vh);
+    display: 'flex';
+    objectfit: 'contain';
     margin: 0 auto;
     filter: drop-shadow(0px 0px 5px rgb(255, 255, 55));
     animation:

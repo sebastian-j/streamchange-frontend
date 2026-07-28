@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, memo, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { playSound, useSound, setSoundEnabled } from 'react-sounds';
+import { useSound, setSoundEnabled } from 'react-sounds';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import slotMachineImg from './assets/SlotsMachineOuter.svg';
 import lever from './assets/lever1.svg';
@@ -40,10 +40,10 @@ const SlotMachineImg = styled.img`
   z-index: 1;
 `;
 const Speaker = styled.img`
-  width: 55px;
-  height: 55px;
+  width: 7%;
+  height: 7%;
   position: absolute;
-  top: 95%;
+  top: 95.5%;
   left: 93.5%;
   z-index: 10;
 `;
@@ -65,7 +65,7 @@ const SlotSymbol = memo(({ item }) => {
         alt="symbol"
         style={{
           width: '50%',
-          height: '150px',
+          height: 'max(150px, 11vh)',
           display: 'flex',
           objectFit: 'contain',
           margin: '0 auto',
@@ -112,11 +112,20 @@ const SlotsRaffleComponent = (props) => {
   const [isPulled, setIsPulled] = useState(false);
   const [isRolling, setIsRolling] = useState(false);
   const [winnerShow, setWinnerShow] = useState(false);
-  const [timer, setTimer] = useState(null);
   const [winner, setWinner] = useState(null);
   const [soundOn, setSoundOn] = useState(true);
+
+  const timerRef = useRef(null);
+  const winIntervalRef = useRef(null);
+  const winTimeoutRef = useRef(null);
+
   const { play: playToggleOff } = useSound('ui/toggle_off');
   const { play: playToggleOn } = useSound('ui/toggle_on');
+  const { play: levelUpPlay, stop: levelUpStop } = useSound('arcade/level_up', {
+    rate: 4.0,
+    volume: 0.75,
+  });
+
   useEffect(() => {
     setSoundEnabled(true);
   }, []);
@@ -130,6 +139,7 @@ const SlotsRaffleComponent = (props) => {
     setSoundEnabled(true);
     setSoundOn(true);
   };
+
   const eligibleUsers = useMemo(() => {
     let users = (props.userArray || []).filter(
       (user) => user.isEligible === true
@@ -159,7 +169,7 @@ const SlotsRaffleComponent = (props) => {
             ? sourceUsers[Math.floor(Math.random() * sourceUsers.length)]
             : null;
         return {
-          id: `${prefix}-slot-${index}`, //
+          id: `${prefix}-slot-${index}`,
           type: 'user',
           user: randomUser,
         };
@@ -209,6 +219,7 @@ const SlotsRaffleComponent = (props) => {
       };
     });
   };
+
   const [reels, setReels] = useState(() => {
     const list0A = generateLongList();
     const list1A = generateUserList();
@@ -221,11 +232,30 @@ const SlotsRaffleComponent = (props) => {
     ];
   });
 
-  const closeImmediately = () => {
-    props.onClose();
+  const stopAllTimersAndSounds = useCallback(() => {
+    if (winIntervalRef.current) {
+      clearInterval(winIntervalRef.current);
+      winIntervalRef.current = null;
+    }
+    if (winTimeoutRef.current) {
+      clearTimeout(winTimeoutRef.current);
+      winTimeoutRef.current = null;
+    }
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    if (levelUpStop) {
+      levelUpStop();
+    }
+  }, [levelUpStop]);
+
+  const closeImmediately = useCallback(() => {
+    stopAllTimersAndSounds();
     setSoundEnabled(false);
-    clearTimeout(timer);
-  };
+    props.onClose();
+  }, [stopAllTimersAndSounds, props]);
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -233,8 +263,11 @@ const SlotsRaffleComponent = (props) => {
       }
     };
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  });
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      stopAllTimersAndSounds();
+    };
+  }, [closeImmediately, stopAllTimersAndSounds]);
 
   const winnerView = () => {
     setWinnerShow(true);
@@ -243,6 +276,7 @@ const SlotsRaffleComponent = (props) => {
   const startSlotMachine = () => {
     const sourceUsers = eligibleUsers;
     if (sourceUsers.length === 0) return;
+    stopAllTimersAndSounds();
 
     const selectedWinner =
       props.preWinner ||
@@ -270,17 +304,21 @@ const SlotsRaffleComponent = (props) => {
     setIsRolling(true);
     const spinDuration = 10000;
 
-    setTimeout(() => {
+    winTimeoutRef.current = setTimeout(() => {
       winnerView();
-      const intervalWin = setInterval(() => {
-        playSound('arcade/level_up', { rate: 4.0, volume: 0.75 });
+      winIntervalRef.current = setInterval(() => {
+        levelUpPlay();
       }, 100);
+
       setTimeout(() => {
-        clearInterval(intervalWin);
+        if (winIntervalRef.current) {
+          clearInterval(winIntervalRef.current);
+          winIntervalRef.current = null;
+        }
       }, 5000);
     }, spinDuration);
 
-    const finalWinTimer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setWinnerShow(false);
       if (selectedWinner && selectedWinner.id) {
         props.onWin(selectedWinner.id);
@@ -297,8 +335,6 @@ const SlotsRaffleComponent = (props) => {
       ]);
       setIsRolling(false);
     }, spinDuration + 5000);
-
-    setTimer(finalWinTimer);
   };
 
   const handleLeverClick = () => {
@@ -385,9 +421,9 @@ const SlotsRaffleComponent = (props) => {
       if (currentTickIndex !== lastTickIndex) {
         if (isRolling) {
           if (currentTickIndex % 2 === 0) {
-            if (playToggleOn) playToggleOn();
+            if (playToggleOn) playToggleOff();
           } else {
-            if (playToggleOff) playToggleOff();
+            if (playToggleOff) playToggleOn();
           }
         } else {
           if (playToggleOff) playToggleOff();
