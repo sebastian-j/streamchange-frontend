@@ -9,7 +9,6 @@ describe('GiveawayPage Actions', () => {
     it('should return the correct type and the passed id', () => {
       const fixture = {
         ownerId: 'id',
-        thumbnailUrl: 'url',
         title: 'stream',
         videoId: 'vid',
       };

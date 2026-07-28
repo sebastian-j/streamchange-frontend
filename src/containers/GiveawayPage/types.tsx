@@ -3,7 +3,6 @@ import * as actions from './actions';
 
 interface IStream {
   ownerId: string;
-  thumbnailUrl: string;
   title: string;
   videoId: string;
 }
