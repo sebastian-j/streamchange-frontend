@@ -267,10 +267,10 @@ const GiveawayPage = (props) => {
             <AvatarSkeleton $size="tiny" />
           ) : (
             <AvatarFallback $size="tiny">
-              {(props.streamInfo.videoId || '?').charAt(0).toUpperCase()}
+              {(props.streamInfo?.streamData?.channel_name || props.streamInfo.videoId || '?').charAt(0).toUpperCase()}
             </AvatarFallback>
           )}
-          <ChannelName>{props.streamInfo.videoId}</ChannelName>
+          <ChannelName>{props.streamInfo?.streamData?.channel_name || props.streamInfo.videoId}</ChannelName>
           <StyledButton onClick={leaveStream}>
             <span>
               <FormattedMessage {...messages.leaveStreamBtn} />
