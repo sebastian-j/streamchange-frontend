@@ -110,7 +110,9 @@ const MenuIcon = () => (
 
 const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(() =>
+    sessionStorage.getItem('gv-avatarUrl')
+  );
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -264,10 +266,6 @@ const GiveawayPage = (props) => {
       ? JSON.parse(savedStreamData)
       : null;
     const storedAvatar = sessionStorage.getItem('gv-avatarUrl');
-
-    if (storedAvatar) {
-      setAvatarUrl(storedAvatar);
-    }
 
     if (channel) {
       const streamProps = {
