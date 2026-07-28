@@ -301,7 +301,7 @@ export class WinnerView extends React.Component {
         this.fetchAvatar(user);
       });
     this.getMessages();
-    this.telemetry();
+    // this.telemetry();
     this.setState({ interval: setInterval(this.getMessages.bind(this), 3000) });
   }
 
