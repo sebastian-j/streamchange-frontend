@@ -66,33 +66,37 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     How do the raffle methods work?
   </button>
   <div
-    class="sc-gsMGyr jxmkhD"
+    class="sc-ipUpyX fEPCjK"
   >
-    <label
-      class="sc-dkHxwO cuuTAs"
-      for="number-display"
+    <div
+      class="sc-gsMGyr jxmkhD"
     >
-      Animation duration (seconds)
-    </label>
-    <button
-      aria-label="Decrease by one"
-      class="sc-hLllbt iepMqS"
-      type="button"
-    >
-      -
-    </button>
-    <input
-      class="sc-eDgbZQ cBvtlC"
-      id="number-display"
-      value="7"
-    />
-    <button
-      aria-label="Increase by one"
-      class="sc-hLllbt eKnUty"
-      type="button"
-    >
-      +
-    </button>
+      <label
+        class="sc-dkHxwO cuuTAs"
+        for="number-display"
+      >
+        Animation duration (seconds)
+      </label>
+      <button
+        aria-label="Decrease by one"
+        class="sc-hLllbt iepMqS"
+        type="button"
+      >
+        -
+      </button>
+      <input
+        class="sc-eDgbZQ cBvtlC"
+        id="number-display"
+        value="7"
+      />
+      <button
+        aria-label="Increase by one"
+        class="sc-hLllbt eKnUty"
+        type="button"
+      >
+        +
+      </button>
+    </div>
   </div>
   <button
     class="sc-kDLlSG fJZvhu"

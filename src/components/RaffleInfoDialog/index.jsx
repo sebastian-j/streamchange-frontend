@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { FormattedMessage, useIntl } from 'react-intl';
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
@@ -71,10 +72,10 @@ const StyledTabs = styled(Tabs)`
 
 const AccentBar = styled.span`
   background: ${(props) => props.theme.color};
-  display: inline-block;
+  display: block;
   height: 3px;
   margin-top: 6px;
-  width: 351px;
+  width: 100%;
 `;
 
 const TriggerButton = styled(Button)`
