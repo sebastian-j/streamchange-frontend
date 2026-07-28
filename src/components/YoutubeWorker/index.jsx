@@ -218,11 +218,7 @@ const YoutubeWorker = (props) => {
       ) : (
         <ThreeSections>
           <UserList platform={props.platform} />
-          <GiveawayRules
-            apiKey={props.apiKey}
-            channel={props.channel}
-            platform={props.platform}
-          />
+          <GiveawayRules apiKey={props.apiKey} />
           <ChatView channel={props.channel} platform={props.platform} />
         </ThreeSections>
       )}
