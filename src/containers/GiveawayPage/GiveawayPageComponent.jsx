@@ -30,6 +30,10 @@ const PageContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  @media (orientation: portrait) {
+    height: auto;
+    overflow-y: auto;
+  }
 `;
 
 const TopBar = styled.div`
