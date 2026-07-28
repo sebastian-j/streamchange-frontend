@@ -6,7 +6,10 @@ export function deleteQueueItem(channelId) {
   const code = localStorage.getItem('queue-widget-code');
   let str = `${API_URL}/v4/queue?key=${code}`;
   if (channelId) str += `&channelId=${channelId}`;
-  axios.delete(str).then(() => {});
+  axios
+    .delete(str)
+    .then(() => {})
+    .catch(() => {});
 }
 
 export function postQueueItem(item) {

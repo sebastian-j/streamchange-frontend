@@ -3,7 +3,7 @@
 exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
 <div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-kDLlSG exnWLW css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-jqMYKt crLagN css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -45,37 +45,61 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
       </svg>
     </div>
   </div>
-  <div
-    class="sc-iBIXdp gtOfsA"
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-pilFg WMNjw css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="button"
   >
-    <label
-      class="sc-ftDObM dkqHAJ"
-      for="number-display"
+    <span
+      class="MuiButton-icon MuiButton-startIcon css-t70kls-MuiButton-startIcon"
     >
-      Animation duration (seconds)
-    </label>
-    <button
-      aria-label="Decrease by one"
-      class="sc-pilFg cGmQws"
-      type="button"
+      <svg
+        class="sc-jTkVfb ajzfk"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+        />
+      </svg>
+    </span>
+    How do the raffle methods work?
+  </button>
+  <div
+    class="sc-ipUpyX fEPCjK"
+  >
+    <div
+      class="sc-gsMGyr jxmkhD"
     >
-      -
-    </button>
-    <input
-      class="sc-jqMYKt iHrWmN"
-      id="number-display"
-      value="7"
-    />
-    <button
-      aria-label="Increase by one"
-      class="sc-pilFg bKBZTE"
-      type="button"
-    >
-      +
-    </button>
+      <label
+        class="sc-dkHxwO cuuTAs"
+        for="number-display"
+      >
+        Animation duration (seconds)
+      </label>
+      <button
+        aria-label="Decrease by one"
+        class="sc-hLllbt iepMqS"
+        type="button"
+      >
+        -
+      </button>
+      <input
+        class="sc-eDgbZQ cBvtlC"
+        id="number-display"
+        value="7"
+      />
+      <button
+        aria-label="Increase by one"
+        class="sc-hLllbt eKnUty"
+        type="button"
+      >
+        +
+      </button>
+    </div>
   </div>
   <button
-    class="sc-ipUpyX cDeJwo"
+    class="sc-kDLlSG fJZvhu"
     type="button"
   >
     Roll it!

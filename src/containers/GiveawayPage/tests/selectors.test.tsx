@@ -8,7 +8,6 @@ describe('GiveawayPage selectors', () => {
     const globalState = {
       stream: {
         ownerId: '',
-        thumbnailUrl: '',
         title: '',
         videoId: '',
       },
@@ -28,7 +27,6 @@ describe('GiveawayPage selectors', () => {
     const infoSelector = makeSelectStreamInfo();
     const stream = {
       ownerId: '',
-      thumbnailUrl: '',
       title: '',
       videoId: '',
     };

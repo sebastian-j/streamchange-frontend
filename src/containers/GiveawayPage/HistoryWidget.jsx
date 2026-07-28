@@ -6,14 +6,18 @@ import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
 import db from '../../components/YoutubeWorker/db';
+import { AvatarFallback } from '../../components/AvatarFallback';
 
 const StyledLink = styled(NavLink)`
+  align-items: center;
   border: none;
-  border-radius: 6px;
   color: ${(props) => props.theme.buttonTextColor};
+  display: inline-flex;
   font-size: 1.05rem;
-  height: 70%;
-  padding: 5px 8px;
+  gap: 6px;
+  height: 34px;
+  justify-content: center;
+  padding: 0 10px;
   position: relative;
   margin: 0 15px 0 0;
   text-decoration: none;
@@ -42,12 +46,11 @@ const StyledLink = styled(NavLink)`
     margin: auto;
   }
   .border-initial {
-    border-radius: 6px;
     border: 1px solid;
     opacity: 0.2;
   }
   @media (orientation: portrait) {
-    line-height: 3em;
+    height: 48px;
   }
 `;
 
@@ -113,7 +116,13 @@ const HistoryWidget = () => {
               {winners.map((item) => (
                 <tr key={item.createdAt}>
                   <Td>
-                    <img src={item.imageUrl} alt="Logo" width="32px" />
+                    {item.imageUrl ? (
+                      <img src={item.imageUrl} alt="Logo" width="32px" />
+                    ) : (
+                      <AvatarFallback $userColor={item.color} $size="tiny">
+                        {item.displayName.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    )}
                   </Td>
                   <Td>{item.displayName}</Td>
                   <Td>{item.prize}</Td>
@@ -127,7 +136,7 @@ const HistoryWidget = () => {
       <StyledLink onMouseEnter={getHistory} to="/giveaway-history">
         <span className="border border-initial" />
         <svg className="border border-hover" fill="none">
-          <rect width="100%" height="100%" rx="6px" pathLength="1" />
+          <rect width="100%" height="100%" pathLength="1" />
         </svg>
         <FormattedMessage {...messages.historyLink} />
         {warning && (

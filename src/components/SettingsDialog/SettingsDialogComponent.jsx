@@ -41,6 +41,7 @@ const SettingsDialog = (props) => {
 
   const closeDialog = () => {
     setIsOpen(false);
+    if (props.onClose) props.onClose();
   };
 
   const changeThemeColor = (value) => {
@@ -85,7 +86,7 @@ const SettingsDialog = (props) => {
         </ToolbarButton>
       </Tooltip>
       <Dialog
-        open={isOpen}
+        open={isOpen || Boolean(props.open)}
         onClose={closeDialog}
         disableRestoreFocus
         aria-labelledby="form-dialog-title"
@@ -174,7 +175,9 @@ const SettingsDialog = (props) => {
 };
 
 SettingsDialog.propTypes = {
+  onClose: PropTypes.func,
   onColorChange: PropTypes.func,
+  open: PropTypes.bool,
   themeColor: PropTypes.string,
 };
 

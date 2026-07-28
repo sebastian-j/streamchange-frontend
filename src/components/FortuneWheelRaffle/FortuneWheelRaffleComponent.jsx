@@ -250,16 +250,20 @@ const FortuneWheelRaffle = (props) => {
     source.start();
   };
 
-  const closeImmediately = () => {
-    props.onClose();
-    clearTimeout(timerRef.current);
-    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
-  };
-
   const confirmWinner = () => {
     if (winner) {
       props.onWin(winner.id);
     }
+  };
+
+  const closeImmediately = () => {
+    if (finished && winner !== null) {
+      confirmWinner();
+      return;
+    }
+    props.onClose();
+    clearTimeout(timerRef.current);
+    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
   };
 
   // segment geometry and fitted labels, computed once per user sample
@@ -470,23 +474,26 @@ const FortuneWheelRaffle = (props) => {
           </div>
           <div className="fwheel-needle" />
         </div>
-        {finished && winner !== null && (
-          <div className="fwheel-winner">
-            <span
-              className="fwheel-winner-name"
-              style={winner.color ? { color: winner.color } : undefined}
-            >
-              {winner.title}
-            </span>
-            <button
-              className="fwheel-close-btn"
-              onClick={confirmWinner}
-              type="button"
-            >
-              <FormattedMessage {...messages.continueBtn} />
-            </button>
-          </div>
-        )}
+        <div
+          className={`fwheel-winner${
+            finished && winner !== null ? ' fwheel-winner--visible' : ''
+          }`}
+        >
+          <span
+            className="fwheel-winner-name"
+            style={winner?.color ? { color: winner.color } : undefined}
+          >
+            {winner ? winner.title : ' '}
+          </span>
+          <button
+            className="fwheel-close-btn"
+            onClick={confirmWinner}
+            tabIndex={finished && winner !== null ? 0 : -1}
+            type="button"
+          >
+            <FormattedMessage {...messages.continueBtn} />
+          </button>
+        </div>
       </div>
     </div>
   );

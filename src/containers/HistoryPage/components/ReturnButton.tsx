@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const ReturnButton = styled(NavLink)`
-  display: block;
+  align-items: center;
   color: ${(props) => props.theme.staticTextColor};
-  flex-grow: 1;
-  line-height: 48px;
-  min-height: 48px;
+  display: inline-flex;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 0.95rem;
+  gap: 8px;
+  padding: 10px 18px;
   text-decoration: none;
-  & span {
-    margin-left: 24px;
-  }
+  transition: background-color 120ms ease-out;
   &:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background-color: ${(props) => props.theme.iconButtonBackground};
   }
 `;

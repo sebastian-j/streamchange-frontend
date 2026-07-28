@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
 import { getSafeColor } from '../../utils/colors';
+import { AvatarFallback, AvatarSkeleton } from '../AvatarFallback';
 
 import messages from './messages';
 import db from '../YoutubeWorker/db';
@@ -57,45 +58,6 @@ const WinnerHeading = styled.div`
     flex-wrap: wrap;
     img {
       height: 22px;
-    }
-  }
-`;
-
-const AvatarFallback = styled.div`
-  align-items: center;
-  background: ${(props) => props.theme.iconButtonBackground};
-  border-radius: 50%;
-  color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
-  display: flex;
-  flex-shrink: 0;
-  font-size: 32px;
-  font-weight: 700;
-  height: 70px;
-  justify-content: center;
-  user-select: none;
-  width: 70px;
-`;
-
-const AvatarSkeleton = styled.div`
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.theme.iconButtonBackground} 0%,
-    ${(props) => props.theme.panelBackground} 50%,
-    ${(props) => props.theme.iconButtonBackground} 100%
-  );
-  background-size: 200% 100%;
-  border-radius: 50%;
-  flex-shrink: 0;
-  height: 70px;
-  width: 70px;
-  animation: avatar-skeleton-shimmer 1.4s ease-in-out infinite;
-
-  @keyframes avatar-skeleton-shimmer {
-    0% {
-      background-position: 100% 0;
-    }
-    100% {
-      background-position: -100% 0;
     }
   }
 `;
@@ -276,6 +238,7 @@ export class WinnerView extends React.Component {
       message: this.state.user.message,
       prize: this.state.prize,
       platform: this.state.user.platform,
+      color: this.state.user.color,
       createdAt: d.toISOString(),
     };
     if (localStorage.getItem('gv-deleteWinner') === 'true') {
@@ -430,9 +393,9 @@ export class WinnerView extends React.Component {
           {this.state.avatarUrl ? (
             <img alt={this.state.user.title} src={this.state.avatarUrl} />
           ) : this.state.avatarLoading ? (
-            <AvatarSkeleton aria-hidden="true" />
+            <AvatarSkeleton $size="large" aria-hidden="true" />
           ) : (
-            <AvatarFallback $userColor={this.state.user.color}>
+            <AvatarFallback $userColor={this.state.user.color} $size="large">
               {this.state.user.title.charAt(0).toUpperCase()}
             </AvatarFallback>
           )}
@@ -485,6 +448,7 @@ export class WinnerView extends React.Component {
           )}
         </FormattedMessage>
         <Tooltip
+          disableInteractive
           title={
             <HintParagraph>
               <FormattedMessage {...messages.replayBtnTooltip} />

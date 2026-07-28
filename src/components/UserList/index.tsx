@@ -18,7 +18,7 @@ import { SkipListLink } from './components/SkipListLink';
 import { StyledButton } from './components/StyledButton';
 import StyledTextField from '../StyledTextField';
 import { ThemedSvg } from './components/ThemedSvg';
-import UserItem from './userItem';
+import VirtualUserList from './components/VirtualUserList';
 import { UserListPanel } from '../Panel/UserListPanel';
 import PanelTitle from '../Panel/PanelTitle';
 import { makeSelectUserArray } from './selectors';
@@ -45,6 +45,49 @@ interface Props {
   userArray: Array<User>;
 }
 
+const filterUsers = (
+  userArray: User[],
+  searchQuery: string,
+  giveawayReq: number,
+  filters: FilteringOptions
+): User[] => {
+  let ret = userArray;
+  if (searchQuery.length > 0 && searchQuery.length < 140) {
+    const query = searchQuery.toLowerCase();
+    ret = ret.filter((item) => item.title.toLowerCase().includes(query));
+  }
+  if (giveawayReq === 1) {
+    ret = ret.filter((user) => user.isSubscriber !== false);
+  }
+  if (!Object.values(filters).some((x) => x)) {
+    return ret;
+  }
+  if (filters.participating && !filters.notParticipating) {
+    ret = ret.filter((user) => user.isEligible);
+  } else if (!filters.participating && filters.notParticipating) {
+    ret = ret.filter((user) => !user.isEligible);
+  }
+  if (
+    filters.moderators ||
+    filters.regulars ||
+    filters.subscribers ||
+    filters.vip
+  ) {
+    ret = ret.filter(
+      (user) =>
+        (filters.moderators && user.isModerator) ||
+        (filters.subscribers && user.isSubscriber) ||
+        (filters.vip && user.isVip) ||
+        (filters.regulars &&
+          !user.isModerator &&
+          !user.isSubscriber &&
+          !user.isVip &&
+          !user.isStreamer)
+    );
+  }
+  return ret;
+};
+
 const UserList = (props: Props) => {
   useInjectReducer({ key: 'userList', reducer });
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
@@ -58,8 +101,6 @@ const UserList = (props: Props) => {
     participating: false,
     notParticipating: false,
   });
-  let selectedCount = 0;
-  let allCount = 0;
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,45 +124,14 @@ const UserList = (props: Props) => {
     setSearchQuery(value);
   };
 
-  const isFiltering = () => Object.values(filters).some((x) => x);
-
-  const getUsers = (): Array<User> => {
-    let ret: Array<User> = props.userArray;
-    if (searchQuery.length > 0 && searchQuery.length < 140) {
-      const query = searchQuery.toLowerCase();
-      ret = ret.filter((item) => item.title.toLowerCase().includes(query));
-    }
-    if (props.giveawayReq === 1)
-      ret = ret.filter((user) => user.isSubscriber !== false);
-    if (isFiltering()) {
-      if (filters.participating && !filters.notParticipating) {
-        ret = ret.filter((user) => user.isEligible);
-      } else if (!filters.participating && filters.notParticipating) {
-        ret = ret.filter((user) => !user.isEligible);
-      }
-      if (
-        filters.moderators ||
-        filters.regulars ||
-        filters.subscribers ||
-        filters.vip
-      ) {
-        ret = ret.filter(
-          (user) =>
-            (filters.moderators && user.isModerator) ||
-            (filters.subscribers && user.isSubscriber) ||
-            (filters.vip && user.isVip) ||
-            (filters.regulars &&
-              !user.isModerator &&
-              !user.isSubscriber &&
-              !user.isVip &&
-              !user.isStreamer)
-        );
-      }
-    }
-    selectedCount = ret.filter((item) => item.isEligible).length;
-    allCount = ret.length;
-    return ret;
-  };
+  const filteredUsers = filterUsers(
+    props.userArray,
+    searchQuery,
+    props.giveawayReq,
+    filters
+  );
+  const selectedCount = filteredUsers.filter((item) => item.isEligible).length;
+  const allCount = filteredUsers.length;
 
   useEffect(() => {
     if (props.userArray.length === 0) {
@@ -367,20 +377,10 @@ const UserList = (props: Props) => {
       <SkipListLink href="#purge-user-list-btn">
         <FormattedMessage {...messages.skipListLinkText} />
       </SkipListLink>
-      <ul>
-        {getUsers().map((item) => (
-          <UserItem
-            key={item.id}
-            channelId={item.id}
-            color={item.color}
-            platform={item.platform}
-            title={item.title}
-            badges={item.badges}
-            isEligible={item.isEligible}
-            handleToggleUser={props.toggleEligibility}
-          />
-        ))}
-      </ul>
+      <VirtualUserList
+        users={filteredUsers}
+        onToggleEligibility={props.toggleEligibility}
+      />
       <StyledButton
         id="purge-user-list-btn"
         onClick={props.purgeList}

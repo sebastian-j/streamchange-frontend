@@ -13,9 +13,17 @@ import StyledTextField from '../../components/StyledTextField';
 import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
 import HistoryMenu from './HistoryMenu';
 import HistoryTable from './HistoryTable';
+import { ContentPanel } from './components/ContentPanel';
 import { InformationText } from './components/InformationText';
+import { LoadingState } from './components/LoadingState';
 import { PageHeader } from './components/PageHeader';
+import { PageIndicator } from './components/PageIndicator';
+import { PageSubtitle } from './components/PageSubtitle';
+import { PageTitle } from './components/PageTitle';
 import { PageWrapper } from './components/PageWrapper';
+import { PaginationControls } from './components/PaginationControls';
+import { PerPageSelectWrapper } from './components/PerPageSelectWrapper';
+import { ResultsSummary } from './components/ResultsSummary';
 import { ReturnButton } from './components/ReturnButton';
 import { TableFooter } from './components/TableFooter';
 import { HistoryItem } from './types';
@@ -25,6 +33,7 @@ const HistoryPage = () => {
   const [error, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [items, setItems] = useState<HistoryItem[]>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [maxResults, setMaxResults] = useState<number>(20);
   const [page, setPage] = useState<number>(0);
@@ -60,6 +69,7 @@ const HistoryPage = () => {
         setIsLoaded(true);
         setError(false);
         setItems(paged);
+        setTotalCount(sorted.length);
         setIsLastPage(firstResult + maxResults >= sorted.length);
       })
       .catch(() => {
@@ -75,24 +85,19 @@ const HistoryPage = () => {
   };
 
   const nextPage = () => {
-    setPage((prevState) => prevState + 1);
+    if (!isLastPage) {
+      setPage((prevState) => prevState + 1);
+    }
   };
 
   useEffect(() => {
-    getHistory();
-  }, [maxResults]);
+    setPage(0);
+  }, [searchQuery, maxResults, sort]);
+
   useEffect(() => {
     getHistory();
-  }, [page]);
-  useEffect(() => {
-    getHistory();
-  }, [searchQuery]);
-  useEffect(() => {
-    getHistory();
-  }, [sort]);
-  useEffect(() => {
-    getHistory();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, maxResults, searchQuery, sort]);
 
   if (error) {
     return (
@@ -111,21 +116,17 @@ const HistoryPage = () => {
           <title>{intl.formatMessage({ ...messages.pageTitle })}</title>
         </Helmet>
         <LinearProgress />
-        <div
-          style={{
-            fontSize: '2vw',
-            position: 'absolute',
-            left: '55%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-          }}
-        >
+        <LoadingState>
           <FormattedMessage {...messages.infoLoading} />
-        </div>
+        </LoadingState>
       </PageWrapper>
     );
   }
+
+  const totalPages = Math.max(1, Math.ceil(totalCount / maxResults));
+  const rangeStart = totalCount === 0 ? 0 : page * maxResults + 1;
+  const rangeEnd = totalCount === 0 ? 0 : rangeStart + items.length - 1;
+
   return (
     <PageWrapper>
       <Helmet htmlAttributes={{ lang: intl.locale }}>
@@ -133,105 +134,136 @@ const HistoryPage = () => {
       </Helmet>
       <PageHeader>
         <ReturnButton to="/giveaway">
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-            <span>
-              <FormattedMessage {...messages.returnButton} />
-            </span>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+          </svg>
+          <span>
+            <FormattedMessage {...messages.returnButton} />
+          </span>
         </ReturnButton>
         <HistoryMenu onClear={getHistory} />
       </PageHeader>
-      <StyledTextField
-        id="search"
-        name="search"
-        label={intl.formatMessage({ ...messages.searchLabel })}
-        value={searchQuery}
-        variant="standard"
-        onChange={(event) => setSearchQuery(event.target.value)}
-        type="text"
-        margin="normal"
-        fullWidth
-      />
-      {searchQuery.length > 0 && items.length === 0 && (
-        <InformationText>
-          <FormattedMessage {...messages.infoNoResults} />
-        </InformationText>
-      )}
-      {items.length > 0 && (
-        <HistoryTable
-          items={items}
-          sort={sort}
-          onSortChange={(value) => setSort(value)}
+      <PageTitle>
+        <FormattedMessage {...messages.pageTitle} />
+      </PageTitle>
+      <PageSubtitle>
+        <FormattedMessage {...messages.pageDescription} />
+      </PageSubtitle>
+      <ContentPanel>
+        <StyledTextField
+          id="search"
+          name="search"
+          label={intl.formatMessage({ ...messages.searchLabel })}
+          value={searchQuery}
+          variant="standard"
+          onChange={(event) => setSearchQuery(event.target.value)}
+          type="text"
+          margin="normal"
+          fullWidth
         />
-      )}
-      <TableFooter>
-        {!isLastPage && (
-          <IconButton
-            edge="end"
-            aria-label="Next page"
-            name="next"
-            onClick={nextPage}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
-              <path fill="none" d="M0 0h24v24H0V0z" />
-            </svg>
-          </IconButton>
+        {searchQuery.length > 0 && items.length === 0 && (
+          <InformationText>
+            <FormattedMessage {...messages.infoNoResults} />
+          </InformationText>
         )}
-        {page !== 0 && (
-          <IconButton
-            edge="end"
-            aria-label="Previous page"
-            name="prev"
-            onClick={prevPage}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
-              <path fill="none" d="M0 0h24v24H0V0z" />
-            </svg>
-          </IconButton>
+        {searchQuery.length === 0 && items.length === 0 && (
+          <InformationText>
+            <FormattedMessage {...messages.infoEmpty} />
+          </InformationText>
         )}
-        <StyledFormControl margin="normal">
-          <InputLabel htmlFor="maxResults">
-            <FormattedMessage {...messages.resultsPerPage} />
-          </InputLabel>
-          <Select
-            value={maxResults}
-            variant="standard"
-            onChange={(event) => {
-              setMaxResults(Number(event.target.value));
-            }}
-            inputProps={{
-              name: 'maxResults',
-              id: 'maxResults',
-            }}
-          >
-            <MenuItem value={10}>10</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={50}>50</MenuItem>
-            <MenuItem value={100}>100</MenuItem>
-          </Select>
-        </StyledFormControl>
-      </TableFooter>
+        {items.length > 0 && (
+          <>
+            <HistoryTable
+              items={items}
+              sort={sort}
+              onSortChange={(value) => setSort(value)}
+            />
+            <TableFooter>
+              <ResultsSummary>
+                <FormattedMessage
+                  {...messages.resultsSummary}
+                  values={{ from: rangeStart, to: rangeEnd, total: totalCount }}
+                />
+              </ResultsSummary>
+              <PaginationControls>
+                <IconButton
+                  edge="end"
+                  aria-label={intl.formatMessage({
+                    ...messages.prevPageLabel,
+                  })}
+                  name="prev"
+                  onClick={prevPage}
+                  disabled={page === 0}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                    <path fill="none" d="M0 0h24v24H0V0z" />
+                  </svg>
+                </IconButton>
+                <PageIndicator>
+                  <FormattedMessage
+                    {...messages.pageIndicator}
+                    values={{ page: page + 1, totalPages }}
+                  />
+                </PageIndicator>
+                <IconButton
+                  edge="end"
+                  aria-label={intl.formatMessage({
+                    ...messages.nextPageLabel,
+                  })}
+                  name="next"
+                  onClick={nextPage}
+                  disabled={isLastPage}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+                    <path fill="none" d="M0 0h24v24H0V0z" />
+                  </svg>
+                </IconButton>
+                <PerPageSelectWrapper>
+                  <StyledFormControl margin="normal">
+                    <InputLabel htmlFor="maxResults">
+                      <FormattedMessage {...messages.resultsPerPage} />
+                    </InputLabel>
+                    <Select
+                      value={maxResults}
+                      variant="standard"
+                      onChange={(event) => {
+                        setMaxResults(Number(event.target.value));
+                      }}
+                      inputProps={{
+                        name: 'maxResults',
+                        id: 'maxResults',
+                      }}
+                    >
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                      <MenuItem value={50}>50</MenuItem>
+                      <MenuItem value={100}>100</MenuItem>
+                    </Select>
+                  </StyledFormControl>
+                </PerPageSelectWrapper>
+              </PaginationControls>
+            </TableFooter>
+          </>
+        )}
+      </ContentPanel>
     </PageWrapper>
   );
 };

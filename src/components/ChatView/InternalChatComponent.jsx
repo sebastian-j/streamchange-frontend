@@ -7,31 +7,29 @@ import InternalChatMessage from './InternalChatMessage';
 import reducer from './reducer';
 
 const ItemScroller = styled.ol`
-  height: 92%;
+  flex: 1;
+  min-height: 0;
   list-style: none;
   overflow-anchor: none;
   overflow-y: scroll;
   padding-left: 0;
 `;
 
-const ScrollerEnd = styled.div`
-  clear: both;
-`;
-
 export const InternalChat = (props) => {
-  const messagesEndRef = useRef(null);
   const scrollerRef = useRef(null);
   const isFirstRender = useRef(true);
   useInjectReducer({ key: 'chat', reducer });
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToBottom = (behavior) => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    scroller.scrollTo({ top: scroller.scrollHeight, behavior });
   };
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
-      scrollToBottom();
+      scrollToBottom('auto');
       return;
     }
 
@@ -41,7 +39,7 @@ export const InternalChat = (props) => {
       scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < 100;
 
     if (isNearBottom) {
-      scrollToBottom();
+      scrollToBottom('smooth');
     }
   }, [props.messages]);
 
@@ -50,7 +48,6 @@ export const InternalChat = (props) => {
       {props.messages.map((message) => (
         <InternalChatMessage key={message.publishedAt} message={message} />
       ))}
-      <ScrollerEnd ref={messagesEndRef} />
     </ItemScroller>
   );
 };

@@ -2,7 +2,7 @@
 
 exports[`<YoutubeWorker /> > should match the snapshot 1`] = `
 <div
-  class="sc-bcHNtg dVbuPM"
+  class="sc-gLfMdy ioVdos"
 >
   <div
     data-testid="user-list"

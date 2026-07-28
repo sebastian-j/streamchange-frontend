@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import qs from 'qs';
 import { API_URL, PRIVILEGED_CHANNELS, WS_URL } from '../../config';
@@ -13,6 +14,7 @@ import { pushUser } from '../UserList/actions';
 import ChatView from '../ChatView';
 import GiveawayRules from '../GiveawayRules';
 import UserList from '../UserList';
+import MobileWorkerLayout from './MobileWorkerLayout';
 import SuperChat from './SuperChat';
 import db from './db';
 
@@ -20,16 +22,14 @@ const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: row;
-  height: 95vh;
-  @media (orientation: portrait) {
-    flex-direction: column;
-    height: auto;
-  }
+  flex: 1;
+  min-height: 0;
 `;
 
 const YoutubeWorker = (props) => {
   const dispatch = useDispatch();
   const [superChat, setSuperChat] = useState(null);
+  const isMobile = useMediaQuery('(orientation: portrait)');
 
   const checkPreWinner = (author) => {
     const config = {
@@ -209,10 +209,20 @@ const YoutubeWorker = (props) => {
   }, [props.channel, props.platform, dispatch]);
 
   return (
-    <ThreeSections>
-      <UserList platform={props.platform} />
-      <GiveawayRules apiKey={props.apiKey} />
-      <ChatView channel={props.channel} platform={props.platform} />
+    <>
+      {isMobile ? (
+        <MobileWorkerLayout
+          apiKey={props.apiKey}
+          channel={props.channel}
+          platform={props.platform}
+        />
+      ) : (
+        <ThreeSections>
+          <UserList platform={props.platform} />
+          <GiveawayRules apiKey={props.apiKey} />
+          <ChatView channel={props.channel} platform={props.platform} />
+        </ThreeSections>
+      )}
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}
@@ -220,7 +230,7 @@ const YoutubeWorker = (props) => {
           title={superChat.title}
         />
       )}
-    </ThreeSections>
+    </>
   );
 };
 

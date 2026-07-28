@@ -5,6 +5,7 @@ interface IHistoryItem {
   displayName: string;
   platform: string;
   imageUrl: string;
+  color?: string;
   message: string;
   prize: string;
 }

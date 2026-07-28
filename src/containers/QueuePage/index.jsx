@@ -17,14 +17,12 @@ import { API_KEY } from '../../config';
 const QueuePage = () => {
   const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
-  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [error, setError] = useState(null);
   const intl = useIntl();
 
   const leaveStream = () => {
     setVideoId('');
     setTitle('');
-    setThumbnailUrl('');
     sessionStorage.removeItem('gv-videoId');
     window.location.reload();
   };
@@ -43,7 +41,6 @@ const QueuePage = () => {
           const stream = res.data.items[0];
           setVideoId(vidId);
           setTitle(stream.snippet.title);
-          setThumbnailUrl(stream.snippet.thumbnails.medium.url);
           sessionStorage.setItem('gv-videoId', vidId);
         }
       })
@@ -55,9 +52,6 @@ const QueuePage = () => {
         } else {
           setVideoId(vidId);
           setTitle('Tytuł nieznany');
-          setThumbnailUrl(
-            'https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg'
-          );
           sessionStorage.setItem('gv-videoId', vidId);
         }
       });
@@ -76,7 +70,6 @@ const QueuePage = () => {
     } else if (videoLink === 'test') {
       setVideoId('test');
       setTitle('');
-      setThumbnailUrl('https://i.ytimg.com/vi/HwsGz6csNA0/maxresdefault.jpg');
     } else {
       setError('invalidUrl');
     }
@@ -106,7 +99,6 @@ const QueuePage = () => {
       </Helmet>
       <TopBar>
         <div>
-          <img alt="Thumbnail" src={thumbnailUrl} />
           <StreamTitle>{title}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <span>

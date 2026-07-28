@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import messages from './messages';
 import CSGORaffle from '../CSGORaffle';
@@ -12,6 +13,7 @@ import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import VerticalRaffle from '../VerticalRaffle';
 import SlotMachine from '../SlotMachine';
 import NumericInput from '../NumericInput';
+import RaffleInfoDialog from '../RaffleInfoDialog';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
 
 const StartButton = styled.button`
@@ -46,9 +48,20 @@ const StartButton = styled.button`
   }
 `;
 
+const AnimationDurationSlot = styled.div`
+  @media (orientation: portrait) {
+    margin-top: 20px;
+  }
+`;
+
 const RaffleWrapper = (props) => {
   const intl = useIntl();
+  const isMobile = useMediaQuery('(orientation: portrait)');
   const [noUsers, setNoUsers] = useState(false);
+
+  // Mobile only supports the vertical raffle, so the picker is hidden there
+  // and this overrides the stored (desktop) preference without touching it.
+  const effectiveAnimationType = isMobile ? 2 : props.animationType;
 
   const openDialog = () => {
     let eligibleUsers = props.userArray.filter(
@@ -81,32 +94,40 @@ const RaffleWrapper = (props) => {
 
   return (
     <div>
-      <StyledFormControl margin="normal">
-        <InputLabel id="animation-select">
-          <FormattedMessage {...messages.raffleType} />
-        </InputLabel>
-        <Select
-          onChange={(event) => props.changeAnimationType(event.target.value)}
-          value={props.animationType}
-          variant="standard"
-        >
-          {/* CS:GO case opening temporarily unavailable
-          <MenuItem value={0}>
-            <FormattedMessage {...messages.raffleTypeCS} />
-          </MenuItem>
-          */}
-          <MenuItem value={3}>
-            <FormattedMessage {...messages.raffleTypeSlots} />
-          </MenuItem>
-          <MenuItem value={2}>
-            <FormattedMessage {...messages.raffleTypeVertical} />
-          </MenuItem>
-          <MenuItem value={1}>
-            <FormattedMessage {...messages.raffleTypeWheel} />
-          </MenuItem>
-        </Select>
-      </StyledFormControl>
-      {props.animationType !== 3 && (
+      {!isMobile && (
+        <>
+          <StyledFormControl margin="normal">
+            <InputLabel id="animation-select">
+              <FormattedMessage {...messages.raffleType} />
+            </InputLabel>
+            <Select
+              onChange={(event) =>
+                props.changeAnimationType(event.target.value)
+              }
+              value={props.animationType}
+              variant="standard"
+            >
+              {/* CS:GO case opening temporarily unavailable
+              <MenuItem value={0}>
+                <FormattedMessage {...messages.raffleTypeCS} />
+              </MenuItem>
+              */}
+              <MenuItem value={3}>
+                <FormattedMessage {...messages.raffleTypeSlots} />
+              </MenuItem>
+              <MenuItem value={2}>
+                <FormattedMessage {...messages.raffleTypeVertical} />
+              </MenuItem>
+              <MenuItem value={1}>
+                <FormattedMessage {...messages.raffleTypeWheel} />
+              </MenuItem>
+            </Select>
+          </StyledFormControl>
+          <RaffleInfoDialog />
+        </>
+      )}
+      <AnimationDurationSlot>
+        {props.animationType !== 3 && (
         <NumericInput
           label={intl.formatMessage({ ...messages.animationDuration })}
           minValue={1}
@@ -115,6 +136,7 @@ const RaffleWrapper = (props) => {
           onChange={(ret) => props.changeAnimationDuration(Number(ret))}
         />
       )}
+      </AnimationDurationSlot>
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
         {noUsers ? (
           <FormattedMessage {...messages.noUserSelected} />
@@ -123,21 +145,21 @@ const RaffleWrapper = (props) => {
         )}
         <div className="btn-hover" />
       </StartButton>
-      {props.isOpen && props.animationType === 0 && (
+      {props.isOpen && effectiveAnimationType === 0 && (
         <CSGORaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}
         />
       )}
-      {props.isOpen && props.animationType === 1 && (
+      {props.isOpen && effectiveAnimationType === 1 && (
         <FortuneWheelRaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}
           onWin={winnerHandler}
         />
       )}
-      {props.isOpen && props.animationType === 2 && (
+      {props.isOpen && effectiveAnimationType === 2 && (
         <VerticalRaffle
           duration={props.animationDuration}
           onClose={props.closeRaffle}

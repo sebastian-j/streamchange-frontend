@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const TableFooter = styled.div`
+  align-items: center;
   display: flex;
-  flex-direction: row-reverse;
-  margin-top: 10px;
-  max-width: 200px;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 16px;
 `;
