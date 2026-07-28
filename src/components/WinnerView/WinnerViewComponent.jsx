@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
 import { getSafeColor } from '../../utils/colors';
-import { AvatarFallback } from '../AvatarFallback';
+import { AvatarFallback, AvatarSkeleton } from '../AvatarFallback';
 
 import messages from './messages';
 import db from '../YoutubeWorker/db';
@@ -62,29 +62,7 @@ const WinnerHeading = styled.div`
   }
 `;
 
-const AvatarSkeleton = styled.div`
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.theme.iconButtonBackground} 0%,
-    ${(props) => props.theme.panelBackground} 50%,
-    ${(props) => props.theme.iconButtonBackground} 100%
-  );
-  background-size: 200% 100%;
-  border-radius: 50%;
-  flex-shrink: 0;
-  height: 70px;
-  width: 70px;
-  animation: avatar-skeleton-shimmer 1.4s ease-in-out infinite;
 
-  @keyframes avatar-skeleton-shimmer {
-    0% {
-      background-position: 100% 0;
-    }
-    100% {
-      background-position: -100% 0;
-    }
-  }
-`;
 
 const WinnerTitle = styled.span`
   color: ${(props) => (props.$userColor ? getSafeColor(props.$userColor, props.theme.panelBackground) : props.theme.staticTextColor)};
@@ -417,7 +395,7 @@ export class WinnerView extends React.Component {
           {this.state.avatarUrl ? (
             <img alt={this.state.user.title} src={this.state.avatarUrl} />
           ) : this.state.avatarLoading ? (
-            <AvatarSkeleton aria-hidden="true" />
+            <AvatarSkeleton $size="large" aria-hidden="true" />
           ) : (
             <AvatarFallback $userColor={this.state.user.color} $size="large">
               {this.state.user.title.charAt(0).toUpperCase()}

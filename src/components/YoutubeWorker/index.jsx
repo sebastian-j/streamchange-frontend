@@ -20,7 +20,8 @@ const ThreeSections = styled.div`
   background-color: ${(props) => props.theme.bodyBackground};
   display: flex;
   flex-direction: row;
-  height: 95vh;
+  flex: 1;
+  min-height: 0;
   @media (orientation: portrait) {
     flex-direction: column;
     height: auto;
