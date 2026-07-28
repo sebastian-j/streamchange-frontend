@@ -21,6 +21,8 @@ const AdPlaceholder = styled.div`
   color: #7b7b7b;
   margin-top: auto;
   padding: 14px;
+  position: relative;
+  top: 14vh;
 `;
 
 const AdFrame = () => {

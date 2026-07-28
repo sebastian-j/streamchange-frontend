@@ -9,6 +9,8 @@ interface GiveawayRulesState {
   readonly preWinner: User | null;
   readonly prize: string;
   readonly requirement: number;
+  channel?: string;
+  platform?: string;
 }
 
 /* --- ACTIONS --- */

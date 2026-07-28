@@ -78,9 +78,8 @@ const GiveawayPage = (props) => {
     window.location.reload();
   };
 
-  const handleStartStream = async (channelName, platformName) => {
+  const handleStartStream = async (channelName, platformName, streamData) => {
     setError(null);
-
     try {
       const blacklistRes = await axios.get(
         `${BACKEND_URL}/api/check-blacklist`,
@@ -117,12 +116,14 @@ const GiveawayPage = (props) => {
               title: stream.snippet.title,
               videoId: channelName,
               platform: platformName,
+              streamData,
             };
             props.changeStreamProperties(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
             sessionStorage.setItem('gv-title', streamProps.title);
             sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
             sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
+            sessionStorage.setItem('gv-streamData', JSON.stringify(streamData));
           }
         })
         .catch((err) => {
@@ -138,6 +139,7 @@ const GiveawayPage = (props) => {
               title: 'Tytuł nieznany',
               videoId: channelName,
               platform: platformName,
+              streamData,
             };
             props.changeStreamProperties(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
@@ -147,12 +149,17 @@ const GiveawayPage = (props) => {
       const streamProps = {
         ownerId: channelName,
         thumbnailUrl:
+          streamData?.thumbnail_url ||
           'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg',
-        title: channelName,
+        title: streamData?.title || channelName,
         videoId: channelName,
         platform: platformName,
+        streamData: streamData,
       };
       props.changeStreamProperties(streamProps);
+      if (streamData) {
+        sessionStorage.setItem('gv-streamData', JSON.stringify(streamData));
+      }
     }
   };
 
@@ -167,6 +174,10 @@ const GiveawayPage = (props) => {
       sessionStorage.getItem('gv-thumbnailUrl') ||
       'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg';
     const storedOwnerId = sessionStorage.getItem('gv-ownerId') || channel;
+    const savedStreamData = sessionStorage.getItem('gv-streamData');
+    const parsedStreamData = savedStreamData
+      ? JSON.parse(savedStreamData)
+      : null;
 
     if (channel) {
       const streamProps = {
@@ -174,7 +185,8 @@ const GiveawayPage = (props) => {
         thumbnailUrl: storedThumbnail,
         title: storedTitle,
         videoId: channel,
-        platform: platform,
+        platform,
+        streamData: parsedStreamData,
       };
       changeStreamProperties(streamProps);
     }
@@ -198,7 +210,7 @@ const GiveawayPage = (props) => {
       <TopBar>
         <StreamInfo>
           <StreamImg alt="Thumbnail" src={props.streamInfo.thumbnailUrl} />
-          <StreamTitle>{props.streamInfo.title}</StreamTitle>
+          <StreamTitle>{props.streamInfo.videoId}</StreamTitle>
           <StyledButton onClick={leaveStream}>
             <span>
               <FormattedMessage {...messages.leaveStreamBtn} />
