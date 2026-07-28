@@ -128,14 +128,14 @@ const RaffleWrapper = (props) => {
       )}
       <AnimationDurationSlot>
         {props.animationType !== 3 && (
-        <NumericInput
-          label={intl.formatMessage({ ...messages.animationDuration })}
-          minValue={1}
-          maxValue={600}
-          value={props.animationDuration}
-          onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-        />
-      )}
+          <NumericInput
+            label={intl.formatMessage({ ...messages.animationDuration })}
+            minValue={1}
+            maxValue={600}
+            value={props.animationDuration}
+            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
+          />
+        )}
       </AnimationDurationSlot>
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
         {noUsers ? (
