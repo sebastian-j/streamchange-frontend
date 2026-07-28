@@ -307,9 +307,9 @@ const GiveawayPage = (props) => {
           {avatarUrl ? (
             <StreamAvatar alt="Profile" src={avatarUrl} />
           ) : avatarLoading ? (
-            <AvatarSkeleton $size="tiny" />
+            <AvatarSkeleton $size="small" />
           ) : (
-            <AvatarFallback $size="tiny">
+            <AvatarFallback $size="small">
               {(
                 props.streamInfo?.streamData?.channel_name ||
                 props.streamInfo.videoId ||

@@ -4,7 +4,7 @@ import { getSafeColor } from '../../utils/colors';
 export type Size = 'tiny' | 'small' | 'large';
 
 const DIMENSIONS: Record<Size, { diameter: string; fontSize: string }> = {
-  tiny: { diameter: '40px', fontSize: '14px' },
+  tiny: { diameter: '32px', fontSize: '14px' },
   small: { diameter: '40px', fontSize: '18px' },
   large: { diameter: '70px', fontSize: '32px' },
 };
