@@ -24,7 +24,6 @@ const WheelItem = styled.div`
       ${BreathingImg} 0.5s linear infinite,
       ${glow} 0.75s infinite alternate;
   }
-
   .symbolContainer img {
     transform: translateZ(0);
     backface-visibility: hidden;
