@@ -8,6 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
 import HistoryWidget from './HistoryWidget';
+import { purgeUsersTable } from '../../components/UserList/model';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import YoutubeWorker from '../../components/YoutubeWorker';
 import SettingsDialog from '../../components/SettingsDialog';
@@ -56,8 +57,9 @@ const GiveawayPage = (props) => {
   const [error, setError] = useState(null);
   const intl = useIntl();
 
-  const leaveStream = () => {
+  const leaveStream = async () => {
     props.clearUserList();
+    await purgeUsersTable();
 
     const streamProps = {
       ownerId: '',

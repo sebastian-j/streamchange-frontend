@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-export const InformationText = styled.div`
+export const PageSubtitle = styled.div`
   color: ${(props) => props.theme.secondaryTextColor};
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-size: 1.05rem;
-  margin: 4vh 0;
-  text-align: center;
+  font-size: 0.95rem;
+  margin: 0 0 16px;
 `;

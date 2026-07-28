@@ -1,22 +1,17 @@
 import styled from 'styled-components';
 
 export const Cell = styled.td`
-  border-bottom: 1px solid #5e5e5e;
-  border-spacing: 0;
-  border-collapse: collapse;
+  border-bottom: 1px solid ${(props) => `${props.theme.staticTextColor}1a`};
   color: ${(props) => props.theme.staticTextColor};
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  &.image {
-    max-width: 100px;
-  }
-  &.textLeft {
+  padding: 14px 20px 14px 12px;
+  text-align: left;
+  vertical-align: middle;
+  &.identity {
     font-size: 1rem;
-    padding: 14px 30px 14px 16px;
-    text-align: left;
+    min-width: 220px;
   }
   &.text {
     font-size: 0.875rem;
-    padding: 14px 30px 14px 16px;
-    text-align: left;
   }
 `;

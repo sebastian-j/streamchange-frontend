@@ -122,16 +122,20 @@ const VerticalRaffle = (props) => {
     source.start();
   };
 
-  const closeImmediately = () => {
-    props.onClose();
-    clearTimeout(timerRef.current);
-    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
-  };
-
   const confirmWinner = () => {
     if (winner) {
       props.onWin(winner.id);
     }
+  };
+
+  const closeImmediately = () => {
+    if (finished && winner !== null) {
+      confirmWinner();
+      return;
+    }
+    props.onClose();
+    clearTimeout(timerRef.current);
+    if (rafId.current !== null) cancelAnimationFrame(rafId.current);
   };
 
   useEffect(() => {
@@ -247,27 +251,30 @@ const VerticalRaffle = (props) => {
             ))}
           </div>
         </div>
-        {finished && winner !== null && (
-          <div className="vraffle-winner">
-            <span
-              className="vraffle-winner-name"
-              style={
-                winner.color
-                  ? { color: getSafeColor(winner.color, '#131b24') }
-                  : undefined
-              }
-            >
-              {winner.title}
-            </span>
-            <button
-              className="vraffle-close-btn"
-              onClick={confirmWinner}
-              type="button"
-            >
-              <FormattedMessage {...messages.continueBtn} />
-            </button>
-          </div>
-        )}
+        <div
+          className={`vraffle-winner${
+            finished && winner !== null ? ' vraffle-winner--visible' : ''
+          }`}
+        >
+          <span
+            className="vraffle-winner-name"
+            style={
+              winner?.color
+                ? { color: getSafeColor(winner.color, '#131b24') }
+                : undefined
+            }
+          >
+            {winner ? winner.title : ' '}
+          </span>
+          <button
+            className="vraffle-close-btn"
+            onClick={confirmWinner}
+            tabIndex={finished && winner !== null ? 0 : -1}
+            type="button"
+          >
+            <FormattedMessage {...messages.continueBtn} />
+          </button>
+        </div>
       </div>
     </div>
   );
