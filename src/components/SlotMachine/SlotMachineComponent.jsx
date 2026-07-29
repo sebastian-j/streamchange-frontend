@@ -18,7 +18,6 @@ import './winAnimation.css';
 import WheelItem from './WheelItem.tsx';
 import SymbolContainer from './rolling.tsx';
 import './leverpull.css';
-import './style.css';
 
 const imageFiles = [lemon, bell, cherry, clover, treasure, diamond, seven];
 const Container = styled.div`
@@ -64,18 +63,18 @@ const SlotSymbol = memo(({ item }) => {
         src={item.src}
         alt="symbol"
         style={{
-          width: '50%',
-          height: 'max(150px, 11vh)',
+          width: '18vw',
+          height: '13vh',
           display: 'flex',
           objectFit: 'contain',
-          margin: '0 auto',
+          margin: '1vh',
         }}
       />
     );
   }
 
   const u = item.user;
-  if (!u) return <div style={{ width: '100%', height: '150px' }} />;
+  if (!u) return <div style={{ width: '18vw', height: '14vh' }} />;
 
   const hasBadges = u.badges && Object.keys(u.badges).length > 0;
 
@@ -349,9 +348,9 @@ const SlotsRaffleComponent = (props) => {
   };
 
   const positions = [
-    { x: '-4vh', y: '13.5vh' },
-    { x: '22vh', y: '13.5vh' },
-    { x: '50vh', y: '13.5vh' },
+    { x: '-5.75vw', y: '15vh' },
+    { x: '9.6vw', y: '15vh' },
+    { x: '20.75vw', y: '15vh' },
   ];
 
   const containerRefs = useRef([]);
@@ -376,8 +375,8 @@ const SlotsRaffleComponent = (props) => {
           const style = window.getComputedStyle(el);
           const matrix = new DOMMatrix(style.transform);
           const translateY = matrix.m42;
-
-          if (translateY < -2250) {
+          const translateHeightPx = (window.innerHeight * 208) / 100;
+          if (translateY < -translateHeightPx) {
             const newSetA =
               reelIndex === 1 ? generateUserList() : generateLongList();
             next[reelIndex] = {
@@ -407,7 +406,8 @@ const SlotsRaffleComponent = (props) => {
 
     const initialStyle = window.getComputedStyle(container);
     const initialMatrix = new DOMMatrix(initialStyle.transform);
-    let lastTickIndex = Math.floor(Math.abs(initialMatrix.m42) / 150);
+    const itemHeightPx = (window.innerHeight * 14) / 100;
+    let lastTickIndex = Math.floor(Math.abs(initialMatrix.m42) / itemHeightPx);
 
     const trackRollingSound = () => {
       if (!containerRefs.current[0]) return;
@@ -415,8 +415,7 @@ const SlotsRaffleComponent = (props) => {
       const style = window.getComputedStyle(containerRefs.current[0]);
       const matrix = new DOMMatrix(style.transform);
       const translateY = Math.abs(matrix.m42);
-
-      const currentTickIndex = Math.floor(translateY / 150);
+      const currentTickIndex = Math.floor(translateY / itemHeightPx);
 
       if (currentTickIndex !== lastTickIndex) {
         if (isRolling) {
@@ -495,7 +494,7 @@ const SlotsRaffleComponent = (props) => {
               zIndex: 2,
               overflow: 'hidden',
               height: '25vh',
-              width: '25vh',
+              width: '18vw',
             }}
           >
             <SymbolContainer

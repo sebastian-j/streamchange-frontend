@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import messages from './messages';
 import reelPreview from './assets/reel.webp';
 import wheelPreview from './assets/wheel.webp';
+//import slotPreview from './assets/slots.webp';
 
 const METHODS = [
   {
@@ -28,6 +29,12 @@ const METHODS = [
     description: messages.wheelDescription,
     preview: wheelPreview,
   },
+  //   {
+  //   label: messages.tabSlots,
+  //   tagline: messages.slotsTagline,
+  //   description: messages.slotsDescription,
+  //   preview: slotsPreview,
+  // },
 ];
 
 // react-intl rich-text tags used inside the description messages.

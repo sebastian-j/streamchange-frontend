@@ -15,9 +15,9 @@ const WheelItem = styled.div`
   position: absolute;
 
   img {
-    height: max(150px, 11vh);
-    display: 'flex';
-    objectfit: 'contain';
+    height: 14vh;
+    display: flex;
+    objectfit: contain;
     margin: 0 auto;
     filter: drop-shadow(0px 0px 5px rgb(255, 255, 55));
     animation:
@@ -34,11 +34,11 @@ const WheelItem = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: 150px;
+    gap: 0.75vh;
+    width: 15.8vw;
+    height: 14vh;
     box-sizing: border-box;
-    padding: 0 10px;
+    padding: 0 7.5vh;
   }
 
   .vroller-badge {
@@ -49,16 +49,16 @@ const WheelItem = styled.div`
   }
 
   .vroller-badge-inner {
-    width: 32px;
-    height: 32px;
+    width: 1.8vw;
+    height: 3vh;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
   .vroller-badge-inner img,
   .vroller-badge-inner svg {
-    width: 20px !important;
-    height: 20px !important;
+    width: 1.8vw !important;
+    height: 1.85vh !important;
     filter: none !important;
     animation: none !important;
     object-fit: contain;
@@ -66,7 +66,7 @@ const WheelItem = styled.div`
   .vroller-nickname {
     display: inline-block;
     text-align: center;
-    font-size: 14px;
+    font-size: 2.4vh;
     font-weight: bold;
     word-break: break-word;
     white-space: nowrap;

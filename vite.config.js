@@ -4,6 +4,7 @@ import babel from '@rolldown/plugin-babel';
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/giveaway/',
   plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
   test: {
     globals: true,
@@ -15,6 +16,17 @@ export default defineConfig({
       reporter: ['text-summary', 'lcov', 'cobertura'],
       reportsDirectory: './coverage',
       reportOnFailure: true,
+    
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'giveaway-assets/js/[name]-[hash].js',
+        chunkFileNames: 'giveaway-assets/js/[name]-[hash].js',
+
+        assetFileNames: 'giveaway-assets/assets/[name]-[hash][extname]',
+      },
+    },
+},
 });
