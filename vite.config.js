@@ -16,7 +16,6 @@ export default defineConfig({
       reporter: ['text-summary', 'lcov', 'cobertura'],
       reportsDirectory: './coverage',
       reportOnFailure: true,
-    
     },
   },
   build: {
@@ -28,5 +27,5 @@ export default defineConfig({
         assetFileNames: 'giveaway-assets/assets/[name]-[hash][extname]',
       },
     },
-},
+  },
 });
