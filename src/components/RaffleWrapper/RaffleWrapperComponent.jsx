@@ -139,8 +139,9 @@ const RaffleWrapper = (props) => {
   );
 
   const toggle = (key, value, setValue) => {
-    localStorage.setItem(key, value ? 'off' : 'on');
-    setValue(!value);
+    const newValue = !value;
+    localStorage.setItem(key, newValue ? 'on' : 'off');
+    setValue(newValue);
   };
 
   // Mobile only supports the vertical raffle, so the picker is hidden there
