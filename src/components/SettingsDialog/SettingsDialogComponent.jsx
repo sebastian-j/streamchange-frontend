@@ -22,7 +22,7 @@ const SettingsDialog = (props) => {
   const intl = useIntl();
   const [isOpen, setIsOpen] = useState(false);
   const [themeColor, setThemeColor] = useState(
-    () => localStorage.getItem('themeColor') || '#0094ff'
+    () => props.themeColor || localStorage.getItem('themeColor') || '#0094ff'
   );
   const [saveCommands, setSaveCommands] = useState(
     () => localStorage.getItem('gv-saveCommands') === 'true'

@@ -101,7 +101,7 @@ const AdFrame = () => {
             </DialogContentText>
             <DialogContentText>
               <FormattedMessage {...messages.adDialogThirdLine} />
-              <Typography>Discord: Baf#5501</Typography>
+              <Typography component="span">Discord: Baf#5501</Typography>
               <ColoredLink href="https://www.facebook.com/BafYT/">
                 Facebook Baf
                 <svg

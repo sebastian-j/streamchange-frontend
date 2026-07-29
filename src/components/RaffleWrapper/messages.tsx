@@ -12,6 +12,14 @@ export default defineMessages({
     id: `${scope}.animationDuration`,
     defaultMessage: 'Animation duration (seconds)',
   },
+  toggleSound: {
+    id: `${scope}.toggleSound`,
+    defaultMessage: 'Animation sound',
+  },
+  toggleEffects: {
+    id: `${scope}.toggleEffects`,
+    defaultMessage: 'Special effects',
+  },
   noUserSelected: {
     id: `${scope}.noUserSelected`,
     defaultMessage: 'No user selected',

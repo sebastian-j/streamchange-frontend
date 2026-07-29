@@ -27,6 +27,8 @@ import {
   AvatarSkeleton,
 } from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
+import { changeColor } from '../../containers/StyleProvider/actions';
+import { getPlatformColor } from '../../theme';
 
 const PageContainer = styled.div`
   display: flex;
@@ -70,6 +72,7 @@ const StreamAvatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+  border: 2px solid ${(props) => getPlatformColor(props.$platform)};
 `;
 
 const ChannelName = styled.span`
@@ -164,6 +167,10 @@ const GiveawayPage = (props) => {
 
     localStorage.setItem('gv-channel', channelName);
     localStorage.setItem('gv-platform', platformName);
+
+    if (!localStorage.getItem('themeColor') && getPlatformColor(platformName)) {
+      dispatch(changeColor(getPlatformColor(platformName)));
+    }
 
     if (platformName === 'youtube') {
       axios
@@ -305,7 +312,11 @@ const GiveawayPage = (props) => {
       <TopBar>
         <StreamInfoBar>
           {avatarUrl ? (
-            <StreamAvatar alt="Profile" src={avatarUrl} />
+            <StreamAvatar
+              alt="Profile"
+              src={avatarUrl}
+              $platform={props.streamInfo.platform}
+            />
           ) : avatarLoading ? (
             <AvatarSkeleton $size="small" />
           ) : (

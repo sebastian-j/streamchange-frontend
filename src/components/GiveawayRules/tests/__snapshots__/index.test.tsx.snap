@@ -2,15 +2,15 @@
 
 exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
 <div
-  class="sc-gsMGyr htatgc"
+  class="sc-iBIXdp gwMvzn"
 >
   <h2
-    class="sc-dkHxwO hPCwfo"
+    class="sc-ftDObM iuShSd"
   >
     Giveaway rules
   </h2>
   <div
-    class="MuiFormControl-root MuiFormControl-marginNormal sc-eDgbZQ fCpQLC css-15nqhxc-MuiFormControl-root"
+    class="MuiFormControl-root MuiFormControl-marginNormal sc-jqMYKt crLagN css-15nqhxc-MuiFormControl-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -54,7 +54,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hLllbt cqcowI css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-pilFg lgSVq css-xanwcj-MuiFormControl-root-MuiTextField-root"
   >
     <label
       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-standard css-1ew92b2-MuiFormLabel-root-MuiInputLabel-root"
@@ -79,7 +79,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div
     aria-label="keyword"
-    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-hLllbt cqcowI css-xanwcj-MuiFormControl-root-MuiTextField-root"
+    class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth MuiTextField-root sc-pilFg lgSVq css-xanwcj-MuiFormControl-root-MuiTextField-root"
     data-mui-internal-clone-element="true"
     inputprops="[object Object]"
   >
@@ -106,7 +106,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
   </div>
   <div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal sc-eDgbZQ fCpQLC css-15nqhxc-MuiFormControl-root"
+      class="MuiFormControl-root MuiFormControl-marginNormal sc-jqMYKt crLagN css-15nqhxc-MuiFormControl-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-113d811-MuiFormLabel-root-MuiInputLabel-root"
@@ -169,35 +169,66 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       How do the raffle methods work?
     </button>
     <div
-      class="sc-dmsmPq iZYOat"
+      class="sc-dmsmPq gBBmHk"
     >
       <div
         class="sc-eoeTJ ccZOxH"
       >
         <label
-          class="sc-brmsbW jnGeCM"
+          class="sc-brmsbW kAFAtK"
           for="number-display"
         >
           Animation duration (seconds)
         </label>
         <button
           aria-label="Decrease by one"
-          class="sc-ksRfhj gTNbPm"
+          class="sc-ksRfhj enCRlj"
           type="button"
         >
           -
         </button>
         <input
-          class="sc-hBhkkI bEPDRa"
+          class="sc-hBhkkI iarcgL"
           id="number-display"
           value="7"
         />
         <button
           aria-label="Increase by one"
-          class="sc-ksRfhj lhGgfe"
+          class="sc-ksRfhj hGgUcf"
           type="button"
         >
           +
+        </button>
+      </div>
+      <div
+        class="sc-kgEcCx buPBKu"
+      >
+        <button
+          aria-label="Animation sound"
+          aria-pressed="true"
+          class="sc-fKMuZk itrHGY"
+          title="Animation sound"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+            />
+          </svg>
+        </button>
+        <button
+          aria-label="Special effects"
+          aria-pressed="true"
+          class="sc-fKMuZk itrHGY"
+          title="Special effects"
+          type="button"
+        >
+          <span
+            class="sc-bBQtQX czYcQe"
+          />
         </button>
       </div>
     </div>
@@ -211,7 +242,9 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       />
     </button>
   </div>
-  <div>
+  <div
+    class="sc-gLfMdy hbWZYw"
+  >
     streamchange.components.StreamInfo.LOS
   </div>
   <div
