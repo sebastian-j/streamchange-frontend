@@ -69,14 +69,18 @@ const ToggleGroup = styled.div`
 const ToggleButton = styled.button`
   align-items: center;
   background: ${({ $on, theme }) =>
-    $on ? `color-mix(in srgb, ${theme.color} 18%, transparent)` : 'transparent'};
+    $on
+      ? `color-mix(in srgb, ${theme.color} 18%, transparent)`
+      : 'transparent'};
   border: none;
   color: ${({ $on, theme }) => ($on ? theme.color : theme.secondaryTextColor)};
   cursor: pointer;
   display: flex;
   height: 100%;
   justify-content: center;
-  transition: color 0.35s ease, background-color 0.35s ease;
+  transition:
+    color 0.35s ease,
+    background-color 0.35s ease;
   width: 30px;
   & + & {
     border-left: 1px solid ${(props) => props.theme.secondaryTextColor};
@@ -87,7 +91,11 @@ const ToggleButton = styled.button`
     width: 18px;
   }
   &:hover {
-    background: color-mix(in srgb, ${(props) => props.theme.color} 12%, transparent);
+    background: color-mix(
+      in srgb,
+      ${(props) => props.theme.color} 12%,
+      transparent
+    );
   }
 `;
 
