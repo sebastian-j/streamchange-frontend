@@ -169,44 +169,44 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       How do the raffle methods work?
     </button>
     <div
-      class="sc-fnqnQZ hgsfKu"
+      class="sc-dmsmPq gBBmHk"
     >
       <div
         class="sc-eoeTJ ccZOxH"
       >
         <label
-          class="sc-pilFg dZuoGV"
+          class="sc-brmsbW kAFAtK"
           for="number-display"
         >
           Animation duration (seconds)
         </label>
         <button
           aria-label="Decrease by one"
-          class="sc-jqMYKt jpqHTx"
+          class="sc-ksRfhj enCRlj"
           type="button"
         >
           -
         </button>
         <input
-          class="sc-kDLlSG zaiNH"
+          class="sc-hBhkkI iarcgL"
           id="number-display"
           value="7"
         />
         <button
           aria-label="Increase by one"
-          class="sc-jqMYKt kQgsDV"
+          class="sc-ksRfhj hGgUcf"
           type="button"
         >
           +
         </button>
       </div>
       <div
-        class="sc-fFneKr gZYvaN"
+        class="sc-kgEcCx buPBKu"
       >
         <button
           aria-label="Animation sound"
           aria-pressed="true"
-          class="sc-bjvxhe fEWCdr"
+          class="sc-fKMuZk itrHGY"
           title="Animation sound"
           type="button"
         >
@@ -222,12 +222,12 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         <button
           aria-label="Special effects"
           aria-pressed="true"
-          class="sc-bjvxhe fEWCdr"
+          class="sc-fKMuZk itrHGY"
           title="Special effects"
           type="button"
         >
           <span
-            class="sc-idHmUl gtqCub"
+            class="sc-bBQtQX czYcQe"
           />
         </button>
       </div>
