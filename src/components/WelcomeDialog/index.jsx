@@ -2,6 +2,10 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from '@mui/material/styles';
 import { FormattedMessage, useIntl } from 'react-intl';
 import messages from './messages';
 import { CompatibilityInfo } from './components/CompatibilityInfo';
@@ -14,6 +18,8 @@ import { streamInfoPost } from '../StreamInfo/StreamInfoPost';
 
 const CHANNEL_URL_REGEX =
   /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
+
+const lightMuiTheme = createTheme({ palette: { mode: 'light' } });
 
 const parseChannelInput = (value) => {
   const trimmed = value.trim();
@@ -89,79 +95,81 @@ const WelcomeDialog = (props) => {
   if (isChrome || props.variant === 1) {
     return (
       <PhotoBackdrop>
-        <DialogWrapper>
-          <div className="dialog">
-            <div className="title">
-              <FormattedMessage {...messages.dialogTitle} />
-            </div>
-            <div className="content">
-              <TextField
-                autoFocus
-                margin="dense"
-                name="channel"
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-                label={intl.formatMessage({ ...messages.videoInputLabel })}
-                type="text"
-                value={text}
-                variant="standard"
-                fullWidth
-              />
-              <div className="text">
-                {isLinkInvalid && (
-                  <span
-                    style={{
-                      display: 'block',
-                      color: '#bd0013',
-                      marginTop: '10px',
-                    }}
-                  >
-                    <FormattedMessage {...messages.invalidChannelUrlError} />
-                  </span>
-                )}
-                {!isLinkInvalid && displayError && (
-                  <span
-                    style={{
-                      display: 'block',
-                      color: '#bd0013',
-                      marginTop: '10px',
-                    }}
-                  >
-                    {displayError === 'invalidUrl' && (
-                      <FormattedMessage {...messages.invalidUrlError} />
-                    )}
-                    {displayError === 'notStream' && (
-                      <FormattedMessage {...messages.notStreamError} />
-                    )}
-                    {displayError === 'notVideo' && (
-                      <FormattedMessage {...messages.notVideoError} />
-                    )}
-                    {displayError === 'quotaExceeded' && (
-                      <FormattedMessage {...messages.quotaExceededError} />
-                    )}
-                    {displayError &&
-                      displayError.startsWith('blacklisted:') && (
-                        <>
-                          <FormattedMessage {...messages.blacklistedError} />
-                          <br />
-                          {displayError.replace('blacklisted:', '')}
-                        </>
+        <MuiThemeProvider theme={lightMuiTheme}>
+          <DialogWrapper>
+            <div className="dialog">
+              <div className="title">
+                <FormattedMessage {...messages.dialogTitle} />
+              </div>
+              <div className="content">
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  name="channel"
+                  onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
+                  label={intl.formatMessage({ ...messages.videoInputLabel })}
+                  type="text"
+                  value={text}
+                  variant="standard"
+                  fullWidth
+                />
+                <div className="text">
+                  {isLinkInvalid && (
+                    <span
+                      style={{
+                        display: 'block',
+                        color: '#bd0013',
+                        marginTop: '10px',
+                      }}
+                    >
+                      <FormattedMessage {...messages.invalidChannelUrlError} />
+                    </span>
+                  )}
+                  {!isLinkInvalid && displayError && (
+                    <span
+                      style={{
+                        display: 'block',
+                        color: '#bd0013',
+                        marginTop: '10px',
+                      }}
+                    >
+                      {displayError === 'invalidUrl' && (
+                        <FormattedMessage {...messages.invalidUrlError} />
                       )}
-                  </span>
+                      {displayError === 'notStream' && (
+                        <FormattedMessage {...messages.notStreamError} />
+                      )}
+                      {displayError === 'notVideo' && (
+                        <FormattedMessage {...messages.notVideoError} />
+                      )}
+                      {displayError === 'quotaExceeded' && (
+                        <FormattedMessage {...messages.quotaExceededError} />
+                      )}
+                      {displayError &&
+                        displayError.startsWith('blacklisted:') && (
+                          <>
+                            <FormattedMessage {...messages.blacklistedError} />
+                            <br />
+                            {displayError.replace('blacklisted:', '')}
+                          </>
+                        )}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="actions">
+                {!isLoading && (
+                  <WavyButton
+                    onClick={handleConnect}
+                    text={intl.formatMessage({ ...messages.saveBtn })}
+                  />
                 )}
+                {isLoading && <CircularProgress />}
               </div>
             </div>
-            <div className="actions">
-              {!isLoading && (
-                <WavyButton
-                  onClick={handleConnect}
-                  text={intl.formatMessage({ ...messages.saveBtn })}
-                />
-              )}
-              {isLoading && <CircularProgress />}
-            </div>
-          </div>
-        </DialogWrapper>
+          </DialogWrapper>
+        </MuiThemeProvider>
         <CookieConsent />
       </PhotoBackdrop>
     );
