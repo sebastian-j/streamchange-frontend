@@ -47,6 +47,7 @@ const DialogWrapper = styled.div`
     }
 
     .title {
+      color: rgba(0, 0, 0, 0.87);
       font-size: 1.25rem;
       font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
       font-weight: 500;
