@@ -22,12 +22,15 @@
  *   the lowest one repeats for the rest of the spin.
  */
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { arc, pie } from 'd3-shape';
+import confetti from 'canvas-confetti';
 
 import messages from './messages';
 import { BADGE_ORDER, BADGE_SETS } from '../ChatView/badgeSets';
+import winSoundSrc from './assets/win.mp3';
 import tickSound1 from './assets/FortuneWheelSound1.mp3';
 import tickSound2 from './assets/FortuneWheelSound2.mp3';
 import tickSound3 from './assets/FortuneWheelSound3.mp3';
@@ -72,6 +75,183 @@ const segmentColor = (index, count) => {
   let i = index % SEGMENT_COLORS.length;
   if (index === count - 1 && i === 0) i = 3;
   return SEGMENT_COLORS[i];
+};
+
+// Marquee bulbs around the rim. They live in their own static overlay rather
+// than in the spinning svg - lights bolted to a turning wheel just smear.
+// Four phases chasing each other is what reads as "running" lights; one
+// global blink would just look like the whole thing flickering.
+const BULB_COUNT = 24;
+const BULB_PHASES = 4;
+const BULB_RING_RADIUS = RIM_RADIUS - 10;
+const BULB_SIZE = 7;
+const BULBS = Array.from({ length: BULB_COUNT }, (unused, index) => {
+  const angle = (index / BULB_COUNT) * 2 * Math.PI - Math.PI / 2;
+  return {
+    cx: Math.cos(angle) * BULB_RING_RADIUS,
+    cy: Math.sin(angle) * BULB_RING_RADIUS,
+    color: SEGMENT_COLORS[index % SEGMENT_COLORS.length].fill,
+    delay: `${(index % BULB_PHASES) * 0.14}s`,
+  };
+  // index 0 sits at 12 o'clock, right under the pointer - drop it
+}).filter((unused, index) => index !== 0);
+
+// same colors as the wheel segments, so the celebration reads as "this wheel
+// won" instead of a generic gold raffle burst
+const CONFETTI_COLORS = SEGMENT_COLORS.map((color) => color.fill);
+// side cannons fire this many volleys, each one weaker than the last
+const CONFETTI_VOLLEYS = [
+  { delay: 250, count: 110 },
+  { delay: 900, count: 85 },
+  { delay: 1600, count: 60 },
+];
+
+const FIREWORK_INTERVAL_MS = 340;
+const FIREWORK_DURATION_MS = 3200;
+
+const EMBER_INTERVAL_MS = 220;
+const EMBER_DURATION_MS = 4000;
+
+/**
+ * Full-screen celebration: a center cannon, volleys from the bottom corners,
+ * and shells bursting overhead for a few seconds after.
+ * Returns a stop function that cancels everything still in flight.
+ */
+const fireCelebration = () => {
+  const base = {
+    colors: CONFETTI_COLORS,
+    zIndex: 9999,
+    disableForReducedMotion: true,
+  };
+
+  confetti({
+    ...base,
+    particleCount: 190,
+    spread: 140,
+    startVelocity: 55,
+    scalar: 1.3,
+    origin: { x: 0.5, y: 0.65 },
+  });
+
+  const timers = CONFETTI_VOLLEYS.map(({ delay, count }) =>
+    setTimeout(() => {
+      confetti({
+        ...base,
+        particleCount: count,
+        angle: 60,
+        spread: 70,
+        startVelocity: 65,
+        scalar: 1.1,
+        origin: { x: 0, y: 0.8 },
+      });
+      confetti({
+        ...base,
+        particleCount: count,
+        angle: 120,
+        spread: 70,
+        startVelocity: 65,
+        scalar: 1.1,
+        origin: { x: 1, y: 0.8 },
+      });
+    }, delay)
+  );
+
+  // fireworks: a full 360 spread with heavy decay reads as a shell bursting,
+  // where the flat spread of the cannons above reads as confetti being thrown
+  const fireworksEnd = Date.now() + FIREWORK_DURATION_MS;
+  const fireworks = setInterval(() => {
+    if (Date.now() > fireworksEnd) {
+      clearInterval(fireworks);
+      return;
+    }
+    confetti({
+      ...base,
+      particleCount: 55,
+      spread: 360,
+      startVelocity: 26,
+      decay: 0.91,
+      gravity: 0.7,
+      ticks: 160,
+      scalar: 1.1,
+      shapes: ['star', 'circle'],
+      origin: { x: 0.12 + Math.random() * 0.76, y: 0.1 + Math.random() * 0.35 },
+    });
+  }, FIREWORK_INTERVAL_MS);
+
+  // embers: negative gravity turns confetti into sparks drifting up off the
+  // bottom edge. Quiet on its own, but it keeps the screen alive underneath
+  // the loud effects instead of letting it go dead between bursts
+  const embersEnd = Date.now() + EMBER_DURATION_MS;
+  const embers = setInterval(() => {
+    if (Date.now() > embersEnd) {
+      clearInterval(embers);
+      return;
+    }
+    confetti({
+      ...base,
+      particleCount: 3,
+      spread: 55,
+      startVelocity: 14,
+      gravity: -0.32,
+      decay: 0.96,
+      ticks: 260,
+      scalar: 0.7,
+      origin: { x: Math.random(), y: 1.05 },
+    });
+  }, EMBER_INTERVAL_MS);
+
+  return () => {
+    timers.forEach(clearTimeout);
+    clearInterval(fireworks);
+    clearInterval(embers);
+    confetti.reset();
+  };
+};
+
+// A brass fanfare synthesised on the fly, layered over the win sample so the
+// wheel gets its own trumpets without shipping another mp3.
+// Ascending arpeggio (G4 C5 E5 G5), the last note held: three short calls and
+// a landing, which is what makes a run of notes read as a fanfare.
+const FANFARE_NOTES = [
+  { freq: 392.0, at: 0, length: 0.16 },
+  { freq: 523.25, at: 0.14, length: 0.16 },
+  { freq: 659.25, at: 0.28, length: 0.16 },
+  { freq: 783.99, at: 0.42, length: 0.9 },
+];
+
+const playFanfare = (ctx, volume) => {
+  const start = ctx.currentTime + 0.05;
+  FANFARE_NOTES.forEach(({ freq, at, length }) => {
+    const t0 = start + at;
+    const gain = ctx.createGain();
+    // brass bite: fast attack, short decay to a sustain, then release
+    gain.gain.setValueAtTime(0, t0);
+    gain.gain.linearRampToValueAtTime(volume, t0 + 0.02);
+    gain.gain.linearRampToValueAtTime(volume * 0.75, t0 + 0.08);
+    gain.gain.setValueAtTime(volume * 0.75, t0 + length * 0.7);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + length);
+
+    // a lowpass opening with the note is what separates brass from a buzz
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.Q.value = 1;
+    filter.frequency.setValueAtTime(freq * 2, t0);
+    filter.frequency.linearRampToValueAtTime(freq * 6, t0 + 0.06);
+    filter.frequency.linearRampToValueAtTime(freq * 3, t0 + length);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    // two saws detuned against each other - one alone sounds synthetic
+    [-6, 6].forEach((detune) => {
+      const osc = ctx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = freq;
+      osc.detune.value = detune;
+      osc.connect(filter);
+      osc.start(t0);
+      osc.stop(t0 + length + 0.05);
+    });
+  });
 };
 
 const MIN_TICK_GAP_MS = 70;
@@ -234,10 +414,12 @@ const FortuneWheelRaffle = (props) => {
     };
   });
   const [finished, setFinished] = useState(false);
+  const won = finished && winner !== null;
   const timerRef = useRef(null);
   const movableRef = useRef(null);
   const audioCtx = useRef(null);
   const tickBuffers = useRef([]);
+  const winBuffer = useRef(null);
   const rafId = useRef(null);
 
   const playTick = (index) => {
@@ -250,6 +432,21 @@ const FortuneWheelRaffle = (props) => {
     source.start();
   };
 
+  const playWinSound = () => {
+    const ctx = audioCtx.current;
+    if (!ctx || ctx.state === 'closed') return;
+    playFanfare(ctx, 0.16);
+    const buffer = winBuffer.current;
+    if (!buffer) return;
+    const source = ctx.createBufferSource();
+    const gain = ctx.createGain();
+    gain.gain.value = 0.8;
+    source.buffer = buffer;
+    source.connect(gain);
+    gain.connect(ctx.destination);
+    source.start();
+  };
+
   const confirmWinner = () => {
     if (winner) {
       props.onWin(winner.id);
@@ -257,7 +454,7 @@ const FortuneWheelRaffle = (props) => {
   };
 
   const closeImmediately = () => {
-    if (finished && winner !== null) {
+    if (won) {
       confirmWinner();
       return;
     }
@@ -320,6 +517,13 @@ const FortuneWheelRaffle = (props) => {
       )
         .then((buffers) => {
           tickBuffers.current = buffers;
+        })
+        .catch(() => {});
+      fetch(winSoundSrc)
+        .then((response) => response.arrayBuffer())
+        .then((data) => ctx.decodeAudioData(data))
+        .then((buffer) => {
+          winBuffer.current = buffer;
         })
         .catch(() => {});
     }
@@ -388,6 +592,12 @@ const FortuneWheelRaffle = (props) => {
   }, [props.duration, users.length, rotation, segmentDeg]);
 
   useEffect(() => {
+    if (!won) return undefined;
+    playWinSound();
+    return fireCelebration();
+  }, [won]);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         closeImmediately();
@@ -397,105 +607,141 @@ const FortuneWheelRaffle = (props) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
+  // the dialog is portaled to <body> so its z-index can clear the confetti
+  // canvas without dragging the backdrop and rays up with it - see style.css
   return (
-    <div className="fwheel-root">
-      <button
-        aria-label="stop the wheel immediately"
-        className="fwheel-backdrop"
-        onClick={closeImmediately}
-        type="button"
-      />
-      <div className="fwheel-dialog">
-        <div className="fwheel-box">
-          <div className="fwheel-movable" ref={movableRef}>
-            <svg className="fwheel-svg" viewBox={VIEWBOX}>
-              <defs>
-                <radialGradient
-                  id="fwheel-hub-shine"
-                  cx="0.4"
-                  cy="0.35"
-                  r="0.9"
-                >
-                  <stop offset="0%" stopColor="#ffffff" />
-                  <stop offset="100%" stopColor="#d2d6db" />
-                </radialGradient>
-              </defs>
-              {segments.map((segment, index) => (
-                <g key={index}>
-                  <path
-                    d={segment.path}
-                    fill={segment.fill}
-                    stroke="#ffffff"
-                    strokeWidth={SEGMENT_STROKE}
-                  />
-                  <g
-                    transform={`rotate(${segment.labelRotate}) translate(${LABEL_RADIUS}, 0)`}
-                  >
-                    {segment.badges.map((badge, badgeIndex) => (
-                      <image
-                        key={badge.key}
-                        href={badge.href}
-                        x={
-                          segment.startX +
-                          badgeIndex * (segment.badgeSize + BADGE_GAP)
-                        }
-                        y={-segment.badgeSize / 2}
-                        width={segment.badgeSize}
-                        height={segment.badgeSize}
-                      />
-                    ))}
-                    <text
-                      className="fwheel-label"
-                      x={
-                        segment.startX + segment.badgesWidth + segment.width / 2
-                      }
-                      fontSize={segment.fontSize}
-                      fill={segment.user.color || segment.labelFill}
-                    >
-                      {segment.text}
-                    </text>
-                  </g>
-                </g>
-              ))}
-              <circle
-                r={RIM_RADIUS}
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth={RIM_WIDTH}
-              />
-              <circle
-                className="fwheel-hub"
-                r={HUB_RADIUS}
-                fill="url(#fwheel-hub-shine)"
-                stroke="#c3c8ce"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </div>
-          <div className="fwheel-needle" />
-        </div>
-        <div
-          className={`fwheel-winner${
-            finished && winner !== null ? ' fwheel-winner--visible' : ''
-          }`}
-        >
-          <span
-            className="fwheel-winner-name"
-            style={winner?.color ? { color: winner.color } : undefined}
-          >
-            {winner ? winner.title : ' '}
-          </span>
-          <button
-            className="fwheel-close-btn"
-            onClick={confirmWinner}
-            tabIndex={finished && winner !== null ? 0 : -1}
-            type="button"
-          >
-            <FormattedMessage {...messages.continueBtn} />
-          </button>
-        </div>
+    <>
+      <div className="fwheel-root">
+        <button
+          aria-label="stop the wheel immediately"
+          className="fwheel-backdrop"
+          onClick={closeImmediately}
+          type="button"
+        />
+        {won && (
+          <>
+            <div className="fwheel-rays" aria-hidden="true" />
+            <div className="fwheel-flash" aria-hidden="true" />
+          </>
+        )}
       </div>
-    </div>
+      {createPortal(
+        <div className="fwheel-dialog-portal">
+          <div className="fwheel-dialog">
+            <div className={`fwheel-box${won ? ' fwheel-box--win' : ''}`}>
+              <div className="fwheel-movable" ref={movableRef}>
+                <svg className="fwheel-svg" viewBox={VIEWBOX}>
+                  <defs>
+                    <radialGradient
+                      id="fwheel-hub-shine"
+                      cx="0.4"
+                      cy="0.35"
+                      r="0.9"
+                    >
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="100%" stopColor="#d2d6db" />
+                    </radialGradient>
+                  </defs>
+                  {segments.map((segment, index) => (
+                    <g key={index}>
+                      <path
+                        d={segment.path}
+                        fill={segment.fill}
+                        stroke="#ffffff"
+                        strokeWidth={SEGMENT_STROKE}
+                      />
+                      <g
+                        transform={`rotate(${segment.labelRotate}) translate(${LABEL_RADIUS}, 0)`}
+                      >
+                        {segment.badges.map((badge, badgeIndex) => (
+                          <image
+                            key={badge.key}
+                            href={badge.href}
+                            x={
+                              segment.startX +
+                              badgeIndex * (segment.badgeSize + BADGE_GAP)
+                            }
+                            y={-segment.badgeSize / 2}
+                            width={segment.badgeSize}
+                            height={segment.badgeSize}
+                          />
+                        ))}
+                        <text
+                          className="fwheel-label"
+                          x={
+                            segment.startX +
+                            segment.badgesWidth +
+                            segment.width / 2
+                          }
+                          fontSize={segment.fontSize}
+                          fill={segment.user.color || segment.labelFill}
+                        >
+                          {segment.text}
+                        </text>
+                      </g>
+                    </g>
+                  ))}
+                  <circle
+                    r={RIM_RADIUS}
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth={RIM_WIDTH}
+                  />
+                  <circle
+                    className="fwheel-hub"
+                    r={HUB_RADIUS}
+                    fill="url(#fwheel-hub-shine)"
+                    stroke="#c3c8ce"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </div>
+              <svg
+                aria-hidden="true"
+                className="fwheel-bulbs"
+                viewBox={VIEWBOX}
+              >
+                {BULBS.map((bulb) => (
+                  <circle
+                    className="fwheel-bulb"
+                    cx={bulb.cx}
+                    cy={bulb.cy}
+                    fill="#fff"
+                    key={`${bulb.cx},${bulb.cy}`}
+                    r={BULB_SIZE}
+                    stroke="rgba(0, 0, 0, 0.5)"
+                    strokeWidth="1.5"
+                    // white filament, coloured bloom: drop-shadow's
+                    // currentcolor reads the color property, never fill
+                    style={{ animationDelay: bulb.delay, color: bulb.color }}
+                  />
+                ))}
+              </svg>
+              <div className="fwheel-needle" />
+            </div>
+            <div
+              className={`fwheel-winner${won ? ' fwheel-winner--visible' : ''}`}
+            >
+              <span
+                className="fwheel-winner-name"
+                style={winner?.color ? { color: winner.color } : undefined}
+              >
+                {winner ? winner.title : ' '}
+              </span>
+              <button
+                className="fwheel-close-btn"
+                onClick={confirmWinner}
+                tabIndex={won ? 0 : -1}
+                type="button"
+              >
+                <FormattedMessage {...messages.continueBtn} />
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 };
 
