@@ -54,4 +54,3 @@ export const getPlatformColor = (platform?: string): string => {
   if (!platform) return PLATFORM_COLORS.kick;
   return PLATFORM_COLORS[platform.toLowerCase()] || PLATFORM_COLORS.kick;
 };
-
