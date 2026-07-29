@@ -28,11 +28,7 @@ import {
 } from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
 import { changeColor } from '../../containers/StyleProvider/actions';
-
-const PLATFORM_COLORS = {
-  twitch: '#9370DB',
-  kick: '#53FC18',
-};
+import { PLATFORM_COLORS, getPlatformColor } from '../../theme';
 
 const PageContainer = styled.div`
   display: flex;
@@ -76,8 +72,7 @@ const StreamAvatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  border: 2px solid
-    ${(props) => (props.$platform === 'twitch' ? '#9370DB' : '#7CFC00')};
+  border: 2px solid ${(props) => getPlatformColor(props.$platform)};
 `;
 
 const ChannelName = styled.span`
@@ -173,8 +168,8 @@ const GiveawayPage = (props) => {
     localStorage.setItem('gv-channel', channelName);
     localStorage.setItem('gv-platform', platformName);
 
-    if (!localStorage.getItem('themeColor') && PLATFORM_COLORS[platformName]) {
-      dispatch(changeColor(PLATFORM_COLORS[platformName]));
+    if (!localStorage.getItem('themeColor') && getPlatformColor(platformName)) {
+      dispatch(changeColor(getPlatformColor(platformName)));
     }
 
     if (platformName === 'youtube') {

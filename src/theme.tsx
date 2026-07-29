@@ -43,3 +43,15 @@ type ThemeColors = typeof lightTheme;
 // `color` is the user-configurable accent color, injected at runtime by
 // StyleProvider on top of the light/dark palette above.
 export type Theme = ThemeColors & { color: string };
+
+export const PLATFORM_COLORS: Record<string, string> = {
+  twitch: '#9370DB',
+  kick: '#53FC18',
+  youtube: '#FF0000',
+};
+
+export const getPlatformColor = (platform?: string): string => {
+  if (!platform) return PLATFORM_COLORS.kick;
+  return PLATFORM_COLORS[platform.toLowerCase()] || PLATFORM_COLORS.kick;
+};
+

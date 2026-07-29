@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages.js';
+import { getPlatformColor } from '../../theme';
 
 const Card = styled.div`
   border: 1px solid ${(props) => props.theme.secondaryTextColor}44;
@@ -43,7 +44,7 @@ const ViewerStat = styled(Stat)`
 const Category = styled.div`
   font-size: 13px;
   font-weight: 500;
-  color: ${(props) => (props.$isTwitch ? '#9370DB' : '#7CFC00')};
+  color: ${(props) => getPlatformColor(props.$platform)};
   text-align: left;
   margin-top: 4px;
 `;
@@ -129,7 +130,7 @@ const StreamInfo = (props) => {
           values={{ title: streamData.title }}
         />
       </Title>
-      <Category $isTwitch={platform === 'twitch'}>
+      <Category $platform={platform}>
         <FormattedMessage
           {...messages.game}
           values={{ game: streamData.game_name }}
