@@ -24,6 +24,26 @@
   outline: none;
 }
 
+/* portaled straight to <body> so it can sit above the confetti canvas
+   (zIndex: 9999 in the JS) without dragging the backdrop and rays up with it -
+   those stay under the confetti so it doesn't get dimmed */
+.fwheel-dialog-portal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.fwheel-dialog-portal .fwheel-dialog {
+  pointer-events: auto;
+}
+
 .fwheel-dialog {
   background: linear-gradient(to right, #0f161d 0%, #131b24 51%, #0f161d 100%);
   padding: 36px;
@@ -41,6 +61,24 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
+/* a quick pop and settle on the win - no rotation or jolt, the wheel just
+   punches out once and comes back */
+.fwheel-box--win {
+  animation: fwheel-box-pop 0.32s ease-out both;
+}
+
+@keyframes fwheel-box-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .fwheel-movable {
   width: 100%;
   height: 100%;
@@ -52,6 +90,44 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+/* the bulb ring sits in its own layer over the spinning wheel, so the lights
+   stay bolted to the frame instead of turning with the segments */
+.fwheel-bulbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* cold filaments while the wheel is still running */
+.fwheel-bulb {
+  opacity: 0.28;
+}
+
+/* On the win they run in four chasing phases - the delay is set per bulb
+   inline, so the light appears to travel around the rim.
+   The glow is a static filter and only opacity animates: a filter inside the
+   keyframes forces every blur pass to be recomputed each frame on all 24
+   bulbs, where a fixed one is rasterised once and then just faded by the
+   compositor. Same look, a fraction of the cost. */
+.fwheel-box--win .fwheel-bulb {
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 13px currentcolor);
+  animation: fwheel-bulb-blink 0.56s ease-in-out infinite;
+}
+
+@keyframes fwheel-bulb-blink {
+  0%,
+  100% {
+    opacity: 0.32;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .fwheel-label {
@@ -94,10 +170,43 @@
 
 .fwheel-winner-name {
   color: white;
-  font-size: 2.4rem;
+  font-size: 3.6rem;
   font-weight: bold;
   font-family: Roboto, sans-serif;
   text-align: center;
+  /* long nicknames at this size run past the dialog edge - wrap instead */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* the name is thrown at the camera and overshoots hard before settling,
+   then holds - the gold extrusion is static, no pulsing */
+.fwheel-winner--visible .fwheel-winner-name {
+  animation: fwheel-winner-pop 0.55s cubic-bezier(0.16, 1.6, 0.3, 1) both;
+}
+
+@keyframes fwheel-winner-pop {
+  0% {
+    transform: scale(0.25);
+    opacity: 0;
+    text-shadow: none;
+  }
+  55% {
+    transform: scale(1.45);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    text-shadow:
+      0 1px 0 #c9a008,
+      0 2px 0 #b8930b,
+      0 3px 0 #a6840a,
+      0 4px 0 #957608,
+      0 5px 0 #846807,
+      0 7px 14px rgba(0, 0, 0, 0.65),
+      0 0 35px rgba(255, 206, 10, 0.8);
+  }
 }
 
 .fwheel-close-btn {
@@ -115,6 +224,149 @@
 .fwheel-close-btn:hover {
   background-color: #ffce0a;
   color: #0f161d;
+}
+
+/* a gleam sweeping across the button, to pull the eye to the thing to click */
+.fwheel-winner--visible .fwheel-close-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.fwheel-winner--visible .fwheel-close-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 206, 10, 0.55),
+    transparent
+  );
+  animation: fwheel-btn-gleam 2.6s 1s ease-in-out infinite;
+}
+
+@keyframes fwheel-btn-gleam {
+  0% {
+    left: -50%;
+  }
+  55%,
+  100% {
+    left: 130%;
+  }
+}
+
+/* one frame of white blowing out the screen, gone before you can read it */
+.fwheel-flash {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  pointer-events: none;
+  z-index: 10;
+  animation: fwheel-win-flash 0.5s ease-out forwards;
+}
+
+@keyframes fwheel-win-flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* sunburst behind everything: a spoked conic gradient turning slowly against
+   the screen, masked to a soft circle so the spokes fade out instead of
+   reaching the corners and boxing the whole viewport in */
+/* 130vmax, not the 190 this started at: the mask fades everything to nothing
+   well before the old edge, so the outer third was texture the compositor
+   carried around and never drew. Halving the area is most of the cost - all
+   the gradient and mask stops below are scaled to match, so it looks the
+   same. */
+.fwheel-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130vmax;
+  height: 130vmax;
+  margin: -65vmax 0 0 -65vmax;
+  /* A warm bloom right behind the wheel, then narrow saturated spokes over it.
+     Narrow is the whole trick: wide wedges read as painted stripes across the
+     page, thin high-contrast ones read as light thrown off the wheel. No white
+     layer either - washing the colours out is what made them look like
+     highlighter marks. Pattern repeats every 15deg, cycling the palette. */
+  background:
+    radial-gradient(
+      circle closest-side,
+      rgba(255, 214, 130, 0.3) 0%,
+      rgba(255, 180, 80, 0.12) 38%,
+      transparent 67%
+    ),
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 90, 60, 0.55) 0deg 2.2deg,
+      transparent 2.2deg 15deg,
+      rgba(255, 201, 60, 0.55) 15deg 17.2deg,
+      transparent 17.2deg 30deg,
+      rgba(95, 224, 138, 0.55) 30deg 32.2deg,
+      transparent 32.2deg 45deg,
+      rgba(77, 157, 255, 0.55) 45deg 47.2deg,
+      transparent 47.2deg 60deg,
+      rgba(181, 102, 255, 0.55) 60deg 62.2deg,
+      transparent 62.2deg 75deg
+    );
+  /* pulled in tight so the rays burn out well before the screen edges - they
+     should look like they come off the wheel, not wallpaper the whole page */
+  mask-image: radial-gradient(
+    circle closest-side,
+    #000 12%,
+    rgba(0, 0, 0, 0.85) 35%,
+    rgba(0, 0, 0, 0.32) 64%,
+    transparent 88%
+  );
+  pointer-events: none;
+  z-index: 7;
+  will-change: transform;
+  animation:
+    fwheel-rays-fade 1.4s ease-out both,
+    fwheel-rays-spin 26s linear infinite;
+}
+
+@keyframes fwheel-rays-fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes fwheel-rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fwheel-winner--visible .fwheel-winner-name,
+  .fwheel-flash,
+  .fwheel-rays,
+  .fwheel-winner--visible .fwheel-close-btn::after {
+    animation: none;
+    display: none;
+  }
+
+  .fwheel-box--win,
+  .fwheel-box--win .fwheel-bulb {
+    animation: none;
+  }
 }
 
 @keyframes fwheel-show {

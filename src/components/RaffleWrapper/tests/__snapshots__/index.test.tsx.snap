@@ -66,35 +66,66 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     How do the raffle methods work?
   </button>
   <div
-    class="sc-ipUpyX fEPCjK"
+    class="sc-ipUpyX fEOXtP"
   >
     <div
       class="sc-gsMGyr jxmkhD"
     >
       <label
-        class="sc-dkHxwO cuuTAs"
+        class="sc-dkHxwO dojHIK"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-hLllbt iepMqS"
+        class="sc-hLllbt cmcFAr"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-eDgbZQ cBvtlC"
+        class="sc-eDgbZQ bGNDGP"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-hLllbt eKnUty"
+        class="sc-hLllbt gVHwCH"
         type="button"
       >
         +
+      </button>
+    </div>
+    <div
+      class="sc-csfbns jQIZem"
+    >
+      <button
+        aria-label="Animation sound"
+        aria-pressed="true"
+        class="sc-eoeTJ hdyoGx"
+        title="Animation sound"
+        type="button"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+          />
+        </svg>
+      </button>
+      <button
+        aria-label="Special effects"
+        aria-pressed="true"
+        class="sc-eoeTJ hdyoGx"
+        title="Special effects"
+        type="button"
+      >
+        <span
+          class="sc-brmsbW ezdljx"
+        />
       </button>
     </div>
   </div>

@@ -237,6 +237,7 @@ const VerticalRaffle = (props) => {
   });
   const [finished, setFinished] = useState(false);
   const won = finished && winner !== null;
+  const celebrate = won && props.effectsOn;
   const timerRef = useRef(null);
   const movableRef = useRef(null);
   const audioCtx = useRef(null);
@@ -247,7 +248,7 @@ const VerticalRaffle = (props) => {
   const playSample = (bufferRef, volume = 1) => {
     const ctx = audioCtx.current;
     const buffer = bufferRef.current;
-    if (!ctx || !buffer || ctx.state === 'closed') return;
+    if (!props.soundOn || !ctx || !buffer || ctx.state === 'closed') return;
     const source = ctx.createBufferSource();
     source.buffer = buffer;
     if (volume === 1) {
@@ -344,10 +345,10 @@ const VerticalRaffle = (props) => {
   }, [props.duration, scroll]);
 
   useEffect(() => {
-    if (!won) return undefined;
+    if (!celebrate) return undefined;
     playSample(winBuffer, 0.8);
     return fireCelebration();
-  }, [won]);
+  }, [celebrate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -363,14 +364,14 @@ const VerticalRaffle = (props) => {
   // canvas without dragging the backdrop and rays up with it - see style.css
   return (
     <>
-      <div className={`vraffle-root${won ? ' vraffle-root--win' : ''}`}>
+      <div className={`vraffle-root${celebrate ? ' vraffle-root--win' : ''}`}>
         <button
           aria-label="stop the raffle immediately"
           className="vraffle-backdrop"
           onClick={closeImmediately}
           type="button"
         />
-        {won && (
+        {celebrate && (
           <>
             <div className="vraffle-rays" aria-hidden="true" />
             <div className="vraffle-flash" aria-hidden="true" />
@@ -387,8 +388,12 @@ const VerticalRaffle = (props) => {
       </div>
       {createPortal(
         <div className="vraffle-dialog-portal">
-          <div className={`vraffle-dialog${won ? ' vraffle-dialog--win' : ''}`}>
-            <div className={`vroller-box${won ? ' vroller-box--win' : ''}`}>
+          <div
+            className={`vraffle-dialog${celebrate ? ' vraffle-dialog--win' : ''}`}
+          >
+            <div
+              className={`vroller-box${celebrate ? ' vroller-box--win' : ''}`}
+            >
               <div className="vroller-needle" />
               <div className="vroller-movable" ref={movableRef}>
                 {users.map((item, index) => (
@@ -440,6 +445,8 @@ const VerticalRaffle = (props) => {
 
 VerticalRaffle.propTypes = {
   duration: PropTypes.number,
+  effectsOn: PropTypes.bool,
+  soundOn: PropTypes.bool,
   giveawayReq: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
@@ -448,10 +455,14 @@ VerticalRaffle.propTypes = {
 };
 VerticalRaffle.defaultProps = {
   duration: 7,
+  effectsOn: true,
+  soundOn: true,
 };
 
 const areEqual = (prevProps, nextProps) =>
   prevProps.duration === nextProps.duration &&
+  prevProps.effectsOn === nextProps.effectsOn &&
+  prevProps.soundOn === nextProps.soundOn &&
   prevProps.onClose === nextProps.onClose &&
   prevProps.onWin === nextProps.onWin;
 
