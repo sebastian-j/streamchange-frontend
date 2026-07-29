@@ -41,6 +41,8 @@
   "streamchange.components.RaffleWrapper.raffleType.vertical": "Maszyna losująca",
   "streamchange.components.VerticalRaffle.continueBtn": "Przejdź dalej",
   "streamchange.components.RaffleWrapper.startBtn": "Losuj",
+  "streamchange.components.RaffleWrapper.toggleEffects": "Efekty specjalne",
+  "streamchange.components.RaffleWrapper.toggleSound": "Dźwięk animacji",
   "streamchange.components.RaffleInfoDialog.trigger": "Jak działają metody losowania?",
   "streamchange.components.RaffleInfoDialog.dialogTitle": "Jak wyglądają metody losowania?",
   "streamchange.components.RaffleInfoDialog.tab.reel": "Maszyna losująca",

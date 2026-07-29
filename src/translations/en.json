@@ -41,6 +41,8 @@
   "streamchange.components.RaffleWrapper.raffleType.vertical": "Reel",
   "streamchange.components.VerticalRaffle.continueBtn": "Continue",
   "streamchange.components.RaffleWrapper.startBtn": "Roll it!",
+  "streamchange.components.RaffleWrapper.toggleEffects": "Special effects",
+  "streamchange.components.RaffleWrapper.toggleSound": "Animation sound",
   "streamchange.components.RaffleInfoDialog.trigger": "How do the raffle methods work?",
   "streamchange.components.RaffleInfoDialog.dialogTitle": "How do the raffle methods look?",
   "streamchange.components.RaffleInfoDialog.tab.reel": "Reel",
