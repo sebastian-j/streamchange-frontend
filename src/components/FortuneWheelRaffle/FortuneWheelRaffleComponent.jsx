@@ -415,6 +415,7 @@ const FortuneWheelRaffle = (props) => {
   });
   const [finished, setFinished] = useState(false);
   const won = finished && winner !== null;
+  const celebrate = won && props.effectsOn;
   const timerRef = useRef(null);
   const movableRef = useRef(null);
   const audioCtx = useRef(null);
@@ -425,7 +426,7 @@ const FortuneWheelRaffle = (props) => {
   const playTick = (index) => {
     const ctx = audioCtx.current;
     const buffer = tickBuffers.current[Math.min(index, TICK_SOUNDS.length - 1)];
-    if (!ctx || !buffer) return;
+    if (!props.soundOn || !ctx || !buffer) return;
     const source = ctx.createBufferSource();
     source.buffer = buffer;
     source.connect(ctx.destination);
@@ -434,7 +435,7 @@ const FortuneWheelRaffle = (props) => {
 
   const playWinSound = () => {
     const ctx = audioCtx.current;
-    if (!ctx || ctx.state === 'closed') return;
+    if (!props.soundOn || !ctx || ctx.state === 'closed') return;
     playFanfare(ctx, 0.16);
     const buffer = winBuffer.current;
     if (!buffer) return;
@@ -592,10 +593,10 @@ const FortuneWheelRaffle = (props) => {
   }, [props.duration, users.length, rotation, segmentDeg]);
 
   useEffect(() => {
-    if (!won) return undefined;
+    if (!celebrate) return undefined;
     playWinSound();
     return fireCelebration();
-  }, [won]);
+  }, [celebrate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -618,7 +619,7 @@ const FortuneWheelRaffle = (props) => {
           onClick={closeImmediately}
           type="button"
         />
-        {won && (
+        {celebrate && (
           <>
             <div className="fwheel-rays" aria-hidden="true" />
             <div className="fwheel-flash" aria-hidden="true" />
@@ -628,7 +629,7 @@ const FortuneWheelRaffle = (props) => {
       {createPortal(
         <div className="fwheel-dialog-portal">
           <div className="fwheel-dialog">
-            <div className={`fwheel-box${won ? ' fwheel-box--win' : ''}`}>
+            <div className={`fwheel-box${celebrate ? ' fwheel-box--win' : ''}`}>
               <div className="fwheel-movable" ref={movableRef}>
                 <svg className="fwheel-svg" viewBox={VIEWBOX}>
                   <defs>
@@ -747,6 +748,8 @@ const FortuneWheelRaffle = (props) => {
 
 FortuneWheelRaffle.propTypes = {
   duration: PropTypes.number,
+  effectsOn: PropTypes.bool,
+  soundOn: PropTypes.bool,
   giveawayReq: PropTypes.number,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
@@ -755,10 +758,14 @@ FortuneWheelRaffle.propTypes = {
 };
 FortuneWheelRaffle.defaultProps = {
   duration: 7,
+  effectsOn: true,
+  soundOn: true,
 };
 
 const areEqual = (prevProps, nextProps) =>
   prevProps.duration === nextProps.duration &&
+  prevProps.effectsOn === nextProps.effectsOn &&
+  prevProps.soundOn === nextProps.soundOn &&
   prevProps.onClose === nextProps.onClose &&
   prevProps.onWin === nextProps.onWin;
 
