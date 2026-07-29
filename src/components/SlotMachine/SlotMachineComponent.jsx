@@ -124,7 +124,6 @@ const SlotsRaffleComponent = (props) => {
     rate: 4.0,
     volume: 0.75,
   });
-
   const soundOnRef = useRef(soundOn);
   const levelUpPlayRef = useRef(levelUpPlay);
   const levelUpStopRef = useRef(levelUpStop);
@@ -140,7 +139,11 @@ const SlotsRaffleComponent = (props) => {
 
   useEffect(() => {
     setSoundEnabled(true);
-  }, []);
+    if (!props.soundOn) {
+      setSoundEnabled(false);
+      console.log(props.soundOn);
+    }
+  }, [props.soundOn]);
 
   const turnSpeakerOff = () => {
     setSoundEnabled(false);
@@ -547,6 +550,8 @@ const SlotsRaffleComponent = (props) => {
 
 SlotsRaffleComponent.propTypes = {
   giveawayReq: PropTypes.number,
+  effectsOn: PropTypes.bool,
+  soundOn: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
   preWinner: PropTypes.object,
@@ -555,6 +560,8 @@ SlotsRaffleComponent.propTypes = {
 
 const areEqual = (prevProps, nextProps) =>
   prevProps.onClose === nextProps.onClose &&
+  prevProps.effectsOn === nextProps.effectsOn &&
+  prevProps.soundOn === nextProps.soundOn &&
   prevProps.onWin === nextProps.onWin;
 
 export default memo(SlotsRaffleComponent, areEqual);

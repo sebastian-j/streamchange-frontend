@@ -222,13 +222,6 @@ const RaffleWrapper = (props) => {
             onChange={(ret) => props.changeAnimationDuration(Number(ret))}
           />
         )}
-        <NumericInput
-          label={intl.formatMessage({ ...messages.animationDuration })}
-          minValue={1}
-          maxValue={600}
-          value={props.animationDuration}
-          onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-        />
         <ToggleGroup>
           <ToggleButton
             aria-label={intl.formatMessage({ ...messages.toggleSound })}
@@ -246,16 +239,20 @@ const RaffleWrapper = (props) => {
               )}
             </svg>
           </ToggleButton>
-          <ToggleButton
-            aria-label={intl.formatMessage({ ...messages.toggleEffects })}
-            aria-pressed={effectsOn}
-            $on={effectsOn}
-            onClick={() => toggle('gv-raffleEffects', effectsOn, setEffectsOn)}
-            title={intl.formatMessage({ ...messages.toggleEffects })}
-            type="button"
-          >
-            <ConfettiIcon $on={effectsOn} />
-          </ToggleButton>
+          {props.animationType !== 3 && (
+            <ToggleButton
+              aria-label={intl.formatMessage({ ...messages.toggleEffects })}
+              aria-pressed={effectsOn}
+              $on={effectsOn}
+              onClick={() =>
+                toggle('gv-raffleEffects', effectsOn, setEffectsOn)
+              }
+              title={intl.formatMessage({ ...messages.toggleEffects })}
+              type="button"
+            >
+              <ConfettiIcon $on={effectsOn} />
+            </ToggleButton>
+          )}
         </ToggleGroup>
       </AnimationDurationSlot>
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
@@ -294,8 +291,10 @@ const RaffleWrapper = (props) => {
       {props.isOpen && props.animationType === 3 && (
         <SlotMachine
           duration={props.animationDuration}
+          effectsOn={effectsOn}
           onClose={props.closeRaffle}
           onWin={winnerHandler}
+          soundOn={soundOn}
         />
       )}
     </div>
