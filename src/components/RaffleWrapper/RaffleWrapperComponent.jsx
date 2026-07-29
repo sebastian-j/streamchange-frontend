@@ -61,6 +61,7 @@ const ToggleGroup = styled.div`
   border: 1px solid ${(props) => props.theme.secondaryTextColor};
   border-radius: 4px;
   display: flex;
+  flex-shrink: 0;
   height: 30px;
   margin-left: auto;
   overflow: hidden;
@@ -76,12 +77,16 @@ const ToggleButton = styled.button`
   color: ${({ $on, theme }) => ($on ? theme.color : theme.secondaryTextColor)};
   cursor: pointer;
   display: flex;
+  flex-shrink: 0;
   height: 100%;
   justify-content: center;
   transition:
     color 0.35s ease,
     background-color 0.35s ease;
   width: 30px;
+  @media (orientation: portrait) {
+    width: 26px;
+  }
   & + & {
     border-left: 1px solid ${(props) => props.theme.secondaryTextColor};
   }

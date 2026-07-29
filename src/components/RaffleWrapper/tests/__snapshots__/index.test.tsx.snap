@@ -72,38 +72,38 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
       class="sc-gsMGyr jxmkhD"
     >
       <label
-        class="sc-dkHxwO cuuTAs"
+        class="sc-dkHxwO dojHIK"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-hLllbt iepMqS"
+        class="sc-hLllbt cmcFAr"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-eDgbZQ cBvtlC"
+        class="sc-eDgbZQ bGNDGP"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-hLllbt eKnUty"
+        class="sc-hLllbt gVHwCH"
         type="button"
       >
         +
       </button>
     </div>
     <div
-      class="sc-csfbns dwEpEa"
+      class="sc-csfbns jQIZem"
     >
       <button
         aria-label="Animation sound"
         aria-pressed="true"
-        class="sc-eoeTJ bwPAXw"
+        class="sc-eoeTJ hdyoGx"
         title="Animation sound"
         type="button"
       >
@@ -119,7 +119,7 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
       <button
         aria-label="Special effects"
         aria-pressed="true"
-        class="sc-eoeTJ bwPAXw"
+        class="sc-eoeTJ hdyoGx"
         title="Special effects"
         type="button"
       >

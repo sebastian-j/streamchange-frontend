@@ -175,38 +175,38 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         class="sc-ftDObM guwTcs"
       >
         <label
-          class="sc-pilFg gePtpD"
+          class="sc-pilFg dZuoGV"
           for="number-display"
         >
           Animation duration (seconds)
         </label>
         <button
           aria-label="Decrease by one"
-          class="sc-jqMYKt bdBxFs"
+          class="sc-jqMYKt jpqHTx"
           type="button"
         >
           -
         </button>
         <input
-          class="sc-kDLlSG eGEOMe"
+          class="sc-kDLlSG zaiNH"
           id="number-display"
           value="7"
         />
         <button
           aria-label="Increase by one"
-          class="sc-jqMYKt fvMWHI"
+          class="sc-jqMYKt kQgsDV"
           type="button"
         >
           +
         </button>
       </div>
       <div
-        class="sc-fFneKr bBfsMB"
+        class="sc-fFneKr gZYvaN"
       >
         <button
           aria-label="Animation sound"
           aria-pressed="true"
-          class="sc-bjvxhe cWzAyW"
+          class="sc-bjvxhe fEWCdr"
           title="Animation sound"
           type="button"
         >
@@ -222,7 +222,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         <button
           aria-label="Special effects"
           aria-pressed="true"
-          class="sc-bjvxhe cWzAyW"
+          class="sc-bjvxhe fEWCdr"
           title="Special effects"
           type="button"
         >

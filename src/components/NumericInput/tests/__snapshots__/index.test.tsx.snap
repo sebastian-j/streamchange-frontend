@@ -5,24 +5,24 @@ exports[`<NumericInput /> > should render and match the snapshot 1`] = `
   class="sc-bcHNtg wNMdS"
 >
   <label
-    class="sc-gsMGyr fxFsfu"
+    class="sc-gsMGyr bYolGE"
     for="number-display"
   />
   <button
     aria-label="Decrease by one"
-    class="sc-dkHxwO ljUzqj"
+    class="sc-dkHxwO eYaaLy"
     type="button"
   >
     -
   </button>
   <input
-    class="sc-hLllbt dHOWlz"
+    class="sc-hLllbt eARvLq"
     id="number-display"
     value="0"
   />
   <button
     aria-label="Increase by one"
-    class="sc-dkHxwO fAUUYz"
+    class="sc-dkHxwO iLgnQS"
     type="button"
   >
     +

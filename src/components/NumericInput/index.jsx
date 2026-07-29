@@ -14,12 +14,18 @@ const Label = styled.label`
   font-family: inherit;
   line-height: 30px;
   margin-right: 5px;
+  @media (orientation: portrait) {
+    font-size: 0.75rem;
+    line-height: 26px;
+    margin-right: 3px;
+  }
 `;
 const Button = styled.button`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
   border-radius: 0 4px 4px 0;
   color: ${(props) => props.theme.buttonTextColor};
+  flex-shrink: 0;
   font-size: 1.5rem;
   line-height: 23px;
   height: 30px;
@@ -31,6 +37,10 @@ const Button = styled.button`
     `
     border-radius: 4px 0 0 4px;
   `}
+  @media (orientation: portrait) {
+    height: 26px;
+    width: 26px;
+  }
   &:focus-visible {
     background-color: ${(props) => props.theme.color};
   }
@@ -44,10 +54,15 @@ const NumberDisplay = styled.input`
   background: transparent;
   border: 1px solid gray;
   color: ${(props) => props.theme.staticTextColor};
+  flex-shrink: 0;
   font-size: 1.5rem;
   height: 100%;
-  max-width: 70px;
+  width: 60px;
   padding: 0 10px;
+  @media (orientation: portrait) {
+    width: 40px;
+    padding: 0 6px;
+  }
 `;
 
 const NumericInput = ({
