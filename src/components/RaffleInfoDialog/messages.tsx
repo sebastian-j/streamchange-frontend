@@ -42,6 +42,15 @@ export default defineMessages({
     defaultMessage:
       'Before the draw the system picks up to <b>20 people</b> from all participants and places them on the wheel. Participants are laid out as wheel segments.<br></br>The wheel spins up and then brakes until the pointer stops on one of the slots. The slot marked by the arrow reveals the winner. The animation duration decides how long the wheel spins before stopping. Great when you want a flashy, spinning fortune-wheel draw.',
   },
+    tabSlots: {
+    id: `${scope}.tab.slots`,
+  },
+  slotsTagline: {
+    id: `${scope}.slots.tagline`,
+  },
+  slotsDescription: {
+    id: `${scope}.slots.description`,
+    },
   previewSoon: {
     id: `${scope}.previewSoon`,
     defaultMessage: 'Preview soon',

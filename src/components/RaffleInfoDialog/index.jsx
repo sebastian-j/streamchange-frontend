@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import messages from './messages';
 import reelPreview from './assets/reel.webp';
 import wheelPreview from './assets/wheel.webp';
+import slotsPreview from './assets/wheel.webp';
 
 const METHODS = [
   {
@@ -27,6 +28,12 @@ const METHODS = [
     tagline: messages.wheelTagline,
     description: messages.wheelDescription,
     preview: wheelPreview,
+  },
+  {
+    label: messages.tabSlots,
+    tagline: messages.slotsTagline,
+    description: messages.slotsDescription,
+    preview: slotsPreview,
   },
 ];
 
