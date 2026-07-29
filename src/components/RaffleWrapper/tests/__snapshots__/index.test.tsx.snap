@@ -66,44 +66,73 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
     How do the raffle methods work?
   </button>
   <div
-    class="sc-ipUpyX fEOXtP"
+    class="sc-fnqnQZ hgsfKu"
   >
     <div
       class="sc-iBIXdp gtOfsA"
     >
       <label
-        class="sc-dkHxwO dojHIK"
+        class="sc-ftDObM fLSaeD"
         for="number-display"
       >
         Animation duration (seconds)
       </label>
       <button
         aria-label="Decrease by one"
-        class="sc-hLllbt cmcFAr"
+        class="sc-pilFg hDzpzR"
         type="button"
       >
         -
       </button>
       <input
-        class="sc-eDgbZQ bGNDGP"
+        class="sc-jqMYKt fRMCZk"
         id="number-display"
         value="7"
       />
       <button
         aria-label="Increase by one"
-        class="sc-hLllbt gVHwCH"
+        class="sc-pilFg iyFRux"
         type="button"
       >
         +
       </button>
     </div>
     <div
-      class="sc-csfbns jQIZem"
+      class="sc-iBIXdp gtOfsA"
+    >
+      <label
+        class="sc-ftDObM fLSaeD"
+        for="number-display"
+      >
+        Animation duration (seconds)
+      </label>
+      <button
+        aria-label="Decrease by one"
+        class="sc-pilFg hDzpzR"
+        type="button"
+      >
+        -
+      </button>
+      <input
+        class="sc-jqMYKt fRMCZk"
+        id="number-display"
+        value="7"
+      />
+      <button
+        aria-label="Increase by one"
+        class="sc-pilFg iyFRux"
+        type="button"
+      >
+        +
+      </button>
+    </div>
+    <div
+      class="sc-fFneKr gZYvaN"
     >
       <button
         aria-label="Animation sound"
         aria-pressed="true"
-        class="sc-eoeTJ hdyoGx"
+        class="sc-bjvxhe fEWCdr"
         title="Animation sound"
         type="button"
       >
@@ -119,12 +148,12 @@ exports[`<RaffleWrapper /> > should render and match the snapshot 1`] = `
       <button
         aria-label="Special effects"
         aria-pressed="true"
-        class="sc-eoeTJ hdyoGx"
+        class="sc-bjvxhe fEWCdr"
         title="Special effects"
         type="button"
       >
         <span
-          class="sc-brmsbW ezdljx"
+          class="sc-idHmUl gtqCub"
         />
       </button>
     </div>
