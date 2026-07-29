@@ -28,7 +28,7 @@ import {
 } from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
 import { changeColor } from '../../containers/StyleProvider/actions';
-import { PLATFORM_COLORS, getPlatformColor } from '../../theme';
+import { getPlatformColor } from '../../theme';
 
 const PageContainer = styled.div`
   display: flex;
