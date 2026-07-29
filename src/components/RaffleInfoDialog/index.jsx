@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import messages from './messages';
 import reelPreview from './assets/reel.webp';
 import wheelPreview from './assets/wheel.webp';
-import slotsPreview from './assets/wheel.webp';
+import slotsPreview from './assets/SlotsPreview.webp';
 
 const METHODS = [
   {
