@@ -125,6 +125,19 @@ const SlotsRaffleComponent = (props) => {
     volume: 0.75,
   });
 
+  const soundOnRef = useRef(soundOn);
+  const levelUpPlayRef = useRef(levelUpPlay);
+  const levelUpStopRef = useRef(levelUpStop);
+
+  useEffect(() => {
+    soundOnRef.current = soundOn;
+  }, [soundOn]);
+
+  useEffect(() => {
+    levelUpPlayRef.current = levelUpPlay;
+    levelUpStopRef.current = levelUpStop;
+  }, [levelUpPlay, levelUpStop]);
+
   useEffect(() => {
     setSoundEnabled(true);
   }, []);
@@ -132,6 +145,7 @@ const SlotsRaffleComponent = (props) => {
   const turnSpeakerOff = () => {
     setSoundEnabled(false);
     setSoundOn(false);
+    levelUpStopRef.current?.();
   };
 
   const turnSpeakerOn = () => {
@@ -244,10 +258,10 @@ const SlotsRaffleComponent = (props) => {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-    if (levelUpStop) {
-      levelUpStop();
+    if (levelUpStopRef.current) {
+      levelUpStopRef.current();
     }
-  }, [levelUpStop]);
+  }, []);
 
   const closeImmediately = useCallback(() => {
     stopAllTimersAndSounds();
@@ -306,7 +320,9 @@ const SlotsRaffleComponent = (props) => {
     winTimeoutRef.current = setTimeout(() => {
       winnerView();
       winIntervalRef.current = setInterval(() => {
-        levelUpPlay();
+        if (soundOnRef.current) {
+          levelUpPlayRef.current?.();
+        }
       }, 100);
 
       setTimeout(() => {
@@ -418,14 +434,16 @@ const SlotsRaffleComponent = (props) => {
       const currentTickIndex = Math.floor(translateY / itemHeightPx);
 
       if (currentTickIndex !== lastTickIndex) {
-        if (isRolling) {
-          if (currentTickIndex % 2 === 0) {
-            if (playToggleOn) playToggleOff();
+        if (soundOnRef.current) {
+          if (isRolling) {
+            if (currentTickIndex % 2 === 0) {
+              if (playToggleOn) playToggleOff();
+            } else {
+              if (playToggleOff) playToggleOn();
+            }
           } else {
-            if (playToggleOff) playToggleOn();
+            if (playToggleOff) playToggleOff();
           }
-        } else {
-          if (playToggleOff) playToggleOff();
         }
 
         lastTickIndex = currentTickIndex;
