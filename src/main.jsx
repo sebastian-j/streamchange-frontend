@@ -23,8 +23,3 @@ root.render(
     </LanguageProvider>
   </Provider>
 );
-// brakuje tutaj starego kodu z production
-// we do not want it installed
-// if (process.env.NODE_ENV === 'production') {
-//   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
-// }
