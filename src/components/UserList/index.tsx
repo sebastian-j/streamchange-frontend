@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 
-import db from '../YoutubeWorker/db';
+import db from '../StreamerWorker/db';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { Counts } from './components/Counts';
 import FilterChips from './FilterChips';

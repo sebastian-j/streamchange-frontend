@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import YoutubeWorker from './components/YoutubeWorker';
+import StreamerWorker from './components/StreamerWorker';
 import WelcomeDialog from './components/WelcomeDialog';
 export default function App() {
   const [channelConfig, setChannelConfig] = useState(() => {
@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <>
-      <YoutubeWorker
+      <StreamerWorker
         channel={channelConfig.channel}
         platform={channelConfig.platform}
         apiKey="test"

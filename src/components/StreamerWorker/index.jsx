@@ -26,7 +26,7 @@ const ThreeSections = styled.div`
   min-height: 0;
 `;
 
-const YoutubeWorker = (props) => {
+const StreamerWorker = (props) => {
   const dispatch = useDispatch();
   const [superChat, setSuperChat] = useState(null);
   const isMobile = useMediaQuery('(orientation: portrait)');
@@ -234,11 +234,11 @@ const YoutubeWorker = (props) => {
   );
 };
 
-YoutubeWorker.propTypes = {
+StreamerWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
   channel: PropTypes.string,
   onBlacklisted: PropTypes.func,
   platform: PropTypes.string,
 };
 
-export default YoutubeWorker;
+export default StreamerWorker;

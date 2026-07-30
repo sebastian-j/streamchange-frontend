@@ -53,7 +53,7 @@ const mocks = vi.hoisted(() => {
 
 const mockStore = configureStore([]);
 
-vi.mock('../../YoutubeWorker/db', () => ({
+vi.mock('../../StreamerWorker/db', () => ({
   default: {
     table: mocks.table,
   },
