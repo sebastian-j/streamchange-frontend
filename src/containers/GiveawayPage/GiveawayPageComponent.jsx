@@ -165,7 +165,7 @@ const GiveawayPage = (props) => {
       console.warn('Nie udało się sprawdzić blacklisty:', err);
     }
 
-    localStorage.setItem('gv-channel', channelName); //stary handleStream
+    localStorage.setItem('gv-channel', channelName);
     localStorage.setItem('gv-platform', platformName);
 
     if (!localStorage.getItem('themeColor') && getPlatformColor(platformName)) {
@@ -400,7 +400,7 @@ const GiveawayPage = (props) => {
           )}
         </TopButtons>
       </TopBar>
-      <YoutubeWorker // z app.jsx
+      <YoutubeWorker
         channel={props.streamInfo.videoId}
         platform={props.streamInfo.platform}
         apiKey={API_KEY}
