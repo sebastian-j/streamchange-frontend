@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<YoutubeWorker /> > should match the snapshot 1`] = `
+exports[`<StreamerWorker /> > should match the snapshot 1`] = `
 <div
   class="sc-gLfMdy ioVdos"
 >

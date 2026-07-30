@@ -19,7 +19,7 @@ import { changeDialogVisibility } from '../../components/SupportInformation/acti
 import HistoryWidget from './HistoryWidget';
 import { purgeUsersTable } from '../../components/UserList/model';
 import WelcomeDialog from '../../components/WelcomeDialog';
-import YoutubeWorker from '../../components/YoutubeWorker';
+import StreamerWorker from '../../components/StreamerWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
 import {
@@ -400,7 +400,7 @@ const GiveawayPage = (props) => {
           )}
         </TopButtons>
       </TopBar>
-      <YoutubeWorker
+      <StreamerWorker
         channel={props.streamInfo.videoId}
         platform={props.streamInfo.platform}
         apiKey={API_KEY}

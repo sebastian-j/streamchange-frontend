@@ -21,7 +21,7 @@ const testState = vi.hoisted(() => ({
   shouldPend: false,
 }));
 
-vi.mock('../../../components/YoutubeWorker/db', () => ({
+vi.mock('../../../components/StreamerWorker/db', () => ({
   default: {
     table: vi.fn(() => {
       let result = [...testState.items];

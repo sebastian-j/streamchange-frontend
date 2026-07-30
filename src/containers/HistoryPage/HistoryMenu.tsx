@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import messages from './messages';
-import db from '../../components/YoutubeWorker/db';
+import db from '../../components/StreamerWorker/db';
 
 interface Props {
   onClear: () => void;

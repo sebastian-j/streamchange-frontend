@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
 
 import messages from './messages';
-import db from '../../components/YoutubeWorker/db';
+import db from '../../components/StreamerWorker/db';
 import { AvatarFallback } from '../../components/AvatarFallback';
 
 const StyledLink = styled(NavLink)`

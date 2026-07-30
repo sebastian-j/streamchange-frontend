@@ -10,7 +10,7 @@ const databaseMock = vi.hoisted(() => ({
   table: vi.fn(),
 }));
 
-vi.mock('../../YoutubeWorker/db', () => ({
+vi.mock('../../StreamerWorker/db', () => ({
   default: databaseMock,
 }));
 
