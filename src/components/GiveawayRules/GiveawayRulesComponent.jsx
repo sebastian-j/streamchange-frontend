@@ -96,7 +96,10 @@ class GiveawayRules extends React.Component {
           )}
         </FormattedMessage>
         <KeywordInput />
-        <RaffleWrapper onWin={this.winHandler} />
+        <RaffleWrapper
+          onWin={this.winHandler}
+          platform={this.props.streamInfo?.platform}
+        />
         <LotteryLawWarning open={this.props.requirement === 1} />
         <StreamInfo
           streamData={this.props.streamInfo?.streamData}

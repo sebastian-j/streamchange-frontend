@@ -138,6 +138,7 @@ const RaffleWrapper = (props) => {
   const [effectsOn, setEffectsOn] = useState(() =>
     readToggle('gv-raffleEffects')
   );
+  console.log(props.platform + 'blabalba');
 
   const toggle = (key, value, setValue) => {
     const newValue = !value;
@@ -193,17 +194,20 @@ const RaffleWrapper = (props) => {
               value={props.animationType}
               variant="standard"
             >
-              {/* CS:GO case opening temporarily unavailable
-              <MenuItem value={0}>
-                <FormattedMessage {...messages.raffleTypeCS} />
-              </MenuItem>
-              */}
+              {props.platform === 'youtube' && (
+                <MenuItem value={0}>
+                  <FormattedMessage {...messages.raffleTypeCS} />
+                </MenuItem>
+              )}
               <MenuItem value={3}>
                 <FormattedMessage {...messages.raffleTypeSlots} />
               </MenuItem>
-              <MenuItem value={2}>
-                <FormattedMessage {...messages.raffleTypeVertical} />
-              </MenuItem>
+              {props.platform === 'kick' ||
+                (props.platform === 'twitch' && (
+                  <MenuItem value={2}>
+                    <FormattedMessage {...messages.raffleTypeVertical} />
+                  </MenuItem>
+                ))}
               <MenuItem value={1}>
                 <FormattedMessage {...messages.raffleTypeWheel} />
               </MenuItem>
@@ -312,6 +316,7 @@ RaffleWrapper.propTypes = {
   openRaffle: PropTypes.func.isRequired,
   onWin: PropTypes.func.isRequired,
   userArray: PropTypes.array,
+  platform: PropTypes.string,
 };
 
 export default RaffleWrapper;
