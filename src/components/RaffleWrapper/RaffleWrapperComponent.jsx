@@ -12,6 +12,7 @@ import confettiIcon from './assets/confetti.png';
 import CSGORaffle from '../CSGORaffle';
 import FortuneWheelRaffle from '../FortuneWheelRaffle';
 import VerticalRaffle from '../VerticalRaffle';
+import SlotMachine from '../SlotMachine';
 import NumericInput from '../NumericInput';
 import RaffleInfoDialog from '../RaffleInfoDialog';
 import StyledFormControl from '../StyledTextField/StyledFormControl';
@@ -197,6 +198,9 @@ const RaffleWrapper = (props) => {
                 <FormattedMessage {...messages.raffleTypeCS} />
               </MenuItem>
               */}
+              <MenuItem value={3}>
+                <FormattedMessage {...messages.raffleTypeSlots} />
+              </MenuItem>
               <MenuItem value={2}>
                 <FormattedMessage {...messages.raffleTypeVertical} />
               </MenuItem>
@@ -209,13 +213,15 @@ const RaffleWrapper = (props) => {
         </>
       )}
       <AnimationDurationSlot>
-        <NumericInput
-          label={intl.formatMessage({ ...messages.animationDuration })}
-          minValue={1}
-          maxValue={600}
-          value={props.animationDuration}
-          onChange={(ret) => props.changeAnimationDuration(Number(ret))}
-        />
+        {props.animationType !== 3 && (
+          <NumericInput
+            label={intl.formatMessage({ ...messages.animationDuration })}
+            minValue={1}
+            maxValue={600}
+            value={props.animationDuration}
+            onChange={(ret) => props.changeAnimationDuration(Number(ret))}
+          />
+        )}
         <ToggleGroup>
           <ToggleButton
             aria-label={intl.formatMessage({ ...messages.toggleSound })}
@@ -233,16 +239,20 @@ const RaffleWrapper = (props) => {
               )}
             </svg>
           </ToggleButton>
-          <ToggleButton
-            aria-label={intl.formatMessage({ ...messages.toggleEffects })}
-            aria-pressed={effectsOn}
-            $on={effectsOn}
-            onClick={() => toggle('gv-raffleEffects', effectsOn, setEffectsOn)}
-            title={intl.formatMessage({ ...messages.toggleEffects })}
-            type="button"
-          >
-            <ConfettiIcon $on={effectsOn} />
-          </ToggleButton>
+          {props.animationType !== 3 && (
+            <ToggleButton
+              aria-label={intl.formatMessage({ ...messages.toggleEffects })}
+              aria-pressed={effectsOn}
+              $on={effectsOn}
+              onClick={() =>
+                toggle('gv-raffleEffects', effectsOn, setEffectsOn)
+              }
+              title={intl.formatMessage({ ...messages.toggleEffects })}
+              type="button"
+            >
+              <ConfettiIcon $on={effectsOn} />
+            </ToggleButton>
+          )}
         </ToggleGroup>
       </AnimationDurationSlot>
       <StartButton disabled={noUsers} type="button" onClick={openDialog}>
@@ -271,6 +281,15 @@ const RaffleWrapper = (props) => {
       )}
       {props.isOpen && effectiveAnimationType === 2 && (
         <VerticalRaffle
+          duration={props.animationDuration}
+          effectsOn={effectsOn}
+          onClose={props.closeRaffle}
+          onWin={winnerHandler}
+          soundOn={soundOn}
+        />
+      )}
+      {props.isOpen && props.animationType === 3 && (
+        <SlotMachine
           duration={props.animationDuration}
           effectsOn={effectsOn}
           onClose={props.closeRaffle}

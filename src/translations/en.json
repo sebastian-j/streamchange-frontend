@@ -40,6 +40,7 @@
   "streamchange.components.RaffleWrapper.raffleType.fortuneWheel": "Fortune wheel",
   "streamchange.components.RaffleWrapper.raffleType.vertical": "Reel",
   "streamchange.components.VerticalRaffle.continueBtn": "Continue",
+  "streamchange.components.RaffleWrapper.raffleType.slots": "Slots Machine",
   "streamchange.components.RaffleWrapper.startBtn": "Roll it!",
   "streamchange.components.RaffleWrapper.toggleEffects": "Special effects",
   "streamchange.components.RaffleWrapper.toggleSound": "Animation sound",

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="34.290001mm"
+   height="54.610008mm"
+   viewBox="0 0 34.290001 54.610008"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-92.83713,-104.1471)">
+    <g
+       id="g2"
+       transform="matrix(0.26458333,0,0,0.26458333,44.365466,29.640436)">
+      <rect
+         x="232"
+         y="424"
+         style="fill:#4c5254"
+         width="32"
+         height="64"
+         id="rect19" />
+      <polyline
+         style="fill:#202d2a"
+         points="232,424 264,424 264,480 "
+         id="polyline19" />
+      <g
+         id="g1">
+        <circle
+           style="fill:#ea1f0a"
+           cx="248"
+           cy="346.39999"
+           r="64.800003"
+           id="circle19" />
+        <ellipse
+           transform="matrix(-0.7073,-0.7069,0.7069,-0.7073,153.5027,683.0189)"
+           style="fill:#ef683f"
+           cx="218.153"
+           cy="309.73099"
+           rx="11.2"
+           ry="23.200001"
+           id="ellipse20" />
+        <path
+           style="fill:#aa2011"
+           d="m 293.6,300.8 c 25.6,25.6 25.6,66.4 0,91.2 -25.6,25.6 -66.4,25.6 -91.2,0"
+           id="path20" />
+        <path
+           style="fill:#f9b843"
+           d="m 290.4,416 c 0,8 -6.4,16 -13.6,16 H 220 c -7.2,0 -13.6,-8 -13.6,-16 v 0 c 0,-7.2 6.4,-16 13.6,-16 h 56.8 c 7.2,0 13.6,8.8 13.6,16 z"
+           id="path21" />
+        <path
+           style="fill:#e88813"
+           d="m 290.4,417.6 v 0 c 0,8 -6.4,14.4 -13.6,14.4 H 220 c -7.2,0 -13.6,-6.4 -13.6,-14.4 v 0"
+           id="path22" />
+      </g>
+    </g>
+  </g>
+</svg>

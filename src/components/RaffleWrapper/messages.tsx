@@ -44,4 +44,7 @@ export default defineMessages({
     id: `${scope}.raffleType.vertical`,
     defaultMessage: 'Reel',
   },
+  raffleTypeSlots: {
+    id: `${scope}.raffleType.slots`,
+  },
 });
