@@ -371,22 +371,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .vraffle-winner--visible .vraffle-winner-name,
-  .vraffle-dialog--win,
-  .vraffle-flash,
-  .vraffle-shockwave,
-  .vraffle-rays,
-  .vraffle-winner--visible .vraffle-close-btn::after {
-    animation: none;
-    display: none;
-  }
-
-  .vroller-box--win {
-    animation: none;
-  }
-}
-
 /* a gleam sweeping across the button, to pull the eye to the thing to click.
    The winner name cannot take this treatment - background-clip: text would
    fight the chat colour that gets set on it inline. */
