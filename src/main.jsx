@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore({});
 const container = document.getElementById('app');
-const root = createRoot(container);
+const root = createRoot(container); // na dole wszystkie stare providery
 root.render(
   <Provider store={store}>
     <LanguageProvider messages={translationMessages}>
@@ -23,3 +23,8 @@ root.render(
     </LanguageProvider>
   </Provider>
 );
+// brakuje tutaj starego kodu z production
+// we do not want it installed
+// if (process.env.NODE_ENV === 'production') {
+//   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+// }
