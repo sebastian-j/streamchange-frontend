@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore({});
 const container = document.getElementById('app');
-const root = createRoot(container); // na dole wszystkie stare providery
+const root = createRoot(container); 
 root.render(
   <Provider store={store}>
     <LanguageProvider messages={translationMessages}>
