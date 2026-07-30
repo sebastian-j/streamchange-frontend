@@ -5,8 +5,6 @@ import { useSound, setSoundEnabled } from 'react-sounds';
 import InternalChatBadges from '../ChatView/InternalChatBadges';
 import slotMachineImg from './assets/SlotsMachineOuter.svg';
 import lever from './assets/lever1.svg';
-import speakerOn from './assets/SpeakerOn.svg';
-import speakerOff from './assets/SpeakerOff.svg';
 import lemon from './assets/symbols/lemon.svg';
 import bell from './assets/symbols/bell.svg';
 import cherry from './assets/symbols/cherry.svg';
@@ -38,15 +36,6 @@ const SlotMachineImg = styled.img`
   left: -15%;
   z-index: 1;
 `;
-const Speaker = styled.img`
-  width: 7%;
-  height: 7%;
-  position: absolute;
-  top: 95.5%;
-  left: 93.5%;
-  z-index: 10;
-`;
-
 const Leverimg = styled.img`
   width: 40%;
   height: 50%;
@@ -112,7 +101,6 @@ const SlotsRaffleComponent = (props) => {
   const [isRolling, setIsRolling] = useState(false);
   const [winnerShow, setWinnerShow] = useState(false);
   const [winner, setWinner] = useState(null);
-  const [soundOn, setSoundOn] = useState(true);
 
   const timerRef = useRef(null);
   const winIntervalRef = useRef(null);
@@ -124,13 +112,8 @@ const SlotsRaffleComponent = (props) => {
     rate: 4.0,
     volume: 0.75,
   });
-  const soundOnRef = useRef(soundOn);
   const levelUpPlayRef = useRef(levelUpPlay);
   const levelUpStopRef = useRef(levelUpStop);
-
-  useEffect(() => {
-    soundOnRef.current = soundOn;
-  }, [soundOn]);
 
   useEffect(() => {
     levelUpPlayRef.current = levelUpPlay;
@@ -141,20 +124,8 @@ const SlotsRaffleComponent = (props) => {
     setSoundEnabled(true);
     if (!props.soundOn) {
       setSoundEnabled(false);
-      console.log(props.soundOn);
     }
   }, [props.soundOn]);
-
-  const turnSpeakerOff = () => {
-    setSoundEnabled(false);
-    setSoundOn(false);
-    levelUpStopRef.current?.();
-  };
-
-  const turnSpeakerOn = () => {
-    setSoundEnabled(true);
-    setSoundOn(true);
-  };
 
   const eligibleUsers = useMemo(() => {
     let users = (props.userArray || []).filter(
@@ -323,9 +294,7 @@ const SlotsRaffleComponent = (props) => {
     winTimeoutRef.current = setTimeout(() => {
       winnerView();
       winIntervalRef.current = setInterval(() => {
-        if (soundOnRef.current) {
-          levelUpPlayRef.current?.();
-        }
+        levelUpPlayRef.current?.();
       }, 100);
 
       setTimeout(() => {
@@ -437,16 +406,14 @@ const SlotsRaffleComponent = (props) => {
       const currentTickIndex = Math.floor(translateY / itemHeightPx);
 
       if (currentTickIndex !== lastTickIndex) {
-        if (soundOnRef.current) {
-          if (isRolling) {
-            if (currentTickIndex % 2 === 0) {
-              if (playToggleOn) playToggleOff();
-            } else {
-              if (playToggleOff) playToggleOn();
-            }
+        if (isRolling) {
+          if (currentTickIndex % 2 === 0) {
+            if (playToggleOn) playToggleOff();
           } else {
-            if (playToggleOff) playToggleOff();
+            if (playToggleOff) playToggleOn();
           }
+        } else {
+          if (playToggleOff) playToggleOff();
         }
 
         lastTickIndex = currentTickIndex;
@@ -478,11 +445,6 @@ const SlotsRaffleComponent = (props) => {
           className={`lever ${isPulled ? 'lever-pulled' : ''}`}
           onClick={handleLeverClick}
         />
-        {soundOn ? (
-          <Speaker src={speakerOn} onClick={turnSpeakerOff} />
-        ) : (
-          <Speaker src={speakerOff} onClick={turnSpeakerOn} />
-        )}
         {winnerShow && (
           <div className="stars-container">
             <div className="star-particle" />
