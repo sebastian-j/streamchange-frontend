@@ -199,7 +199,7 @@ const YoutubeWorker = (props) => {
     <ThreeSections>
       <UserList />
       <GiveawayRules apiKey={props.apiKey} />
-      <ChatView videoId={props.videoId} />
+      <ChatView videoId={props.videoId} platform={'youtube'} />
       {superChat && (
         <SuperChat
           imageUrl={superChat.imageUrl}

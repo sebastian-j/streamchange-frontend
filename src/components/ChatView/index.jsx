@@ -104,7 +104,11 @@ function ChatView(props) {
         </MenuList>
       </Header>
       {chatMode === CHAT_MODES.EMBEDDED && (
-        <ChatEmbed channel={props.channel} platform={props.platform} />
+        <ChatEmbed
+          channel={props.channel}
+          platform={props.platform}
+          videoId={props.videoId}
+        />
       )}
       {chatMode === CHAT_MODES.INTERNAL && <InternalChat />}
     </Panel>
@@ -114,6 +118,7 @@ function ChatView(props) {
 ChatView.propTypes = {
   channel: PropTypes.string,
   platform: PropTypes.string,
+  videoId: PropTypes.string,
 };
 
 export default ChatView;

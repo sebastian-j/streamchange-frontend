@@ -29,7 +29,7 @@ import {
 import { API_KEY, BACKEND_URL } from '../../config';
 import { changeColor } from '../../containers/StyleProvider/actions';
 import { getPlatformColor } from '../../theme';
-
+import YoutubeWorker from '../../components/YoutubeWorker';
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -99,11 +99,6 @@ const StyledButton = styled(Button)`
   }
 `;
 
-/*
- * On mobile the toolbar actions live in the hamburger menu. The dialogs stay
- * mounted (their triggers are hidden) because MUI renders them in a portal, so
- * the menu can open them through props/Redux.
- */
 const HiddenTriggers = styled.div`
   display: none;
 `;
@@ -145,6 +140,7 @@ const GiveawayPage = (props) => {
     sessionStorage.removeItem('gv-thumbnailUrl');
     sessionStorage.removeItem('gv-ownerId');
     sessionStorage.removeItem('gv-avatarUrl');
+    sessionStorage.removeItem('gv-streamData');
     localStorage.removeItem('gv-channel');
     localStorage.removeItem('gv-platform');
     window.location.reload();
@@ -173,6 +169,8 @@ const GiveawayPage = (props) => {
     }
 
     if (platformName === 'youtube') {
+      sessionStorage.removeItem('gv-streamData');
+
       axios
         .get(
           `https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+liveStreamingDetails&id=${channelName}&key=${API_KEY}`
@@ -192,14 +190,12 @@ const GiveawayPage = (props) => {
               title: stream.snippet.title,
               videoId: channelName,
               platform: platformName,
-              streamData,
             };
             props.changeStreamProperties(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
             sessionStorage.setItem('gv-title', streamProps.title);
             sessionStorage.setItem('gv-thumbnailUrl', streamProps.thumbnailUrl);
             sessionStorage.setItem('gv-ownerId', streamProps.ownerId);
-            sessionStorage.setItem('gv-streamData', JSON.stringify(streamData));
           }
         })
         .catch((err) => {
@@ -215,7 +211,6 @@ const GiveawayPage = (props) => {
               title: 'Tytuł nieznany',
               videoId: channelName,
               platform: platformName,
-              streamData,
             };
             props.changeStreamProperties(streamProps);
             sessionStorage.setItem('gv-videoId', channelName);
@@ -230,11 +225,14 @@ const GiveawayPage = (props) => {
         title: streamData?.title || channelName,
         videoId: channelName,
         platform: platformName,
-        streamData: streamData,
+        streamData: streamData || null,
       };
       props.changeStreamProperties(streamProps);
+
       if (streamData) {
         sessionStorage.setItem('gv-streamData', JSON.stringify(streamData));
+      } else {
+        sessionStorage.removeItem('gv-streamData');
       }
 
       if (streamData?.user_id) {
@@ -271,10 +269,21 @@ const GiveawayPage = (props) => {
       sessionStorage.getItem('gv-thumbnailUrl') ||
       'https://static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg';
     const storedOwnerId = sessionStorage.getItem('gv-ownerId') || channel;
+
     const savedStreamData = sessionStorage.getItem('gv-streamData');
-    const parsedStreamData = savedStreamData
-      ? JSON.parse(savedStreamData)
-      : null;
+    let parsedStreamData = null;
+    if (
+      platform !== 'youtube' &&
+      savedStreamData &&
+      savedStreamData !== 'undefined'
+    ) {
+      try {
+        parsedStreamData = JSON.parse(savedStreamData);
+      } catch (e) {
+        console.warn('Nieprawidłowy ciąg JSON w gv-streamData:', e);
+      }
+    }
+
     const storedAvatar = sessionStorage.getItem('gv-avatarUrl');
 
     if (channel) {
@@ -284,11 +293,15 @@ const GiveawayPage = (props) => {
         title: storedTitle,
         videoId: channel,
         platform,
-        streamData: parsedStreamData,
+        ...(platform !== 'youtube' && { streamData: parsedStreamData }),
       };
       changeStreamProperties(streamProps);
 
-      if (!storedAvatar && parsedStreamData?.user_id) {
+      if (
+        !storedAvatar &&
+        parsedStreamData?.user_id &&
+        platform !== 'youtube'
+      ) {
         fetchAvatar(parsedStreamData.user_id, platform);
       }
     }
@@ -400,28 +413,35 @@ const GiveawayPage = (props) => {
           )}
         </TopButtons>
       </TopBar>
-      <StreamerWorker
-        channel={props.streamInfo.videoId}
-        platform={props.streamInfo.platform}
-        apiKey={API_KEY}
-        onBlacklisted={(reason) => {
-          setError(`blacklisted:${reason}`);
-          const streamProps = {
-            ownerId: '',
-            thumbnailUrl: '',
-            title: '',
-            videoId: '',
-            platform: '',
-          };
-          props.changeStreamProperties(streamProps);
-          sessionStorage.removeItem('gv-videoId');
-          sessionStorage.removeItem('gv-title');
-          sessionStorage.removeItem('gv-thumbnailUrl');
-          sessionStorage.removeItem('gv-ownerId');
-          localStorage.removeItem('gv-channel');
-          localStorage.removeItem('gv-platform');
-        }}
-      />
+      {(props.streamInfo.platform === 'twitch' ||
+        props.streamInfo.platform === 'kick') && (
+        <StreamerWorker
+          channel={props.streamInfo.videoId}
+          platform={props.streamInfo.platform}
+          apiKey={API_KEY}
+          onBlacklisted={(reason) => {
+            setError(`blacklisted:${reason}`);
+            const streamProps = {
+              ownerId: '',
+              thumbnailUrl: '',
+              title: '',
+              videoId: '',
+              platform: '',
+            };
+            props.changeStreamProperties(streamProps);
+            sessionStorage.removeItem('gv-videoId');
+            sessionStorage.removeItem('gv-title');
+            sessionStorage.removeItem('gv-thumbnailUrl');
+            sessionStorage.removeItem('gv-ownerId');
+            sessionStorage.removeItem('gv-streamData');
+            localStorage.removeItem('gv-channel');
+            localStorage.removeItem('gv-platform');
+          }}
+        />
+      )}
+      {props.streamInfo.platform === 'youtube' && (
+        <YoutubeWorker videoId={props.streamInfo.videoId} apiKey={API_KEY} />
+      )}
     </PageContainer>
   );
 };

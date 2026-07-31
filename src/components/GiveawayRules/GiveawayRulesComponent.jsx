@@ -98,10 +98,13 @@ class GiveawayRules extends React.Component {
         <KeywordInput />
         <RaffleWrapper onWin={this.winHandler} />
         <LotteryLawWarning open={this.props.requirement === 1} />
-        <StreamInfo
-          streamData={this.props.streamInfo?.streamData}
-          platform={this.props.streamInfo?.platform}
-        />
+        {(this.props.streamInfo?.platform === 'kick' ||
+          this.props.streamInfo?.platform === 'twitch') && (
+          <StreamInfo
+            streamData={this.props.streamInfo?.streamData}
+            platform={this.props.streamInfo?.platform}
+          />
+        )}
         <AdFrame />
       </Panel>
     );

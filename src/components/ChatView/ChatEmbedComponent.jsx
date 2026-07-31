@@ -9,7 +9,6 @@ const ChatFrame = styled.iframe`
 
 export function ChatEmbed(props) {
   if (props.channel === 'test') return <div />;
-
   const channel = encodeURIComponent(props.channel);
 
   if (props.platform === 'twitch') {
@@ -22,7 +21,15 @@ export function ChatEmbed(props) {
       />
     );
   }
-
+  if (props.platform === 'youtube') {
+    return (
+      <ChatFrame
+        className="chat-frame"
+        title="Youtube Chat"
+        src={`https://www.youtube.com/live_chat?v=${props.videoId}&embed_domain=${window.location.hostname}`}
+      />
+    );
+  }
   return (
     <ChatFrame
       className="chat-frame"
@@ -35,6 +42,7 @@ export function ChatEmbed(props) {
 ChatEmbed.propTypes = {
   channel: PropTypes.string,
   platform: PropTypes.string,
+  videoId: PropTypes.string,
   isDarkMode: PropTypes.bool,
 };
 

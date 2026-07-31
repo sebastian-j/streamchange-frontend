@@ -243,11 +243,6 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
     </button>
   </div>
   <div
-    class="sc-gLfMdy hbWZYw"
-  >
-    streamchange.components.StreamInfo.LOS
-  </div>
-  <div
     data-testid="ad-frame"
   />
 </div>
