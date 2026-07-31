@@ -202,12 +202,12 @@ const RaffleWrapper = (props) => {
               <MenuItem value={3}>
                 <FormattedMessage {...messages.raffleTypeSlots} />
               </MenuItem>
-              {props.platform === 'kick' ||
-                (props.platform === 'twitch' && (
+              {(props.platform === 'kick' ||
+                props.platform === 'twitch') && (
                   <MenuItem value={2}>
                     <FormattedMessage {...messages.raffleTypeVertical} />
                   </MenuItem>
-                ))}
+                )}
               <MenuItem value={1}>
                 <FormattedMessage {...messages.raffleTypeWheel} />
               </MenuItem>
