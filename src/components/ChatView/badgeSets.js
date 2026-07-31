@@ -14,6 +14,10 @@ import twitchSubscriber from './assets/badges/twitch/twitch_subscriber_badge.svg
 import twitchFounder from './assets/badges/twitch/twitch_founder_badge.svg';
 import twitchCertified from './assets/badges/twitch/twitch_verified_badge.svg';
 
+import youtubeBroadcaster from './assets/badges/youtube/youtube_streamer_badge.svg';
+import youtubeModerator from './assets/badges/youtube/youtube_moderator_badge.svg';
+import youtubeSubscriber from './assets/badges/youtube/youtube_subscriber_badge.svg';
+import youtubeVerified from './assets/badges/youtube/youtube_verified_badge.svg';
 // Badges are rendered left-to-right in this order, like on Twitch/Kick
 export const BADGE_ORDER = [
   { key: 'broadcaster', label: 'Broadcaster' },
@@ -46,5 +50,11 @@ export const BADGE_SETS = {
     subscriber: twitchSubscriber,
     founder: twitchFounder,
     certified: twitchCertified,
+  },
+  youtube: {
+    broadcaster: youtubeBroadcaster,
+    moderator: youtubeModerator,
+    subscriber: youtubeSubscriber,
+    certified: youtubeVerified,
   },
 };
