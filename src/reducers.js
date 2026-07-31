@@ -7,8 +7,8 @@ import { combineReducers } from 'redux';
 import giveawayRulesReducer from './components/GiveawayRules/reducer';
 import giveawayPageReducer from './containers/GiveawayPage/reducer';
 import languageProviderReducer from './containers/LanguageProvider/reducer';
-import styleProviderReducer from '../src/containers/StyleProvider/reducer';
-import raffleWrapperReducer from '../src/components/RaffleWrapper/reducer';
+import styleProviderReducer from './containers/StyleProvider/reducer';
+import raffleWrapperReducer from './components/RaffleWrapper/reducer';
 import queueReducer from './containers/QueuePage/reducer';
 
 /**
