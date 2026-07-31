@@ -17,7 +17,7 @@ import WavyButton from './components/WavyButton';
 import { streamInfoPost } from '../StreamInfo/StreamInfoPost';
 
 const CHANNEL_URL_REGEX =
-  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com|youtube\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
+  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com|youtube\.com|youtu\.be)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
 
 const lightMuiTheme = createTheme({ palette: { mode: 'light' } });
 
