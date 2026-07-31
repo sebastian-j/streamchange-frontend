@@ -149,7 +149,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       </div>
     </div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-ivuvMG gidNyO css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeSmall MuiButton-colorPrimary sc-bBQtQX kznTpM css-1ccsd5i-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -157,7 +157,7 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         class="MuiButton-icon MuiButton-startIcon css-t70kls-MuiButton-startIcon"
       >
         <svg
-          class="sc-dmsmPq dGHkWp"
+          class="sc-hIjUsD bfNdXm"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -169,44 +169,44 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
       How do the raffle methods work?
     </button>
     <div
-      class="sc-llBdKb gZoFxR"
+      class="sc-cxhVIO deEygt"
     >
       <div
-        class="sc-bjvxhe yqztR"
+        class="sc-fFneKr etjryE"
       >
         <label
-          class="sc-idHmUl etZyaQ"
+          class="sc-bjvxhe cgiWaW"
           for="number-display"
         >
           Animation duration (seconds)
         </label>
         <button
           aria-label="Decrease by one"
-          class="sc-dHPFqY kvuOxD"
+          class="sc-idHmUl fwKSRU"
           type="button"
         >
           -
         </button>
         <input
-          class="sc-hIjUsD bqcLJZ"
+          class="sc-dHPFqY kYMyOe"
           id="number-display"
           value="7"
         />
         <button
           aria-label="Increase by one"
-          class="sc-dHPFqY dmkUDT"
+          class="sc-idHmUl bKlsHE"
           type="button"
         >
           +
         </button>
       </div>
       <div
-        class="sc-iIXgSY uWkQi"
+        class="sc-llBdKb kbQTzM"
       >
         <button
           aria-label="Animation sound"
           aria-pressed="true"
-          class="sc-ghUFvp bCRuji"
+          class="sc-iIXgSY fooZsB"
           title="Animation sound"
           type="button"
         >
@@ -222,18 +222,18 @@ exports[`<GiveawayRules /> > should render and match the snapshot 1`] = `
         <button
           aria-label="Special effects"
           aria-pressed="true"
-          class="sc-ghUFvp bCRuji"
+          class="sc-iIXgSY fooZsB"
           title="Special effects"
           type="button"
         >
           <span
-            class="sc-eAeLra dvkYWE"
+            class="sc-ghUFvp cmCGXg"
           />
         </button>
       </div>
     </div>
     <button
-      class="sc-cxhVIO cXjWaO"
+      class="sc-ivuvMG dXRSIv"
       type="button"
     >
       Roll it!
