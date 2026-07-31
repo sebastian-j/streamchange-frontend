@@ -16,32 +16,52 @@ import { PhotoBackdrop } from './components/PhotoBackdrop';
 import WavyButton from './components/WavyButton';
 import { streamInfoPost } from '../StreamInfo/StreamInfoPost';
 
-const CHANNEL_URL_REGEX =
-  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com|youtube\.com|youtu\.be)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
+const STREAM_URL_REGEX =
+  /^(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)|(youtube\.com|youtu\.be)\/(?:watch\?v=|shorts\/|live\/|v\/)?([a-zA-Z0-9_.-]+))(?:[/?#].*)?$/i;
 
 const lightMuiTheme = createTheme({ palette: { mode: 'light' } });
 
 const parseChannelInput = (value) => {
   const trimmed = value.trim();
+
   if (trimmed.toLowerCase() === 'test') {
     return { channel: 'test', platform: 'twitch' };
   }
-  const match = trimmed.match(CHANNEL_URL_REGEX);
+  if (
+    /youtube\.com\/@?[a-zA-Z0-9_.-]+$/i.test(trimmed) &&
+    !trimmed.endsWith('/live')
+  ) {
+    return null;
+  }
+
+  const match = trimmed.match(STREAM_URL_REGEX);
   if (!match) {
     return null;
   }
-  const [, domain, channelName] = match;
-  return {
-    channel: channelName,
-    platform: (() => {
-      const d = domain.toLowerCase();
-      if (d.includes('twitch')) return 'twitch';
-      if (d.includes('youtube') || d.includes('youtu.be')) return 'youtube';
-      return 'kick';
-    })(),
-  };
-};
 
+  const [, twKickDomain, twKickChannel, ytDomain, ytVideoId] = match;
+
+  if (twKickDomain) {
+    const d = twKickDomain.toLowerCase();
+    return {
+      channel: twKickChannel,
+      platform: d.includes('twitch') ? 'twitch' : 'kick',
+    };
+  }
+
+  if (ytDomain) {
+    const cleanVideoId = ytVideoId.startsWith('@')
+      ? ytVideoId.slice(1)
+      : ytVideoId;
+
+    return {
+      videoId: cleanVideoId,
+      platform: 'youtube',
+    };
+  }
+
+  return null;
+};
 const WelcomeDialog = (props) => {
   const intl = useIntl();
   const [isChrome] = useState(() => !!window.chrome);
