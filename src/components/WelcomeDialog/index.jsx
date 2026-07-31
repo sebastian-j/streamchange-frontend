@@ -17,7 +17,7 @@ import WavyButton from './components/WavyButton';
 import { streamInfoPost } from '../StreamInfo/StreamInfoPost';
 
 const CHANNEL_URL_REGEX =
-  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
+  /^(?:https?:\/\/)?(?:www\.)?(twitch\.tv|kick\.com|youtube\.com)\/([a-zA-Z0-9_-]+)(?:[/?#].*)?$/i;
 
 const lightMuiTheme = createTheme({ palette: { mode: 'light' } });
 
@@ -33,7 +33,12 @@ const parseChannelInput = (value) => {
   const [, domain, channelName] = match;
   return {
     channel: channelName,
-    platform: domain.toLowerCase().includes('twitch') ? 'twitch' : 'kick',
+    platform: (() => {
+      const d = domain.toLowerCase();
+      if (d.includes('twitch')) return 'twitch';
+      if (d.includes('youtube') || d.includes('youtu.be')) return 'youtube';
+      return 'kick';
+    })(),
   };
 };
 
