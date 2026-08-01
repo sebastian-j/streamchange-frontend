@@ -372,17 +372,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vraffle-winner--visible .vraffle-winner-name,
-  .vraffle-dialog--win,
   .vraffle-flash,
   .vraffle-shockwave,
   .vraffle-rays,
   .vraffle-winner--visible .vraffle-close-btn::after {
-    animation: none;
     display: none;
   }
 
-  .vroller-box--win {
+  .vraffle-winner--visible .vraffle-winner-name {
     animation: none;
   }
 }
