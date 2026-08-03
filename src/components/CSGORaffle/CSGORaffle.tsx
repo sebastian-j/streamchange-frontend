@@ -1,40 +1,71 @@
 import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import './style.css';
 
-const CSGORaffle = (props) => {
-  const [{ users, winner, scroll }] = useState(() => {
-    let eligibleUsers = props.userArray.filter(
+type UserId = string | number;
+
+type RaffleUser = {
+  id: UserId;
+  title?: string;
+  imageUrl?: string;
+  isEligible: boolean;
+  isSubscriber?: boolean;
+}
+
+type CSGORaffleProps = {
+  duration?: number;
+  giveawayReq?: number;
+  onClose: () => void;
+  onWin: (winnerId: UserId) => void;
+  preWinner?: RaffleUser;
+  userArray: RaffleUser[];
+}
+
+type RaffleState = {
+  users: RaffleUser[];
+  winner?: RaffleUser;
+  scroll: number;
+}
+
+const CSGORaffle = ({
+  duration = 7,
+  giveawayReq,
+  onClose,
+  onWin,
+  preWinner,
+  userArray,
+}: CSGORaffleProps) => {
+  const [{ users, winner, scroll }] = useState<RaffleState>(() => {
+    let eligibleUsers = userArray.filter(
       (user) => user.isEligible === true
     );
-    if (props.giveawayReq === 1) {
+    if (giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter(
         (user) => user.isSubscriber !== false
       );
     }
     const shuffled = [];
     if (eligibleUsers.length > 0) {
-      for (let i = 0; i < 30 + props.duration * 3; i += 1) {
+      for (let i = 0; i < 30 + duration * 3; i += 1) {
         shuffled.push(
           eligibleUsers[Math.floor(Math.random() * eligibleUsers.length)]
         );
       }
     }
     const winnerIndex =
-      Math.floor(Math.random() * 10) + 10 + props.duration * 3;
-    if (props.preWinner) shuffled[winnerIndex] = props.preWinner;
+      Math.floor(Math.random() * 10) + 10 + duration * 3;
+    if (preWinner) shuffled[winnerIndex] = preWinner;
     return {
       users: shuffled,
       winner: shuffled[winnerIndex],
       scroll: -(winnerIndex * 150 + Math.floor(Math.random() * 65) - 290),
     };
   });
-  const [scrollSize, setScrollSize] = useState(0);
+  const [scrollSize, setScrollSize] = useState<number>(0);
   const timerRef = useRef(null);
 
   const closeImmediately = () => {
-    props.onClose();
+    onClose();
     clearTimeout(timerRef.current);
   };
 
@@ -42,12 +73,12 @@ const CSGORaffle = (props) => {
     const scrollTimeout = setTimeout(() => setScrollSize(scroll), 10);
     timerRef.current = setTimeout(
       () => {
-        props.onWin(winner.id);
+        onWin(winner.id);
       },
-      (props.duration + 1) * 1000
+      (duration + 1) * 1000
     );
     return () => clearTimeout(scrollTimeout);
-  }, [scroll, winner, props]);
+  }, [scroll, winner, duration, onWin]);
 
   return (
     <div className="dialog-root">
@@ -66,7 +97,7 @@ const CSGORaffle = (props) => {
                 className="roller-movable"
                 style={{
                   left: scrollSize,
-                  transitionDuration: `${props.duration}s`,
+                  transitionDuration: `${duration}s`,
                 }}
               >
                 {users.map((item, index) => (
@@ -83,25 +114,13 @@ const CSGORaffle = (props) => {
         </div>
         <span
           className="raffle-winner"
-          style={{ animationDelay: `${props.duration + 0.1}s` }}
+          style={{ animationDelay: `${duration + 0.1}s` }}
         >
           {winner?.title}
         </span>
       </div>
     </div>
   );
-};
-
-CSGORaffle.propTypes = {
-  duration: PropTypes.number,
-  giveawayReq: PropTypes.number,
-  onClose: PropTypes.func.isRequired,
-  onWin: PropTypes.func.isRequired,
-  preWinner: PropTypes.object,
-  userArray: PropTypes.array,
-};
-CSGORaffle.defaultProps = {
-  duration: 7,
 };
 
 export default CSGORaffle;

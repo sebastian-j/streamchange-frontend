@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-const AdTitle = styled.span`
+const AdTitle = styled.span<{ margin: number }>`
   color: #7b7b7b;
   font-family: Arial, sans-serif;
   margin-bottom: 5px;
   margin-right: ${({ margin }) => margin}px;
 `;
 
-const PromotedContentWrapper = styled.div`
+const PromotedContentWrapper = styled.div<{ margin: number; offset: number }>`
   margin-bottom: ${({ margin }) => margin}px;
   position: relative;
   top: calc(45vh - ${({ offset }) => offset}px);
@@ -21,7 +20,7 @@ const Image = styled.img`
   width: 31vw;
 `;
 
-const Shield = styled.div`
+const Shield = styled.div<{ margin: number }>`
   bottom: 0;
   left: 0;
   padding-bottom: ${({ margin }) => margin}px;
@@ -30,9 +29,21 @@ const Shield = styled.div`
   top: 10px;
 `;
 
-const PromotedBanner = (props) => {
+type PromotedBannerProps = {
+  channelUrl: string;
+  imageUrl: string;
+  testMargins?: boolean;
+  title?: string;
+};
+
+const PromotedBanner = ({
+  channelUrl,
+  imageUrl,
+  testMargins = false,
+  title,
+}: PromotedBannerProps) => {
   const [imgHeight, setImgHeight] = useState(0);
-  const isVideo = props.imageUrl.substr(props.imageUrl.length - 3) === 'mp4';
+  const isVideo = imageUrl.substr(imageUrl.length - 3) === 'mp4';
 
   const onImgLoad = ({ target: img }) => {
     setImgHeight(img.offsetHeight);
@@ -46,63 +57,52 @@ const PromotedBanner = (props) => {
     <PromotedContentWrapper
       offset={imgHeight}
       // eslint-disable-next-line react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection
-      margin={props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
+      margin={testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
     >
       <AdTitle
         // eslint-disable-next-line react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection
-        margin={props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
+        margin={testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
       >
         <FormattedMessage {...messages.title} />
       </AdTitle>
-      <a href={props.channelUrl} target="_blank">
+      <a href={channelUrl} target="_blank">
         <div>
           {!isVideo && (
-            <Image alt={props.title} onLoad={onImgLoad} src={props.imageUrl} />
+            <Image alt={title} onLoad={onImgLoad} src={imageUrl} />
           )}
           {isVideo && (
             <video
               width="100%"
-              title={props.title}
+              title={title}
               autoPlay
               loop
               muted
               onLoadedMetadata={onVideoLoad}
             >
-              <source src={props.imageUrl} type="video/mp4" />
+              <source src={imageUrl} type="video/mp4" />
             </video>
           )}
         </div>
         {/* eslint-disable react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection */}
         <Shield
           margin={
-            props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100
+            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
           }
         />
         <Shield
           margin={
-            props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100
+            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
           }
         />
         <Shield
           margin={
-            props.testMargins ? 1 : Math.round(Math.random() * 1000) / 100
+            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
           }
         />
         {/* eslint-enable react-hooks/purity */}
       </a>
     </PromotedContentWrapper>
   );
-};
-
-PromotedBanner.propTypes = {
-  channelUrl: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  testMargins: PropTypes.bool,
-  title: PropTypes.string,
-};
-
-PromotedBanner.defaultProps = {
-  testMargins: false,
 };
 
 export default PromotedBanner;

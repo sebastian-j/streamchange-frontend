@@ -6,7 +6,7 @@ import { StyleProvider } from '../StyleProviderComponent';
 describe('<StyleProvider />', () => {
   it('should render its children', () => {
     const children = <h1>Test</h1>;
-    const { container } = render(<StyleProvider>{children}</StyleProvider>);
+    const { container } = render(<StyleProvider isDarkMode>{children}</StyleProvider>);
     expect(container.firstChild).not.toBeNull();
   });
 });

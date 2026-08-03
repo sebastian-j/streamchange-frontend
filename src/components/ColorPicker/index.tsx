@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SketchPicker } from 'react-color';
 import './style.css';
@@ -44,7 +43,14 @@ const PickerButton = styled.button`
   }
 `;
 
-const ColorPicker = (props) => {
+type ColorPickerProps = {
+  color?: string | { r: number; g: number; b: number; a: number };
+  name?: string;
+  label?: string;
+  handleChange: (name: string, color: string) => void;
+};
+
+const ColorPicker = (props: ColorPickerProps) => {
   const [color, setColor] = useState(props.color || '#000000');
   const [pickerVisible, setPickerVisible] = useState(false);
 
@@ -53,7 +59,7 @@ const ColorPicker = (props) => {
       ? color
       : `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 
-  const handleColorChange = (colorObject) => {
+  const handleColorChange = (colorObject: { rgb: { r: number; g: number; b: number; a: number } }) => {
     const rgba = colorObject.rgb;
     const hex = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
     setColor(rgba);
@@ -97,13 +103,6 @@ const ColorPicker = (props) => {
       )}
     </div>
   );
-};
-
-ColorPicker.propTypes = {
-  color: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  handleChange: PropTypes.func,
 };
 
 export default ColorPicker;

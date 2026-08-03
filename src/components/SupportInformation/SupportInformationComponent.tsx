@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -15,7 +14,13 @@ import ToolbarButton from './ToolbarButton';
 import { useInjectReducer } from '../../utils/injectReducer';
 import reducer from './reducer';
 
-const SupportInformation = (props) => {
+type SupportInformationProps = {
+  closeDialog: () => void;
+  isOpen: boolean;
+  openDialog: () => void;
+};
+
+const SupportInformation = (props: SupportInformationProps) => {
   useInjectReducer({ key: 'supportInfo', reducer });
 
   return (
@@ -91,12 +96,6 @@ const SupportInformation = (props) => {
       </Dialog>
     </div>
   );
-};
-
-SupportInformation.propTypes = {
-  closeDialog: PropTypes.func,
-  isOpen: PropTypes.bool,
-  openDialog: PropTypes.func,
 };
 
 export default SupportInformation;

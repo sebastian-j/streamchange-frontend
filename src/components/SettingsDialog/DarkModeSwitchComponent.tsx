@@ -1,21 +1,20 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { useIntl } from 'react-intl';
 
 import messages from './messages';
 
-const DarkModeSwitch = (props) => {
+const DarkModeSwitch = (onModeToggle: (event: React.ChangeEvent<HTMLInputElement>) => void) => {
   const intl = useIntl();
   const [state, setState] = useState(
     () => localStorage.getItem('darkMode') === 'true'
   );
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState(event.target.checked);
     localStorage.setItem('darkMode', event.target.checked.toString());
-    props.onModeToggle(event);
+    onModeToggle(event);
   };
 
   return (
@@ -28,10 +27,6 @@ const DarkModeSwitch = (props) => {
       />
     </div>
   );
-};
-
-DarkModeSwitch.propTypes = {
-  onModeToggle: PropTypes.func,
 };
 
 export default DarkModeSwitch;

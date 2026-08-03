@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import InputAdornment from '@mui/material/InputAdornment';
 import Tooltip from '@mui/material/Tooltip';
@@ -9,7 +8,14 @@ import StyledTextField from '../StyledTextField';
 import HintParagraph from '../Tooltip/HintParagraph';
 import ToggleVisibilityBtn from './ToggleVisibilityButton';
 
-const KeywordInput = (props) => {
+const StyledTextFieldAny = StyledTextField as any;
+
+type KeywordInputProps = {
+  keyword: string;
+  changeKeyword: (keyword: string) => void;
+};
+
+const KeywordInput = (props: KeywordInputProps) => {
   const intl = useIntl();
   const [visible, setVisible] = useState(true);
   const [error, setError] = useState(0);
@@ -34,7 +40,7 @@ const KeywordInput = (props) => {
       aria-label="keyword"
       enterDelay={800}
     >
-      <StyledTextField
+      <StyledTextFieldAny
         error={!!error}
         margin="dense"
         name="keyword"
@@ -50,7 +56,7 @@ const KeywordInput = (props) => {
             : ''
         }
         fullWidth
-        inputprops={{
+        InputProps={{
           endAdornment: (
             <InputAdornment position="end">
               <Tooltip
@@ -89,11 +95,6 @@ const KeywordInput = (props) => {
       />
     </Tooltip>
   );
-};
-
-KeywordInput.propTypes = {
-  keyword: PropTypes.string,
-  changeKeyword: PropTypes.func,
 };
 
 export default KeywordInput;

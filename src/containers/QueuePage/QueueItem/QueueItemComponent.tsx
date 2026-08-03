@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
@@ -15,7 +14,18 @@ import { Title } from './components/Title';
 import { UserBar } from './components/UserBar';
 import { UserBarColumn } from './components/UserBarColumn';
 
-const QueueItem = (props) => {
+type QueueItemProps = {
+  addedAt: string;
+  channelId: string;
+  deleteItem: (channelId: string) => void;
+  imageUrl: string;
+  title: string;
+  message: string;
+  lastActiveAt: string;
+  updateItem: (item: { id: string; message?: string; lastActiveAt?: string }) => void;
+};
+
+const QueueItem = (props: QueueItemProps) => {
   const [editMode, setEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState(props.message);
   const [prevMessage, setPrevMessage] = useState(props.message);
@@ -85,7 +95,7 @@ const QueueItem = (props) => {
               href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
-              <Logo alt="logo" src={props.imageUrl} edit={editMode} />
+              <Logo alt="logo" src={props.imageUrl} />
             </a>
             <UserBarColumn className="fullWidth">
               <Title className={clsx(isActive && 'active')}>
@@ -162,17 +172,6 @@ const QueueItem = (props) => {
       </Tooltip>
     </li>
   );
-};
-
-QueueItem.propTypes = {
-  addedAt: PropTypes.string,
-  channelId: PropTypes.string.isRequired,
-  deleteItem: PropTypes.func,
-  imageUrl: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  message: PropTypes.string,
-  lastActiveAt: PropTypes.string,
-  updateItem: PropTypes.func,
 };
 
 export default QueueItem;

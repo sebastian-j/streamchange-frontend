@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import {
@@ -37,9 +36,15 @@ const parseChannelInput = (value) => {
   };
 };
 
-const WelcomeDialog = (props) => {
+type WelcomeDialogProps = {
+  error?: string;
+  onStart?: (channel: string, platform: string, streamData: any) => void;
+  variant?: number;
+};
+
+const WelcomeDialog = (props: WelcomeDialogProps) => {
   const intl = useIntl();
-  const [isChrome] = useState(() => !!window.chrome);
+  const [isChrome] = useState(() => !!(window as any).chrome);
   const [isFirstUse] = useState(() => !localStorage.getItem('locale'));
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
@@ -182,12 +187,6 @@ const WelcomeDialog = (props) => {
       </div>
     </CompatibilityInfo>
   );
-};
-
-WelcomeDialog.propTypes = {
-  error: PropTypes.string,
-  onStart: PropTypes.func,
-  variant: PropTypes.number,
 };
 
 export default WelcomeDialog;

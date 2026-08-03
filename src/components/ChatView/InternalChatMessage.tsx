@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -9,7 +8,7 @@ const MessageLi = styled.li`
   margin-bottom: 5px;
 `;
 
-const AuthorTitle = styled.span`
+const AuthorTitle = styled('span')<{$userColor?: string}>`
   color: ${(props) =>
     props.$userColor
       ? getSafeColor(props.$userColor, props.theme.panelBackground)
@@ -50,7 +49,22 @@ const renderMessageBody = (message) => {
   return message.displayText;
 };
 
-const InternalChatMessage = (props) => {
+type InternalChatMessageProps = {
+  message: {
+    publishedAt: string;
+    title: string;
+    color?: string;
+    platform: string;
+    fragments?: Array<{
+      type: string;
+      text?: string;
+      code?: string;
+      url?: string;
+    }>;
+  };
+};
+
+const InternalChatMessage = (props: InternalChatMessageProps) => {
   const userColor = props.message.color || null;
   const dt = new Date(props.message.publishedAt);
   const convertedDate = `${dt.getHours()}:${
@@ -66,10 +80,6 @@ const InternalChatMessage = (props) => {
       <MessageText>{renderMessageBody(props.message)}</MessageText>
     </MessageLi>
   );
-};
-
-InternalChatMessage.propTypes = {
-  message: PropTypes.object.isRequired,
 };
 
 export default InternalChatMessage;

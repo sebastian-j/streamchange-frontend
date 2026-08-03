@@ -23,7 +23,7 @@ describe('<WelcomeDialog />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale="en">
-          <WelcomeDialog passVideo={() => 0} />
+          <WelcomeDialog />
         </IntlProvider>
       </Provider>
     );

@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -13,7 +12,7 @@ import { StyledButton } from './components/StyledButton';
 import { UrlContainer } from './components/UrlContainer';
 import messages from './messages';
 
-const QueueWidgetDialog = (props) => {
+const QueueWidgetDialog = (props: { widgetCode: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [widgetUrl, setWidgetUrl] = useState('');
   const urlInput = useRef(null);
@@ -65,7 +64,7 @@ const QueueWidgetDialog = (props) => {
           <UrlContainer>
             <input
               onFocus={(event) => event.target.select()}
-              readOnly="readonly"
+              readOnly
               ref={urlInput}
               type="text"
               value={widgetUrl}
@@ -85,10 +84,6 @@ const QueueWidgetDialog = (props) => {
       </Dialog>
     </div>
   );
-};
-
-QueueWidgetDialog.propTypes = {
-  widgetCode: PropTypes.string,
 };
 
 export default QueueWidgetDialog;

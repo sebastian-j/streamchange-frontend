@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';
 
@@ -20,7 +19,7 @@ const Label = styled.label`
     margin-right: 3px;
   }
 `;
-const Button = styled.button`
+const Button = styled.button<{ $left?: boolean }>`
   background: ${(props) => props.theme.buttonBackground};
   border: 1px solid ${(props) => props.theme.color};
   border-radius: 0 4px 4px 0;
@@ -65,6 +64,15 @@ const NumberDisplay = styled.input`
   }
 `;
 
+type NumericInputProps = {
+  label?: string;
+  onChange: (value: number) => void;
+  value?: number;
+  minValue?: number | null;
+  maxValue?: number | null;
+  step?: number;
+};
+
 const NumericInput = ({
   label = '',
   onChange,
@@ -72,7 +80,7 @@ const NumericInput = ({
   minValue = null,
   maxValue = null,
   step = 1,
-}) => {
+}: NumericInputProps) => {
   const intl = useIntl();
 
   const checkValue = (newValue) => {
@@ -105,7 +113,7 @@ const NumericInput = ({
       <Label htmlFor="number-display">{label}</Label>
       <Button
         aria-label={intl.formatMessage({ ...messages.decreaseButton })}
-        $left="true"
+        $left={true}
         onClick={dec}
         type="button"
       >
@@ -127,12 +135,4 @@ const NumericInput = ({
   );
 };
 
-NumericInput.propTypes = {
-  label: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.number,
-  minValue: PropTypes.number,
-  maxValue: PropTypes.number,
-  step: PropTypes.number,
-};
 export default NumericInput;
