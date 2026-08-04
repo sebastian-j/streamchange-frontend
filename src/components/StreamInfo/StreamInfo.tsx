@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages.js';
-import { getPlatformColor } from '../../theme';
+import { getPlatformColor } from '../../theme.js';
 
 const Card = styled.div`
   border: 1px solid ${(props) => props.theme.secondaryTextColor}44;
@@ -41,7 +41,7 @@ const ViewerStat = styled(Stat)`
   color: #e53935;
 `;
 
-const Category = styled.div`
+const Category = styled.div<{ $platform: string }>`
   font-size: 13px;
   font-weight: 500;
   color: ${(props) => getPlatformColor(props.$platform)};
@@ -69,29 +69,29 @@ const ViewerIcon = () => (
   </svg>
 );
 
-const StreamInfo = (props) => {
+const StreamInfo = (props: { streamData: any; platform: string }) => {
   const { streamData, platform } = props;
   const [uptime, setUptime] = useState('---');
 
   useEffect(() => {
     if (!streamData || !streamData.started_at) return;
 
-    const calculateUptime = (startedAt) => {
+    const calculateUptime = (startedAt: string) => {
       if (!startedAt) return 'Ładowanie...';
 
-      const start = new Date(startedAt);
-      const now = new Date();
+      const start = new Date(startedAt).getTime();
+      const now = new Date().getTime();
       const diff = now - start;
       let hours = Math.floor(diff / (1000 * 60 * 60));
-      let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      if (minutes.toString().length < 2) minutes = `0${minutes}`;
-      if (seconds.toString().length < 2) seconds = `0${seconds}`;
+      const minutesStr = minutes.toString().padStart(2, '0');
+      const secondsStr = seconds.toString().padStart(2, '0');
       if (platform === 'kick') {
         hours = hours - 2;
       }
-      return `${hours}:${minutes}:${seconds}`;
+      return `${hours}:${minutesStr}:${secondsStr}`;
     };
 
     const update = () => setUptime(calculateUptime(streamData.started_at));

@@ -9,7 +9,7 @@ import { Wrapper } from './components/Wrapper';
 import messages from './messages';
 
 const CookieConsent = () => {
-  const [accepted, setAccepted] = useState(
+  const [accepted, setAccepted] = useState<boolean>(
     localStorage.getItem('cookieConsent') === 'true'
   );
   const handleAcceptClick = () => {

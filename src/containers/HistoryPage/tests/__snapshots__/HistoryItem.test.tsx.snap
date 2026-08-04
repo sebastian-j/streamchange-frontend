@@ -42,7 +42,9 @@ exports[`<HistoryItem /> > should render and match the snapshot 1`] = `
   <td
     class="sc-hLllbt XGmoA text"
   >
-    <span>
+    <span
+      class="relativeDate"
+    >
       December 24, 2019
        8:27
     </span>

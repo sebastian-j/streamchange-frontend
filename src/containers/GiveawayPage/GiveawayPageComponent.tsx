@@ -27,7 +27,7 @@ import {
   AvatarSkeleton,
 } from '../../components/AvatarFallback';
 import { API_KEY, BACKEND_URL } from '../../config';
-import { changeColor } from '../../containers/StyleProvider/actions';
+import { changeColor } from '../StyleProvider/actions';
 import { getPlatformColor } from '../../theme';
 
 const PageContainer = styled.div`
@@ -66,7 +66,7 @@ const StreamInfoBar = styled.div`
   }
 `;
 
-const StreamAvatar = styled.img`
+const StreamAvatar = styled.img<{ $platform: string }>`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -115,13 +115,13 @@ const MenuIcon = () => (
 );
 
 const GiveawayPage = (props) => {
-  const [error, setError] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(() =>
+  const [error, setError] = useState<null | string>(null);
+  const [avatarUrl, setAvatarUrl] = useState<null | string>(() =>
     sessionStorage.getItem('gv-avatarUrl')
   );
-  const [avatarLoading, setAvatarLoading] = useState(false);
-  const [menuAnchor, setMenuAnchor] = useState(null);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [avatarLoading, setAvatarLoading] = useState<boolean>(false);
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const isMobile = useMediaQuery('(orientation: portrait)');
   const dispatch = useDispatch();
   const intl = useIntl();
@@ -150,7 +150,11 @@ const GiveawayPage = (props) => {
     window.location.reload();
   };
 
-  const handleStartStream = async (channelName, platformName, streamData) => {
+  const handleStartStream = async (
+    channelName: string,
+    platformName: string,
+    streamData: any
+  ) => {
     setError(null);
     try {
       const blacklistRes = await axios.get(
@@ -243,7 +247,7 @@ const GiveawayPage = (props) => {
     }
   };
 
-  const fetchAvatar = async (userId, platform) => {
+  const fetchAvatar = async (userId: string, platform: string) => {
     setAvatarLoading(true);
     try {
       const res = await axios.get(`${BACKEND_URL}/api/avatar`, {
