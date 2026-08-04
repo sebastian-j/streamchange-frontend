@@ -26,7 +26,7 @@ interface Props {
 }
 
 const WavyButton = ({ onClick, text }: Props) => {
-  const [translate, setTranslate] = useState('0');
+  const [translate, setTranslate] = useState<string>('0');
 
   const onMouseEnter = () => {
     setTranslate('-25%');

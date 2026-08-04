@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -34,7 +33,12 @@ const PromotedContent = styled.div`
   padding: 14px;
 `;
 
-const PromotedVideo = (props) => (
+type PromotedVideoProps = {
+  description?: string;
+  videoId: string;
+};
+
+const PromotedVideo = (props: PromotedVideoProps) => (
   <PromotedContentWrapper>
     <AdTitle>
       <FormattedMessage {...messages.title} />
@@ -52,10 +56,5 @@ const PromotedVideo = (props) => (
     </PromotedContent>
   </PromotedContentWrapper>
 );
-
-PromotedVideo.propTypes = {
-  description: PropTypes.string,
-  videoId: PropTypes.string.isRequired,
-};
 
 export default PromotedVideo;

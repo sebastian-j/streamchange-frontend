@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Avatar from '@mui/material/Avatar';
@@ -30,7 +29,20 @@ const ListItem = styled.li`
   }
 `;
 
-const FilterChips = (props) => {
+type FilterChipsProps = {
+  onDelete: (filterName: string) => void;
+  filters: {
+    regulars?: boolean;
+    moderators?: boolean;
+    subscribers?: boolean;
+    vip?: boolean;
+    participating?: boolean;
+    notParticipating?: boolean;
+  };
+  platform: string;
+};
+
+const FilterChips = (props: FilterChipsProps) => {
   const intl = useIntl();
   const badgeSet = BADGE_SETS[props.platform] || BADGE_SETS.twitch;
   const isFiltering = () => !Object.values(props.filters).some((x) => x);
@@ -158,12 +170,6 @@ const FilterChips = (props) => {
       )}
     </div>
   );
-};
-
-FilterChips.propTypes = {
-  onDelete: PropTypes.func,
-  filters: PropTypes.object,
-  platform: PropTypes.string,
 };
 
 export default FilterChips;

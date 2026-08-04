@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -18,22 +17,29 @@ import LocaleToggle from './LocaleToggle';
 import HintParagraph from '../Tooltip/HintParagraph';
 import ToolbarButton from '../SupportInformation/ToolbarButton';
 
-const SettingsDialog = (props) => {
+type SettingsDialogProps = {
+  onClose?: () => void;
+  onColorChange: (color: string) => void;
+  open?: boolean;
+  themeColor?: string;
+};
+
+const SettingsDialog = (props: SettingsDialogProps) => {
   const intl = useIntl();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [themeColor, setThemeColor] = useState(
     () => props.themeColor || localStorage.getItem('themeColor') || '#0094ff'
   );
-  const [saveCommands, setSaveCommands] = useState(
+  const [saveCommands, setSaveCommands] = useState<boolean>(
     () => localStorage.getItem('gv-saveCommands') === 'true'
   );
-  const [deleteWinner, setDeleteWinner] = useState(
+  const [deleteWinner, setDeleteWinner] = useState<boolean>(
     () => localStorage.getItem('gv-deleteWinner') === 'true'
   );
-  const [abortCommand, setAbortCommand] = useState(() =>
+  const [abortCommand, setAbortCommand] = useState<string>(() =>
     localStorage.getItem('gv-abortCommand')
   );
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -44,7 +50,7 @@ const SettingsDialog = (props) => {
     if (props.onClose) props.onClose();
   };
 
-  const changeThemeColor = (value) => {
+  const changeThemeColor = (value: string) => {
     setThemeColor(value);
   };
 
@@ -118,7 +124,6 @@ const SettingsDialog = (props) => {
                     onChange={(event) => setSaveCommands(event.target.checked)}
                     color="primary"
                     name="saveCommands"
-                    type="checkbox"
                   />
                 }
                 label={intl.formatMessage({ ...messages.saveCommandsLabel })}
@@ -139,7 +144,6 @@ const SettingsDialog = (props) => {
                   onChange={(event) => setDeleteWinner(event.target.checked)}
                   color="primary"
                   name="deleteWinner"
-                  type="checkbox"
                 />
               }
               label={intl.formatMessage({ ...messages.deleteWinnerLabel })}
@@ -172,13 +176,6 @@ const SettingsDialog = (props) => {
       </Dialog>
     </div>
   );
-};
-
-SettingsDialog.propTypes = {
-  onClose: PropTypes.func,
-  onColorChange: PropTypes.func,
-  open: PropTypes.bool,
-  themeColor: PropTypes.string,
 };
 
 export default SettingsDialog;

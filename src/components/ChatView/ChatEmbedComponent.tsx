@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ChatFrame = styled.iframe`
@@ -7,7 +6,13 @@ const ChatFrame = styled.iframe`
   width: 100%;
 `;
 
-export function ChatEmbed(props) {
+type ChatEmbedProps = {
+  channel: string;
+  platform: string;
+  isDarkMode: boolean;
+};
+
+export function ChatEmbed(props: ChatEmbedProps) {
   if (props.channel === 'test') return <div />;
 
   const channel = encodeURIComponent(props.channel);
@@ -31,11 +36,5 @@ export function ChatEmbed(props) {
     />
   );
 }
-
-ChatEmbed.propTypes = {
-  channel: PropTypes.string,
-  platform: PropTypes.string,
-  isDarkMode: PropTypes.bool,
-};
 
 export default ChatEmbed;

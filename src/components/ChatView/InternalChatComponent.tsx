@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -15,12 +14,27 @@ const ItemScroller = styled.ol`
   padding-left: 0;
 `;
 
-export const InternalChat = (props) => {
+type InternalChatProps = {
+  messages: Array<{
+    publishedAt: string;
+    title: string;
+    color?: string;
+    platform: string;
+    fragments?: Array<{
+      type: string;
+      text?: string;
+      code?: string;
+      url?: string;
+    }>;
+  }>;
+};
+
+export const InternalChat = (props: InternalChatProps) => {
   const scrollerRef = useRef(null);
   const isFirstRender = useRef(true);
   useInjectReducer({ key: 'chat', reducer });
 
-  const scrollToBottom = (behavior) => {
+  const scrollToBottom = (behavior: 'auto' | 'smooth') => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     scroller.scrollTo({ top: scroller.scrollHeight, behavior });
@@ -50,10 +64,6 @@ export const InternalChat = (props) => {
       ))}
     </ItemScroller>
   );
-};
-
-InternalChat.propTypes = {
-  messages: PropTypes.array,
 };
 
 export default InternalChat;

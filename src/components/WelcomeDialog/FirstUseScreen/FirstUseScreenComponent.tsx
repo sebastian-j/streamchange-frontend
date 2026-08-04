@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import FlagPL from '../assets/flag-pl.png';
@@ -17,20 +16,28 @@ import { Tile } from './components/Tile';
 import { Title } from './components/Title';
 import messages from './messages';
 
-const FirstUseScreen = (props) => {
-  const [darkMode, setDarkMode] = useState(
+type FirstUseScreenProps = {
+  onLocaleToggle: (locale: string) => void;
+  locale: string;
+};
+
+const FirstUseScreen = (props: FirstUseScreenProps) => {
+  const [darkMode, setDarkMode] = useState<boolean>(
     localStorage.getItem('darkMode') === 'true'
   );
-  const [language, setLanguage] = useState(props.locale);
+  const [language, setLanguage] = useState<string>(props.locale);
 
-  const changeLanguage = (event) => {
-    setLanguage(event.target.value);
-    props.onLocaleToggle(event.target.value);
+  const changeLanguage = (event: React.MouseEvent<HTMLInputElement>) => {
+    setLanguage(event.currentTarget.value);
+    props.onLocaleToggle(event.currentTarget.value);
   };
 
-  const changeTheme = (event) => {
-    setDarkMode(event.target.value === '1');
-    localStorage.setItem('darkMode', (event.target.value === '1').toString());
+  const changeTheme = (event: React.MouseEvent<HTMLInputElement>) => {
+    setDarkMode(event.currentTarget.value === '1');
+    localStorage.setItem(
+      'darkMode',
+      (event.currentTarget.value === '1').toString()
+    );
   };
 
   const save = () => {
@@ -131,11 +138,6 @@ const FirstUseScreen = (props) => {
       <CookieConsent />
     </Backdrop>
   );
-};
-
-FirstUseScreen.propTypes = {
-  onLocaleToggle: PropTypes.func,
-  locale: PropTypes.string,
 };
 
 export default FirstUseScreen;

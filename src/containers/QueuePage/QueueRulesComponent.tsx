@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Tooltip from '@mui/material/Tooltip';
@@ -10,9 +9,24 @@ import StyledTextField from '../../components/StyledTextField';
 import AdFrame from '../../components/AdFrame';
 import QueueWidgetDialog from './QueueWidgetDialog';
 
-const QueueRules = (props) => {
+type QueueRulesProps = {
+  changeCapacity: (capacity: number) => void;
+  changeQueueCommand: (command: string) => void;
+  changeTTI: (timeToIdle: number) => void;
+  changeTTK: (timeToKick: number) => void;
+  changeWidgetCode: (widgetCode: string) => void;
+  capacity: number;
+  command?: string;
+  timeToIdle?: number;
+  timeToKick: number;
+  widgetCode?: string;
+};
+
+const QueueRules = (props: QueueRulesProps) => {
   const intl = useIntl();
-  const handleInputValueChange = (event) => {
+  const handleInputValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
@@ -116,19 +130,6 @@ const QueueRules = (props) => {
       <AdFrame />
     </Panel>
   );
-};
-
-QueueRules.propTypes = {
-  changeCapacity: PropTypes.func.isRequired,
-  changeQueueCommand: PropTypes.func.isRequired,
-  changeTTI: PropTypes.func.isRequired,
-  changeTTK: PropTypes.func.isRequired,
-  changeWidgetCode: PropTypes.func.isRequired,
-  capacity: PropTypes.number.isRequired,
-  command: PropTypes.string,
-  timeToIdle: PropTypes.number,
-  timeToKick: PropTypes.number.isRequired,
-  widgetCode: PropTypes.string,
 };
 
 export default QueueRules;

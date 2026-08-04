@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import {
   ThemeProvider as MuiThemeProvider,
@@ -7,7 +6,13 @@ import {
 } from '@mui/material/styles';
 import { darkTheme, lightTheme } from '../../theme';
 
-export function StyleProvider(props) {
+type StyleProviderProps = {
+  color?: string;
+  children: React.ReactNode;
+  isDarkMode: boolean;
+};
+
+export function StyleProvider(props: StyleProviderProps) {
   const themeType = props.isDarkMode ? darkTheme : lightTheme;
   const theme = { ...themeType, color: props.color };
 
@@ -27,11 +32,5 @@ export function StyleProvider(props) {
     </MuiThemeProvider>
   );
 }
-
-StyleProvider.propTypes = {
-  color: PropTypes.string,
-  children: PropTypes.element.isRequired,
-  isDarkMode: PropTypes.bool,
-};
 
 export default StyleProvider;

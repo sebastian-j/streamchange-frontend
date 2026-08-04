@@ -1,6 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import { Avatar } from './components/Avatar';
 import { AvatarFallback } from '../../components/AvatarFallback';
 import { Cell } from './components/Cell';
@@ -11,7 +8,18 @@ import RelativeDate from '../../components/RelativeDate';
 
 const toKickSlug = (channelId) => channelId.replaceAll('_', '-');
 
-const HistoryItem = (props) => {
+type HistoryItemProps = {
+  channelId: string;
+  imageUrl?: string;
+  platform?: string;
+  displayName?: string;
+  color?: string;
+  prize?: string;
+  message?: string;
+  createdAt?: string;
+};
+
+const HistoryItem = (props: HistoryItemProps) => {
   const channelUrl =
     props.platform === 'twitch'
       ? `https://www.twitch.tv/${props.channelId}`
@@ -50,14 +58,4 @@ const HistoryItem = (props) => {
   );
 };
 
-HistoryItem.propTypes = {
-  channelId: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
-  platform: PropTypes.string,
-  displayName: PropTypes.string,
-  color: PropTypes.string,
-  prize: PropTypes.string,
-  message: PropTypes.string,
-  createdAt: PropTypes.string,
-};
 export default HistoryItem;

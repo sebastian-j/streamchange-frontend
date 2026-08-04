@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`<RelativeDate /> > should render and match the snapshot 1`] = `
-<span>
+<span
+  class="relativeDate"
+>
   December 24, 2019
    8:27
 </span>

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -47,7 +46,14 @@ const PromotedChannelTitle = styled.a`
   text-decoration: none;
 `;
 
-const PromotedChannel = (props) => (
+type PromotedChannelProps = {
+  channelUrl: string;
+  description?: string;
+  imageUrl: string;
+  title?: string;
+};
+
+const PromotedChannel = (props: PromotedChannelProps) => (
   <PromotedContentWrapper>
     <AdTitle>
       <FormattedMessage {...messages.title} />
@@ -65,12 +71,5 @@ const PromotedChannel = (props) => (
     </PromotedContent>
   </PromotedContentWrapper>
 );
-
-PromotedChannel.propTypes = {
-  channelUrl: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  imageUrl: PropTypes.string.isRequired,
-  title: PropTypes.string,
-};
 
 export default PromotedChannel;

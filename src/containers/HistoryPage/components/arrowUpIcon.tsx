@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Svg = styled.svg`
@@ -16,7 +14,7 @@ const Svg = styled.svg`
     transform: rotate(180deg);
   }
 `;
-const ArrowUpIcon = (props) => (
+const ArrowUpIcon = (props: { className?: string }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -29,7 +27,4 @@ const ArrowUpIcon = (props) => (
   </Svg>
 );
 
-ArrowUpIcon.propTypes = {
-  className: PropTypes.string,
-};
 export default ArrowUpIcon;

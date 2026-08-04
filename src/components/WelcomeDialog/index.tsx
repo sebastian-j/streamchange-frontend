@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import {
@@ -21,7 +20,7 @@ const CHANNEL_URL_REGEX =
 
 const lightMuiTheme = createTheme({ palette: { mode: 'light' } });
 
-const parseChannelInput = (value) => {
+const parseChannelInput = (value: string) => {
   const trimmed = value.trim();
   if (trimmed.toLowerCase() === 'test') {
     return { channel: 'test', platform: 'twitch' };
@@ -37,22 +36,28 @@ const parseChannelInput = (value) => {
   };
 };
 
-const WelcomeDialog = (props) => {
+type WelcomeDialogProps = {
+  error?: string;
+  onStart?: (channel: string, platform: string, streamData: any) => void;
+  variant?: number;
+};
+
+const WelcomeDialog = (props: WelcomeDialogProps) => {
   const intl = useIntl();
-  const [isChrome] = useState(() => !!window.chrome);
-  const [isFirstUse] = useState(() => !localStorage.getItem('locale'));
-  const [isLoading, setIsLoading] = useState(false);
-  const [text, setText] = useState('');
-  const [isLinkInvalid, setIsLinkInvalid] = useState(false);
-  const [customError, setCustomError] = useState(null);
-  const [prevError, setPrevError] = useState(props.error);
+  const [isChrome] = useState<boolean>(() => !!(window as any).chrome);
+  const [isFirstUse] = useState<boolean>(() => !localStorage.getItem('locale'));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [text, setText] = useState<string>('');
+  const [isLinkInvalid, setIsLinkInvalid] = useState<boolean>(false);
+  const [customError, setCustomError] = useState<string | null>(null);
+  const [prevError, setPrevError] = useState<string>(props.error);
 
   if (props.error !== prevError) {
     setPrevError(props.error);
     if (props.error) setIsLoading(false);
   }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
     if (isLinkInvalid) setIsLinkInvalid(false);
     if (customError) setCustomError(null);
@@ -80,7 +85,7 @@ const WelcomeDialog = (props) => {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !isLoading) {
       handleConnect();
     }
@@ -182,12 +187,6 @@ const WelcomeDialog = (props) => {
       </div>
     </CompatibilityInfo>
   );
-};
-
-WelcomeDialog.propTypes = {
-  error: PropTypes.string,
-  onStart: PropTypes.func,
-  variant: PropTypes.number,
 };
 
 export default WelcomeDialog;

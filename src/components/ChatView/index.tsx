@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -27,7 +26,12 @@ const CHAT_MODES = Object.freeze({
   INTERNAL: 1,
 });
 
-function ChatView(props) {
+type ChatViewProps = {
+  channel: string;
+  platform: string;
+};
+
+function ChatView(props: ChatViewProps) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [chatMode, setChatMode] = useState(() => {
     const saved = localStorage.getItem('gv-chatMode');
@@ -110,10 +114,5 @@ function ChatView(props) {
     </Panel>
   );
 }
-
-ChatView.propTypes = {
-  channel: PropTypes.string,
-  platform: PropTypes.string,
-};
 
 export default ChatView;

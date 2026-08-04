@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { FormattedMessage } from 'react-intl';
 import Tooltip from '@mui/material/Tooltip';
@@ -15,11 +14,28 @@ import { Title } from './components/Title';
 import { UserBar } from './components/UserBar';
 import { UserBarColumn } from './components/UserBarColumn';
 
-const QueueItem = (props) => {
-  const [editMode, setEditMode] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(props.message);
-  const [prevMessage, setPrevMessage] = useState(props.message);
-  const [isActive, setIsActive] = useState(() => {
+type QueueItemProps = {
+  addedAt: string;
+  channelId: string;
+  deleteItem: (channelId: string) => void;
+  imageUrl: string;
+  title: string;
+  message: string;
+  lastActiveAt: string;
+  updateItem: (item: {
+    id: string;
+    message?: string;
+    lastActiveAt?: string;
+  }) => void;
+};
+
+const QueueItem = (props: QueueItemProps) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editedDescription, setEditedDescription] = useState<string>(
+    props.message
+  );
+  const [prevMessage, setPrevMessage] = useState<string>(props.message);
+  const [isActive, setIsActive] = useState<boolean>(() => {
     const now = new Date();
     const lastActiveAt = new Date(props.lastActiveAt);
     return (
@@ -33,7 +49,7 @@ const QueueItem = (props) => {
     setEditedDescription(props.message);
   }
 
-  const convertDate = (dt) =>
+  const convertDate = (dt: Date) =>
     `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''}${dt.getMinutes()}:${
       dt.getSeconds() < 10 ? '0' : ''
     }${dt.getSeconds()}`;
@@ -44,7 +60,7 @@ const QueueItem = (props) => {
     props.deleteItem(props.channelId);
   };
 
-  const toggleEditMode = (mode) => {
+  const toggleEditMode = (mode: boolean) => {
     setEditMode(mode);
     window.getSelection().removeAllRanges();
   };
@@ -61,7 +77,7 @@ const QueueItem = (props) => {
     setEditMode(false);
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       updateDescription();
     }
@@ -85,7 +101,7 @@ const QueueItem = (props) => {
               href={`https://www.twitch.tv/${props.channelId}`}
               target="_blank"
             >
-              <Logo alt="logo" src={props.imageUrl} edit={editMode} />
+              <Logo alt="logo" src={props.imageUrl} />
             </a>
             <UserBarColumn className="fullWidth">
               <Title className={clsx(isActive && 'active')}>
@@ -162,17 +178,6 @@ const QueueItem = (props) => {
       </Tooltip>
     </li>
   );
-};
-
-QueueItem.propTypes = {
-  addedAt: PropTypes.string,
-  channelId: PropTypes.string.isRequired,
-  deleteItem: PropTypes.func,
-  imageUrl: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  message: PropTypes.string,
-  lastActiveAt: PropTypes.string,
-  updateItem: PropTypes.func,
 };
 
 export default QueueItem;

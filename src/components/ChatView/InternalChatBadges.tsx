@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { BADGE_ORDER, BADGE_SETS } from './badgeSets';
@@ -9,7 +8,14 @@ const BadgeImg = styled.img`
   vertical-align: middle;
 `;
 
-const InternalChatBadges = ({ message }) => {
+type InternalChatBadgesProps = {
+  message: {
+    platform: string;
+    badges?: string[];
+  };
+};
+
+const InternalChatBadges = ({ message }: InternalChatBadgesProps) => {
   const badgeSet = BADGE_SETS[message.platform] || BADGE_SETS.twitch;
   const badges = message.badges || [];
 
@@ -23,10 +29,6 @@ const InternalChatBadges = ({ message }) => {
       title={badge.label}
     />
   ));
-};
-
-InternalChatBadges.propTypes = {
-  message: PropTypes.object.isRequired,
 };
 
 export default InternalChatBadges;

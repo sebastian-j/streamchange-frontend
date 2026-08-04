@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const MessageLi = styled.li`
@@ -41,7 +40,18 @@ const renderMessageBody = (fragments, text) => {
   return text;
 };
 
-function MessageItem(props) {
+type MessageItemProps = {
+  date: string;
+  text: string;
+  fragments?: Array<{
+    type: string;
+    text?: string;
+    code?: string;
+    url?: string;
+  }>;
+};
+
+function MessageItem(props: MessageItemProps) {
   const dt = new Date(props.date);
   const convertedDate = `${dt.getHours()}:${
     dt.getMinutes() < 10 ? '0' : ''
@@ -55,11 +65,5 @@ function MessageItem(props) {
     </MessageLi>
   );
 }
-
-MessageItem.propTypes = {
-  date: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  fragments: PropTypes.arrayOf(PropTypes.object),
-};
 
 export default MessageItem;
