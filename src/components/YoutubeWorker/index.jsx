@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 import { API_URL, PRIVILEGED_CHANNELS } from '../../config';
 import { addMessage } from '../ChatView/actions';
@@ -29,6 +29,7 @@ const ThreeSections = styled.div`
 `;
 
 const YoutubeWorker = (props) => {
+  const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
   const [superChat, setSuperChat] = useState(null);
 
@@ -47,7 +48,7 @@ const YoutubeWorker = (props) => {
       title: msg.a.n,
       ...dbMessage,
     };
-    props.addMessage(chatViewMessage);
+    dispatch(addMessage(chatViewMessage));
     if (
       dbMessage.displayText === localStorage.getItem('keyword') &&
       localStorage.getItem('gv-saveCommands') !== 'true'
@@ -73,7 +74,7 @@ const YoutubeWorker = (props) => {
       .post(`${API_URL}/v4/bwin`, qs.stringify(data), config)
       .then((res) => {
         if (res.data && res.data.bwin && res.data.bwin === 'yes') {
-          props.changePreWinner(author);
+          dispatch(changePreWinner(author));
           db.messages
             .filter(
               (message) =>
@@ -104,7 +105,7 @@ const YoutubeWorker = (props) => {
             ''
           )}`,
         });
-        props.onColorChange(author.message.replace('!color ', ''));
+        dispatch(changeColor(author.message.replace('!color ', '')));
         setTimeout(() => setSuperChat(null), 10000);
       } else if (author.message.startsWith('!time ')) {
         const seconds = Number(author.message.replace('!time ', ''));
@@ -115,9 +116,9 @@ const YoutubeWorker = (props) => {
         });
         setTimeout(() => setSuperChat(null), 10000);
         if (!Number.isNaN(seconds) && seconds > 0 && seconds < 601) {
-          props.changeAnimationDuration(
+          dispatch(changeAnimationDuration(
             Number(author.message.replace('!time ', ''))
-          );
+          ));
         }
       } else if (author.message.startsWith('!prize ')) {
         setSuperChat({
@@ -128,7 +129,7 @@ const YoutubeWorker = (props) => {
             ''
           )}`,
         });
-        props.changePrize(author.message.replace('!prize ', ''));
+        dispatch(changePrize(author.message.replace('!prize ', '')));
         setTimeout(() => setSuperChat(null), 10000);
       }
       checkPreWinner(author);
@@ -172,7 +173,7 @@ const YoutubeWorker = (props) => {
               .toLowerCase()
               .includes(localStorage.getItem('keyword').toLowerCase()),
           };
-          props.pushUser(author);
+          dispatch(pushUser(author));
           checkResignation(author);
           saveMessage(res.data.items[i]);
           superChatFeatures(author, res.data.items[i]);
@@ -213,25 +214,7 @@ const YoutubeWorker = (props) => {
 
 YoutubeWorker.propTypes = {
   apiKey: PropTypes.string.isRequired,
-  addMessage: PropTypes.func.isRequired,
-  changeAnimationDuration: PropTypes.func,
-  changePreWinner: PropTypes.func,
-  changePrize: PropTypes.func,
-  onColorChange: PropTypes.func,
-  pushUser: PropTypes.func.isRequired,
   videoId: PropTypes.string,
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    addMessage: (m) => dispatch(addMessage(m)),
-    changeAnimationDuration: (t) => dispatch(changeAnimationDuration(t)),
-    changePreWinner: (w) => dispatch(changePreWinner(w)),
-    changePrize: (str) => dispatch(changePrize(str)),
-    onColorChange: (col) => dispatch(changeColor(col)),
-    pushUser: (u) => dispatch(pushUser(u)),
-    dispatch,
-  };
-}
-
-export default connect(null, mapDispatchToProps)(YoutubeWorker);
+export default YoutubeWorker;
