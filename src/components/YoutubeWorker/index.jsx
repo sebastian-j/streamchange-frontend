@@ -116,9 +116,11 @@ const YoutubeWorker = (props) => {
         });
         setTimeout(() => setSuperChat(null), 10000);
         if (!Number.isNaN(seconds) && seconds > 0 && seconds < 601) {
-          dispatch(changeAnimationDuration(
-            Number(author.message.replace('!time ', ''))
-          ));
+          dispatch(
+            changeAnimationDuration(
+              Number(author.message.replace('!time ', ''))
+            )
+          );
         }
       } else if (author.message.startsWith('!prize ')) {
         setSuperChat({
