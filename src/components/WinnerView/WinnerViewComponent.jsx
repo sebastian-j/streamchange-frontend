@@ -10,7 +10,7 @@ import { getSafeColor } from '../../utils/colors';
 import { AvatarFallback, AvatarSkeleton } from '../AvatarFallback';
 
 import messages from './messages';
-import db from '../YoutubeWorker/db';
+import db from '../StreamerWorker/db';
 import { API_URL, BACKEND_URL } from '../../config';
 import PanelTitle from '../Panel/PanelTitle';
 import StyledTextField from '../StyledTextField';

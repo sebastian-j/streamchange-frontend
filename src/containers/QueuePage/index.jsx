@@ -9,7 +9,7 @@ import { StyledButton } from './components/StyledButton';
 import { TopBar } from './components/TopBar';
 import { TopButtons } from './components/TopButtons';
 import WelcomeDialog from '../../components/WelcomeDialog';
-import QueueWorker from '../../components/YoutubeWorker/QueueWorker';
+import QueueWorker from '../../components/StreamerWorker/QueueWorker';
 import SettingsDialog from '../../components/SettingsDialog';
 import SupportInformation from '../../components/SupportInformation';
 import { API_KEY } from '../../config';

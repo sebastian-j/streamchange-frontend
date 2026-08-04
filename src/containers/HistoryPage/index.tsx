@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import messages from './messages';
-import db from '../../components/YoutubeWorker/db';
+import db from '../../components/StreamerWorker/db';
 import StyledTextField from '../../components/StyledTextField';
 import StyledFormControl from '../../components/StyledTextField/StyledFormControl';
 import HistoryMenu from './HistoryMenu';

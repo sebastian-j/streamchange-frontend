@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { API_URL } from '../../../config';
-import YoutubeWorker from '../index';
+import StreamerWorker from '../index';
 
 const mockStore = configureStore([]);
 
@@ -39,7 +39,7 @@ vi.mock('../../AdFrame', () => ({
   default: () => <div data-testid="ad-frame" />,
 }));
 
-describe('<YoutubeWorker />', () => {
+describe('<StreamerWorker />', () => {
   let store: ReturnType<typeof mockStore>;
   beforeEach(() => {
     localStorage.clear();
@@ -52,7 +52,7 @@ describe('<YoutubeWorker />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale="en">
-          <YoutubeWorker apiKey="key" channel="vidId" />
+          <StreamerWorker apiKey="key" channel="vidId" />
         </IntlProvider>
       </Provider>
     );
