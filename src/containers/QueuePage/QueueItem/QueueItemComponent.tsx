@@ -22,14 +22,20 @@ type QueueItemProps = {
   title: string;
   message: string;
   lastActiveAt: string;
-  updateItem: (item: { id: string; message?: string; lastActiveAt?: string }) => void;
+  updateItem: (item: {
+    id: string;
+    message?: string;
+    lastActiveAt?: string;
+  }) => void;
 };
 
 const QueueItem = (props: QueueItemProps) => {
-  const [editMode, setEditMode] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(props.message);
-  const [prevMessage, setPrevMessage] = useState(props.message);
-  const [isActive, setIsActive] = useState(() => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editedDescription, setEditedDescription] = useState<string>(
+    props.message
+  );
+  const [prevMessage, setPrevMessage] = useState<string>(props.message);
+  const [isActive, setIsActive] = useState<boolean>(() => {
     const now = new Date();
     const lastActiveAt = new Date(props.lastActiveAt);
     return (
@@ -43,7 +49,7 @@ const QueueItem = (props: QueueItemProps) => {
     setEditedDescription(props.message);
   }
 
-  const convertDate = (dt) =>
+  const convertDate = (dt: Date) =>
     `${dt.getHours()}:${dt.getMinutes() < 10 ? '0' : ''}${dt.getMinutes()}:${
       dt.getSeconds() < 10 ? '0' : ''
     }${dt.getSeconds()}`;
@@ -54,7 +60,7 @@ const QueueItem = (props: QueueItemProps) => {
     props.deleteItem(props.channelId);
   };
 
-  const toggleEditMode = (mode) => {
+  const toggleEditMode = (mode: boolean) => {
     setEditMode(mode);
     window.getSelection().removeAllRanges();
   };
@@ -71,7 +77,7 @@ const QueueItem = (props: QueueItemProps) => {
     setEditMode(false);
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       updateDescription();
     }

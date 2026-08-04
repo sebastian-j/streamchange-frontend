@@ -52,14 +52,16 @@ type ColorPickerProps = {
 
 const ColorPicker = (props: ColorPickerProps) => {
   const [color, setColor] = useState(props.color || '#000000');
-  const [pickerVisible, setPickerVisible] = useState(false);
+  const [pickerVisible, setPickerVisible] = useState<boolean>(false);
 
   const colorString =
     typeof color === 'string'
       ? color
       : `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 
-  const handleColorChange = (colorObject: { rgb: { r: number; g: number; b: number; a: number } }) => {
+  const handleColorChange = (colorObject: {
+    rgb: { r: number; g: number; b: number; a: number };
+  }) => {
     const rgba = colorObject.rgb;
     const hex = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
     setColor(rgba);

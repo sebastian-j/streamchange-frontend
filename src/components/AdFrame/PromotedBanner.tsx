@@ -42,7 +42,7 @@ const PromotedBanner = ({
   testMargins = false,
   title,
 }: PromotedBannerProps) => {
-  const [imgHeight, setImgHeight] = useState(0);
+  const [imgHeight, setImgHeight] = useState<number>(0);
   const isVideo = imageUrl.substr(imageUrl.length - 3) === 'mp4';
 
   const onImgLoad = ({ target: img }) => {
@@ -67,9 +67,7 @@ const PromotedBanner = ({
       </AdTitle>
       <a href={channelUrl} target="_blank">
         <div>
-          {!isVideo && (
-            <Image alt={title} onLoad={onImgLoad} src={imageUrl} />
-          )}
+          {!isVideo && <Image alt={title} onLoad={onImgLoad} src={imageUrl} />}
           {isVideo && (
             <video
               width="100%"
@@ -85,19 +83,13 @@ const PromotedBanner = ({
         </div>
         {/* eslint-disable react-hooks/purity -- intentional per-render jitter to defeat adblock DOM-pattern detection */}
         <Shield
-          margin={
-            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
-          }
+          margin={testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
         />
         <Shield
-          margin={
-            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
-          }
+          margin={testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
         />
         <Shield
-          margin={
-            testMargins ? 1 : Math.round(Math.random() * 1000) / 100
-          }
+          margin={testMargins ? 1 : Math.round(Math.random() * 1000) / 100}
         />
         {/* eslint-enable react-hooks/purity */}
       </a>

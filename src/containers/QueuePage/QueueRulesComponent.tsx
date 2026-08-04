@@ -24,7 +24,9 @@ type QueueRulesProps = {
 
 const QueueRules = (props: QueueRulesProps) => {
   const intl = useIntl();
-  const handleInputValueChange = (event) => {
+  const handleInputValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;

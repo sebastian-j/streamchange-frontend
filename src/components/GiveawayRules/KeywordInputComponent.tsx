@@ -17,10 +17,10 @@ type KeywordInputProps = {
 
 const KeywordInput = (props: KeywordInputProps) => {
   const intl = useIntl();
-  const [visible, setVisible] = useState(true);
-  const [error, setError] = useState(0);
+  const [visible, setVisible] = useState<boolean>(true);
+  const [error, setError] = useState<number>(0);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.includes(localStorage.getItem('gv-abortCommand'))) {
       setError(1);
       return;

@@ -22,10 +22,10 @@ type FirstUseScreenProps = {
 };
 
 const FirstUseScreen = (props: FirstUseScreenProps) => {
-  const [darkMode, setDarkMode] = useState(
+  const [darkMode, setDarkMode] = useState<boolean>(
     localStorage.getItem('darkMode') === 'true'
   );
-  const [language, setLanguage] = useState(props.locale);
+  const [language, setLanguage] = useState<string>(props.locale);
 
   const changeLanguage = (event: React.MouseEvent<HTMLInputElement>) => {
     setLanguage(event.currentTarget.value);
@@ -34,7 +34,10 @@ const FirstUseScreen = (props: FirstUseScreenProps) => {
 
   const changeTheme = (event: React.MouseEvent<HTMLInputElement>) => {
     setDarkMode(event.currentTarget.value === '1');
-    localStorage.setItem('darkMode', (event.currentTarget.value === '1').toString());
+    localStorage.setItem(
+      'darkMode',
+      (event.currentTarget.value === '1').toString()
+    );
   };
 
   const save = () => {

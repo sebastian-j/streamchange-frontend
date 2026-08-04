@@ -6,7 +6,10 @@ type RelativeDateProps = {
   ISO8601Date: string;
 };
 
-function RelativeDate({ className = 'relativeDate', ISO8601Date }: RelativeDateProps) {
+function RelativeDate({
+  className = 'relativeDate',
+  ISO8601Date,
+}: RelativeDateProps) {
   const dt = new Date(ISO8601Date);
   const now = new Date();
   if (

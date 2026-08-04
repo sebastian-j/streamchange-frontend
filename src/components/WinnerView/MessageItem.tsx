@@ -43,7 +43,12 @@ const renderMessageBody = (fragments, text) => {
 type MessageItemProps = {
   date: string;
   text: string;
-  fragments?: Array<{ type: string; text?: string; code?: string; url?: string }>;
+  fragments?: Array<{
+    type: string;
+    text?: string;
+    code?: string;
+    url?: string;
+  }>;
 };
 
 function MessageItem(props: MessageItemProps) {

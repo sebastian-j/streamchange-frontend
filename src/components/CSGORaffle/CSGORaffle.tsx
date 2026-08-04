@@ -10,7 +10,7 @@ type RaffleUser = {
   imageUrl?: string;
   isEligible: boolean;
   isSubscriber?: boolean;
-}
+};
 
 type CSGORaffleProps = {
   duration?: number;
@@ -19,13 +19,13 @@ type CSGORaffleProps = {
   onWin: (winnerId: UserId) => void;
   preWinner?: RaffleUser;
   userArray: RaffleUser[];
-}
+};
 
 type RaffleState = {
   users: RaffleUser[];
   winner?: RaffleUser;
   scroll: number;
-}
+};
 
 const CSGORaffle = ({
   duration = 7,
@@ -36,9 +36,7 @@ const CSGORaffle = ({
   userArray,
 }: CSGORaffleProps) => {
   const [{ users, winner, scroll }] = useState<RaffleState>(() => {
-    let eligibleUsers = userArray.filter(
-      (user) => user.isEligible === true
-    );
+    let eligibleUsers = userArray.filter((user) => user.isEligible === true);
     if (giveawayReq === 1) {
       eligibleUsers = eligibleUsers.filter(
         (user) => user.isSubscriber !== false
@@ -52,8 +50,7 @@ const CSGORaffle = ({
         );
       }
     }
-    const winnerIndex =
-      Math.floor(Math.random() * 10) + 10 + duration * 3;
+    const winnerIndex = Math.floor(Math.random() * 10) + 10 + duration * 3;
     if (preWinner) shuffled[winnerIndex] = preWinner;
     return {
       users: shuffled,

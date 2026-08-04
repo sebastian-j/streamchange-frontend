@@ -26,20 +26,20 @@ type SettingsDialogProps = {
 
 const SettingsDialog = (props: SettingsDialogProps) => {
   const intl = useIntl();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [themeColor, setThemeColor] = useState(
     () => props.themeColor || localStorage.getItem('themeColor') || '#0094ff'
   );
-  const [saveCommands, setSaveCommands] = useState(
+  const [saveCommands, setSaveCommands] = useState<boolean>(
     () => localStorage.getItem('gv-saveCommands') === 'true'
   );
-  const [deleteWinner, setDeleteWinner] = useState(
+  const [deleteWinner, setDeleteWinner] = useState<boolean>(
     () => localStorage.getItem('gv-deleteWinner') === 'true'
   );
-  const [abortCommand, setAbortCommand] = useState(() =>
+  const [abortCommand, setAbortCommand] = useState<string>(() =>
     localStorage.getItem('gv-abortCommand')
   );
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -50,7 +50,7 @@ const SettingsDialog = (props: SettingsDialogProps) => {
     if (props.onClose) props.onClose();
   };
 
-  const changeThemeColor = (value) => {
+  const changeThemeColor = (value: string) => {
     setThemeColor(value);
   };
 

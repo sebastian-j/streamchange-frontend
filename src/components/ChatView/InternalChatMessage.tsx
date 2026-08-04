@@ -8,7 +8,7 @@ const MessageLi = styled.li`
   margin-bottom: 5px;
 `;
 
-const AuthorTitle = styled('span')<{$userColor?: string}>`
+const AuthorTitle = styled('span')<{ $userColor?: string }>`
   color: ${(props) =>
     props.$userColor
       ? getSafeColor(props.$userColor, props.theme.panelBackground)

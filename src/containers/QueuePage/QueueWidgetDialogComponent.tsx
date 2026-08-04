@@ -13,8 +13,8 @@ import { UrlContainer } from './components/UrlContainer';
 import messages from './messages';
 
 const QueueWidgetDialog = (props: { widgetCode: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [widgetUrl, setWidgetUrl] = useState('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [widgetUrl, setWidgetUrl] = useState<string>('');
   const urlInput = useRef(null);
 
   const openDialog = () => {

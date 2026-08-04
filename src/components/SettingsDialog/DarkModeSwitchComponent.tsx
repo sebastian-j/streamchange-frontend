@@ -5,9 +5,11 @@ import { useIntl } from 'react-intl';
 
 import messages from './messages';
 
-const DarkModeSwitch = (onModeToggle: (event: React.ChangeEvent<HTMLInputElement>) => void) => {
+const DarkModeSwitch = (
+  onModeToggle: (event: React.ChangeEvent<HTMLInputElement>) => void
+) => {
   const intl = useIntl();
-  const [state, setState] = useState(
+  const [state, setState] = useState<boolean>(
     () => localStorage.getItem('darkMode') === 'true'
   );
 
